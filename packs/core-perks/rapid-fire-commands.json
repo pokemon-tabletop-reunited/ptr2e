@@ -7,7 +7,7 @@
     {
       "name": "Rapid-Fire Commands",
       "type": "passive",
-      "_id": "K4apJsPuk13vbTDN",
+      "_id": "TSSBfRlA7Ph0oQdi",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -17,22 +17,7 @@
             "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
             "predicate": [],
             "chance": 100,
-            "isFixedChance": false,
-            "affects": "self",
-            "alterations": [],
-            "dontMerge": false,
-            "label": "Rapid-Fire Commands Advance",
-            "mode": 2,
-            "ignored": false
-          },
-          {
-            "type": "roll-effect",
-            "key": "command-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
-            "predicate": [],
-            "label": "Rapid-Fire Commands Advance",
-            "chance": 100,
-            "isFixedChance": false,
+            "isFixedChance": true,
             "affects": "self",
             "alterations": [],
             "dontMerge": false,
@@ -68,12 +53,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
-        "createdTime": 1762109477192,
-        "modifiedTime": 1762109566242,
-        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+        "createdTime": 1764896643568,
+        "modifiedTime": 1764896677521,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
       }
     }
   ],
@@ -91,7 +76,7 @@
     },
     "actions": [],
     "slug": "rapid-fire-commands",
-    "description": "<p>Effect: The user is @Affliction[advance 10] when using @Trait[command] Actions.</p>",
+    "description": "<p>Effect: The user's @Trait[command] Actions gain @Affliction[advance 10], or have that value increase by +10.</p>",
     "traits": [],
     "prerequisites": [
       {
