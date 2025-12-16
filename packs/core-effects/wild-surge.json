@@ -1,0 +1,80 @@
+{
+  "name": "Wild Surge",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "description": "<p>This effect doubles the damage output of the user's next @Trait[psychic] attack.</p>",
+    "traits": []
+  },
+  "img": "systems/ptr2e/img/item-icons/exp.%20share.webp",
+  "effects": [
+    {
+      "name": "Wild Surge",
+      "type": "affliction",
+      "_id": "gcahTp5af7oXWUMX",
+      "img": "systems/ptr2e/img/item-icons/exp.%20share.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "psychic-attack-damage",
+            "value": 100,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "fvodFSf62YcS6YUL"
+}
