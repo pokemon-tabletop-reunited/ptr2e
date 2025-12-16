@@ -41,9 +41,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -60,6 +57,145 @@
     }
   },
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Type Strategist",
+      "type": "passive",
+      "_id": "5sLJdj4yCgZd1yEv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": [
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.dnqJkLDfmVyfWgsx"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.dwLYiIqC9WXSKCh6"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.JI7LuIL8E3e3BpJK"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.vB4RIbdqcuM4Keas"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.2ME4qfhWakXYYboF"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.pSK3STkjjgugQ3H3"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.BkTACEq1PzGRD0Id"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.SV3K0rwPNgadACbk"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.oBJ0un1HW7fVupi4"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.v3fTAQPvc4KCp9FP"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.sAVVU8he165R1XNG"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.5ZJMHfPQTEw8VjaQ"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.tjpnZ5lQ7zFQaMnb"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.wWowNi8OBICdscYY"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.zSzXHht06lV1mQrs"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.2UtCESgmcB3T0Xxf"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.QMrZ6cvbPuLBuc7S"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.fgikTg5ObPejQVBd"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.e50SqGfMifBSEze6"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.GMK1ekaBViF1NUjZ"
+              }
+            ],
+            "prompt": "Select An Ability",
+            "adjustName": false,
+            "rollOption": "typeStrategist",
+            "flag": "typeStrategist",
+            "allowNoSelection": false,
+            "showDisabled": true
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.typeStrategist}",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765209663914,
+        "modifiedTime": 1765210442016,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "4RGeGfwQgRYhOUf8"
 }
