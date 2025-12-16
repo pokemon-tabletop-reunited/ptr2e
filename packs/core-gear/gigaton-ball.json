@@ -20,19 +20,24 @@
     "grade": "C",
     "fling": {
       "type": "untyped",
-      "power": 50,
-      "accuracy": 85,
-      "hide": null
+      "power": 90,
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
     "traits": [
-      "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "5x Catch Rate modifier.",
-    "modifier": 5,
+    "description": "<p>2.75x Catch Rate modifier.</p>",
+    "modifier": 2.75,
     "quantity": 1,
     "slug": "gigaton-ball",
     "stack": 3,
@@ -44,8 +49,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "HC12vQhqD7gZ5hGc",
   "effects": [],

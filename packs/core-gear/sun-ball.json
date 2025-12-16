@@ -22,7 +22,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,10 +35,11 @@
       "stack-5",
       "belt",
       "fling",
-      "environ-ball"
+      "environ-ball",
+      "ball"
     ],
-    "description": "5x Catch Rate modifier with Sunny Weather present. 2x Catch Rate modifier if only natural sunlight is present. 1x Catch Rate modifier otherwise.",
-    "modifier": 2,
+    "description": "<p>3.5x Catch Rate modifier with @UUID[Compendium.ptr2e.core-summons.9cgLo9qwotwZUqPT]{Sunny Weather} present. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 3.5,
     "quantity": 1,
     "slug": "sun-ball",
     "stack": 5,
@@ -45,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "3QYLN0PsST3TqyUM",
   "effects": [],

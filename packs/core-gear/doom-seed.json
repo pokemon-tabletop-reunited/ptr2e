@@ -5,7 +5,7 @@
   "system": {
     "cost": 5,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 90,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "other",
@@ -27,13 +32,9 @@
       "combat",
       "consumable",
       "natural",
-      "fling",
-      "seed",
-      "held",
-      "fling",
-      "fling"
+      "seed"
     ],
-    "description": "On hit, the target gains @Affliction[perish] 3.",
+    "description": "<p>On hit, the target gains @Affliction[perish 3].</p>",
     "quantity": 1,
     "slug": "doom-seed",
     "stack": 1,
@@ -45,10 +46,105 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Doom Seed",
+        "slug": "doom-seed",
+        "description": "<p>On hit, the target gains @Affliction[perish 3].</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "natural",
+          "seed"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": [],
+        "accuracy": 100
+      }
+    ]
   },
   "_id": "JNZt5DJdNlQQseWb",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Doom Seed",
+      "type": "passive",
+      "_id": "u4rflaWuRuBpahhT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "doom-seed-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.perishcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758794760411,
+        "modifiedTime": 1758794791223,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

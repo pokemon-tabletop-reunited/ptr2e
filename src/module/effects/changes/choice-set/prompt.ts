@@ -62,7 +62,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
 
     const renderItemSheet = async (choice: ChoiceSetChoice | null): Promise<void> => {
       if (!choice || !UUIDUtils.isItemUUID(choice.value)) return;
-      const item = await fromUuid(choice.value);
+      const item = await fu.fromUuid(choice.value);
       item?.sheet.render(true);
     }
 
@@ -80,7 +80,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
 
       this.selectMenu.on("change", event => {
         const data = event.detail.tagify.value.at(0);
-        if (!data) return updateAnchor(true);
+        if (!data || data.disabled) return updateAnchor(true);
 
         const index = Number(data.value)
         if (isNaN(index)) return;
@@ -147,8 +147,8 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPTR2e<ItemSystemPTR, ActorPTR
     const dropZone = this.element.querySelector(".drop-zone");
     if (this.selectMenu) {
       const { whitelist } = this.selectMenu.settings;
-      const menuChoice = { value: String(choicesLength - 1), label: newChoice.label };
-      whitelist?.push(menuChoice.value as string & { label: string; value: string })
+      const menuChoice = { value: String(choicesLength - 1), label: newChoice.label, disabled: false };
+      whitelist?.push(menuChoice.value as string & { label: string; value: string; disabled: boolean | undefined });
 
       this.selectMenu.setPersistedData(whitelist, "whitelist");
       this.selectMenu.addTags([menuChoice], true, true);

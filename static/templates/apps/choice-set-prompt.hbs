@@ -21,7 +21,7 @@
             <div class="choice-buttons">
                 {{#each choices as |choice|}}
                     <div class="choice">
-                        <button type="button" value="{{choice.value}}" data-action="pick"{{#if choice.img}} class="with-image{{#if choice.hasUUID}} item perk{{/if}}"{{/if}} {{#if choice.hasUUID}} data-uuid="{{choice.uuid}}" data-tooltip="{{choice.label}}"{{#unless choice.img}} class="item perk"{{/unless}}{{/if}}>
+                        <button type="button" value="{{choice.value}}" data-action="pick"{{#if choice.img}} class="with-image{{#if choice.hasUUID}} item perk{{/if}}"{{/if}} {{#if choice.hasUUID}} data-uuid="{{choice.uuid}}" data-tooltip="{{choice.label}}"{{#unless choice.img}} class="item perk"{{/unless}}{{/if}} {{#if choice.disabled}} disabled{{/if}}>
                             {{#if choice.img}}<img src="{{choice.img}}" />{{/if}}
                             <span>{{choice.label}}</span>
                         </button>

@@ -1,0 +1,96 @@
+{
+  "name": "Honedge (Weapon)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "honedge-weapon",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "living-weapon",
+      "weapon",
+      "pokemon",
+      "steel",
+      "ghost",
+      "sharp"
+    ],
+    "actions": [
+      {
+        "name": "Draining Slash",
+        "slug": "draining-slash",
+        "description": "<p>Effect: Upon resolving this attack, the user loses @Tick[-1] of HP.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "pokemon",
+          "steel",
+          "ghost",
+          "sharp",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      }
+    ],
+    "description": "<p>Wielding a Honedge as a weapon. A spirit harbors within this sword just holding it makes you feel weak.</p>",
+    "crafting": {
+      "skill": "N/A",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "steel",
+      "power": 40,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Living Weapon"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [],
+  "folder": "V4skAU6G3OH5fXaf",
+  "flags": {},
+  "_id": "8B5x8SsYCwwFYDYD"
+}

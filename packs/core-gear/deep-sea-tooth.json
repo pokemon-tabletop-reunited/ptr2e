@@ -1,6 +1,6 @@
 {
   "name": "Deep Sea Tooth",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/deepseatooth.webp",
   "type": "equipment",
   "system": {
     "crafting": {
@@ -18,14 +18,20 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "combat",
       "clamperl",
       "huntail",
-      "evolution"
+      "evolution",
+      "accessory"
     ],
     "actions": [
       {
@@ -41,7 +47,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -49,7 +56,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has their Base ATK increased by 100%.",
+    "description": "<p>Effect: Clamperl users have their ATK increased by +100% and their DEF increased by +50%, and Huntail and Gorebyss users have their ATK increased by +50% and their DEF increased by +25%.<br><br>The appropriate species may consume this item to trigger Evolution.</p>",
     "slug": "deep-sea-tooth",
     "quantity": 1,
     "identification": {
@@ -69,10 +76,116 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "FRPaeHt5yO6wwUZF",
-  "effects": [],
-  "folder": "6VDJBcrqVDh5bYtA"
+  "effects": [
+    {
+      "name": "Deep Sea Tooth",
+      "type": "passive",
+      "_id": "rKKCza8Mrp9mXi2M",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 1,
+            "predicate": [
+              "species:clamperl"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "species:clamperl"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "species:huntail"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "species:gorebyss"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.25,
+            "predicate": [
+              "species:huntail"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.25,
+            "predicate": [
+              "species:gorebyss"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758625030038,
+        "modifiedTime": 1758625159384,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXae"
 }

@@ -19,18 +19,21 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "The Weather is set to Sunny on the current Floor.",
+    "description": "<p>The Weather is set to @UUID[Compendium.ptr2e.core-summons.9cgLo9qwotwZUqPT]{Sunny Weather} for 3 rounds.</p>",
     "quantity": 1,
     "slug": "sunny-orb",
     "stack": 1,
@@ -42,8 +45,31 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Sunny Orb",
+        "slug": "sunny-orb",
+        "description": "<p>The Weather is set to @UUID[Compendium.ptr2e.core-summons.9cgLo9qwotwZUqPT]{Sunny Weather} for 3 rounds.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "UcKAiTpysRPNJhmC",
   "effects": [],

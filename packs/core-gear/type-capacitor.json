@@ -9,7 +9,7 @@
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,15 +18,18 @@
       "type": "untyped",
       "power": 50,
       "accuracy": 100,
-      "hide": false
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "combat",
-      "held",
-      "charge-pool-20",
-      "consumable",
-      "type-fling"
+      "charge-pool-5",
+      "accessory"
     ],
     "actions": [
       {
@@ -44,7 +47,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex",
@@ -53,7 +57,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares an Attack that shares a &lt;Type&gt; with the item. Effect: This item's PP Pool can be expended in place of the user's PP for the triggering Attack. If the item does not have enough PP to spend for the Attack, the remaining cost is taken from the user.</p>",
+    "description": "<p>Trigger: The user declares an Attack that shares a &lt;Type&gt; with the item.<br><br>Effect: This item's PP Pool can be expended in place of the user's PP for the triggering Attack. If the item does not have enough PP to spend for the Attack, the remaining cost is taken from the user.<br><br>Camp: The Type Capacitor recharges during Camp.</p>",
     "slug": "type-capacitor",
     "quantity": 1,
     "identification": {
@@ -73,7 +77,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "sn7BvjOguiDMnBhW",
