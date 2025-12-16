@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: If there is at least one other allied creature with the Plus, Minus or Anionic Ability on the field, the user's DEF stat is increased by 50%. If the user is within 5m of an ally with the Plus, Minus, or Anionic Ability, they gain the effect of that Ability.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,9 +36,284 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "vPEGQexm8QvcHC29",
-  "effects": []
+  "effects": [
+    {
+      "name": "Anionic",
+      "type": "passive",
+      "_id": "XdLo90Bfj5FX9CmV",
+      "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "anionic:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "label": "Anionic",
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "anionic:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765274657186,
+        "modifiedTime": 1765274657186,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    },
+    {
+      "name": "Cationic",
+      "type": "passive",
+      "_id": "f1tPaNQ7MQQIEQvn",
+      "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "cationic:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "cationic:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765274666443,
+        "modifiedTime": 1765274666443,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    },
+    {
+      "name": "Minus",
+      "type": "passive",
+      "_id": "ofomBRf2x3wxVbqy",
+      "img": "systems/ptr2e/img/svg/electric_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "minus:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "minus:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765274670660,
+        "modifiedTime": 1765274670660,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    },
+    {
+      "name": "Plus",
+      "type": "passive",
+      "_id": "3N3B0dqkMIlt8KYq",
+      "img": "systems/ptr2e/img/svg/electric_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "plus:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "plus:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765274674465,
+        "modifiedTime": 1765274674465,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }
