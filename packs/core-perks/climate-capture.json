@@ -1,0 +1,57 @@
+{
+  "name": "Climate Capture",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>The user can purchase Weather Balls of their grade or lower with IP without having to adhere to Rarity constraints;<br><br>@UUID[Compendium.ptr2e.core-gear.JBPkoTh8GFAL1u3P]{Beacon Ball}<br>@UUID[Compendium.ptr2e.core-gear.Tf7l91f61dumDDyG]{Dusk Ball}<br>@UUID[Compendium.ptr2e.core-gear.og6QFbXvO5aHdLHd]{Hail Ball}<br>@UUID[Compendium.ptr2e.core-gear.C1Tz1K3ugyH0S1G3]{Rain Ball}<br>@UUID[Compendium.ptr2e.core-gear.Sla18tcyQccrcQw9]{Sand Ball}<br>@UUID[Compendium.ptr2e.core-gear.snHusywqmnb6mMlR]{Smog Ball}<br>@UUID[Compendium.ptr2e.core-gear.3QYLN0PsST3TqyUM]{Sun Ball}<br>@UUID[Compendium.ptr2e.core-gear.ws0SP7fr74PHDi2e]{Vane Ball}</p>",
+    "traits": [
+      "crafting"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.meteorology.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "crafting"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 85,
+        "y": 170,
+        "connected": [
+          "pharmacist",
+          "ball-tinkerer",
+          "minor-buff-13"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/perk-icons/Crafting.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "bRAozSA9RapLc2ZA"
+}
