@@ -421,7 +421,7 @@ class CheckPTR2e {
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.target) {
-        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }).roll();
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor?.uuid === targetContext.self.actor?.uuid ? 0 : targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor?.uuid === targetContext.self.actor?.uuid ? 0 : targetContext.target?.actor.system.modifiers.effectResistance }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.defensive) {
