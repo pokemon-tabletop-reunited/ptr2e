@@ -1,0 +1,193 @@
+name: Check Failed -> Post Comment
+
+# Run when checks / suites / workflow runs complete
+on:
+  check_run:
+    types: [completed]
+  check_suite:
+    types: [completed]
+  workflow_run:
+    workflows: [PTR2e CI]
+    types: [completed]
+
+# Ensure the workflow has permissions to read checks/actions and post comments
+permissions:
+  checks: read
+  actions: read
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  comment-on-failure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Debug show event payload (first 2000 chars)
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Event path: $GITHUB_EVENT_PATH"
+          echo "==== event payload (head) ===="
+          head -n 2000 "$GITHUB_EVENT_PATH" || true
+
+      - name: Determine PR URL and conclusion
+        id: get_info
+        run: |
+          event="$GITHUB_EVENT_PATH"
+
+          pr_number=$(jq -r '
+            if (.check_run and (.check_run.pull_requests | length) > 0) then .check_run.pull_requests[0].number
+            elif (.check_run and .check_run.check_suite and (.check_run.check_suite.pull_requests | length) > 0) then .check_run.check_suite.pull_requests[0].number
+            elif (.check_suite and (.check_suite.pull_requests | length) > 0) then .check_suite.pull_requests[0].number
+            elif (.workflow_run and (.workflow_run.pull_requests | length) > 0) then .workflow_run.pull_requests[0].number
+            else "" end' "$event")
+
+          conclusion=$(jq -r '
+            if .check_run then .check_run.conclusion
+            elif .check_suite then .check_suite.conclusion
+            elif .workflow_run then .workflow_run.conclusion
+            else "" end' "$event")
+
+          echo "pr_number=${pr_number}" >> "$GITHUB_OUTPUT"
+          echo "conclusion=${conclusion}" >> "$GITHUB_OUTPUT"
+          echo "Determined number=${pr_number}, conclusion=${conclusion}"
+
+      - name: Fetch failing check message (generic extraction of the custom error)
+        id: fetch_message
+        run: |
+          set -euo pipefail
+          event="$GITHUB_EVENT_PATH"
+          owner="${GITHUB_REPOSITORY%/*}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          auth="Authorization: token ${GITHUB_TOKEN}"
+
+          # Determine commit/run ids if available
+          commit_sha=$(jq -r '
+            if (.check_run and (.check_run.head_sha|length>0)) then .check_run.head_sha
+            elif (.check_suite and (.check_suite.head_sha|length>0)) then .check_suite.head_sha
+            elif (.workflow_run and (.workflow_run.head_sha|length>0)) then .workflow_run.head_sha
+            else "" end' "$event")
+          run_id=$(jq -r '.workflow_run.id // .check_run.check_suite.run_id // ""' "$event" || true)
+
+          # Helper: extract text after the last " - " across the whole input
+          after_last_dash() {
+            input="$1"
+            # normalize CRLF -> LF
+            input=$(printf "%s" "$input" | sed 's/\r//g')
+            # If there is any " - " in the whole input, capture text after the last occurrence.
+            # Use grep to extract all occurrences of ' - .*' and take the last one, then strip the leading ' - '.
+            last=$(printf "%s" "$input" | grep -o ' - .*' | tail -n 1 | sed 's/^ - //')
+            if [ -n "$last" ]; then
+              printf "%s" "$last"
+              return 0
+            fi
+            # fallback: return empty
+            return 1
+          }
+
+          # Helper: conservative extraction if no dash found
+          extract_fallback() {
+            input="$1"
+            # normalize
+            input=$(printf "%s" "$input" | sed 's/\r//g')
+            # Prefer a line that looks like a custom message (not a stacktrace)
+            candidate=$(printf "%s\n" "$input" | grep -i -E 'error|exception|failed|fatal|panic|Document source' | grep -v -E '^\s*at\s' | head -n1 || true)
+            if [ -n "$candidate" ]; then
+              printf "%s" "$candidate"
+              return 0
+            fi
+            # else pick the last non-empty line
+            candidate=$(printf "%s\n" "$input" | awk 'NF{line=$0} END{print line}' || true)
+            if [ -n "$candidate" ]; then
+              printf "%s" "$candidate"
+              return 0
+            fi
+            return 1
+          }
+
+          message=""
+
+          # 1) Try check-run output & annotations (favor annotations first since they often include the messages you posted)
+          if [ -n "$commit_sha" ]; then
+            checks_resp=$(curl -s -H "$auth" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner/$repo/commits/$commit_sha/check-runs")
+            check_id=$(echo "$checks_resp" | jq -r '.check_runs[] | select(.conclusion=="failure") | .id' | head -n1 || true)
+            if [ -z "$check_id" ]; then
+              check_id=$(echo "$checks_resp" | jq -r '.check_runs[] | select(.status=="completed") | .id' | head -n1 || true)
+            fi
+
+            if [ -n "$check_id" ]; then
+              cr=$(curl -s -H "$auth" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner/$repo/check-runs/$check_id")
+              output_text=$(echo "$cr" | jq -r '.output.text // .output.summary // ""' || true)
+              annotations=$(curl -s -H "$auth" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner/$repo/check-runs/$check_id/annotations" || true)
+              ann_snip=$(echo "$annotations" | jq -r '.[] | "\(.path):\(.start_line):\(.annotation_level) - \(.message)"' || true)
+
+              # Try to extract from annotations first (since they include the formatted " - " separator)
+              message=$(after_last_dash "$ann_snip" || true)
+              if [ -z "$message" ]; then
+                # Then try the output text
+                message=$(after_last_dash "$output_text" || true)
+              fi
+
+              # If still empty, fallback to a conservative extract
+              if [ -z "$message" ]; then
+                message=$(extract_fallback "$ann_snip" || true)
+                if [ -z "$message" ]; then
+                  message=$(extract_fallback "$output_text" || true)
+                fi
+              fi
+            fi
+          fi
+
+          # 2) Fallback: search in workflow run logs
+          if [ -z "$message" ] && [ -n "$run_id" ]; then
+            tmpzip="$(mktemp /tmp/logs-XXXXXX.zip)"
+            curl -sL -H "$auth" -H "Accept: application/vnd.github+json" -o "$tmpzip" "https://api.github.com/repos/$owner/$repo/actions/runs/$run_id/logs" || true
+            tmpdir="$(mktemp -d /tmp/logsdir-XXXXXX)"
+            unzip -q "$tmpzip" -d "$tmpdir" || true
+
+            # combine tails of job log files for searching
+            combined=""
+            while IFS= read -r -d '' f; do
+              combined="${combined}\n\n==== FILE: ${f} ====\n$(tail -n 500 "$f" 2>/dev/null || true)"
+            done < <(find "$tmpdir" -type f -name "*.txt" -print0)
+
+            message=$(after_last_dash "$combined" || true)
+            if [ -z "$message" ]; then
+              message=$(extract_fallback "$combined" || true)
+            fi
+
+            rm -rf "$tmpzip" "$tmpdir" || true
+          fi
+
+          # 3) final fallback
+          if [ -z "$message" ]; then
+            message="(no concise custom error found after last ' - ' in outputs/annotations/logs)"
+          fi
+
+          # sanitize/truncate
+          message="$(echo "$message" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+          max=1000
+          clipped=$(echo -n "$message" | head -c $max)
+
+          echo "error_message<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$clipped" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post failure comment
+        if: ${{ steps.get_info.outputs.conclusion == 'failure' && steps.get_info.outputs.pr_number != '' }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.get_info.outputs.pr_number }}
+          message: |
+            ⚠️ Some checks have failed. Please review the details below:
+
+            Error excerpt:
+            ```
+            ${{ steps.fetch_message.outputs.error_message }}
+            ```
+          hide_and_recreate: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
