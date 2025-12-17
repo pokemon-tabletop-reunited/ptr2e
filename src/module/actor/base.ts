@@ -648,6 +648,15 @@ class ActorPTR2e<
     for (const affliction of afflictions) {
       affliction.system.apply(this);
     }
+    // Run the _traits array as it may have added changes
+    for(const trait of this.system._traits) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if(!effect?.active) continue;
+      for (const change of effect.changes) {
+        change.effect.apply(this, change.clone());
+      }
+    }
 
     // Apply special statuses that changed to active tokens
     let tokens;
@@ -1865,7 +1874,7 @@ class ActorPTR2e<
       if (!auraAffectsActor(data, origin.actor, this)) continue;
 
       const effect = existing ?? await fromUuid(data.uuid);
-      if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
+      if (!((effect instanceof ItemPTR2e && (effect as ItemPTR2e).type === "effect") || effect instanceof ActiveEffectPTR2e)) {
         console.warn(`Effect from ${data.uuid} not found`);
         continue;
       }
@@ -1905,7 +1914,7 @@ class ActorPTR2e<
         }
       }
 
-      const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
+      const effects = (effect instanceof ItemPTR2e ? (effect as ItemPTR2e).effects : [effect]) as ActiveEffectPTR2e[];
       const sources = effects.map(e => fu.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
       toCreate.push(...sources);
     }
