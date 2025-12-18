@@ -180,4 +180,14 @@
           </div>
         </div>
     {{/each}}
+    {{#if (gt results.size 1)}}
+      <div class="target target-footer">
+        <button type="button" class="apply-damage-all-hit" data-tooltip="Apply to all hit targets">
+          <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.ApplyAllHit"}}
+        </button>
+        <button type="button" class="apply-damage-all" data-tooltip="Apply to all targets, including misses">
+          <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.ApplyAll"}}
+        </button>
+      </div>
+    {{/if}}
 </footer>

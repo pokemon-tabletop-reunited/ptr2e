@@ -61,6 +61,8 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore - Ignore this error about override not being present in base class
   override get title() {
     return game.i18n.format(`PTR2E.ActorSheet.Components.${this.component.constructor.name}.title`, { actor: this._actor.name });
   }

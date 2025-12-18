@@ -741,6 +741,19 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       if (!targetUuid) return;
       this.applyDamage(targetUuid);
     });
+    html.find(".apply-damage-all").on("click", async () => {
+      for (const result of this.results) {
+        await this.applyDamage(result.target.uuid);
+      }
+    });
+    html.find(".apply-damage-all-hit").on("click", async () => {
+      for (const result of this.results) {
+        const override = this.overrides.get(result.target.uuid);
+        if (["hit", "critical"].includes(override?.value ?? AttackRoll.successCategory(result.accuracy, result.crit))) {
+          await this.applyDamage(result.target.uuid);
+        }
+      }
+    });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
     html.find("[data-action='apply-capture']").on("click", async (event) => {
