@@ -52,7 +52,7 @@ export default class ApplyTickChangeSystem extends ChangeModel {
         ui.notifications.info(`Updated ${actor.name}'s Power Points from ${current} to ${newValue}.`);
       }
       else {
-        await this.actor.applyDamage(value * -1, { healShield: this.method === "Shield" && value > 0, silent: false});
+        await this.actor.applyDamage(value * -1, { healShield: this.method === "Shield" && value > 0, silent: false, flat: true });
       }
     } else {
       await this.actor.applyTickDamage({

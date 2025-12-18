@@ -17,7 +17,8 @@ export const CHANGE_MODES = Object.freeze({
   DOWNGRADE: 3,
   UPGRADE: 4,
   OVERRIDE: 5,
-  REMOVE: 6
+  REMOVE: 6,
+  CONCAT: 7
 })
 
 class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<

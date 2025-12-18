@@ -11,6 +11,7 @@ import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { Predicate, PredicateStatement, StatementValidator } from "@system/predication/predication.ts";
 import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
+import { ActorSizePTR2e } from "@actor/data/size.ts";
 
 const PerkExtension = HasEmbed(
   HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(HasPublication(foundry.abstract.TypeDataModel)))))),
@@ -176,6 +177,8 @@ export default abstract class PerkSystem extends PerkExtension {
             case "level":
             case "system.advancement.level":
               return "Level";
+            case "size.rank":
+              return "Size Rank";
           }
 
           return `'${path}'`;
@@ -192,6 +195,14 @@ export default abstract class PerkSystem extends PerkExtension {
       if (predicate && typeof predicate === "object" && Object.keys(predicate).length > 0) {
         const statement = predicate as object
         if (StatementValidator.isBinaryOp(statement)) {
+          // Handle Size Category options specifically
+          if ('gte' in statement && typeof statement.gte[0] === "string" && statement.gte[0] == "{actor|size.rank}" && typeof statement.gte[1] === "number") {
+            return `Size Category: ${ActorSizePTR2e.toString(ActorSizePTR2e.sizeFromRank(statement.gte[1]))} or larger`;
+          }
+          if('lte' in statement && typeof statement.lte[0] === "string" && statement.lte[0] == "{actor|size.rank}" && typeof statement.lte[1] === "number") {
+            return `Size Category: ${ActorSizePTR2e.toString(ActorSizePTR2e.sizeFromRank(statement.lte[1]))} or smaller`;
+          }
+
           if ('eq' in statement) {
             //@ts-expect-error - Could be attempting to evaluate truthy value
             if (statement.eq[1] == true) {
@@ -229,6 +240,7 @@ export default abstract class PerkSystem extends PerkExtension {
           if (Array.isArray(or) && or.length === 1) {
             return or[0];
           }
+
           return `One of: ${Array.isArray(or) ? `<ul><li>${or.join('</li><li>')}</li></ul>` : or}`;
         }
         if (StatementValidator.isNand(statement)) {

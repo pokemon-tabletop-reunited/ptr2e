@@ -1,0 +1,124 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Crimson Mist",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Crimson Mist",
+        "slug": "crimson-mist",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "traits": [
+          "digimon",
+          "powder"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "types": [
+          "poison"
+        ],
+        "category": "special",
+        "predicate": [],
+        "description": "<p>Effect: This attack has a 50% chance each to inflict @Affliction[blight 8] and @Affliction[stunted 5].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "power": 105,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "effects": [
+    {
+      "name": "Crimson Mist",
+      "type": "passive",
+      "_id": "tOnFAp2EbkdfwKMb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "crimson-mist-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Blight",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "crimson-mist-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Stunted",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "DJ9n8BwxJz52Z5wd"
+}

@@ -1,0 +1,121 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Needle Hive",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Needle Hive",
+        "slug": "needle-hive",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "traits": [
+          "digimon",
+          "contact",
+          "5-strike"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "types": [
+          "psychic"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: This attack gains +1 Effectiveness Stage vs @Trait[fairy] creatures. This attack inflicts @Affliction[blight 8].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 30,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": [
+    {
+      "name": "Needle Hive",
+      "type": "passive",
+      "_id": "8FxMabvb5ntTu5H1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "needle-hive-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:fairy"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "needle-hive-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "0QteqofIbXSKr22M"
+}

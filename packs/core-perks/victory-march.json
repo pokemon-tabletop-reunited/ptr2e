@@ -14,8 +14,32 @@
       ],
       "notes": ""
     },
-    "actions": [],
-    "description": "<p>Effect: By spending @PP[-4] as a Complex Action, the user may may activate the Victory March summon, which grants allies on the field @Affliction[boosted] and @Affliction[resolved] for 3 rounds.</p>",
+    "actions": [
+      {
+        "name": "Victory March",
+        "slug": "victory-march",
+        "description": "<p>Effect: By spending @PP[-4] as a Complex Action, the user may may activate the Victory March summon, which grants allies on the field +20% Damage and +20% Damage Reduction for 3 rounds.</p>",
+        "traits": [],
+        "type": "attack",
+        "img": "icons/sundries/flags/banner-flag-red-white.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "summon": "Compendium.ptr2e.core-summons.fFAxckcMfiygtqxM",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": []
+      }
+    ],
+    "description": "<p>Effect: By spending @PP[-4] as a Complex Action, the user may may activate the Victory March summon, which grants allies on the field +20% Damage and +20% Damage Reduction for 3 rounds.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
@@ -47,13 +71,9 @@
         "tier": null
       }
     ],
-    "slug": "victory-march",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "slug": "victory-march"
   },
   "img": "icons/sundries/flags/banner-flag-red-white.webp",
   "effects": [],
-  "flags": {},
   "_id": "EoSXR10Kweit9IX2"
 }

@@ -1,0 +1,325 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Pickaxe",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "pickaxe",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "sci-fi",
+      "fantasy",
+      "2-handed"
+    ],
+    "actions": [
+      {
+        "name": "Pickaxe Swing",
+        "slug": "pickaxe-swing",
+        "description": "<p>Effect: On a Critical Hit, this attack gains @Trait[pierce] and deals double damage.</p>",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "flinch-10",
+          "crit-1"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 70,
+        "accuracy": 85
+      },
+      {
+        "name": "Pickaxe Chop",
+        "slug": "pickaxe-chop",
+        "description": "<p>Effect: On hit, the target has a 30% chance to lose -1 DEF Stage for 5 Activations, and a 30% chance to gain @Affliction[delay 20].</p>",
+        "traits": [
+          "weapon",
+          "sharp",
+          "adaptable",
+          "contact",
+          "crit-1",
+          "flinch-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "variant": "pickaxe-swing",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 110,
+        "accuracy": 85
+      },
+      {
+        "name": "Pickaxe Smash",
+        "slug": "pickaxe-smash",
+        "description": "<p>Effect: On hit, the target has a 20% chance to lose -1 DEF, SPDEF, and/or SPD Stage for 5 Activations. On a Critical Hit, this attack gains @Trait[pierce], deals double damage, and the target gains @Affliction[splinter 5].</p>",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "crit-2",
+          "flinch-40"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "variant": "pickaxe-swing",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 120,
+        "accuracy": 70
+      }
+    ],
+    "description": "<p>A pickaxe, pick-axe, or pick is a generally T-shaped hand tool used for prying. Its head is typically metal, attached perpendicularly to a longer handle. A standard pickaxe has a pointed end on one side of its head and a broad flat \"axe\" blade opposite. The historic pickaxe was readily adapted to a weapon for hand-to-hand combat in ancient times.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 2
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 160,
+      "accuracy": 65,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Pickaxe",
+      "type": "passive",
+      "_id": "P3ud4zrZiJXpF4xT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 12,
+            "predicate": [],
+            "label": "Pickaxe",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "pickaxe-swing-attack-damage-flat",
+            "value": 7,
+            "predicate": [],
+            "label": "Swing",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pickaxe-chop-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "label": "Chop Defense",
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pickaxe-chop-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "label": "Chop Delay",
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "pickaxe-smash-attack-damage-flat",
+            "value": 14,
+            "predicate": [],
+            "label": "Smash",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pickaxe-smash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Smash Defense",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pickaxe-smash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pickaxe-smash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "pickaxe-smash-attack-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Item.CKKHxTGLWFlK7jxe.ActiveEffect.dRMRrs9MBQAuqTjh",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764809995472,
+        "modifiedTime": 1764809995472,
+        "lastModifiedBy": "r8rxDx9bzq5ASx3l"
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "csSm3lt6nLmOZxn5"
+}

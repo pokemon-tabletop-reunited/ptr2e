@@ -1,5 +1,18 @@
-<div>
-    {{{trait.description}}}
+<header class="mb-2">
+  <h4 class="trait m-0">
+    {{label}}
+  </h4>
+  {{#if type}}
+  <small style="color: {{colors.bg}};">
+    {{capitalize type}} Trait
+  </small>
+  {{/if}}
+</header>
+<content>
+    {{{description}}}
+    {{#if related}}
     <hr>
-    {{{keywords trait.related}}}
-</div>
+    <h5 class="mt-0">Related Traits</h5>
+    {{{related}}}
+    {{/if}}
+</content>
