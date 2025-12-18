@@ -28,7 +28,7 @@
         "types": [
           "steel"
         ],
-        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 1 to 100.</p>",
+        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 10 to 100.</p>",
         "img": "systems/ptr2e/img/svg/steel_icon.svg",
         "predicate": []
       }
@@ -57,9 +57,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "hard-press-attack-power",
-            "value": "(@target.system.health.percent)-100",
+            "value": "((@actor.system.health.percent)-100)*0.9",
             "predicate": [],
             "label": "Hard Press Scaling",
             "mode": 2,

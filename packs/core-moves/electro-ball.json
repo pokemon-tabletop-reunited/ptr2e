@@ -57,9 +57,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "electro-ball-attack-power",
-            "value": "round(min(300,@actor.system.attributes.spe.final/@target.system.attributes.spe.final*50))",
+            "value": "round(min(121,36*max(1,(@actor.system.attributes.spe.final-@target.system.attributes.spe.final)/@target.system.attributes.spe.final)))-1",
             "predicate": [],
             "label": "Electro Ball Scaling",
             "mode": 2,
