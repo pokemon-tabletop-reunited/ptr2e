@@ -39,6 +39,7 @@ import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 import { RollNote } from "@system/notes.ts";
 import { PlaceholderTrait } from "@module/data/models/trait.ts";
+import AbilitySystem from "@item/data/ability.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -2238,10 +2239,42 @@ class ActorPTR2e<
 
           const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
-            const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
+            const moves = (await Promise.all(newMoves.map(move => fu.fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
             //@ts-expect-error - Asserted that this is an Array.
             changed.items.push(...moves.map(move => move.toObject()));
+          }
+
+          // Grant abilities at level 20/40/60
+          if(currentLevel < 20 && level >= 20) {
+            const basicAbilities = this.species.abilities.basic;
+            const abilities = (await Promise.all(basicAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
+          }
+          if(currentLevel < 40 && level >= 40) {
+            const advancedAbilities = this.species.abilities.advanced;
+            const abilities = (await Promise.all(advancedAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
+          }
+          if(currentLevel < 60 && level >= 60) {
+            const masterAbilities = this.species.abilities.master;
+            const abilities = (await Promise.all(masterAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
           }
         }
         else newLevel = this.system.getLevel(newExperience);
