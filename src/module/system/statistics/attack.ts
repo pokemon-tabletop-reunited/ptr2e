@@ -286,6 +286,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     if (variants.length) args.skipDialog = false;
 
     const selfOptions = new Set([...options, "targets:self"]);
+    // Add own effectiveness to self options
+    const effectiveness = this.actor.getEffectiveness(this.attack.types, this.modifiers.filter(t => t.type === "effectiveness").reduce((sum, curr) => sum + curr.modifier, 0), options.has("self:action:trait:ignore-type-immunity"));
+    selfOptions.add(`effectiveness:${effectiveness}`);
+    if(effectiveness === 0) selfOptions.add(`effectiveness:immune`);
+    else if(effectiveness === 1) selfOptions.add(`effectiveness:normal`);
+    else if(effectiveness < 1) selfOptions.add(`effectiveness:resist`);
+    else if(effectiveness > 1) selfOptions.add(`effectiveness:super`);
+
 
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
@@ -331,6 +339,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
       const targetsSelf = target.actor === this.actor;
 
+      // Add effectiveness options
+      const effectiveness = target.actor?.getEffectiveness(this.attack.types, this.modifiers.filter(t => t.type === "effectiveness").reduce((sum, curr) => sum + curr.modifier, 0), options.has("self:action:trait:ignore-type-immunity"));
+      const effectivenessOptions = new Set([`effectiveness:${effectiveness}`]);
+      if(effectiveness === 0) effectivenessOptions.add(`effectiveness:immune`);
+      else if(effectiveness === 1) effectivenessOptions.add(`effectiveness:normal`);
+      else if(effectiveness < 1) effectivenessOptions.add(`effectiveness:resist`);
+      else if(effectiveness > 1) effectivenessOptions.add(`effectiveness:super`);
+
       const targetDomains = allyOrEnemy === "enemy"
         ? this.domains.map(d => `hostile-${d}`)
         : allyOrEnemy === "ally"
@@ -344,7 +360,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         domains: domains,
         statistic: this,
         target: target,
-        options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
+        options: new Set([...options, ...effectivenessOptions, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
         skipEffectRolls: args.skipEffectRolls,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
