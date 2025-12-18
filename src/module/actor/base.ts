@@ -1191,6 +1191,7 @@ class ActorPTR2e<
     const vulnerabilityMultiplier = isNaN(this.system.modifiers["vulnerabilityMultiplier"] ?? 1) ? 1 : (this.system.modifiers["vulnerabilityMultiplier"] ?? 1);
 
     const rollNotes: { options: string[], domains: string[], html: string }[] = [];
+    let isAcePerishing = false;
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
       toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
@@ -1230,6 +1231,10 @@ class ActorPTR2e<
               acc.groups[affliction.priority].type = result.damage.type;
             }
           }
+        }
+        if(result.perish) {
+          // This Ace Actor is perishing
+          isAcePerishing = true;
         }
         return acc;
       },
@@ -1301,6 +1306,16 @@ class ActorPTR2e<
           value: newHealth,
         },
       };
+    }
+
+    if(isAcePerishing) {
+      const weary = await fu.fromUuid<ActiveEffectPTR2e>("Compendium.ptr2e.core-effects.Item.wearyconditiitem");
+      if(weary) {
+        await this.createEmbeddedDocuments("ActiveEffect", [weary.toObject()]);
+      }
+      await ChatMessage.create({
+        content: `${this.link}'s Perish Counter reached 0! They gained a stack of Weary.`,
+      })
     }
 
     if (afflictions.toDelete.length !== 0) {
