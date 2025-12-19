@@ -14,7 +14,7 @@
       "evolution"
     ],
     "actions": [],
-    "description": "<p>Effect: The user’s DEF is increased by +15%. Effect is doubled for @Trait[grass] creatures.<br><br>An Applin may consume this item in order to trigger Evolution.</p>",
+    "description": "<p>Effect: The user’s SPD is increased by +15%. Effect is doubled for @Trait[grass] creatures.<br><br>An Applin may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -57,6 +57,71 @@
     }
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Sweet Apple",
+      "type": "passive",
+      "_id": "E6bl6WMz9jGgkEMf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": 0.15,
+            "predicate": [],
+            "label": "Sweet Apple",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": 0.15,
+            "predicate": [
+              "trait:grass"
+            ],
+            "label": "Sweet Apple (Grass)",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766185438768,
+        "modifiedTime": 1766186262868,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "6FQD1M645VzLBzzp"
 }
