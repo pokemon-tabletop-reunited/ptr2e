@@ -15,30 +15,29 @@
       "charcadet",
       "armarogue",
       "evolution",
-      "psychic",
       "worn"
     ],
     "actions": [],
-    "description": "<p>Effect: Increases the user's Base DEF by +20, Base SPDEF by +30, and decreases Base SPD by -10. Increases the Power and Accuracy of [Psychic] Attacks by 10%.</p><p>Restriction: Only affects [Charcadet] or [Armarogue] creatures.</p>",
+    "description": "<p>Effect: The user takes -15 less Physical Damage and -25 less Special Damage while equipped, and has their Base SPD reduced by 15%.<br><br>@UUID[Compendium.ptr2e.core-species.r1xs6gQqlJMm5onZ]{Charcadet} users increase their Base DEF by +20, Base SPDEF by +30, and decrease Base SPD by -10, and increase the Power of their Special-Category Attacks by 30%.</p><p><span style=\"color: rgb(239, 230, 216); font-family: Signika, &#x27;Palatino Linotype&#x27;, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(0, 0, 0); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none\">@UUID[Compendium.ptr2e.core-species.eE3eVsnw34zNbLxo]{Armarouge} users deal +10% more damage with @Trait[pulse] and @Trait[missile] Attacks, and increase the Accuracy of their Special-Category Attacks by 15%.</span><br><br>A Charcadet may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "carryType": "equipped",
+      "carryType": "stowed",
       "handsHeld": null,
       "slot": "worn"
     },
     "grade": "A",
     "fling": {
       "type": "psychic",
-      "power": 65,
-      "accuracy": 85,
-      "hide": false,
+      "power": 130,
+      "accuracy": 75,
+      "hide": true,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 2,
         "unit": "m"
       }
     },
@@ -71,10 +70,40 @@
       "system": {
         "changes": [
           {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": -15,
+            "predicate": [],
+            "label": "Auspicious Armor",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-flat",
+            "value": -25,
+            "predicate": [],
+            "label": "Auspicious Armor",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.base",
+            "value": 0.85,
+            "predicate": [],
+            "mode": 1,
+            "ignored": false
+          },
+          {
             "type": "stats-alteration",
             "key": "",
             "value": 0,
-            "predicate": [],
+            "predicate": [
+              "item:species:charcadet"
+            ],
             "hp": null,
             "atk": null,
             "def": 20,
@@ -82,28 +111,51 @@
             "spd": 30,
             "spe": -10,
             "mode": 2,
-            "priority": null,
             "ignored": false
           },
           {
             "type": "percentile-modifier",
-            "key": "psychic-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Auspicious Armor (Power)",
-            "mode": 1,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "key": "special-attack-power",
+            "value": 30,
+            "predicate": [
+              "item:species:charcadet"
+            ],
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
           },
           {
             "type": "percentile-modifier",
-            "key": "psychic-attack-accuracy",
+            "key": "missile-trait-attack-damage",
             "value": 10,
-            "predicate": [],
-            "label": "Auspicious Armor (Accuracy)",
-            "mode": 1,
-            "priority": null,
+            "predicate": [
+              "item:species:armarouge"
+            ],
+            "label": "Auspicious Armor",
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "pulse-trait-attack-damage",
+            "value": 10,
+            "predicate": [
+              "item:species:armarouge"
+            ],
+            "label": "Auspicious Armor",
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-accuracy",
+            "value": 15,
+            "predicate": [
+              "item:species:armarouge"
+            ],
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -132,16 +184,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Item.H8Jyu9wupiygpqxO.ActiveEffect.KDfvrk0ejLb9PQUP",
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.7.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1766199080176,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
       }
     }

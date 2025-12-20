@@ -14,7 +14,7 @@
       "evolution"
     ],
     "actions": [],
-    "description": "<p>Effect: The @Trait[digital] user’s ATK, DEF, SPATK, and SPDEF are increased by +10%, and the user is @Affliction[advance 5] at the end of their Activations.@Trait[electric-soldier] creatures have these effects doubled.<br><br>A Porygon can consume this item to trigger evolution.</p>",
+    "description": "<p>Effect: The @Trait[digital] user’s ATK, DEF, SPATK, and SPDEF are increased by +15%, and the user is @Affliction[advance 10] at the end of their Activations.@Trait[electric-soldier] creatures have these effects doubled.<br><br>@UUID[Compendium.ptr2e.core-species.wi4WJ5XlGJO7eMA9]{Porygon} can consume this item to trigger evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -59,52 +59,163 @@
   "img": "systems/ptr2e/img/item-icons/up-grade.webp",
   "effects": [
     {
-      "name": "Type Booster (Normal)",
+      "name": "Upgrade",
       "type": "passive",
-      "_id": "Y91spdb1ZTmr5R5S",
+      "_id": "vIZxKU4v8VFqKDzi",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal) Power",
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.15,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:data",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal)",
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.15,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:data",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.15,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:data",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.15,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:data",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 10
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.15,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.15,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.15,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.15,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
         "removeAfterAttacking": false,
-        "removeAfterAttacked": false
+        "removeAfterAttacked": false,
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -112,17 +223,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
+        "exportSource": null,
         "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
-        "exportSource": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766190270172,
+        "modifiedTime": 1766190789559,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],
