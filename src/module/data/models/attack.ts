@@ -196,11 +196,6 @@ export default class AttackPTR2e extends ActionPTR2e {
   override prepareDerivedData(): void {
     super.prepareDerivedData();
 
-    if(this.traits.has("adaptable") && !this.variant) {
-      if(this.item?.type !== "weapon") 
-        this.generateAdaptableVariants();
-    }
-
     this.statistic = this.prepareStatistic();
   }
 
