@@ -1,55 +1,54 @@
 <section class="skill-editor">
     <fieldset class="controls">
-        <legend>Controls</legend>
-        <div class="buttons">
-            <button type="button" data-action="reset-skills">Reset All Investment</button>
-            <button type="button" data-action="change-resources">Change Resources</button>
-            {{#if hasLuck}}<button type="button" data-action="change-luck">Change Luck</button>{{/if}}
+      <legend>Controls</legend>
+      <div class="buttons">
+        <button type="button" data-action="reset-skills">Reset All Investment</button>
+        <button type="button" data-action="change-resources">Change Resources</button>
+        {{#if hasLuck}}<button type="button" data-action="change-luck">Change Luck</button>{{/if}}
+        {{#if (isGm)}}
+          {{#if @root.overrideValidation}}
+            <button type="button" class="override" data-action="toggle-override" data-tooltip="PTR2E.SkillsEditor.override-toggle-tooltip">
+              {{localize "PTR2E.SkillsEditor.override-toggle" status="✔"}}
+            </button>
+          {{else}}
+            <button type="button" data-action="toggle-override" data-tooltip="PTR2E.SkillsEditor.override-toggle-tooltip">
+              {{localize "PTR2E.SkillsEditor.override-toggle" status="✖"}}
+            </button>
+          {{/if}}
+        {{/if}}
+      </div>
+      <div class="points">
+        <label>Spent Points: <span id="points-spent-label">{{points.spent}} / {{points.total}}</span></label>
+        <label>Points Available: <span><b id="points-available-label" class="{{#if (lt points.available 0)}}invalid{{/if}}">{{points.available}}</b></span></label>
+        <div class="skill-filter mt-1">
+          <label>Filter: </label>
+          <input name="filter" type="search" placeholder="Filter" value="">
         </div>
-        <div class="points">
-          <label>Spent Points: <span>{{points.spent}} / {{points.total}}</span></label>
-          <label>Points Available: <span><b>{{points.available}}</b></span></label>
-          <div class="skill-filter mt-1">
-            <label>Filter: </label>
-            <input name="filter" type="search" placeholder="Filter" value="">
-          </div>
-          <label>Sort mode: <button type="button" class="w-50" data-action="toggle-sort">{{#if sort}}Alphabetical{{else}}Total value{{/if}}</button></label>
-        </div>
+        <label>Sort mode: <button type="button" class="w-50" data-action="toggle-sort">{{#if sort}}Alphabetical{{else}}Total value{{/if}}</button></label>
+      </div>
     </fieldset>
     <fieldset class="skills">
-        <div class="scroll">
-            <header class="skill">
-                <label>Skill</label>
-                <label>Base</label>
-                <label>Current Investment</label>
-                <label>Apply Investment</label>
-            </header>
-            {{#each skills}}
-                <div class="skill" data-slug="{{slug}}" data-group="{{group}}">
-                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}{{#if group}} <small>({{formatSlug group}})</small>{{/if}}</label>
-                    <label>{{value}}</label>
-                    <label>{{rvs}}</label>
-                    {{#if (eq this.slug "luck")}}
-                        <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
-                    {{else}}
-                        {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
-                            <label></label>
-                        {{else}}
-                            <input name="{{slug}}.investment" type="number" min="{{min}}" max="{{max}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
-                        {{/if}}
-                    {{/if}}
-                </div>
-            {{/each}}
-        </div>
+      <header class="skill">
+        <label>Skill</label>
+        <label>Base</label>
+        <label>Current Investment</label>
+      </header>
+      <div class="scroll">
+        {{#each skills}}
+          <div class="skill" data-slug="{{slug}}" data-group="{{group}}">
+            <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}{{#if group}} <small>({{formatSlug group}})</small>{{/if}}</label>
+            <label class="value">{{value}}</label>
+            {{#if (eq this.slug "luck")}}
+              <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
+            {{else}}
+              {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
+                <input name="{{slug}}.rvs" type="number" min="{{min}}" max="{{max}}" value="{{rvs}}" data-slug="{{slug}}" step="1" disabled/>
+              {{else}}
+                <input name="{{slug}}.rvs" type="number" min="{{min}}" max="{{max}}" value="{{rvs}}" data-slug="{{slug}}" step="1"/>
+              {{/if}}
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
     </fieldset>
-    <footer class="controls">
-        {{#if valid}}
-        <button type="submit">{{localize "PTR2E.SkillsEditor.Apply.apply"}}</button>
-        {{else}}
-        {{#if showOverrideSubmit}}
-        <button type="submit" formnovalidate="formnovalidate">{{localize "PTR2E.SkillsEditor.Apply.override"}}</button>
-        {{/if}}
-        <p>{{localize "PTR2E.SkillsEditor.Apply.fail"}}</p>
-        {{/if}}
-    </footer>
 </section>

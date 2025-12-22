@@ -2623,6 +2623,7 @@ type ActorFlags2e = ActorFlags & {
       get types(): PickableThing[];
     },
     traitEffects?: Record<string, boolean>;
+    overrideSkillValidation?: boolean;
   };
 };
 

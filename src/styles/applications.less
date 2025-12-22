@@ -4572,6 +4572,68 @@
   
     &.skill-sheet {
       max-height: 750px;
+      
+      .controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 0 0 min-content;
+        margin: 0;
+
+        .buttons {
+          flex: 0 0 35%;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .points {
+          flex: 0 0 55%;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            span {
+              margin-left: auto;
+              align-self: flex-end;
+            }
+          }
+
+          .skill-filter {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            align-items: center;
+            align-content: center;
+          }
+        }
+
+        .invalid, .override {
+          @keyframes danger-glow {
+            from {
+              box-shadow: 0 0 5px -5px orangered;
+            }
+  
+            to {
+              box-shadow: 0 0 5px 5px orangered;
+            }
+          }
+  
+          animation: danger-glow 1s infinite alternate;
+        }
+
+        .invalid {
+          color: darkred;
+        }
+      }
   
       .skill-editor {
         display: flex;
@@ -4579,49 +4641,6 @@
         overflow: hidden;
         gap: 0.25rem;
   
-        .controls {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-evenly;
-          align-items: center;
-          gap: 0.5rem;
-          flex: 0 0 min-content;
-          margin: 0;
-  
-          .buttons {
-            flex: 0 0 35%;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-          }
-  
-          .points {
-            flex: 0 0 55%;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-  
-            label {
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              justify-content: space-between;
-  
-              span {
-                margin-left: auto;
-                align-self: flex-end;
-              }
-            }
-  
-            .skill-filter {
-              display: flex;
-              flex-direction: row;
-              gap: 1rem;
-              align-items: center;
-              align-content: center;
-            }
-          }
-        }
   
         .skills {
           display: flex;
@@ -4676,7 +4695,7 @@
       .scroll {
         overflow-x: hidden;
         overflow-y: auto;
-        height: calc(100% - 2.5rem);
+        height: calc(100% - 45px - 1.5rem);
       }
     }
   

@@ -132,6 +132,7 @@ class SkillsComponent extends ActorComponent {
                 await actor.update({
                   "system.skills": {
                     [skillSlug]: {
+                      ...actor.system.skills[skillSlug],
                       favourite: skills[skillSlug].favourite,
                       hidden: skills[skillSlug].hidden,
                     }
@@ -156,6 +157,7 @@ class SkillsComponent extends ActorComponent {
                 await actor.update({
                   "system.skills": {
                     [skillSlug]: {
+                      ...actor.system.skills[skillSlug],
                       hidden: skills[skillSlug].hidden,
                       favourite: skills[skillSlug].favourite,
                     }

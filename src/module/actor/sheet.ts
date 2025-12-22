@@ -1191,6 +1191,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     this.actor.update({
       "system.skills": {
         [slug]: {
+          ...this.document.system.skills[slug],
           favourite: skills[slug].favourite,
           hidden: skills[slug].hidden,
         }
@@ -1213,6 +1214,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     this.actor.update({
       "system.skills": {
         [slug]: {
+          ...this.document.system.skills[slug],
           favourite: skills[slug].favourite,
           hidden: skills[slug].hidden,
         }
