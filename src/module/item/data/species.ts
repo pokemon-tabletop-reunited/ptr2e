@@ -196,7 +196,7 @@ class SpeciesSystem extends SpeciesExtension {
         }
       ),
       skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
-        initial: getInitialSkillList,
+        initial: () => Object.values(getInitialSkillList()),
       }),
       moves: new fields.SchemaField({
         levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),

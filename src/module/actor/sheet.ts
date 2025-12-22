@@ -17,7 +17,6 @@ import {
   DocumentSheetConfigurationExpanded,
 } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
 import { AttackPTR2e, PTRCONSTS, Trait } from "@data";
@@ -175,7 +174,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         return new SkillsEditor(this.actor).render(true);
       },
       "luck-roll": async function (this: ActorSheetPTRV2) {
-        const skill = this.actor.system.skills.get("luck")!;
+        const skill = this.actor.system.skills["luck"]!;
         await skill.endOfDayLuckRoll();
       },
       "rest": function (this: ActorSheetPTRV2) {
@@ -1184,13 +1183,19 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slug = skillDiv.dataset.slug;
     if (!slug) return;
 
-    const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
-    const index = skills.findIndex((s) => s.slug === slug);
-    if (index === -1) return;
+    const skills = this.actor.system.toObject().skills;
+    if(!skills[slug]) return;
 
-    skills[index].favourite = !skills[index].favourite;
-    if (skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
-    this.actor.update({ "system.skills": skills });
+    skills[slug].favourite = !skills[slug].favourite;
+    if (skills[slug].favourite && skills[slug].hidden) skills[slug].hidden = false;
+    this.actor.update({
+      "system.skills": {
+        [slug]: {
+          favourite: skills[slug].favourite,
+          hidden: skills[slug].hidden,
+        }
+      }
+    })
   }
 
   static async _onHideSkill(this: ActorSheetPTRV2, event: Event) {
@@ -1200,13 +1205,19 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slug = skillDiv.dataset.slug;
     if (!slug) return;
 
-    const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
-    const index = skills.findIndex((s) => s.slug === slug);
-    if (index === -1) return;
+    const skills = this.actor.system.toObject().skills;
+    if(!skills[slug]) return;
 
-    skills[index].hidden = !skills[index].hidden;
-    if (skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
-    this.actor.update({ "system.skills": skills });
+    skills[slug].hidden = !skills[slug].hidden;
+    if (skills[slug].hidden && skills[slug].favourite) skills[slug].favourite = false;
+    this.actor.update({
+      "system.skills": {
+        [slug]: {
+          favourite: skills[slug].favourite,
+          hidden: skills[slug].hidden,
+        }
+      }
+    });
   }
 
   protected async _onCreate(event: Event) {

@@ -158,7 +158,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       skills,
       points,
       isReroll:
-        !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
+        !levelOne || (levelOne && this.document.system.skills["luck"]!.value! > 1),
       levelOne,
       valid,
       showOverrideSubmit: game?.user?.isGM ?? false,
@@ -233,17 +233,17 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       yes: {
         callback: async () => {
           await document.update({
-            "system.skills": document.system._source.skills.map((skill) => {
-              if (skill.slug === "resources") return {
+            "system.skills": Object.fromEntries(Object.values(document.system._source.skills).map((skill) => {
+              if (skill.slug === "resources") return [skill.slug, {
                 ...skill,
                 rvs: 0,
                 value: 10,
-              };
-              return {
+              }];
+              return [skill.slug, {
                 ...skill,
                 rvs: 0,
-              };
-            }),
+              }];
+            })),
             "flags.ptr2e.editedSkills": false,
           });
           this.skills = this.resetSkills();
@@ -255,7 +255,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   static #onChangeResources(this: SkillsEditor) {
     const document = this.document;
-    const resources = document.system.skills.find((skill) => skill.slug === "resources");
+    const resources = document.system.skills.resources
     if (!resources) return;
 
     foundry.applications.api.DialogV2.prompt({
@@ -298,14 +298,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             (resources.rvs ?? 0) + value;
 
           await document.update({
-            "system.skills": document.system.skills.map((skill) => {
+            "system.skills": Object.fromEntries(Object.entries(document.system.skills).map(([slug, skill]) => {
               return skill.slug === "resources"
-                ? {
+                ? [slug, {
                   ...skill,
                   rvs: (skill.rvs ?? 0) + value,
-                }
-                : skill;
-            }),
+                }]
+                : [slug, skill];
+            })),
           });
           this.render({});
         },
@@ -315,7 +315,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   static #onChangeLuck(this: SkillsEditor) {
     const document = this.document;
-    const luck = document.system.skills.find((skill) => skill.slug === "luck");
+    const luck = document.system.skills.luck
     if (!luck) return;
 
     foundry.applications.api.DialogV2.prompt({
@@ -358,14 +358,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             (luck.value ?? 0) + value;
 
           await document.update({
-            "system.skills": document.system.skills.map((skill) => {
-              return skill.slug === "luck"
-                ? {
+            "system.skills": Object.fromEntries(Object.entries(document.system.skills).map(([slug, skill]) => {
+              return slug === "luck"
+                ? [slug, {
                   ...skill,
                   value: (skill.value ?? 0) + value,
-                }
-                : skill;
-            }),
+                }]
+                : [slug, skill];
+            })),
           });
           this.render({});
         },
@@ -375,12 +375,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   static async #onRollLuck(this: SkillsEditor) {
     const document = this.document;
-    const luck = document.system.skills.find((skill) => skill.slug === "luck");
+    const luck = document.system.skills.luck
     if (!luck) return;
 
     const levelOne = this.document.system.advancement.level === 1;
     const isReroll =
-      !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1);
+      !levelOne || (levelOne && this.document.system.skills.luck!.value! > 1);
 
     const rollAndApplyLuck = async (isReroll = false) => {
       const roll = await new Roll("3d6 * 5").roll();
@@ -400,14 +400,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
       this.skills.find((skill) => skill.slug === "luck")!.value = roll.total;
       await document.update({
-        "system.skills": document.system.skills.map((skill) => {
-          return skill.slug === "luck"
-            ? {
+        "system.skills": Object.fromEntries(Object.entries(document.system.skills).map(([slug, skill]) => {
+          return slug === "luck"
+            ? [slug, {
               ...skill,
               value: roll.total,
-            }
-            : skill;
-        }),
+            }]
+            : [slug, skill];
+        })),
       });
       this.render({});
     };
@@ -444,7 +444,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     formData: FormDataExtended
   ) {
     const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
-    const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
+    const skills = Object.values(this.document.system.toObject().skills as Record<string, SkillPTR2e["_source"]>);
     const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
     const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
 
@@ -505,7 +505,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
     await this.document.update({
       "flags.ptr2e.editedSkills": true,
-      "system.skills": skills,
+      "system.skills": Object.fromEntries(skills.map(skill => [skill.slug, skill])),
     });
   }
 }

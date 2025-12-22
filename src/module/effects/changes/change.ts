@@ -261,7 +261,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
                 : resolvables[key] ?? this.effect;
 
           if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
-            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            const value = this.actor?.system?.skills?.[prop.split(".")[1]]?.total;
             if(value != undefined && !isNaN(value)) return String(value); 
           }
 

@@ -43,21 +43,17 @@ class SkillPTR2e extends foundry.abstract.DataModel {
     if(speciesTrait && this.slug === "resources") {
       if(speciesTrait?.value > this.value) this.value = speciesTrait.value;
     }
-    if(this.actor.system.skills[this.slug]) {
-      const {value, rvs} = this.actor.system.skills[this.slug] as {value: number, rvs: number};
-      if(value) this.value += value;
-      if(rvs) {
-        this.rvs = this.rvs ? this.rvs + rvs : rvs;
-      }
-    }
 
-    this.total = this.value + (this.rvs ?? 0);
     if ((this.rvs ?? 0) > 0 && this.parent.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {
       this.parent.advancement.rvs.spent += this.rvs!;
     }
     if (this.slug === "resources") {
       this.parent.advancement.rvs.spent += this.value - 10;
     }
+  }
+
+  get total() {
+    return this.value + (this.rvs ?? 0);
   }
 
   get statistic() {
@@ -76,8 +72,6 @@ class SkillPTR2e extends foundry.abstract.DataModel {
 
 interface SkillPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<SkillSchema> {
   _source: SourceFromSchema<SkillSchema>;
-
-  total: number;
 }
 
 type CoreSkill = Pick<SkillPTR2e["_source"], 'slug' | 'favourite' | 'hidden' | 'group'>;
