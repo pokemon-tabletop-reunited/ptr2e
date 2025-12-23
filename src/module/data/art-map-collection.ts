@@ -72,7 +72,7 @@ export default class PTR2eArtMaps extends Collection<SpeciesImageData> {
     // Allow custom-defined user Art Settings from the world
     const settingArt = game.settings.get<Record<string, SpeciesImageDataSource>>(
       "ptr2e",
-      "artmap"
+      "custom-art-map"
     );
     for (const k in settingArt) {
       const [key, data] = this._initializeSource(settingArt[k], k);
@@ -85,7 +85,8 @@ export default class PTR2eArtMaps extends Collection<SpeciesImageData> {
 
   _initializeSource(
     source: SpeciesImageDataSource | ModuleSpeciesImageDataSource,
-    key: string
+    key: string,
+    notifyUser = false
   ): [string?, SpeciesImageData?] {
     const data: SpeciesImageData = {
       data: {
@@ -98,18 +99,18 @@ export default class PTR2eArtMaps extends Collection<SpeciesImageData> {
 
     // If base path is not defined, skip
     if (!data.data.base) {
-      console.error(
-        `PTR2E | Art Map Collection ${"_source" in source ? `| Module ${source._source} |` : "|"
-        } No base path defined for ${key}`
-      );
+      const error = `PTR2E | Art Map Collection ${"_source" in source ? `| Module ${source._source} |` : "|"
+        } No base path defined for ${key}`;
+      if(notifyUser) ui.notifications.error(error);
+      else console.error(error);
       return [];
     }
     // If base path does not end with a number, skip
     if (!data.data.base.match(/\d+$/)) {
-      console.error(
-        `PTR2E | Art Map Collection ${"_source" in source ? `| Module ${source._source} |` : "|"
-        } Base path for ${key} does not end with a number`
-      );
+      const error = `PTR2E | Art Map Collection ${"_source" in source ? `| Module ${source._source} |` : "|"
+        } Base path for ${key} does not end with a number`;
+      if(notifyUser) ui.notifications.error(error);
+      else console.error(error);
       return [];
     }
     //TODO: Consider making this a setting
@@ -118,10 +119,10 @@ export default class PTR2eArtMaps extends Collection<SpeciesImageData> {
 
     const sluggedKey = sluggify(key);
     if (key != sluggedKey) {
-      console.warn(
-        `PTR2E | Art Map Collection ${"_source" in source ? `| Module ${source._source} |` : "|"
-        } Key ${key} is not sluggified. Automatically converting to ${sluggedKey}`
-      );
+      const warning = `PTR2E | Art Map Collection ${"_source" in source ? `| Module ${source._source} |` : "|"
+        } Key ${key} is not sluggified. Automatically converting to ${sluggedKey}`;
+      if(notifyUser) ui.notifications.warn(warning);
+      else console.warn(warning);
       return [sluggedKey, data];
     }
 

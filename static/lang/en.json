@@ -1358,7 +1358,25 @@
         }
       }
     },
+    "ArtMap": {
+      "Title": "World Art Map Editor",
+      "Header": "<p>This is the World Art Map Editor, which allows you to set-up Custom Art Maps for your world without needing to create a module.</p><p>Art Maps are what the system uses to generate the correct token images for creatures generated using Blueprints. For more information, check <a href='https://2e.ptr.wiki/en/guides/custom-art-map'>the Guide on our Wiki</a>.</p>",
+      "Save": "Save Art Map",
+      "Check": "Drag & Drop a species item here to check if it would result in a valid token image.",
+      "Results": {
+        "InvalidItem": "The dropped item is not a valid Species item.",
+        "NotFound": "No valid token image found for species: {slug}.",
+        "NoResult": "Unable to determine token image for species: {slug} with number: {number} and form: {form}.",
+        "Title": "Located Image for {name}"
+      },
+      "InvalidJSON": "The Art Map data is not valid JSON. Please correct the errors and try again."
+    },
     "Settings": {
+      "ArtMap": {
+        "Name": "World Art Map",
+        "Label": "Open Editor",
+        "Hint": "Manage the World Art Map used for generating token images for Blueprints."
+      },
       "Sidebar": {
         "Header": "PTR 2e System Settings"
       },
