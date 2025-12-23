@@ -448,7 +448,7 @@ class SpeciesSystem extends SpeciesExtension {
   private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<DeepPartial<PerkPTR2e['_source']>> {
 
     const img = await (async () => {
-      const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
+      const species = await fu.fromUuid<SpeciesPTR2e>(evolution.uuid);
       if (!species) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const config = game.ptr.data.artMap.get(species.slug);
@@ -517,7 +517,16 @@ class SpeciesSystem extends SpeciesExtension {
     } as EvolutionData;
     if (!evolutions.uuid) evolutions.uuid = (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid;
 
+    const packs = game.settings.get("ptr2e", "compendiumBrowserPacks")?.species ?? {};
+    const sources = Object.values(game.settings.get("ptr2e", "compendiumBrowserSources")?.sources ?? {});
+
     for await (const [evolution, depth] of recursiveEvolution(evolutions)) {
+      // Check if Evolution should be loaded
+      const species = await fu.fromUuid<SpeciesPTR2e>(evolution.uuid);
+      if (!species) continue;
+      if(species.pack && packs[species.pack]?.load === false) continue;
+      if(species.system.publication?.source && sources.find(s => s && s.name === species.system.publication.source)?.load === false) continue;
+
       const data = await this.createEvolutionPerk(evolution, isShiny);
       (data.flags!.ptr2e!.evolution as Record<string, unknown>).tier = depth;
 
