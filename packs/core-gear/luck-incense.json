@@ -1,0 +1,138 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Luck Incense",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "luck-incense",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held"
+    ],
+    "actions": [],
+    "description": "<p>The user has +10% EHR.</p><p>@UUID[Compendium.ptr2e.core-species.EwWHSoOg3MZwbISa]{Happiny}, @UUID[Compendium.ptr2e.core-species.inXVND6bfUdY5ksv]{Chansey}, and @UUID[Compendium.ptr2e.core-species.bWrd2kY80xae5vQY]{Blissey} users's their actions that have an effect roll have their Base Chance increased by +10.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "C",
+    "fling": {
+      "type": "normal",
+      "power": 90,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "QaeIRMhru00w3hU0",
+  "img": "systems/ptr2e/img/item-icons/luck%20incense.webp",
+  "effects": [
+    {
+      "name": "Luck Incense",
+      "type": "passive",
+      "_id": "Ay4uz6Y372tRdRCq",
+      "img": "systems/ptr2e/img/item-icons/luck%20incense.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "all",
+            "value": "Compendium.ptr2e.core-effects.Item.dVXsQ55hDouadYkE",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:happiny",
+                  "item:species:chansey",
+                  "item:species:blissey"
+                ]
+              }
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 10
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>The user has +10% EHR.</p><p>@UUID[Compendium.ptr2e.core-species.EwWHSoOg3MZwbISa]{Happiny}, @UUID[Compendium.ptr2e.core-species.inXVND6bfUdY5ksv]{Chansey}, and @UUID[Compendium.ptr2e.core-species.bWrd2kY80xae5vQY]{Blissey} users's their actions that have an effect roll have their Base Chance increased by +10.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Item.kA5BWuhEpBlHOArR.ActiveEffect.zzN1TcGWSoQvv8DX",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.8.beta",
+        "createdTime": 1766506673221,
+        "modifiedTime": 1766506673221,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
+}
