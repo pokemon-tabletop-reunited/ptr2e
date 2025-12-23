@@ -1737,6 +1737,17 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
     });
 
+    const targetDefensiveEphemeralEffects = await extractEphemeralEffects({
+      affects: "defensive",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+    });
+
     const targetEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "target",
       origin: selfActor,
@@ -1797,7 +1808,7 @@ class ActorPTR2e<
       ? null
       : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
         [...params.options, ...itemOptions, ...originRollOptions].filter(R.isTruthy),
-        targetEphemeralEffects
+        [...targetEphemeralEffects, ...targetDefensiveEphemeralEffects]
       ) ?? null;
 
     const rollOptions = new Set(
