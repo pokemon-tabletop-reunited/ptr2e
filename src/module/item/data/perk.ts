@@ -62,6 +62,7 @@ export default abstract class PerkSystem extends PerkExtension {
 
       global: new fields.BooleanField({ required: true, initial: true, label: "PTR2E.FIELDS.perk.global.label", hint: "PTR2E.FIELDS.perk.global.hint" }),
       webs: new fields.SetField(new fields.DocumentUUIDField({ type: "Item" }), { required: true, initial: [], label: "PTR2E.FIELDS.perk.webs.label", hint: "PTR2E.FIELDS.perk.webs.hint" }),
+      traitWebs: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.perk.traitWebs.label", hint: "PTR2E.FIELDS.perk.traitWebs.hint" }),
 
       nodes: new fields.ArrayField(
         new fields.SchemaField({
@@ -396,6 +397,14 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
   global: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   webs: foundry.data.fields.SetField<
     foundry.data.fields.DocumentUUIDField<string, true, false, true>,
+    string[],
+    Set<string>,
+    true,
+    false,
+    true
+  >;
+  traitWebs: foundry.data.fields.SetField<
+    SlugField<string, string, true, false, true>,
     string[],
     Set<string>,
     true,

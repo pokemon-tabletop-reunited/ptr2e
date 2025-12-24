@@ -374,7 +374,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   _lineCache = new Map<string, SVGLineElement>();
   _zoomAmount: this['zoomLevels'][number] = 0.4;
 
-  web: "global" | ItemUUID = "global";
+  web: "global" | ItemUUID | string = "global";
   private speciesEvolutions: PerkPTR2e[] = [];
   private underdogPerks: PerkPTR2e[] = [];
   private perkTab: CompendiumBrowserPerkTab | null = null;
@@ -423,6 +423,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
     if (!this._perkStore.initialized) {
       this._perkStore.updateState(this.actor);
+    }
+
+    for(const web of this._perkStore.availableWebs) {
+      if(this.actor && this.actor.traits.has(web)) {
+        const trait = game.ptr.data.traits.get(web)
+        webOptions.push({
+          value: web,
+          label: trait ? `[${trait.label}] Perk Web` : `[${Handlebars.helpers.formatSlug(web)}] Perk Web`
+        })
+      }
     }
 
     const grid: GridEntry[] = [];
@@ -566,7 +576,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         if (value === "global") {
           return this.setWeb(null);
         }
-        const species = await fromUuid<SpeciesPTR2e>(value);
+        if(this._perkStore.availableWebs.has(value)) {
+          return this.setWeb(value);
+        }
+        const species = await fu.fromUuid<SpeciesPTR2e>(value);
         this.setWeb(species ?? null);
       });
     }
@@ -1533,15 +1546,21 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     element.scrollTo({ left: newLeft, top: newTop, behavior: "smooth" });
   }
 
-  async setWeb(species: SpeciesPTR2e | null) {
-    if (species === null) {
+  async setWeb(webOrSpecies: SpeciesPTR2e | string | null) {
+    if (webOrSpecies === null) {
       this.web = "global";
       this.speciesEvolutions = [];
       return await PerkWebApp.refresh.call(this);
     }
 
-    this.web = species.uuid;
-    this.speciesEvolutions = await species.system.getEvolutionPerks(!!this.actor?.system.shiny);
+    if(typeof webOrSpecies === "string") {
+      this.web = webOrSpecies;
+      this.speciesEvolutions = [];
+      return await PerkWebApp.refresh.call(this);
+    }
+
+    this.web = webOrSpecies.uuid;
+    this.speciesEvolutions = await webOrSpecies.system.getEvolutionPerks(!!this.actor?.system.shiny);
     this.underdogPerks = this.actor ? await this.actor.getUnderdogPerks() : [];
     await PerkWebApp.refresh.call(this);
 
