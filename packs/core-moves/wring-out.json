@@ -27,7 +27,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 1 to 120.</p>",
+        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 10 to 120.</p>",
         "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
@@ -58,7 +58,7 @@
           {
             "type": "percentile-modifier",
             "key": "wring-out-attack-power",
-            "value": "(@target.system.health.percent)-100",
+            "value": "((@actor.system.health.percent)-100)*1.4",
             "predicate": [],
             "label": "Wring Out Scaling",
             "mode": 2,

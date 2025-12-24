@@ -11,26 +11,26 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You may spend 4 PP to Fling a [Ball] or [Concoction] item as a Free Action at [Delay 3] [Interrupt 2] once before the start of your next Activation.</p>",
+    "description": "<p>You may spend 4 PP to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action at @Trait[flinch 30], @Trait[interrupt-2] once before the start of your next Activation.</p>",
     "actions": [
       {
         "name": "Fast Pitch",
         "slug": "fast-pitch",
-        "description": "<p>You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.</p>",
+        "description": "<p>You may spend 4 PP to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action at @Trait[flinch 30], @Trait[interrupt-2] once before the start of your next Activation.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 4
         },
         "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "interrupt-2",
+          "flinch-30"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "fast-pitch",
@@ -72,10 +72,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "P49Aro4LHhgEkPC5",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",

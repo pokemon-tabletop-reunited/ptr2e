@@ -1,0 +1,120 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Strike Fishing",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Strike Fishing",
+        "slug": "strike-fishing",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "traits": [
+          "digimon",
+          "missile",
+          "pierce",
+          "danger-close"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: This attack inflicts @UUID[Compendium.ptr2e.core-effects.hIE6W3Y5E9CyHiTy]{-1 Evasion Stage} for 3 activations and gains +1 Effectiveness Stage vs @Trait[water] creatures.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "power": 95,
+        "accuracy": 100
+      }
+    ],
+    "grade": "E"
+  },
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
+  "effects": [
+    {
+      "name": "Strike Fishing",
+      "type": "passive",
+      "_id": "08ef9dRuk4GV5Mf9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "strike-fishing-attack-effectiveness-stage",
+            "value": 1,
+            "predicate": [
+              "target:trait:water"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "strike-fishing-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.hIE6W3Y5E9CyHiTy",
+            "predicate": [],
+            "alterations": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "cUaPfdMsKV8Xuttr"
+}

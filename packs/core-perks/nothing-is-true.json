@@ -1,0 +1,110 @@
+{
+  "name": "Nothing Is True",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: The user gains the @Trait[ninja] trait.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.stealth.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 177,
+        "y": 48,
+        "connected": [
+          "out-of-options",
+          "belt-expansion-1",
+          "pervasive-shadow",
+          "smokestep",
+          "root-2"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/skills/melee/strike-dagger-poison-green.webp",
+  "effects": [
+    {
+      "name": "Nothing Is True",
+      "type": "passive",
+      "_id": "SvsczNeeUSZhXyMH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "ninja",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "eJxc0lYNgPi8fooF"
+}

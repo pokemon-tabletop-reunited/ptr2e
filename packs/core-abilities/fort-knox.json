@@ -19,7 +19,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user receives a negative [Stage Change] effect.</p><p>Effect: The user gains +3 DEF Stages for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg"
@@ -38,9 +39,77 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "qR1Q8x49FCISx02d",
-  "effects": []
+  "effects": [
+    {
+      "name": "Fort Knox",
+      "type": "passive",
+      "_id": "aEDO8GBwpLy8FJpF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-note",
+            "key": "effect-applied",
+            "value": "{actor|link}'s {item|link} may be able to activate as they just had an effect applied!",
+            "predicate": [],
+            "visibility": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fort-knox-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.mmrwiSq22RoCTCbg",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.zkPwckV2p2C4AjFp.ActiveEffect.AtxTtATg56OHCBz7",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765277892219,
+        "modifiedTime": 1765277934358,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

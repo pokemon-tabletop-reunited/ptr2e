@@ -53,10 +53,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
   "effects": [
@@ -72,57 +69,55 @@
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.VoiUETAcuekeVO32",
             "predicate": [],
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.actions.0.free",
-                "value": "true"
-              }
-            ],
-            "mode": 2,
+            "alterations": [],
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.F4GCikgU29LS0wu7",
             "predicate": [],
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.actions.0.free",
-                "value": "true"
-              }
-            ],
-            "mode": 2,
+            "alterations": [],
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "drill",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -140,16 +135,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1737392003677,
-        "modifiedTime": 1737392098018,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1764892764196,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2",
         "exportSource": null
       }
     }

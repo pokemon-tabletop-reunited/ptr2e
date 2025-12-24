@@ -1,0 +1,357 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Whip",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "whip",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "blunt",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "sci-fi",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Whip Strike",
+        "slug": "whip-strike",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[delay 30]. On a Critical Hit, the target gains @Affliction[bleed 5].</p>",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "missile",
+          "crit-1",
+          "flinch-10",
+          "impel"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 3,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 60,
+        "accuracy": 90
+      },
+      {
+        "name": "Whip Lash",
+        "slug": "whip-lash",
+        "description": "<p>Effect: On hit, the target gains @Affliction[delay 30] and has a 30% chance of gaining @Affliction[bleed 5] and a further @Affliction[delay 30]. On a Critical Hit, the target loses -1 random Stat Stage for 5 Activations, and has a 30% chance of gaining @Affliction[splinter 5].</p>",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "missile",
+          "crit-1",
+          "flinch-30",
+          "impel"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "variant": "whip-strike",
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 40,
+        "accuracy": 75
+      },
+      {
+        "name": "Whip Bind",
+        "slug": "whip-bind",
+        "description": "<p>Effect: On hit, the target is @Affliction[bound], and the user automatically succeeds with a @Affliction[grapple] against the target. The target is @Affliction[hindered] and has -1 default ACC while @Affliction[bound], and can only be cured of @Affliction[bound] as a Free Action while this item is not Held or the target escapes the Grapple.</p>",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "missile",
+          "flinch-10",
+          "impel"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "variant": "whip-strike",
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "accuracy": 65
+      }
+    ],
+    "description": "<p>A whip is a blunt weapon or implement used in a striking motion to create sound or pain. Whips can be used for flagellation to exert control through pain compliance or fear of pain, or be used as an audible cue through the distinct whipcrack effect. The portion used for striking is generally either a firm rod designed for direct contact, or a flexible line requiring a specialized swing. The former is easier and more precise, the latter offers longer reach and greater force. Some varieties, such as a hunting whip or lunge whip, have an extended stock section in addition to the line.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 25,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Whip",
+      "type": "passive",
+      "_id": "ZGkivoZUlsJTwcEp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 3,
+            "predicate": [],
+            "label": "Whip",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-strike-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              }
+            ],
+            "dontMerge": false,
+            "label": "Delay",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-strike-attack-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "label": "Bleed",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "whip-lash-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "label": "Lash",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-lash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              }
+            ],
+            "dontMerge": false,
+            "label": "Auto Delay",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-lash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              }
+            ],
+            "dontMerge": false,
+            "label": "Delay",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-lash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Lash Bleed",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-lash-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Lash Splinter",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-bind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "predicate": [],
+            "label": "Bind Bound",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-bind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.grapplecondiitem",
+            "predicate": [],
+            "label": "Bind Grapple",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "WmEtmDZ28GjmyFNW"
+}

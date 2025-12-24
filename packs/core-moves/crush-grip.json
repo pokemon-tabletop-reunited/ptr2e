@@ -22,15 +22,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 5
         },
         "category": "physical",
-        "power": 120,
+        "power": 180,
         "accuracy": 100,
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 1 to 120. This attack ignores the target’s positive DEF Stages. The user auto-succeeds on a @Affliction[grapple] Maneuver check against the target on hit. While the target is @Affliction[grapple]d, they are @Affliction[splintered], and suffer a -30 to rolls to escape the @Affliction[grapple].</p>",
+        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 10 to 180. This attack ignores the target’s positive DEF Stages. The user auto-succeeds on a @Affliction[grapple] Maneuver check against the target on hit. While the target is @Affliction[grapple]d, they are @Affliction[splintered], and suffer a -30 to rolls to escape the @Affliction[grapple].</p>",
         "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
@@ -59,9 +59,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "crush-grip-attack-power",
-            "value": "(@target.system.health.percent)-100",
+            "value": "((@target.system.health.percent)-100)*1.7",
             "predicate": [],
             "label": "Crush Grip Scaling",
             "mode": 2,

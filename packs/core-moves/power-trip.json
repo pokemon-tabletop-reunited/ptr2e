@@ -28,7 +28,7 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages.</p>",
+        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p>",
         "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "predicate": []
       }
@@ -54,7 +54,7 @@
           {
             "type": "flat-modifier",
             "key": "power-trip-attack-power",
-            "value": "20 * (@actor.system.attributes.atk.stage+@actor.system.attributes.def.stage+@actor.system.attributes.spa.stage+@actor.system.attributes.spd.stage+@actor.system.attributes.spd.stage+@actor.system.battleStats.accuracy.stage+@actor.system.battleStats.evasion.stage+@actor.system.battleStats.critRate.stage)",
+            "value": "20 * (max(0,@actor.system.attributes.atk.stage)+max(0,@actor.system.attributes.def.stage)+max(0,@actor.system.attributes.spa.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.battleStats.accuracy.stage)+max(0,@actor.system.battleStats.evasion.stage)+max(0,round(@actor.system.battleStats.critRate.stage*1.5)))",
             "predicate": [],
             "label": "Power Trip",
             "mode": 2,
