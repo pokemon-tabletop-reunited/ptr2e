@@ -15,24 +15,27 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "S",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "restorative",
     "traits": [
       "combat",
-      "held",
       "restorative",
       "consumable",
-      "natural",
       "healing"
     ],
-    "description": "The target cured of @Affliction[fainted], not accruing @Affliction[weary]. HP is set to 100% of Max.",
+    "description": "<p>The target is healed @Tick[16] and reduces Weary by 1 stack.</p>",
     "quantity": 1,
     "slug": "max-revive",
     "stack": 1,
@@ -44,8 +47,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "S5qluVraz0FH7cpZ",
   "effects": [],

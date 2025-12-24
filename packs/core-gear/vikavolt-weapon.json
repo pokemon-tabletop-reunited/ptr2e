@@ -1,0 +1,221 @@
+{
+  "name": "Vikavolt (Weapon)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "vikavolt-weapon",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "living-weapon",
+      "weapon",
+      "electric",
+      "bug",
+      "pokemon",
+      "ray"
+    ],
+    "actions": [
+      {
+        "name": "Charge Blast",
+        "slug": "charge-blast",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance to gain @Affliction[paralyzed] 5.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "electric",
+          "bug",
+          "pokemon",
+          "blast-2",
+          "ray"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "blast",
+          "distance": 16,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 80,
+        "accuracy": 90,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Rail Cannon",
+        "slug": "rail-cannon",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "electric",
+          "bug",
+          "pokemon",
+          "ray",
+          "pierce"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "line",
+          "distance": 12,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 110,
+        "accuracy": 90,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Volt Ray",
+        "slug": "volt-ray",
+        "description": "<p>Wielding a Vikavolt as a weapon. Popular weapon used by the military all around the Pokémon world.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "electric",
+          "bug",
+          "pokemon",
+          "ray"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 45,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      }
+    ],
+    "description": "<p>Wielding a Vikavolt as a weapon. Popular weapon used by the military all around the Pokémon world.</p>",
+    "crafting": {
+      "skill": "N/A",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 2,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "electric",
+      "power": 50,
+      "accuracy": 85,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Living Weapon"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Charge Blast",
+      "type": "affliction",
+      "_id": "yMS8DXTvi2HQmrJE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "charge-blast-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXaf",
+  "flags": {},
+  "_id": "P1FIvxkZ2nRdpRIr"
+}

@@ -1,0 +1,133 @@
+{
+  "name": "Army of Phantoms",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Army of Phantoms",
+        "slug": "army-of-phantoms",
+        "description": "<p>Effect: As a Complex Action, the user can make themselves and all allies within range become @Affliction[invisible 3].</p>",
+        "traits": [
+          "ninja"
+        ],
+        "type": "generic",
+        "img": "icons/svg/invisible.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: As a Complex Action, the user can make themselves and all allies within range become @Affliction[invisible 3].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "item:perk:smokestep"
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 188,
+        "y": 39,
+        "connected": [
+          "smokestep",
+          "aura-empathy"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/svg/invisible.svg",
+  "effects": [
+    {
+      "name": "Army of Phantoms",
+      "type": "passive",
+      "_id": "0Ox73sr7cQBCQcdk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "army-of-phantoms-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.invisibleconitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "klID8J4yUuKFvW43"
+}

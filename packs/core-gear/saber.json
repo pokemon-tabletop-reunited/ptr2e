@@ -1,0 +1,243 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Saber",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "saber",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "blade",
+      "fling",
+      "steel",
+      "1-handed",
+      "switch-grip",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Saber Swing",
+        "slug": "saber-swing",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact",
+          "adaptable",
+          "pass-1",
+          "priority-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 60,
+        "accuracy": 95
+      },
+      {
+        "name": "Saber Thrust",
+        "slug": "saber-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "adaptable",
+          "crit-1",
+          "grapple",
+          "flinch-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 100,
+        "accuracy": 85
+      },
+      {
+        "name": "Saber Charge",
+        "slug": "saber-charge",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact",
+          "adaptable",
+          "pass-3",
+          "dash",
+          "flinch-25"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 110,
+        "accuracy": 90
+      }
+    ],
+    "description": "<p>A saber is a type of single-edged, curved cutting sword developed from ancient designs into a cavalry-focused weapon.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "fling": {
+      "type": "steel",
+      "power": 85,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Saber",
+      "type": "passive",
+      "_id": "Xm7KX4XFo3NQpxpe",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 12,
+            "predicate": [],
+            "label": "Saber",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "saber-thrust-attack-damage-flat",
+            "value": 2,
+            "predicate": [],
+            "label": "Saber Thrust",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "saber-charge-attack-damage-flat",
+            "value": 10,
+            "predicate": [],
+            "label": "Saber Charge",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-saber-attack-damage-flat",
+            "value": 10,
+            "predicate": [],
+            "label": "Saber (Fling)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "r8rxDx9bzq5ASx3l",
+        "modifiedTime": 1762640671454
+      }
+    }
+  ],
+  "_id": "KCghcBlfNSfb2ZEk"
+}

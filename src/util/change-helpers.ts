@@ -1,7 +1,7 @@
 import { ActorPTR2e, ActorSynthetics, EffectAlteration, EffectRoll } from "@actor";
 import { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
 import { ActiveEffectPTR2e, BracketedValue, EffectSourcePTR2e } from "@effects";
-import { ItemPTR2e, ItemSourcePTR2e } from "@item";
+import { EffectPTR2e, ItemPTR2e, ItemSourcePTR2e } from "@item";
 import {
   DeferredValueParams,
   ModifierAdjustment,
@@ -126,7 +126,8 @@ async function extractEffectRolls({
   options,
   chanceModifier = 0,
   hasSenerenGrace = false,
-  effectAlterations: effectAdjustments = {}
+  effectAlterations: effectAdjustments = {},
+  targetEffectAlterations: targetEffectAdjustments = {}
 }: Omit<ExtractEphemeralEffectsParams, 'affects'> & { affects: "self" | "origin" | "target" | "defensive", chanceModifier?: number, hasSenerenGrace?: boolean }): Promise<EffectRoll[]> {
   if (!(origin && target)) return [];
 
@@ -161,15 +162,48 @@ async function extractEffectRolls({
     }, [] as EffectRoll[]).map(async (e) => {
       if (e) {
         if (!e.isFixedChance) e.chance = e.chance + chanceModifier;
+        const effectItem = await fu.fromUuid<EffectPTR2e>(e.effect);
+        if(!effectItem) return e;
+
+        const effectDomains = Array.from(new Set([
+          ...(effectItem.effects as unknown as ActiveEffectPTR2e[]).map(e  => [
+            `${e.slug}-applied`,
+            ...(e.system.traits.map(t => `${t.slug}-trait-applied`))
+          ]).flat(),
+          `${effectItem.slug}-applied`,
+          ...(effectItem.system.traits.map(t => `${t.slug}-trait-applied`)),
+          ...domains
+        ]));
 
         const alterations = await extractEffectAlterations(
           effectAdjustments,
-          domains,
+          effectDomains,
           e,
           options,
           resolvables
         );
-        e.alterations = [...(e.alterations ?? []), ...alterations.flatMap(a => a.alterations ?? [])];
+
+        const targetEffectDomains = Array.from(new Set([
+          ...(effectItem.effects as unknown as ActiveEffectPTR2e[]).map(e  => [
+            `${e.slug}-received`,
+            ...(e.system.traits.map(t => `${t.slug}-trait-received`))
+          ]).flat(),
+          `${effectItem.slug}-received`,
+          ...(effectItem.system.traits.map(t => `${t.slug}-trait-received`)),
+        ]));
+        const targetAlterations = await extractEffectAlterations(
+          targetEffectAdjustments,
+          targetEffectDomains,
+          e,
+          options,
+          resolvables
+        );
+
+        e.alterations = [
+          ...(e.alterations ?? []), 
+          ...alterations.flatMap(a => a.alterations ?? []),
+          ...targetAlterations.flatMap(a => a.alterations ?? [])
+        ];
 
         return e;
       }
@@ -203,17 +237,17 @@ async function extractEffectRolls({
   });
 }
 
-async function extractEffectAlterations(
+export async function extractEffectAlterations(
   adjustmentsRecord: ActorSynthetics["effectAlterations"],
   selectors: string[],
-  effect: EffectRoll,
+  effectRoll: EffectRoll | Record<string, unknown>,
   options: Set<string> | string[] = [],
   resolvables: Record<string, unknown> = {}
 ): Promise<EffectAlteration[]> {
   return await Promise.all(
     selectors
       .flatMap((s) => adjustmentsRecord[s] ?? [])
-      .map((d) => d({ test: options, injectables: { ...resolvables, effect }, resolvables}))
+      .map((d) => d({ test: options, injectables: { ...resolvables, effect: effectRoll }, resolvables}))
       .flatMap((e) => e ?? [])
   )
 }
@@ -228,6 +262,7 @@ interface ExtractEphemeralEffectsParams {
   domains: string[];
   options: Set<string> | string[];
   effectAlterations?: ActorSynthetics["effectAlterations"];
+  targetEffectAlterations?: ActorSynthetics["effectAlterations"];
 }
 
 function extractAttackAdjustments(

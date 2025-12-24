@@ -7,26 +7,24 @@
       "item:move:reflect"
     ],
     "cost": 4,
-    "description": "<p>When using either Light Screen or Reflect, you may spend 3PP to also use the other one as a Free Action at [Interrupt 2].<br><br>Connection: Light Screen, Reflect.</p>",
+    "description": "<p>When using either @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen} or @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}, you may spend 3PP to also use the other one as a Free Action at @Trait[interrupt-2].<br><br>Connection: @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen}, @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}.</p>",
     "actions": [
       {
         "name": "Screen Setter",
         "slug": "screen-setter",
-        "description": "<p>When using either Light Screen or Reflect, you may spend 3PP to also use the other one as a Free Action at [Interrupt 2].</p>",
+        "description": "<p>When using either @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen} or @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}, you may spend 3PP to also use the other one as a Free Action at @Trait[interrupt-2].</p>",
         "cost": {
           "activation": "complex",
           "powerPoints": 3
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
         "range": {
           "target": "enemy",
           "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "distance": 10
+        }
       }
     ],
     "slug": "screen-setter",
@@ -58,12 +56,9 @@
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
-          "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -81,11 +76,8 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "undefined"
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+      "notes": ""
+    }
   },
   "_id": "cnTPWqYXmGaFZfBd",
   "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
@@ -93,7 +85,7 @@
     {
       "name": "Screen Setter",
       "type": "passive",
-      "_id": "32yj5ObQZdmyiwFN",
+      "_id": "35IbEOtwo4EBq3hN",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -109,35 +101,55 @@
                 "value": "true"
               }
             ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.1Fj2tpYLzmm6bnIN",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -145,17 +157,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "exportSource": null,
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
-        "createdTime": 1737391538266,
-        "modifiedTime": 1737391569234,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
-        "exportSource": null
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764893346978,
+        "modifiedTime": 1764893441881,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
       }
     }
   ],

@@ -8,7 +8,7 @@
       "previous": null
     },
     "publication": {
-      "source": "PTR 2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
@@ -23,7 +23,8 @@
         "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "traits": [
           "hazard",
-          "blast-2"
+          "blast-2",
+          "digimon"
         ],
         "range": {
           "target": "blast",
@@ -44,7 +45,8 @@
         "description": "<p>Effect: Creates a cloud in the Blast Area for 3 rounds. Any creature that starts their activation in or enters a space containing this Hazard has a 15% chance to gain @Affliction[paralysis] 5 per tile. The initial attack also possesses this 15% chance to apply the affliction.</p>"
       }
     ],
-    "grade": "B"
+    "grade": "B",
+    "slug": "paralyze-breath"
   },
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "effects": [
@@ -66,14 +68,17 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -95,15 +100,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "Ug2caoRxuWMgzrtP"
 }

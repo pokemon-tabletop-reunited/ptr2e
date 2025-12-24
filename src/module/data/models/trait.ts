@@ -61,7 +61,7 @@ class Trait {
             trait: { value: this.value ?? "" }
           }
         }) as string,
-        value: c.resolveValue(c.value, c.value, {
+        value: c.type === "roll-option" ? c.value : c.resolveValue(c.value, c.value, {
           evaluate: false, resolvables: {
             actor,
             item,
@@ -71,6 +71,19 @@ class Trait {
           }
         }) as string | number
       })
+      if('alterations' in c && Array.isArray(c.alterations) && c.alterations.length > 0) {
+        c.updateSource({
+          alterations: c.alterations.map(a => ({...a, value: c.resolveValue(a.value, a.value, {
+            evaluate: false, resolvables: {
+              actor,
+              item,
+              effect,
+              attack,
+              trait: { value: this.value ?? "" }
+            }
+          }) as string | number}))
+        })
+      }
     })
     return effect;
   }

@@ -3,7 +3,73 @@
   "_id": "YI8PcUnxFKbyMUxl",
   "type": "perk",
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dastardly Planner",
+      "type": "passive",
+      "_id": "STc3Sp1vHC5baWwo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "kuBl9IfXIgqtcwV4",
+            "value": 0,
+            "predicate": [],
+            "max": 8,
+            "color": "#0a0a0a",
+            "private": false,
+            "label": "Dastard",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": "10*@actor.clocks.kuBl9IfXIgqtcwV4",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765225533345,
+        "modifiedTime": 1765225685306,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,28 +83,29 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
-    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;\">During Combat, the user maintains a Dastard Clock, which is 8 Spans in size.<br><br style=\"box-sizing: border-box; color: rgb(145, 152, 161); font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(13, 17, 23); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">Whenever the user uses the Wait Action, Tick Forward the Dastard Clock by one Span.<br><br style=\"box-sizing: border-box; color: rgb(145, 152, 161); font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(13, 17, 23); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\">When the user declares an Attack, the Dastard Clock Empties. For each Span removed in this way, if the Attack is a Damaging Attack, increase its Power by 10%. Additionally, for each 2 Spans removed, add +1 to the duration of any non-[Weather], [Terrain], or [Room] effects the triggering Attack creates or inflicts.</span></p>",
-    "traits": [],
+    "slug": "dastardly-planner",
+    "description": "<p>During Combat, the user maintains a Dastard Clock, which is 8 Spans in size.<br><br>Whenever the user uses the Wait Action, or an action with the @Trait[set-up] trait (not inclusive of Resolution phase), Tick Forward the Dastard Clock by one Span.When the user declares an Attack, the Dastard Clock Empties. <br><br>For each Span removed in this way, if the Attack is a Damaging Attack, increase its Power by 10%. Additionally, for each 2 Spans removed, add +1 to the duration of any non-[Weather], [Terrain], or [Room] effects the triggering Attack creates or inflicts.</p>",
+    "traits": [
+      "partial-automation"
+    ],
     "prerequisites": [
       "trait:dark"
     ],
     "autoUnlock": [],
     "cost": 3,
-    "originSlug": null,
     "design": {
       "arena": "mental",
       "approach": "finesse",
       "archetype": "dark"
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 137,
         "y": 92,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "evil-touch",
           "salted-wounds",
@@ -47,10 +114,15 @@
           "hostile-shadows",
           "black-hole"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]
-  }
+  },
+  "folder": "3FMJcmOMjNlPT6A0"
 }

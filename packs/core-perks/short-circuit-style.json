@@ -3,7 +3,65 @@
   "_id": "8lWn0fQAkufMkRwv",
   "type": "perk",
   "img": "icons/magic/lightning/bolt-forked-blue-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Short Circuit Style",
+      "type": "passive",
+      "_id": "5V3R8ZM6MAz3zTyq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "short-circuit-style-generic",
+            "value": "Compendium.ptr2e.core-perks.Item.8lWn0fQAkufMkRwv",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756042298786,
+        "modifiedTime": 1756042318280,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -16,8 +74,30 @@
       ],
       "notes": ""
     },
-    "actions": [],
-    "slug": null,
+    "actions": [
+      {
+        "name": "Short Circuit Style",
+        "slug": "short-circuit-style",
+        "description": "<p>Target: A Commanded @Trait[electric] Creature<br><br>Effect: The affected [Electric] creature inflicts @Tick[-1] to itself and @Tick[-2] to it's target when it hits with an @Trait[electric] attack. This effect is doubled during Rainy Weather. This is not considered Recoil damage.</p>",
+        "traits": [
+          "command",
+          "style",
+          "electric"
+        ],
+        "type": "generic",
+        "img": "icons/magic/lightning/bolt-forked-blue-yellow.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "short-circuit-style",
     "description": "<p>Target: A Commanded @Trait[electric] Creature<br><br>Effect:  The affected [Electric] creature inflicts @Tick[-1] to itself and @Tick[-2] to it's target when it hits with an @Trait[electric] attack. This effect is doubled during Rainy Weather. This is not considered Recoil damage.</p>",
     "traits": [
       "command",
@@ -29,14 +109,11 @@
     ],
     "autoUnlock": [],
     "cost": 2,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "finesse",
       "archetype": "electric"
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
@@ -51,5 +128,6 @@
         "tier": null
       }
     ]
-  }
+  },
+  "folder": "2JITUAwLwao03qoc"
 }

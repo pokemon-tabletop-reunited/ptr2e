@@ -21,17 +21,23 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "12x Catch Rate modifer if used on a [Paradox] creature. 1x Catch Rate modifer otherwise.",
-    "modifier": 12,
+    "description": "<p>5x Catch Rate modifer if used on a @Trait[paradox] creature. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 5,
     "quantity": 1,
     "slug": "strange-ball",
     "stack": 5,
@@ -43,8 +49,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "yRg97xxzNbQGfFWe",
   "effects": [],

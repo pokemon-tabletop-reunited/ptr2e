@@ -26,7 +26,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user would be @Affliction[fainted] by a damaging attack.</p><p>Effect: The user does not gain @Affliction[fainted] and heals 100% HP. Then, the user gains @Affliction[boosted] 7 and @Affliction[chanted] 7. This can occur once per combat.</p>",
+    "description": "<p>Trigger: The user would be @Affliction[fainted] by a damaging attack.</p><p>Effect: The user does not gain @Affliction[fainted] and heals 100% HP. Then, the user gains @Affliction[boosted 7], @Affliction[resolved 7], and @Affliction[chanted 7]. This can occur once per combat.</p><p>Passive: Connection - Extreme Speed. The user possesses +1 default SPD Stage, and has @UUID[Compendium.ptr2e.core-abilities.SaEKwKaz49q3qV4M]{Inner Focus} as an Extra Ability.</p>",
     "traits": [
       "legendary"
     ],
@@ -93,6 +93,25 @@
           {
             "type": "roll-effect",
             "key": "brazen-ashes-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "brazen-ashes-generic",
             "value": "Compendium.ptr2e.core-effects.Item.chantedcondiitem",
             "predicate": [],
             "chance": 100,
@@ -108,11 +127,71 @@
             "dontMerge": false,
             "mode": 2,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.SaEKwKaz49q3qV4M",
+            "predicate": [
+              "item:ability:brazen-ashes:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.FMxkce89JzTELo3Z",
+            "predicate": [
+              "item:ability:brazen-ashes:active"
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
@@ -129,17 +208,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
-        "createdTime": 1753746769502,
-        "modifiedTime": 1753746903553,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "exportSource": null
       }
     }
   ]

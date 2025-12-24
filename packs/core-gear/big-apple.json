@@ -5,7 +5,7 @@
   "system": {
     "cost": 4,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "grass",
       "power": 50,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "food",
@@ -30,9 +35,10 @@
       "healing",
       "food",
       "held",
-      "fling"
+      "fling",
+      "mystery-dungeon"
     ],
-    "description": "The target is healed 8 Ticks of PP, and is cured of 1 @Affliction[weary].",
+    "description": "<p>The user recovers @PP[30].</p>",
     "quantity": 1,
     "slug": "big-apple",
     "stack": 1,
@@ -44,10 +50,106 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Big Apple",
+        "slug": "big-apple",
+        "description": "<p>The user recovers @PP[30].</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "healing",
+          "food",
+          "held",
+          "fling"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "coASAcnoVLUZl6pm",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Big Apple",
+      "type": "passive",
+      "_id": "9blKeNv9lb8DRO8h",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "big-apple-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.LHUTMAC0nCJWDRFt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.isFlat",
+                "value": "true"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 30
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.YOZU71QhsdyUbvmd.ActiveEffect.D1qzjRsKxs810yAJ",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758581453458,
+        "modifiedTime": 1758581470648,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

@@ -5,7 +5,7 @@
   "system": {
     "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,20 +19,20 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "spicy-3",
-      "sour-1",
       "combat"
     ],
     "description": "Effect: This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user would take damage from a super effective Bug-Type attack or effect, taking 50% less damage from the triggering attack or effect.",
@@ -47,8 +47,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "dGzcZGYLr6sv0MR3",
   "effects": [],

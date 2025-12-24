@@ -6,9 +6,30 @@
       "version": 0.107,
       "previous": null
     },
-    "actions": [],
-    "description": "<p>As a free action, you may spend @Tick[-4] to become @Affliction[stoked] 1.</p>",
-    "traits": [],
+    "actions": [
+      {
+        "name": "Midnight Oil",
+        "slug": "midnight-oil",
+        "description": "<p>As a free action, you may spend @Tick[-4] to become @UUID[Compendium.ptr2e.core-effects.Item.stokedcondititem]{Stoked}.</p>",
+        "traits": [
+          "fire"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>As a free action, you may spend @Tick[-4] to become @UUID[Compendium.ptr2e.core-effects.Item.stokedcondititem]{Stoked}.</p>",
+    "traits": [
+      "fire"
+    ],
     "prerequisites": [
       "trait:fire"
     ],
@@ -16,24 +37,21 @@
     "slug": "midnight-oil",
     "nodes": [
       {
+        "x": 166,
+        "y": 92,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "firefly",
           "inner-warmth",
           "intense-heat"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 166,
-        "y": 92,
         "tier": null
       }
     ],
@@ -51,13 +69,87 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Midnight Oil",
+      "type": "passive",
+      "_id": "otpFQE78uFNHHb9I",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "midnight-oil-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "midnight-oil-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.stokedcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764896209897,
+        "modifiedTime": 1764896323120,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "_id": "JaKFLzcgjJ6GRrRy",
   "folder": "oguAsvaOzTLs8f97"
 }

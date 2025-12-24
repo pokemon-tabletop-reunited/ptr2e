@@ -21,6 +21,10 @@
       {
         "type": "flight",
         "value": 8
+      },
+      {
+        "type": "swim",
+        "value": 3
       }
     ],
     "traits": [
@@ -28,7 +32,6 @@
       "bipedal",
       "inflatable",
       "hover",
-      "underdog",
       "fully-evolved",
       "jump-3"
     ],
@@ -43,26 +46,26 @@
       ],
       "basic": [
         {
-          "slug": "frisk"
+          "slug": "inflationary"
         },
         {
-          "slug": "inflationary"
+          "slug": "frisk"
         }
       ],
       "advanced": [
         {
-          "slug": "sweet-dreams"
+          "slug": "fur-coat"
         },
         {
-          "slug": "thick-fat"
+          "slug": "singer"
         }
       ],
       "master": [
         {
-          "slug": "pixilate"
+          "slug": "anger-point"
         },
         {
-          "slug": "tuck-and-roll"
+          "slug": "primal-rage"
         }
       ]
     },
@@ -158,6 +161,14 @@
       {
         "slug": "survival",
         "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -823,11 +834,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -846,19 +855,22 @@
                   "operand": "or"
                 }
               ],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
+              "perk": {
+                "x": 26,
+                "y": 26
               },
-              "evolutions": []
+              "details": null
             }
-          ]
+          ],
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.dgXlKnCPn9LUj3wJ",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "forest",
@@ -873,9 +885,619 @@
       "source": "PTR 2e Core - Kanto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "czJSIQDUib6snvcc",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Wigglytuff X",
+      "type": "form",
+      "_id": "ymUGovv6HReoSTv8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-wigglytuff-x:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Wigglytuff X Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.MLE0DaKLRYxW26oK",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": "Well Built",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": "jump 3",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": "jump 4",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": "fighting",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": "normal",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.type.types",
+            "value": "normal",
+            "mode": 6,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.type.types",
+            "value": "fighting",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 57,
+            "def": 8,
+            "spa": -25,
+            "spd": 17,
+            "spe": 53,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 6,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": -2,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 4,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 35,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-x:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754084712459,
+        "modifiedTime": 1754085784122,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    },
+    {
+      "name": "Mega Wigglytuff Y",
+      "type": "form",
+      "_id": "Pyn432X3WeftlHUt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-wigglytuff-y:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Wigglytuff Y Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.gubM49aBQUdUKGQv",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "hover",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "jump 3",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "jump 6",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "volatile bomb",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "rapid",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "firestarter",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "tailed",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.type.types",
+            "value": "normal",
+            "mode": 6,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.type.types",
+            "value": "fire",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": "normal",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 24,
+            "def": 4,
+            "spa": 49,
+            "spd": 9,
+            "spe": 14,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 45,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 35,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 45,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 40,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.movement.flight.value",
+            "value": -8,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 8,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-wigglytuff-y:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754085294694,
+        "modifiedTime": 1754086050022,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

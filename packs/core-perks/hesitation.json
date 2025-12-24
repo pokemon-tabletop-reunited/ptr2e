@@ -11,42 +11,42 @@
       }
     ],
     "cost": 3,
-    "description": "<p>When the user hits a creature with a [Social] Action,they may spend 2 PP to cause to the target to be Flinched 3. For multiple targets, you must spend 2 PP to affect each target</p>",
+    "description": "<p>When the user hits a creature with a @Trait[social] Action,they may spend 2 PP to afflict the target with @Affliction[delay 30]. For multiple targets, you must spend 2 PP to affect each target</p>",
     "actions": [
       {
         "name": "Hesitation",
         "slug": "hesitation",
-        "description": "<p>Trigger: The user's hits a creature with a [Social] Action.</p><p>Effect: The target is Flinched.</p>",
+        "description": "<p>Trigger: The user's hits a creature with a @Trait[social] Action.</p><p>Effect: The target is afflicted with @Affliction[delay 30].</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user's hits a creature with a [Social] Action.",
-          "delay": null,
-          "priority": null
+          "trigger": "The user's hits a creature with a @Trait[social] Action."
         },
         "type": "generic",
         "traits": [
-          "social",
-          "flinch-3"
+          "social"
         ],
-        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "hesitation",
-    "traits": [],
+    "traits": [
+      "social"
+    ],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 160,
+        "y": 140,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "condemn",
           "stat-iv-booster-1-2",
@@ -55,25 +55,15 @@
           "agitator"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#8000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 160,
-        "y": 140,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

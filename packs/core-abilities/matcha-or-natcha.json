@@ -1,0 +1,150 @@
+{
+  "name": "Matcha or Natcha",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "matcha-or-natcha",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "innate",
+      "partial-automation"
+    ],
+    "actions": [
+      {
+        "name": "Matcha or Natcha (Unremarkable)",
+        "slug": "matcha-or-natcha-unremarkable",
+        "description": "<p>Effect: If the user is in their Unremarkable Forme, they take 20% less damage from Physical- and Special-Category Attacks and are @Affliction[advance 30] whenever they miss with an Action.</p>",
+        "traits": [
+          "innate",
+          "partial-automation"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/ability_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Matcha or Natcha (Masterpiece)",
+        "slug": "matcha-or-natcha-action-masterpiece",
+        "description": "<p>Effect: If the user is in their Masterpiece Forme, the user’s @Trait[drain-x] on its Actions increases by +1/3. When the user gains HP or Shields, they have a 30% chance of gaining +1 SPATK or SPDEF Stage for 5 Activations respectively.</p>",
+        "traits": [
+          "innate",
+          "partial-automation"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/ability_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: Connection – Matcha Gotcha. If the user is in their Unremarkable Forme, they take 20% less damage from Physical- and Special-Category Attacks and are @Affliction[advance 30] whenever they miss with an Action.</p><p>If the user is in their Masterpiece Forme, the user’s @Trait[drain-x] on its Actions increases by +1/3. When the user gains HP or Shields, they have a 30% chance of gaining +1 SPATK or SPDEF Stage for 5 Activations respectively.</p><p>The user gains Hospitality as an Extra Ability.</p>"
+  },
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "effects": [
+    {
+      "name": "Matcha or Natcha",
+      "type": "passive",
+      "_id": "HK6LvyTR4S4Vs9bt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.qbw0X9rYwQxjYy98",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.xadNMxTDVEtPcSzD",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "MQUmeOsU24FdIqeN"
+}

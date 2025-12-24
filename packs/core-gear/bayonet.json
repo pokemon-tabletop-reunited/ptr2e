@@ -1,0 +1,221 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Bayonet",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "bayonet",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "1-handed",
+      "modern",
+      "early-modern",
+      "fantasy",
+      "switch-grip",
+      "steel"
+    ],
+    "actions": [
+      {
+        "name": "Bayonet Thrust",
+        "slug": "bayonet-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "crit-1",
+          "flinch-10",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 60,
+        "accuracy": 90,
+        "free": true
+      },
+      {
+        "name": "Bayonet Thrust (Readied)",
+        "slug": "bayonet-thrust-readied",
+        "description": "<p>Trigger: A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced].</p>",
+        "traits": [
+          "weapon",
+          "interrupt-2",
+          "adaptable",
+          "crit-1",
+          "priority-20",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced]."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 60,
+        "accuracy": 100,
+        "free": true
+      },
+      {
+        "name": "Bayonet Unlugged Thrust",
+        "slug": "bayonet-unlugged-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "adaptable",
+          "grapple"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 35,
+        "accuracy": 85,
+        "free": true
+      }
+    ],
+    "description": "<p>A bayonet is a spike-shaped melee weapon designed to be mounted on the end of the barrel of a long firearm, allowing the weapon to be used as an improvised spear in close combat. While mounted onto a Firearm, this weapon is Slotless. It can be Held, albeit not able to be used as effectively.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 85,
+      "accuracy": 75,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Bayonet",
+      "type": "passive",
+      "_id": "jK2wcxOo4Ke1hVWE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 9,
+            "predicate": [],
+            "label": "Bayonet",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "bayonet-unlugged-thrust",
+            "value": -5,
+            "predicate": [],
+            "label": "Bayonet",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "r8rxDx9bzq5ASx3l",
+        "modifiedTime": 1762640448796
+      }
+    }
+  ],
+  "_id": "9CKlrqUYYOFyi5fV"
+}

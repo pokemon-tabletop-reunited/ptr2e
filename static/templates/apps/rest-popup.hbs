@@ -1,4 +1,4 @@
-<section class="heal-popup">
+<section class="heal-popup standard-form">
     <fieldset class="restType">
         <legend>Rest Type</legend>
         <div>
@@ -12,19 +12,38 @@
     </fieldset>
 
     {{!-- Party --}}
-    <fieldset class="party-apply">
+    <fieldset class="party-apply scroll">
     {{#each party}}
+        <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
+    {{/each}}
+    {{#if box.length}}
+      <span style="flex: 0 0 100%; border-bottom: 1px solid var(--border-theme-color); width: 100%;"></span>
+    {{/if}}
+    {{!-- Boxed Pokémon --}}
+    {{#each box}}
         <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
     {{/each}}
     </fieldset>
 
     {{#if (eq restType "camp" )}}
     <fieldset class="camp-settings">
-        <legend>Camp Settings</legend>
+        <legend>{{localize "PTR2E.Rest.Camp.label"}} Settings</legend>
         <div class="form-group w-100">
             <label for="{{id}}-fractionToHeal">{{localize "PTR2E.Rest.HealthRestoration.label"}}</label>
             <div class="form-fields">
               <input class="fractionToHeal" id="{{id}}-fractionToHeal" type="number" name="fractionToHeal" value="{{fractionToHeal}}" min="0" max="100" />
+            </div>
+        </div>
+    </fieldset>
+    {{/if}}
+
+    {{#if (eq restType "center" )}}
+    <fieldset class="center-settings">
+        <legend>{{localize "PTR2E.Rest.PkmnCenter.label"}} Settings</legend>
+        <div class="form-group w-100">
+            <label>Apply to Boxed mons?</label>
+            <div class="form-fields">
+              <input type="checkbox" name="applyToBox" {{#if applyToBox}}checked{{/if}} />
             </div>
         </div>
     </fieldset>

@@ -5,7 +5,7 @@
   "system": {
     "prerequisites": [],
     "cost": 1,
-    "description": "<p>Your next non-[Contact] Attack gains [Crit X] or [Crit X+1] until it resolves.</p>",
+    "description": "<p>Your next non-@Trait[contact] Attack gains @Trait[crit-x] or [Crit X+1] until it resolves.</p>",
     "actions": [
       {
         "name": "Down The Sights",
@@ -17,14 +17,11 @@
         },
         "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
     "slug": "down-the-sights",
@@ -48,13 +45,10 @@
           "needle-threader"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -73,12 +67,67 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "_id": "eHdFNdcyllxflfNA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Down The Sights",
+      "type": "passive",
+      "_id": "OP5pQtqdVpPEqv2z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "down-the-sights-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.GslkeZgUjwbZLKXm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765226024095,
+        "modifiedTime": 1765226047880,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

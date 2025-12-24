@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "the-unassessably-terrible",
-    "description": "<p>The user gains +20 on rolls to coerce or intimidate other creatures, and takes 20% less damage from [Pack Mon] creatures.</p>",
+    "description": "<p>The user gains +20 on rolls to coerce or intimidate other creatures, and takes 20% less damage from @Trait[pack-mon] creatures.</p>",
     "traits": [],
     "prerequisites": [
       "trait:dragon",
@@ -35,23 +35,86 @@
       {
         "x": 133,
         "y": 83,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "drakelike",
           "draconic-presence",
           "kinetic-dispersion",
           "bladesworn-scion"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    ]
   },
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "The Unassessably Terrible",
+      "type": "affliction",
+      "_id": "OelVwoXG71tiZGvN",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -20,
+            "predicate": [
+              "trait:pack-mon"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Item.A6xkBnPbLdJE68HB.ActiveEffect.pvYUwTseRuOimTJn",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764089390337,
+        "modifiedTime": 1764089390337,
+        "lastModifiedBy": "LVQq1FE8wFklB1O7"
+      }
+    }
+  ],
   "_id": "0ipu4RDGb6d5Lign"
 }

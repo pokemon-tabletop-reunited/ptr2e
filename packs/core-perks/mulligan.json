@@ -17,7 +17,9 @@
     "actions": [],
     "slug": "mulligan",
     "description": "<p>Effect: The user can spend 5 Luck to force a reroll of an ally's Effect Roll, this roll gains 50% EHR for this reroll only.</p>",
-    "traits": [],
+    "traits": [
+      "gambler"
+    ],
     "prerequisites": [
       "item:perk:jockeying"
     ],
@@ -34,21 +36,23 @@
       {
         "x": 83,
         "y": 191,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "jockeying",
           "lucky-duck"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    ]
   },
   "img": "icons/sundries/gaming/dice-runed-tan.webp",
   "effects": [],
-  "flags": {},
   "_id": "wdBLycAWtfTDK3Sl"
 }

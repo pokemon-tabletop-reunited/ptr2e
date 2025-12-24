@@ -25,6 +25,9 @@
 
 .standard-form {
   gap: 0.5rem;
+  fieldset:disabled a.content-link {
+    pointer-events: all;
+  }
 }
 
 /** PTR2e Specific Apps */
@@ -2460,6 +2463,7 @@
       justify-content: start;
       gap: 0.5rem;
       flex-wrap: wrap;
+      max-height: 25rem;
 
       img {
         width: 40px;
@@ -2755,6 +2759,20 @@
           border: 1px solid var(--border-theme-color);
           cursor: pointer;
           background: linear-gradient(to right, rgb(7, 7, 10), rgb(19, 17, 31));
+
+          &.highlighted {
+            @keyframes glow {
+              from {
+                box-shadow: 0 0 5px -5px gold;
+              }
+
+              to {
+                box-shadow: 0 0 5px 5px gold;
+              }
+            }
+
+            animation: glow 1s infinite alternate;
+          }
   
           &.selected {
             border-color: #973748;
@@ -9183,7 +9201,7 @@ footer#ui-bottom {
         align-content: center;
       }
 
-      &.attack.full, &.skill.full {
+      &.attack.full, &.skill.full, &.action.full {
         border: 1px dashed var(--border-theme-color);
         padding: 1px;
       }

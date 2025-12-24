@@ -112,6 +112,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
       flag: new fields.StringField({ required: false, blank: false, nullable: false, initial: undefined }),
       rollOption: new fields.StringField({ required: false, blank: false, nullable: true, initial: null }),
       allowNoSelection: new StrictBooleanField({ required: false, nullable: false, initial: undefined }),
+      showDisabled: new StrictBooleanField({ required: false, nullable: false, initial: undefined }),
       selection: new fields.AnyField({ required: false, nullable: true }),
     }
   }
@@ -217,6 +218,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
         value: c.value,
         label: game.i18n.localize(c.label),
         img: c.img,
+        disabled: c.disabled
       }))
 
       // Only sort if the choices were generated via compendium query or actor data
@@ -231,6 +233,13 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
   }
 
   private choicesFromArray(choices: PickableThing[], actorRollOptions: Set<string>): PickableThing[] {
+    if(this.showDisabled) {
+      return choices.map( c => ({
+        ...c,
+        disabled: c.predicate ? !this.resolveInjectedProperties(new Predicate(c.predicate)).test(actorRollOptions) : false
+      }) );
+    }
+
     return choices.filter((c) =>
       this.resolveInjectedProperties(new Predicate(c.predicate ?? [])).test(actorRollOptions),
     );
@@ -332,6 +341,7 @@ interface ChoiceSetSchema extends ChangeSchema {
   >;
   /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
   allowNoSelection: StrictBooleanField<false, false, false>;
+  showDisabled: StrictBooleanField<false, false, false>;
   selection: foundry.data.fields.AnyField;
 };
 

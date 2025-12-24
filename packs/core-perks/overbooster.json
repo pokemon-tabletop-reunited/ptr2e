@@ -7,27 +7,25 @@
   "system": {
     "actions": [
       {
-        "name": "Overbooster",
-        "slug": "overbooster",
-        "description": "<p>The user loses a Tick of HP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations.</p>",
-        "traits": [],
+        "name": "Overbooster (Tick)",
+        "slug": "overbooster-tick",
+        "description": "<p>Effect: The user loses @Tick[-1]. The user Ticks their Overbooster Clock by 1 Span.<br><br>This may only be done up two times during each of the user's Activations.</p>",
+        "traits": [
+          "priority-10"
+        ],
         "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "cost": {
+          "activation": "free"
+        },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
-        },
-        "cost": {
-          "activation": "free",
-          "powerPoints": 1
-        },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "overbooster",
-    "description": "<p>The user spends a Tick of HP and 1 PP. The user's next Physical- or Special-Category Attack deals +20% more damage. This can be done twice on each of the user's Activations</p>>",
+    "description": "<p>The user maintains an Overbooster Clock, maximum 20 Spans. Up to twice per Activation as a Free Action at @Trait[priority-10], the user can Tick the Overbooster Clock by 1 Span and lose @Tick[-1].</p><p>The user can choose to empty the Overbooster Clock as a Free Action when they declare a Physical- or Special-Category Attack, increasing the EHR and Damage of the Attack by +4% and +20% respectively per Span consumed. The Overbooster Clock is emptied when the user enters or exits combat.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -37,6 +35,10 @@
     },
     "nodes": [
       {
+        "x": 65,
+        "y": 42,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "desperate-strike",
           "glutton-for-punishment",
@@ -45,18 +47,11 @@
           "boiling-blood"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": "#ff0000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 65,
-        "y": 42,
         "tier": null
       }
     ],
@@ -74,10 +69,165 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Overbooster",
+      "type": "passive",
+      "_id": "enVtfPog1vWfGEWC",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "overboosterClock",
+            "value": 0,
+            "predicate": [],
+            "max": 20,
+            "color": "#e02e6f",
+            "private": false,
+            "label": "Overbooster",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "overbooster-tick-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "",
+                "value": 0
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "overbooster-tick-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "overboosterClock"
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "overboosting-active",
+            "predicate": [],
+            "label": "Overboosting",
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "alwaysActive": false,
+            "state": true,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-damage",
+            "value": "20*@actor.clocks.overboosterClock",
+            "predicate": [
+              "overboosting-active"
+            ],
+            "label": "Overbooster!",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": "4*@actor.clocks.overboosterClock",
+            "predicate": [
+              "overboosting-active"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "predicate": [
+              "overboosting-active"
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "overboosterClock"
+              },
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": "-1-@actor.clocks.overboosterClock"
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "never"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765586584498,
+        "modifiedTime": 1766013406353,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ]
 }

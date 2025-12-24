@@ -1,4 +1,4 @@
-import { AttackPTR2e, FlatModifierChangeSystem, SummonAttackPTR2e, Trait } from "@data";
+import { AttackPTR2e, FlatModifierChangeSystem, PTRCONSTS, SummonAttackPTR2e, Trait } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -72,7 +72,7 @@ class AttackStatistic extends Statistic {
         `${attack.category}-${attack.type}`,
         attack.traits.contents.flatMap((t) => {
           const trait = t as PlaceholderTrait;
-          if(!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
+          if (!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
 
           return [
             `${trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, "")}-trait-${attack.type}`,
@@ -162,7 +162,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     if (this.attack.variant) {
       const original = this.attack.original as AttackPTR2e;
       if (original) {
+        const typeDomains = Object.values(PTRCONSTS.Types).map(t => `${t}-${original.type}`)
         for (const od of original.statistic?.domains ?? []) {
+          if(typeDomains.includes(od)) continue;
           extraDomains.add(od);
         }
       }
@@ -266,22 +268,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         targets.splice(index, 1);
       }
 
-      const powerModifier = this.modifiers.find(m => m.type === "power" && m.method === "base");
-      if (!powerModifier) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
-        return null;
-      }
-      const actorLift = this.actor.skills["lift"]?.mod ?? 1;
-      const actorWC = this.actor.species?.size?.weightClass ?? 1
-      const targetWC = target.actor.species?.size?.weightClass ?? 1;
-      const actorCatMod = this.actor.size?.rank ?? 1;
-      const thrownCatMod = target.actor.size?.rank ?? 1;
-
-      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
-
-      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
-
-      const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+      const result = AttackCheck.calculateActorToss(this.modifiers, this.actor, target.actor);
+      if(!result) return null;
+      const {power, accuracy, range} = result;
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
@@ -297,6 +286,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     if (variants.length) args.skipDialog = false;
 
     const selfOptions = new Set([...options, "targets:self"]);
+    // Add own effectiveness to self options
+    const effectiveness = this.actor.getEffectiveness(this.attack.types, this.modifiers.filter(t => t.type === "effectiveness").reduce((sum, curr) => sum + curr.modifier, 0), options.has("self:action:trait:ignore-type-immunity"));
+    selfOptions.add(`effectiveness:${effectiveness}`);
+    if(effectiveness === 0) selfOptions.add(`effectiveness:immune`);
+    else if(effectiveness === 1) selfOptions.add(`effectiveness:normal`);
+    else if(effectiveness < 1) selfOptions.add(`effectiveness:resist`);
+    else if(effectiveness > 1) selfOptions.add(`effectiveness:super`);
+
 
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
@@ -332,6 +329,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false,
       effectAlterations: this.actor.synthetics.effectAlterations,
+      targetEffectAlterations: this.actor.synthetics.effectAlterations,
     });
 
     // const extraModifiers = args.modifiers ?? [];
@@ -340,6 +338,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
       const targetsSelf = target.actor === this.actor;
+
+      // Add effectiveness options
+      const effectiveness = target.actor?.getEffectiveness(this.attack.types, this.modifiers.filter(t => t.type === "effectiveness").reduce((sum, curr) => sum + curr.modifier, 0), options.has("self:action:trait:ignore-type-immunity"));
+      const effectivenessOptions = new Set([`effectiveness:${effectiveness}`]);
+      if(effectiveness === 0) effectivenessOptions.add(`effectiveness:immune`);
+      else if(effectiveness === 1) effectivenessOptions.add(`effectiveness:normal`);
+      else if(effectiveness < 1) effectivenessOptions.add(`effectiveness:resist`);
+      else if(effectiveness > 1) effectivenessOptions.add(`effectiveness:super`);
 
       const targetDomains = allyOrEnemy === "enemy"
         ? this.domains.map(d => `hostile-${d}`)
@@ -354,7 +360,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         domains: domains,
         statistic: this,
         target: target,
-        options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
+        options: new Set([...options, ...effectivenessOptions, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
         skipEffectRolls: args.skipEffectRolls,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
@@ -456,6 +462,26 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     }
 
     return rolls;
+  }
+
+  static calculateActorToss(modifiers: ModifierPTR2e[], actor: ActorPTR2e, target: ActorPTR2e) {
+    const powerModifier = modifiers.find(m => m.type === "power" && m.method === "base");
+    if (!powerModifier) {
+      ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
+      return null;
+    }
+    const actorLift = actor.skills["lift"]?.mod ?? 1;
+    const actorWC = actor.species?.size?.weightClass ?? 1
+    const targetWC = target.species?.size?.weightClass ?? 1;
+    const actorCatMod = actor.size?.rank ?? 1;
+    const thrownCatMod = target.size?.rank ?? 1;
+
+    const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
+
+    const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
+
+    const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+    return {power, accuracy, range};
   }
 
   get breakdown(): string {

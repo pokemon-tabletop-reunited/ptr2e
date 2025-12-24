@@ -1,0 +1,58 @@
+{
+  "name": "Berry Garden",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: The user can purchase @Trait[berry] items with IP of their Grade or Lower without having to adhere to rarity restrictions.</p>",
+    "traits": [
+      "crafting"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.natural-world.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "crafting"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 101,
+        "y": 157,
+        "connected": [
+          "minor-buff-32",
+          "minor-buff-18",
+          "herbalist",
+          "pharmacist"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/item-icons/portable%20grower.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "ozGMX1SYPR1vhZQ9"
+}

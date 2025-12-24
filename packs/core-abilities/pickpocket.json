@@ -26,14 +26,14 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bestow the item to an allied creature.</p>",
         "variant": "thief",
         "free": true,
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/icons/container_icon.webp",
         "predicate": []
       }
     ],
-    "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+    "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bestow the item to an allied creature.</p>",
     "traits": [
       "connection",
       "partial-automation"
@@ -47,7 +47,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "RbNW8PmXowslwwP3",
@@ -63,7 +64,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.jxorjVcjferdaDBc",
-            "predicate": [],
+            "predicate": [
+              "ability:pickpocket:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -71,25 +74,27 @@
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -111,12 +116,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737417843881,
-        "modifiedTime": 1737417894502,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754320032585,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

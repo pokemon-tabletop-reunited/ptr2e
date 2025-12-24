@@ -5,7 +5,7 @@
   "system": {
     "cost": 4,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,26 +19,23 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "spicy-1",
-      "dry-1",
-      "sweet-5",
-      "bitter-5",
-      "sour-1",
       "combat"
     ],
-    "description": "Effect: When the user is damaged by a Special-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 SPDEF Stages for 5 Activations.",
+    "description": "<p>Effect: When the user is damaged by a Special-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 SPDEF Stages for 5 Activations.</p>",
     "quantity": 1,
     "slug": "maranga-berry",
     "stack": 1,
@@ -50,10 +47,92 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Maranga Berry",
+        "slug": "maranga-berry",
+        "description": "<p>Effect: When the user is damaged by a Special-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], giving the user +2 SPDEF Stages for 5 Activations.</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/maranga berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "2bEeZsyg1BAGfth1",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Maranga Berry",
+      "type": "passive",
+      "_id": "A4CX6g0CWObfSSJo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "maranga-berry-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.iFFY3BDzPF3mvg6r",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758643330607,
+        "modifiedTime": 1758643348754,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }

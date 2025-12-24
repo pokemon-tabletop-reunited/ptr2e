@@ -8,7 +8,7 @@
       "previous": null
     },
     "actions": [],
-    "description": "<p>Passive: Your Fighting-Type Moves gain a 20% chance to inflict Suppressed 5. If they already had a chance to inflict Suppressed, that chance is increased by 20%.</p>",
+    "description": "<p>Passive: Your @Trait[fighting] Type Moves gain a 20% chance to inflict @Affliction[suppressed 5]. If they already had a chance to inflict @Affliction[suppressed], that chance is increased by 20%.</p>",
     "traits": [],
     "prerequisites": [
       "trait:fighting"
@@ -17,6 +17,10 @@
     "slug": "fighting-momentum",
     "nodes": [
       {
+        "x": 145,
+        "y": 84,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "kinetic-dispersion",
           "acceptance",
@@ -25,25 +29,15 @@
           "minor-buff-34"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 145,
-        "y": 84,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -65,28 +59,33 @@
       "name": "Fighting Momentum",
       "type": "passive",
       "_id": "REBksiKRSKlWhlFP",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/fighting_icon.svg",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
             "key": "fighting-attack",
             "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -98,22 +97,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Passive: Your @Trait[fighting] Type Moves gain a 20% chance to inflict @Affliction[suppressed 5]. If they already had a chance to inflict @Affliction[suppressed], that chance is increased by 20%.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1757798251649,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

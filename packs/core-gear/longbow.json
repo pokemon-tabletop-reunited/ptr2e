@@ -1,0 +1,152 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Longbow",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "longbow",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "charge-pool-12",
+      "reload-2",
+      "early-modern",
+      "medieval",
+      "fantasy",
+      "2-handed",
+      "projectile"
+    ],
+    "actions": [
+      {
+        "name": "Longbow Shot",
+        "slug": "longbow-shot",
+        "traits": [
+          "weapon",
+          "missile",
+          "adaptable",
+          "readied",
+          "flinch-15"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 135,
+        "accuracy": 80,
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": []
+      }
+    ],
+    "description": "<p>A longbow is a type of tall bow that makes a fairly long draw possible. The historical longbow was a simple bow made of a single piece of wood, but modern longbows may also be made from modern materials or by gluing different timbers together. </p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 2
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 40,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Longbow",
+      "type": "passive",
+      "_id": "6wnrC0ZO9DLyoep9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 17,
+            "predicate": [],
+            "label": "Longbow",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "r8rxDx9bzq5ASx3l",
+        "modifiedTime": 1764810904149
+      }
+    }
+  ],
+  "_id": "kcONNhYYQmn2dEKX"
+}

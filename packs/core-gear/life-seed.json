@@ -5,7 +5,7 @@
   "system": {
     "cost": 4,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 90,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "other",
@@ -29,11 +34,9 @@
       "natural",
       "healing",
       "seed",
-      "held",
-      "stack-3",
-      "fling"
+      "stack-3"
     ],
-    "description": "The target is healed to its Max HP and loses 3 @Affliction[weary].",
+    "description": "<p>The target is healed to its Max HP and loses 1 @Affliction[weary].</p>",
     "quantity": 1,
     "slug": "life-seed",
     "stack": 1,
@@ -45,8 +48,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "PLIEnGy6HuDcmuVH",
   "effects": [],

@@ -1,15 +1,15 @@
 {
   "name": "Reveal Glass",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/reveal glass.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "slotless",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,9 +18,14 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "unique",
     "traits": [
       "forme-change",
       "tornadus",
@@ -43,7 +48,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -71,10 +77,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "n21Z7NfgrYrQdg9z",
   "effects": [],
-  "folder": "ZJQbcaoYaa7A40WO"
+  "folder": "V4skAU6G3OH5fXad"
 }

@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -35,7 +40,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -43,7 +49,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: When a creature takes damage from a @Affliction[bound] effect caused by the user, inflict an additional Tick of HP damage.",
+    "description": "<p>Passive:  When inflicting @Affliction[bound], you additionally inflict @Affliction[bleed].</p>",
     "slug": "binding-band",
     "quantity": 1,
     "identification": {
@@ -63,7 +69,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "IRSRyTKcrlSZKS8v",

@@ -1,15 +1,15 @@
 {
   "name": "Thick Club",
-  "img": "systems/ptr2e/img/item-icons/thick club.webp",
+  "img": "systems/ptr2e/img/item-icons/thick%20club.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "accessory",
+      "slot": "held",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -41,7 +46,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -49,7 +55,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has their Base ATK increased by 100%.",
+    "description": "<p>Effect: @UUID[Compendium.ptr2e.core-species.2cvIGjbnuAQvx1Qx]{Cubone}, @UUID[Compendium.ptr2e.core-species.wvyyCqanDEY5QZY9]{Marowak} and @UUID[Compendium.ptr2e.core-species.42Nx0JjL8UFTG6RH]{Alolan Marowak} users have their Base ATK increased by 100%.</p>",
     "slug": "thick-club",
     "quantity": 1,
     "identification": {
@@ -69,10 +75,72 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "grTDFrK7LJhXVzYQ",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Thick Club",
+      "type": "passive",
+      "_id": "D21970ACuVnmsSaq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 2,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:cubone",
+                  "item:species:marowak",
+                  "item:species:marowak-alolan"
+                ]
+              }
+            ],
+            "mode": 1,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1759316143502,
+        "modifiedTime": 1765592560873,
+        "lastModifiedBy": "OOfI7hV743ETBRV2"
+      }
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA"
 }

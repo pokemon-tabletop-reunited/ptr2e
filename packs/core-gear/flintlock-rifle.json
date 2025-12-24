@@ -1,0 +1,149 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Flintlock Rifle",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "flintlock-rifle",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "reload-6",
+      "charge-pool-1",
+      "2-handed",
+      "firearm",
+      "early-modern"
+    ],
+    "actions": [
+      {
+        "name": "Flintlock Rifle Shot",
+        "slug": "flintlock-rifle-shot",
+        "traits": [
+          "weapon",
+          "firearm",
+          "readied",
+          "missile",
+          "flinch-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "defensiveStat": "def",
+        "predicate": [],
+        "power": 150,
+        "accuracy": 90
+      }
+    ],
+    "description": "<p>Flintlock is a general term for any firearm that uses a flint-striking ignition mechanism, replacing earlier firearm-ignition technologies, such as the matchlock and the wheellock. Flintlock weapons were commonly used until they were superceded by percussion lock systems. Rifled weapons have their barrel cut with a helical or spiralling pattern of grooves, which imparts a spin on the projectile, making the missle fly straighter. However, ball-firing muzzle-loading rifles are slower to clean and more likely to jam than a smoothbore musket is, and are better used as a specialist's weapon.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 2
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 80,
+      "accuracy": 75,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Flintlock Rifle",
+      "type": "passive",
+      "_id": "7dcwjeDFlvj91bmQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 60,
+            "predicate": [],
+            "label": "Shot",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "ce9O1rTsgYrVOjzV"
+}

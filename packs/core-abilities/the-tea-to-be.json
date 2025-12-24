@@ -1,0 +1,152 @@
+{
+  "name": "The Tea to Be",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "the-tea-to-be",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "innate",
+      "partial-automation"
+    ],
+    "actions": [
+      {
+        "name": "The Tea to Be (Phony)",
+        "slug": "the-tea-to-be-phony",
+        "description": "<p>Effect: If the user is in their Phony Forme, the user has +15% EHR and RES and their Special- and Status-Category Attacks targeting other creatures have a 20% chance of giving their target @Affliction[delay 20].</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/ability_icon.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        }
+      },
+      {
+        "name": "The Tea to Be Action (Antique)",
+        "slug": "the-tea-to-be-antique",
+        "description": "<p>Effect: If the user is in their Antique Forme, the user and their allies heal 30% more HP from @Trait[healing] Actions, and they gain 3 PP and @Affliction[advance 10] when consuming @Trait[food] items.</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "systems/ptr2e/img/icons/ability_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: Connection – Teatime. If the user is in their Phony Forme, the user has +15% EHR and RES and their Special- and Status-Category Attacks targeting other creatures have a 20% chance of giving their target @Affliction[delay 20].</p><p>If the user is a Antique Forme, the user and their allies heal 30% more HP from @Trait[healing] Actions, and they gain 3 PP and @Affliction[advance 10] when consuming @Trait[food] items.</p><p>The user gains Cursed Body as an Extra Ability.</p>"
+  },
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "effects": [
+    {
+      "name": "The Tea to Be",
+      "type": "passive",
+      "_id": "Hyk3ISN5gFQNQcXO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.lR7K1KeX5KnrUp1L",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.rIKiInEzes5D9bVC",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1762716569900
+      }
+    }
+  ],
+  "_id": "Ufs68YY3hxV4gzFI"
+}

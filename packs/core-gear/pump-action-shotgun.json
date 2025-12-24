@@ -16,9 +16,14 @@
     "grade": "B",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 100,
-      "hide": false
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -26,11 +31,14 @@
       "fling",
       "firearm",
       "autoload",
-      "two-handed",
+      "2-handed",
       "shouldered",
       "steel",
       "charge-pool-8",
-      "reload-1"
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -42,7 +50,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Pump-Action Shotgun",
         "slug": "pump-action-shotgun",
@@ -69,7 +78,8 @@
         "accuracy": 85,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Pump-Action Shotgun (Slam Trigger)",
         "slug": "pump-action-shotgun-slam-trigger",
@@ -98,8 +108,8 @@
         "free": true,
         "traits": [
           "missile",
-          "priority-1",
-          "dash"
+          "dash",
+          "priority-10"
         ],
         "name": "Pump-Action Shotgun (Hip Fire)",
         "slug": "pump-action-shotgun-hip-fire",
@@ -144,7 +154,7 @@
       ],
       "notes": ""
     },
-    "description": "<p>A semi-automatic shotgun is a repeating shotgun with a semi-automatic action, i.e. capable of automatically chambering a new shell after each firing, but requires individual trigger-pull to manually actuate each shot. Semi-automatic shotguns use gas operation, blowback, or recoil operation to cycle the action, eject the empty shell, and load another round.</p>"
+    "description": "<p>A pump-action shotgun is a shotgun with a manual firearm action that is operated by moving a sliding handguard on the gun's forestock, typically using the slide to eject spent casings, chamber a new round, and prime the weapon. These weapons are typically fed from a tubular magazine underneath the barrel, though some more modern designs utilize detachable box magazines.</p>"
   },
   "_id": "cKsYET7mSIuV0Qhw",
   "effects": [
@@ -158,20 +168,31 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 20,
+            "value": 38,
             "predicate": [],
             "label": "Pump-Action Shotgun",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "pump-action-shotgun-slam-trigger-attack-damage-flat",
+            "value": 76,
+            "predicate": [],
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -189,16 +210,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743970446605,
-        "modifiedTime": 1743970464310,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757631979494,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

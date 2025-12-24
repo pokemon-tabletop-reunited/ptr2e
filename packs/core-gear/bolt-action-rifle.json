@@ -16,9 +16,14 @@
     "grade": "C",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 95,
-      "hide": false
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -28,7 +33,10 @@
       "autoload",
       "steel",
       "reload-1",
-      "charge-pool-8"
+      "charge-pool-8",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -40,10 +48,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Bolt-Action Rifle",
         "slug": "bolt-action-rifle",
@@ -70,8 +76,9 @@
         "accuracy": 85,
         "free": true,
         "traits": [
-          "2-strike",
-          "missile"
+          "double-strike",
+          "missile",
+          "firearm"
         ],
         "name": "Bolt-Action Rifle (Snap Shot)",
         "slug": "bolt-action-rifle-snap-shot",
@@ -100,7 +107,8 @@
         "free": true,
         "traits": [
           "dash",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Bolt-Action Rifle (Hip Fire)",
         "slug": "bolt-action-rifle-hip-fire",
@@ -158,11 +166,11 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 33,
+            "value": 38,
             "predicate": [],
             "label": "Bolt-Action Rifle",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -171,7 +179,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -189,16 +199,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743901236922,
-        "modifiedTime": 1743901765782,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757553621193,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

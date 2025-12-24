@@ -7,7 +7,7 @@
       "fire",
       "pseudo-affliction"
     ],
-    "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.</p>",
+    "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
     "slug": "stoked",
     "publication": {
       "source": "",
@@ -25,9 +25,10 @@
       "img": "systems/ptr2e/img/svg/fire_icon.svg",
       "type": "affliction",
       "duration": {
-        "turns": 1,
+        "turns": null,
         "startTime": null,
-        "combat": null
+        "combat": null,
+        "startTurn": null
       },
       "system": {
         "changes": [
@@ -48,25 +49,23 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
         "formula": "",
         "type": "damage"
       },
-      "description": "While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.",
-      "statuses": [
-        "stoked"
-      ],
+      "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
+      "statuses": [],
       "_id": "stokedcondition0",
       "_stats": {
-        "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1765233439611,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -76,26 +75,12 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {}
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      }
     }
   ],
-  "_id": "stokedcondititem",
-  "flags": {
-    "core": {}
-  },
-  "_stats": {
-    "coreVersion": "13.346",
-    "systemId": "ptr2e",
-    "systemVersion": "1.3.8.beta",
-    "createdTime": null,
-    "modifiedTime": 1753615320749,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-effects.Item.stokedcondititem",
-    "duplicateSource": null,
-    "exportSource": null
-  },
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  }
+  "_id": "stokedcondititem"
 }

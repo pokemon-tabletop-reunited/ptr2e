@@ -35,8 +35,8 @@ class ItemPTR2e<
   }
 
   get grantedBy(): ItemPTR2e | ActiveEffectPTR2e | null {
-    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
-      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
+    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
+      ?? (this.actor?.effects.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
       ?? null;
   }
 
@@ -437,6 +437,23 @@ class ItemPTR2e<
     if (fu.isEmpty(diff)) {
       return void ui.notifications.warn("No changes detected.");
     }
+
+    // Preserve action slot
+    if((thisData.system?.actions as ActionPTR2e[])?.length && diff.system && typeof diff.system == "object" && 'actions' in diff.system && diff.system.actions && Array.isArray(diff.system.actions) && diff.system.actions.length) {
+      const actionSlots = (thisData.system.actions as ActionPTR2e[])?.flatMap(a => typeof a.slot == 'number' ? { slug: a.slug, slot: a.slot } : []) ?? [];
+      for(const entry of actionSlots) {
+        const action = diff.system.actions.find((a: ActionPTR2e) => a.slug === entry.slug);
+        if(action && !isNaN(entry.slot)) {
+          action.slot = entry.slot;
+        }
+      }
+    }
+
+    // Preserve ability slots
+    if(thisData.system.slot && !isNaN(thisData.system.slot as number) && diff.system && typeof diff.system == "object" && 'slot' in diff.system && diff.system.slot) {
+      diff.system.slot = thisData.system.slot;
+    }
+
     const changes = fu.flattenObject(diff);
     await this.update(changes);
     ui.notifications.info("Changes synced.");

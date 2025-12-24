@@ -1,0 +1,84 @@
+{
+  "folder": "V4skAU6G3OH5fXgE",
+  "name": "Landslide",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [],
+    "slug": "landslide"
+  },
+  "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+  "effects": [
+    {
+      "name": "Landslide",
+      "type": "passive",
+      "_id": "10qFHS1JVhEXPKmJ",
+      "img": "icons/environment/wilderness/terrain-rocky-ground.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": -1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "rock-attack-damage-percentile",
+            "value": "5(@actor.system.details.size.weightClass)",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [
+        "slowed"
+      ],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2",
+        "modifiedTime": 1764892502446
+      }
+    }
+  ],
+  "_id": "0iy9w11FwvKVHDTO"
+}

@@ -10,39 +10,42 @@
         ]
       }
     ],
-    "cost": 2,
-    "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.</p>",
+    "cost": 1,
+    "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions.</p><p>Whenever someone attempts to probe your Aura using @UUID[Compendium.ptr2e.core-perks.0oopLlKDWl1rf2Sm]{Aura Empathy} they take a -20 penalty to any triggering Aura Sense check(s).</p><p>If they fail on any such checks, you become aware of their attempt to probe your Aura.</p>",
     "actions": [
       {
         "name": "Aura Dampening",
         "slug": "aura-dampening",
-        "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.</p>",
+        "description": "<p>Whenever someone attempts to probe your Aura using @UUID[Compendium.ptr2e.core-perks.0oopLlKDWl1rf2Sm]{Aura Empathy} they take a -20 penalty to any triggering Aura Sense check(s).</p><p>If they fail on any such checks, you become aware of their attempt to probe your Aura.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
-        "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "type": "passive",
+        "traits": [
+          "aura"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "aura-dampening",
-    "traits": [],
+    "traits": [
+      "aura"
+    ],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
+        "x": 179,
+        "y": 25,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "aura-projection",
           "aura-bonding",
@@ -50,25 +53,15 @@
           "shielding-aura"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 179,
-        "y": 25,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {

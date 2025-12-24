@@ -39,6 +39,7 @@ import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 import { RollNote } from "@system/notes.ts";
 import { PlaceholderTrait } from "@module/data/models/trait.ts";
+import AbilitySystem from "@item/data/ability.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -648,6 +649,15 @@ class ActorPTR2e<
     for (const affliction of afflictions) {
       affliction.system.apply(this);
     }
+    // Run the _traits array as it may have added changes
+    for(const trait of this.system._traits) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if(!effect?.active) continue;
+      for (const change of effect.changes) {
+        change.effect.apply(this, change.clone());
+      }
+    }
 
     // Apply special statuses that changed to active tokens
     let tokens;
@@ -841,16 +851,17 @@ class ActorPTR2e<
     return stat.value * stageModifier();
   }
 
-  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: false, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update: Record<string, unknown> }>;
-  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: true, shield?: boolean, pp?: boolean }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
-  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
-  async applyTickDamage({ ticks, apply = true, shield = false, pp = false }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: false, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, update: Record<string, unknown> }>;
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply: true, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, message: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply, shield, pp }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }>;
+  async applyTickDamage({ ticks, apply = true, shield = false, pp = false, types = new Set() }: { ticks: number, apply?: boolean, shield?: boolean, pp?: boolean, types?: Set<PokemonType> }): Promise<{ applied: number, update?: Record<string, unknown>, message?: ChatMessagePTR2e }> {
     const isDamage = ticks < 0;
     const multiplier = !isNaN((this.system.modifiers["vulnerabilityMultiplier"] ?? 1)) ? (this.system.modifiers["vulnerabilityMultiplier"] ?? 1) : 1;
+    const typeMultiplier = this.getEffectiveness(types);
 
     if (!pp) {
       const originalAmount = Math.floor((this.system.health.max / 16) * Math.abs(ticks));
-      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier), 1) : Math.floor(originalAmount);
+      const amount = isDamage ? Math.max(Math.floor(originalAmount * multiplier * typeMultiplier), 1) : Math.floor(originalAmount);
       const applied = shield
         ? Math.min(amount || 0, isDamage ? this.system.shield.value : Infinity)
         : Math.min(amount || 0, isDamage ? this.system.health.value : this.system.health.max - this.system.health.value);
@@ -875,6 +886,16 @@ class ActorPTR2e<
       }
 
       await this.update(update);
+      const notes = [];
+      if (isDamage && multiplier !== 1) {
+        notes.push(`Vulnerability Multiplier: x${multiplier}`);
+      }
+      if (typeMultiplier !== 1) {
+        notes.push(`Type Multiplier: x${typeMultiplier}`);
+      }
+      if (notes.length) {
+        notes.unshift(`Original Damage: ${originalAmount}`);
+      }
 
       return {
         applied,
@@ -885,13 +906,13 @@ class ActorPTR2e<
             damageApplied: isDamage ? applied : -applied,
             shieldApplied: shield,
             target: this.uuid,
-            notes: isDamage && multiplier !== 1 ? [`Original Damage: ${originalAmount}`, `Vulnerability Multiplier: ${multiplier}`] : []
+            notes
           }
         })
       }
     }
 
-    const amount = Math.floor(Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks)) * (isDamage ? multiplier : 1));
+    const amount = Math.floor(Math.floor((this.system.powerPoints.max / 16) * Math.abs(ticks)) * (isDamage ? multiplier : 1) * (isDamage ? typeMultiplier : 1));
     const applied = Math.min(amount || 0, isDamage ? this.system.powerPoints.value : this.system.powerPoints.max - this.system.powerPoints.value);
 
     const update = {
@@ -909,6 +930,14 @@ class ActorPTR2e<
 
     await this.update(update);
 
+    const notes = [];
+    if (multiplier !== 1) {
+      notes.push(`Vulnerability Multiplier: x${multiplier}`);
+    }
+    if (typeMultiplier !== 1) {
+      notes.push(`Type Multiplier: x${typeMultiplier}`);
+    }
+
     return {
       applied,
       //@ts-expect-error - Chat messages have not been properly defined yet
@@ -918,7 +947,7 @@ class ActorPTR2e<
           damageApplied: isDamage ? applied : -applied,
           target: this.uuid,
           ppApplied: true,
-          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : []
+          notes
         }
       })
     }
@@ -926,7 +955,7 @@ class ActorPTR2e<
 
   async applyDamage(
     damage: number,
-    { silent, healShield } = { silent: false, healShield: false }
+    { silent, healShield, flat } = { silent: false, healShield: false, flat: false }
   ) {
     // If this is damage, apply the vulnerability multiplier
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
@@ -936,7 +965,7 @@ class ActorPTR2e<
     }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
-    if (damage > 0 || healShield) {
+    if ((damage > 0 && !flat) || healShield) {
       const damageAppliedToShield = Math.min(damage || 0, this.system.shield.value);
       if (this.system.shield.value > 0 && damageAppliedToShield === 0) return 0;
       if (damageAppliedToShield > 0 || healShield) {
@@ -1163,6 +1192,7 @@ class ActorPTR2e<
     const vulnerabilityMultiplier = isNaN(this.system.modifiers["vulnerabilityMultiplier"] ?? 1) ? 1 : (this.system.modifiers["vulnerabilityMultiplier"] ?? 1);
 
     const rollNotes: { options: string[], domains: string[], html: string }[] = [];
+    let isAcePerishing = false;
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
       toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
@@ -1202,6 +1232,10 @@ class ActorPTR2e<
               acc.groups[affliction.priority].type = result.damage.type;
             }
           }
+        }
+        if(result.perish) {
+          // This Ace Actor is perishing
+          isAcePerishing = true;
         }
         return acc;
       },
@@ -1273,6 +1307,16 @@ class ActorPTR2e<
           value: newHealth,
         },
       };
+    }
+
+    if(isAcePerishing) {
+      const weary = await fu.fromUuid<ActiveEffectPTR2e>("Compendium.ptr2e.core-effects.Item.wearyconditiitem");
+      if(weary) {
+        await this.createEmbeddedDocuments("ActiveEffect", [weary.toObject()]);
+      }
+      await ChatMessage.create({
+        content: `${this.link}'s Perish Counter reached 0! They gained a stack of Weary.`,
+      })
     }
 
     if (afflictions.toDelete.length !== 0) {
@@ -1705,6 +1749,7 @@ class ActorPTR2e<
       chanceModifier: (Number(selfActor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: selfActor?.rollOptions?.all?.["special:serene-grace"] ?? false,
       effectAlterations: selfActor.synthetics.effectAlterations,
+      targetEffectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
     })
 
     const targetOriginEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
@@ -1719,6 +1764,7 @@ class ActorPTR2e<
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false,
       effectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
+      targetEffectAlterations: selfActor.synthetics.effectAlterations,
     })
 
     const targetDefensiveEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
@@ -1733,6 +1779,7 @@ class ActorPTR2e<
       chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false,
       effectAlterations: targetToken?.actor?.synthetics.effectAlterations ?? {},
+      targetEffectAlterations: selfActor.synthetics.effectAlterations,
     });
 
     const targetOriginFlatModifiers = await extractTargetModifiers({
@@ -1843,7 +1890,7 @@ class ActorPTR2e<
       if (!auraAffectsActor(data, origin.actor, this)) continue;
 
       const effect = existing ?? await fromUuid(data.uuid);
-      if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
+      if (!((effect instanceof ItemPTR2e && (effect as ItemPTR2e).type === "effect") || effect instanceof ActiveEffectPTR2e)) {
         console.warn(`Effect from ${data.uuid} not found`);
         continue;
       }
@@ -1883,7 +1930,7 @@ class ActorPTR2e<
         }
       }
 
-      const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
+      const effects = (effect instanceof ItemPTR2e ? (effect as ItemPTR2e).effects : [effect]) as ActiveEffectPTR2e[];
       const sources = effects.map(e => fu.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
       toCreate.push(...sources);
     }
@@ -2155,15 +2202,8 @@ class ActorPTR2e<
       }
     }
 
-    if (changed.system?.shield !== undefined) {
-      if (
-        typeof changed.system.shield.value === "number" &&
-        changed.system.shield.value > this.system.shield.value
-      ) {
-        changed.system.shield.max ??= changed.system.shield.value;
-      } else if (changed.system.shield.value === 0) {
-        changed.system.shield.max = 0;
-      }
+    if(changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
+      changed.system.shield.value = this.system.shield.max;
     }
 
     if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
@@ -2199,10 +2239,42 @@ class ActorPTR2e<
 
           const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
-            const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
+            const moves = (await Promise.all(newMoves.map(move => fu.fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
             //@ts-expect-error - Asserted that this is an Array.
             changed.items.push(...moves.map(move => move.toObject()));
+          }
+
+          // Grant abilities at level 20/40/60
+          if(currentLevel < 20 && level >= 20) {
+            const basicAbilities = this.species.abilities.basic;
+            const abilities = (await Promise.all(basicAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
+          }
+          if(currentLevel < 40 && level >= 40) {
+            const advancedAbilities = this.species.abilities.advanced;
+            const abilities = (await Promise.all(advancedAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
+          }
+          if(currentLevel < 60 && level >= 60) {
+            const masterAbilities = this.species.abilities.master;
+            const abilities = (await Promise.all(masterAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
           }
         }
         else newLevel = this.system.getLevel(newExperience);
@@ -2448,6 +2520,7 @@ class ActorPTR2e<
     await this.update({
       "system.health.value": health,
       "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
+      "system.shield.value": 0
     });
 
     // remove effects

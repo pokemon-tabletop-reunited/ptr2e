@@ -22,19 +22,23 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "restorative",
     "traits": [
       "stack-3",
       "combat",
-      "held",
       "restorative",
       "consumable",
       "healing"
     ],
-    "description": "The target is healed of @Affliction[paralysis].",
+    "description": "<p>The target is healed of @Affliction[paralysis] and @Affliction[tased].</p>",
     "quantity": 1,
     "slug": "paralyze-heal",
     "stack": 3,
@@ -46,8 +50,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "G9PwywAAEX3DKuZ2",
   "effects": [],

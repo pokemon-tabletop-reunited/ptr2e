@@ -7,7 +7,7 @@
       "previous": null
     },
     "actions": [],
-    "description": "<p>Passive: Your Dragon-type attacks gain a 20% chance to inflict Fear 5, or +20% chance to inflict Fear if they would already do so.</p>",
+    "description": "<p>Your @Trait[dragon] Type attacks gain a 20% chance to inflict @Affliction[fear 5], or +20% chance to inflict @Affliction[fear] if they would already do so.</p>",
     "traits": [],
     "prerequisites": [
       "trait:dragon"
@@ -16,6 +16,10 @@
     "slug": "draconic-presence",
     "nodes": [
       {
+        "x": 141,
+        "y": 79,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "acceptance",
           "thug",
@@ -31,18 +35,11 @@
           "the-unassessably-terrible"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/dragon_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/dragon_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 141,
-        "y": 79,
         "tier": null
       }
     ],
@@ -60,10 +57,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "effects": [
@@ -71,28 +65,33 @@
       "name": "Draconic Presence",
       "type": "passive",
       "_id": "Ws5hRtrbWspE6tDW",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/dragon_icon.svg",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
             "key": "dragon-attack",
             "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
-            "predicate": [],
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -104,22 +103,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Your @Trait[dragon] Type attacks gain a 20% chance to inflict @Affliction[fear 5], or +20% chance to inflict @Affliction[fear] if they would already do so.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1757798058802,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

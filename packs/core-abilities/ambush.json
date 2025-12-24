@@ -25,7 +25,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Fake Out. The user gains +4 CRIT Stages for 2 Activations.</p>",
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth, or declares an attack while @Affliction[invisible] .</p><p>Effect: Connection - Fake Out. The user gains +4 CRIT Stages for 2 Activations.</p>",
     "traits": [
       "connection"
     ],
@@ -55,7 +55,9 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.bETEHMYZpiBol842",
-            "predicate": [],
+            "predicate": [
+              "ability:ambush:active"
+            ],
             "alterations": [
               {
                 "mode": 5,
@@ -68,11 +70,11 @@
               "grantee": "detach",
               "granter": "cascade"
             },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
             "mode": 2,
             "ignored": false,
-            "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
-            "allowDuplicate": true,
             "track": false,
             "replaceSelf": false
           },
@@ -133,11 +135,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737392621557,
-        "modifiedTime": 1753709058894,
+        "modifiedTime": 1754316733014,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }

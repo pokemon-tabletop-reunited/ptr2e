@@ -48,6 +48,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             nullable: true,
             validate: AttackMessageSystem.#validateRoll,
           }),
+          amount: new fields.JSONField({
+            required: true,
+            nullable: true,
+            validate: AttackMessageSystem.#validateRoll,
+          }),
           context: new fields.SchemaField({
             check: new fields.SchemaField({
               breakdown: new fields.StringField({ required: true, blank: true, initial: "" }),
@@ -213,6 +218,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       result.accuracy = fromRollData(source.accuracy);
       result.crit = fromRollData(source.crit);
       result.damage = fromRollData(source.damage);
+      result.amount = fromRollData(source.amount);
       if (source.effectRolls) {
         result.effectRolls = {
           applied: source.effectRolls.applied,
@@ -341,6 +347,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Attack.DamageRandomness",
           }
         ),
+        amount: await foundry.applications.handlebars.renderTemplate(
+          "systems/ptr2e/templates/chat/rolls/x-strike-amount.hbs",
+          {
+            inner: await AttackMessageSystem.renderInnerRoll(data.amount, isPrivate, null),
+            isPrivate,
+            type: "amount",
+            label: "PTR2E.Attack.AmountRandomness",
+          }
+        ),
         effects: [] as string[],
         none: false
       };
@@ -426,6 +441,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                 if (damage) {
                   context.damage = damage.value;
                   context.damageRoll = damage;
+                  context.amount = result.amount?.total ?? null;
                 }
               }
               else if (summonAttack?.damageType === "flat") {
@@ -561,6 +577,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const result = this.context.results.get(targetUuid);
     if (!result) return false;
 
+    const origin = await this.currentOrigin;
+
     async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[], isCrit = false) {
       if (!effects.length) return;
       const toApply = await (async () => {
@@ -587,7 +605,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
-              alteration.applyTo(grantedSource as ItemSourcePTR2e, target);
+              alteration.applyTo(grantedSource as ItemSourcePTR2e, target, origin);
             }
 
             toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
@@ -604,15 +622,20 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
     }
 
-    return (await Promise.all([
-      (async () => {
-        const target = result.target;
-        const damage = result.damage;
-        if (!damage) return false;
+    // Damage needs to be applied before all effects are, in case any effect depends on the new HP value.
+    const promise = (async () => {
+      const target = result.target;
+      const damage = result.damage;
+      if (!damage) return 0;
+      let damageApplied = 0, amount = result.amount || 1;
+      do {
+        damageApplied += await target.applyDamage(damage);
+      } while (--amount > 0);
+      return damageApplied;
+    })()
 
-        const damageApplied = await target.applyDamage(damage);
-        return damageApplied;
-      })(),
+    return (await Promise.all([
+      await promise,
       (async (): Promise<void> => {
         const target = result.target;
         await applyEffects(target, result.effect.effects?.target ?? [], result.hit === "critical");
@@ -717,6 +740,19 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         ?.dataset?.targetUuid as Maybe<ActorUUID>;
       if (!targetUuid) return;
       this.applyDamage(targetUuid);
+    });
+    html.find(".apply-damage-all").on("click", async () => {
+      for (const result of this.results) {
+        await this.applyDamage(result.target.uuid);
+      }
+    });
+    html.find(".apply-damage-all-hit").on("click", async () => {
+      for (const result of this.results) {
+        const override = this.overrides.get(result.target.uuid);
+        if (["hit", "critical"].includes(override?.value ?? AttackRoll.successCategory(result.accuracy, result.crit))) {
+          await this.applyDamage(result.target.uuid);
+        }
+      }
     });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
@@ -952,6 +988,7 @@ interface AttackMessageRenderContextData {
   target: ActorPTR2e;
   hit: AccuracySuccessCategory;
   damage?: number;
+  amount?: number | null;
   damageRoll?: DamageCalc;
   accuracyRoll?: AccuracyCalc;
   notes: Maybe<string>;
@@ -1030,6 +1067,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     crit: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     damage: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
+    amount: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     context: foundry.data.fields.SchemaField<
       CheckContextSchema,
       foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>,
@@ -1046,6 +1084,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: string | null;
     crit: string | null;
     damage: string | null;
+    amount: string | null;
     context: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
     effectRolls: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>> | null;
   },
@@ -1054,6 +1093,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: Rolled<AttackRoll> | null;
     crit: Rolled<AttackRoll> | null;
     damage: Rolled<AttackRoll> | null;
+    amount: Rolled<AttackRoll> | null;
     context: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
     effectRolls: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>> | null;
   }

@@ -16,9 +16,14 @@
     "grade": "B",
     "fling": {
       "type": "steel",
-      "power": 65,
-      "accuracy": 95,
-      "hide": false
+      "power": 85,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -29,7 +34,10 @@
       "readied",
       "steel",
       "reload-3",
-      "charge-pool-30"
+      "charge-pool-30",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -41,7 +49,8 @@
         "accuracy": 90,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Medium Machinegun",
         "slug": "medium-machinegun",
@@ -68,7 +77,8 @@
         "accuracy": 85,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Medium Machinegun (Burst)",
         "slug": "medium-machinegun-burst",
@@ -97,8 +107,9 @@
         "free": true,
         "traits": [
           "missile",
-          "delay-3",
-          "10-strike"
+          "10-strike",
+          "flinch-30",
+          "firearm"
         ],
         "name": "Medium Machinegun (Salvo)",
         "slug": "medium-machinegun-salvo",
@@ -128,7 +139,8 @@
         "free": true,
         "traits": [
           "missile",
-          "dash"
+          "dash",
+          "firearm"
         ],
         "name": "Medium Machinegun (Hip Fire)",
         "slug": "medium-machinegun-hip-fire",
@@ -189,17 +201,37 @@
             "value": 33,
             "predicate": [],
             "label": "Medium Machinegun",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "medium-machinegun-burst-attack-damage-flat",
+            "value": 66,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "medium-machinegun-hip-fire-attack-damage-flat",
+            "value": 66,
+            "predicate": [],
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -217,16 +249,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743892843449,
-        "modifiedTime": 1743972682028,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757631998546,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

@@ -3,7 +3,76 @@
   "_id": "i1ssduVi8UQHILRf",
   "type": "perk",
   "img": "systems/ptr2e/img/item-icons/full%20heal.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Appetite Loss",
+      "type": "passive",
+      "_id": "6zEdmeiXQiecogAz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.tETlM9WcIzcdJPG3",
+            "predicate": [],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764893668416,
+        "modifiedTime": 1764893689158,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,7 +86,7 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
+    "slug": "appetite-loss",
     "description": "<p>Effect: The user gains Unnerve as a Connected Ability.</p>",
     "traits": [],
     "prerequisites": [
@@ -30,14 +99,11 @@
     ],
     "autoUnlock": [],
     "cost": 2,
-    "originSlug": null,
     "design": {
       "arena": "social",
       "approach": "finesse",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
@@ -54,5 +120,6 @@
         "tier": null
       }
     ]
-  }
+  },
+  "folder": "mYLGJuVcLTxYkgvC"
 }

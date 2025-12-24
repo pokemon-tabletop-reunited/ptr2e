@@ -128,9 +128,11 @@ class ActiveEffectPTR2e<
       .find((kc) => !!kc.count);
     if (existing) {
       delete domainRecord[existing.key];
+      domainRecord[option] = true;
       domainRecord[`${option}:${existing.count + 1}`] = true;
     }
     else {
+      domainRecord[option] = true;
       domainRecord[`${option}:1`] = true;
     }
   }
@@ -428,6 +430,14 @@ class ActiveEffectPTR2e<
           const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
             (e) => e.slug === sluggify(source.name)
           );
+          if(existing?.slug === "duel") {
+            ui.notifications.warn("Only one Duel effect can be applied at a time.");
+            return [];
+          }
+          if(existing?.slug === "perish") {
+            existing.update({ "duration.turns": Math.clamp((existing.duration.turns ?? 0) - 1, 1, Infinity) });
+            return [];
+          }
           if (existing?.system.stacks) {
             existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
             return [];
@@ -522,6 +532,12 @@ class ActiveEffectPTR2e<
       this.target.update(actorUpdates, { noHook: true });
     }
   }
+
+  override get isTemporary(): boolean {
+    if(this.flags.ptr2e.displayOnToken) return this.flags.ptr2e.displayOnToken === "always";
+
+    return super.isTemporary;
+  }
 }
 
 interface ActiveEffectPTR2e<
@@ -547,6 +563,7 @@ interface ActiveEffectPTR2e<
         amount?: number;
       };
       traitEffect?: string;
+      displayOnToken?: "always" | "never" | null;
     };
   }
 

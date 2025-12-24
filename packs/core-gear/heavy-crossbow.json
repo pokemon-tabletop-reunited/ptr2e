@@ -1,0 +1,152 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Heavy Crossbow",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "heavy-crossbow",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "charge-pool-12",
+      "reload-2",
+      "1-handed",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy",
+      "projectile"
+    ],
+    "actions": [
+      {
+        "name": "Heavy Crossbow Shot",
+        "slug": "heavy-crossbow-shot",
+        "traits": [
+          "weapon",
+          "missile",
+          "adaptable",
+          "flinch-35"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 22,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 90,
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "defensiveStat": "def"
+      }
+    ],
+    "description": "<p>A crossbow is a ranged weapon using an elastic launching device consisting of a bow-like assembly mounted horizontally on a main frame, which is hand-held in a similar fashion to the stock of a long gun. Crossbows shoot arrow-like projectiles called bolts or quarrels. Crossbows can be cocked and readed to shoot, allowing the user to aim and shoot with the exertion of a normal bow.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 2
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 90,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Heavy Crossbow",
+      "type": "passive",
+      "_id": "e7QjiwXnwpyi3OLz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 50,
+            "predicate": [],
+            "label": "Heavy Crossbow",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "CpftADaPQ4izAvSi"
+}

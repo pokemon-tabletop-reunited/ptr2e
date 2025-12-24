@@ -22,17 +22,23 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "1.75x Catch Rate modifier. Catch Rate modifier increases by +2.25x vs creatures that are in Flight.",
-    "modifier": 4,
+    "description": "<p>2x Catch Rate modifier vs creatures in the Flight or Teleport movement states. 1x Catch Rate Modifier otherwise.</p>",
+    "modifier": 2,
     "quantity": 1,
     "slug": "wing-ball",
     "stack": 5,
@@ -44,8 +50,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "eqFrWrjv5sSIvpmW",
   "effects": [],

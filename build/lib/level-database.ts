@@ -6,7 +6,7 @@ import type {
     ActiveEffectSource,
     TableResultSource,
 } from "types/foundry/common/documents/module.d.ts";
-import systemJSON from "../../static/system.json" assert { type: "json" };
+import systemJSON from "../../static/system.json" with { type: "json" };
 import { PackError } from "./helpers.ts";
 import { PackEntry } from "./types.ts";
 import { ItemSourcePTR2e } from "./compendium-pack.ts";

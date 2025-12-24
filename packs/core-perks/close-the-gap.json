@@ -3,7 +3,71 @@
   "_id": "qGU7Exn5lNVJfdnw",
   "type": "perk",
   "img": "icons/skills/movement/feet-winged-boots-brown.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Close The Gap",
+      "type": "passive",
+      "_id": "nMao62kJtSNTVUEc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "close-the-gap-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764894453601,
+        "modifiedTime": 1764894487566,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -16,8 +80,25 @@
       ],
       "notes": ""
     },
-    "actions": [],
-    "slug": null,
+    "actions": [
+      {
+        "name": "Close The Gap",
+        "slug": "close-the-gap",
+        "description": "<p>Effect: The user gains +1 EVA Stage for 2 Activations when they use Rush and move toward an enemy creature. Can only be used once per activation, and then its usage refreshes at the start of the user's next Activation.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "close-the-gap",
     "description": "<p>Effect: The user gains +1 EVA Stage for 2 Activations when they use Rush and move toward an enemy creature. Can only be used once per activation, and then its usage refreshes at the start of the user's next Activation.</p>",
     "traits": [],
     "prerequisites": [
@@ -25,14 +106,11 @@
     ],
     "autoUnlock": [],
     "cost": 2,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "finesse",
       "archetype": "fighting"
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
@@ -48,5 +126,6 @@
         "tier": null
       }
     ]
-  }
+  },
+  "folder": "bvVSJTYvqaY3Smhz"
 }

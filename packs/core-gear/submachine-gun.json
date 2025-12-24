@@ -18,7 +18,12 @@
       "type": "steel",
       "power": 50,
       "accuracy": 95,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -28,7 +33,10 @@
       "autoload",
       "steel",
       "charge-pool-35",
-      "reload-1"
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -40,7 +48,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Submachine Gun",
         "slug": "submachine-gun",
@@ -67,7 +76,8 @@
         "accuracy": 85,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Submachine Gun (Burst)",
         "slug": "submachine-gun-burst",
@@ -95,7 +105,8 @@
         "accuracy": 75,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Submachine Gun (Spray)",
         "slug": "submachine-gun-spray",
@@ -125,7 +136,8 @@
         "traits": [
           "missile",
           "dash",
-          "priority-1"
+          "firearm",
+          "priority-10"
         ],
         "name": "Submachine Gun (Hip Fire)",
         "slug": "submachine-gun-hip-fire",
@@ -186,18 +198,47 @@
             "key": "{item|id}-attack-damage-flat",
             "value": 37,
             "predicate": [],
-            "label": "Auto Pistol",
-            "mode": 2,
+            "label": "Submachine Gun",
             "priority": null,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "submachine-gun-burst-attack-damage-flat",
+            "value": 74,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "submachine-gun-spray-attack-damage-flat",
+            "value": 185,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "submachine-gun-hip-fire-attack-damage-flat",
+            "value": 111,
+            "predicate": [],
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -215,16 +256,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743901863356,
-        "modifiedTime": 1743901883899,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1757631965062,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],
