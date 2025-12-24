@@ -29,7 +29,7 @@
         "category": "physical",
         "power": 150,
         "accuracy": 100,
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p>",
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 150.</p>",
         "predicate": []
       }
     ],
@@ -56,9 +56,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "upheaval-attack-power",
-            "value": "(@actor.system.health.percent)-100",
+            "value": "((@actor.system.health.percent)-100)*1.4",
             "predicate": [],
             "label": "Upheaval",
             "mode": 2,

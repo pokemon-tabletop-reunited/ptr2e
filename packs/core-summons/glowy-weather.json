@@ -8,7 +8,8 @@
     },
     "traits": [
       "partial-automation",
-      "weather"
+      "weather",
+      "nuclear"
     ],
     "actions": [],
     "baseAV": 150,
@@ -20,7 +21,8 @@
       ],
       "notes": ""
     },
-    "slug": "glowy-weather"
+    "slug": "glowy-weather",
+    "description": "<p><strong>Glowy</strong> is an odd sensation. The air feels \"charged\", full of energy and invigoration, but also it spurs tension and anxiety. One could say it's the most reasonable \"danger\" response, as this energy is uncomfortable to most creatures, and downright harmful with longer exposure.</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>At the end of their Activation, non-Steel- and Nuclear-Type creatures lose a Tick of HP.</li><li>Nuclear-Type creatures gain 30% to their Movement Allowances and their SPD is increased 30%.</li><li>At the end of each round, non-Nuclear-Type creatures have one of their Abilities randomly Nullified 3.</li><li>Non-Steel- and Nuclear-Type creatures are Stunted.</li><li>Steel-Type Attacks have a 15% chance to inflict Unlucky 5. Attacks that would already cause Unlucky 5 instead increase their chance to cause Unlucky by 15%.</li><li>Nuclear-Type Attacks have a 30% chance to inflict Unlucky 5. Attacks that would already cause Unlucky 5 instead increase their chance to cause Unlucky by 30%.</li></ul>"
   },
   "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
   "effects": [
@@ -34,13 +36,13 @@
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
-            "value": 1.3,
+            "value": 0.3,
             "predicate": [
               "trait:nuclear"
             ],
-            "mode": 1,
             "label": "Nuclear SpeedBoost",
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -73,16 +75,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.8.beta",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
-        "exportSource": null
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null,
+        "modifiedTime": 1762904476940
       }
     }
   ],

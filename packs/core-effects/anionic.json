@@ -1,0 +1,89 @@
+{
+  "name": "Anionic",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": []
+  },
+  "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+  "effects": [
+    {
+      "name": "Anionic",
+      "type": "passive",
+      "_id": "JTFKaBfQ9bPTy5P3",
+      "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "anionic:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "label": "Anionic",
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "anionic:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1765274533927
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Hcpgv8BT4EPY9Oti"
+}

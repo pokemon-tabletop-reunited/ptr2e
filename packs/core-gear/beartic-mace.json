@@ -1,0 +1,183 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Beartic Mace",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "beartic-mace",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "1-handed",
+      "charge-pool-10",
+      "conventional",
+      "modern",
+      "sci-fi",
+      "weapon"
+    ],
+    "actions": [
+      {
+        "name": "Beartic Mace Spray",
+        "slug": "beartic-mace-spray",
+        "description": "<p>Effect: On hit, the target has a 50% chance to gain @Affliction[blinded 3] and a 70% chance to lose -1 ATK and ACC Stage for 5 Activations.</p>",
+        "traits": [
+          "weapon",
+          "powder"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "accuracy": 90
+      }
+    ],
+    "description": "<p>Beartic mace is an oleoresin capsicum tear gas aerosol that irritates the eyes with burning and pain sensations so intense so as to cause them to involuntarily close, bringing temporary blindness, with the pain otherwise affecting other motor capacities. Historically, mace has been a reliable and effective non-lethal self-defense tool.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Beartic Mace",
+      "type": "passive",
+      "_id": "qlRjOuUi95kKQQOi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "beartic-mace-spray-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blindedcondiitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Blind Chance",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "beartic-mace-spray-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "chance": 70,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "ATK Chance",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "beartic-mace-spray-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "predicate": [],
+            "chance": 70,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "ACC Chance",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "rr6i1w0gzPo7Qc8n"
+}

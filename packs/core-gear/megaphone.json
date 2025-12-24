@@ -1,0 +1,117 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Megaphone",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "megaphone",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "conventional",
+      "modern",
+      "sci-fi",
+      "mystery-dungeon"
+    ],
+    "actions": [],
+    "description": "<p>The user’s @Trait[sonic] Attacks and Actions deal +20% more damage.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "steel",
+      "power": 95,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Megaphone",
+      "type": "passive",
+      "_id": "3KlytMZwBpSoNakC",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "sonic-trait-attack-damage",
+            "value": 20,
+            "predicate": [],
+            "label": "Megaphone",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "tuFYrmr8GNYDgDqb"
+}

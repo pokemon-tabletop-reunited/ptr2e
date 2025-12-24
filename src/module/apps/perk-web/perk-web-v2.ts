@@ -1143,7 +1143,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const nameAnchor = liElement.querySelector<HTMLAnchorElement>("div.name > a");
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid<PerkPTR2e>(entryUuid);
+          const document = await fu.fromUuid<PerkPTR2e>(entryUuid);
           let node = this._perkStore.nodeFromSlug(document?.slug ?? "");
           if (!node) return;
 
@@ -1159,6 +1159,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const perkElement = this.element.querySelector(`div.perk[data-x="${node.position.x}"][data-y="${node.position.y}"]`)
           this.currentNode = node;
           perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
+          perkElement?.classList.add("highlighted");
+          setTimeout(() => {
+            perkElement?.classList.remove("highlighted");
+          }, 10000);
           this.render({ parts: ["hudPerk"] });
         });
       }

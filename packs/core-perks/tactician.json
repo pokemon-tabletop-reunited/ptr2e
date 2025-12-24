@@ -11,29 +11,22 @@
       }
     ],
     "cost": 1,
-    "description": "<p>Effect: The user may target creatures other than itself or its Team with [Command] Actions, and the target(s) of the user's [Command] Actions are Advanced 10%.</p>",
+    "description": "<p>Effect: The user may target creatures other than itself or its Team with @Trait[command] Actions, and the target(s) of the user's @Trait[command] Actions are @Affliction[advance 10].</p>",
     "actions": [
       {
         "name": "Tactician",
         "slug": "tactician",
         "description": "<p>You are able to issue Commands to allied creatures which you are not deemed to have ownership of.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "tactician",
@@ -71,9 +64,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -91,6 +81,64 @@
   },
   "_id": "13JRGGWEpyfuZZuG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Tactician",
+      "type": "passive",
+      "_id": "lRv8TMEODJtvgosb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "command-trait-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764897157595,
+        "modifiedTime": 1764897181010,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "folder": "PAZ8zWUPw7Azm5V6"
 }

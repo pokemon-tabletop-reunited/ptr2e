@@ -532,6 +532,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         accuracy: r.rolls.accuracy?.toJSON() ?? null,
         crit: r.rolls.crit?.toJSON() ?? null,
         damage: r.rolls.damage?.toJSON() ?? null,
+        amount: r.rolls.amount?.toJSON() ?? null,
         context: {
           check: r.check,
           ...R.pick(r.context, ["action", "domains", "notes", "title", "type"]),

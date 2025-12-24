@@ -18,30 +18,27 @@
       {
         "name": "Berserkergang",
         "slug": "berserkergang",
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user uses Rage, targeting itself, as a Free Action, gaining [Interrupt 3] and [Delay 3], on the attack.</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user uses Rage, targeting itself, as a Free Action, gaining @Trait[interrupt-3] and @Affliction[delay 30], on the attack.</p>",
         "traits": [
           "interrupt-3",
-          "delay-3"
+          "flinch-30"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "free",
           "powerPoints": 2,
           "delay": 3,
           "trigger": "The user enters combat."
-        },
-        "variant": null,
-        "ephemeralVariant": false
+        }
       }
     ],
     "slug": "berserkergang",
-    "description": "<p>When the user enters combat, they may spend 2 PP and may use Rage as a Free Action with [Interrupt 3] and [Delay 3], targeting itself with the attack.</p>",
+    "description": "<p>When the user enters combat, they may spend 2 PP and may use @UUID[Compendium.ptr2e.core-moves.6OK8vhZYljL4X7cd]{Rage} as a Free Action with @Trait[interrupt-3] and @Affliction[delay 30], targeting itself with the attack.</p>",
     "traits": [],
     "prerequisites": [
       "item:move:rage"
@@ -75,13 +72,9 @@
         },
         "tier": null
       }
-    ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    ]
   },
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
   "effects": [],
-  "flags": {},
   "_id": "AeHU57coP5PEfWhJ"
 }
