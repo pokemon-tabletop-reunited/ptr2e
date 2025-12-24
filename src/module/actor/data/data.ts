@@ -16,7 +16,7 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
   advancement: foundry.data.fields.SchemaField<AdvancementSchema, SourceFromSchema<AdvancementSchema>, ModelPropsFromSchema<AdvancementSchema>, true, false, false>;
   attributes: foundry.data.fields.SchemaField<AttributesSchema, SourceFromSchema<AttributesSchema>, ModelPropsFromSchema<AttributesSchema>, true, false, false>;
   battleStats: foundry.data.fields.SchemaField<BattleStatsSchema, SourceFromSchema<BattleStatsSchema>, ModelPropsFromSchema<BattleStatsSchema>, true, false, false>;
-  skills: CollectionField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
+  skills: foundry.data.fields.TypedObjectField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
   biology: foundry.data.fields.ObjectField<object, object, true, false, false>;
   capabilities: foundry.data.fields.ObjectField<object, object, true, false, false>;
   type: foundry.data.fields.SchemaField<TypeSchema, SourceFromSchema<TypeSchema>, ModelPropsFromSchema<TypeSchema>, true, false, false>;

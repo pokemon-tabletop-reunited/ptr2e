@@ -172,6 +172,7 @@ async function extractEffectRolls({
           ]).flat(),
           `${effectItem.slug}-applied`,
           ...(effectItem.system.traits.map(t => `${t.slug}-trait-applied`)),
+          "all-applied",
           ...domains
         ]));
 
@@ -189,6 +190,7 @@ async function extractEffectRolls({
             ...(e.system.traits.map(t => `${t.slug}-trait-received`))
           ]).flat(),
           `${effectItem.slug}-received`,
+          "all-received",
           ...(effectItem.system.traits.map(t => `${t.slug}-trait-received`)),
         ]));
         const targetAlterations = await extractEffectAlterations(
@@ -253,7 +255,7 @@ export async function extractEffectAlterations(
 }
 
 interface ExtractEphemeralEffectsParams {
-  affects: "target" | "origin";
+  affects: "target" | "origin" | "self" | "defensive";
   origin: ActorPTR2e | null;
   target: Maybe<ActorPTR2e>;
   item: ItemPTR2e | null;

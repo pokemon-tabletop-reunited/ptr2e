@@ -256,7 +256,7 @@ class ActorPTR2e<
   }
 
   get luck(): number {
-    return this.isAce ? this.system.skills.get("luck")!.total : 0;
+    return this.isAce ? this.system.skills.luck.total : 0;
   }
 
   get spendableLuck(): number {
@@ -1166,13 +1166,13 @@ class ActorPTR2e<
     const luck = this.luck;
     if (luck > 0) {
       const skills = this.system.toObject().skills;
-      const luckSkill = skills.find((skill) => skill.slug === "luck");
+      const luckSkill = skills.luck
       if (!luckSkill) return [];
-      luckSkill.value = Math.max(luck - amount, 1);
+      const newValue = Math.max(luck - amount, 1);
 
       amount -= luck;
-      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
-      pendingUpdates.push({ _id: this.id, "system.skills": skills });
+      notifications.push({ name: this.name, amount: luck - newValue, leftover: newValue });
+      pendingUpdates.push({ _id: this.id, "system.skills.luck.value": newValue });
     }
     if (amount <= 0) {
       if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
@@ -1737,6 +1737,17 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
     });
 
+    const targetDefensiveEphemeralEffects = await extractEphemeralEffects({
+      affects: "defensive",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+    });
+
     const targetEffectRolls = params.skipEffectRolls ? [] : await extractEffectRolls({
       affects: "target",
       origin: selfActor,
@@ -1797,7 +1808,7 @@ class ActorPTR2e<
       ? null
       : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
         [...params.options, ...itemOptions, ...originRollOptions].filter(R.isTruthy),
-        targetEphemeralEffects
+        [...targetEphemeralEffects, ...targetDefensiveEphemeralEffects]
       ) ?? null;
 
     const rollOptions = new Set(
@@ -2623,6 +2634,7 @@ type ActorFlags2e = ActorFlags & {
       get types(): PickableThing[];
     },
     traitEffects?: Record<string, boolean>;
+    overrideSkillValidation?: boolean;
   };
 };
 

@@ -29,6 +29,7 @@ export const ui: {
 }
 export const apps: {
   DocumentSheetConfig: typeof DocumentSheetConfig
+  ImagePopout: typeof ImagePopout
 }
 export const settings: {
   SettingsConfig: typeof SettingsConfig,

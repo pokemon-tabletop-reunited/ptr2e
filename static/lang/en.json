@@ -291,6 +291,7 @@
       "consumable": "Consumables",
       "gear": "Gear",
       "container": "Containers",
+      "ammo": "Ammo",
       "empty": "No items yet..."
     },
     "PerkWebApp": {
@@ -1358,7 +1359,25 @@
         }
       }
     },
+    "ArtMap": {
+      "Title": "World Art Map Editor",
+      "Header": "<p>This is the World Art Map Editor, which allows you to set-up Custom Art Maps for your world without needing to create a module.</p><p>Art Maps are what the system uses to generate the correct token images for creatures generated using Blueprints. For more information, check <a href='https://2e.ptr.wiki/en/guides/custom-art-map'>the Guide on our Wiki</a>.</p>",
+      "Save": "Save Art Map",
+      "Check": "Drag & Drop a species item here to check if it would result in a valid token image.",
+      "Results": {
+        "InvalidItem": "The dropped item is not a valid Species item.",
+        "NotFound": "No valid token image found for species: {slug}.",
+        "NoResult": "Unable to determine token image for species: {slug} with number: {number} and form: {form}.",
+        "Title": "Located Image for {name}"
+      },
+      "InvalidJSON": "The Art Map data is not valid JSON. Please correct the errors and try again."
+    },
     "Settings": {
+      "ArtMap": {
+        "Name": "World Art Map",
+        "Label": "Open Editor",
+        "Hint": "Manage the World Art Map used for generating token images for Blueprints."
+      },
       "Sidebar": {
         "Header": "PTR 2e System Settings"
       },
@@ -1560,11 +1579,8 @@
         "reroll": "{name} just <b style='color: #aa0200;' data-tooltip-direction='UP' data-tooltip='Rerolling your luck may only be done with explicit permission from the GM!'>Rerolled</b> their Luck!!",
         "result": "The new score of {result} has been applied to their Luck Skill."
       },
-      "Apply": {
-        "apply": "Apply Investment",
-        "override": "Override Restrictions and Apply",
-        "fail": "You have entered an invalid configuration of skills."
-      }
+      "override-toggle": "Skill Max Override: {status}",
+      "override-toggle-tooltip": "When enabled, allows skill investment to go above 70 RVs."
     },
     "Attributes": {
       "hp": {
@@ -1730,6 +1746,14 @@
             "label": "Crafting Materials",
             "hint": "The materials required to craft this gear."
           }
+        },
+        "ammoType": {
+          "label": "Ammunition Type",
+          "hint": "A list of valid ammunition [Traits] that this gear can use as ammunition."
+        },
+        "ammo": {
+          "label": "Ammunition",
+          "hint": "The current item selected as ammunition for this gear."
         },
         "equipped": {
           "carryType": {
@@ -2060,6 +2084,10 @@
         "webs": {
           "label": "Species Webs",
           "hint": "The Species Webs this perk is shown on (if any). Drag & Drop species to add them to the list."
+        },
+        "traitWebs": {
+          "label": "Trait Webs",
+          "hint": "The Trait Webs this perk is shown on (if any)."
         }
       },
       "node": {

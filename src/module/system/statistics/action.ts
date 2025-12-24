@@ -5,7 +5,7 @@ import { AttackRollCallback, AttackRollResult } from "@system/rolls/check-roll.t
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import { StatisticData } from "./data.ts";
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckContext } from "@system/data.ts";
 import { extractEffectRolls, extractNotes } from "src/util/change-helpers.ts";
@@ -111,10 +111,33 @@ class GenericActionCheck<TParent extends GenericActionStatistic = GenericActionS
     this.parent = parent;
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
-    data.check.domains = Array.from(new Set(data.check.domains ?? []));
-    this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
-
+    const extraDomains = new Set<string>();
     this.additionalOptions = new Set<string>();
+
+    if(this.item.system.ammo) {
+      extraDomains.add("uses-ammo");
+      const ammoItem = (() => {
+        try {
+          return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+        }
+        catch {
+          return null;
+        }
+      })();
+      if(ammoItem) {
+        extraDomains.add(`ammo-${ammoItem.slug}`);
+        extraDomains.add(`ammo-${ammoItem.id}`);
+        for(const trait of ammoItem.traits ?? []) {
+          extraDomains.add(`ammo-trait-${trait.slug}`);
+        }
+        for(const option of ammoItem.getRollOptions("item", { includeActor: false})) {
+          this.additionalOptions.add(`ammo:${option}`);
+        }
+      }
+    }
+
+    data.check.domains = Array.from(new Set(data.check.domains ?? []));
+    this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
 
     this.label = data.check?.label
       ? game.i18n.localize(data.check.label) || this.parent.label
@@ -263,7 +286,28 @@ class GenericActionCheck<TParent extends GenericActionStatistic = GenericActionS
       args.modifiers ?? []
     );
 
-    return await CheckPTR2e.rolls(check, checkContext, args.callback);
+    const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
+
+    if(rolls?.length) {
+      if(this.item.system.ammo) {
+        const ammoItem = (() => {
+          try {
+            return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+          }
+          catch {
+            return null;
+          }
+        })();
+        if(ammoItem) {
+          const currentQuantity = ammoItem.system.quantity;
+          if(currentQuantity > 0) {
+            await ammoItem.update({ "system.quantity": currentQuantity - 1 });
+            ui.notifications.info(`Consumed 1 ${ammoItem.name}. ${currentQuantity - 1} remaining.`);
+          }
+        }
+      }
+    }
+    return rolls;
   }
 
   get breakdown(): string {

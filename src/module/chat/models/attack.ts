@@ -779,26 +779,26 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     if (!actor) return;
 
     const number = accuracy.total;
-    const luck = actor.system.skills.get("luck")!.total;
+    const luck = actor.system.skills["luck"]!.total;
     if (luck < number) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
       return;
     }
 
-    const skills = actor.system.skills.map((skill) => {
-      return skill.slug === "luck"
-        ? {
+    const skills = Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+      return slug === "luck"
+        ? [slug, {
           ...skill,
           value: luck - number,
-        }
-        : skill;
-    });
+        }]
+        : [slug, skill];
+    }));
     await actor.update({ "system.skills": skills });
 
     const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: number,
       actor: actor.name,
-      total: actor.system.skills.get("luck")!.total
+      total: actor.system.skills["luck"]!.total
     })
     ui.notifications.info(notification);
 
@@ -818,7 +818,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const actor = ["origin-effect", "defensive-effect"].includes(choice.type) ? await fromUuid<ActorPTR2e>(entry.uuid) : await this.currentOrigin;
     if (!actor) return;
 
-    const luck = actor.system.skills.get("luck")!.total;
+    const luck = actor.system.skills["luck"]!.total;
     if (!entry.result) {
       if (choice.type !== "self-effect") throw new Error("Attempting to spend luck on a Self Effect but no Self Effect was selected");
       if (choice.index === undefined) throw new Error("No Self Effect index was provided");
@@ -835,20 +835,20 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
 
       await actor.update({
-        "system.skills": actor.system.skills.map((skill) => {
-          return skill.slug === "luck"
-            ? {
+        "system.skills": Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+          return slug === "luck"
+            ? [slug, {
               ...skill,
               value: luck - value,
-            }
-            : skill;
-        })
+            }]
+            : [slug, skill];
+        }))
       });
 
       const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
         amount: value,
         actor: actor.name,
-        total: actor.system.skills.get("luck")!.total,
+        total: actor.system.skills["luck"]!.total,
         type: choice.name ?? "Self Effect "
       });
       ui.notifications.info(notification);
@@ -888,20 +888,20 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     await actor.update({
-      "system.skills": actor.system.skills.map((skill) => {
-        return skill.slug === "luck"
-          ? {
+      "system.skills": Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+        return slug === "luck"
+          ? [slug, {
             ...skill,
             value: luck - value,
-          }
-          : skill;
-      })
+          }]
+          : [slug, skill];
+      }))
     });
 
     const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: value,
       actor: actor.name,
-      total: actor.system.skills.get("luck")!.total,
+      total: actor.system.skills["luck"]!.total,
       type: (() => {
         switch (choice.type) {
           case "accuracy": return "Accuracy";

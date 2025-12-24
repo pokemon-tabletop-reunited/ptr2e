@@ -15,13 +15,13 @@
     },
     "grade": "B",
     "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100,
+      "type": "normal",
+      "power": 60,
+      "accuracy": 90,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 6,
         "unit": "m"
       }
     },
@@ -52,7 +52,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's default CRIT is increased by +1.<br><br>May be consumed by certain Species to trigger Evolution.</p>",
+    "description": "<p>Effect: The user has +1 CRIT with and deals +10% Critical Hit damage with @Trait[contact] Attacks.<br><br>May be consumed by certain Species to trigger Evolution.</p>",
     "slug": "razor-claw",
     "quantity": 1,
     "identification": {
@@ -86,14 +86,15 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.battleStats.critRate.stage",
+            "type": "stage-modifier",
+            "key": "contact-trait-attack-crit",
             "value": 1,
             "predicate": [],
             "label": "Razor Claw",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -120,16 +121,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "1.4.7.beta",
         "createdTime": 1731793523575,
-        "modifiedTime": 1731798278805,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1766207740948,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
       }
     }

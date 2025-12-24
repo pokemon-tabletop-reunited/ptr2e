@@ -338,7 +338,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const shiny = this.randomInteger(1, 100) <= shinyChance;
 
-      const gender = blueprint.gender !== "random"
+      const gender = blueprint.gender && blueprint.gender !== "random"
         ? blueprint.gender
         : species.system.genderRatio === -1
           ? "genderless"
@@ -712,10 +712,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           }
         }
 
-        const skills = new Map(getInitialSkillList().map((skill) => [skill.slug, skill]));
+        const skills = getInitialSkillList();
 
         for (const skill of perkSkills) {
-          const existing = skills.get(skill.skill);
+          const existing = skills[skill.skill];
           if (existing) {
             existing.rvs = (existing.rvs ?? 0) + skill.value;
           } else {
@@ -726,12 +726,12 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const calculateSkills = (points: number, weighted: boolean, speciesOnly: boolean) => {
           const bag = new WeightedBag<SourceFromSchema<SkillSchema>>();
 
-          const pool = speciesOnly ? evolution.system.skills : Array.from(skills.values());
+          const pool = speciesOnly ? evolution.system.skills : Object.values(skills);
 
           for (const skillData of pool) {
-            const skill = skills.get(skillData.slug) ?? (() => {
+            const skill = skills[skillData.slug] ?? (() => {
               const skill = (game.ptr.data.skills.get(skillData.slug) ?? partialSkillToSkill({ slug: skillData.slug })) as SourceFromSchema<SkillSchema>;
-              skills.set(skillData.slug, skill);
+              skills[skillData.slug] = skill;
               return skill;
             })();
             if (skill.hidden) continue;
@@ -771,7 +771,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         calculateSkills(randomPoints, false, false);
         calculateSkills(leftOverPoints - randomPoints, true, false);
 
-        return Array.from(skills.values());
+        return skills;
       })();
 
       const type = evolution.system.traits?.includes("humanoid") ? "humanoid" : "pokemon";

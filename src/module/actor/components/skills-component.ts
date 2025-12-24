@@ -34,7 +34,7 @@ class SkillsComponent extends ActorComponent {
             const hiddenGroups: SkillCategory = { none: { label: null, skills: [] } };
             const normalGroups: SkillCategory = { none: { label: null, skills: [] } };
 
-            for (const skill of actor.system.skills.contents.sort((a, b) =>
+            for (const skill of Object.values(actor.system.skills as Record<string, SkillPTR2e>).sort((a, b) =>
                 a.slug.localeCompare(b.slug)
             )) {
                 // Do not add Luck for non-[Ace]s
@@ -124,13 +124,20 @@ class SkillsComponent extends ActorComponent {
                 )?.dataset.slug;
                 if (!skillSlug) return;
                 
-                const skills = actor.system.toObject().skills as SkillPTR2e["_source"][];
-                const index = skills.findIndex((s) => s.slug === skillSlug);
-                if (index === -1) return;
+                const skills = actor.system.toObject().skills;
+                if(!skills[skillSlug]) return;
 
-                skills[index].favourite = !skills[index].favourite;
-                if(skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
-                await actor.update({ "system.skills": skills });
+                skills[skillSlug].favourite = !skills[skillSlug].favourite;
+                if(skills[skillSlug].favourite && skills[skillSlug].hidden) skills[skillSlug].hidden = false;
+                await actor.update({
+                  "system.skills": {
+                    [skillSlug]: {
+                      ...actor.system.skills[skillSlug],
+                      favourite: skills[skillSlug].favourite,
+                      hidden: skills[skillSlug].hidden,
+                    }
+                  }
+                })
                 refreshApps();
             });
         }
@@ -142,13 +149,20 @@ class SkillsComponent extends ActorComponent {
                 )?.dataset.slug;
                 if (!skillSlug) return;
 
-                const skills = actor.system.toObject().skills as SkillPTR2e["_source"][];
-                const index = skills.findIndex((s) => s.slug === skillSlug);
-                if (index === -1) return;
+                const skills = actor.system.toObject().skills;
+                if(!skills[skillSlug]) return;
 
-                skills[index].hidden = !skills[index].hidden;
-                if(skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
-                await actor.update({ "system.skills": skills });
+                skills[skillSlug].hidden = !skills[skillSlug].hidden;
+                if(skills[skillSlug].hidden && skills[skillSlug].favourite) skills[skillSlug].favourite = false;
+                await actor.update({
+                  "system.skills": {
+                    [skillSlug]: {
+                      ...actor.system.skills[skillSlug],
+                      hidden: skills[skillSlug].hidden,
+                      favourite: skills[skillSlug].favourite,
+                    }
+                  }
+                });
                 refreshApps();
             });
         }
@@ -160,7 +174,7 @@ class SkillsComponent extends ActorComponent {
                 )?.dataset.slug;
                 if (!skillSlug) return;
 
-                const skill = actor.system.skills.get(skillSlug);
+                const skill = actor.system.skills[skillSlug];
                 if(!skill) return;
 
                 return skill.roll();

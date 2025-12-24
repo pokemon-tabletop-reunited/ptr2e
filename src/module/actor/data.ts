@@ -45,7 +45,7 @@ export type DeferredEffectRoll = DeferredPromise<EffectRoll | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
 interface ActorSynthetics {
-  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[] } | undefined>;
+  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[], defensive: DeferredEphemeralEffect[] } | undefined>;
   ephemeralModifiers: Record<string, DeferredModifier[]>;
   modifierAdjustments: ModifierAdjustmentSynthetics;
   modifiers: ModifierSynthetics;

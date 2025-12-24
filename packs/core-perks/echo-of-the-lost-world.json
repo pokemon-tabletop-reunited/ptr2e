@@ -3,7 +3,115 @@
   "_id": "QewUuhjwpxF2bzfp",
   "type": "perk",
   "img": "systems/ptr2e/img/item-icons/helix%20fossil.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Echo of the Lost World",
+      "type": "passive",
+      "_id": "llRTqfS2bdiZrtkn",
+      "img": "systems/ptr2e/img/item-icons/helix%20fossil.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "not": "attack:type:rock"
+              }
+            ],
+            "hideIfDisabled": true,
+            "label": "Non-Rock DMG Resistance",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "predicate": [
+              {
+                "not": "attack:type:rock"
+              }
+            ],
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 15
+              }
+            ],
+            "label": "Non-Rock RES",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": 15,
+            "predicate": [
+              {
+                "not": "attack:type:rock"
+              }
+            ],
+            "label": "Non-Rock DMG Mod",
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.dVXsQ55hDouadYkE",
+            "predicate": [
+              {
+                "not": "attack:type:rock"
+              }
+            ],
+            "affects": "self",
+            "alterations": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>Effect: The user takes 10% less damage from non-@Trait[rock] Type Physical- and Special-Category Attacks, and increases their RES by 15% against effects from non-Rock Type Attacks. Additionally, the user's non-@Trait[rock] Type Attacks deal 15% more damage and have their Base Chances (if any) increased by 5%.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Item.UH0Z3GpQNhoyv5I4.ActiveEffect.WuyH1tytCFObtFsF",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.8.beta",
+        "createdTime": 1766506653333,
+        "modifiedTime": 1766506653333,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,8 +125,8 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
-    "description": "<p>Effect: The user takes 5% less damage from non-Rock Type Attacks, and increases their RES by 10% against such attacks. Additionally, the user's non-Rock Type Attacks deal 10% more damage and have their Base Chances (if any) increased by 5%.</p>",
+    "slug": "echo-of-the-lost-world",
+    "description": "<p>Effect: The user takes 10% less damage from non-@Trait[rock] Type Physical- and Special-Category Attacks, and increases their RES by 15% against effects from non-Rock Type Attacks. Additionally, the user's non-@Trait[rock] Type Attacks deal 15% more damage and have their Base Chances (if any) increased by 5%.</p>",
     "traits": [],
     "prerequisites": [
       "trait:fossil",
@@ -31,26 +139,29 @@
     ],
     "autoUnlock": [],
     "cost": 2,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "resilience",
       "archetype": "fossil"
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 166,
         "y": 29,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "root-2",
           "cthonic-terror"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]
