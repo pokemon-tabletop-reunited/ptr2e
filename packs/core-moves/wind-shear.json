@@ -14,7 +14,7 @@
         ],
         "range": {
           "target": "line",
-          "distance": 4,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
@@ -56,9 +56,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "wind-shear-attack-power",
-            "value": "round(min(200,@actor.system.attributes.spe.final/@target.system.attributes.spe.final*40))",
+            "value": "round(min(91,27*max(1,(@actor.system.attributes.spe.final-@target.system.attributes.spe.final)/@target.system.attributes.spe.final)))-1",
             "predicate": [],
             "label": "Wind Shear Scaling",
             "mode": 2,

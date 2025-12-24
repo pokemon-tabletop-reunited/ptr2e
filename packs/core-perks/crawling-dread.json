@@ -3,7 +3,74 @@
   "_id": "PtbZSdcxlu1c8mRy",
   "type": "perk",
   "img": "icons/creatures/invertebrates/bug-sixlegged-gray.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Crawling Dread",
+      "type": "passive",
+      "_id": "2RJ1wAr6HXXfRZyo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.movement",
+            "value": 2,
+            "predicate": [
+              "effect:summon:gloomy-weather"
+            ],
+            "label": "Gloomy",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.movement",
+            "value": 2,
+            "predicate": [
+              "effect:summon:foggy-weather"
+            ],
+            "label": "Foggy",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765224259988,
+        "modifiedTime": 1765224334250,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,

@@ -15,7 +15,7 @@
         ],
         "range": {
           "target": "emanation",
-          "distance": 5,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
@@ -23,12 +23,12 @@
           "powerPoints": 8
         },
         "category": "special",
-        "power": 150,
+        "power": 200,
         "accuracy": 100,
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p>",
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 200.</p>",
         "img": "systems/ptr2e/img/svg/dragon_icon.svg",
         "predicate": []
       }
@@ -57,9 +57,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "dragon-energy-attack-power",
-            "value": "(@actor.system.health.percent)-100",
+            "value": "((@actor.system.health.percent)-100)*1.9",
             "predicate": [],
             "label": "Dragon Energy",
             "mode": 2,

@@ -640,7 +640,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
 
-    this.health.max = this.attributes.hp.value;
+    this.shield.max = this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     for (const skill of this.skills) {
@@ -667,7 +667,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
 
         if(!isNaN(Number(this.modifiers.hpMultiplier)) && this.modifiers.hpMultiplier !== 1) {
-          this.health.max = this.attributes.hp.value = Math.round(this.attributes.hp.value * Number(this.modifiers.hpMultiplier));
+          this.shield.max = this.health.max = this.attributes.hp.value = Math.round(this.attributes.hp.value * Number(this.modifiers.hpMultiplier));
           this.health.percent = Math.round((this.health.value / this.health.max) * 100);
         }
         if(!isNaN(Number(this.modifiers.ppMultiplier)) && this.modifiers.ppMultiplier !== 1) {
@@ -834,7 +834,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
     }
 
-    this.health.max = this.attributes.hp.value;
+    this.shield.max = this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     this.powerPoints.max = Math.floor((20 + Math.ceil(0.5 * this.advancement.level) + (this.modifiers.powerPoints ?? 0)) * (this.modifiers.ppMultiplier || 1));

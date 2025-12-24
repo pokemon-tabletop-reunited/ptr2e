@@ -54,9 +54,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "rug-pull-attack-power",
-            "value": "min(600,@target.system.details.size.weightClass*50)",
+            "value": "min(120,@target.system.details.size.weightClass*9)",
             "predicate": [],
             "label": "Rug Pull Scaling",
             "mode": 2,

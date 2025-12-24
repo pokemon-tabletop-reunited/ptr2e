@@ -197,7 +197,8 @@ export default class AttackPTR2e extends ActionPTR2e {
     super.prepareDerivedData();
 
     if(this.traits.has("adaptable") && !this.variant) {
-      this.generateAdaptableVariants();
+      if(this.item?.type !== "weapon") 
+        this.generateAdaptableVariants();
     }
 
     this.statistic = this.prepareStatistic();

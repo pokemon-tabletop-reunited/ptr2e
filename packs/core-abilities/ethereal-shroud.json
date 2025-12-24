@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user gains the resistances and immunities of the Ghost-Type (but not the type itself, so the user does not receive STAB on Ghost attacks, nor the weaknesses of the Ghost-Type), and is affected by Gloomy Weather as if it were Ghost-Type. The user takes 25% less damage from Special-Category Attacks.</p>",
         "img": "icons/svg/explosion.svg"
@@ -24,7 +25,8 @@
     ],
     "description": "<p>Effect: The user gains the resistances and immunities of the Ghost-Type (but not the type itself, so the user does not receive STAB on Ghost attacks, nor the weaknesses of the Ghost-Type), and is affected by Gloomy Weather as if it were Ghost-Type. The user takes 25% less damage from Special-Category Attacks.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "ethereal-shroud",
     "_migration": {
@@ -35,9 +37,95 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "2UrW1jpHHIPntWkj",
-  "effects": []
+  "effects": [
+    {
+      "name": "Ethereal Shroud",
+      "type": "passive",
+      "_id": "8EsO8iqs8oXcMjyH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "gloomy",
+            "predicate": [
+              "effect:summon:gloomy-weather"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -25,
+            "predicate": [],
+            "label": "Ethereal Shroud (Special DR)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "poison-attack-effectiveness-stage",
+            "value": -1,
+            "predicate": [],
+            "label": "Ethereal Shroud (Poison)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "bug-attack-effectiveness-stage",
+            "value": -1,
+            "predicate": [],
+            "label": "Ethereal Shroud (Bug)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765276592995,
+        "modifiedTime": 1765276768405,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

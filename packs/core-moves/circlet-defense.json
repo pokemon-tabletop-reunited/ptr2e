@@ -1,0 +1,74 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Circlet Defense",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Circlet Defense (Initiate)",
+        "slug": "circlet-defense-initiate",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "digimon"
+        ],
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>Effect: The user enters the [Circlet Defense 2] state. While in the [Circlet Defense] state, on receiving a physical attack, the user may freely use the Circlet Defense (Counter) attack.</p>",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Circlet Defense (Counter)",
+        "slug": "circlet-defense-counter",
+        "traits": [
+          "digimon",
+          "interrupt-4"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "predicate": [],
+        "power": 100,
+        "accuracy": 100
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "TQF8PKSy1df3MyMQ"
+}
