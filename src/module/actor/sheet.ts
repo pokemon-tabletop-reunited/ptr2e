@@ -195,9 +195,20 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
         if (!type) return;
 
+
         return void await this.document.createEmbeddedDocuments("Item", [{
-          name: ItemPTR2e.defaultName({ type, parent: this.document }),
-          type,
+          name: type === "ammo" ? "Ammo" : ItemPTR2e.defaultName({ type, parent: this.document }),
+          ...(() => {
+            if (type === "ammo") {
+              return {
+                type: "consumable",
+                system: {
+                  consumableType: "ammo",
+                }
+              }
+            }
+            return { type };
+          })(),
         }]);
       },
       "browse": async function (this: ActorSheetPTRV2, event: Event) {
@@ -267,7 +278,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     actions: {
       id: "actions",
       template: "systems/ptr2e/templates/actor/actor-actions.hbs",
-      scrollable: ["[data-tab='actionsCombat']",".scroll"]
+      scrollable: ["[data-tab='actionsCombat']", ".scroll"]
     },
     inventory: {
       id: "inventory",
@@ -509,15 +520,17 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
 
     if (partId === "inventory") {
-      const inventory = (() => {
+      const { inventory, ammoOptions } = (() => {
+        const ammoOptions: Record<string, { label: string; value: string; selected: boolean }[]> = {};
         const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
         for (const item of this.actor.items) {
           const physicalItems = [
             "weapon",
             "equipment",
             "consumable",
+            "ammo",
             "gear",
-            "container",
+            "container"
           ];
           for (const type of physicalItems) {
             if (!inventory[type]) inventory[type] = [];
@@ -535,16 +548,36 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return physicalItems.includes(item.type);
           }
           if (isTypeOfPhysicalItem(item)) {
+            if (item.type === "consumable" && item.system.consumableType === "ammo") {
+              inventory["ammo"].push(item);
+              continue;
+            }
             const category = item.type;
             inventory[category].push(item);
           }
         }
         for (const key of Object.keys(inventory)) {
+          if (key !== "ammo") {
+            for (const item of inventory[key]) {
+              if ('ammoType' in item.system && item.system.ammoType instanceof Set && item.system.ammoType.size > 0) {
+                const options = [];
+                for (const ammo of inventory["ammo"].filter(i => i.system.traits && (i as ConsumablePTR2e).system.equipped.carryType !== "dropped" && i.system.traits.some(t => (item.system.ammoType as Set<string>).has(t.slug)))) {
+                  options.push({
+                    label: `${ammo.name} (${ammo.system.quantity}/${ammo.system.stack || 1})`,
+                    value: ammo.uuid,
+                    selected: item.system.ammo === ammo.uuid
+                  });
+                }
+                ammoOptions[item.id] = options;
+              }
+            }
+          }
           inventory[key].sort((a, b) => a.sort - b.sort);
         }
-        return inventory;
+        return { inventory, ammoOptions };
       })();
       context.inventory = inventory;
+      context.ammoOptions = ammoOptions;
     }
 
     if (partId === "actions") {
@@ -906,6 +939,22 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           }
         });
       }
+
+      for (const element of htmlQueryAll<HTMLSelectElement>(
+        htmlElement,
+        "select.ammo-select"
+      )) {
+        element.addEventListener("change", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const itemId = element.dataset.id;
+          const item = this.document.items.get(itemId!) as ItemPTR2e;
+          if (!item) return;
+
+          const ammoUuid = element.value || null;
+          await item.update({ "system.ammo": ammoUuid });
+        });
+      }
     }
 
     if (partId === "perks") {
@@ -1184,7 +1233,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (!slug) return;
 
     const skills = this.actor.system.toObject().skills;
-    if(!skills[slug]) return;
+    if (!skills[slug]) return;
 
     skills[slug].favourite = !skills[slug].favourite;
     if (skills[slug].favourite && skills[slug].hidden) skills[slug].hidden = false;
@@ -1207,7 +1256,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (!slug) return;
 
     const skills = this.actor.system.toObject().skills;
-    if(!skills[slug]) return;
+    if (!skills[slug]) return;
 
     skills[slug].hidden = !skills[slug].hidden;
     if (skills[slug].hidden && skills[slug].favourite) skills[slug].favourite = false;
@@ -1288,7 +1337,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override bringToFront(): void {
-    if(foundry.applications.instances.has(`stats-editor-${this.actor.id}`)) return;
+    if (foundry.applications.instances.has(`stats-editor-${this.actor.id}`)) return;
     return super.bringToFront();
   }
 }

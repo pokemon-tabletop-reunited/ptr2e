@@ -7,7 +7,7 @@ import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { ActorPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
 import { AttackRollResult } from "@system/rolls/check-roll.ts";
-import { ItemPTR2e, SummonPTR2e } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, SummonPTR2e } from "@item";
 import { CombatantPTR2e } from "@combat";
 import { ActorSizePTR2e } from "@actor/data/size.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
@@ -186,6 +186,29 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   override async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
+    if(this.item?.system && 'ammoType' in this.item.system && this.item.system.ammoType instanceof Set && this.item.system.ammoType.size > 0) {
+      const ammoItem = (() => {
+        if(!this.item?.system.ammo) return null;
+        try {
+          return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+        }
+        catch {
+          return null;
+        }
+      })()
+      if(!ammoItem) {
+        ui.notifications.error(`${this.item.name} has no ammo selected, please select ammo to use this attack.`);
+        return false;
+      };
+      if(ammoItem.system.equipped.carryType === "dropped") {
+        ui.notifications.error(`You dropped your ${ammoItem.name} ammunition, please select usable ammo to use this attack.`);
+        return false;
+      }
+      if(ammoItem.system.quantity <= 0) {
+        ui.notifications.error(`You are out of ${ammoItem.name} ammunition, please select usable ammo to use this attack.`);
+        return false;
+      }
+    }
     if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
       const variant = this.actor?.actions.attack.get(this.defaultVariant);
       if(variant) return variant.roll(args);

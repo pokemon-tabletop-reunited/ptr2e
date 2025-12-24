@@ -159,6 +159,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
     const extraDomains = new Set<string>();
+    const extraOptions = new Set<string>();
     if (this.attack.variant) {
       const original = this.attack.original as AttackPTR2e;
       if (original) {
@@ -169,11 +170,32 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         }
       }
     }
+    if(this.item.system.ammo) {
+      extraDomains.add("uses-ammo");
+      const ammoItem = (() => {
+        try {
+          return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+        }
+        catch {
+          return null;
+        }
+      })();
+      if(ammoItem) {
+        extraDomains.add(`ammo-${ammoItem.slug}`);
+        extraDomains.add(`ammo-${ammoItem.id}`);
+        for(const trait of ammoItem.traits ?? []) {
+          extraDomains.add(`ammo-trait-${trait.slug}`);
+        }
+        for(const option of ammoItem.getRollOptions("item", { includeActor: false})) {
+          extraOptions.add(`ammo:${option}`);
+        }
+      }
+    }
 
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
     this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
 
-    this.additionalOptions = new Set<string>();
+    this.additionalOptions = new Set<string>(extraOptions);
     if (this.attack.power && this.attack.stab > 1) {
       const options = [...this.attack.types.map(t => `stab-${t}`), `stab`];
       this.domains.push(...options);
@@ -451,6 +473,24 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
           if (flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
             const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e)
             await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit });
+          }
+        }
+      }
+
+      if(this.item.system.ammo) {
+        const ammoItem = (() => {
+          try {
+            return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+          }
+          catch {
+            return null;
+          }
+        })();
+        if(ammoItem) {
+          const currentQuantity = ammoItem.system.quantity;
+          if(currentQuantity > 0) {
+            await ammoItem.update({ "system.quantity": currentQuantity - 1 });
+            ui.notifications.info(`Consumed 1 ${ammoItem.name}. ${currentQuantity - 1} remaining.`);
           }
         }
       }
