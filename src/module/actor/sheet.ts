@@ -989,7 +989,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     event.preventDefault();
     const target = event.currentTarget as HTMLElement;
     const component = target.dataset.component as ActorComponentKey;
-    const sheet = new ComponentPopout({ actor: this.actor, component });
+    const sheet = new ComponentPopout({ document: this.actor, actor: this.actor, component });
     sheet.render(true);
   }
 

@@ -1,0 +1,77 @@
+{
+  "folder": "BImk1fcMbR5akA4z",
+  "name": "Hunting Cannon",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Hunting Cannon (Set-Up)",
+        "slug": "hunting-cannon-set-up",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "digimon",
+          "set-up",
+          "priority-20"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>Effect: The user gains @Affliction[braced]. If the user moves (voluntarily or otherwise) after initiating this move, the move will fail.</p>",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Hunting Cannon (Resolution)",
+        "slug": "hunting-cannon-resolution",
+        "description": "<p>Effect: The user gains @Affliction[braced]. If the user moves (voluntarily or otherwise) after initiating this move, the move will fail.</p>",
+        "traits": [
+          "flinch-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "creature",
+          "distance": 25,
+          "unit": "m"
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 125,
+        "accuracy": 100
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "5ppCh8J57qgpuUU9"
+}

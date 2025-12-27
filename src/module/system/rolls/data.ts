@@ -96,7 +96,7 @@ interface CheckRollContext extends BaseRollContext {
     /** Is the roll a reroll? */
     isReroll?: boolean;
     /** Omitted Subrolls */
-    omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage'>;
+    omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage' | 'amount'>;
     /** PP Cost */
     ppCost?: number;
     /** Should PP be consumed */

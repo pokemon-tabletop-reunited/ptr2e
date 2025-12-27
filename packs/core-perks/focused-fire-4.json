@@ -14,7 +14,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Passive Effect: When making an X-Strike roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br><br>For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br><br>This perk is disabled when the creature with it has the Skill Link ability slotted.</p>",
+    "description": "<p>Passive Effect: When making an @Trait[x-strike] roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br /><br />For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br /><br />This perk is disabled when the creature with it has the @UUID[Compendium.ptr2e.core-abilities.m3NkhaFegGTH5ZuK]{Skill Link} ability slotted.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
@@ -54,7 +54,47 @@
     "originSlug": null
   },
   "img": "icons/equipment/head/goggles-leather-grey.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Focused Fire 4",
+      "type": "passive",
+      "_id": "MejT2BEwNyRUvZZc",
+      "img": "icons/equipment/head/goggles-leather-grey.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "strike-trait-attack-hits-flat",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "combat": null,
+        "startRound": 1,
+        "startTurn": 0
+      },
+      "description": "<p>Passive Effect: When making an @Trait[x-strike] roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br /><br />For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br /><br />This perk is disabled when the creature with it has the @UUID[Compendium.ptr2e.core-abilities.m3NkhaFegGTH5ZuK]{Skill Link} ability slotted.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0
+    }
+  ],
   "folder": "zrVtKATNxzLNxTUX",
   "flags": {},
   "_id": "mLzdq1QTiLDGXe9Z"

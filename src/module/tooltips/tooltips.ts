@@ -130,19 +130,33 @@ export default class TooltipsPTR2e {
     const data = game.ptr.data.traits.getTrait(trait);
     if (!data) return false;
 
-    this.tooltip.innerHTML = `<h4 class="trait">[${data.label
-      }]</h4><content>${await foundry.applications.ux.TextEditor.enrichHTML(data.description)}</content>
-        <div class="progress-circle">
-            <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
-                <circle class="bg"></circle>
-                <circle class="fg"></circle>
-                <circle class="fgb"></circle>
-            </svg>
-        </div>`;
-    const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as
-      | TooltipDirections
-      | undefined;
-    requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+    await this._renderTooltip({
+      path: "systems/ptr2e/templates/partials/trait-tooltip.hbs",
+      data: {
+        label: data.label,
+        description: await foundry.applications.ux.TextEditor.enrichHTML(data.description),
+        related: await foundry.applications.ux.TextEditor.enrichHTML(data.related.map(r => `@Trait[${r}]`).join(", ")),
+        type: data.type,
+        colors: Trait.bgColors[data.type || "default"]
+      },
+      direction: game.tooltip.element?.dataset.tooltipDirection as
+        | TooltipDirections
+        | undefined,
+    });
+
+    // this.tooltip.innerHTML = `<h4 class="trait">[${data.label
+    //   }]</h4><content>${await foundry.applications.ux.TextEditor.enrichHTML(data.description)}</content>
+    //     <div class="progress-circle">
+    //         <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
+    //             <circle class="bg"></circle>
+    //             <circle class="fg"></circle>
+    //             <circle class="fgb"></circle>
+    //         </svg>
+    //     </div>`;
+    // const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as
+    //   | TooltipDirections
+    //   | undefined;
+    // requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
     return tooltipTrait ? 1 : 2000;
   }
 

@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's Physical- and Special-Category Electric-Type attacks deal 30% more damage to targets that are Swimming, or in Rainy Weather. The user's Physical- and Special-Category Water-Type attacks have a 10% chance to inflict @Affliction[paralysis] 5.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's Physical- and Special-Category Electric-Type attacks deal 30% more damage to targets that are Swimming, or in Rainy Weather. The user's Physical- and Special-Category Water-Type attacks have a 10% chance to inflict @Affliction[paralysis] 5.</p>",
+    "description": "<p>Effect: The user's @Trait[electric] attacks deal 30% more damage to targets that are Swimming, or in Rainy Weather. The user's @Trait[water] attacks have a 10% chance to inflict @Affliction[paralysis] 5.</p>",
     "traits": [
       "environ"
     ],
@@ -35,9 +36,90 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ereX8qXbRPVBS13N",
-  "effects": []
+  "effects": [
+    {
+      "name": "Hydro Circuit",
+      "type": "passive",
+      "_id": "f6VZhIpBCERgLcwp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "electric-attack-damage",
+            "value": 30,
+            "predicate": [
+              "effect:summon:rainy-weather"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "electric-attack-damage",
+            "value": 30,
+            "predicate": [
+              "target:state:swim"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "water-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765279901338,
+        "modifiedTime": 1765280072973,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -83,7 +83,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
       })
     }
     else {
-      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied });
+      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied, flat: false });
     }
   }
 

@@ -3,7 +3,92 @@
   "_id": "f32io4C4fy33C7yM",
   "type": "perk",
   "img": "icons/skills/social/diplomacy-handshake-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Left Handedness",
+      "type": "passive",
+      "_id": "YfJdCqrx7WgVBj4o",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "prompt": "Select An Ability",
+            "adjustName": false,
+            "flag": "left-handedness",
+            "rollOption": "left-handedness",
+            "allowNoSelection": false,
+            "showDisabled": true,
+            "choices": [
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.N4iNQzyU492WWozy"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.jsFFHr4t5qwwCzMt"
+              }
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "predicate": [],
+            "ignored": true
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.left-handedness}",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.gqinWHq2LiHX7DQj.ActiveEffect.KudMzNMQfJSqFIlQ",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765235421128,
+        "modifiedTime": 1765235513407,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
