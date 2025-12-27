@@ -101,7 +101,7 @@ class GithubManager {
       const sourceId = item.flags?.core?.sourceId || item._stats?.compendiumSource;
       if (sourceId) {
         if(!sourceId.startsWith(pack.metadata.packageName)) {
-          return await fu.fromUuid(sourceId) ?? null as ItemPTR2e<ItemSystemPTR, null> | null;
+          return (await fu.fromUuid<ItemPTR2e<ItemSystemPTR, null>>(sourceId) ?? null) as ItemPTR2e<ItemSystemPTR, null> | null;
         }
         const existing = await pack.getDocument(sourceId.split(".").at(-1)!);
         if (existing) return existing;
