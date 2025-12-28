@@ -1,6 +1,6 @@
 <main>
   <div class="scroll">
-    <section class="perk-grid {{#if editMode}}edit-mode{{/if}} {{#unless global}}species-web{{/unless}}" style="{{#unless noZoom}}zoom: {{zoom}};{{else}}transform: scale({{zoom}});{{/unless}}">
+    <section class="perk-grid {{#if editMode}}edit-mode{{/if}} {{#if speciesWeb}}species-web{{/if}}" style="{{#unless noZoom}}zoom: {{zoom}};{{else}}transform: scale({{zoom}});{{/unless}}">
       {{#each grid as |perk|}}
         {{#if perk.name}}
           <div class="perk{{#each perk.classes}} {{this}}{{/each}} item"
