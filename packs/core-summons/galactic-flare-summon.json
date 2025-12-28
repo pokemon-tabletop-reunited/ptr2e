@@ -3,17 +3,23 @@
   "type": "summon",
   "system": {
     "_migration": {
-      "version": 0.111,
-      "previous": null
+      "version": 0.113,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.351",
+        "system": "1.4.11.beta"
+      }
     },
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
       "notes": ""
     },
-    "traits": [],
+    "traits": [
+      "digimon"
+    ],
     "actions": [
       {
         "name": "Galactic Flare",
@@ -26,7 +32,8 @@
         },
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "types": [
           "nuclear"
@@ -40,10 +47,10 @@
       }
     ],
     "baseAV": 90,
-    "duration": 3
+    "duration": 3,
+    "slug": "galactic-flare-summon"
   },
   "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
   "effects": [],
-  "flags": {},
   "_id": "FjaCUQRiSsaHjGcg"
 }
