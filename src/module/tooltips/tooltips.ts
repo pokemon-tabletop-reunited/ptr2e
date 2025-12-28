@@ -915,6 +915,7 @@ export default class TooltipsPTR2e {
       case "perk":
         if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
         return await this.#createItemTooltip(entity, "perk");
+      case "ptr2e-digimon-expansion.digimonSpecies":
       case "species":
         if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
         return await this.#createItemTooltip(entity, "species");

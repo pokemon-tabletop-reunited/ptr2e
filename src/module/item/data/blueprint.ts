@@ -578,7 +578,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       // Add species item
       items.push({
         name: evolution.system.slug ? Handlebars.helpers.formatSlug(evolution.system.slug) : evolution.name,
-        type: 'species',
+        type: species.type ?? "species",
         img: img,
         system: evolution.system,
         _id: "actorspeciesitem",

@@ -223,11 +223,12 @@ class ItemPTR2e<
     const actor = context?.parent as ActorPTR2e | null;
     if (!actor) return super.createDocuments<TDocument>(data, context);
 
-    const specialTypes = ["species"];
+    const specialTypes = ["species", "ptr2e-digimon-expansion.digimonSpecies"];
 
     for (const source of sources) {
       if (specialTypes.includes(source.type as string)) {
         switch (source.type) {
+          case "ptr2e-digimon-expansion.digimonSpecies":
           case "species": {
             const speciesItem = actor.items.get("actorspeciesitem") as ItemPTR2e<ItemSystemPTR, ActorPTR2e>;
             if (speciesItem) {

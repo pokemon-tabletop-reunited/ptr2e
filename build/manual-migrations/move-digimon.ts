@@ -23,7 +23,7 @@ import url from "url";
 
 {
   const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
-  for(const key of ["abilities", "moves", "perks", "effects"]) {
+  for(const key of ["abilities", "moves", "perks", "effects", "summons"]) {
     const packsDataPath = path.resolve(__dirname, `../../packs/core-${key}`);
     const newPath = path.resolve(__dirname, `../../packs/${key}`);
     for (const file of fs.readdirSync(packsDataPath)) {

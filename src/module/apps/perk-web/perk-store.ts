@@ -338,7 +338,7 @@ class PerkStore extends Collection<PerkNode> {
               connectedNode.perk.system.cost = 1;
             }
 
-            if (connectedNode.perk.flags.ptr2e?.evolution) {
+            if (connectedNode.perk.flags.ptr2e?.evolution && !isNaN(currentTier)) {
               const evolution = connectedNode.perk.flags.ptr2e.evolution as {
                 name: string;
                 uuid: string;
