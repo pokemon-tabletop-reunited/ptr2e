@@ -82,6 +82,7 @@ class GithubManager {
   static VALID_DOCUMENT_TYPES: Record<string, string> = {
     move: "ptr2e.core-moves",
     species: "ptr2e.core-species",
+    "ptr2e-digimon-expansion.digimonSpecies": "ptr2e-digimon-expansion.digimon-species",
     ability: "ptr2e.core-abilities",
     perk: "ptr2e.core-perks",
     effect: "ptr2e.core-effects",
