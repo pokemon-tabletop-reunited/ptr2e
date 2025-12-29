@@ -653,8 +653,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.shield.max = this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
-    for (const skill of this.skills) {
-      skill.prepareBaseData();
+    for (const skill in this.skills) {
+      this.skills[skill].slug = skill;
+      this.skills[skill].prepareBaseData();
     }
     for (const skill of game.ptr.data.skills) {
       if (!this.skills[skill.slug]) {
