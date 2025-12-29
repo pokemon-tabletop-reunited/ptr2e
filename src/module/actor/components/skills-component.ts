@@ -42,19 +42,22 @@ class SkillsComponent extends ActorComponent {
         // Do not add Resources for non-[Ace]s that do not have the Resources skill from their Species
         if (skill.slug === "resources" && !actor.isAce && (actor.species?.skills.get("resources")?.value ?? 0) <= 1) continue;
 
+        function getLabel(groupSlug: string): string | null {
+          const localized = game.i18n.localize(`PTR2E.Skills.${groupSlug}.label`);
+          return localized !== `PTR2E.Skills.${groupSlug}.label` ? localized : Handlebars.helpers.formatSlug(groupSlug);
+        }
+
         if (skill.favourite) {
           const group = skill.group || "none";
-          if (!favouriteGroups[group])
-            favouriteGroups[group] = { label: group, skills: [] };
+          if (!favouriteGroups[group]) favouriteGroups[group] = { label: getLabel(group), skills: [] };
           favouriteGroups[group].skills.push(skill);
         } else if (skill.hidden) {
           const group = skill.group || "none";
-          if (!hiddenGroups[group]) hiddenGroups[group] = { label: group, skills: [] };
+          if (!hiddenGroups[group]) hiddenGroups[group] = { label: getLabel(group), skills: [] };
           hiddenGroups[group].skills.push(skill);
         } else {
           const group = skill.group || "none";
-
-          if (!normalGroups[group]) normalGroups[group] = { label: group, skills: [] };
+          if (!normalGroups[group]) normalGroups[group] = { label: getLabel(group), skills: [] };
           normalGroups[group].skills.push(skill);
         }
       }
@@ -126,7 +129,7 @@ class SkillsComponent extends ActorComponent {
 
         const skills = actor.system.toObject().skills;
         if (!skills[skillSlug]) {
-          if(!actor.system.skills[skillSlug]) return;
+          if (!actor.system.skills[skillSlug]) return;
           // @ts-expect-error - Correct assignment
           skills[skillSlug] = {
             ...actor.system.skills[skillSlug]
@@ -157,7 +160,7 @@ class SkillsComponent extends ActorComponent {
 
         const skills = actor.system.toObject().skills;
         if (!skills[skillSlug]) {
-          if(!actor.system.skills[skillSlug]) return;
+          if (!actor.system.skills[skillSlug]) return;
           // @ts-expect-error - Correct assignment
           skills[skillSlug] = {
             ...actor.system.skills[skillSlug]
