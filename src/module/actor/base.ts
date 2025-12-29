@@ -2414,7 +2414,6 @@ class ActorPTR2e<
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
     if (game.users.activeGM?.id !== game.user.id) return;
-    // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
     function isEffect(
@@ -2424,27 +2423,40 @@ class ActorPTR2e<
     ): _documents is ActiveEffectPTR2e<typeof parent>[] {
       return collection === "effects";
     }
-    if (isEffect(collection, documents)) return;
+    if (isEffect(collection, documents)) {
+      const domains = documents.flatMap(effect => [
+        ...effect.system.traits.map(t => `${t?.slug ?? t}-trait-received`),
+        `${effect.slug || effect.system.slug}-received`,
+        "all-received"
+      ])
+      const notes = extractNotes(this.synthetics.rollNotes, domains);
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+      return;
+    } else {
+      const domains = documents.filter(d => d.type == "effect").flatMap(e => e.effects as unknown as ActiveEffectPTR2e[]).flatMap(effect => [
+        ...effect.system.traits.map(t => `${t?.slug ?? t}-trait-received`),
+        `${effect.slug || effect.system.slug}-received`,
+        "all-received"
+      ])
+      const notes = extractNotes(this.synthetics.rollNotes, domains);
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+    }
 
     const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
     if (!perks.length) return;
 
-    // const updates = [];
-    // const originalRoot = this.originalRoot;
-    // if (!originalRoot) throw new Error("No original root found.");
-    // // const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
-    // //   strict: true,
-    // // });
-
-    // // for (const root of this.unconnectedRoots) {
-    // //   // const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
-
-    // //   // const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
-    // //   if (path) {
-    // //     updates.push({ _id: root.id, "system.cost": 1 });
-    // //   }
-    // // }
-    // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
   }
 
   protected override _onDeleteDescendantDocuments(
