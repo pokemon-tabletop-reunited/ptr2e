@@ -17,7 +17,7 @@
       "rhyperior"
     ],
     "actions": [],
-    "description": "<p>Effect: The user takes -15% less damage from Physical-Category Attacks. Rhyhorn, Rhydon, and Rhyperior users take -25% less damage from Special-Category Attacks and have +15% RES.<br><br>A Rhydon may consume this item in order to trigger Evolution.</p>",
+    "description": "<p>Effect: The user takes -15% less damage from Physical-Category Attacks. @UUID[Compendium.ptr2e.core-species.sMeP7oy9e1Xoo1YL]{Rhyhorn}, @UUID[Compendium.ptr2e.core-species.7bhWOgrX8BaFk8T2]{Rhydon}, and @UUID[Compendium.ptr2e.core-species.vh6LElnAS6Yep8QZ]{Rhyperior} users take -25% less damage from Special-Category Attacks and have +15% RES.<br><br>A Rhydon may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -36,7 +36,7 @@
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 4,
+        "distance": 2,
         "unit": "m"
       }
     },
@@ -60,6 +60,95 @@
     }
   },
   "img": "systems/ptr2e/img/item-icons/protector.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Protector",
+      "type": "passive",
+      "_id": "Gp87JXq7KDrcUzoz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Protector",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -25,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:rhyhorn",
+                  "target:species:rhydon",
+                  "target:species:rhyperior"
+                ]
+              }
+            ],
+            "label": "Protector",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:rhyhorn",
+                  "target:species:rhydon",
+                  "target:species:rhyperior"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766206531126,
+        "modifiedTime": 1766206826996,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "HCte0tv6rdpKecWM"
 }

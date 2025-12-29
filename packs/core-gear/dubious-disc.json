@@ -14,7 +14,7 @@
       "evolution"
     ],
     "actions": [],
-    "description": "<p>Effect: The @Trait[digital] user’s ATK, SPATK, and SPD are increased by 15%, and the user has a 10% chance to gain @Affliction[bleed 3] whenever they use an Attack. @Trait[electric-soldier] creatures have these effects doubled.<br><br>A Porygon-2 can consume this item to trigger evolution.</p>",
+    "description": "<p>Effect: The @Trait[digital] user’s ATK, SPATK, and SPD are increased by 20%, and the user has a 20% chance to gain @Affliction[bleed 3] whenever they use an Attack. @Trait[electric-soldier] creatures have these effects doubled.<br><br>@UUID[Compendium.ptr2e.core-species.bfUNgdPtQbCWvOm1]{Porygon2} can consume this item to trigger evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -59,52 +59,151 @@
   "img": "systems/ptr2e/img/item-icons/dubious%20disk.webp",
   "effects": [
     {
-      "name": "Type Booster (Normal)",
+      "name": "Dubious Disc",
       "type": "passive",
-      "_id": "Buja40HsH5dQ7120",
+      "_id": "h0p6R5axIMwaRZkZ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal) Power",
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.2,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:virus",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal)",
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.2,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:virus",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.2,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:virus",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:digimon",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.2,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.2,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.2,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
         "removeAfterAttacking": false,
-        "removeAfterAttacked": false
+        "removeAfterAttacked": false,
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -112,17 +211,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
+        "exportSource": null,
         "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
-        "exportSource": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766188536741,
+        "modifiedTime": 1766190806194,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

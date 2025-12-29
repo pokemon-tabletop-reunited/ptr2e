@@ -16,7 +16,7 @@
       "slurpuff"
     ],
     "actions": [],
-    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base ATK and DEF. Swirlix and Slurpuff users deal +15% more and takes -15% less Physical-Category damage.<br><br><span style=\"color: rgb(239, 230, 216); font-family: Signika, &#x27;Palatino Linotype&#x27;, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(0, 0, 0); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none\">A Swirlix may consume this item in order to trigger Evolution.</span></p>",
+    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base ATK and DEF. @UUID[Compendium.ptr2e.core-species.pxuoV77OKgYBv0sQ]{Swirlix} and @UUID[Compendium.ptr2e.core-species.AdhZNYH88O0j4T0K]{Slurpuff} users deal +15% more and takes -15% less Physical-Category damage.<br><br>A Swirlix may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -59,6 +59,99 @@
     }
   },
   "img": "systems/ptr2e/img/item-icons/whipped%20dream.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Whipped Dream",
+      "type": "passive",
+      "_id": "PDn2CERdQuEixrp8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "trait:fairy"
+            ],
+            "hp": null,
+            "atk": 10,
+            "def": 10,
+            "spa": null,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "physical-attack-damage",
+            "value": 15,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:swirlix",
+                  "item:species:slurpuff"
+                ]
+              }
+            ],
+            "label": "Whipped Dream",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "physical-attack-damage-percentile",
+            "value": -15,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:swirlix",
+                  "item:species:slurpuff"
+                ]
+              }
+            ],
+            "label": "Whipped Dream",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766207382430,
+        "modifiedTime": 1766207474389,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "PAp00fGGTK3wL303"
 }
