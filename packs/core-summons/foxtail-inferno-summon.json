@@ -3,15 +3,23 @@
   "type": "summon",
   "system": {
     "_migration": {
-      "version": 0.111,
-      "previous": null
+      "version": 0.113,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.351",
+        "system": "1.4.11.beta"
+      }
     },
     "publication": {
-      "source": "",
-      "authors": [],
+      "source": "Digidex",
+      "authors": [
+        "Fox"
+      ],
       "notes": ""
     },
-    "traits": [],
+    "traits": [
+      "digimon"
+    ],
     "actions": [
       {
         "name": "Foxtail Inferno (Summon) Action (#1)",
@@ -21,7 +29,8 @@
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "simple"
@@ -38,7 +47,8 @@
       }
     ],
     "baseAV": 100,
-    "duration": 3
+    "duration": 3,
+    "slug": "foxtail-inferno-summon"
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "effects": [
@@ -78,7 +88,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -98,17 +110,15 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": "Item.a4T4UHOxm5Iy0so4.ActiveEffect.6zIbaNSNvvTQrNw0",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
-        "createdTime": null,
-        "modifiedTime": null,
+        "systemVersion": "1.4.11.beta",
         "lastModifiedBy": null
       }
     }
   ],
-  "flags": {},
   "_id": "k6Trv0PKk45HA0fA"
 }

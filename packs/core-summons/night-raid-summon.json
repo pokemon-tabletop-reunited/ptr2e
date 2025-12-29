@@ -3,17 +3,23 @@
   "type": "summon",
   "system": {
     "_migration": {
-      "version": 0.111,
-      "previous": null
+      "version": 0.113,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.351",
+        "system": "1.4.11.beta"
+      }
     },
     "publication": {
-      "source": "PTR2e Digimon Supplement - Digi Dex",
+      "source": "Digidex",
       "authors": [
         "Fox"
       ],
       "notes": ""
     },
-    "traits": [],
+    "traits": [
+      "digimon"
+    ],
     "actions": [
       {
         "name": "Night Raid (Summon)",
@@ -28,7 +34,8 @@
         },
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "types": [
           "ghost"
@@ -43,10 +50,10 @@
       }
     ],
     "baseAV": 125,
-    "duration": 4
+    "duration": 4,
+    "slug": "night-raid-summon"
   },
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "effects": [],
-  "flags": {},
   "_id": "YlsZm28LC6EMHSyc"
 }
