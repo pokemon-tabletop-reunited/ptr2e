@@ -250,9 +250,10 @@ class ItemPTR2e<
     }
 
     async function processSources(sources: ItemSourcePTR2e[]) {
+      const sourcesArray = [...sources];
       const outputItemSources: ItemSourcePTR2e[] = sources;
 
-      for (const source of sources) {
+      for (const source of sourcesArray) {
         if (!source.effects?.length) continue;
         const item = new CONFIG.Item.documentClass(source as ItemPTR2e["_source"], { parent: actor }) as ItemPTR2e;
         const effects = source.effects.map((e: unknown) => new CONFIG.ActiveEffect.documentClass(e as ActiveEffectPTR2e["_source"], { parent: item }) as ActiveEffectPTR2e);

@@ -1,4 +1,4 @@
-import { AttackPTR2e, HasEmbed, HasMigrations } from "@data";
+import { AttackPTR2e, ChangeModelTypes, HasEmbed, HasMigrations } from "@data";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { BaseItemSourcePTR2e } from "./system.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
@@ -16,6 +16,7 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
 import { SkillSchema } from "@module/data/models/skill.ts";
 import { GeneratorConfig } from "@module/data/models/generator-config.ts";
+import ActiveEffectPTR2e from "@module/effects/document.ts";
 
 export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
   /**
@@ -209,7 +210,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const progress = new Progress({ steps: (this.blueprints.size * 3) + 2 });
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix"));
 
-    const toBeCreated: Partial<ActorPTR2e['_source']>[] = [];
+    const toBeCreated: {data: Partial<ActorPTR2e['_source']>, items: Partial<ItemPTR2e['_source']>[]}[] = [];
     for (const blueprint of this.blueprints) {
       await blueprint.prepareAsyncData();
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Step", {
@@ -227,7 +228,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             teamMemberOf: options.team ? [options.folder.id] : [],
           }
         }
-        toBeCreated.push(actor);
+        toBeCreated.push({data: actor, items: []});
         continue;
       }
 
@@ -258,7 +259,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             teamMemberOf: options.team ? [options.folder.id] : [],
           }
         }
-        toBeCreated.push(actor);
+        toBeCreated.push({data: actor, items: []});
         continue;
       }
       const species = speciesOrActor.toObject() as SpeciesPTR2e['_source'] & {
@@ -644,7 +645,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         for (const step of perkGenResult) {
           for (const data of step.path.flatMap(path => ({ ...path.data.perk, system: { ...path.data.perk.system }, slug: path.id?.toString() }))) {
             if (owned.has(data.slug)) continue;
-            const perk = data as unknown as PerkPTR2e['_source'];
+            const perk = fu.duplicate(data) as unknown as PerkPTR2e['_source'];
             perk.system.originSlug = data.slug;
             //@ts-expect-error - Valid operation.
             delete perk._id
@@ -799,6 +800,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       }
 
       const data = {
+        _id: fu.randomID(),
         name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,
         img,
         type,
@@ -827,7 +829,6 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           },
           skills
         },
-        items,
         prototypeToken: fu.mergeObject(foundryDefaultTokenSettings, {
           actorLink: linkToken,
           displayBars: foundryDefaultTokenSettings.displayBars ?? CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
@@ -843,23 +844,71 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       data.system!.health = { value: actor.system.health.max, max: actor.system.health.max };
       data.system!.powerPoints = { value: actor.system.powerPoints.max, max: actor.system.powerPoints.max };
 
-      toBeCreated.push(data);
+      toBeCreated.push({data, items: items as ItemPTR2e["_source"][]});
     }
 
     if (dataOnly) {
       progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
-      return toBeCreated;
+      return toBeCreated.reduce((acc, cur) => {
+        //@ts-expect-error - Correctly typed
+        cur.data.items = cur.items;
+        acc.push(cur.data);
+        return acc;
+      }, [] as Partial<ActorPTR2e['_source']>[]);
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));
-    //@ts-expect-error - This is valid actor data
-    const actors = await ActorPTR2e.createDocuments(toBeCreated);
+    const itemMap: [string, unknown[]][] = [];
+    for(const actorData of toBeCreated) {
+      if(!actorData.items?.length) continue;
+      const speciesItemIndex = actorData.items.findIndex(i => i.type === "species");
+      if(speciesItemIndex !== -1) {
+        const speciesItem = actorData.items[speciesItemIndex];
+        // Remove species item from actor creation data
+        actorData.items.splice(speciesItemIndex, 1);
+        actorData.data.items = [speciesItem as unknown as ItemPTR2e["_source"]];
+      }
+      // Remove any items with preCreate hook effects
+      for(let i = actorData.items.length - 1; i >= 0; i--) {
+        const item = actorData.items[i];
+        const effects = item.effects as ActiveEffectPTR2e["_source"][] | undefined;
+        let breaking = false;
+        if(effects?.length) {
+          for(const effect of effects) {
+            if(breaking) break;
+            for(const change of effect.system.changes) {
+              if(ChangeModelTypes()[change.type]?.prototype?.preCreate) {
+                breaking = true;
+                break;
+              }
+            }
+          }
+        }
+        // If no matching effect, it doesn't need to be deffered
+        if(!breaking) {
+          actorData.items.splice(i, 1);
+          actorData.data.items ||= [];
+          actorData.data.items.push(item as unknown as ItemPTR2e["_source"]);
+        }
+      }
+      
+      itemMap.push([actorData.data._id!, actorData.items]);
+    }
+    const createdActors = await ActorPTR2e.createDocuments(toBeCreated.map(a => a.data as ActorPTR2e["_source"]), { temporary: false, keepId: true });
+    for(const [actorId, items] of itemMap) {
+      const actor = createdActors.find(a => a.id === actorId);
+      if(!actor) {
+        console.error(`PTR2e Blueprint Generator | Could not find created actor with id ${actorId} to add items to`);
+        continue;
+      }
+      await actor.createEmbeddedDocuments("Item", items as unknown as ItemPTR2e["_source"][]);
+    }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep"));
 
     const { x, y } = options;
     const tokensToCreate: TokenDocumentPTR2e[] = [];
-    for (const actor of actors) {
+    for (const actor of createdActors) {
       // TODO: Spread out actors in case there's multiple
       const tokenData = await actor.getTokenDocument({ x, y });
       tokensToCreate.push(tokenData);

@@ -490,7 +490,7 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
           const skill = types[0].split(":")[1];
           const value = types[1];
 
-          const actorSkill = actor.system.skills.get(skill)
+          const actorSkill = actor.system.skills[skill]
           if(!actorSkill) continue;
 
           const alreadySpent = skills.get(skill)?.value ?? 0;
@@ -510,7 +510,7 @@ export class nba<NodeData extends PerkNodeData = PerkNodeData, LinkData = unknow
           const results = [];
           for(const [skillString, value] of types as [string, number][]) {
             const skill = skillString.split(":")[1];
-            const actorSkill = actor.system.skills.get(skill);
+            const actorSkill = actor.system.skills[skill];
             if(!actorSkill) {
               valid = false;
               break;
