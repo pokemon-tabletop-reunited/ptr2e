@@ -44,6 +44,7 @@ import { TokenRulerPTR2e } from "@module/canvas/token-ruler.ts";
 import { PrototypeTokenConfigPTR2e, TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { ImageResolver } from "@utils";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -208,7 +209,8 @@ export const PTRCONFIG = {
   utils: {
     predicate: Predicate,
     SlugField,
-    PredicateField
+    PredicateField,
+    ImageResolver
   },
   options: {} as Record<string, PickableThing[]>,
   movementTypes: {
