@@ -371,7 +371,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   set movementType(newType: string) {
-    if(this._movementType === newType) return;
+    if(this._movementType == newType) return;
     if(this._movementType == null || this._movementType == undefined) {
       this.parent.rollOptions.removeOption("self", `state:overland`);
     }
@@ -718,6 +718,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       case this.health.value >= Math.floor(this.health.max * 0.25): {
         this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
       }
+    }
+    // Set movement state option
+    if(this.movementType) {
+      this.parent.rollOptions.addOption("self", `state:${this.movementType}`);
     }
 
     //@ts-expect-error - The getter needs to be added afterwards.
