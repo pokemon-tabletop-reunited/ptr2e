@@ -17,11 +17,10 @@
     },
     "traits": [
       "accessory",
-      "held",
-      "needs-automation"
+      "held"
     ],
     "actions": [],
-    "description": "<p>Psychic-Type users deal/take 10% more/less Special-Category damage. Mime Jr., Mr. Mime, Mr. Mime Galarian, and Mr. Rime users have +15% EHR and +10 Base SPATK.</p>",
+    "description": "<p>Psychic-Type users deal/take 10% more/less Special-Category damage. @UUID[Compendium.ptr2e.core-species.QIYzkXCGv98ltEJG]{Mime Jr.}, @UUID[Compendium.ptr2e.core-species.OUHtARROlVunWZG7]{Mr. Mime}, @UUID[Compendium.ptr2e.core-species.N6yaUbYg9QLmVMxP]{Mr. Mime Galarian}, and @UUID[Compendium.ptr2e.core-species.InFjiJz45Y6AyAiK]{Mr. Rime} users have +15% EHR and +10 Base SPATK.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -35,12 +34,12 @@
     "grade": "D",
     "fling": {
       "type": "psychic",
-      "power": 90,
+      "power": 100,
       "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -58,6 +57,115 @@
   },
   "_id": "RMWlwN6SnJXJSAIa",
   "img": "systems/ptr2e/img/item-icons/luck incense.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Odd Incense",
+      "type": "passive",
+      "_id": "ODoUm0ZX3PYxoZ7T",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 10,
+            "predicate": [
+              "trait:psychic"
+            ],
+            "label": "Odd Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:psychic"
+            ],
+            "label": "Odd Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 10,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:mime-jr",
+                  "item:species:mr-mime",
+                  "item:species:mr-mime-galarian",
+                  "item:species:mr-rime"
+                ]
+              }
+            ],
+            "label": "Odd Incense",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:mime-jr",
+                  "item:species:mr-mime",
+                  "item:species:mr-mime-galarian",
+                  "item:species:mr-rime"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": 10,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766445304771,
+        "modifiedTime": 1766446009956,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

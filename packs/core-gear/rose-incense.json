@@ -21,7 +21,7 @@
       "needs-automation"
     ],
     "actions": [],
-    "description": "<p>Grass-Type users deal/take 10% more/less Special-Category damage. Budew, Roselia, and Roserade users have +10 Base SPATK, and have a 20% chance to freely use Accupressure on itself when resolving a @Trait[drain-x] or @Trait[poison] Attack.</p>",
+    "description": "<p>Grass-Type users deal/take 10% more/less Special-Category damage. @UUID[Compendium.ptr2e.core-species.u0tWJ21vXRWiVZtH]{Budew}, @UUID[Compendium.ptr2e.core-species.VoBt5EWOY1vbTH8Z]{Roselia}, and @UUID[Compendium.ptr2e.core-species.tUAo0jg7dNMExftf]{Roserade} users have +10 Base SPATK, and have a 20% chance to freely use Accupressure on itself when resolving a @Trait[drain-x] or @Trait[poison] Attack.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -35,12 +35,12 @@
     "grade": "D",
     "fling": {
       "type": "untyped",
-      "power": 90,
+      "power": 100,
       "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -58,6 +58,96 @@
   },
   "_id": "8Pg6vQrsatWJzfBh",
   "img": "systems/ptr2e/img/item-icons/rose incense.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Rose Incense",
+      "type": "passive",
+      "_id": "EbxsgpZmIsI4F1Hb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 10,
+            "predicate": [
+              "trait:grass"
+            ],
+            "label": "Rose Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:grass"
+            ],
+            "label": "Rose Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "system.modifiers.effectHitRate",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:budew",
+                  "item:species:roselia",
+                  "item:species:roserade"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": 10,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766447278815,
+        "modifiedTime": 1766447533724,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }
