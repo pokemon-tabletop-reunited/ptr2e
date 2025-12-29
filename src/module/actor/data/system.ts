@@ -805,6 +805,42 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     })
   }
 
+  static generateDesperationAndIntrepidStates(health: ActorSystemPTR2e["health"]): Set<string> {
+    const states = new Set<string>();
+    switch (true) {
+      case health.value <= Math.floor(health.max * 0.25): {
+        states.add("desperation-1-4");
+      }
+      case health.value <= Math.floor(health.max * (1 / 3)): {
+        states.add("desperation-1-3");
+      }
+      case health.value <= Math.floor(health.max * 0.5): {
+        states.add("desperation-1-2");
+      }
+      case health.value <= Math.floor(health.max * 0.75): {
+        states.add("desperation-3-4");
+      }
+    }
+    switch (true) {
+      case health.value == health.max: {
+        states.add("healthy");
+      }
+      case health.value >= Math.floor(health.max * 0.75): {
+        states.add("intrepid-3-4");
+      }
+      case health.value >= Math.floor(health.max * 0.5): {
+        states.add("intrepid-1-2");
+      }
+      case health.value >= Math.floor(health.max * (1 / 3)): {
+        states.add("intrepid-1-3");
+      }
+      case health.value >= Math.floor(health.max * 0.25): {
+        states.add("intrepid-1-4");
+      }
+    }
+    return states;
+  }
+
   override prepareDerivedData(): void {
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();

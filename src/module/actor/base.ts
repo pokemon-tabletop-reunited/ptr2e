@@ -2201,6 +2201,23 @@ class ActorPTR2e<
       } else if ((changed.system.health.value as number) > 0 && fainted) {
         await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
       }
+
+      const currentStates = ActorSystemPTR2e.generateDesperationAndIntrepidStates(this.system.health);
+      const changedStates = ActorSystemPTR2e.generateDesperationAndIntrepidStates({
+        ...this.system.health,
+        ...(typeof changed.system?.health.value === "number" ? { value: changed.system.health.value } : {}),
+      });
+      const newStates = changedStates.difference(currentStates);
+      if (newStates.size > 0) {
+        const notes = extractNotes(this.synthetics.rollNotes, Array.from(newStates));
+        if (notes?.length) {
+          const content = RollNote.notesToHTML(notes)?.outerHTML;
+          if (content?.length) await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content
+          });
+        }
+      }
     }
 
     if (changed.system?.advancement?.experience?.current !== undefined) {
@@ -2345,6 +2362,8 @@ class ActorPTR2e<
       console.error(err);
     }
 
+
+
     return super._preUpdate(changed, options, user);
   }
 
@@ -2372,7 +2391,16 @@ class ActorPTR2e<
   ): void {
     super._onUpdate(changed, options, userId);
 
-    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    // const changed
+
+    // const notes = this.synthetics.rollNotes["desperation"];
+    // if (notes?.length) {
+    //   const content = RollNote.notesToHTML(notes)?.outerHTML;
+    //   if (content?.length) await ChatMessage.create({
+    //     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    //     content
+    //   });
+    // }
   }
 
   protected override async _onCreateDescendantDocuments(
