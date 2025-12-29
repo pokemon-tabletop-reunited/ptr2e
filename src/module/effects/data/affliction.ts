@@ -66,6 +66,9 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
         const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.turns! - this.parent.duration.remaining! - 1));
         return stacksToRemove || 0;
       }
+      if(this.slug.startsWith("desync")) {
+        return Math.min(this.stacks || 0, 5);
+      }
 
       return this.stacks > 1 ? 1 : 0;
     })();
