@@ -112,6 +112,7 @@ interface CheckRollContext extends BaseRollContext {
     };
     /** Attack Variants' slugs */
     variants?: string[];
+    isChangingVariant?: boolean;
 }
 
 interface CaptureCheckRollContext extends CheckRollContext {

@@ -342,6 +342,7 @@ class ActorPTR2e<
       effectsRemovedAfterAttacking: [],
       effectsRemovedAfterAttacked: [],
       toggles: [],
+      moveVariants: {},
       attackAdjustments: {},
       tokenTags: new Map(),
       tokenOverrides: {},
@@ -1667,6 +1668,9 @@ class ActorPTR2e<
       for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
         adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
+      for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
+        adjustment().adjustAttack?.(selfAttack, actionRollOptions);
+      }
     }
 
     const actionTraits = (() => {
@@ -1682,6 +1686,9 @@ class ActorPTR2e<
 
       if (selfAttack) {
         for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
+          adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
+        }
+        for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }

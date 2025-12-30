@@ -1,14 +1,15 @@
 import { ActorPTR2e, AttackAdjustment } from "@actor";
-import { BasicChangeSystem, ChangeModel, ChangeSchema, PTRCONSTS, RangePTR2e } from "@data";
+import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, ChangeModel, ChangeSchema, PTRCONSTS, RangePTR2e } from "@data";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { CHANGE_MODES } from "./change.ts";
+import { sluggify } from "@utils";
 
-type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat";
+type MoveVariantOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat";
 
-export default class AlterAttackChangeSystem extends ChangeModel {
-  static override TYPE = "alter-attack";
+export default class MoveVariantChangeSystem extends ChangeModel {
+  static override TYPE = "move-variant";
 
-  static VALID_PROPERTIES = new Set<AttackPropertyOptions>([
+  static VALID_PROPERTIES = new Set<MoveVariantOptions>([
     "power",
     "accuracy",
     "type",
@@ -59,6 +60,36 @@ export default class AlterAttackChangeSystem extends ChangeModel {
 
       const definition = this.resolveInjectedProperties(this.definition);
 
+      const key = `${sluggify(this._source.label || this.selector)}`;  
+      const getAttackVariant = (attack: AttackPTR2e): AttackPTR2e | null => {
+        if(!attack) return null;
+        // If this is the correct variant return it
+        if(attack.slug.includes(`${key}-move-variant`)) {
+          return attack;
+        }
+        // If this is already a variant, get the parent attack
+        if(attack.variant) return getAttackVariant((attack.parent as unknown as {actions: Map<string, AttackPTR2e>}).actions.get(attack.variant)!);
+        // Check if any variants exist for this attack
+        const exists = (attack.parent as unknown as {actions: Map<string, AttackPTR2e>}).actions.get(`${attack.slug}-${key}-move-variant`);
+        if(exists) return exists;
+
+        // Otherwise generate a new variant
+        const variant = fu.duplicate(attack) as unknown as AttackPTR2e["_source"];
+        variant.slug += `-${key}-move-variant`;
+        variant.name += ` (${this.label || this.selector})`;
+        variant.variant = attack.slug;
+        variant.img = variant.img === ActionPTR2e.baseImg ? attack.item.img ?? "systems/ptr2e/img/icons/untyped_icon.png" : variant.img;
+        // const actions = (attack.parent?._source.actions || []) as AttackPTR2e[];
+        // attack.parent?.updateSource({ "actions": [...actions, variant] });
+        const variantAttack = new AttackPTR2e(variant, { parent: attack.parent });
+        variantAttack.prepareDerivedData();
+        attack.actor?.actions.set(variant.slug, variantAttack);
+        attack.actor?.actions.attack.set(variant.slug, variantAttack);
+        attack.item?.actions.set(variant.slug, variantAttack);
+        attack.item?.system.actions.set(variant.slug, variantAttack);
+        return variantAttack;
+      }
+
       switch (this.property) {
         case "accuracy": {
           return {
@@ -70,15 +101,20 @@ export default class AlterAttackChangeSystem extends ChangeModel {
               if (!definition.test(options)) {
                 return;
               }
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for accuracy adjustment."); 
+              }
 
-              const accuracy = attack.accuracy;
+              const accuracy = variant.accuracy;
               if (typeof accuracy !== "number") {
                 return this.failValidation("An attack that meets the definition of 'accuracy' must have a range with a distance value.");
               }
 
               const newAccuracy = BasicChangeSystem.getNewValue(this.mode, accuracy, change);
-              attack.accuracy = Math.max(1, newAccuracy);
-              attack.updateSource({ accuracy: attack.accuracy });
+              variant.accuracy = Math.max(1, newAccuracy);
+              variant.updateSource({ accuracy: variant.accuracy });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -93,15 +129,21 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              const power = attack.power;
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for power adjustment.");
+              }
+
+              const power = variant.power;
               if (typeof power !== "number") {
                 return this.failValidation("An attack that meets the definition of 'power' must have a range with a distance value.");
               }
 
               const newPower = BasicChangeSystem.getNewValue(this.mode, power, change);
 
-              attack.power = Math.max(1, newPower);
-              attack.updateSource({ power: attack.power });
+              variant.power = Math.max(1, newPower);
+              variant.updateSource({ power: variant.power });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -122,22 +164,28 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for type adjustment.");
+              }
+
               if (this.mode === CHANGE_MODES.ADD) {
                 for (const c of changeArray) {
-                  if (!attack.types.has(c)) {
-                    attack.types.add(c);
+                  if (!variant.types.has(c)) {
+                    variant.types.add(c);
                   }
                 }
               }
               else if (this.mode === CHANGE_MODES.REMOVE) {
                 for (const c of changeArray) {
-                  attack.types.delete(c);
+                  variant.types.delete(c);
                 }
               }
               else if (this.mode === CHANGE_MODES.OVERRIDE) {
-                attack.types = new Set(changeArray);
+                variant.types = new Set(changeArray);
               }
-              attack.updateSource({ types: Array.from(attack.types) });
+              variant.updateSource({ types: Array.from(variant.types) });
+              variant.prepareDerivedData();
             },
             adjustTraits: (attack, traits, options) => {
               if (!([CHANGE_MODES.ADD, "subtract", "remove", CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
@@ -154,19 +202,27 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for type adjustment.");
+              }
+
+              const newTraits = variant === attack ? traits : Array.from(new Set(variant._source.traits));
+
               if (this.mode === CHANGE_MODES.ADD) {
-                traits.push(...changeArray);
+                newTraits.push(...changeArray);
               }
               else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
-                changeArray.forEach(c => traits.findSplice(s => s === c));
+                changeArray.forEach(c => newTraits.findSplice(s => s === c));
               }
               else if (this.mode === CHANGE_MODES.OVERRIDE) {
                 for (const type of Object.values(PTRCONSTS.Types)) {
-                  traits.findSplice(s => s === type);
+                  newTraits.findSplice(s => s === type);
                 }
-                traits.push(...changeArray);
+                newTraits.push(...changeArray);
               }
-              attack.updateSource({ traits: Array.from(traits) });
+              variant.updateSource({ traits: Array.from(newTraits) });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -185,12 +241,20 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              if (this.mode === CHANGE_MODES.ADD && !traits.includes(change)) {
-                traits.push(change);
-              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
-                traits.findSplice(s => s === change);
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for traits adjustment.");
               }
-              attack.updateSource({ traits: Array.from(traits) });
+
+              const newTraits = variant === attack ? traits : Array.from(variant._source.traits);
+
+              if (this.mode === CHANGE_MODES.ADD && !newTraits.includes(change)) {
+                newTraits.push(change);
+              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+                newTraits.findSplice(s => s === change);
+              }
+              variant.updateSource({ traits: Array.from(newTraits) });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -205,14 +269,20 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              const ppCost = attack.cost.powerPoints;
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for pp-cost adjustment.");
+              }
+
+              const ppCost = variant.cost.powerPoints;
               if (typeof ppCost !== "number") {
                 return this.failValidation("An attack that meets the definition of 'pp-cost' must have a range with a distance value.");
               }
 
               const newPpCost = BasicChangeSystem.getNewValue(this.mode, ppCost, change);
-              attack.cost.powerPoints = newPpCost;
-              attack.updateSource({ "cost.powerPoints": attack.cost.powerPoints });
+              variant.cost.powerPoints = newPpCost;
+              variant.updateSource({ "cost.powerPoints": variant.cost.powerPoints });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -227,16 +297,22 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              if (!attack.range) {
-                attack.range = new RangePTR2e({
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for range adjustment.");
+              }
+
+              if (!variant.range) {
+                variant.range = new RangePTR2e({
                   target: change as PTRCONSTS.TargetOption,
                   distance: 1,
                 });
               }
               else {
-                attack.range.target = change as PTRCONSTS.TargetOption;
+                variant.range.target = change as PTRCONSTS.TargetOption;
               }
-              attack.updateSource({ range: attack.range });
+              variant.updateSource({ range: variant.range });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -251,14 +327,20 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              const rip = attack.range?.distance;
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for rip adjustment.");
+              }
+
+              const rip = variant.range?.distance;
               if (typeof rip !== "number") {
                 return this.failValidation("An attack that meets the definition of 'rip' must have a range with a distance value.");
               }
 
               const newRangeIncrement = BasicChangeSystem.getNewValue(this.mode, rip, change);
-              attack.range!.distance = newRangeIncrement;
-              attack.updateSource({ range: attack.range });
+              variant.range!.distance = newRangeIncrement;
+              variant.updateSource({ range: variant.range });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -273,8 +355,14 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              attack.offensiveStat = change as PTRCONSTS.Stat;
-              attack.updateSource({ offensiveStat: attack.offensiveStat });
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for offensiveStat adjustment.");
+              }
+
+              variant.offensiveStat = change as PTRCONSTS.Stat;
+              variant.updateSource({ offensiveStat: variant.offensiveStat });
+              variant.prepareDerivedData();
             }
           }
         }
@@ -289,26 +377,32 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              attack.defensiveStat = change as PTRCONSTS.Stat;
-              attack.updateSource({ defensiveStat: attack.defensiveStat });
+              const variant = getAttackVariant(attack);
+              if (!variant) {
+                return this.failValidation("Could not create or find move variant for defensiveStat adjustment.");
+              }
+
+              variant.defensiveStat = change as PTRCONSTS.Stat;
+              variant.updateSource({ defensiveStat: variant.defensiveStat });
+              variant.prepareDerivedData();
             }
           }
         }
       }
     });
 
-    actor.synthetics.attackAdjustments ??= {};
-    actor.synthetics.attackAdjustments[this.selector] ??= [];
-    actor.synthetics.attackAdjustments[this.selector].push(adjustment);
+    actor.synthetics.moveVariants ??= {};
+    actor.synthetics.moveVariants[this.selector] ??= [];
+    actor.synthetics.moveVariants[this.selector].push(adjustment);
   }
 }
 
-export default interface AlterAttackChangeSystem extends ChangeModel, ModelPropsFromSchema<AlterAttackChangeSchema> {
+export default interface MoveVariantChangeSystem extends ChangeModel, ModelPropsFromSchema<AlterAttackChangeSchema> {
   _source: SourceFromSchema<AlterAttackChangeSchema>;
   value: string;
 }
 
 interface AlterAttackChangeSchema extends ChangeSchema {
-  property: foundry.data.fields.StringField<AttackPropertyOptions, AttackPropertyOptions, true, false, true>;
+  property: foundry.data.fields.StringField<MoveVariantOptions, MoveVariantOptions, true, false, true>;
   definition: PredicateField;
 };
