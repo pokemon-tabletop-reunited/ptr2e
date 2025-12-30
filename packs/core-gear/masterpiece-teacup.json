@@ -23,7 +23,7 @@
       "sinischa"
     ],
     "actions": [],
-    "description": "<p>Effect: The user heals +30% more HP from @Trait[drain-x] effects. Poltchageist and Sinischa users gain +10 Base SPATK. Poltchageist evolve when exposed to this item, and Sinischa can use this item to change Forme.</p>",
+    "description": "<p>Effect: The user heals +30% more HP from @Trait[drain-x] effects. @UUID[Compendium.ptr2e.core-species.x7D9WA7RFeOWVVMR]{Poltchageist} and @UUID[Compendium.ptr2e.core-species.ts9XjY5e4LeVjv3a]{Sinistcha} users gain +10 Base SPATK. Poltchageist evolve when exposed to this item, and Sinistcha can use this item to change Forme.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -60,6 +60,71 @@
   },
   "_id": "wxcBU4pq2WYTXMfu",
   "img": "systems/ptr2e/img/item-icons/masterpiece teacup.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Masterpiece Teacup",
+      "type": "passive",
+      "_id": "9NrhKQThvJOVz4Vr",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:poltchageist",
+                  "item:species:sinischa"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": 10,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766205224441,
+        "modifiedTime": 1766205259921,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

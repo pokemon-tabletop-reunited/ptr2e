@@ -17,11 +17,10 @@
     },
     "traits": [
       "accessory",
-      "held",
-      "needs-automation"
+      "held"
     ],
     "actions": [],
-    "description": "<p>The user has +10% RES. Chingling and Chimecho users have a 10% chance to gain @UUID[Compendium.ptr2e.core-effects.rMNLqloV5nLmCLrZ]{Omniboost} when resolving a @Trait[sonic] Attack.</p>",
+    "description": "<p>The user has +10% RES. @UUID[Compendium.ptr2e.core-species.y5lxdl8nq0TmWq9Y]{Chingling} and @UUID[Compendium.ptr2e.core-species.6THltAMaj0ldckUs]{Chimecho} users have a 10% chance to gain @UUID[Compendium.ptr2e.core-effects.rMNLqloV5nLmCLrZ]{Omniboost 5} when resolving a @Trait[sonic] Attack.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -35,12 +34,12 @@
     "grade": "C",
     "fling": {
       "type": "psychic",
-      "power": 90,
+      "power": 100,
       "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -58,6 +57,80 @@
   },
   "_id": "Pw45UP5q40eNPtW3",
   "img": "systems/ptr2e/img/item-icons/pure incense.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Pure Incense",
+      "type": "passive",
+      "_id": "rzsVggRmXS5w5hK9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "predicate": [],
+            "label": "Pure Incense",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "sonic-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:chingling",
+                  "item:species:chimecho"
+                ]
+              }
+            ],
+            "label": "Pure Incense",
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766446062977,
+        "modifiedTime": 1766446585546,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

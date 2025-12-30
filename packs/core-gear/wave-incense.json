@@ -17,11 +17,10 @@
     },
     "traits": [
       "accessory",
-      "held",
-      "needs-automation"
+      "held"
     ],
     "actions": [],
-    "description": "<p>Water-Type users deal/take 10% more/less Special-Category damage. Mantyke and Mantine users have +2 default SPD Stages and +30% RES while Swimming and are Advanced 30% after resolving Attacks while Flying.</p>",
+    "description": "<p>Water-Type users deal/take 10% more/less Special-Category damage. @UUID[Compendium.ptr2e.core-species.1S3QiEuezM4nWTim]{Mantyke} and @UUID[Compendium.ptr2e.core-species.ph6Gxb3bUi8Yh711]{Mantine} users have +2 default SPD Stages and +30% RES while Swimming and are @Affliction[advance 30] after resolving Attacks while Flying.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -35,12 +34,12 @@
     "grade": "D",
     "fling": {
       "type": "water",
-      "power": 90,
+      "power": 100,
       "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -58,6 +57,145 @@
   },
   "_id": "ymlbZjVCD3oMbDep",
   "img": "systems/ptr2e/img/item-icons/wave incense.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Wave Incense",
+      "type": "passive",
+      "_id": "jn1cd1B3xHWZgNlU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 10,
+            "predicate": [
+              "trait:water"
+            ],
+            "label": "Wave Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:water"
+            ],
+            "label": "Wave Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.stage",
+            "value": 2,
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "or": [
+                      "item:species:mantype",
+                      "item:species:mantine"
+                    ]
+                  },
+                  "self:state:swimming"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 30,
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "or": [
+                      "item:species:mantype",
+                      "item:species:mantine"
+                    ]
+                  },
+                  "self:state:swimming"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "or": [
+                      "item:species:mantype",
+                      "item:species:mantine"
+                    ]
+                  },
+                  "self:state:flight"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766448073835,
+        "modifiedTime": 1766450739822,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

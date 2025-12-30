@@ -16,7 +16,7 @@
       "aromatisse"
     ],
     "actions": [],
-    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base SPATK and SPDEF. Spritzee and Aromatisse users deal +15% more and take -10% less Special-Category damage.<br><br>A Spritzee may consume this item in order to trigger Evolution.</p>",
+    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base SPATK and SPDEF. @UUID[Compendium.ptr2e.core-species.Az28PlJeld8Zmqoc]{Spritzee} and @UUID[Compendium.ptr2e.core-species.N9X5OvfUJZs5fv53]{Aromatisse} users deal +15% more and take -10% less Special-Category damage.<br><br>A Spritzee may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -30,8 +30,8 @@
     "grade": "C",
     "fling": {
       "type": "fairy",
-      "power": 70,
-      "accuracy": 100,
+      "power": 65,
+      "accuracy": 90,
       "hide": false,
       "range": {
         "target": "creature",
@@ -59,6 +59,101 @@
     }
   },
   "img": "systems/ptr2e/img/item-icons/sachet.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Sachet",
+      "type": "passive",
+      "_id": "UfK1dUqTeQymPGW1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "trait:fairy"
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": 10,
+            "spd": 10,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 15,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:spritzee",
+                  "item:species:aromatisse"
+                ]
+              }
+            ],
+            "label": "Sachet",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:spritzee",
+                  "item:species:aromatisse"
+                ]
+              }
+            ],
+            "label": "Sachet",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766207127810,
+        "modifiedTime": 1766207274681,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "AddZ0pPHBStJ19Qb"
 }
