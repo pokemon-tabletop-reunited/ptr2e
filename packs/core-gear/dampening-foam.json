@@ -24,7 +24,7 @@
       "mystery-dungeon"
     ],
     "actions": [],
-    "description": "<p>The user takes 25% less damage from and has +20% RES against @Trait[sonic] Attacks and Actions, but takes 40% more @Trait[fire] damage.</p>",
+    "description": "<p>The user takes 20% less damage from and has +30% RES against @Trait[sonic] Attacks and Actions, but takes 40% more @Trait[fire] damage.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -57,7 +57,8 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -71,19 +72,27 @@
           {
             "type": "ephemeral-modifier",
             "key": "sonic-trait-attack-damage-percentile",
-            "value": -25,
+            "value": -20,
             "predicate": [],
-            "label": "Dampening Foam",
+            "label": "Dampening Foam (Sonic Damage)",
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "system.modifiers.effectResistance",
-            "value": 0,
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
             "predicate": [],
-            "label": "Cannot be Automated Yet",
+            "label": "Dampening Foam (Sonic RES)",
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 30
+              }
+            ],
             "mode": 2,
             "ignored": false
           },
@@ -128,11 +137,11 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1767137900168
       }
     }
   ],
-  "flags": {},
   "_id": "qHjExxhvSmWoEvcE"
 }
