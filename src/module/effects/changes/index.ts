@@ -23,5 +23,6 @@ export { default as CreateClockChangeSystem } from "./create-clock.ts";
 export { default as IncrementClockChangeSystem } from "./increment-clock.ts";
 export { default as ApplyTickChangeSystem } from "./apply-tick.ts";
 export { default as EffectAlterationChangeSystem } from "./effect-alteration.ts";
+export { default as MoveVariantChangeSystem } from "./move-variant.ts";
 export type * from "./choice-set/change-model.ts";
 export type * from "./data.ts";

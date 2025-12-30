@@ -13,7 +13,7 @@
       "evolution"
     ],
     "actions": [],
-    "description": "<p>Effect: The user’s @Trait[contact] Attacks have a 10% chance to inflict @Affliction[splinter 5] on hit, and those @Trait[contact] Move that also have @Trait[sharp] instead have 30%.<br><br>A Scyther may consume this item in order to trigger Evolution.</p>",
+    "description": "<p>Effect: The user’s @Trait[contact] Attacks have a 10% chance to inflict @Affliction[splinter 5] on hit, and those @Trait[contact] Move that also have @Trait[sharp] instead have 30%.<br><br>@UUID[Compendium.ptr2e.core-species.OFISlRjckpWyfww7]{Scyther} may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -58,5 +58,80 @@
   },
   "_id": "YRVve7S4P4kGJcvK",
   "img": "systems/ptr2e/img/item-icons/black augurite.webp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Black Augurite",
+      "type": "passive",
+      "_id": "UyhJhbaFTL01wFwj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Black Augurite",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [
+              "item:trait:sharp"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Black Augurite (Sharp)",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766187314997,
+        "modifiedTime": 1766187590812,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

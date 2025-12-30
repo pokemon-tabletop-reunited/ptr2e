@@ -424,7 +424,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options));
 
-    //TODO: Apply just-in-time roll options from changes
+    const finalVariants = args.variants ?? (context.self.attack.getVariants() || []);
+    if (finalVariants.length) args.skipDialog = false;
 
     const checkContext: CheckRollContext & { contexts: Record<ActorUUID, CheckContext>, modifierDialog?: AttackModifierPopup } = {
       type: "attack-roll",
@@ -441,7 +442,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       domains: this.domains,
       damaging: args.damaging,
       createMessage: args.createMessage ?? true,
-      variants,
+      variants: finalVariants,
       modifierDialog: args.modifierDialog,
       skipDialog: args.skipDialog ?? targets.length === 0,
       omittedSubrolls: (() => {
@@ -499,6 +500,24 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     // Reset the fling actor toss attack data.
     if (this.attack.slug === "fling-actor-toss") {
       this.actor.generateFlingAttack();
+    }
+
+    if(finalVariants.length && !checkContext.isChangingVariant) {
+      for(const variant of finalVariants.filter(v => v.endsWith("-move-variant"))) {
+        const attack = checkContext.actor?.actions.attack.get(variant);
+        if(attack) {
+          checkContext.actor?.actions.attack.delete(variant);
+          checkContext.actor?.actions.delete(variant);
+          checkContext.item?.actions.delete(variant);
+          //@ts-expect-error - correct type
+          checkContext.item?.system.actions.delete(variant);
+          const actions = (attack.parent?.toObject() as {actions: AttackPTR2e["_source"][]}).actions?.filter(a => a.slug !== variant);
+          attack.parent?.updateSource({ "actions": actions });
+        }
+      }
+    }
+    if(checkContext.isChangingVariant) {
+      checkContext.isChangingVariant = false;
     }
 
     return rolls;

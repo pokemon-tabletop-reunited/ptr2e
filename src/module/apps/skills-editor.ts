@@ -45,7 +45,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
   };
 
   document: ActorPTR2e;
-  // skills: SkillBeingEdited[];
+  hasMadeAChange = false;
   filter: SearchFilter;
   sort: "a" | "v" = "a";
 
@@ -212,40 +212,73 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             return;
           }
 
-          const newRvs = Math.clamp((skill.rvs ?? 0) + newValue, skill.min, shouldOverrideValidation ? Infinity : skill.max);
-          if (newRvs === skill.rvs) {
-            if (skill.rvs === skill.max) {
-              ui.notifications.warn(`Woops! The maximum investment for ${skill.label} is ${skill.max}, you cannot invest more.`);
+          const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
+          if (levelOne && slug === "resources") {
+            const newResourceValue = Math.clamp((skill.value ?? 0) + newValue, 10, shouldOverrideValidation ? Infinity : skill.max);
+            if (newResourceValue === skill.value) {
+              if (skill.value === skill.max) {
+                ui.notifications.warn(`Woops! The maximum value for ${skill.label} is ${skill.max}, you cannot increase it further.`);
+              }
+              else if (skill.value === 10) {
+                ui.notifications.warn(`Woops! The minimum value for ${skill.label} is 10, you cannot reduce it further.`);
+              }
+              input.value = String(skill.rvs);
+              delete input.dataset.prevValue;
+              return;
             }
-            else if (skill.rvs === skill.min) {
-              ui.notifications.warn(`Woops! The minimum investment for ${skill.label} is ${skill.min}, you cannot reduce it further.`);
+
+            skill.value = newResourceValue;
+            // const baseLabel = htmlElement.querySelector(".skill[data-slug='resources'] label.value");
+            // if (baseLabel) baseLabel.textContent = String(skill.value);
+
+            await this.document.update({
+              "system.skills": {
+                [slug]: {
+                  ...this.document.system.skills[slug],
+                  value: skill.value,
+                }
+              }
+            });
+          }
+          else {
+            const newRvs = Math.clamp((skill.rvs ?? 0) + newValue, skill.min, shouldOverrideValidation ? Infinity : skill.max);
+            if (newRvs === skill.rvs) {
+              if (skill.rvs === skill.max) {
+                ui.notifications.warn(`Woops! The maximum investment for ${skill.label} is ${skill.max}, you cannot invest more.`);
+              }
+              else if (skill.rvs === skill.min) {
+                ui.notifications.warn(`Woops! The minimum investment for ${skill.label} is ${skill.min}, you cannot reduce it further.`);
+              }
+              input.value = String(skill.rvs);
+              delete input.dataset.prevValue;
+              return;
             }
-            input.value = String(skill.rvs);
-            delete input.dataset.prevValue;
-            return;
+
+            skill.rvs = newRvs;
+
+            await this.document.update({
+              "system.skills": {
+                [slug]: {
+                  ...this.document.system.skills[slug],
+                  rvs: skill.rvs,
+                }
+              }
+            })
           }
 
-          skill.rvs = newRvs;
           input.value = String(skill.rvs);
           delete input.dataset.prevValue;
 
-          await this.document.update({
-            "system.skills": {
-              [slug]: {
-                ...this.document.system.skills[slug],
-                rvs: skill.rvs,
-              }
-            }
-          })
-          if (spentLabel) spentLabel.textContent = `${this.document.system.advancement.rvs.spent} / ${this.document.system.advancement.rvs.total}`;
-          if (availableLabel) {
-            availableLabel.textContent = this.document.system.advancement.rvs.available.toString();
-            if( this.document.system.advancement.rvs.available < 0 ) {
-              availableLabel.classList.add("invalid");
-            } else {
-              availableLabel.classList.remove("invalid");
-            }
-          }
+          this.hasMadeAChange = true;
+          // if (spentLabel) spentLabel.textContent = `${this.document.system.advancement.rvs.spent} / ${this.document.system.advancement.rvs.total}`;
+          // if (availableLabel) {
+          //   availableLabel.textContent = this.document.system.advancement.rvs.available.toString();
+          //   if( this.document.system.advancement.rvs.available < 0 ) {
+          //     availableLabel.classList.add("invalid");
+          //   } else {
+          //     availableLabel.classList.remove("invalid");
+          //   }
+          // }
         }
         input.addEventListener("blur", handleBlur.bind(this), { once: true });
       });
@@ -266,6 +299,22 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     }
   }
 
+  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onClose(options);
+    if (this.hasMadeAChange) {
+      this.document.setFlag("ptr2e", "editedSkills", true);
+    }
+
+    //@ts-expect-error - App v1 compatability
+    delete this.document.apps[this.id];
+  }
+
+  /** @override */
+  override _onFirstRender() {
+    //@ts-expect-error - App v1 compatability
+    this.document.apps[this.id] = this;
+  }
+
   static #onResetSkills(this: SkillsEditor) {
     const document = this.document;
 
@@ -280,7 +329,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       }),
       yes: {
         callback: async () => {
-          await document.update({"system.==skills": {}});
+          await document.update({ "system.==skills": {}, "flags.ptr2e.editedSkills": false });
           this.skills = this.resetSkills();
           this.render({});
         },

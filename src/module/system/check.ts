@@ -303,6 +303,10 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
+      if(dialog.variantSelected) {
+        context.isChangingVariant = true;
+        return null;
+      }
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
     else if (!context.skipDialog) {
@@ -310,6 +314,10 @@ class CheckPTR2e {
       const dialog = await new AttackModifierPopup(check, sharedModifiers, context).wait();
 
       if (!dialog) {
+        return null;
+      }
+      if(dialog.variantSelected) {
+        context.isChangingVariant = true;
         return null;
       }
       context.rollMode = dialog.rollMode ?? context.rollMode;

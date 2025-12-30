@@ -722,7 +722,8 @@
           "create-clock": "Create Clock",
           "increment-clock": "Increment Clock",
           "apply-tick": "Apply Tick",
-          "effect-alteration": "Effect Alteration"
+          "effect-alteration": "Effect Alteration",
+          "move-variant": "Move Variant"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -831,6 +832,14 @@
         },
         "DontMerge": {
           "label": "Don't merge chances"
+        },
+        "property": {
+          "label": "Property",
+          "hint": "The property of the change."
+        },
+        "definition": {
+          "label": "Definition",
+          "hint": "Definition is a second predicate which is checked after the selector."
         },
         "priority": {
           "label": "Priority",
@@ -996,7 +1005,8 @@
           "boosted": "Boosted",
           "loafing": "Loafing",
           "advance": "Advance",
-          "delay": "Delay"
+          "delay": "Delay",
+          "desync": "Desync"
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
@@ -1056,7 +1066,8 @@
           "resolved": "An afflicted creature takes 20% less damage from Physical- and Special-Category Attacks.",
           "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>",
           "advance": "The afflicted creature's next Activation is Advanced by XY%. Default is 10%.",
-          "delay": "The afflicted creature's next Activation is Delayed by XY%. Default is 10%."
+          "delay": "The afflicted creature's next Activation is Delayed by XY%. Default is 10%.",
+          "desync": "<p>When a creature is afflicted with @Affliction[desync], it cannot perform any actions with the @Trait[interrupt-x] trait. When the afflicted creature is hit, it gains +1 stack of @Affliction[desync]. <br><br>At the end of the afflicted creature's next activation, all stacks of @Affliction[desync] are removed.</p><p>On removal of @Affliction[desync], the afflicted creature suffers a number of ticks of @Trait[dot] damage equal to the number of stacks removed. This is inclusive of the use of curative effects.</p>"
         }
       }
     },

@@ -515,13 +515,13 @@ export class AttackModifierPopup extends ModifierPopup {
     const variantSlug = select.value;
 
     const uuid = this.context.actor?.uuid ?? this.context.attack?.actor?.uuid;
-    const origin = await fromUuid<ActorPTR2e>(uuid);
+    const origin = await fu.fromUuid<ActorPTR2e>(uuid);
     if (!origin) return;
 
     const variant = origin.actions.attack.get(variantSlug);
     if (!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
 
-    this.resolve?.(null);
+    this.resolve?.({variantSelected: true});
     this.promise = null;
     this.resolve = undefined;
 

@@ -14,7 +14,7 @@
       "evolution"
     ],
     "actions": [],
-    "description": "<p>Effect: @Trait[poison] creatures’ RES is increased by +15%.<br><br>Slowpoke Galarian can consume this item to trigger Evolution.</p>",
+    "description": "<p>Effect: @Trait[poison] creatures’ RES is increased by +15%.<br><br>@UUID[Compendium.ptr2e.core-species.qIlDyPzO4Ui5vqNX]{Slowpoke Galarian} can consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -57,6 +57,66 @@
     }
   },
   "img": "systems/ptr2e/img/item-icons/galarica wreath.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Galarica Wreath",
+      "type": "affliction",
+      "_id": "emkRY2uVQhaeOpv4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "predicate": [
+              "trait:poison"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766200965398,
+        "modifiedTime": 1766200995555,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "AJTFcM299PV2ae4h"
 }

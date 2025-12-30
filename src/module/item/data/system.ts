@@ -14,7 +14,8 @@ type ItemType =
     | "perk"
     | "species"
     | "weapon"
-    | "summon";
+    | "summon"
+    | "ptr2e-digimon-expansion.digimonSpecies";
 
 type BaseItemSourcePTR2e<
     TType extends ItemType,

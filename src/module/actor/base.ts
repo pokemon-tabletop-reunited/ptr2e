@@ -342,6 +342,7 @@ class ActorPTR2e<
       effectsRemovedAfterAttacking: [],
       effectsRemovedAfterAttacked: [],
       toggles: [],
+      moveVariants: {},
       attackAdjustments: {},
       tokenTags: new Map(),
       tokenOverrides: {},
@@ -1667,6 +1668,9 @@ class ActorPTR2e<
       for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
         adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
+      for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
+        adjustment().adjustAttack?.(selfAttack, actionRollOptions);
+      }
     }
 
     const actionTraits = (() => {
@@ -1682,6 +1686,9 @@ class ActorPTR2e<
 
       if (selfAttack) {
         for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
+          adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
+        }
+        for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }
@@ -2201,6 +2208,23 @@ class ActorPTR2e<
       } else if ((changed.system.health.value as number) > 0 && fainted) {
         await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
       }
+
+      const currentStates = ActorSystemPTR2e.generateDesperationAndIntrepidStates(this.system.health);
+      const changedStates = ActorSystemPTR2e.generateDesperationAndIntrepidStates({
+        ...this.system.health,
+        ...(typeof changed.system?.health.value === "number" ? { value: changed.system.health.value } : {}),
+      });
+      const newStates = changedStates.difference(currentStates);
+      if (newStates.size > 0) {
+        const notes = extractNotes(this.synthetics.rollNotes, Array.from(newStates));
+        if (notes?.length) {
+          const content = RollNote.notesToHTML(notes)?.outerHTML;
+          if (content?.length) await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content
+          });
+        }
+      }
     }
 
     if (changed.system?.advancement?.experience?.current !== undefined) {
@@ -2345,6 +2369,8 @@ class ActorPTR2e<
       console.error(err);
     }
 
+
+
     return super._preUpdate(changed, options, user);
   }
 
@@ -2372,7 +2398,16 @@ class ActorPTR2e<
   ): void {
     super._onUpdate(changed, options, userId);
 
-    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    // const changed
+
+    // const notes = this.synthetics.rollNotes["desperation"];
+    // if (notes?.length) {
+    //   const content = RollNote.notesToHTML(notes)?.outerHTML;
+    //   if (content?.length) await ChatMessage.create({
+    //     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    //     content
+    //   });
+    // }
   }
 
   protected override async _onCreateDescendantDocuments(
@@ -2386,7 +2421,6 @@ class ActorPTR2e<
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
     if (game.users.activeGM?.id !== game.user.id) return;
-    // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
     function isEffect(
@@ -2396,27 +2430,40 @@ class ActorPTR2e<
     ): _documents is ActiveEffectPTR2e<typeof parent>[] {
       return collection === "effects";
     }
-    if (isEffect(collection, documents)) return;
+    if (isEffect(collection, documents)) {
+      const domains = documents.flatMap(effect => [
+        ...effect.system.traits.map(t => `${t?.slug ?? t}-trait-received`),
+        `${effect.slug || effect.system.slug}-received`,
+        "all-received"
+      ])
+      const notes = extractNotes(this.synthetics.rollNotes, domains);
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+      return;
+    } else {
+      const domains = documents.filter(d => d.type == "effect").flatMap(e => e.effects as unknown as ActiveEffectPTR2e[]).flatMap(effect => [
+        ...effect.system.traits.map(t => `${t?.slug ?? t}-trait-received`),
+        `${effect.slug || effect.system.slug}-received`,
+        "all-received"
+      ])
+      const notes = extractNotes(this.synthetics.rollNotes, domains);
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+    }
 
     const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
     if (!perks.length) return;
 
-    // const updates = [];
-    // const originalRoot = this.originalRoot;
-    // if (!originalRoot) throw new Error("No original root found.");
-    // // const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
-    // //   strict: true,
-    // // });
-
-    // // for (const root of this.unconnectedRoots) {
-    // //   // const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
-
-    // //   // const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
-    // //   if (path) {
-    // //     updates.push({ _id: root.id, "system.cost": 1 });
-    // //   }
-    // // }
-    // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
   }
 
   protected override _onDeleteDescendantDocuments(

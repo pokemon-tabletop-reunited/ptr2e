@@ -1233,7 +1233,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (!slug) return;
 
     const skills = this.actor.system.toObject().skills;
-    if (!skills[slug]) return;
+    if (!skills[slug]) {
+      if(!this.document.system.skills[slug]) return;
+      // @ts-expect-error - Correct assignment
+      skills[slug] = {
+        ...this.document.system.skills[slug]
+      }
+    }
 
     skills[slug].favourite = !skills[slug].favourite;
     if (skills[slug].favourite && skills[slug].hidden) skills[slug].hidden = false;
@@ -1256,7 +1262,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     if (!slug) return;
 
     const skills = this.actor.system.toObject().skills;
-    if (!skills[slug]) return;
+    if (!skills[slug]) {
+      if(!this.document.system.skills[slug]) return;
+      // @ts-expect-error - Correct assignment
+      skills[slug] = {
+        ...this.document.system.skills[slug]
+      }
+    }
 
     skills[slug].hidden = !skills[slug].hidden;
     if (skills[slug].hidden && skills[slug].favourite) skills[slug].favourite = false;

@@ -9,17 +9,18 @@
     },
     "slug": "full-incense",
     "publication": {
-      "source": "",
-      "authors": [],
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
       "notes": ""
     },
     "traits": [
       "accessory",
-      "held",
-      "needs-automation"
+      "held"
     ],
     "actions": [],
-    "description": "<p>At the end of each Round, the user gains @Affliction[resolved 2], @HP[1 tick], and is @Affliction[delay 40]. Munchlax and Snorlax users gain @UUID[Compendium.ptr2e.core-abilities.1fZMWi8thyYYl8Sz]{Truant} as an Extra Ability, and +10 Base DEF and Base SPDEF.</p>",
+    "description": "<p>Upon resolving an Attack, the user has a 40% flat chance to be @Affliction[resolved 2], gain @HP[1 tick], and be @Affliction[delay 30]. @UUID[Compendium.ptr2e.core-species.FhZwYawFSq85h0bF]{Munchlax} and @UUID[Compendium.ptr2e.core-species.dT1OJHNewsT7XKpm]{Snorlax} users gain @UUID[Compendium.ptr2e.core-abilities.1fZMWi8thyYYl8Sz]{Truant} as an Extra Ability, instead gain @Tick[2] instead of @Tick[1] and are @Affliction[delay 15] instead of @Affliction[delay 30]. and gain +10 Base DEF and Base SPDEF.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -33,12 +34,12 @@
     "grade": "C",
     "fling": {
       "type": "normal",
-      "power": 90,
+      "power": 100,
       "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -56,6 +57,219 @@
   },
   "_id": "rYx8hxNA7q9uTTS4",
   "img": "systems/ptr2e/img/item-icons/full incense.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Full Incense",
+      "type": "passive",
+      "_id": "oc2l1cJPPMSlDrHd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 40,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [
+              {
+                "nor": [
+                  "item:species:munchlax",
+                  "item:species:snorlax"
+                ]
+              }
+            ],
+            "chance": 40,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 1
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [
+              {
+                "nor": [
+                  "item:species:munchlax",
+                  "item:species:snorlax"
+                ]
+              }
+            ],
+            "chance": 40,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:munchlax",
+                  "item:species:snorlax"
+                ]
+              }
+            ],
+            "chance": 40,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 2
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:munchlax",
+                  "item:species:snorlax"
+                ]
+              }
+            ],
+            "chance": 40,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 15
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:munchlax",
+                  "item:species:snorlax"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": 10,
+            "spa": null,
+            "spd": 10,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.1fZMWi8thyYYl8Sz",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:munchlax",
+                  "item:species:snorlax"
+                ]
+              }
+            ],
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766259595986,
+        "modifiedTime": 1766444612851,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

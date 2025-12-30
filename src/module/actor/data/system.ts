@@ -371,7 +371,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   set movementType(newType: string) {
-    if(this._movementType === newType) return;
+    if(this._movementType == newType) return;
     if(this._movementType == null || this._movementType == undefined) {
       this.parent.rollOptions.removeOption("self", `state:overland`);
     }
@@ -653,8 +653,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.shield.max = this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
-    for (const skill of this.skills) {
-      skill.prepareBaseData();
+    for (const skill in this.skills) {
+      this.skills[skill].slug = skill;
+      this.skills[skill].prepareBaseData();
     }
     for (const skill of game.ptr.data.skills) {
       if (!this.skills[skill.slug]) {
@@ -717,6 +718,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       case this.health.value >= Math.floor(this.health.max * 0.25): {
         this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
       }
+    }
+    // Set movement state option
+    if(this.movementType) {
+      this.parent.rollOptions.addOption("self", `state:${this.movementType}`);
     }
 
     //@ts-expect-error - The getter needs to be added afterwards.
@@ -798,6 +803,42 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
       }
     })
+  }
+
+  static generateDesperationAndIntrepidStates(health: ActorSystemPTR2e["health"]): Set<string> {
+    const states = new Set<string>();
+    switch (true) {
+      case health.value <= Math.floor(health.max * 0.25): {
+        states.add("desperation-1-4");
+      }
+      case health.value <= Math.floor(health.max * (1 / 3)): {
+        states.add("desperation-1-3");
+      }
+      case health.value <= Math.floor(health.max * 0.5): {
+        states.add("desperation-1-2");
+      }
+      case health.value <= Math.floor(health.max * 0.75): {
+        states.add("desperation-3-4");
+      }
+    }
+    switch (true) {
+      case health.value == health.max: {
+        states.add("healthy");
+      }
+      case health.value >= Math.floor(health.max * 0.75): {
+        states.add("intrepid-3-4");
+      }
+      case health.value >= Math.floor(health.max * 0.5): {
+        states.add("intrepid-1-2");
+      }
+      case health.value >= Math.floor(health.max * (1 / 3)): {
+        states.add("intrepid-1-3");
+      }
+      case health.value >= Math.floor(health.max * 0.25): {
+        states.add("intrepid-1-4");
+      }
+    }
+    return states;
   }
 
   override prepareDerivedData(): void {

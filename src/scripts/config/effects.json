@@ -342,6 +342,37 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
   },
   {
+    "id": "desync",
+    "name": "PTR2E.Effect.Statuses.Labels.desync",
+    "img": "icons/svg/portal.svg",
+    "type": "affliction",
+    "system": {
+      "changes": [
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.desynccondititem",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "dontMerge": false
+        }
+      ],
+      "priority": 30,
+      "formula": "(1/16 * @stacksToRemove)",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "major-affliction",
+        "dot"
+      ],
+      "stacks": 1
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.desync"
+  },
+  {
     "id": "splinter",
     "name": "PTR2E.Effect.Statuses.Labels.splinter",
     "img": "icons/svg/oak.svg",
@@ -351,38 +382,38 @@
     },
     "system": {
       "changes": [
-          {
-            "type": "grant-effect",
-            "value": "stunted",
-            "key": "",
-            "predicate": [],
-            "alterations": [],
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "mode": 2,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false
+        {
+          "type": "grant-effect",
+          "value": "stunted",
+          "key": "",
+          "predicate": [],
+          "alterations": [],
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
           },
-          {
-            "type": "roll-effect",
-            "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
-            "predicate": [],
-            "chance": 100,
-            "isFixedChance": true,
-            "affects": "defensive",
-            "alterations": [],
-            "dontMerge": false,
-            "mode": 2,
-            "ignored": false
-          }
-        ],
+          "mode": 2,
+          "ignored": false,
+          "reevaluateOnUpdate": false,
+          "inMemoryOnly": false,
+          "allowDuplicate": true,
+          "track": false,
+          "replaceSelf": false
+        },
+        {
+          "type": "roll-effect",
+          "key": "damaging-attack",
+          "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "alterations": [],
+          "dontMerge": false,
+          "mode": 2,
+          "ignored": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,

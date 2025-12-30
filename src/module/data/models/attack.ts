@@ -156,11 +156,11 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   getVariants(options: Iterable<string> | true = this.getFullRollOptions()): string[] {
     if(this.variant) return this.actor?.actions.attack.get(this.variant)?.getVariants(options) ?? [];
-    return this.actor?.actions.attack.filter(a => a.variant == this.slug).filter(a => {
+    return Array.from(new Set([...this.actor?.actions.attack ?? [], ...(this.parent as unknown as {actions: Collection<AttackPTR2e>}).actions].filter(a => a.variant == this.slug).filter(a => {
       if(options === true) return true;
       if(a.predicate.length === 0) return true;
       return a.predicate.test(options);
-    }).map(a => a.slug) ?? [];
+    }).map(a => a.slug) ?? []));
   }
 
   // TODO: This should add any relevant modifiers
