@@ -67,26 +67,18 @@
       "system": {
         "changes": [
           {
-            "type": "roll-option",
-            "key": "",
-            "value": "microphone:active",
+            "type": "ephemeral-effect",
+            "key": "sonic-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [],
-            "domain": "all",
-            "toggleable": true,
-            "count": false,
-            "alwaysActive": false,
-            "label": "Using a Sonic Attack?",
-            "mode": 2,
-            "ignored": false,
-            "suboptions": [],
-            "state": false
-          },
-          {
-            "type": "basic",
-            "key": "system.modifiers.effectHitRate",
-            "value": 25,
-            "predicate": [
-              "microphone:active"
+            "label": "Microphone",
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 25
+              }
             ],
             "mode": 2,
             "ignored": false
