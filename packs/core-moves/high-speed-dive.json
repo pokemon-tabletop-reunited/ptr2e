@@ -60,9 +60,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "high-speed-dive-attack-power",
-            "value": "min(400,max(0,((@actor.system.details.size.weightClass)-(@target.system.details.size.weightClass))*50))",
+            "value": "min(80,max(0,((@actor.system.details.size.weightClass)-(@target.system.details.size.weightClass))*16))",
             "predicate": [],
             "label": "High-Speed Dive Scaling",
             "mode": 2,

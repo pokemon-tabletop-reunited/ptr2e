@@ -3,6 +3,9 @@
         {{#each inventory as |items category|}}
             <header>
                 <span class="item-name">{{localize (concat "PTR2E.Inventory." category)}}</span>
+                {{#if (isdefined items.0.system.ammo)}}
+                <span class="ammo">Ammo</span>
+                {{/if}}
                 {{#if (isdefined items.0.system.quantity)}}
                 <span class="quantity">Quantity</span>
                 {{/if}}
@@ -24,6 +27,16 @@
                         </div>
                         <div class="item-name rarity-{{this.system.rarity}}">{{this.name}}</div>
                     </div>
+                    {{#if (and (isdefined this.system.ammo) (gte this.system.ammoType.size 1))}}
+                    <div class="ammo">
+                      <select class="ammo-select" data-id="{{this.id}}">
+                        <option value="">--</option>
+                        {{#each (lookup @root.ammoOptions this.id)}}
+                          <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                    {{/if}}
                     {{#if (isdefined this.system.quantity)}}
                     <div class="quantity">
                         <a class="decrease" data-action="decrease-quantity" data-tooltip-direction="UP" data-tooltip="[Click] Decrease by 1<br>[Shift-Click] Decrease by 5<br>[Control-Click] Decrease by 10" draggable="false">–</a>

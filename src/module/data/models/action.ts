@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { PTRCONSTS, ActionType, ActionCost, Delay, Priority, Trait } from "@data";
 import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
@@ -286,6 +286,29 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   //@ts-expect-error - Details are unknown, this is correct.
   async roll(args?: StatisticRollParameters<unknown>): Promise<unknown> {
+    if(this.item?.system && 'ammoType' in this.item.system && this.item.system.ammoType instanceof Set && this.item.system.ammoType.size > 0) {
+      const ammoItem = (() => {
+        if(!this.item?.system.ammo) return null;
+        try {
+          return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+        }
+        catch {
+          return null;
+        }
+      })()
+      if(!ammoItem) {
+        ui.notifications.error(`${this.item.name} has no ammo selected, please select ammo to use this action.`);
+        return false;
+      };
+      if(ammoItem.system.equipped.carryType === "dropped") {
+        ui.notifications.error(`You dropped your ${ammoItem.name} ammunition, please select usable ammo to use this action.`);
+        return false;
+      }
+      if(ammoItem.system.quantity <= 0) {
+        ui.notifications.error(`You are out of ${ammoItem.name} ammunition, please select usable ammo to use this action.`);
+        return false;
+      }
+    }
     return this.statistic!.check.roll(args)
   }
 }

@@ -130,7 +130,7 @@ class SummonStatistic extends AttackStatistic {
               : injectables.attack;
 
           if (key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
-            const value = injectables.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            const value = injectables.actor?.system?.skills?.[prop.split(".")[1]]?.total;
             if (value != undefined && !isNaN(value)) return String(value);
           }
 

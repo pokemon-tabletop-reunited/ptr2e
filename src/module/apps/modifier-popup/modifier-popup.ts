@@ -320,5 +320,6 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
 }
 
 export interface ModifierPopupResult {
-  rollMode: RollMode;
+  rollMode?: RollMode;
+  variantSelected?: boolean;
 }

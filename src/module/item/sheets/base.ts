@@ -1,4 +1,4 @@
-import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { DocumentSheetConfiguration, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
@@ -173,6 +173,17 @@ export default class ItemSheetPTR2e<
 
     const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.description);
 
+    const ammoOptions = [];
+    if(this.item.actor && 'ammoType' in this.item.system && this.item.system.ammoType instanceof Set && this.item.system.ammoType.size > 0) {
+      for(const item of this.item.actor.itemTypes.consumable.filter(i => (i as ConsumablePTR2e).system.consumableType === "ammo" && (i as ConsumablePTR2e).system.equipped.carryType !== "dropped" && i.system.traits && (this.item.system.ammoType as Set<string>).some(t => i.system.traits!.has(t)))) {
+        ammoOptions.push({
+          label: `${item.name} (${item.system.quantity}/${item.system.stack || 1})`,
+          value: item.uuid,
+          selected: this.item.system.ammo === item.uuid
+        });
+      }
+    }
+
     return {
       ...((await super._prepareContext()) as Record<string, unknown>),
       item: this.document,
@@ -183,6 +194,7 @@ export default class ItemSheetPTR2e<
       effects,
       enrichedDescription,
       enrichedNotes: (this.document.system instanceof BlueprintSystem) ? "" : await foundry.applications.ux.TextEditor.enrichHTML(this.document.system.publication?.notes ?? ""),
+      ammoOptions
     };
   }
 

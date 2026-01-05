@@ -8,6 +8,7 @@ import CharacterCombatantSystem from "../../combat/combatant/models/character.ts
 import { TokenAura } from "./aura/aura.ts";
 // import { TokenConfigPTR2e } from "./sheet.ts";
 import BaseUser from "types/foundry/common/documents/user.js";
+import { ActiveEffectPTR2e } from "@effects";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 
@@ -319,7 +320,42 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
         ui.notifications.warn("PTR2E.TokenDeleteWarning", { localize: true })
         return Promise.resolve(false);
       }
+
+      if (this.isLinked) {
+        // Check for any effects that should be deleted on recall
+        const effects: ActiveEffectPTR2e[] = [];
+        for (const effect of this.actor.effects.contents as ActiveEffectPTR2e[]) {
+          if (!effect.system.removeOnRecall) continue;
+
+          effects.push(effect);
+        }
+        if (effects.length > 0) {
+          (async () => {
+            if (!effects) return;
+            foundry.applications.api.DialogV2.prompt({
+              window: {
+                title: "Delete Effects on Recall",
+              },
+              content: await (async () => {
+                const htmlString = `<p>The following effects are marked to be deleted on recall</p><ul>${effects.map(effect => `<li>${effect.link}</li>`).join('')}</ul><p>Do you want to delete them now?</p>`;
+                const html = globalThis.document.createElement("div");
+                html.innerHTML = await foundry.applications.ux.TextEditor.enrichHTML(htmlString);
+                return html;
+              })(),
+              ok: {
+                action: "delete",
+                label: "Delete",
+                callback: async () => {
+                  if (effects[0].parent) await effects[0].parent.deleteEmbeddedDocuments("ActiveEffect", effects.map(e => e.id));
+                },
+              },
+            });
+          })()
+        }
+      }
     }
+
+
 
     return super._preDelete(options, user);
   }
@@ -327,7 +363,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
 interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
   flags: TokenFlagsPTR2e;
-  
+
   movementAction: string;
 
   initialized: boolean;

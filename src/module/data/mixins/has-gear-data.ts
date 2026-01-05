@@ -98,6 +98,8 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
           label: "PTR2E.FIELDS.gear.rarity.label",
           hint: "PTR2E.FIELDS.gear.rarity.hint",
         }),
+        ammoType: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.gear.ammoType.label", hint: "PTR2E.FIELDS.gear.ammoType.hint" }),
+        ammo: new fields.DocumentUUIDField({ required: false, nullable: true, initial: null, label: "PTR2E.FIELDS.gear.ammo.label", hint: "PTR2E.FIELDS.gear.ammo.hint" }),
       };
     }
 

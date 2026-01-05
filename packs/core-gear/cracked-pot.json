@@ -1,0 +1,130 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Cracked Pot",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "cracked-pot",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held",
+      "evolution",
+      "sinistea",
+      "polteageist"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user heals +10% more HP from @Trait[healing] effects. @UUID[Compendium.ptr2e.core-species.R0n6lG1d5H9GZCX2]{Sinistea} and @UUID[Compendium.ptr2e.core-species.gggul6ENjnXFvE37]{Polteageist} users gain +10 Base SPD. Sinistea evolve when exposed to this item, and Polteageist can use this item to change Forme.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "C",
+    "fling": {
+      "type": "normal",
+      "power": 80,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "sf0qiXF0uczjW1WV",
+  "img": "systems/ptr2e/img/item-icons/cracked pot.webp",
+  "effects": [
+    {
+      "name": "Cracked Pot",
+      "type": "passive",
+      "_id": "hjBJ8YKAWy7aI3Ti",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:sinistea",
+                  "item:species:polteageist"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": 10,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "never"
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766187957650,
+        "modifiedTime": 1766188056163,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
+}

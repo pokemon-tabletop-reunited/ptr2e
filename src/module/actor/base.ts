@@ -39,6 +39,7 @@ import { ActorSizePTR2e } from "./data/size.ts";
 import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 import { RollNote } from "@system/notes.ts";
 import { PlaceholderTrait } from "@module/data/models/trait.ts";
+import AbilitySystem from "@item/data/ability.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -255,7 +256,7 @@ class ActorPTR2e<
   }
 
   get luck(): number {
-    return this.isAce ? this.system.skills.get("luck")!.total : 0;
+    return this.isAce ? this.system.skills.luck.total : 0;
   }
 
   get spendableLuck(): number {
@@ -341,6 +342,7 @@ class ActorPTR2e<
       effectsRemovedAfterAttacking: [],
       effectsRemovedAfterAttacked: [],
       toggles: [],
+      moveVariants: {},
       attackAdjustments: {},
       tokenTags: new Map(),
       tokenOverrides: {},
@@ -648,6 +650,15 @@ class ActorPTR2e<
     for (const affliction of afflictions) {
       affliction.system.apply(this);
     }
+    // Run the _traits array as it may have added changes
+    for(const trait of this.system._traits) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if(!effect?.active) continue;
+      for (const change of effect.changes) {
+        change.effect.apply(this, change.clone());
+      }
+    }
 
     // Apply special statuses that changed to active tokens
     let tokens;
@@ -945,7 +956,7 @@ class ActorPTR2e<
 
   async applyDamage(
     damage: number,
-    { silent, healShield } = { silent: false, healShield: false }
+    { silent, healShield, flat } = { silent: false, healShield: false, flat: false }
   ) {
     // If this is damage, apply the vulnerability multiplier
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
@@ -955,7 +966,7 @@ class ActorPTR2e<
     }
     // Damage is applied to shield first, then health
     // Shields cannot be healed
-    if (damage > 0 || healShield) {
+    if ((damage > 0 && !flat) || healShield) {
       const damageAppliedToShield = Math.min(damage || 0, this.system.shield.value);
       if (this.system.shield.value > 0 && damageAppliedToShield === 0) return 0;
       if (damageAppliedToShield > 0 || healShield) {
@@ -1156,13 +1167,13 @@ class ActorPTR2e<
     const luck = this.luck;
     if (luck > 0) {
       const skills = this.system.toObject().skills;
-      const luckSkill = skills.find((skill) => skill.slug === "luck");
+      const luckSkill = skills.luck
       if (!luckSkill) return [];
-      luckSkill.value = Math.max(luck - amount, 1);
+      const newValue = Math.max(luck - amount, 1);
 
       amount -= luck;
-      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
-      pendingUpdates.push({ _id: this.id, "system.skills": skills });
+      notifications.push({ name: this.name, amount: luck - newValue, leftover: newValue });
+      pendingUpdates.push({ _id: this.id, "system.skills.luck.value": newValue });
     }
     if (amount <= 0) {
       if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
@@ -1182,6 +1193,7 @@ class ActorPTR2e<
     const vulnerabilityMultiplier = isNaN(this.system.modifiers["vulnerabilityMultiplier"] ?? 1) ? 1 : (this.system.modifiers["vulnerabilityMultiplier"] ?? 1);
 
     const rollNotes: { options: string[], domains: string[], html: string }[] = [];
+    let isAcePerishing = false;
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
       toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
@@ -1221,6 +1233,10 @@ class ActorPTR2e<
               acc.groups[affliction.priority].type = result.damage.type;
             }
           }
+        }
+        if(result.perish) {
+          // This Ace Actor is perishing
+          isAcePerishing = true;
         }
         return acc;
       },
@@ -1292,6 +1308,16 @@ class ActorPTR2e<
           value: newHealth,
         },
       };
+    }
+
+    if(isAcePerishing) {
+      const weary = await fu.fromUuid<ActiveEffectPTR2e>("Compendium.ptr2e.core-effects.Item.wearyconditiitem");
+      if(weary) {
+        await this.createEmbeddedDocuments("ActiveEffect", [weary.toObject()]);
+      }
+      await ChatMessage.create({
+        content: `${this.link}'s Perish Counter reached 0! They gained a stack of Weary.`,
+      })
     }
 
     if (afflictions.toDelete.length !== 0) {
@@ -1642,6 +1668,9 @@ class ActorPTR2e<
       for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
         adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
+      for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
+        adjustment().adjustAttack?.(selfAttack, actionRollOptions);
+      }
     }
 
     const actionTraits = (() => {
@@ -1657,6 +1686,9 @@ class ActorPTR2e<
 
       if (selfAttack) {
         for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
+          adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
+        }
+        for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }
@@ -1703,6 +1735,17 @@ class ActorPTR2e<
     // Get ephemeral effects from this actor that affect the target while being attacked
     const targetEphemeralEffects = await extractEphemeralEffects({
       affects: "target",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+    });
+
+    const targetDefensiveEphemeralEffects = await extractEphemeralEffects({
+      affects: "defensive",
       origin: selfActor,
       target: targetToken?.actor ?? null,
       item: selfItem,
@@ -1772,7 +1815,7 @@ class ActorPTR2e<
       ? null
       : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
         [...params.options, ...itemOptions, ...originRollOptions].filter(R.isTruthy),
-        targetEphemeralEffects
+        [...targetEphemeralEffects, ...targetDefensiveEphemeralEffects]
       ) ?? null;
 
     const rollOptions = new Set(
@@ -1865,7 +1908,7 @@ class ActorPTR2e<
       if (!auraAffectsActor(data, origin.actor, this)) continue;
 
       const effect = existing ?? await fromUuid(data.uuid);
-      if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
+      if (!((effect instanceof ItemPTR2e && (effect as ItemPTR2e).type === "effect") || effect instanceof ActiveEffectPTR2e)) {
         console.warn(`Effect from ${data.uuid} not found`);
         continue;
       }
@@ -1905,7 +1948,7 @@ class ActorPTR2e<
         }
       }
 
-      const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
+      const effects = (effect instanceof ItemPTR2e ? (effect as ItemPTR2e).effects : [effect]) as ActiveEffectPTR2e[];
       const sources = effects.map(e => fu.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
       toCreate.push(...sources);
     }
@@ -2165,6 +2208,23 @@ class ActorPTR2e<
       } else if ((changed.system.health.value as number) > 0 && fainted) {
         await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
       }
+
+      const currentStates = ActorSystemPTR2e.generateDesperationAndIntrepidStates(this.system.health);
+      const changedStates = ActorSystemPTR2e.generateDesperationAndIntrepidStates({
+        ...this.system.health,
+        ...(typeof changed.system?.health.value === "number" ? { value: changed.system.health.value } : {}),
+      });
+      const newStates = changedStates.difference(currentStates);
+      if (newStates.size > 0) {
+        const notes = extractNotes(this.synthetics.rollNotes, Array.from(newStates));
+        if (notes?.length) {
+          const content = RollNote.notesToHTML(notes)?.outerHTML;
+          if (content?.length) await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content
+          });
+        }
+      }
     }
 
     if (changed.system?.advancement?.experience?.current !== undefined) {
@@ -2177,15 +2237,8 @@ class ActorPTR2e<
       }
     }
 
-    if (changed.system?.shield !== undefined) {
-      if (
-        typeof changed.system.shield.value === "number" &&
-        changed.system.shield.value > this.system.shield.value
-      ) {
-        changed.system.shield.max ??= changed.system.shield.value;
-      } else if (changed.system.shield.value === 0) {
-        changed.system.shield.max = 0;
-      }
+    if(changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
+      changed.system.shield.value = this.system.shield.max;
     }
 
     if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
@@ -2221,10 +2274,42 @@ class ActorPTR2e<
 
           const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
-            const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
+            const moves = (await Promise.all(newMoves.map(move => fu.fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
             //@ts-expect-error - Asserted that this is an Array.
             changed.items.push(...moves.map(move => move.toObject()));
+          }
+
+          // Grant abilities at level 20/40/60
+          if(currentLevel < 20 && level >= 20) {
+            const basicAbilities = this.species.abilities.basic;
+            const abilities = (await Promise.all(basicAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
+          }
+          if(currentLevel < 40 && level >= 40) {
+            const advancedAbilities = this.species.abilities.advanced;
+            const abilities = (await Promise.all(advancedAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
+          }
+          if(currentLevel < 60 && level >= 60) {
+            const masterAbilities = this.species.abilities.master;
+            const abilities = (await Promise.all(masterAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
+            if (abilities.length) {
+              // Check for existing abilities to avoid duplicates
+              changed.items ??= [];
+              //@ts-expect-error - Asserted that this is an Array.
+              changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
+            }
           }
         }
         else newLevel = this.system.getLevel(newExperience);
@@ -2284,6 +2369,8 @@ class ActorPTR2e<
       console.error(err);
     }
 
+
+
     return super._preUpdate(changed, options, user);
   }
 
@@ -2311,7 +2398,16 @@ class ActorPTR2e<
   ): void {
     super._onUpdate(changed, options, userId);
 
-    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    // const changed
+
+    // const notes = this.synthetics.rollNotes["desperation"];
+    // if (notes?.length) {
+    //   const content = RollNote.notesToHTML(notes)?.outerHTML;
+    //   if (content?.length) await ChatMessage.create({
+    //     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    //     content
+    //   });
+    // }
   }
 
   protected override async _onCreateDescendantDocuments(
@@ -2325,7 +2421,6 @@ class ActorPTR2e<
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
     if (game.users.activeGM?.id !== game.user.id) return;
-    // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
     function isEffect(
@@ -2335,27 +2430,40 @@ class ActorPTR2e<
     ): _documents is ActiveEffectPTR2e<typeof parent>[] {
       return collection === "effects";
     }
-    if (isEffect(collection, documents)) return;
+    if (isEffect(collection, documents)) {
+      const domains = documents.flatMap(effect => [
+        ...effect.system.traits.map(t => `${t?.slug ?? t}-trait-received`),
+        `${effect.slug || effect.system.slug}-received`,
+        "all-received"
+      ])
+      const notes = extractNotes(this.synthetics.rollNotes, domains);
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+      return;
+    } else {
+      const domains = documents.filter(d => d.type == "effect").flatMap(e => e.effects as unknown as ActiveEffectPTR2e[]).flatMap(effect => [
+        ...effect.system.traits.map(t => `${t?.slug ?? t}-trait-received`),
+        `${effect.slug || effect.system.slug}-received`,
+        "all-received"
+      ])
+      const notes = extractNotes(this.synthetics.rollNotes, domains);
+      if (notes?.length) {
+        const content = RollNote.notesToHTML(notes)?.outerHTML;
+        if (content?.length) await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content
+        });
+      }
+    }
 
     const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
     if (!perks.length) return;
 
-    // const updates = [];
-    // const originalRoot = this.originalRoot;
-    // if (!originalRoot) throw new Error("No original root found.");
-    // // const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
-    // //   strict: true,
-    // // });
-
-    // // for (const root of this.unconnectedRoots) {
-    // //   // const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
-
-    // //   // const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
-    // //   if (path) {
-    // //     updates.push({ _id: root.id, "system.cost": 1 });
-    // //   }
-    // // }
-    // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
   }
 
   protected override _onDeleteDescendantDocuments(
@@ -2470,8 +2578,7 @@ class ActorPTR2e<
     await this.update({
       "system.health.value": health,
       "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
-      "system.shield.value": 0,
-      "system.shield.max": 0
+      "system.shield.value": 0
     });
 
     // remove effects
@@ -2574,6 +2681,7 @@ type ActorFlags2e = ActorFlags & {
       get types(): PickableThing[];
     },
     traitEffects?: Record<string, boolean>;
+    overrideSkillValidation?: boolean;
   };
 };
 

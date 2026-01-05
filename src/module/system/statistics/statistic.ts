@@ -32,16 +32,16 @@ class Statistic extends BaseStatistic {
     data.domains ??= [];
 
     const skillModifier =
-      data.check?.type === "skill-check" && actor.system.skills.has(data.slug)
+      data.check?.type === "skill-check" && actor.system.skills[data.slug]
         ? new ModifierPTR2e({
           slug: data.slug,
           label: data.label,
-          modifier: actor.system.skills.get(data.slug)!.total,
+          modifier: actor.system.skills[data.slug]!.total,
           method: "flat",
         })
         : null;
 
-    if(skillModifier && actor.system.modifiers.skills !== 1 && actor.system.skills.has(data.slug)) {
+    if(skillModifier && actor.system.modifiers.skills !== 1 && actor.system.skills[data.slug]) {
       const value = Number(actor.system.modifiers.skills);
       if(!isNaN(value) && value !== 1) {
         skillModifier.adjustments.push({

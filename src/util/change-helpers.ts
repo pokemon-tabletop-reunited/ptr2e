@@ -172,6 +172,7 @@ async function extractEffectRolls({
           ]).flat(),
           `${effectItem.slug}-applied`,
           ...(effectItem.system.traits.map(t => `${t.slug}-trait-applied`)),
+          "all-applied",
           ...domains
         ]));
 
@@ -189,6 +190,7 @@ async function extractEffectRolls({
             ...(e.system.traits.map(t => `${t.slug}-trait-received`))
           ]).flat(),
           `${effectItem.slug}-received`,
+          "all-received",
           ...(effectItem.system.traits.map(t => `${t.slug}-trait-received`)),
         ]));
         const targetAlterations = await extractEffectAlterations(
@@ -237,23 +239,23 @@ async function extractEffectRolls({
   });
 }
 
-async function extractEffectAlterations(
+export async function extractEffectAlterations(
   adjustmentsRecord: ActorSynthetics["effectAlterations"],
   selectors: string[],
-  effect: EffectRoll,
+  effectRoll: EffectRoll | Record<string, unknown>,
   options: Set<string> | string[] = [],
   resolvables: Record<string, unknown> = {}
 ): Promise<EffectAlteration[]> {
   return await Promise.all(
     selectors
       .flatMap((s) => adjustmentsRecord[s] ?? [])
-      .map((d) => d({ test: options, injectables: { ...resolvables, effect }, resolvables}))
+      .map((d) => d({ test: options, injectables: { ...resolvables, effect: effectRoll }, resolvables}))
       .flatMap((e) => e ?? [])
   )
 }
 
 interface ExtractEphemeralEffectsParams {
-  affects: "target" | "origin";
+  affects: "target" | "origin" | "self" | "defensive";
   origin: ActorPTR2e | null;
   target: Maybe<ActorPTR2e>;
   item: ItemPTR2e | null;

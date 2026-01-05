@@ -49,7 +49,7 @@ export default class FlatModifierChangeSystem extends ChangeModel {
         return { selector: resolvedSelector, method: providedMethod };
       })();
 
-      const suffixes = ["accuracy", "evasion", "damage", "crit", "power", "stat", "effectiveness", "capture"] as const;
+      const suffixes = ["accuracy", "evasion", "damage", "crit", "power", "stat", "effectiveness", "capture", "strikes", "hits"] as const;
 
       for (const suffix of suffixes) {
         if (selector.endsWith("-" + suffix)) {

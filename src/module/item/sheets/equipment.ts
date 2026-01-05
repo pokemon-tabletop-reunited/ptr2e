@@ -8,7 +8,7 @@ export default class EquipmentSheet extends ItemSheetPTR2e<EquipmentPTR2e["syste
 
   static override readonly overviewTemplate = "systems/ptr2e/templates/items/equipment/equipment-overview.hbs";
   static override readonly detailsTemplate = "systems/ptr2e/templates/items/equipment/equipment-details.hbs";
-  override noActions = true;
+  override noActions = false;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
     fu.mergeObject(super.PARTS, {

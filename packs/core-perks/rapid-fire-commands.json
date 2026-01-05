@@ -3,7 +3,65 @@
   "_id": "dRhqCwSMW7IbtMe9",
   "type": "perk",
   "img": "icons/svg/wing.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rapid-Fire Commands",
+      "type": "passive",
+      "_id": "TSSBfRlA7Ph0oQdi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "command-trait-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764896643568,
+        "modifiedTime": 1764896677521,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -18,7 +76,7 @@
     },
     "actions": [],
     "slug": "rapid-fire-commands",
-    "description": "<p>Effect: The user's @Trait[command] Actions gain [Priority 1], or have that value increase by +1.</p>",
+    "description": "<p>Effect: The user's @Trait[command] Actions gain @Affliction[advance 10], or have that value increase by +10.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -47,12 +105,18 @@
       {
         "x": 37,
         "y": 61,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "keep-fighting",
           "the-meaning-of-haste"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]

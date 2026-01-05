@@ -52,7 +52,8 @@
         "category": "physical",
         "predicate": [],
         "power": 60,
-        "accuracy": 90
+        "accuracy": 90,
+        "free": true
       },
       {
         "name": "Bayonet Thrust (Readied)",
@@ -84,7 +85,8 @@
         "category": "physical",
         "predicate": [],
         "power": 60,
-        "accuracy": 100
+        "accuracy": 100,
+        "free": true
       },
       {
         "name": "Bayonet Unlugged Thrust",
@@ -111,7 +113,8 @@
         "category": "physical",
         "predicate": [],
         "power": 35,
-        "accuracy": 85
+        "accuracy": 85,
+        "free": true
       }
     ],
     "description": "<p>A bayonet is a spike-shaped melee weapon designed to be mounted on the end of the barrel of a long firearm, allowing the weapon to be used as an improvised spear in close combat. While mounted onto a Firearm, this weapon is Slotless. It can be Held, albeit not able to be used as effectively.</p>",
@@ -158,22 +161,24 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
+            "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
             "value": 9,
             "predicate": [],
             "label": "Bayonet",
             "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
+            "type": "flat-modifier",
             "key": "bayonet-unlugged-thrust",
             "value": -5,
             "predicate": [],
             "label": "Bayonet",
             "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -204,13 +209,13 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": "r8rxDx9bzq5ASx3l",
+        "modifiedTime": 1762640448796
       }
     }
   ],
-  "flags": {},
   "_id": "9CKlrqUYYOFyi5fV"
 }

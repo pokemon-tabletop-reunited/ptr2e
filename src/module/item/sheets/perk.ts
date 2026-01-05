@@ -50,11 +50,11 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
 
   override async _onDropItem(event: DragEvent, data: object) {
     const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
-    if (!item || item.type !== "species") return super._onDropItem(event, data);
+    if (!item || !["species", "ptr2e-digimon-expansion.digimonSpecies"].includes(item.type)) return super._onDropItem(event, data);
 
     if (this.document.system.webs.has(item.uuid)) return;
 
-    const species = await fromUuid<SpeciesPTR2e>(item.uuid);
+    const species = await fu.fromUuid<SpeciesPTR2e>(item.uuid);
     if (!species) return;
 
     const uuid = species.system.evolutions?.uuid ?? item.uuid;

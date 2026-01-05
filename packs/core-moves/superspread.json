@@ -4,45 +4,17 @@
   "_id": "41vylq9fiaBko12z",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "superspread",
     "actions": [
       {
         "name": "Superspread",
         "slug": "superspread",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [
-          "powder"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 10
-        },
-        "variant": null,
-        "types": [
-          "poison"
-        ],
-        "category": "special",
-        "power": 50,
-        "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 Activations. The user gains @Affliction[choice-locked] 5.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
-      },
-      {
-        "name": "Superspread 1",
-        "slug": "superspread-1",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "powder"
+          "powder",
+          "gas",
+          "flinch-25"
         ],
         "range": {
           "target": "emanation",
@@ -51,136 +23,188 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0
+          "powerPoints": 3
         },
-        "variant": "superspread",
         "types": [
           "poison"
         ],
         "category": "special",
         "power": 50,
-        "accuracy": 85,
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 Activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
-      },
-      {
-        "name": "Superspread 2",
-        "slug": "superspread-2",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "powder"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0
-        },
-        "variant": "superspread",
-        "types": [
-          "poison"
-        ],
-        "category": "special",
-        "power": 50,
-        "accuracy": 80,
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 Activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
-      },
-      {
-        "name": "Superspread 3",
-        "slug": "superspread-3",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "powder"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 4,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0
-        },
-        "variant": "superspread",
-        "types": [
-          "poison"
-        ],
-        "category": "special",
-        "power": 50,
-        "accuracy": 75,
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 40% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 Activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
-      },
-      {
-        "name": "Superspread 4",
-        "slug": "superspread-4",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [
-          "powder"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0
-        },
-        "variant": "superspread",
-        "types": [
-          "poison"
-        ],
-        "category": "special",
-        "power": 50,
-        "accuracy": 70,
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 Activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
+        "accuracy": 95,
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison 3] and losing -1 SPDEF Stage for 3 Activations.</p><p>For each consecutive time this attack is used and hits at least one target, this Attack's Power increases by 20, its Accuracy decreases by -5, its effect chances are increased by +10% and their duration increases by +1. This progress is tracked by the Clock named for this Attack.</p><p>This Clock resets if the user fails to hit at least one target with this Attack, leaves combat, gains @Affliction[fainted], or combat ends.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A",
+    "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721259496619,
-    "modifiedTime": 1721259585209,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Superspread",
+      "type": "passive",
+      "_id": "lWw4sNR7obyUBvoa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "superspreadClock",
+            "value": 0,
+            "predicate": [],
+            "label": "Superspread",
+            "max": 5,
+            "color": "#aa6bc8",
+            "private": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "superspread-attack-power",
+            "value": "20*@actor.clocks.superspreadClock",
+            "predicate": [],
+            "label": "Iterative Boost",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "superspread-attack-accuracy",
+            "value": "-5*@actor.clocks.superspreadClock",
+            "predicate": [],
+            "label": "Iterative Reduction",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "superspread-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": "3+@actor.clocks.superspreadClock"
+              }
+            ],
+            "dontMerge": false,
+            "label": "Superspread (Poison)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "superspread-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": "3+@actor.clocks.superspreadClock"
+              }
+            ],
+            "dontMerge": false,
+            "label": "Superspread (SPDEF)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "superspread-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "predicate": [
+              {
+                "not": "actor:clocks:superspreadClock:value:5"
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "superspreadClock"
+              }
+            ],
+            "dontMerge": false,
+            "label": "Superspread Clock",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "superspread-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.dVXsQ55hDouadYkE",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "0+10*@actor.clocks.superspreadClock"
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1766455966348,
+        "modifiedTime": 1767137704561,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

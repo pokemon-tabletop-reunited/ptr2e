@@ -25,7 +25,7 @@
         "types": [
           "water"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p>",
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 150.</p>",
         "img": "systems/ptr2e/img/svg/water_icon.svg",
         "predicate": []
       }
@@ -54,9 +54,9 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
+            "type": "flat-modifier",
             "key": "water-spout-attack-power",
-            "value": "(@actor.system.health.percent)-100",
+            "value": "((@actor.system.health.percent)-100)*1.4",
             "predicate": [],
             "label": "Water Spout",
             "mode": 2,
