@@ -50,6 +50,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         const characters = this.characters;
 
         const { updates, messages, undoData } = characters.reduce((acc, character) => {
+          if(character.effects.get("loafingcondition")) return acc;
           const newTotal = character.system.advancement.experience.current + total;
           const levelUp = character.system.advancement.experience.next <= newTotal;
           acc.undoData.push({ _id: character.id, "system.advancement.experience.current": character.system.advancement.experience.current });
@@ -225,7 +226,7 @@ export class EXPTracker extends foundry.applications.api.HandlebarsApplicationMi
         folders,
         entries: entries.map(entry => ({
           actor: entry,
-          loafing: entry.effects.get("loafingafflictio") as ActiveEffectPTR2e
+          loafing: entry.effects.get("loafingcondition") as ActiveEffectPTR2e
         }))
       }
     });
