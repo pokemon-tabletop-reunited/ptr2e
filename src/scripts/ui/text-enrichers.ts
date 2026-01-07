@@ -273,7 +273,7 @@ export class TextEnricher {
         ui.notifications.info(`Updated ${actor.name}'s Power Points from ${current} to ${newValue}.`);
       }
       else {
-        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false, flat: true})
+        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false, flat: true, note: ""})
       }
     }
   }

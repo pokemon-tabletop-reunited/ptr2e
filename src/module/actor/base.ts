@@ -956,7 +956,7 @@ class ActorPTR2e<
 
   async applyDamage(
     damage: number,
-    { silent, healShield, flat } = { silent: false, healShield: false, flat: false }
+    { silent, healShield, flat, note } = { silent: false, healShield: false, flat: false, note: "" }
   ) {
     // If this is damage, apply the vulnerability multiplier
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
@@ -1001,6 +1001,7 @@ class ActorPTR2e<
                 damageApplied: damageAppliedToShield,
                 shieldApplied: true,
                 target: this.uuid,
+                note,
               }
             }
           );
@@ -1025,7 +1026,8 @@ class ActorPTR2e<
         system: {
           damageApplied: damageApplied,
           target: this.uuid,
-          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : []
+          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : [],
+          note
         },
       });
     }

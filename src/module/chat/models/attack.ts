@@ -428,6 +428,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   }
                 } : { some: false, applied: false },
                 hasCaptureRoll: !!(this.attack.slug?.startsWith("fling") && this.attack.flingItemId),
+                check: result.context.check
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({
@@ -623,7 +624,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     // Damage needs to be applied before all effects are, in case any effect depends on the new HP value.
-    const promise = (async () => {
+    const damageApplied = await (async () => {
       const target = result.target;
       const damage = result.damage;
       if (!damage) return 0;
@@ -634,8 +635,45 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       return damageApplied;
     })()
 
+    const { recoil, drain } = (result.check?.totalModifiers as Record<string, { base: number, flat: number, stage: number, percentile: number }>) ?? {}
+    if (recoil) {
+      if (recoil.flat > 0) {
+        try {
+          const recoilDamage = new Roll(`floor(@damage * (@recoilFlat * @recoilPercentile))`, {
+            damage: damageApplied,
+            recoilFlat: recoil.flat,
+            recoilPercentile: recoil.percentile
+          }).evaluateSync().total
+
+          if (recoilDamage > 0 && origin) {
+            await origin.applyDamage(recoilDamage, { silent: false, healShield: false, flat: true, note: `Recoil damage from attacking ${result.target.name}` });
+          }
+        }
+        catch (error) {
+          console.error("Failed to calculate recoil damage", error);
+        }
+      }
+    }
+    if (drain) {
+      if (drain.flat > 0 && origin) {
+        try {
+          const drainDamage = new Roll(`floor(@damage * (@drainFlat * @drainPercentile))`, {
+            damage: damageApplied,
+            drainFlat: drain.flat,
+            drainPercentile: drain.percentile
+          }).evaluateSync().total
+          if (drainDamage > 0) {
+            await origin.applyDamage(-drainDamage, { silent: false, healShield: false, flat: true, note: `Drain heal from attacking ${result.target.name}` });
+          }
+        }
+        catch (error) {
+          console.error("Failed to calculate drain damage", error);
+        }
+      }
+    }
+
     return (await Promise.all([
-      await promise,
+      damageApplied,
       (async (): Promise<void> => {
         const target = result.target;
         await applyEffects(target, result.effect.effects?.target ?? [], result.hit === "critical");
@@ -1002,6 +1040,7 @@ interface AttackMessageRenderContextData {
     };
   };
   hasCaptureRoll?: boolean;
+  check: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextCheckSchema>>;
 }
 
 export type AttackResultsData = ModelPropsFromSchema<AttackMessageSchema>["results"][number];
