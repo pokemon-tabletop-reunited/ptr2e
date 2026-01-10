@@ -1,0 +1,207 @@
+{
+  "name": "Quarry Flush",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "quarry-flush",
+    "description": "<p>Against creatures that meet the @Trait[intrepid-1-2] Condition, the user’s Attacks have +15% EHR and a 10% chance to inflict @Affliction[fear 3] and @Affliction[delay 10].</p><p>Against creatures that meet the @Trait[intrepid-3-4] Condition, the user’s Attacks also have +25% EHR and a 5% chance to inflict @Affliction[fear 3] and @Affliction[delay 10].</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "hunter"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 35,
+        "y": 182,
+        "connected": [
+          "dead-eye",
+          "weak-spot"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+  "effects": [
+    {
+      "name": "Quarry Flush",
+      "type": "passive",
+      "_id": "wzbvhyLJieRrDriD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "target:state:intrepid-1-2"
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 15
+              }
+            ],
+            "label": "Quarry Flush - EHR 1/2",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "predicate": [
+              "target:state:intrepid-1-2"
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Quarry Flush - Fear",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [
+              "target:state:intrepid-1-2"
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Quarry Flush - Delay",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "target:state:intrepid-3-4"
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 25
+              }
+            ],
+            "label": "Quarry Flush - EHR 3/4",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "predicate": [
+              "target:state:intrepid-3-4"
+            ],
+            "chance": 5,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Quarry Flush - Fear",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [
+              "target:state:intrepid-3-4"
+            ],
+            "chance": 5,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Quarry Flush - Delay",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "W85LoOCz3WlwbyhZ",
+  "flags": {},
+  "_id": "BPnHoU1Eofkxthz8"
+}

@@ -6,34 +6,27 @@
       {
         "gte": [
           "{actor|skills.intimidate.mod}",
-          30
+          45
         ]
       }
     ],
-    "cost": 1,
-    "description": "<p>You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation. When targeted by a Conversation or Deception skill check, you may resist using Intimidate instead of Psychology.</p>",
+    "cost": 2,
+    "description": "<p>You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation. The user can use Intimidate in place of Psychology in Skill Contests when opposing Conversation, Deception, or Negotiation.<br><br>The user has +40% RES against @Trait[social] and @Trait[impel] Actions from non-allied creatures.</p>",
     "actions": [
       {
         "name": "Unreasonable",
         "slug": "unreasonable",
-        "description": "You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation.",
+        "description": "<p>The user can use Intimidate in place of Psychology in Skill Contests when opposing Conversation, Deception, or Negotiation.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
-        "img": "systems/ptr2e/img/icons/feat_icon.webp",
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+        "img": "systems/ptr2e/img/icons/feat_icon.webp"
       }
     ],
     "slug": "unreasonable",
@@ -44,37 +37,31 @@
     },
     "nodes": [
       {
+        "x": 42,
+        "y": 113,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "masters-whip",
           "harsh-motivator",
           "bloodthirst"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ffffff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-          "tint": "#141414",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 42,
-        "y": 113,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "resilience",
-      "archetype": "socialite"
+      "archetype": "taskmaster"
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -82,10 +69,90 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "zFg7hQjnXI2qaLYt",
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Unreasonable",
+      "type": "passive",
+      "_id": "lAjsm6moxLKBZTZo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "key": "social-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "predicate": [],
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": 40
+              }
+            ],
+            "label": "Unreasonable - RES",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "predicate": [],
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.changes.0.value",
+                "value": 40
+              }
+            ],
+            "label": "Unreasonable - RES",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767999032383,
+        "modifiedTime": 1767999167698,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "folder": "6XbjR9qPWzZw4vEd"
 }

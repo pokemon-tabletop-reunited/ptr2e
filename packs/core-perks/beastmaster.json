@@ -11,27 +11,22 @@
       }
     ],
     "cost": 1,
-    "description": "<p>You may substitute Intimidate in place of Leadership for Skill Contests.</p>",
+    "description": "<p>The user’s @Trait[impel] Attacks have a 20% chance to cause Allied targets to gain @Affliction[boosted 5], @Affliction[argute 5], and +1 CRIT Stage for 5 Activations.</p><p>The user can use Intimidate in place of Leadership for Skill Contests, and doubles the Assistance bonus they provide to a Conversation, Fast Talk, Negotiation, or Psychology Test if allowed to assist using Intimidate.</p><p></p>",
     "actions": [
       {
         "name": "Beastmaster",
         "slug": "beastmaster",
-        "description": "<p>You may substitute Intimidate in place of Leadership for Skill Contests.</p>",
+        "description": "<p>The user can use Intimidate in place of Leadership for Skill Contests, and doubles the Assistance bonus they provide to a Conversation, Fast Talk, Negotiation, or Psychology Test if allowed to assist using Intimidate.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "beastmaster",
@@ -56,13 +51,10 @@
           "lethal-restraint"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#800000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -73,7 +65,7 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "socialite"
+      "archetype": "taskmaster"
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -82,12 +74,115 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "B2XQnfWC8Xx8Veqj",
   "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Beastmaster",
+      "type": "passive",
+      "_id": "2WgE7RdDyrE3Ih9n",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Beastmaster - Boosted",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Beastmaster - Argute",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Beastmaster - Crit",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767917353914,
+        "modifiedTime": 1767917646106,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "folder": "6XbjR9qPWzZw4vEd"
 }

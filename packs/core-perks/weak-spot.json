@@ -19,25 +19,22 @@
     },
     "nodes": [
       {
+        "x": 33,
+        "y": 178,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "root-5",
           "type-hunter",
-          "dead-to-rights",
-          "dead-eye"
+          "dead-eye",
+          "quarry-flush"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#800000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 33,
-        "y": 178,
         "tier": null
       }
     ],
@@ -56,9 +53,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -117,7 +112,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -139,7 +136,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737391595802,

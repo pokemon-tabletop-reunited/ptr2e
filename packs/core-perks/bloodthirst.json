@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "bloodthirst",
-    "description": "<p>Gain +1 CRIT Stage when attacking creatures who are have less than 50% of their HP remaining.</p>",
+    "description": "<p>The user’s @Trait[impel] Attacks have a 20% chance to cause Allied targets to gain +1 ATK, SPATK, and SPD Stage for 3 Activations if they have @Affliction[bleed].</p><p>When using on @Trait[impel] Attack on a creature that has @Affliction[bleed], the user has a 40% chance to gain @Affliction[advance 20].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -17,37 +17,31 @@
     },
     "nodes": [
       {
+        "x": 38,
+        "y": 116,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "beastmaster",
           "masters-whip",
           "unreasonable"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff0000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 38,
-        "y": 116,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "hunter"
+      "archetype": "taskmaster"
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -55,7 +49,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -66,23 +61,116 @@
       "system": {
         "changes": [
           {
-            "type": "stage-modifier",
-            "key": "system.battleStats.critRate.stage",
-            "value": 1,
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
             "predicate": [
-              "target:state:desperation-1-2"
+              {
+                "and": [
+                  "target:effect:affliction:bleed",
+                  "origin:ally"
+                ]
+              }
             ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Bloodthirst - ATK",
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "predicate": [
+              {
+                "and": [
+                  "target:effect:affliction:bleed",
+                  "origin:ally"
+                ]
+              }
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Bloodthirst - SPATK",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [
+              {
+                "and": [
+                  "target:effect:affliction:bleed",
+                  "origin:ally"
+                ]
+              }
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Bloodthirst - SPD",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              "target:effect:affliction:bleed"
+            ],
+            "chance": 40,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 20
+              }
+            ],
+            "dontMerge": false,
+            "label": "Bloodthirst - Advance",
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -100,16 +188,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1733012002017,
-        "modifiedTime": 1733012378345,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1767999916838,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
       }
     }

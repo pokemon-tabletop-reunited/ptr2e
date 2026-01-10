@@ -6,8 +6,28 @@
       "version": 0.109,
       "previous": null
     },
-    "actions": [],
-    "description": "<p>You may target allied creatures over whom you have authority (or you possess the Tactician perk). The target ally may be immediately dropped down to 50% health, or 33% health, if they are above the chosen value. This triggers any relevant perks or abilities as if they had been attacked by an enemy. This lost health is converted into shields of equal value.<br><br>Note: Please ensure you have the target ally's out-of-character consent to use this perk on them, if pertinent.</p>",
+    "actions": [
+      {
+        "name": "Harsh Motivator",
+        "slug": "harsh-motivator",
+        "description": "<p>Trigger: The user applied @Affliction[bleed] to a targeted Ally.</p><p>Effect: The creature takes damage up to @Tick[-8] and cannot drop below 5 Ticks’ worth of HP from this Action. The creature is cured of @Affliction[bleed], and gains @Affliction[resolved 3], @Affliction[hale 3], and @Affliction[chanted 3].</p>",
+        "traits": [
+          "interrupt-3",
+          "flinch-30"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>If the user applies @Affliction[bleed] to an Ally, they can spend 2 PP as a Free Action at @Trait[interrupt 3] and @Trait[flinch 30] to cause that ally to lose up to @Tick[-8] (unable to drop below 5 Ticks’ worth of HP) — curing them of @Affliction[bleed] and granting @Affliction[resolved 3], @Affliction[hale 3], and @Affliction[chanted 3].</p><blockquote><p>Note: Please ensure you have the target ally's out-of-character consent to use this perk on them, if pertinent.</p></blockquote><p>The user’s @Trait[impel] Attacks are resisted an additional step by Allied targets.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -21,37 +41,31 @@
     "slug": "harsh-motivator",
     "nodes": [
       {
+        "x": 42,
+        "y": 117,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "masters-whip",
           "unreasonable",
           "beastmaster"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 42,
-        "y": 117,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": null
+      "archetype": "taskmaster"
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -59,10 +73,148 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Harsh Motivator",
+      "type": "passive",
+      "_id": "bizuMn0NinNSbFMR",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "harsh-motivator-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": true,
+            "label": "Harsh Motivator - Resolved",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "harsh-motivator-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": true,
+            "label": "Harsh Motivator - Hale",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "harsh-motivator-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": true,
+            "label": "Harsh Motivator - Chanted",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "harsh-motivator-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "label": "Harsh Motivator - Delay",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -30
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "impel-trait-attack-effectiveness-stage",
+            "value": -1,
+            "predicate": [
+              "origin:ally"
+            ],
+            "label": "Impel Effectiveness vs Ally",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767998334249,
+        "modifiedTime": 1767998887153,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "cIhKwVlHdIF9idFz",
   "folder": "6XbjR9qPWzZw4vEd"
 }

@@ -18,22 +18,24 @@
       {
         "name": "Driven",
         "slug": "driven",
-        "description": "<p>Trigger: The user resolves Master's Whip.</p><p>Effect: The triggering Action's target gains @UUID[Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl]{+1 Critical Stage} for 5 Activations.</p>",
-        "traits": [],
+        "description": "<p>Trigger: The user hits an Ally with an @Trait[impel] Attack.</p><p>Effect: The targeted creature gains +1 Stage of the user’s choice for 3 Activations.</p>",
+        "traits": [
+          "interrupt-3"
+        ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
         "range": {
-          "target": "field",
+          "target": "ally",
           "unit": "m"
         },
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
+          "powerPoints": 2,
           "trigger": "The user resolves Master's Whip."
         }
       }
     ],
-    "description": "<p>Effect: When resolving Master's Whip, the user may spend 3 PP as a Free Action at @Trait[interrupt-2] to grant the target of Master's Whip @UUID[Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl]{+1 Critical Stage} for 5 Activations.</p>",
+    "description": "<p>If the user hits an Ally with an @Trait[impel] Attack, the user can spend 2 PP as a Free Action at @Trait[interrupt 3] and @Trait[flinch 20] to cause that creature to gain +1 Stage of the user’s choice for 3 Activations.</p><p>The user doubles the Assistance bonus they provide to a Husbandry or Leadership Test if allowed to assist using Intimidate.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:masters-whip"
@@ -65,7 +67,8 @@
         "tier": null
       }
     ],
-    "slug": "driven"
+    "slug": "driven",
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
   "effects": [
@@ -78,23 +81,24 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "driven-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "key": "driven-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
             "predicate": [],
             "chance": 100,
-            "affects": "target",
-            "dontMerge": false,
+            "affects": "self",
+            "dontMerge": true,
             "alterations": [
               {
                 "mode": 5,
-                "property": "duration.turns",
-                "value": 3
+                "property": "system.amount",
+                "value": -20
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "isFixedChance": false
+            "isFixedChance": true,
+            "label": "Driven - Delay",
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -121,16 +125,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1768000270961,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
       }
     }

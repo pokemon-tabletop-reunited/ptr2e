@@ -36,10 +36,10 @@
         "hidden": false,
         "type": "normal",
         "connected": [
-          "high-noon",
           "dead-eye",
           "duelists-glory",
-          "dont-interrupt-me"
+          "dont-interrupt-me",
+          "dead-to-rights"
         ],
         "config": {
           "texture": null,
@@ -51,9 +51,7 @@
       }
     ],
     "slug": "duelists-eye",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "icons/svg/target.svg",
   "effects": [
@@ -81,7 +79,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -103,7 +103,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
@@ -113,6 +113,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "hqLlxrNgq2V9zDSL"
 }

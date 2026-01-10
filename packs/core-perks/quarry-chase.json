@@ -1,0 +1,207 @@
+{
+  "name": "Quarry Chase",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Against creatures that meet the @Trait[desperation-1-2] Condition, the user’s Attacks have +1 default CRIT and their @Trait[contact] Attacks gain @Trait[dash] and have a 20% chance to inflict @Affliction[stuck 2].</p><p>The user takes -5% damage from and +10% RES against Attacks made by creatures that meet @Trait[desperation-1-2], which are increased by an additional -10% and +15% respectively if a creature meets @Trait[desperation-1-4].</p>"
+    },
+    "actions": [],
+    "slug": "quarry-chase",
+    "description": "<p>Against creatures that meet the @Trait[desperation-1-2] Condition, the user’s Attacks have +1 default CRIT and their @Trait[contact] Attacks gain @Trait[dash] and have a 20% chance to inflict @Affliction[stuck 2].</p><p>The user takes -5% damage from and +10% RES against Attacks made by creatures that meet @Trait[desperation-1-2], which are increased by an additional -10% and +15% respectively if a creature meets @Trait[desperation-1-4].</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "hunter"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 44,
+        "y": 180,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "dead-to-rights",
+          "dead-eye"
+        ],
+        "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+  "effects": [
+    {
+      "name": "Quarry Chase",
+      "type": "passive",
+      "_id": "q3EsErlkMTokrP1l",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "attack-crit-stage",
+            "value": 1,
+            "predicate": [
+              "target:state:desperation-1-2"
+            ],
+            "label": "Quarry Chase - CRIT 1/2",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "contact-trait-attack",
+            "value": "dash",
+            "predicate": [
+              "target:state:desperation-1-2"
+            ],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.stuckconditiitem",
+            "predicate": [
+              "target:state:desperation-1-2"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "label": "Quarry Chase - Stuck",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -5,
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "label": "Quarry Chase - DAM 1/2",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "self:state:desperation-1-4"
+            ],
+            "label": "Quarry Chase - DAM 1/4",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "predicate": [
+              "self:state:desperation-1-2"
+            ],
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 10
+              }
+            ],
+            "label": "Quarry Chase - RES 1/2",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "predicate": [
+              "self:state:desperation-1-4"
+            ],
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 15
+              }
+            ],
+            "label": "Quarry Chase - RES 1/4",
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "W85LoOCz3WlwbyhZ",
+  "flags": {},
+  "_id": "4qQ1xi4h7itb4UPb"
+}

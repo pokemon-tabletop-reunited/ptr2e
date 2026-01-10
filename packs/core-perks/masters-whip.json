@@ -9,39 +9,24 @@
       {
         "name": "Master's Whip",
         "slug": "masters-whip",
-        "description": "<p>You may advance a targeted ally's activation forward by 30% as a Simple Action, costing 3PP.</p>",
-        "traits": [],
-        "type": "attack",
+        "description": "<p>Trigger: The user hits a creature from their Team with an @Trait[impel] Attack.</p><p>Effect: The targeted creature gains @Affliction[advance 50], and has a 30% chance of gaining @Affliction[bleed 2].</p>",
+        "traits": [
+          "interrupt-3"
+        ],
+        "type": "generic",
         "range": {
           "target": "ally",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 3
+          "activation": "free",
+          "powerPoints": 2
         },
-        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg"
       }
     ],
     "slug": "masters-whip",
-    "description": "<p>You may advance a targeted ally's activation forward by 30% as a Simple Action, costing 3PP.</p>",
+    "description": "<p>If the user hits an Ally with an @Trait[impel] Attack, the user can spend @PP[-2] as a Free Action at @Trait[interrupt-3] and @Trait[flinch-20] to cause that creature to be @Affliction[advance 50], and have a 30% chance of being afflicted with @Affliction[bleed 2].</p><p>The user deals 30% more damage and has +40% EHR with their @Trait[impel] Attacks, and their @Trait[basic] Attacks gain the @Trait[impel] Trait.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -70,16 +55,14 @@
           "root-6",
           "climatologist",
           "emergency-retreat",
-          "driven"
+          "driven",
+          "minor-buff-12"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#000000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-          "tint": "#f5f5f5",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -90,7 +73,7 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "tactician"
+      "archetype": "taskmaster"
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -99,9 +82,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -113,27 +94,103 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "masters-whip-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
-            "predicate": [],
+            "key": "masters-whip-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              "origin:ally"
+            ],
             "chance": 100,
+            "isFixedChance": true,
             "affects": "target",
             "alterations": [
               {
                 "mode": 5,
                 "property": "system.amount",
-                "value": 30
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Advance 30%"
+                "value": 50
               }
             ],
-            "label": "Master's Whip",
-            "dontMerge": false,
+            "dontMerge": true,
+            "label": "Master's Whip - Advance",
             "mode": 2,
-            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "masters-whip-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              }
+            ],
+            "dontMerge": true,
+            "label": "Master's Whip - Delay",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "masters-whip-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "label": "Master's Whip - Bleed",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "impel-trait-attack-damage",
+            "value": 30,
+            "predicate": [],
+            "label": "Impel Damage",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "impel-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "label": "Impel EHR",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 40
+              }
+            ],
+            "affects": "self",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "basic-trait-attack",
+            "value": "impel",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -141,7 +198,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -159,16 +218,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1742128847826,
-        "modifiedTime": 1745186004290,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1768005277162,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
       }
     }
