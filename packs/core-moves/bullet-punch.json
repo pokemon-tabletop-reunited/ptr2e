@@ -12,8 +12,8 @@
         "traits": [
           "punch",
           "dash",
-          "priority-10",
-          "contact"
+          "contact",
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -22,8 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 40,
@@ -31,20 +30,54 @@
         "types": [
           "steel"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "bullet-punch-interrupt",
+        "name": "Bullet Punch (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "contact",
+          "flinch-10",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user's current AV is less than 45."
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 45.</p>",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "variant": "bullet-punch",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "PDKfrt5BmoIBw8D2",

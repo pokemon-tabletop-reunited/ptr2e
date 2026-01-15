@@ -4,13 +4,13 @@
   "_id": "hkvstn0F94zVZsen",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "mach-turn",
     "actions": [
       {
         "name": "Mach Turn",
         "slug": "mach-turn",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
         "traits": [
           "double-strike",
           "sonic",
@@ -23,47 +23,60 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "priority": 2
+          "powerPoints": 6
         },
-        "variant": null,
         "types": [
           "flying"
         ],
         "category": "physical",
         "power": 35,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "predicate": []
+      },
+      {
+        "name": "Mach Turn (Interrupt)",
+        "slug": "mach-turn-interrupt",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "traits": [
+          "double-strike",
+          "sonic",
+          "flinch-15"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "trigger": "The user's current AV is less than 65."
+        },
+        "variant": "mach-turn",
+        "types": [
+          "flying"
+        ],
+        "category": "physical",
+        "power": 35,
+        "accuracy": 90,
+        "description": "<p>Trigger: The user's current AV is less than 65.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 6100000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719597709227,
-    "modifiedTime": 1719973939629,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

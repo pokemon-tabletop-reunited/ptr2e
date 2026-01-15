@@ -13,8 +13,8 @@
           "legendary",
           "dash",
           "pass-6",
-          "priority-20",
-          "contact"
+          "contact",
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 8,
           "priority": 2
         },
         "category": "physical",
@@ -32,20 +32,56 @@
         "types": [
           "psychic"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "wormhole-interrupt",
+        "name": "Wormhole (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dash",
+          "pass-6",
+          "contact",
+          "flinch-25",
+          "interrupt-6"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "priority": 2,
+          "trigger": "The user's current AV is less than 120."
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 120.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "variant": "wormhole",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "ujtbYdepPwT8WpK3",

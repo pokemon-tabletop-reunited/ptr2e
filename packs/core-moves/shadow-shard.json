@@ -11,7 +11,7 @@
         "type": "attack",
         "traits": [
           "missile",
-          "priority-10"
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -20,8 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 40,
@@ -29,20 +28,51 @@
         "types": [
           "shadow"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "shadow-shard-interrupt",
+        "name": "Shadow Shard (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "flinch-30"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user's current AV is less than 60."
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "shadow"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 60.</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "variant": "shadow-shard",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "E",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "rVgqrgTOiwSxO7pR",

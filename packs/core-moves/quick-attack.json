@@ -30,20 +30,58 @@
         "types": [
           "normal"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "slot": 2,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      },
+      {
+        "slug": "quick-attack-interrupt",
+        "name": "Quick Attack (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "flinch-10"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user's current AV is less than 45."
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 45.</p>",
+        "slot": 2,
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "variant": "quick-attack",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "E",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": 0.112,
+      "previous": {
+        "schema": null,
+        "foundry": "13.351",
+        "system": "1.5.0.beta"
+      }
     }
   },
   "_id": "D7s1YrVm8EIkyQa2",

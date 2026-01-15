@@ -7,15 +7,15 @@
     "slug": "sneak-attack",
     "actions": [
       {
-        "name": "Sneak Attack Attack",
-        "slug": "sneak-attack",
+        "name": "Sneak Attack",
+        "slug": "sneak-atk",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/dark_icon.svg",
         "traits": [
           "dash",
-          "priority-10",
           "contact",
-          "crit-1"
+          "crit-1",
+          "priority-30"
         ],
         "range": {
           "target": "creature",
@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "types": [
           "dark"
@@ -33,9 +33,40 @@
         "power": 40,
         "accuracy": 100,
         "predicate": []
+      },
+      {
+        "name": "Sneak Attack (Interrupt)",
+        "slug": "sneak-atk-interrupt",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "dash",
+          "contact",
+          "crit-1",
+          "flinch-20"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 60."
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "predicate": [],
+        "variant": "sneak-atk",
+        "description": "<p>Trigger: The user's current AV is less than 60.</p>"
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

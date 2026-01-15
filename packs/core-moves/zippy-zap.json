@@ -12,8 +12,8 @@
         "traits": [
           "mascot",
           "crit-4",
-          "priority-10",
-          "contact"
+          "contact",
+          "priority-30"
         ],
         "range": {
           "target": "creature",
@@ -22,8 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "priority": 1
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 80,
@@ -31,20 +30,54 @@
         "types": [
           "electric"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "zippy-zap-interrupt",
+        "name": "Zippy Zap (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "mascot",
+          "crit-4",
+          "contact",
+          "flinch-20",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "The user's current AV is less than 60."
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 60.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "variant": "zippy-zap",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C",
+    "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "688eKLk0PpR7TUuf",

@@ -11,7 +11,7 @@
         "type": "attack",
         "traits": [
           "paradox",
-          "priority-20"
+          "priority-25"
         ],
         "range": {
           "target": "creature",
@@ -20,8 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "priority": 2
+          "powerPoints": 5
         },
         "category": "special",
         "power": 70,
@@ -29,16 +28,17 @@
         "types": [
           "electric"
         ],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "predicate": []
       },
       {
-        "slug": "thunderclap-reaction",
-        "name": "Thunderclap (Reaction)",
+        "slug": "thunderclap-interrupt",
+        "name": "Thunderclap (Interrupt)",
         "type": "attack",
         "traits": [
           "paradox",
-          "interrupt-2"
+          "flinch-30",
+          "interrupt-5"
         ],
         "range": {
           "target": "creature",
@@ -48,7 +48,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "trigger": "<p>The user is targeted by a  Attack.</p>"
+          "trigger": "The user's current AV is less than 100."
         },
         "category": "special",
         "power": 70,
@@ -56,14 +56,13 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Trigger: The user is targeted by a  Attack.</p><p>Effect: The user attacks the triggering creature with this attack. If the target gains @Affliction[fainted] due to damage from this move, the triggering attack fails.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "predicate": [],
         "variant": "thunderclap",
-        "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "description": "<p>Trigger: The user's current AV is less than 100.</p>"
       }
     ],
-    "grade": "C",
+    "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

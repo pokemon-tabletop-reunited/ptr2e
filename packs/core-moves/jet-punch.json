@@ -11,8 +11,35 @@
         "type": "attack",
         "traits": [
           "punch",
-          "priority-40",
-          "contact"
+          "priority-40"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "jet-punch-interrupt",
+        "name": "Jet Punch (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "contact",
+          "flinch-30",
+          "interrupt-3"
         ],
         "range": {
           "target": "creature",
@@ -21,8 +48,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "priority": 4
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 80."
         },
         "category": "physical",
         "power": 60,
@@ -30,11 +57,13 @@
         "types": [
           "water"
         ],
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": [],
+        "description": "<p>Trigger: The user's current AV is less than 80.</p>",
+        "variant": "jet-punch"
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

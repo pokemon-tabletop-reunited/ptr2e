@@ -12,17 +12,16 @@
         "traits": [
           "5-strike",
           "missile",
-          "priority-10"
+          "priority-35"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "priority": 1
+          "powerPoints": 3
         },
         "category": "special",
         "power": 15,
@@ -30,20 +29,52 @@
         "types": [
           "water"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "water-shuriken-interrupt",
+        "name": "Water Shuriken (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "5-strike",
+          "missile",
+          "flinch-25"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 75."
+        },
+        "category": "special",
+        "power": 15,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 75.</p>",
+        "img": "systems/ptr2e/img/svg/water_icon.svg",
+        "variant": "water-shuriken",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "L0dZPXlo5aPLZFzi",

@@ -4,13 +4,13 @@
   "_id": "xwk1Zm5233VHiy4O",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "air-raid",
     "actions": [
       {
         "name": "Air Raid",
         "slug": "air-raid",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
         "traits": [
           "5-strike",
           "contact",
@@ -25,47 +25,63 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "priority": 1
+          "powerPoints": 4
         },
-        "variant": null,
         "types": [
           "flying"
         ],
         "category": "physical",
         "power": 30,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "predicate": []
+      },
+      {
+        "name": "Air Raid (Interrupt)",
+        "slug": "air-raid-interrupt",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "traits": [
+          "5-strike",
+          "contact",
+          "dash",
+          "recoil-1-4",
+          "flinch-30",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "The user's current AV is less than 65."
+        },
+        "variant": "air-raid",
+        "types": [
+          "flying"
+        ],
+        "category": "physical",
+        "power": 30,
+        "accuracy": 90,
+        "description": "<p>Trigger: The user's current AV is less than 65.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 100000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719596998515,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

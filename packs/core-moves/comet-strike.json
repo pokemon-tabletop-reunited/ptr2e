@@ -4,17 +4,17 @@
   "_id": "mFzJKUaLbQQxLMqu",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "comet-strike",
     "actions": [
       {
         "name": "Comet Strike",
         "slug": "comet-strike",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "traits": [
-          "priority-10",
           "dash",
-          "contact"
+          "contact",
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -23,46 +23,59 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 2
         },
-        "variant": null,
         "types": [
           "fire"
         ],
         "category": "physical",
         "power": 40,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "predicate": []
+      },
+      {
+        "name": "Comet Strike (Interrupt)",
+        "slug": "comet-strike-interrupt",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "dash",
+          "contact",
+          "flinch-10",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "variant": "comet-strike",
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 1800000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719595099066,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": []
 }

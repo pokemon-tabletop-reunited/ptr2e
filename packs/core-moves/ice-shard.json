@@ -11,17 +11,16 @@
         "type": "attack",
         "traits": [
           "missile",
-          "priority-10"
+          "priority-30"
         ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 40,
@@ -29,20 +28,52 @@
         "types": [
           "ice"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "ice-shardlp-w1v-zsmhvh-ziojh",
+        "name": "Ice Shard Variant",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "flinch-15",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user's current AV is less than 45."
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 45.</p>",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "variant": "ice-shard",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "VCZ3gj0SoGu1NW8O",

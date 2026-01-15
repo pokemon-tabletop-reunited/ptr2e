@@ -10,9 +10,9 @@
         "name": "Mach Punch",
         "type": "attack",
         "traits": [
-          "priority-10",
           "punch",
-          "contact"
+          "contact",
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -21,8 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "priority": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 40,
@@ -30,20 +29,51 @@
         "types": [
           "fighting"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "mach-punch-interrupt",
+        "name": "Mach Punch (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "contact",
+          "flinch-10",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "variant": "mach-punch",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "TPuO1edsEdd4LNRy",

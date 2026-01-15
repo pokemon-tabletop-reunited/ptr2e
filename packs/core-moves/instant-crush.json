@@ -11,17 +11,17 @@
         "type": "attack",
         "traits": [
           "crushing",
-          "priority-10"
+          "crit-1",
+          "priority-20"
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 2,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "powerPoints": 3
         },
         "category": "special",
         "power": 60,
@@ -31,10 +31,44 @@
         ],
         "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/psychic_icon.svg",
-        "defensiveStat": "def"
+        "defensiveStat": "def",
+        "predicate": []
+      },
+      {
+        "slug": "instant-crush-interrupt",
+        "name": "Instant Crush (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "crit-1",
+          "flinch-40",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "priority": 1,
+          "trigger": "The user's current AV is less than 70."
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 85,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 70.</p><p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "defensiveStat": "def",
+        "variant": "instant-crush",
+        "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null
@@ -43,8 +77,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "PAVy0l3CS8e2Vi5x",
   "effects": []

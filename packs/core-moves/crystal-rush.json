@@ -11,8 +11,37 @@
         "type": "attack",
         "traits": [
           "dash",
-          "priority-10",
-          "contact"
+          "contact",
+          "priority-25"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 55,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "<p>Effect: This attack is neutral against all Types, and ignores Type immunities.</p>",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "crystal-rush-interrupt",
+        "name": "Crystal Rush (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "flinch-25",
+          "interrupt-3"
         ],
         "range": {
           "target": "creature",
@@ -22,7 +51,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "priority": 1
+          "trigger": "The user's current AV is less than 65."
         },
         "category": "physical",
         "power": 55,
@@ -30,9 +59,10 @@
         "types": [
           "rock"
         ],
-        "description": "<p>Effect: This attack is neutral against all Types, and ignores Type immunities.</p>",
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "description": "<p>Trigger: The user's current AV is less than 65.</p><p>Effect: This attack is neutral against all Types, and ignores Type immunities.</p>",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "predicate": [],
+        "variant": "crystal-rush"
       }
     ],
     "grade": "C",
@@ -45,7 +75,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "DlWfIdSFTuOpY0YW",

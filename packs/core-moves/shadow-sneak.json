@@ -12,8 +12,8 @@
         "traits": [
           "dash",
           "pass-2",
-          "priority-10",
-          "contact"
+          "contact",
+          "priority-40"
         ],
         "range": {
           "target": "creature",
@@ -22,8 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "priority": 1
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 40,
@@ -31,20 +30,53 @@
         "types": [
           "ghost"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "shadow-sneakrflroy-t0wd-ehp-bma",
+        "name": "Shadow Sneak (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "pass-2",
+          "contact",
+          "flinch-10"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 45."
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 45.</p>",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "variant": "shadow-sneak",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "dLTM9MXRJndGERXj",

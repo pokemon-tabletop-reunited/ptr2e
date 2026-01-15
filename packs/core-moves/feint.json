@@ -11,9 +11,9 @@
         "type": "attack",
         "traits": [
           "dash",
-          "priority-20",
           "contact",
-          "pierce"
+          "pierce",
+          "priority-25"
         ],
         "range": {
           "target": "creature",
@@ -22,8 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "priority": 2
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 30,
@@ -31,19 +30,54 @@
         "types": [
           "normal"
         ],
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "feint-interrupt",
+        "name": "Feint (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "pierce",
+          "flinch-25",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 60."
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 60.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "variant": "feint",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "PjOZd4TXRrr4PyHx",

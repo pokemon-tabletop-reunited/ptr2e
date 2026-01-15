@@ -11,8 +11,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "priority-10",
-          "contact"
+          "contact",
+          "priority-20"
         ],
         "range": {
           "target": "creature",
@@ -21,8 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "priority": 1
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 65,
@@ -30,20 +29,53 @@
         "types": [
           "fire"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "flame-impact-interrupt",
+        "name": "Flame Impact (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "flinch-30",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 55."
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 55.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "variant": "flame-impact",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "cJEAe6BB6VRKgq8F",

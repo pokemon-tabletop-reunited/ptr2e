@@ -11,8 +11,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "priority-20",
-          "contact"
+          "contact",
+          "priority-60"
         ],
         "range": {
           "target": "creature",
@@ -21,8 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "priority": 2
+          "powerPoints": 5
         },
         "category": "physical",
         "power": 80,
@@ -30,20 +29,53 @@
         "types": [
           "normal"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "extreme-speedf-fbjwl-xdlgq-we38n",
+        "name": "Extreme Speed (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "flinch-20",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "trigger": "The user's current AV is less than 100."
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 100.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "variant": "extreme-speed",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C",
+    "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "FMxkce89JzTELo3Z",

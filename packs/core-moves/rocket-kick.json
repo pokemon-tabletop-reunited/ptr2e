@@ -15,7 +15,7 @@
           "double-strike",
           "kick",
           "contact",
-          "priority-20"
+          "priority-25"
         ],
         "range": {
           "target": "creature",
@@ -24,8 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 2
+          "powerPoints": 3
         },
         "types": [
           "fire"
@@ -34,9 +33,40 @@
         "power": 30,
         "accuracy": 90,
         "predicate": []
+      },
+      {
+        "name": "Rocket Kick (Interrupt)",
+        "slug": "rocket-kickafpdl-hu88h-qgt6t8",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "double-strike",
+          "kick",
+          "contact",
+          "flinch-15"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 55."
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "power": 30,
+        "accuracy": 90,
+        "predicate": [],
+        "variant": "rocket-kick",
+        "description": "<p>Trigger: The user's current AV is less than 55.</p>"
       }
     ],
-    "grade": "E",
+    "grade": "C",
     "traits": [],
     "_migration": {
       "version": null,
@@ -46,7 +76,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "effects": []

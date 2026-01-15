@@ -10,11 +10,11 @@
         "name": "Pressure Wave",
         "slug": "pressure-wave",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
         "traits": [
           "earthbound",
-          "priority-10",
-          "pulse"
+          "pulse",
+          "priority-40"
         ],
         "range": {
           "target": "cone",
@@ -23,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 3
         },
         "types": [
           "ground"
@@ -32,9 +32,40 @@
         "power": 40,
         "accuracy": 100,
         "predicate": []
+      },
+      {
+        "name": "Pressure Wave (Interrupt)",
+        "slug": "pressure-wave-interrupt",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "traits": [
+          "earthbound",
+          "pulse",
+          "flinch-20",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user's current AV is less than 65."
+        },
+        "types": [
+          "ground"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "predicate": [],
+        "description": "<p>Trigger: The user's current AV is less than 65.</p>",
+        "variant": "pressure-wave"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [

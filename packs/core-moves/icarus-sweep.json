@@ -11,19 +11,18 @@
         "type": "attack",
         "traits": [
           "kick",
-          "priority-10",
           "contact",
+          "priority-15",
           "push-3"
         ],
         "range": {
-          "target": "cone",
-          "distance": 2,
+          "target": "creature",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "priority": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 60,
@@ -31,20 +30,54 @@
         "types": [
           "flying"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "icarus-sweepypi92cr-npttp8dis",
+        "name": "Icarus Sweep (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "kick",
+          "contact",
+          "interrupt-2",
+          "flinch-20",
+          "push-3"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user's current AV is less than 45."
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 45.</p>",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
+        "variant": "icarus-sweep",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "C3lFIFdSs44IVgxX",

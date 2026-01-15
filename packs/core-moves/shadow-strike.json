@@ -11,8 +11,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "priority-20",
-          "contact"
+          "contact",
+          "priority-50"
         ],
         "range": {
           "target": "creature",
@@ -21,8 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 2
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 30,
@@ -30,20 +29,52 @@
         "types": [
           "shadow"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
+      },
+      {
+        "slug": "shadow-strike-interrupt",
+        "name": "Shadow Strike (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "flinch-30"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user's current AV is less than 75."
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "types": [
+          "shadow"
+        ],
+        "description": "<p>Trigger: The user's current AV is less than 75.</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "variant": "shadow-strike",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "E",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "CWZLhRp8Qx4PxaZ8",

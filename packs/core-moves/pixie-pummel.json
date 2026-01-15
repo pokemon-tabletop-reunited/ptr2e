@@ -10,12 +10,12 @@
         "name": "Pizxie Pummel",
         "slug": "pixie-pummel",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
         "traits": [
           "contact",
           "6-strike",
           "dash",
-          "priority-10"
+          "priority-20"
         ],
         "range": {
           "target": "creature",
@@ -24,8 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "priority": 2
+          "powerPoints": 4
         },
         "types": [
           "fairy"
@@ -35,6 +34,38 @@
         "accuracy": 85,
         "description": "<p>Effect: On hit, the user loses -1 DEF and SPDEF Stage for 5 Activations.</p>",
         "predicate": []
+      },
+      {
+        "name": "Pizxie Pummel (Interrupt)",
+        "slug": "pixie-pummelx-e70dlcpbh-pg5vyf",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "traits": [
+          "contact",
+          "6-strike",
+          "dash",
+          "flinch-20",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "The user's current AV is less than 55."
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "physical",
+        "power": 30,
+        "accuracy": 85,
+        "description": "<p>Trigger: The user's current AV is less than 55.</p><p>Effect: On hit, the user loses -1 DEF and SPDEF Stage for 5 Activations.</p>",
+        "predicate": [],
+        "variant": "pixie-pummel"
       }
     ],
     "grade": "B",
@@ -47,7 +78,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -67,7 +99,10 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -78,14 +113,19 @@
             "affects": "self",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -107,12 +147,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737314881585,
         "modifiedTime": 1737314931899,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

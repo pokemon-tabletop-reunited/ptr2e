@@ -11,17 +11,16 @@
         "type": "attack",
         "traits": [
           "missile",
-          "priority-10"
+          "priority-25"
         ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "powerPoints": 2
         },
         "category": "special",
         "power": 40,
@@ -29,11 +28,39 @@
         "types": [
           "psychic"
         ],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "predicate": []
+      },
+      {
+        "slug": "psybolt-interrupt",
+        "name": "Psybolt (Interrupt)",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "flinch-15"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "predicate": [],
+        "description": "<p>Trigger: The user's current AV is less than 45.</p>",
+        "variant": "psybolt"
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
