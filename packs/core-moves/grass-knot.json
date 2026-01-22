@@ -14,7 +14,7 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
@@ -56,22 +56,25 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "grass-knot-attack-power",
-            "value": "min(600,@target.system.details.size.weightClass*50)",
+            "type": "alter-attack",
+            "key": "grass-knot-attack",
+            "value": "max(20,min(140,@target.system.details.size.weightClass*10))",
             "predicate": [],
             "label": "Grass Knot Scaling",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 5,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -89,16 +92,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.iWdcVdEe3eMHGjUu.ActiveEffect.RWoOCmigMhLceiZI",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1743515719282,
-        "modifiedTime": 1743546961634,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1767160838473,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

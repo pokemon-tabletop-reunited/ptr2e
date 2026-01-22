@@ -14,12 +14,12 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 5
         },
         "category": "special",
         "power": 20,
@@ -56,22 +56,25 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "stored-pwr-attack-power",
+            "type": "alter-attack",
+            "key": "stored-pwr-attack",
             "value": "20 * (max(0,@actor.system.attributes.atk.stage)+max(0,@actor.system.attributes.def.stage)+max(0,@actor.system.attributes.spa.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.battleStats.accuracy.stage)+max(0,@actor.system.battleStats.evasion.stage)+max(0,round(@actor.system.battleStats.critRate.stage*1.5)))",
             "predicate": [],
             "label": "Stored Power",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -89,16 +92,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.yoBSCEEZtzbZESMt.ActiveEffect.SGs4pJyAdVY8y4Ah",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1740188922597,
-        "modifiedTime": 1745090631006,
-        "lastModifiedBy": "n5bBYe2ClImhFeB2"
+        "modifiedTime": 1767161376172,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

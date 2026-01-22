@@ -70,24 +70,24 @@
             "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "superspread-attack-power",
+            "type": "alter-attack",
+            "key": "superspread-attack",
             "value": "20*@actor.clocks.superspreadClock",
             "predicate": [],
-            "label": "Iterative Boost",
+            "property": "power",
+            "definition": [],
             "mode": 2,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "superspread-attack-accuracy",
+            "type": "alter-attack",
+            "key": "superspread-attack",
             "value": "-5*@actor.clocks.superspreadClock",
             "predicate": [],
-            "label": "Iterative Reduction",
+            "property": "accuracy",
+            "definition": [],
             "mode": 2,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -139,7 +139,7 @@
               }
             ],
             "chance": 100,
-            "isFixedChance": false,
+            "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
@@ -202,7 +202,7 @@
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
         "createdTime": 1766455966348,
-        "modifiedTime": 1767137704561,
+        "modifiedTime": 1767157772643,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
