@@ -1,0 +1,255 @@
+{
+  "folder": "V4skAU6G3OH5fXac",
+  "name": "CerasAires ES-4u Expedition Frame",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "es-4u-expedition-frame",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "backpack",
+      "sci-fi"
+    ],
+    "actions": [],
+    "description": "<p>The CerasAires ES-4u Expedition Frame is a naked powered exoskeleton that is designed to be worn on top of clothing, standard armor, and light EVA suits, and will not fit around powered armor or full EVA or voidsuits. It is primarily designed to assist with lifting and hauling duties in remote decently-hospitable colonies, and its lack of armoring means that it doesn’t hold up well in a dedicated combat role and is vulnerable to mechanical malfunctions resulting from combat.<br><br>Grant +20 Base ATK, increases the Physical damage the user deals, and grants +3 Belt and +1 Accessory Slots, but the user is more susceptible to Critial Hits from @Trait[electric], @Trait[nuclear], @Trait[sharp], and @Trait[explode] Attacks.<br><br>As well, whenver the user is hit by a Critical Hit, they are @Affliction[delay 30], have a 15% of gaining @Affliction[splinter 3], and have a 50% chance of losing -1 ATK and SPD Stages for 3 Activations.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "backpack",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 130,
+      "accuracy": 65,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 1,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Expedition Frame",
+      "type": "passive",
+      "_id": "bON3OAikQkc4XsFx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.inventory.belt.max",
+            "value": 3,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.inventory.accessory.max",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "hp": null,
+            "atk": 20,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "physical-attack-damage",
+            "value": 5,
+            "predicate": [],
+            "label": "Expedition Frame (Phys Flat)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 15,
+            "predicate": [],
+            "label": "Expedition Frame (Phys Perc)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "electric-attack-crit-stage-flat",
+            "value": 1,
+            "predicate": [],
+            "label": "Expedition Frame (Vuln - Electric)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "nuclear-attack-crit-stage-flat",
+            "value": 1,
+            "predicate": [],
+            "label": "Expedition Frame (Vuln - Nuclear)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "sharp-trait-attack-crit-stage-flat",
+            "value": 1,
+            "predicate": [],
+            "label": "Expedition Frame (Vuln - Sharp)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "explode-attack-crit-stage-flat",
+            "value": 1,
+            "predicate": [],
+            "label": "Expedition Frame (Vuln - Explode)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.2,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 15,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.xbipXPhCJKizKZlg",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "izyuuYCeUai4Fkki"
+}
