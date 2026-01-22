@@ -2141,7 +2141,7 @@
     "slug": "firearm",
     "label": "Firearm",
     "related": [],
-    "description": "This trait refers to guns and other such @Trait[projectile] devices that utilize an explosive charge to propel one or more projectiles down a barrel to inflict damage on a target. Firearms tend to be synonymous with more cold and calculated modern-style warfare, away from the romanticized sword and spear combat of the Middle Ages and Antiquity, and are ubiquitious in many settings that resemble contemporary society to any degree."
+    "description": "This trait refers to guns and other such @Trait[projectile] devices that utilize an explosive charge to propel one or more projectiles down a barrel to inflict damage on a target. Firearms tend to be synonymous with more cold and calculated modern-style warfare, away from the romanticized sword and spear combat of the Middle Ages and Antiquity, and are ubiquitious in many settings that resemble contemporary society to any degree. Attacks made by Firearm @Trait[weapon]s are Physical-Category, but utilize the attacker’s SPATK for damage calculation."
   },
   {
     "slug": "weathervane",
@@ -4005,20 +4005,6 @@
     "type": "automated"
   },
   {
-    "slug": "aberrant",
-    "label": "Aberrant",
-    "related": [],
-    "description": "This represents the Aberrant Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @Trait[adaptable] Actions provided by the Item (including the user's own Struggle).",
-    "type": "automated"
-  },
-  {
-    "slug": "radiant",
-    "label": "Radiant",
-    "related": [],
-    "description": "This represents the Radiant Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @Trait[adaptable] Actions provided by the Item (including the user's own Struggle).",
-    "type": "automated"
-  },
-  {
     "slug": "type-shift",
     "label": "Type Shift",
     "related": [],
@@ -4517,6 +4503,36 @@
     "description": "Weapons with this trait use a mechanism to automatically feed their ammunition, rather than loading each shot by hand, like with a sling, bow, or muzzleloading firearm."
   },
   {
+    "slug": "caseless",
+    "label": "Caseless",
+    "related": [],
+    "description": "A @Trait[firearm] @Trait[weapon] with this trait uses advanced solid block ammunition – no longer needing a case or primer, only the bullet wrapped in the solid propellant ignited by an electric impulse, with no case or eject or clear. This ammunition is also significantly more space-efficient – these weapons have a @Trait[charge-pool-x] usually 1.5× to 4× times larger than contemporary cased firearms of similar design."
+  },
+  {
+    "slug": "coilgun",
+    "label": "Coilgun",
+    "related": [],
+    "description": "A @Trait[weapon] with this trait resembles a @Trait[firearm], but instead utilizes an array of electromagnets curled around a barrel as a sort of linear motor to fire a conductive projectile. These weapons feature physical ammunition like @Trait[firearm]s and expendable batteries like @Trait[laser] weapons, which causes their reloads to cost +1 IP. Attacks made by Coilgun @Trait[weapon]s are Physical-Category, but utilize the attacker’s SPATK for damage calculation."
+  },
+  {
+    "slug": "arc",
+    "label": "Arc",
+    "related": [],
+    "description": "A @Trait[weapon] with this trait utilizes technology to harness prolonged, high-yield electric discharges that, when jumping through most mediums, produces a plasma arc and heat akin to lightning."
+  },
+  {
+    "slug": "plasma",
+    "label": "Plasma",
+    "related": [],
+    "description": "A @Trait[weapon] with this trait fires superheated blasts of plasma energy as a @Trait[firearm] would a bullet."
+  },
+  {
+    "slug": "powered",
+    "label": "Powered",
+    "related": [],
+    "description": "Equipment or Gear with this trait utilizes motors or some other method (technological or magical) to augment the user’s body - adding to and slightly enhancing their natural strength."
+  },
+  {
     "slug": "ranger",
     "label": "Ranger",
     "related": [],
@@ -4729,6 +4745,12 @@
     "label": "UFO",
     "related": [],
     "description": "This Trait denotes the creature to be or be in a Unidentified Flying Object (UFO). Meaning they must use Pilot (Aerospace) for its Rush skill."
+  },
+  {
+    "slug": "impel",
+    "label": "Impel",
+    "related": [],
+    "description": "Denotes if an Action or effect is violently provocative. Generally, this is a forceful measure to exert control of or coerce action from its target."
   },
   {
     "slug": "agitator",
