@@ -12,6 +12,19 @@
             {{formField fields.equipped.fields.carryType value=source.system.equipped.carryType localize=true}}
             {{formField fields.equipped.fields.slot value=source.system.equipped.slot localize=true}}
             {{formField fields.equipped.fields.handsHeld value=source.system.equipped.handsHeld localize=true}}
+            {{formField fields.ammoType value=source.system.ammoType localize=true}}
+            <div class="form-group">
+              <label>{{localize "PTR2E.FIELDS.gear.ammo.label"}}</label>
+              <div class="form-fields">
+                <select name="system.ammo">
+                  <option value="">--</option>
+                  {{#each ammoOptions}}
+                    <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <p class="hint">{{localize "PTR2E.FIELDS.gear.ammo.hint"}}</p>
+            </div>
         </fieldset>
         <fieldset>
             <legend>

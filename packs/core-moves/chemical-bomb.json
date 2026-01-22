@@ -10,15 +10,15 @@
         "name": "Chemical Bomb",
         "slug": "chemical-bomb",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [
-          "sky",
           "environ",
-          "explode"
+          "explode",
+          "blast-2"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
@@ -31,22 +31,23 @@
         "category": "special",
         "power": 110,
         "accuracy": 70,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison 5].</p>",
+        "predicate": []
       },
       {
         "name": "Chemical Bomb (Smoggy)",
         "slug": "chemical-bomb-smoggy",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [
           "sky",
           "environ",
-          "danger-close",
-          "explode"
+          "explode",
+          "blast-2"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
@@ -61,7 +62,8 @@
         "category": "special",
         "power": 110,
         "accuracy": 70,
-        "description": "<p>Trigger: While Smoogy Weather is present.</p><p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5.</p>"
+        "description": "<p>Trigger: While Smoogy Weather is present.</p><p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison 5].</p>",
+        "predicate": []
       }
     ],
     "grade": "B",
@@ -73,8 +75,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -93,14 +97,19 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -122,12 +131,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729531678032,
         "modifiedTime": 1729531707464,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

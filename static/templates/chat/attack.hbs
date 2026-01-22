@@ -27,6 +27,7 @@
           <article class="collapsed">
               {{#if data.rolls.accuracy}}{{#if @root.metagameInfo.showAccuracyRoll}}{{{data.rolls.accuracy}}}{{/if}}{{/if}}
               {{#if data.rolls.crit}}{{#if @root.metagameInfo.showAccuracyRoll}}{{{data.rolls.crit}}}{{/if}}{{/if}}
+              {{#if data.rolls.amount}}{{#if @root.metagameInfo.showAccuracyRoll}}{{{data.rolls.amount}}}{{/if}}{{/if}}
               {{#if data.rolls.damage}}{{#if @root.metagameInfo.showDamageRoll}}{{{data.rolls.damage}}}{{/if}}{{/if}}
               {{#if @root.metagameInfo.showEffectRolls}}
               {{#each data.rolls.effects}}
@@ -88,7 +89,7 @@
           {{#if (and @root.hasDamage @root.hasEffect)}}
             <div class="damage" {{#if @root.metagameInfo.showDamageTooltip}}data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT"{{/if}}>
               {{#if @root.metagameInfo.showDamageResult}}
-                <span>{{data.damage}}</span>
+                <span>{{data.damage}}{{#if data.amount}} x {{data.amount}}{{/if}}</span>
               {{else}}
                 <i class="fas fa-question"></i>
               {{/if}}
@@ -132,7 +133,7 @@
           {{else if @root.hasDamage}}
               <div class="damage" {{#if @root.metagameInfo.showDamageTooltip}}data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT"{{/if}}>
                 {{#if @root.metagameInfo.showDamageResult}}
-                  <span>{{data.damage}}</span>
+                  <span>{{data.damage}}{{#if data.amount}} x {{data.amount}}{{/if}}</span>
                 {{else}}
                   <i class="fas fa-question"></i>
                 {{/if}}
@@ -179,4 +180,14 @@
           </div>
         </div>
     {{/each}}
+    {{#if (gt results.size 1)}}
+      <div class="target target-footer">
+        <button type="button" class="apply-damage-all-hit" data-tooltip="Apply to all hit targets">
+          <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.ApplyAllHit"}}
+        </button>
+        <button type="button" class="apply-damage-all" data-tooltip="Apply to all targets, including misses">
+          <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.ApplyAll"}}
+        </button>
+      </div>
+    {{/if}}
 </footer>

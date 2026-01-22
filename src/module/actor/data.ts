@@ -45,7 +45,7 @@ export type DeferredEffectRoll = DeferredPromise<EffectRoll | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
 interface ActorSynthetics {
-  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[] } | undefined>;
+  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[], defensive: DeferredEphemeralEffect[] } | undefined>;
   ephemeralModifiers: Record<string, DeferredModifier[]>;
   modifierAdjustments: ModifierAdjustmentSynthetics;
   modifiers: ModifierSynthetics;
@@ -62,6 +62,7 @@ interface ActorSynthetics {
   effectsRemovedAfterAttacking: ActiveEffectPTR2e[];
   effectsRemovedAfterAttacked: ActiveEffectPTR2e[];
   toggles: RollOptionToggle[];
+  moveVariants: Record<string, (() => AttackAdjustment)[]>;
   attackAdjustments: Record<string, (() => AttackAdjustment)[]>;
   tokenTags: Map<TokenDocumentUUID, string>;
   tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {

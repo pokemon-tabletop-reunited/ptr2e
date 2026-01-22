@@ -208,6 +208,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       "move",
       "perk",
       "species",
+      "ptr2e-digimon-expansion.digimonSpecies",
       "weapon"
     ] as const)
     type BrowsableType = SetElement<typeof browsableTypes>;
@@ -219,6 +220,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       ["move", "move"],
       ["perk", "perk"],
       ["species", "species"],
+      ["ptr2e-digimon-expansion.digimonSpecies", "species"],
       ["weapon", "gear"],
     ]);
 

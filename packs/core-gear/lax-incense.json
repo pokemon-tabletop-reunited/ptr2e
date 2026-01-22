@@ -17,11 +17,10 @@
     },
     "traits": [
       "accessory",
-      "held",
-      "needs-automation"
+      "held"
     ],
     "actions": [],
-    "description": "<p>Attacks targeting the user have -5 Accuracy, and the user has +5% RES. Wynaut and Wobbuffet users gain an additional +25% RES, and +10 Base HP.</p>",
+    "description": "<p>Attacks targeting the user have -5 Accuracy, and the user has +5% RES. @UUID[Compendium.ptr2e.core-species.RMlsWjTFvdJLQIAp]{Wynaut} and @UUID[Compendium.ptr2e.core-species.nDWC0gq0pNsTrETE]{Wobbuffet} users gain an additional +25% RES, and +10 Base HP.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -35,12 +34,12 @@
     "grade": "C",
     "fling": {
       "type": "psychic",
-      "power": 90,
+      "power": 100,
       "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -58,6 +57,105 @@
   },
   "_id": "PcWVoDKbVqnYdYbC",
   "img": "systems/ptr2e/img/item-icons/lax incense.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Lax Incense",
+      "type": "passive",
+      "_id": "Y0F9rygvWVle2rzh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": -5,
+            "predicate": [],
+            "label": "Lax Incense",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 25,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:wynaut",
+                  "item:species:wobbuffet"
+                ]
+              }
+            ],
+            "label": "Lax Incense",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:wynaut",
+                  "item:species:wobbuffet"
+                ]
+              }
+            ],
+            "hp": 10,
+            "atk": null,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766260256392,
+        "modifiedTime": 1766260427579,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

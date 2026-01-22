@@ -35,8 +35,8 @@ class ItemPTR2e<
   }
 
   get grantedBy(): ItemPTR2e | ActiveEffectPTR2e | null {
-    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
-      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
+    return (this.actor?.items.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
+      ?? (this.actor?.effects.get(this.flags.ptr2e?.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
       ?? null;
   }
 
@@ -58,7 +58,7 @@ class ItemPTR2e<
     return "traits" in this.system ? this.system.traits : null;
   }
 
-  getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
+  getRollOptions(prefix = this.type, { includeGranter = true, includeActor = true } = {}): string[] {
     const traitOptions = ((): string[] => {
       if (!this.traits) return [];
       const options = [];
@@ -81,12 +81,16 @@ class ItemPTR2e<
       ]
       : [] as string[];
 
+    const actorOptions = includeActor && this.parent
+      ? this.parent.getRollOptions().map((o) => `actor:${o}`)
+      : [];
+
     const options = [
       `${prefix}:id:${this.id}`,
       `${prefix}:${this.slug}`,
       `${prefix}:slug:${this.slug}`,
       ...granterOptions,
-      ...(this.parent?.getRollOptions() ?? []).map((o) => `actor:${o}`),
+      ...actorOptions,
       ...traitOptions.map((o) => `${prefix}:${o}`),
       ...gearOptions.map((o) => `${prefix}:${o}`),
     ];
@@ -219,11 +223,12 @@ class ItemPTR2e<
     const actor = context?.parent as ActorPTR2e | null;
     if (!actor) return super.createDocuments<TDocument>(data, context);
 
-    const specialTypes = ["species"];
+    const specialTypes = ["species", "ptr2e-digimon-expansion.digimonSpecies"];
 
     for (const source of sources) {
       if (specialTypes.includes(source.type as string)) {
         switch (source.type) {
+          case "ptr2e-digimon-expansion.digimonSpecies":
           case "species": {
             const speciesItem = actor.items.get("actorspeciesitem") as ItemPTR2e<ItemSystemPTR, ActorPTR2e>;
             if (speciesItem) {
@@ -245,9 +250,10 @@ class ItemPTR2e<
     }
 
     async function processSources(sources: ItemSourcePTR2e[]) {
+      const sourcesArray = [...sources];
       const outputItemSources: ItemSourcePTR2e[] = sources;
 
-      for (const source of sources) {
+      for (const source of sourcesArray) {
         if (!source.effects?.length) continue;
         const item = new CONFIG.Item.documentClass(source as ItemPTR2e["_source"], { parent: actor }) as ItemPTR2e;
         const effects = source.effects.map((e: unknown) => new CONFIG.ActiveEffect.documentClass(e as ActiveEffectPTR2e["_source"], { parent: item }) as ActiveEffectPTR2e);
@@ -288,23 +294,23 @@ class ItemPTR2e<
 
   static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
   static override async createDialog(
-    data: Record<string, unknown> = {}, 
+    data: Record<string, unknown> = {},
     createOptions: Record<string, unknown> = {},
     {
-      folders, 
-      types, 
-      template, 
-      context, 
+      folders,
+      types,
+      template,
+      context,
       ...dialogOptions
     }: {
-      folders?: {id: string, name: string}[];
+      folders?: { id: string, name: string }[];
       types?: string[];
       template?: string;
     } & {
       context?: { parent?: Actor; pack?: Collection<ItemPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
     } = {}
   ) {
-    if(types?.length) types = types.filter(t => t !== "ptu-item");
+    if (types?.length) types = types.filter(t => t !== "ptu-item");
     else types = this.TYPES.filter(t => t !== "ptu-item");
 
     return super.createDialog(data, createOptions, {
@@ -421,12 +427,12 @@ class ItemPTR2e<
 
   async syncData(): Promise<void> {
     const sourceId = this.flags.core?.sourceId || this._stats?.compendiumSource;
-    if(!sourceId) {
+    if (!sourceId) {
       return void ui.notifications.error("Unable to detect source for this item, unable to sync.");
     }
 
     const source = await fu.fromUuid(sourceId) as this;
-    if(!source) {
+    if (!source) {
       return void ui.notifications.error("The source this item references no longer exists.");
     }
 
@@ -439,18 +445,18 @@ class ItemPTR2e<
     }
 
     // Preserve action slot
-    if((thisData.system?.actions as ActionPTR2e[])?.length && diff.system && typeof diff.system == "object" && 'actions' in diff.system && diff.system.actions && Array.isArray(diff.system.actions) && diff.system.actions.length) {
+    if ((thisData.system?.actions as ActionPTR2e[])?.length && diff.system && typeof diff.system == "object" && 'actions' in diff.system && diff.system.actions && Array.isArray(diff.system.actions) && diff.system.actions.length) {
       const actionSlots = (thisData.system.actions as ActionPTR2e[])?.flatMap(a => typeof a.slot == 'number' ? { slug: a.slug, slot: a.slot } : []) ?? [];
-      for(const entry of actionSlots) {
+      for (const entry of actionSlots) {
         const action = diff.system.actions.find((a: ActionPTR2e) => a.slug === entry.slug);
-        if(action && !isNaN(entry.slot)) {
+        if (action && !isNaN(entry.slot)) {
           action.slot = entry.slot;
         }
       }
     }
 
     // Preserve ability slots
-    if(thisData.system.slot && !isNaN(thisData.system.slot as number) && diff.system && typeof diff.system == "object" && 'slot' in diff.system && diff.system.slot) {
+    if (thisData.system.slot && !isNaN(thisData.system.slot as number) && diff.system && typeof diff.system == "object" && 'slot' in diff.system && diff.system.slot) {
       diff.system.slot = thisData.system.slot;
     }
 

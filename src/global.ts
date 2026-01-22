@@ -154,6 +154,7 @@ declare global {
 
   interface ClientSettingsMap {
     get(key: "ptr2e.pokemonTypes"): {default: TypeEffectiveness}
+    get(key: "ptr2e.custom-art-map"): {type: foundry.data.fields.JSONField}
   }
 
   // eslint-disable-next-line @typescript-eslint/no-namespace

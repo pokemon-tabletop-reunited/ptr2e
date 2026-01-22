@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Whipped Dream",
   "type": "equipment",
   "system": {
@@ -8,9 +8,15 @@
       "previous": null
     },
     "slug": "whipped-dream",
-    "traits": [],
+    "traits": [
+      "accessory",
+      "held",
+      "evolution",
+      "swirlix",
+      "slurpuff"
+    ],
     "actions": [],
-    "description": "<p>A soft and sweet treat made of fluffy, puffy, whipped, and whirled cream that boosts the power of Fairy-type moves. It's loved by a certain Pokémon.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base ATK and DEF. @UUID[Compendium.ptr2e.core-species.pxuoV77OKgYBv0sQ]{Swirlix} and @UUID[Compendium.ptr2e.core-species.AdhZNYH88O0j4T0K]{Slurpuff} users deal +15% more and takes -15% less Physical-Category damage.<br><br>A Swirlix may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -18,7 +24,7 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
+      "handsHeld": 1,
       "slot": "accessory"
     },
     "grade": "C",
@@ -26,10 +32,15 @@
       "type": "fairy",
       "power": 70,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -43,56 +54,80 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/whipped%20dream.webp",
   "effects": [
     {
-      "name": "Type Booster (Fairy)",
+      "name": "Whipped Dream",
       "type": "passive",
-      "_id": "TxXTntfh3SMv8nsi",
+      "_id": "PDn2CERdQuEixrp8",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "fairy-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Fairy) Power",
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "trait:fairy"
+            ],
+            "hp": null,
+            "atk": 10,
+            "def": 10,
+            "spa": null,
+            "spd": null,
+            "spe": null,
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "fairy-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Fairy)",
+            "type": "basic",
+            "key": "physical-attack-damage",
+            "value": 15,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:swirlix",
+                  "item:species:slurpuff"
+                ]
+              }
+            ],
+            "label": "Whipped Dream",
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "physical-attack-damage-percentile",
+            "value": -15,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:swirlix",
+                  "item:species:slurpuff"
+                ]
+              }
+            ],
+            "label": "Whipped Dream",
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -100,16 +135,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766207382430,
+        "modifiedTime": 1766207474389,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

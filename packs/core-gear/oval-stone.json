@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Oval Stone",
   "type": "equipment",
   "system": {
@@ -9,16 +9,12 @@
     },
     "slug": "oval-stone",
     "traits": [
-      "combat",
-      "type",
-      "normal",
       "evolution",
-      "happiny",
-      "chancey",
-      "blissey"
+      "accessory",
+      "held"
     ],
     "actions": [],
-    "description": "<p>A peculiar stone that can make a certain species of Pokémon evolve. It is round and smooth, boosting the power of Normal-type moves.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%</p>",
+    "description": "<p>Effect: @UUID[Compendium.ptr2e.core-species.EwWHSoOg3MZwbISa]{Happiny}, @UUID[Compendium.ptr2e.core-species.inXVND6bfUdY5ksv]{Chansey}, and @UUID[Compendium.ptr2e.core-species.bWrd2kY80xae5vQY]{Blissey} users gain +80 Base ATK, and +30 to their Lift.<br><br>A Happiny may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,15 +22,20 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
+      "handsHeld": 1,
       "slot": "accessory"
     },
     "grade": "C",
     "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100,
-      "hide": false
+      "type": "rock",
+      "power": 100,
+      "accuracy": 75,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 7,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -51,37 +52,56 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/oval%20stone.webp",
   "effects": [
     {
-      "name": "Type Booster (Normal)",
+      "name": "Oval Stone",
       "type": "passive",
-      "_id": "G6DCgSb3io2sh1fO",
+      "_id": "2p207ZEzbc4kcI1m",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal) Power",
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:happiny",
+                  "item:species:chansey",
+                  "item:species:blissey"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": 80,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": null,
             "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal)",
+            "type": "flat-modifier",
+            "key": "lift-check",
+            "value": 30,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:happiny",
+                  "item:species:chansey",
+                  "item:species:blissey"
+                ]
+              }
+            ],
+            "label": "Oval Stone",
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -90,17 +110,14 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -108,16 +125,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766206210402,
+        "modifiedTime": 1766206370220,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

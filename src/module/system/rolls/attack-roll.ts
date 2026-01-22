@@ -16,7 +16,7 @@ class AttackRoll extends CheckRoll {
   static override createFromData(
     data: AttackRollCreationData,
     options: AttackRollDataPTR2e,
-    type: "accuracy" | "crit" | "damage" = "accuracy"
+    type: "accuracy" | "crit" | "damage" | "amount" = "accuracy"
   ): AttackRoll | null {
     options.attackType = type;
     switch (type) {
@@ -26,6 +26,8 @@ class AttackRoll extends CheckRoll {
         return AttackRoll.createCritRoll(data, options);
       case "damage":
         return AttackRoll.createDamageRoll(data, options);
+      case "amount":
+        return AttackRoll.createAmountRoll(options);
     }
   }
 
@@ -130,6 +132,19 @@ class AttackRoll extends CheckRoll {
     options.damageMod = data.check.total?.damage?.percentile ?? 1;
 
     return new AttackRoll("2d8", { power }, options);
+  }
+
+  static createAmountRoll(
+    options: AttackRollDataPTR2e
+  ): AttackRoll | null {
+    const { strikes, hits } = options;
+    if (strikes == null || hits == null || strikes < 3) return null;
+    
+
+    options.strikes = strikes;
+    options.hits = Math.clamp(hits, 0, strikes-1);
+
+    return new AttackRoll(hits == 0 ? "1+1d(@strikes - 1)" : "1+@hits+1d(@strikes - @hits - 1)", { strikes, hits: options.hits }, options);
   }
 
   static successCategory(
@@ -253,7 +268,7 @@ class AttackRoll extends CheckRoll {
 
 interface AttackRoll extends CheckRoll {
   options: AttackRollDataPTR2e;
-  attackType: "accuracy" | "crit" | "damage";
+  attackType: "accuracy" | "crit" | "damage" | "amount";
 }
 
 interface AttackRollCreationData {
@@ -263,7 +278,7 @@ interface AttackRollCreationData {
 
 type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   rip: boolean;
-  attackType?: "accuracy" | "crit" | "damage";
+  attackType?: "accuracy" | "crit" | "damage" | "amount";
   power?: number;
   damageMod?: number;
   outOfRange: boolean;
@@ -274,6 +289,8 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   ignoreImmune: boolean;
   targetUnaware: boolean;
   originUnaware: boolean;
+  strikes?: number;
+  hits?: number;
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

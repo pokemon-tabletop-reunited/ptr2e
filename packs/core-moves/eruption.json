@@ -25,18 +25,23 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p>",
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 150.</p>",
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "23Z3l1FUmOXJv9mx",
@@ -49,22 +54,25 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "eruption-attack-power",
-            "value": "(@actor.system.health.percent)-100",
+            "type": "alter-attack",
+            "key": "eruption-attack",
+            "value": "@actor.system.health.percent*1.4+10",
             "predicate": [],
             "label": "Eruption",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 5,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -82,16 +90,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.xf2NuI372VOQGVIL.ActiveEffect.YKMJMRUWhZfZFacZ",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1740185024105,
-        "modifiedTime": 1740185045633,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1767165381108,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

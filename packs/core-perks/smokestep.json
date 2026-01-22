@@ -1,0 +1,135 @@
+{
+  "name": "Smokestep",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Smokestep",
+        "slug": "smokestep",
+        "description": "<p>Effect: As a Simple Action, the user can become @Affliction[invisible 3].<br><br>Passive: Whilst @Affliction[invisible], the user is considered to be Hidden or In Stealth even if enemies are aware of their presence.</p>",
+        "traits": [
+          "ninja"
+        ],
+        "type": "generic",
+        "img": "icons/svg/invisible.svg",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: As a Simple Action, the user can become @Affliction[invisible 3].<br><br>Passive:  Whilst @Affliction[invisible], the user is considered to be Hidden or In Stealth even if enemies are aware of their presence.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ninja"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 186,
+        "y": 44,
+        "connected": [
+          "nothing-is-true",
+          "edgerunner",
+          "army-of-phantoms",
+          "silence-is-golden",
+          "pervasive-shadow"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/svg/invisible.svg",
+  "effects": [
+    {
+      "name": "Smokestep",
+      "type": "passive",
+      "_id": "GCAZE4VE49H2LVol",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "smokestep-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.invisibleconitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "xnEnVeWUELOEknw5"
+}

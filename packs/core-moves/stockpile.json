@@ -10,225 +10,335 @@
         "name": "Stockpile",
         "type": "attack",
         "traits": [
-          "defensive"
+          "defensive",
+          "flinch-20"
         ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "self",
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 1
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: [Linked Attack: Spit Up][Linked Attack: Swallow]</p><p>The user gains 1 @Affliction[stockpile] Stack for 5 Activations. A @Affliction[stockpile] Stack raises the user's DEF and SPDEF Stage by +1. The user may only have a maximum of 3 @Affliction[stockpile] Stacks at a time.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: Each use of this attack fills 1 Span of the the Clock named for this Attack, up to a maximum of 3 Spans. The user gains +1 DEF and SPDEF Stage and +10 RES per Span filled of this Clock.</p><p>This Clock empties when the user resolves @UUID[Compendium.ptr2e.core-moves.Item.mGsDKzPNQ42oalNp.Actions.spit-up]{Spit Up} or @UUID[Compendium.ptr2e.core-moves.Item.mGsDKzPNQ42oalNp.Actions.swallow]{Swallow} and it resets if the user leaves combat, gains @Affliction[fainted], or combat ends.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
       },
       {
-        "slug": "swallow-1",
-        "name": "Swallow-1",
+        "slug": "spit-up",
+        "name": "Spit Up",
         "type": "attack",
         "traits": [
-          "healing",
-          "linked"
+          "missile"
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "trigger": "<p>The user has exactly 1 Stack of @Affliction[stockpile].</p>"
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user has exactly 1 Stack of @Affliction[stockpile].</p><p>Effect: The user spends all @Affliction[stockpile] Stacks to heal 6 Ticks of HP.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "variant": "stockpile",
-        "free": true,
-        "slot": null
-      },
-      {
-        "slug": "swallow-2",
-        "name": "Swallow-2",
-        "type": "attack",
-        "traits": [
-          "healing",
-          "linked"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "trigger": "<p>The user has exactly 2 Stacks of @Affliction[stockpile].</p>"
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user has exactly 2 Stacks of @Affliction[stockpile].</p><p>Effect: The user spends all @Affliction[stockpile] Stacks to heal 12 Ticks of HP.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "variant": "stockpile",
-        "free": true,
-        "slot": null
-      },
-      {
-        "slug": "swallow-3",
-        "name": "Swallow-3",
-        "type": "attack",
-        "traits": [
-          "healing",
-          "linked"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "trigger": "<p>The user has exactly 3 Stacks of @Affliction[stockpile].</p>"
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user has exactly 3 Stacks of @Affliction[stockpile].</p><p>Effect: The user spends all @Affliction[stockpile] Stacks to heal 16 Ticks of HP.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "variant": "stockpile",
-        "free": true,
-        "slot": null
-      },
-      {
-        "slug": "spit-up-1",
-        "name": "Spit Up 1",
-        "type": "attack",
-        "traits": [
-          "blast-2",
-          "linked"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user has exactly 1 Stack of @Affliction[stockpile].</p>"
+          "powerPoints": 2
         },
         "category": "special",
-        "power": 100,
+        "power": 10,
         "accuracy": 100,
         "types": [
           "normal"
         ],
-        "description": "<p>Trigger: The user has exactly 1 Stack of @Affliction[stockpile].</p>",
-        "contestType": "",
-        "contestEffect": "",
+        "description": "<p>Effect: This Attack's Power is equal to 100 times the number of Spans filled on the user's Stockpile Clock.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "variant": "stockpile",
-        "free": true,
-        "slot": null
+        "predicate": []
       },
       {
-        "slug": "spit-up-2",
-        "name": "Spit Up 2",
+        "slug": "swallow",
+        "name": "Swallow",
         "type": "attack",
         "traits": [
-          "blast-2",
-          "linked"
+          "healing"
         ],
         "range": {
-          "target": "blast",
-          "distance": 10,
+          "target": "self",
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user has exactly 2 Stacks of @Affliction[stockpile].</p>"
+          "powerPoints": 2
         },
-        "category": "special",
-        "power": 200,
-        "accuracy": 100,
+        "category": "status",
         "types": [
           "normal"
         ],
-        "description": "<p>Trigger: The user has exactly 2 Stacks of @Affliction[stockpile].</p>",
-        "contestType": "",
-        "contestEffect": "",
+        "description": "<p>Effect: The user gains the following effects, based on the number of Spans filled by the Stockpile Clock:</p><ul><li>1 Span: @Tick[6]</li><li>2 Spans: @Tick[12]</li><li>3 Spans: @Tick[16] and @Tick[2 shield].</li></ul>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "variant": "stockpile",
-        "free": true,
-        "slot": null
-      },
-      {
-        "slug": "spit-up-3",
-        "name": "Spit Up 3",
-        "type": "attack",
-        "traits": [
-          "blast-2",
-          "linked"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user has exactly 3 Stacks of @Affliction[stockpile].</p>"
-        },
-        "category": "special",
-        "power": 300,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Trigger: The user has exactly 3 Stacks of @Affliction[stockpile].</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "variant": "stockpile",
-        "free": true,
-        "slot": null
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "mGsDKzPNQ42oalNp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stockpile",
+      "type": "passive",
+      "_id": "9cGrJwXYsqwlaiCZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "stockpile:active",
+            "predicate": [],
+            "label": "Toggle: Stockpile",
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "alwaysActive": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "create-clock",
+            "key": "stockpileClockUs",
+            "value": 0,
+            "predicate": [
+              "stockpile:active"
+            ],
+            "max": 3,
+            "color": "#919aa2",
+            "private": false,
+            "label": "Stockpile",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "stockpile-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "predicate": [
+              {
+                "and": [
+                  "stockpile:active",
+                  {
+                    "not": "actor:clocks:stockpileClockUs:value:3"
+                  }
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "stockpileClockUs"
+              }
+            ],
+            "dontMerge": false,
+            "label": "Stockpile Clock",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.def.stage",
+            "value": "@actor.clocks.stockpileClockUs",
+            "predicate": [
+              "stockpile:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.stage",
+            "value": "@actor.clocks.stockpileClockUs",
+            "predicate": [
+              "stockpile:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": "@actor.clocks.stockpileClockUs*10",
+            "predicate": [
+              "stockpile:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "spit-up-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "stockpileClockUs"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "-1-@actor.clocks.stockpileClockUs"
+              }
+            ],
+            "dontMerge": false,
+            "predicate": [
+              "stockpile:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "swallow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "stockpileClockUs"
+              },
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "-1-@actor.clocks.stockpileClockUs"
+              }
+            ],
+            "dontMerge": false,
+            "predicate": [
+              "stockpile:active"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "spit-up-attack",
+            "value": "100*@actor.clocks.stockpileClockUs",
+            "predicate": [
+              "stockpile:active"
+            ],
+            "property": "power",
+            "definition": [],
+            "mode": 5,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "swallow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [
+              "stockpile:active"
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "min(16, 6*@actor.clocks.stockpileClockUs)"
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "swallow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "predicate": [
+              {
+                "and": [
+                  "stockpile:active",
+                  "actor:clocks:stockpileClockUs:value:3"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Item.Itrn89HfpQHY4j7l.ActiveEffect.fqpoenQH2s0yzeOA",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767471251223,
+        "modifiedTime": 1767471251223,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

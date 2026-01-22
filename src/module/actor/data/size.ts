@@ -148,6 +148,10 @@ export class ActorSizePTR2e {
     this.width = newSpace.width;
   }
 
+  static toString(size: Size): string {
+    return game.i18n.localize(CONFIG.PTR.actorSizes[size]);
+  }
+
   toString(): string {
     return game.i18n.localize(CONFIG.PTR.actorSizes[this.value]);
   }

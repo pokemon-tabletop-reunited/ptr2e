@@ -3,7 +3,98 @@
   "_id": "1BxjZlaOPUbxtWjZ",
   "type": "perk",
   "img": "systems/ptr2e/img/item-icons/old%20amber.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Cthonic Terror",
+      "type": "passive",
+      "_id": "9WGX0aUkigLcvbjf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 10,
+            "predicate": [
+              "ability:fossilized:active"
+            ],
+            "label": "Fossilized (EHR)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "predicate": [
+              "ability:fossilized:active"
+            ],
+            "label": "Fossilized (RES)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage-percentile",
+            "value": 15,
+            "predicate": [
+              "ability:fossilized:active"
+            ],
+            "label": "Fossilized (Damage Inc.)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:effect:passive:fossilized"
+            ],
+            "label": "Fossilized (Damage Red.)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1764894591892,
+        "modifiedTime": 1767138428575,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,10 +108,11 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
+    "slug": "cthonic-terror",
     "description": "<p>Effect: While the user has Fossilized slotted, they gains 10% EHR and 10% RES. Additionally, they take 10% less damage from all Attacks, and all of their Attacks deal 15% more damage.</p>",
     "traits": [
-      "fossil"
+      "fossil",
+      "partial-automation"
     ],
     "prerequisites": [
       "item:perk:echo-of-the-lost-world",
@@ -33,27 +125,31 @@
     ],
     "autoUnlock": [],
     "cost": 4,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "resilience",
       "archetype": "fossil"
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 165,
         "y": 26,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "echo-of-the-lost-world"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }

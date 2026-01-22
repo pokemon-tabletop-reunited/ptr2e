@@ -1,0 +1,182 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Altru-Tera DP7 Laser Rifle",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "altru-tera-dp7-laser-rifle",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "laser",
+      "reload-4",
+      "steel",
+      "charge-pool-28",
+      "sci-fi",
+      "2-handed"
+    ],
+    "actions": [
+      {
+        "name": "Las-Beam",
+        "slug": "las-beam",
+        "traits": [
+          "ray"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 32,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 75,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Magnum Beam",
+        "slug": "magnum-beam",
+        "traits": [
+          "ray",
+          "flinch-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 21,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 170,
+        "accuracy": 90,
+        "free": true,
+        "predicate": [],
+        "variant": "las-beam"
+      }
+    ],
+    "description": "<p>The DR7 is a specialty-manufactured directed energy weapon, designed to fit the role of a battle rifle for security or military personnel. The DR7 is loaded with current generation capacitor bank magazines as their standard configuration, giving them a fair few number of shots at quite a significant punch and a “Beam Magnum” selector, to allow for higher output and stopping power.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": null
+    },
+    "fling": {
+      "type": "untyped",
+      "power": 110,
+      "accuracy": 65,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "DP7 Laser Rifle",
+      "type": "passive",
+      "_id": "NdBTmaCJIlnwvue2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "las-beam-attack-damage",
+            "value": 35,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "magnum-beam-attack-damage",
+            "value": 88,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "bl6lDzDCN1L8rPTD"
+}

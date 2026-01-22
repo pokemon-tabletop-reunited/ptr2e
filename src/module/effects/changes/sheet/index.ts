@@ -36,8 +36,9 @@ import EffectAlterationChangeSystem from "../effect-alteration.ts";
 import EffectAlterationForm from "./effect-alteration.ts";
 import EphemeralEffectChangeSystem from "../ephemeral-effect.ts";
 import EphemeralEffectForm from "./ephemeral-effect.ts";
-// import AlterAttackChangeSystem from "../alter-attack.ts";
-// import AlterAttackForm from "./alter-attack.ts";
+import MoveVariantChangeSystem from "../move-variant.ts";
+import AlterAttackChangeSystem from "../alter-attack.ts";
+import AlterAttackForm from "./alter-attack.ts";
 
 const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
@@ -59,7 +60,8 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [IncrementClockChangeSystem.TYPE]: IncrementClockForm,
     [ApplyTickChangeSystem.TYPE]: ApplyTickForm,
     [EphemeralEffectChangeSystem.TYPE]: EphemeralEffectForm,
-    // [AlterAttackChangeSystem.TYPE]: AlterActionForm,
+    [AlterAttackChangeSystem.TYPE]: AlterAttackForm,
+    [MoveVariantChangeSystem.TYPE]: AlterAttackForm
 };
 
 export { CHANGE_FORMS, ChangeForm}

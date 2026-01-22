@@ -9,12 +9,11 @@
     "traits": [
       "weapon",
       "laser",
-      "adaptable-ammunition",
-      "firearm",
-      "autoload",
       "energy-weapon",
       "sci-fi",
-      "charge-pool-18"
+      "charge-pool-18",
+      "reload-3",
+      "2-handed"
     ],
     "actions": [
       {
@@ -23,7 +22,8 @@
         "description": "<p>The SilphCo Laslock is a single-shot rifle that trades out on the convenience of the Defender for a higher power output and thus longer effective range.</p>",
         "traits": [
           "weapon",
-          "ray"
+          "ray",
+          "flinch-25"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -41,7 +41,7 @@
         ],
         "category": "special",
         "power": 80,
-        "accuracy": 100,
+        "accuracy": 95,
         "free": true,
         "predicate": []
       }
@@ -92,7 +92,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -105,8 +106,8 @@
         "changes": [
           {
             "type": "flat-modifier",
-            "key": "{item|id}-attack-damage-flat",
-            "value": 5,
+            "key": "laslock-beam-attack-damage",
+            "value": 30,
             "predicate": [],
             "mode": 2,
             "ignored": false,
@@ -141,12 +142,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1758158061278,
-        "modifiedTime": 1758158094534,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1767461598425,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
       }
     }
   ],

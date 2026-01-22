@@ -25,7 +25,7 @@ declare global {
         TDocument,
         ImagePopoutOptions
     > {
-        constructor(src: string, options?: Partial<ImagePopoutOptions>);
+        constructor({src, uuid, window}: {src: string, uuid?: string, window?: {title?: string}});
 
         static override get defaultOptions(): ImagePopoutOptions;
 

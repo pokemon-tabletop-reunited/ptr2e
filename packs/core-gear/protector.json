@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Protector",
   "type": "equipment",
   "system": {
@@ -9,15 +9,15 @@
     },
     "slug": "protector",
     "traits": [
-      "combat",
-      "type",
-      "rock",
+      "accessory",
+      "held",
       "evolution",
       "rhyhorn",
+      "rhydon",
       "rhyperior"
     ],
     "actions": [],
-    "description": "<p>A protective item of some sort. It is extremely stiff and heavy that boosts the power of Rock-Type moves. It's loved by a certain Pokémon.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Effect: The user takes -15% less damage from Physical-Category Attacks. @UUID[Compendium.ptr2e.core-species.sMeP7oy9e1Xoo1YL]{Rhyhorn}, @UUID[Compendium.ptr2e.core-species.7bhWOgrX8BaFk8T2]{Rhydon}, and @UUID[Compendium.ptr2e.core-species.vh6LElnAS6Yep8QZ]{Rhyperior} users take -25% less damage from Special-Category Attacks and have +15% RES.<br><br>A Rhydon may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -28,15 +28,20 @@
       "handsHeld": null,
       "slot": "accessory"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "rock",
-      "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "power": 120,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -50,56 +55,76 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/protector.webp",
   "effects": [
     {
-      "name": "Type Booster (Rock)",
+      "name": "Protector",
       "type": "passive",
-      "_id": "ZDRTTaPk89qWotn5",
+      "_id": "Gp87JXq7KDrcUzoz",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "rock-attack-power",
-            "value": 10,
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -15,
             "predicate": [],
-            "label": "Type Booster (Rock) Power",
+            "label": "Protector",
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
-            "type": "percentile-modifier",
-            "key": "rock-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Rock)",
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -25,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:rhyhorn",
+                  "target:species:rhydon",
+                  "target:species:rhyperior"
+                ]
+              }
+            ],
+            "label": "Protector",
             "mode": 2,
-            "priority": null,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:rhyhorn",
+                  "target:species:rhydon",
+                  "target:species:rhyperior"
+                ]
+              }
+            ],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "combat": null
       },
       "description": "",
       "origin": null,
@@ -107,16 +132,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766206531126,
+        "modifiedTime": 1766206826996,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

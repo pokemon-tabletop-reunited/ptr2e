@@ -14,7 +14,7 @@ export interface ActorData {
 export interface Actor {
   name: string;
   system: {
-    skills: Map<string, Skill>
+    skills: Record<string, Skill>
     advancement: {
       level: number
     }
