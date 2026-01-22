@@ -18,6 +18,7 @@
             "predicate": [
               "ability:fossilized:active"
             ],
+            "label": "Fossilized (EHR)",
             "mode": 2,
             "ignored": false
           },
@@ -28,6 +29,7 @@
             "predicate": [
               "ability:fossilized:active"
             ],
+            "label": "Fossilized (RES)",
             "mode": 2,
             "ignored": false
           },
@@ -38,6 +40,19 @@
             "predicate": [
               "ability:fossilized:active"
             ],
+            "label": "Fossilized (Damage Inc.)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:effect:passive:fossilized"
+            ],
+            "label": "Fossilized (Damage Red.)",
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
@@ -73,10 +88,10 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1764894591892,
-        "modifiedTime": 1764894761766,
-        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+        "modifiedTime": 1767138428575,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],
@@ -134,6 +149,7 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }
