@@ -6,26 +6,26 @@
     "actions": [
       {
         "traits": [
-          "interrupt-5"
+          "interrupt",
+          "flinch-30"
         ],
         "name": "Dual Wield",
         "slug": "dual-wield",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user declares a [Missile], [Pulse], or [Ray] attack.</p>"
+          "powerPoints": 1,
+          "trigger": "The user declares a @Trait[missile], @Trait[pulse], or @Trait[ray] attack."
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Trigger: The user declares a [Missile], [Pulse], or [Ray] attack.</p><p>Effect: The attack loses 30% of their Power and gains @Trait[double-strike], or gain +2 to its existing [X-Strike] trait, for the rest of the user's Activation.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user declares a @Trait[missile], @Trait[pulse], or @Trait[ray] attack.</p><p>Effect: The user spends 1 PP as an @Trait[interrupt] at @Trait[flinch-30]. If the declared Attack lacks @Trait[double-strike] or @Trait[x-strike], the attack loses -30% Base Power and gains @Trait[double-strike] until it is resolved (using @UUID[Compendium.ptr2e.core-effects.58tqKMnWTwQJgAC6]{Dual Wield (Single Strike)}).</p><p>If the declared Attack already possessed @Trait[double-strike] or @Trait[x-strike], the attack instead gains +30% Base Power and EHR and gains +1 minimum and +3 maximum hits until it is resolved (using @UUID[Compendium.ptr2e.core-effects.ojm5vuWcgyYbey6P]{Dual Wield (Multi-Strike)}).</p>",
+        "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp"
       }
     ],
-    "description": "<p>Trigger: The user declares a @Trait[missile], @Trait[pulse], or @Trait[ray] attack.</p><p>Effect: The user spends 2 PP at @Trait[interrupt-5]. If the declared Attack lacks @Trait[x-strike], the attack loses -30% Power and gains @Trait[double-strike] until it is resolved. If the declared Attack already possessed @Trait[x-strike], the attack instead gains +30% Power and EHR and @Trait[priority-20] until it is resolved.</p>",
+    "description": "<p>Trigger: The user declares a @Trait[missile], @Trait[pulse], or @Trait[ray] attack.</p><p>Effect: The user spends 1 PP as an @Trait[interrupt] at @Trait[flinch-30]. If the declared Attack lacks @Trait[double-strike] or @Trait[x-strike], the attack loses -30% Base Power and gains @Trait[double-strike] until it is resolved (using @UUID[Compendium.ptr2e.core-effects.58tqKMnWTwQJgAC6]{Dual Wield (Single Strike)}).</p><p>If the declared Attack already possessed @Trait[double-strike] or @Trait[x-strike], the attack instead gains +30% Base Power and EHR and gains +1 minimum and +3 maximum hits until it is resolved (using @UUID[Compendium.ptr2e.core-effects.ojm5vuWcgyYbey6P]{Dual Wield (Multi-Strike)}).</p>",
     "traits": [],
     "slug": "dual-wield",
     "_migration": {
