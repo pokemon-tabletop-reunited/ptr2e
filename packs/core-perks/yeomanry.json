@@ -3,7 +3,86 @@
   "_id": "KWW5eOGkAuGnaPHK",
   "type": "perk",
   "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Yeomanry",
+      "type": "passive",
+      "_id": "SNAHektnfpJUzd3M",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "missile-trait-attack-damage",
+            "value": 40,
+            "predicate": [
+              "self:action:trait:projectile",
+              {
+                "not": "self:action:trait:firearm"
+              }
+            ],
+            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "struggle-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Wielding a Projectile Weapon?",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "hand-weapon-strike-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Wielding a Projectile Weapon?",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1770163154572,
+        "modifiedTime": 1770164716648,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -18,7 +97,7 @@
     },
     "actions": [],
     "slug": "yeomanry",
-    "description": "<p>The user’s non-@Trait[firearm] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a non-@Trait[firearm] @Trait[missile] @Trait[weapon].</p>",
+    "description": "<p>The user’s @Trait[projectile] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle and @UUID[Compendium.ptr2e.core-gear.rRb0uqppb5elSTfA]{Hand Weapon} Attacks have +10 Base Power while the user has a @Trait[projectile] @Trait[weapon] in their Held Slot(s).</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder",
@@ -77,7 +156,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "folder": "VCEaYPpKcCqDx7yx"
 }
