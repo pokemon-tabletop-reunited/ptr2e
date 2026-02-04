@@ -35,7 +35,7 @@ async function initializePerks({ perks }: { perks: Perk[] }) {
 
 async function generate({ config, actor: actorData, options }: { config: GeneratorConfig, actor: ActorData, options: string[] }): Promise<PerkGeneratorResult> {
   const actorSystem = mergeObject(actorData.system, {
-    skills: actorData.system.skills.reduce((acc, skill) => {
+    skills: Object.values(actorData.system.skills).reduce((acc, skill) => {
       acc.set(skill.slug, {
         ...skill,
         total: skill.value + skill.rvs,
@@ -45,7 +45,7 @@ async function generate({ config, actor: actorData, options }: { config: Generat
     }, new Map<string, Skill>())
   }, { inplace: false }) as unknown as Actor["system"];
   const actor = mergeObject(actorData, { system: actorSystem }, { inplace: false }) as unknown as Actor;
-  actor.skills = Array.from(actor.system.skills.values()).reduce((acc, skill) => {
+  actor.skills = Object.values(actor.system.skills).reduce((acc, skill) => {
     acc[skill.slug] = skill;
     return acc;
   }, {} as Record<string, Skill>);

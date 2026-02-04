@@ -14,12 +14,12 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 5
         },
         "category": "special",
         "power": 20,
@@ -27,7 +27,7 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p><p></p><blockquote><p>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</p></blockquote>",
+        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p>",
         "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "predicate": []
       }
@@ -56,22 +56,25 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "stored-pwr-attack-power",
-            "value": "20 * (@actor.system.attributes.atk.stage+@actor.system.attributes.def.stage+@actor.system.attributes.spa.stage+@actor.system.attributes.spd.stage+@actor.system.attributes.spd.stage+@actor.system.battleStats.accuracy.stage+@actor.system.battleStats.evasion.stage+@actor.system.battleStats.critRate.stage)",
+            "type": "alter-attack",
+            "key": "stored-pwr-attack",
+            "value": "20 * (max(0,@actor.system.attributes.atk.stage)+max(0,@actor.system.attributes.def.stage)+max(0,@actor.system.attributes.spa.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.battleStats.accuracy.stage)+max(0,@actor.system.battleStats.evasion.stage)+max(0,round(@actor.system.battleStats.critRate.stage*1.5)))",
             "predicate": [],
             "label": "Stored Power",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -89,16 +92,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.yoBSCEEZtzbZESMt.ActiveEffect.SGs4pJyAdVY8y4Ah",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1740188922597,
-        "modifiedTime": 1745090631006,
-        "lastModifiedBy": "n5bBYe2ClImhFeB2"
+        "modifiedTime": 1767161376172,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

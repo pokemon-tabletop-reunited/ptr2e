@@ -17,7 +17,7 @@
       "dusknoir"
     ],
     "actions": [],
-    "description": "<p>Effect: Ghost Type creatures take 10% less damage from Physical- and Special-Category Attacks. Duskull, Dusclops, and Dusknoir gain @Affliction[advance 15] when they use an attack.</p>",
+    "description": "<p>Effect: @Trait[ghost] Type creatures take 10% less damage from Physical- and Special-Category Attacks. @UUID[Compendium.ptr2e.core-species.NRLM4OLKyc5fyeQ6]{Duskull}, @UUID[Compendium.ptr2e.core-species.AHcoRwAZ2zheJlfe]{Dusclops}, and @UUID[Compendium.ptr2e.core-species.N0qK5vxpzw3opgHT]{Dusknoir} gain @Affliction[advance 15] when they use an attack.<br><br>Dusclops may consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -31,12 +31,12 @@
     "grade": "C",
     "fling": {
       "type": "ghost",
-      "power": 70,
-      "accuracy": 100,
+      "power": 50,
+      "accuracy": 90,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 3,
         "unit": "m"
       }
     },
@@ -72,7 +72,9 @@
             "type": "ephemeral-modifier",
             "key": "damaging-attack-damage-percentile",
             "value": -10,
-            "predicate": [],
+            "predicate": [
+              "target:trait:ghost"
+            ],
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
@@ -133,12 +135,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.4.beta",
+        "systemVersion": "1.4.7.beta",
         "createdTime": 1758629799235,
-        "modifiedTime": 1758630064734,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1766207053243,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

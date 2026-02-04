@@ -17,15 +17,11 @@
         "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
         "range": {
           "target": "ally",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "activation": "free"
+        }
       }
     ],
     "description": "<p>You are able to tutor the [Desperation] Ability of your chosen Type to yourself and any Pokemon you are responsible for of the chosen Type. This may be taken multiple times, each time selecting a different type for which you have a corresponding Type Specialty.</p>",
@@ -84,12 +80,148 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Type Desperation",
+      "type": "passive",
+      "_id": "1eqjkNuqn4oNpjPm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "prompt": "Select An Ability",
+            "adjustName": false,
+            "flag": "typeDesperation",
+            "rollOption": "typeDesperation",
+            "allowNoSelection": false,
+            "showDisabled": true,
+            "choices": [
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.QiqP5Xrw4RONT2Rj"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.fOrAmM8cSQtNoklE"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.ts89BEcu1e0tA3w6"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.ANRnD2QDxKgRnPFi"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.6qwLdkY871AxKJmM"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.5OvNzjB2nSBLZbBk"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.GvXhEEV30BsWL4B0"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.6V4E7dWDnaDedpRP"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.3cr8lV0ES23zlwNo"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.BfjkYPHIhVLY8pbd"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.EYh4PzU86n4q5gZK"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.zWRHuzQE5hpreLwy"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.f1xjUtaJUH9qOIuE"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.656qoQVsc8ss9dfx"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.Xw364tg2OaSLqoWj"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.rMkEkomv6IeiTHgd"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.J0kHDuw62VBEv7hS"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.Kp7XFh8O1Yy68ozS"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.i0xkZPn7CXuwdPE3"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.syY6AXnJyG1ed4E8"
+              }
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "predicate": [],
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.typeDesperation}",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765206696638,
+        "modifiedTime": 1765209516545,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "N6JdgwC4bTgZBUS6"
 }

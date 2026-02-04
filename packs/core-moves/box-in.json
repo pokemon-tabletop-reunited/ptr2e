@@ -54,22 +54,24 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "box-in-attack-power",
-            "value": "min(600,@target.system.details.size.heightClass*100)",
+            "type": "alter-attack",
+            "key": "box-in-attack",
+            "value": "max(20,min(140,@target.system.details.size.heightClass*20))",
             "predicate": [],
-            "label": "Box In Scaling",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 5,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -87,16 +89,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1743514353940,
-        "modifiedTime": 1743514708606,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "modifiedTime": 1767160781229,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

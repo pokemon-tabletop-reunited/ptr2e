@@ -36,6 +36,24 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
     const output = {} as EndOfTurn;
     if (this.remainingActivations === 0) {
       output.type = "delete";
+      if(this.slug === "perish" && this.parent.targetsActor()) {
+        const isAce = this.parent?.target?.traits?.has("ace");
+        if(isAce) {
+          output.perish = true;
+          return output;
+        } 
+        else {
+          output.damage = {
+            formula: Number.MAX_SAFE_INTEGER.toString(),
+            type: "damage"
+          }
+          output.note = {
+            html: "Perish Counter reached zero, and sets the target to 0 HP.",
+            domains: [],
+            options: []
+          }
+        }
+      }
     }
     // If special update needs to happen
     // eslint-disable-next-line no-constant-condition
@@ -47,6 +65,9 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
       if (this.slug.startsWith("blight")) {
         const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.turns! - this.parent.duration.remaining! - 1));
         return stacksToRemove || 0;
+      }
+      if(this.slug.startsWith("desync")) {
+        return Math.min(this.stacks || 0, 5);
       }
 
       return this.stacks > 1 ? 1 : 0;
@@ -164,6 +185,7 @@ type EndOfTurn =
       domains: string[];
       html: string;
     };
+    perish?: boolean;
   }
   | {
     type: "update";
@@ -177,6 +199,7 @@ type EndOfTurn =
       domains: string[];
       html: string;
     };
+    perish?: boolean;
   }
   | {
     type?: never;
@@ -190,6 +213,7 @@ type EndOfTurn =
       domains: string[];
       html: string;
     };
+    perish?: boolean;
   };
 
 export default AfflictionActiveEffectSystem;

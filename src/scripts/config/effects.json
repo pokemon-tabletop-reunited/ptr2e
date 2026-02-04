@@ -342,6 +342,37 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
   },
   {
+    "id": "desync",
+    "name": "PTR2E.Effect.Statuses.Labels.desync",
+    "img": "icons/svg/portal.svg",
+    "type": "affliction",
+    "system": {
+      "changes": [
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.desynccondititem",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "dontMerge": false
+        }
+      ],
+      "priority": 30,
+      "formula": "(1/16 * @stacksToRemove)",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "major-affliction",
+        "dot"
+      ],
+      "stacks": 1
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.desync"
+  },
+  {
     "id": "splinter",
     "name": "PTR2E.Effect.Statuses.Labels.splinter",
     "img": "icons/svg/oak.svg",
@@ -351,43 +382,44 @@
     },
     "system": {
       "changes": [
-          {
-            "type": "grant-effect",
-            "value": "stunted",
-            "key": "",
-            "predicate": [],
-            "alterations": [],
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "mode": 2,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false
+        {
+          "type": "grant-effect",
+          "value": "stunted",
+          "key": "",
+          "predicate": [],
+          "alterations": [],
+          "onDeleteActions": {
+            "grantee": "detach",
+            "granter": "cascade"
           },
-          {
-            "type": "roll-effect",
-            "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
-            "predicate": [],
-            "chance": 100,
-            "isFixedChance": true,
-            "affects": "defensive",
-            "alterations": [],
-            "dontMerge": false,
-            "mode": 2,
-            "ignored": false
-          }
-        ],
+          "mode": 2,
+          "ignored": false,
+          "reevaluateOnUpdate": false,
+          "inMemoryOnly": false,
+          "allowDuplicate": true,
+          "track": false,
+          "replaceSelf": false
+        },
+        {
+          "type": "roll-effect",
+          "key": "damaging-attack",
+          "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "alterations": [],
+          "dontMerge": false,
+          "mode": 2,
+          "ignored": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
+        "rock",
         "major-affliction"
       ]
     },
@@ -452,10 +484,16 @@
     },
     "system": {
       "changes": [
-        {
-          "type": "flat-modifier",
-          "key": "skill-check",
-          "value": -10
+       {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": -15,
+          "predicate": [],
+          "label": "Hindered",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "formula": null,
@@ -498,7 +536,19 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": -10,
+          "predicate": [],
+          "label": "Confusion (RES)",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -595,10 +645,32 @@
           "key": "system.battleStats.evasion.stage",
           "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
           "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": "10-20*@effect.system.stacks",
+          "predicate": [],
+          "label": "Weary (EHR)",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "10-15*@effect.system.stacks",
+          "predicate": [],
+          "label": "Weary (RES)",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "traits": [
-        "pseudo-affliction"
+        "minor-affliction"
       ],
       "stacks": 1,
       "removeAfterCombat": false
@@ -611,7 +683,19 @@
     "img": "icons/svg/hazard.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "-15",
+          "predicate": [],
+          "label": "Exposed",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
       "traits": [
         "minor-affliction"
       ],
@@ -1338,7 +1422,30 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": -20,
+          "predicate": [],
+          "label": "Unlucky (RES)",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": -30,
+          "predicate": [],
+          "label": "Unlucky (EHR)",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1457,22 +1564,23 @@
         {
           "type": "percentile-modifier",
           "key": "attack-power",
-          "value": -33,
+          "value": -25,
           "predicate": [],
-          "label": "Fear - targeting Source",
+          "label": "Fear",
           "mode": 2,
           "priority": null,
           "ignored": false
         },
         {
           "type": "basic",
-          "key": "system.battleStats.accuracy.stage",
-          "value": -1,
+          "key": "system.modifiers.effectResistance",
+          "value": -15,
           "predicate": [],
-          "label": "Fear - targeting Source",
+          "label": "Fear (RES)",
           "mode": 2,
           "priority": null,
-          "ignored": false
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "formula": null,
@@ -1529,9 +1637,9 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.rebound"
   },
   {
-    "id": "ringed",
-    "name": "PTR2E.Effect.Statuses.Labels.ringed",
-    "img": "systems/ptr2e/img/conditions/vortex.svg",
+    "id": "regen",
+    "name": "PTR2E.Effect.Statuses.Labels.regen",
+    "img": "icons/svg/regen.svg",
     "type": "affliction",
     "duration": {
       "turns": 5
@@ -1547,7 +1655,7 @@
         "minor-affliction"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.ringed"
+    "description": "PTR2E.Effect.Statuses.Descriptions.regen"
   },
   {
     "id": "bleed",
@@ -1626,7 +1734,7 @@
         {
           "type": "percentile-modifier",
           "key": "attack-power",
-          "value": -33,
+          "value": -40,
           "predicate": [],
           "label": "Taunt - not targeting Source",
           "mode": 2,
@@ -1751,7 +1859,7 @@
         {
           "type": "percentile-modifier",
           "key": "attack-damage-percentile",
-          "value": 20,
+          "value": 25,
           "predicate": [],
           "label": "Boosted",
           "mode": 2,
@@ -1767,6 +1875,66 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.boosted"
+  },
+  {
+    "id": "hale",
+    "name": "PTR2E.Effect.Statuses.Labels.hale",
+    "img": "icons/svg/ice-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": 20,
+          "predicate": [],
+          "label": "Hale",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.hale"
+  },
+  {
+    "id": "argute",
+    "name": "PTR2E.Effect.Statuses.Labels.argute",
+    "img": "icons/svg/ice-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": 25,
+          "predicate": [],
+          "label": "Argute",
+          "mode": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.argute"
   },
   {
     "id": "loafing",

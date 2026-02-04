@@ -15,7 +15,7 @@
       "consumable"
     ],
     "actions": [],
-    "description": "<p>A peculiar metal that can make certain species of Pokémon evolve. It is composed of many layers.<br><br>Effect: The user takes 10% less damage from Special-Category Attacks. Effect doubled for @Trait[steel] creatures. Duraludon and Archaludon users are @Affliction[advance 10] after using an attack.</p>",
+    "description": "<p>Effect: The user takes 10% less damage from Special-Category Attacks. Effect doubled for @Trait[steel] creatures. @UUID[Compendium.ptr2e.core-species.8zwoJEr5uIUPtLr3]{Duraludon} and @UUID[Compendium.ptr2e.core-species.6NKbLnXSDTXsUC0M]{Archaludon} users are @Affliction[advance 10] after using an attack.<br><br>Duraludon can consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -29,12 +29,12 @@
     "grade": "A",
     "fling": {
       "type": "steel",
-      "power": 90,
-      "accuracy": 100,
+      "power": 140,
+      "accuracy": 80,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 3,
         "unit": "m"
       }
     },
@@ -57,7 +57,7 @@
       "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/gear_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/metal alloy.webp",
   "effects": [
     {
       "name": "Metal Alloy",
@@ -81,14 +81,9 @@
             "key": "special-attack-damage-percentile",
             "value": -10,
             "predicate": [
-              {
-                "or": [
-                  "target:species:duraludon",
-                  "target:species:archaludon"
-                ]
-              }
+              "target:trait:steel"
             ],
-            "label": "Metal Alloy (Duraludon Line)",
+            "label": "Metal Alloy (Steel)",
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
@@ -100,8 +95,8 @@
             "predicate": [
               {
                 "or": [
-                  "target:species:duraludon",
-                  "target:species:archaludon"
+                  "item:species:duraludon",
+                  "item:species:archaludon"
                 ]
               }
             ],
@@ -142,12 +137,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.4.beta",
+        "systemVersion": "1.4.7.beta",
         "createdTime": 1758631244422,
-        "modifiedTime": 1758631375537,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1766206118301,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

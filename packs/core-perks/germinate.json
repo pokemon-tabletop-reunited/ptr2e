@@ -1,0 +1,117 @@
+{
+  "folder": "eXSEV54jXXZfP27D",
+  "name": "Germinate",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.MeJaT3UMQETtE153]{Germinate} as a tutored ability.</p>",
+    "traits": [
+      "grass",
+      "type-shift"
+    ],
+    "prerequisites": [
+      "trait:grass"
+    ],
+    "autoUnlock": [
+      "item:ability:germinate"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "grass"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 63,
+        "y": 126,
+        "connected": [
+          "one-with-the-green",
+          "nurturing-shoots",
+          "brittle-ice"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
+  "effects": [
+    {
+      "name": "Germinate Perk",
+      "type": "passive",
+      "_id": "mUzcYojoXkWwZl9V",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.MeJaT3UMQETtE153",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "YegfkjBiiBD6gJcv"
+}

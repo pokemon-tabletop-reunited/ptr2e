@@ -18,13 +18,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user hits with a [Contact] attack.</p><p>Effect: The users heals 2 Ticks of HP.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user hits with a [Contact] attack.</p><p>Effect: The users heals @Tick[2].</p>",
+        "img": "systems/ptr2e/img/conditions/seeded.svg"
       }
     ],
-    "description": "<p>Trigger: The user hits with a [Contact] attack.</p><p>Effect: The users heals 2 Ticks of HP.</p>",
+    "description": "<p>Trigger: The user hits with a [Contact] attack.</p><p>Effect: The users heals @Tick[2].</p>",
     "traits": [
       "healing"
     ],
@@ -37,9 +38,74 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Tu6MCvo97JPOrU0c",
-  "effects": []
+  "effects": [
+    {
+      "name": "Siphon",
+      "type": "passive",
+      "_id": "4a7CcZa1aX8Ypf7y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765285634047,
+        "modifiedTime": 1765285670220,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -1,0 +1,130 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Unremarkable Teacup",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "unremarkable-teacup",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held",
+      "evolution",
+      "poltchageist",
+      "sinistcha"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user heals +15% more HP from @Trait[drain-x] effects. @UUID[Compendium.ptr2e.core-species.x7D9WA7RFeOWVVMR]{Poltchageist} and @UUID[Compendium.ptr2e.core-species.ts9XjY5e4LeVjv3a]{Sinistcha} users gain +10 Base HP. Poltchageist evolve when exposed to this item, and Sinistcha can use this item to change Forme.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "C",
+    "fling": {
+      "type": "normal",
+      "power": 65,
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 6,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "iaPBBzh2k7rlryzb",
+  "img": "systems/ptr2e/img/item-icons/unremarkable teacup.webp",
+  "effects": [
+    {
+      "name": "Unremarkable Teacup",
+      "type": "passive",
+      "_id": "SaPrTKPFcAGabnEX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:poltchageist",
+                  "item:species:sinischa"
+                ]
+              }
+            ],
+            "hp": 10,
+            "atk": null,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766203819721,
+        "modifiedTime": 1766203873023,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
+}

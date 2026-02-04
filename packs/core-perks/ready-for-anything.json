@@ -50,13 +50,64 @@
         "tier": null
       }
     ],
-    "slug": "ready-for-anything",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "slug": "ready-for-anything"
   },
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "Ready For Anything",
+      "type": "passive",
+      "_id": "Dau5aZQUXKVDJX0Z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 20,
+            "predicate": [
+              "effect:affliction:braced"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764896712918,
+        "modifiedTime": 1764896741939,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "_id": "0PCYjKndhybEYReD"
 }

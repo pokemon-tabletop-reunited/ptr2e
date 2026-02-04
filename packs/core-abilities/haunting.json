@@ -13,7 +13,6 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
           "trigger": "<p>The user is @Affliction[fainted] from another creature's attack or effect.</p>"
         },
         "range": {
@@ -21,11 +20,11 @@
           "distance": 20,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is @Affliction[fainted] from another creature's attack or effect.</p><p>Effect: The triggering creature gains @Affliction[cursed] 3.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user is @Affliction[fainted] from another creature's attack or effect.</p><p>Effect: The triggering creature gains @Affliction[cursed 3].</p>",
+        "img": "systems/ptr2e/img/conditions/cursed.svg"
       }
     ],
-    "description": "<p>Trigger: The user is @Affliction[fainted] from another creature's attack or effect.</p><p>Effect: The triggering creature gains @Affliction[cursed] 3.</p>",
+    "description": "<p>Trigger: The user is @Affliction[fainted] from another creature's attack or effect.</p><p>Effect: The triggering creature gains @Affliction[cursed 3].</p>",
     "traits": [],
     "slug": "haunting",
     "_migration": {
@@ -36,9 +35,74 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "p1FwvalPcGzuUlAh",
-  "effects": []
+  "effects": [
+    {
+      "name": "Haunting",
+      "type": "passive",
+      "_id": "pcyT1F3OMuNgwPzI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "haunting-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.cursedcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765279209552,
+        "modifiedTime": 1765279254653,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

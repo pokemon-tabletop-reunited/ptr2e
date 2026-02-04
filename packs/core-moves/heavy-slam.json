@@ -52,29 +52,32 @@
   "_id": "Zv39tngGrRZUoCxr",
   "effects": [
     {
-      "name": "Heat Crash",
+      "name": "Heavy Slam",
       "type": "passive",
       "_id": "Ytn2ACFbLoQJqclz",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "heavy-slam-attack-power",
-            "value": "min(200,max(0,((@actor.system.details.size.weightClass)-(@target.system.details.size.weightClass))*30))",
+            "type": "alter-attack",
+            "key": "heavy-slam-attack",
+            "value": "min(80,max(0,((@actor.system.details.size.weightClass)-(@target.system.details.size.weightClass))*16))",
             "predicate": [],
             "label": "Heavy Slam Scaling",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -92,16 +95,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Actor.76kEnzj1AIQHiFPJ.Item.ynRKBWUrMjUzN6C7.ActiveEffect.zSYHDDUrMewbhNpR",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1743549258822,
-        "modifiedTime": 1743549272827,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1767160936325,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

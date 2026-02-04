@@ -346,7 +346,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
           const slug = ((event.currentTarget as HTMLElement).parentElement as HTMLElement).dataset.slug;
           if (!slug) return;
 
-          const skill = this.token!.actor!.system.skills.get(slug);
+          const skill = this.token!.actor!.system.skills[slug];
           if (!skill) return;
 
           return skill.roll();

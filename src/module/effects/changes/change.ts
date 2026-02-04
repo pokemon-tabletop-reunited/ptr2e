@@ -17,7 +17,8 @@ export const CHANGE_MODES = Object.freeze({
   DOWNGRADE: 3,
   UPGRADE: 4,
   OVERRIDE: 5,
-  REMOVE: 6
+  REMOVE: 6,
+  CONCAT: 7
 })
 
 class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<
@@ -260,7 +261,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
                 : resolvables[key] ?? this.effect;
 
           if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
-            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            const value = this.actor?.system?.skills?.[prop.split(".")[1]]?.total;
             if(value != undefined && !isNaN(value)) return String(value); 
           }
 
