@@ -13,17 +13,23 @@
       ]
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "slotless",
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "S",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "consumableType": "restorative",
     "traits": [
       "held",
@@ -32,8 +38,8 @@
       "natural",
       "empowering"
     ],
-    "description": "The target gains +1 SPDEF IV.",
-    "quantity": 1,
+    "description": "<p>Effect: The user gains +1 SPDEF IV (this item is treated as being Consumed while Equipped).</p><p>Restriction: Creatures can usually only have 30 SPDEF IVs.</p>",
+    "quantity": 3,
     "slug": "zinc",
     "_migration": {
       "version": 0.107,
@@ -43,19 +49,21 @@
         "system": "0.10.0-alpha.2.4.2"
       }
     },
-    "stack": 1,
+    "stack": 3,
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "H4EBNmV2mMyvTBi9",
   "effects": [
     {
-      "name": "+1 SpDef IV",
+      "name": "Zinc",
       "type": "passive",
       "_id": "yySo4M3GM8JWCtX9",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -64,39 +72,9 @@
           {
             "type": "basic",
             "key": "system.attributes.spd.ivs",
-            "value": {
-              "brackets": [
-                {
-                  "start": 1,
-                  "end": 1,
-                  "value": 1
-                },
-                {
-                  "start": 2,
-                  "end": 2,
-                  "value": 2
-                },
-                {
-                  "start": 3,
-                  "end": 3,
-                  "value": 3
-                },
-                {
-                  "start": 4,
-                  "end": 4,
-                  "value": 4
-                },
-                {
-                  "start": 5,
-                  "end": 999,
-                  "value": 5
-                }
-              ],
-              "field": "item|system.quantity"
-            },
+            "value": "@item.system.quantity",
             "predicate": [],
             "mode": 2,
-            "priority": null,
             "ignored": false
           }
         ],
@@ -104,7 +82,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -122,16 +102,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.2",
+        "systemVersion": "1.5.0.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1771957755925,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "exportSource": null
       }
     }
   ],
