@@ -1,0 +1,61 @@
+{
+  "name": "Misdirect",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "misdirect",
+    "description": "<p>When the user inflicts a @Trait[major-affliction] or @Trait[minor-affliction] on one or more targeted creatures with an Attack affected by Shurikenjutsu, the user can then freely Move 3m using a Movement Type of their choice.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "item:perk:shurikenjutsu"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 185,
+        "y": 37,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "shurikenjutsu",
+          "conservation-of-ninjutsu",
+          "smokestep",
+          "one-with-the-shadows"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/skills/targeting/target-glowing-yellow.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "GMdOyvZIWeXJa8Xs"
+}

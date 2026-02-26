@@ -3,7 +3,147 @@
   "_id": "3JzUu6EOj3XHAwlt",
   "type": "perk",
   "img": "icons/creatures/birds/chicken-hen-white.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Your Target's Right Here!",
+      "type": "passive",
+      "_id": "s5iztFqKXXT3xkQ1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 1
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.markedcondititem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1772124176935,
+        "modifiedTime": 1772124395990,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -16,9 +156,27 @@
       ],
       "notes": ""
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Your Target's Right Here!",
+        "slug": "your-targets-right-here",
+        "description": "<p>Effect: The target gains @Tick[1 shield], @Affliction[resolved 2], +1 DEF and SPDEF Stage for 2 Activations, and @Affliction[marked 3].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/creatures/birds/chicken-hen-white.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "ally",
+          "distance": 5,
+          "unit": "m"
+        }
+      }
+    ],
     "slug": "your-targets-right-here",
-    "description": "<p>Effect: The user spends 5 PP as a Complex Action. The target gains @Tick[1 shield], @Affliction[resolved 2], @UUID[Compendium.ptr2e.core-effects.sMystTj3FBJ00AZp]{+1 Defense Stage for 2 activations} and @UUID[Compendium.ptr2e.core-effects.jEX7s3GbbAtzgyS3]{+1 Special Defense Stage for 2 activations}, and @Affliction[marked 3].</p>",
+    "description": "<p>Effect: The user spends @PP[-5] as a Complex Action. An Ally within 5m gains @Tick[1 shield], @Affliction[resolved 2], +1 DEF and SPDEF Stage for 2 Activations, and @Affliction[marked 3].</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
@@ -34,16 +192,23 @@
       {
         "x": 31,
         "y": 61,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hold-the-line",
           "minor-buff-35",
           "tactician"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "folder": "PAZ8zWUPw7Azm5V6"
 }

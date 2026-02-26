@@ -1,0 +1,66 @@
+{
+  "name": "Monomi-no-Ikki",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "monomi-no-ikki",
+    "description": "<p>The user spends 1 fewer IP on @Trait[ninja] items and can purchase @Trait[ninja] items one Rarity higher using IP.</p><p>The user provides a (non-stacking) +20 bonus on Special Order Rolls, which is doubled for @Trait[ninja] items, and the duration of the user’s @Trait[command] effects applied to other @Trait[ninja] creatures is increased by +1.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ace",
+      "trait:ninja",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.negotiate.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 181,
+        "y": 37,
+        "connected": [
+          "smokestep",
+          "army-of-phantoms"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/sundries/documents/document-symbol-eye.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "Q7i6DGm8c3eiZMdV"
+}
