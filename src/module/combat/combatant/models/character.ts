@@ -96,23 +96,26 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     }
   }
 
+  // speedAvg is informed by an approximation of the expected Speed value of the average Pokemon at a given level, which is determined by an approximate average Speed of all of the highest evolutions that are legal at a given level, alongside the approximation of the average EV and IV allocations for Pokemon at each given level.
   static calculateBaseAV(
     actor: ActorPTR2e | null,
     combat: CombatPTR2e,
+    speedAvg = ((1.8 * combat.averageLevel + 135) * combat.averageLevel / 100) + 25,
     speedStages = actor?.speedStage ?? 0
   ): number {
     if (!actor) return Infinity;
 
     // Calculate base AV and stretch it values between 45 and 150
+    // Base AV takes into account the user's Speed value and proportions it around speedAvg to fit (roughly) between 15 and 200, before stretching takes place.
     const unboundBaseAV = Math.floor(
       this.stretchBaseAV(
-        (750 * (1 + ((combat.averageLevel) * 23) / 99)) * (1 - speedStages * 0.125) / actor.speed,
+        (215 * actor.speed / (speedAvg + Math.exp(1) * combat.averageLevel)) * ((37 - combat.averageLevel * 7 / 40 ) / 29) - ((combat.averageLevel + 40) / 15) + 15,
         70 - Math.max(5 * Math.min(5, speedStages), 0),
         125 - Math.min(5 * Math.max(-5, speedStages), 0)
       )
     );
 
-    // Clamp the base AV between 70 and 125, modified by the speed stages up to 45 and 150
+    // Clamp the base AV between 70 and 125, with the bounds modified by Speed stages, up to 45 on the speedy end and 150 on the slow end.
     return this.clampBaseAV(unboundBaseAV, speedStages);
   }
 
@@ -137,7 +140,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
       return 1 / (1 + Math.exp(-x));
     }
 
-    // Normalize the value to a -6 to 6 range (approximate range for sigmoid to be effective)
+    // Normalize the value to a -7 to 7 range (6 and -6 is the approximate range for sigmoid to be effective, 7 tightens the spread a little more)
     const normalized = ((value - min) / (max - min)) * 7 - 3.5;
 
     // Apply the sigmoid function
