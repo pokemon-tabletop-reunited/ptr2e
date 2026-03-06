@@ -3,27 +3,23 @@
   "type": "perk",
   "system": {
     "prerequisites": [],
-    "cost": 2,
-    "description": "<p>While @Affliction[enraged], the user's Damaging Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations.</p>",
+    "cost": 3,
+    "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack, and have a 20% chance of being @Affliction[advance 10] when hit by a Physical- or Special-Category Attack.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "<p>While @Affliction[enraged], the user's Damaging Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
+        "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack, and have a 20% chance of being @Affliction[advance 10] when hit by a Physical- or Special-Category Attack.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
-        "type": "generic",
+        "type": "passive",
         "traits": [],
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
     "slug": "frenzied-assault",
@@ -49,12 +45,9 @@
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -74,9 +67,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "IMn0UktiyUWZXQty",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -97,18 +88,36 @@
             ],
             "chance": 30,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              "effect:affliction:enraged"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -126,16 +135,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.1.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": null,
-        "modifiedTime": 1742140638683,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1772815323036,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
         "exportSource": null
       }
     }

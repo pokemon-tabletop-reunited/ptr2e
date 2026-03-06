@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "invigorate",
-    "description": "<p>When healing another creature, you may give them +1 Combat Stage in a stat of your choice for 5 activations, at a cost of 2PP.</p>",
+    "description": "<p>When the user resolves a @Trait[healing] Action that targets another creature, the user may spend 2 PP to give that create +1 Stage in a Stat of the user's choice for 5 Activations.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -24,6 +24,10 @@
     },
     "nodes": [
       {
+        "x": 43,
+        "y": 83,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "chansey-medicine",
           "involuntary-transfusion",
@@ -31,18 +35,11 @@
           "homeostatic-treatments"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff80ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 43,
-        "y": 83,
         "tier": null
       }
     ],
@@ -61,9 +58,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": []
 }

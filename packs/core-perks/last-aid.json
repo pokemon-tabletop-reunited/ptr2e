@@ -10,9 +10,9 @@
       {
         "name": "Last Aid",
         "slug": "last-aid",
-        "description": "<p>Trigger: The User is Fainted<br><br>Effect: All allies (fully excluding the User) within 5m of the User recover 50% of the User's max HP. Activation of this perk prevents the user from benefitting from either Tubthumping or Keep Fighting.</p>",
+        "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: Allies creatures within range recover HP equal to @Tick[8] based on the user's HP.</p><p>Restriction: The user may not use @UUID[Compendium.ptr2e.core-perks.NjAYGkmZsg9QxiQY]{Tubthumping} or @UUID[Compendium.ptr2e.core-perks.3RMFsZTuMdDhCyZg]{Keep Fighting!} in conjunction with this Perk.</p>",
         "traits": [
-          "interrupt-6"
+          "healing"
         ],
         "type": "generic",
         "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
@@ -24,11 +24,11 @@
         "cost": {
           "activation": "free",
           "powerPoints": 5,
-          "trigger": "Fainted"
+          "trigger": "The user gains @Affliction[fainted]."
         }
       }
     ],
-    "description": "<p>Trigger: The User is Fainted<br><br>Effect: All allies (fully excluding the User) within 5m of the User recover 50% of the User's max HP. Activation of this perk prevents the user from benefitting from either Tubthumping or Keep Fighting. </p>",
+    "description": "<p>When the user gains @Affliction[fainted], they may spend @PP[-5] as a Free Action [Interrupt] to grant allied creatures within a 5m Emanation HP equal to @Tick[8] based on the user's HP.</p><p>Restriction: The user may not use @UUID[Compendium.ptr2e.core-perks.NjAYGkmZsg9QxiQY]{Tubthumping} or @UUID[Compendium.ptr2e.core-perks.3RMFsZTuMdDhCyZg]{Keep Fighting!} in conjunction with this Perk.</p>",
     "traits": [],
     "prerequisites": [
       "trait:healer"
@@ -37,23 +37,20 @@
     "slug": "last-aid",
     "nodes": [
       {
+        "x": 55,
+        "y": 83,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "cautious-healer",
           "martyrs-gift"
         ],
         "config": {
-          "alpha": null,
+          "texture": "icons/magic/holy/barrier-shield-winged-cross.webp",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "icons/magic/holy/barrier-shield-winged-cross.webp",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 55,
-        "y": 83,
         "tier": null
       }
     ],
@@ -71,7 +68,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
   "effects": [

@@ -7,30 +7,27 @@
       "previous": null
     },
     "actions": [],
-    "description": "<p>Trigger: User is Fainted.<br><br>Effect: Allies within 5m of the user may trigger any of their abilities that activate in the event that they have defeated an opponent (such as Moxie). This may trigger one ability per ally. Activating this perk prevents the user from benefiting from either Tubthumping or Keep Fighting.</p>",
+    "description": "<p>When the user gains @Affliction[fainted], allied creatures within a 10m Emanation are considered to have also caused the user to gain @Affliction[fainted], and may activate effects that would trigger from doing so.</p><p>Restriction: The user may not use @UUID[Compendium.ptr2e.core-perks.NjAYGkmZsg9QxiQY]{Tubthumping} or @UUID[Compendium.ptr2e.core-perks.3RMFsZTuMdDhCyZg]{Keep Fighting!} in conjunction with this Perk.</p>",
     "traits": [],
     "prerequisites": [],
-    "cost": 2,
+    "cost": 3,
     "slug": "offering",
     "nodes": [
       {
+        "x": 75,
+        "y": 44,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "tubthumping",
           "wergild"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/icons/capability_icon.webp",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/icons/capability_icon.webp",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 75,
-        "y": 44,
         "tier": null
       }
     ],
@@ -49,9 +46,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/icons/capability_icon.webp",
   "effects": [],
