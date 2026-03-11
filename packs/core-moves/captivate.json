@@ -29,34 +29,6 @@
         "description": "<p>Effect: On hit, the target loses -2 SPATK Stages for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
-      },
-      {
-        "slug": "captivate-charmed",
-        "name": "captivate (Charmed)",
-        "type": "attack",
-        "traits": [
-          "social"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "trigger": "<p>Target has @Affliction[charmed].</p>"
-        },
-        "category": "status",
-        "accuracy": 100,
-        "types": [
-          "fairy"
-        ],
-        "description": "<p>Trigger: Target has @Affliction[charmed].</p><p>Effect: On hit, the target loses -3 SPATK Stages for 7 Activations.</p>",
-        "variant": "captivate",
-        "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
       }
     ],
     "grade": "C",
@@ -86,15 +58,40 @@
             "type": "roll-effect",
             "key": "captivate-attack",
             "value": "Compendium.ptr2e.core-effects.Item.EYmp1DeE1Lwzi0D1",
-            "predicate": [],
+            "predicate": [
+              {
+                "not": "target:effect:affliction:charmed"
+              }
+            ],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "isFixedChance": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "captivate-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.EeFUiCOkrY4ePf1d",
+            "predicate": [
+              "target:effect:affliction:charmed"
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -121,16 +118,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1729527645906,
-        "modifiedTime": 1729527678105,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1768867432081,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
       }
     }

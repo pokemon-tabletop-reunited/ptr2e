@@ -7,9 +7,12 @@
       "version": 0.11,
       "previous": null
     },
-    "traits": [],
+    "traits": [
+      "armor",
+      "sci-fi"
+    ],
     "actions": [],
-    "description": "<p>An EVA suit prevents Exposure as a result of being out in the void of space, and in combination with a Sealed Air Supply (@UUID[Compendium.ptr2e.core-gear.HYpypVyGlwJ2agae]{Sealed Air Supply}), can keep a character alive in this extreme environment.</p>",
+    "description": "<p>An EVA suit is an unarmored voidsuit and provides bare minimum life support and environmental isolative features to ensure the wearer can survive in a vacuum for a limited time. It prevents Exposure as a result of being out in the void of space, and in combination with a Sealed Air Supply (@UUID[Compendium.ptr2e.core-gear.HYpypVyGlwJ2agae]{Sealed Air Supply}), can keep a character alive in extreme environments.</p><p>The user has +30% RES and takes -5% less Special-Category damage.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -20,15 +23,15 @@
       "handsHeld": null,
       "slot": "worn"
     },
-    "grade": "E",
+    "grade": "C",
     "fling": {
       "type": "untyped",
-      "power": null,
-      "accuracy": 100,
+      "power": 90,
+      "accuracy": 70,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 2,
         "unit": "m"
       }
     },
@@ -50,9 +53,73 @@
       ],
       "notes": ""
     },
-    "slug": "eva-suit"
+    "slug": "eva-suit",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "EVA Suit",
+      "type": "passive",
+      "_id": "CdmynWASjY7O9N2D",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -5,
+            "predicate": [],
+            "label": "EVA Suit",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 30,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767654923717,
+        "modifiedTime": 1767655475172,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "pMSJ9iVD2THZ7uiW"
 }
