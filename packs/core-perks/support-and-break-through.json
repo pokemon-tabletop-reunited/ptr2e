@@ -1,0 +1,219 @@
+{
+  "folder": "VCEaYPpKcCqDx7yx",
+  "name": "Support and Break Through",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Support and Break Through",
+        "slug": "support-and-break-through",
+        "description": "<p>When the user benefits an Ally with the effect of the user’s Covering Fire or Harry, that creature is @Affliction[advance 10] and has a 30% chance of being @Affliction[advance 30].</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "icons/skills/movement/arrow-upward-yellow.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "support-and-break-through",
+    "description": "<p>When the user benefits an Ally with the effect of the user’s Covering Fire or Harry, that creature is @Affliction[advance 10] and has a 30% chance of being @Affliction[advance 30].</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          "item:perk:covering-fire",
+          "item:perk:harry"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "gunslinger"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 181,
+        "y": 74,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "defense-in-depth",
+          "covering-fire",
+          "harry"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/skills/movement/arrow-upward-yellow.webp",
+  "effects": [
+    {
+      "name": "Support and Break Through",
+      "type": "passive",
+      "_id": "a3LSz7hGnkXAELpy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-light-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-light-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-heavy-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-heavy-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "harry-interrupt-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "harry-interrupt-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "BpuoHcO3rsZVZ6o8"
+}

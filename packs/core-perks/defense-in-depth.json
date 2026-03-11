@@ -1,0 +1,64 @@
+{
+  "folder": "VCEaYPpKcCqDx7yx",
+  "name": "Defense in Depth",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "defense-in-depth",
+    "description": "<p>When setting Covering Fire or Harry, the user can gain an additional @Affliction[delay 40] to increase the size of the created clock by 4 Spans.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          "item:perk:covering-fire",
+          "item:perk:harry"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "gunslinger"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 183,
+        "y": 70,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "support-and-break-through",
+          "covering-fire",
+          "harry"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/skills/ranged/tracers-triple-orange.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "l25lJ4g6ikkCdpoB"
+}
