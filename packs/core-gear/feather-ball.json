@@ -25,7 +25,7 @@
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 12,
+        "distance": 8,
         "unit": "m"
       }
     },
@@ -37,7 +37,7 @@
       "fling",
       "ball"
     ],
-    "description": "<p>1x Catch Rate modifier. Catch Rate modifier increases by +0.25x vs creatures that are in Flight.</p>",
+    "description": "<p>1.25x Catch Rate modifier and +50% range vs targets utilizing Flight or Teleport Movement.</p>",
     "modifier": 1.25,
     "quantity": 1,
     "slug": "feather-ball",
@@ -53,9 +53,72 @@
       ],
       "notes": ""
     },
-    "actions": []
+    "actions": [],
+    "ammoType": []
   },
   "_id": "OshRvOSAkRGET7Au",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Feather Ball",
+      "type": "passive",
+      "_id": "b80Cn9lakWUmrVOx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-feather-ball-attack",
+            "value": 1.5,
+            "predicate": [
+              {
+                "or": [
+                  "target:state:flight",
+                  "target:state:teleport"
+                ]
+              }
+            ],
+            "property": "range",
+            "definition": [],
+            "mode": 1,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771029396212,
+        "modifiedTime": 1771030067563,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "bIBkUsgkWMXMOtHm"
 }

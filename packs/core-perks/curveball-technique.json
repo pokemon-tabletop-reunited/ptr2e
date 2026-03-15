@@ -4,7 +4,7 @@
   "system": {
     "prerequisites": [],
     "cost": 1,
-    "description": "<p>Passive: When using Fling with a [Ball] item, you increase the power of the attack by +15. This perk allows poke balls to deal damage.</p>",
+    "description": "<p>The user's Flings with @Trait[ball] Items have +15 base Power.</p>",
     "actions": [],
     "slug": "curveball-technique",
     "traits": [
@@ -53,7 +53,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "XOggUhl7hxBP9PHa",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
@@ -66,13 +67,14 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "ball-trait-attack-power",
+            "type": "alter-attack",
+            "key": "ball-trait-attack",
             "value": 15,
             "predicate": [],
+            "property": "power",
+            "definition": [],
             "mode": 2,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           }
         ],
         "slug": null,
@@ -103,12 +105,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1759921694150,
-        "modifiedTime": 1759921714386,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1771031709977,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
       }
     }
   ],

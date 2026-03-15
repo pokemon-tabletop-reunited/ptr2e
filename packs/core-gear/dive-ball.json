@@ -21,11 +21,11 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
+      "accuracy": 100,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 8,
         "unit": "m"
       }
     },
@@ -35,10 +35,9 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball",
       "ball"
     ],
-    "description": "<p>3.5x Catch Rate modifer if used on a target that is Swimming. 1x Catch Rate modifer otherwise. Water can't provide Cover against Dive Balls.</p>",
+    "description": "<p>3.5x Catch Rate modifer and +50% Fling range if used on a target that is Swimming. 1x Catch Rate modifer and normal range otherwise. Water can't provide Cover against Dive Balls.</p>",
     "modifier": 3.5,
     "quantity": 1,
     "slug": "dive-ball",
@@ -54,9 +53,67 @@
       ],
       "notes": ""
     },
-    "actions": []
+    "actions": [],
+    "ammoType": []
   },
   "_id": "1RAmn9H3LSZCk4X2",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dive Ball",
+      "type": "passive",
+      "_id": "j51rvVvqtDzW8c5K",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-dive-ball-attack",
+            "value": 1.5,
+            "predicate": [
+              "target:state:swim"
+            ],
+            "property": "range",
+            "definition": [],
+            "mode": 1,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771029129547,
+        "modifiedTime": 1771030001609,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "bIBkUsgkWMXMOtHm"
 }
