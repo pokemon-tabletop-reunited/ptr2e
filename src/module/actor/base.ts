@@ -2674,7 +2674,7 @@ type ActorFlags2e = ActorFlags & {
     }
     editedSkills?: boolean
     skillOptions?: {
-      data: (PickableThing & { base: number, investment: number, group?: string })[];
+      data: (PickableThing & { base: number, investment: number, group?: string, mod: number })[];
       get all(): PickableThing[];
       get species(): PickableThing[];
     }

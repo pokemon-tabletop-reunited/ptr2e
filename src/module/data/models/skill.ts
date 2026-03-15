@@ -36,6 +36,8 @@ class SkillPTR2e extends foundry.abstract.DataModel {
   }
 
   prepareBaseData(): void {
+    if(this.mod == null) this.mod = 0;
+
     const speciesTrait = this.actor.species?.skills?.get(this.slug);
     if (speciesTrait && this.value <= 1) {
       this.value = speciesTrait.value;
@@ -53,7 +55,7 @@ class SkillPTR2e extends foundry.abstract.DataModel {
   }
 
   get total() {
-    return this.value + (this.rvs ?? 0);
+    return this.value + (this.rvs ?? 0) + (this.mod ?? 0);
   }
 
   get statistic() {
@@ -72,6 +74,8 @@ class SkillPTR2e extends foundry.abstract.DataModel {
 
 interface SkillPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<SkillSchema> {
   _source: SourceFromSchema<SkillSchema>;
+
+  mod: number | undefined;
 }
 
 type CoreSkill = Pick<SkillPTR2e["_source"], 'slug' | 'favourite' | 'hidden' | 'group'>;

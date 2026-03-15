@@ -737,10 +737,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           const customSkill = game.ptr.data.skills.get(skill.slug) as CustomSkill;
           return customSkill?.label ?? Handlebars.helpers.formatSlug(skill.slug);
         })();
-        acc.push({ label, value: skill.slug, investment: skill.rvs ?? 0, base: skill.value, group: skill.group });
+        acc.push({ label, value: skill.slug, investment: skill.rvs ?? 0, base: skill.value, group: skill.group, mod: skill.mod ?? 0 });
         return acc;
-      }, [] as (PickableThing & { investment: number, base: number, group?: string })[])
-    }
+      }, [] as (PickableThing & { investment: number, base: number, group?: string, mod: number })[]
+    )}
     Object.defineProperties(this.parent.flags.ptr2e.skillOptions, {
       "all": {
         get: () => {
@@ -780,6 +780,36 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       "pilot": {
         get: () => {
           return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot");
+        }
+      },
+      "all40": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.mod <= 40);
+        }
+      },
+      "arts60": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "arts" && skill.mod <= 60);
+        }
+      },
+      "science60": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "science" && skill.mod <= 60);
+        }
+      },
+      "performance60": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "performance" && skill.mod <= 60);
+        }
+      },
+      "occult60": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "occult" && skill.mod <= 60);
+        }
+      },
+      "pilot60": {
+        get: () => {
+          return this.parent.flags.ptr2e.skillOptions!.data.filter(skill => skill.group === "pilot" && skill.mod <= 60);
         }
       }
     });
