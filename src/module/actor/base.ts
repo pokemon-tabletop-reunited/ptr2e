@@ -274,9 +274,9 @@ class ActorPTR2e<
     if (isNaN(jumpTraitValue)) return 0;
 
     const jumpMultiplier = {
-      1: 0.1,
-      2: 0.4,
-      3: 0.8,
+      1: 0.2,
+      2: 0.6,
+      3: 1,
       4: 1.4,
       5: 3,
       6: 8,
@@ -284,7 +284,7 @@ class ActorPTR2e<
       8: 30
     }[jumpTraitValue] ?? 0;
 
-    return parseFloat((this.system.details.size.height * jumpMultiplier).toFixed(2));
+    return parseFloat((0.5 + this.system.details.size.height * jumpMultiplier).toFixed(2));
   }
 
   get nullifiableAbilities(): PickableThing[] {
