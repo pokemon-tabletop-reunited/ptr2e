@@ -32,13 +32,18 @@
         "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "CW44Gzlj9fY26pGh",
@@ -51,22 +56,25 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
+            "type": "alter-attack",
             "key": "flail-attack-power",
             "value": "1.8 * (100-@actor.system.health.percent)",
             "label": "Flail",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -84,16 +92,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Item.48mv2v1fZIB425Wn.ActiveEffect.3Igoq5pxc0DPxQXN",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1740186557802,
-        "modifiedTime": 1740187122097,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1767160551350,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

@@ -1,0 +1,354 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Chainsaw",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "chainsaw",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "2-handed",
+      "weapon",
+      "blade",
+      "conventional",
+      "sci-fi"
+    ],
+    "actions": [
+      {
+        "name": "Chainsaw Swing",
+        "slug": "chainsaw-swing",
+        "description": "<p>Effect: On hit, the target has a 25% chance of gaining @Affliction[bleed 5].</p>",
+        "traits": [
+          "weapon",
+          "sharp",
+          "crit-1",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 80,
+        "accuracy": 80
+      },
+      {
+        "name": "Chainsaw Grind",
+        "slug": "chainsaw-grind",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[bleed 2], a 20% of losing -1 DEF Stage for 2 Activations, and a 10% chance of gaining @Affliction[splinter 2]. Each consecutive time this attack hits the same target, this attack's Flat Damage increases by +3, Accuracy by +5, Priority by +15, and the user’s EHR for this Attack increases by +35%.</p><p>This progress is tracked via the 6 Span Chainsaw Grind Clock, which is reset to 0 if this Attack misses or this Attack is not used during the user’s Activation).</p>",
+        "traits": [
+          "weapon",
+          "sharp",
+          "crit-2",
+          "flinch-25",
+          "contact",
+          "grapple"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "variant": "chainsaw-swing",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 55,
+        "accuracy": 65
+      }
+    ],
+    "description": "<p>A chainsaw is a portable handheld power saw that cuts with a set of teeth attached to a rotating chain driven along a guide bar. A chainsaw comprises an engine, a drive mechanism, a guide bar, a cutting chain, a tensioning mechanism, and safety features. Chainsaws are typically gasoline or electric-powered and used for tasks to cut through plants and wood and sometimes even concrete and ice, though smaller versions are used for certain surgical procedures. Chainsaws are stupendously dangerous to their operator, but those dangers make them horrifically effective weapons.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 2
+    },
+    "grade": "C",
+    "fling": {
+      "type": "steel",
+      "power": 120,
+      "accuracy": 60,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Chainsaw",
+      "type": "passive",
+      "_id": "28Grmvuo1SGnA50M",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "chainsaw-swing-attack-damage",
+            "value": 9,
+            "predicate": [],
+            "label": "Chainsaw Swing",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chainsaw-swing-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Chainsaw Swing (Bleed)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "create-clock",
+            "key": "chainsawGrindClk",
+            "value": 0,
+            "predicate": [],
+            "max": 6,
+            "color": "#c03e3f",
+            "private": false,
+            "label": "Chainsaw Grind",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "chainsaw-grind-attack-damage",
+            "value": "5 + 3*@actor.clocks.chainsawGrindClk",
+            "predicate": [],
+            "label": "Chainsaw Grind (Damage)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "chainsaw-grind-attack",
+            "value": "5*@actor.clocks.chainsawGrindClk",
+            "predicate": [],
+            "label": "Chainsaw Grind (Accuracy)",
+            "property": "accuracy",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chainsaw-grind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": "15*@actor.clocks.chainsawGrindClk"
+              }
+            ],
+            "dontMerge": true,
+            "label": "Chainsaw Grind (Advance)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chainsaw-grind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "label": "Chainsaw Grind (Bleed)",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chainsaw-grind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "label": "Chainsaw Grind (DEF)",
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chainsaw-grind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "label": "Chainsaw Grind (Splinter)",
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "chainsaw-grind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "label": "Chainsaw Grind (Effect Chance)",
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": "35*@actor.clocks.chainsawGrindClk"
+              }
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chainsaw-grind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "predicate": [],
+            "label": "Chainsaw Grind (Increment)",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.key",
+                "value": "@actor.clocks.chainsawGrindClk"
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-chainsaw-attack-damage",
+            "value": 22,
+            "predicate": [],
+            "label": "Chainsaw (Fling)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "kEB4MUFx1SEM0W3P"
+}

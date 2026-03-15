@@ -13,19 +13,13 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "fling-attack",
+            "key": "fling-trait-attack",
             "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
-            "alterations": [
-              {
-                "mode": 2,
-                "property": "",
-                "value": 0
-              }
-            ],
+            "alterations": [],
             "dontMerge": true,
             "mode": 2,
             "ignored": false
@@ -68,12 +62,12 @@
         "compendiumSource": "Actor.tGa5Upvillhew3kv.Item.okq5vNnqfxQRj5A7.ActiveEffect.RtKFuVw7jRDYWvMG",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1759897005106,
-        "modifiedTime": 1761507916526,
-        "lastModifiedBy": "HXJQDBwSD1R41BZS"
+        "modifiedTime": 1770163004704,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],
@@ -91,7 +85,7 @@
     },
     "actions": [],
     "slug": "bit-of-a-tosser",
-    "description": "<p>Effect: The user’s Fling Attacks deal +5 flat damage and have a 30% chance of inflicting Flinched 1 on hit.</p>",
+    "description": "<p>Effect: The user’s @Trait[fling] Attacks deal +5 flat damage and have a 30% chance of inflicting @Affliction[delay 10] on hit.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
@@ -107,14 +101,21 @@
       {
         "x": 48,
         "y": 50,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "mobilize",
           "berserkergang"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }
