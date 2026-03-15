@@ -20,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 5
         },
         "category": "physical",
         "power": 60,
@@ -29,47 +29,53 @@
           "dark"
         ],
         "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "M9G3VseIJpbLjsGu",
   "effects": [
     {
-      "name": "Power Trip",
+      "name": "Punishment",
       "type": "passive",
       "_id": "4BEUje4hBFw2LSTr",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "power-trip-attack-power",
-            "value": "20 * (max(0,@target.system.attributes.atk.stage)+max(0,@target.system.attributes.def.stage)+max(0,@target.system.attributes.spa.stage)+max(0,@target.system.attributes.spd.stage)+max(0,@target.system.attributes.spd.stage)+max(0,@target.system.battleStats.accuracy.stage)+max(0,@target.system.battleStats.evasion.stage)+max(0,round(@target.system.battleStats.critRate.stage*1.5)))",
+            "type": "alter-attack",
+            "key": "punishment-attack",
+            "value": "20* (max(0,@target.system.attributes.atk.stage)+max(0,@target.system.attributes.def.stage)+max(0,@target.system.attributes.spa.stage)+max(0,@target.system.attributes.spd.stage)+max(0,@target.system.attributes.spd.stage)+max(0,@target.system.battleStats.accuracy.stage)+max(0,@target.system.battleStats.evasion.stage)+max(0,round(@target.system.battleStats.critRate.stage*1.5)))",
             "predicate": [],
             "label": "Punishment",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -87,16 +93,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1740187535596,
-        "modifiedTime": 1740188810565,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1767161591232,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

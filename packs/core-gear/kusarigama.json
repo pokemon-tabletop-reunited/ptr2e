@@ -1,0 +1,287 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Kusarigama",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "kusarigama",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "blade",
+      "blunt",
+      "2-handed",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Kusarigama Slash",
+        "slug": "kusarigama-slash",
+        "description": "<p>Effect: This Attack gains +35 base Power, +20 Accuracy, +4 flat damage, and +1 CRIT against targets Afflicted with @Affliction[bound].</p>",
+        "traits": [
+          "weapon",
+          "sharp",
+          "priority-20",
+          "contact",
+          "adaptable"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 25,
+        "accuracy": 50
+      },
+      {
+        "name": "Kusarigama Strike",
+        "slug": "kusarigama-strike",
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[delay 10].</p>",
+        "traits": [
+          "weapon",
+          "hammer",
+          "missile",
+          "adaptable"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 45,
+        "accuracy": 60
+      },
+      {
+        "name": "Kusarigama Bind",
+        "slug": "kusarigama-bind",
+        "description": "<p>While @Affliction[bound], the target is also @Affliction[grapple], and cannot utilize Attacks using their Held Items. This @Affliction[bound] effect can be removed with a Taxing Acrobatics, Lift, or Sleight of Hand Skill Check taken as a Simple Action. The user must remain within 3 RI of the target to keep them @Affliction[bound].</p>",
+        "traits": [
+          "weapon",
+          "flinch-20"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": [],
+        "accuracy": 55
+      }
+    ],
+    "description": "<p>The kusarigama or “chain-sickle” is an older-fashioned weapon that was developed from a number of conventional tools into a half-improvised, half-purpose-made weapon that finds use in some more obscure martial arts. It consists of a kama (a type of sickle or billhook) on a kusari-fundo – a type of metal chain (kusari) with a heavy iron weight (fundo) at the end. Generally, the weapon was focused on utilizing the weight and chain to confound, disable, disarm, or grapple foes to allow the user to get in close with the sickle.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 85,
+      "accuracy": 70,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Kusarigama",
+      "type": "passive",
+      "_id": "Y0ZxWQ5oJ4XIKZom",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 4,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-kusarigama-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "kusarigama-slash-attack-power",
+            "value": 35,
+            "predicate": [
+              "target:effect:affliction:bound"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "kusarigama-slash-attack-accuracy",
+            "value": 20,
+            "predicate": [
+              "target:effect:affliction:bound"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "key": "kusarigama-slash-attack-crit",
+            "value": 1,
+            "predicate": [
+              "target:effect:affliction:bound"
+            ],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "kusarigama-slash-attack-damage",
+            "value": 4,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "kusarigama-strike-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "kusarigama-bind-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "MTR3g3O8kGCdkP1t"
+}

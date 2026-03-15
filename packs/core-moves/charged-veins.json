@@ -3,16 +3,15 @@
   "type": "move",
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
-    "slug": "gear-up",
+    "slug": "charged-veins",
     "actions": [
       {
-        "slug": "chargen-veins",
+        "slug": "charged-veins",
         "name": "Charged Veins",
         "type": "attack",
         "traits": [],
         "range": {
           "target": "field",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
@@ -20,25 +19,26 @@
           "powerPoints": 3
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
-          "rocked"
+          "rock"
         ],
         "description": "<p>Effect: The user and all allied creatures with the Ability Anionic or Cationic increase their DEF Stage and SPDEF Stage by +1 for 5 Activations. The Stage increase is doubled for creatures with both abilities.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "C",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "X9isn1WUcflDDKqC",
