@@ -7,7 +7,7 @@
     {
       "name": "Yeomanry",
       "type": "passive",
-      "_id": "SNAHektnfpJUzd3M",
+      "_id": "V5yuSoMghua9up8o",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -16,21 +16,58 @@
             "key": "missile-trait-attack-damage",
             "value": 40,
             "predicate": [
-              "self:action:trait:projectile",
+              "self:action:trait:weapon",
               {
                 "not": "self:action:trait:firearm"
               }
             ],
-            "hideIfDisabled": true,
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "missile-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "self:action:trait:weapon",
+              {
+                "not": "self:action:trait:firearm"
+              }
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": 15
+              }
+            ],
             "mode": 2,
             "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "struggle-attack-power",
-            "value": 10,
+            "type": "roll-option",
+            "key": "",
+            "value": "yeoman-wpn:active",
             "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
             "label": "Wielding a Projectile Weapon?",
+            "alwaysActive": false,
+            "state": true,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "flat-modifier",
+            "key": "struggle-attack",
+            "value": 20,
+            "predicate": [
+              "yeoman-wpn:active"
+            ],
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
@@ -39,8 +76,9 @@
             "type": "flat-modifier",
             "key": "hand-weapon-strike-attack-power",
             "value": 10,
-            "predicate": [],
-            "label": "Wielding a Projectile Weapon?",
+            "predicate": [
+              "yeoman-wpn:active"
+            ],
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
@@ -56,7 +94,7 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
+        "startTime": 0,
         "combat": null
       },
       "description": "",
@@ -71,15 +109,15 @@
         }
       },
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Actor.yTATR0D63ScmGUlH.Item.3TYY15D6hvycx085.ActiveEffect.5HTr6F4bubtYh1uM",
         "duplicateSource": null,
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
-        "createdTime": 1770163154572,
-        "modifiedTime": 1770164716648,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "createdTime": 1773234675126,
+        "modifiedTime": 1773234675126,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
       }
     }
   ],
@@ -97,32 +135,26 @@
     },
     "actions": [],
     "slug": "yeomanry",
-    "description": "<p>The user’s @Trait[projectile] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle and @UUID[Compendium.ptr2e.core-gear.rRb0uqppb5elSTfA]{Hand Weapon} Attacks have +10 Base Power while the user has a @Trait[projectile] @Trait[weapon] in their Held Slot(s).</p>",
+    "description": "<p>The user’s non-@Trait[firearm] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a @Trait[projectile] @Trait[weapon], and improvised Attacks with that Weapon have +10 Power.</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder",
       {
         "gte": [
           "{actor|skills.survival.mod}",
-          30
+          40
         ]
       },
       {
         "gte": [
           "{actor|skills.lift.mod}",
-          45
+          50
         ]
       },
       {
         "gte": [
           "{actor|skills.acrobatics.mod}",
-          30
-        ]
-      },
-      {
-        "gte": [
-          "{actor|level}",
-          20
+          40
         ]
       }
     ],
