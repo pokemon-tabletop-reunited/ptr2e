@@ -57,22 +57,25 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "low-kick-attack-power",
-            "value": "min(120,@target.system.details.size.weightClass*9)",
+            "type": "alter-attack",
+            "key": "low-kick-attack",
+            "value": "max(20,min(140,@target.system.details.size.weightClass*10))",
             "predicate": [],
             "label": "Low Kick Scaling",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -90,16 +93,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.iWdcVdEe3eMHGjUu.ActiveEffect.RWoOCmigMhLceiZI",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1743550688572,
-        "modifiedTime": 1743550712079,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1767161119367,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

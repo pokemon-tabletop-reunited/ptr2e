@@ -8,7 +8,7 @@
     "actions": [
       {
         "name": "Condemn",
-        "slug": "condemn-1",
+        "slug": "condemn",
         "description": "<p>You may spend 3PP to condemn a target within 5m as a Simple Action. This is considered an Attack with the [Social] trait, and may only be used once per Activation. The target loses -1 DEF and SPDEF stages for 3 Activations.</p>",
         "traits": [
           "social"
@@ -30,17 +30,7 @@
         "category": "status",
         "accuracy": 100,
         "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "predicate": []
       }
     ],
     "slug": "condemn",
@@ -106,9 +96,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -135,7 +123,8 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -154,14 +143,17 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -183,7 +175,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737935473142,

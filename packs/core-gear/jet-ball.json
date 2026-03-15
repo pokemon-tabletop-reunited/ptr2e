@@ -25,7 +25,7 @@
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 20,
+        "distance": 8,
         "unit": "m"
       }
     },
@@ -37,7 +37,7 @@
       "fling",
       "ball"
     ],
-    "description": "<p>3x Catch Rate modifier vs targets in the Flying or Teleportation movement states.</p>",
+    "description": "<p>3x Catch Rate modifier and +50% range vs targets utilizing Flight or Teleport Movement.</p>",
     "modifier": 3,
     "quantity": 1,
     "slug": "jet-ball",
@@ -53,9 +53,72 @@
       ],
       "notes": ""
     },
-    "actions": []
+    "actions": [],
+    "ammoType": []
   },
   "_id": "g74RkfDpUI6xZAy7",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Jet Ball",
+      "type": "passive",
+      "_id": "zObKLVQb6TDHiiyS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-feather-ball-attack",
+            "value": 1.5,
+            "predicate": [
+              {
+                "or": [
+                  "target:state:flight",
+                  "target:state:teleport"
+                ]
+              }
+            ],
+            "property": "range",
+            "definition": [],
+            "mode": 1,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771030183437,
+        "modifiedTime": 1771030207296,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "bIBkUsgkWMXMOtHm"
 }
