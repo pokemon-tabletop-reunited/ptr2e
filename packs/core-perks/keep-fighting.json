@@ -17,16 +17,16 @@
       }
     ],
     "cost": 4,
-    "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The user can spend 8 PP as a Complex Action at @Trait[interrupt-4] when a creature at a range of 10m of the user gains @Affliction[fainted] to revive the target to @HP[5 tick] and heal have it lose 1 Stack of @Affliction[weary], and the user is Flinched 40%.</p>",
+    "description": "<p>Effect: The user can spend @PP[-7] as an @Trait[interrupt] @Trait[flinch-40] Complex Action when an Ally within 10m gains @Affliction[fainted],. The Ally is healed @HP[5 tick] and cured of 1 Stack of @Affliction[weary].</p>",
     "actions": [
       {
         "name": "Keep Fighting!",
         "slug": "keep-fighting",
-        "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The user can spend 8 PP as a Complex Action at @Trait[interrupt-4] when a creature at a range of 10m of the user gains @Affliction[fainted] to revive the target to @HP[5 tick] and heal have it lose 1 Stack of @Affliction[weary], and the user is Flinched 40%.</p>",
+        "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed @HP[5 tick] and loses 1 Stack of @Affliction[weary].</p>",
         "type": "generic",
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "trigger": "An ally gains @Affliction[fainted]."
         },
         "range": {
@@ -35,9 +35,8 @@
           "unit": "m"
         },
         "traits": [
-          "interrupt-4",
           "healing",
-          "flinch-40"
+          "interrupt"
         ],
         "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
       }
@@ -82,7 +81,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "3RMFsZTuMdDhCyZg",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -98,7 +98,9 @@
             "type": "roll-effect",
             "key": "keep-fighting-generic",
             "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
-            "predicate": [],
+            "predicate": [
+              "origin:ally"
+            ],
             "chance": 100,
             "isFixedChance": true,
             "affects": "target",
@@ -107,6 +109,25 @@
                 "mode": 5,
                 "property": "system.changes.0.value",
                 "value": 5
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "the-meaning-of-haste-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -40
               }
             ],
             "dontMerge": false,
@@ -144,10 +165,10 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1765234874919,
-        "modifiedTime": 1765234997941,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1772123680193,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
       }
     }
   ],

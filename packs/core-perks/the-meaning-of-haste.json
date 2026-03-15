@@ -9,39 +9,22 @@
       {
         "name": "The Meaning of Haste",
         "slug": "the-meaning-of-haste",
-        "description": "<p>All allied creatures gain +2 SPD stages for 5 Activations.</p>",
+        "description": "<p>Effect: The user and all allies in range are @Affliction[advance 30] and gain +2 SPD Stages for 3 Activations.</p>",
         "traits": [],
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "field",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 8
         },
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "predicate": [],
-        "free": true,
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "the-meaning-of-haste",
-    "description": "<p>Spend 6PP and grant a field-wide +2 SPD stages to yourself and all allies for 5 activations as a Complex Action.</p>",
+    "description": "<p>Effect: By spending @PP[-8] as a Complex Action, the user and all allies on the field are @Affliction[advance 30] and gain +2 SPD Stages for 3 Activations.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -58,24 +41,21 @@
     },
     "nodes": [
       {
+        "x": 39,
+        "y": 58,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "cheerleader",
           "im-with-you",
           "rapid-fire-commands"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#0000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 39,
-        "y": 58,
         "tier": null
       }
     ],
@@ -94,9 +74,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -108,23 +86,65 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "the-meaning-of-haste-attack",
+            "key": "the-meaning-of-haste-generic",
             "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLZ",
-            "predicate": [],
+            "predicate": [
+              {
+                "or": [
+                  "targets:self",
+                  "origin:ally"
+                ]
+              }
+            ],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": [],
-            "dontMerge": false
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "isFixedChance": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "the-meaning-of-haste-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "predicate": [
+              {
+                "or": [
+                  "targets:self",
+                  "origin:ally"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -142,16 +162,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1736877838885,
-        "modifiedTime": 1736877883752,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1772122900501,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
         "exportSource": null
       }
     }
