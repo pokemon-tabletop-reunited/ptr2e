@@ -471,7 +471,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         selfEffectRolls: this.selfEffects ? await (async () => {
           const rolls = [];
           for (const roll of this.selfEffects!.rolls) {
-            const item = await fromUuid(roll.effect);
+            const item = await fu.fromUuid(roll.effect);
             if (!item) {
               Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${roll.effect}`), { log: "error" });
               continue;
