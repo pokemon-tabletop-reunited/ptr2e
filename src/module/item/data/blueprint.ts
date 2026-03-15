@@ -861,7 +861,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const itemMap: [string, unknown[]][] = [];
     for(const actorData of toBeCreated) {
       if(!actorData.items?.length) continue;
-      const speciesItemIndex = actorData.items.findIndex(i => i.type === "species");
+      const speciesItemIndex = actorData.items.findIndex(i => i.type === "species" || i.type?.endsWith("Species"));
       if(speciesItemIndex !== -1) {
         const speciesItem = actorData.items[speciesItemIndex];
         // Remove species item from actor creation data
