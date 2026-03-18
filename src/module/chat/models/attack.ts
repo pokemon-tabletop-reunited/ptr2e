@@ -623,6 +623,31 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
     }
 
+    // If the attack has pierce, handle removing of [Shield] trait effects
+    if(this.context.attack.traits.has("pierce")) {
+      const shieldEffects = result.target.effects.filter(e => (e as ActiveEffectPTR2e).system.traits?.has("shield"));
+      const shieldHP = result.target.system.shield.value || 0;
+      if(shieldEffects.length) {
+        await result.target.deleteEmbeddedDocuments("ActiveEffect", shieldEffects.map(e => e.id));
+      }
+      if(shieldHP) {
+        await result.target.update({"system.shield.value": 0});
+      }
+      if (shieldEffects.length || shieldHP) {
+        //@ts-expect-error - Chat messages have not been properly defined yet
+        await ChatMessage.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: shieldHP,
+            shieldApplied: true,
+            target: result.target.uuid,
+            note: `<div class="pl-1 pr-1 center-text" ><p>${result.target.name} had ${shieldEffects.length} @Trait[shield] effect(s) removed and ${shieldHP} shield HP reduced by ${this.context.attack.name} due to its @Trait[pierce] Trait.</p>`
+            + `<p>Removed Effects:</p><ul class="p-0 m-1" style="list-style: none";">${shieldEffects.map(e => `<li>${e.name}</li>`).join("")}</ul><p><small class="fs-10">Please note that @Trait[shield] summons are not automatically deleted and should be manually removed.</small></p></div>`,
+          }
+        });
+      }
+    }
+
     // Damage needs to be applied before all effects are, in case any effect depends on the new HP value.
     const damageApplied = await (async () => {
       const target = result.target;
