@@ -275,8 +275,9 @@ export class TextEnricher {
         await ChatMessagePTR2e.create({
           type: "damage-applied",
           system: {
-            damageApplied: newValue - current,
+            damageApplied: current - newValue,
             target: actor.uuid,
+            ppApplied: true
           },
         });
       }

@@ -53,8 +53,9 @@ export default class ApplyTickChangeSystem extends ChangeModel {
         await ChatMessagePTR2e.create({
           type: "damage-applied",
           system: {
-            damageApplied: newValue - current,
+            damageApplied: current - newValue,
             target: this.actor.uuid,
+            ppApplied: true
           },
         });
       }
