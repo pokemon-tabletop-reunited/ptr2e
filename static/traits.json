@@ -2838,10 +2838,34 @@
     "description": "Denotes if a creature makes contact with its target through using the associated Action or Attack. The Range of the Action or Attack is affected by the user's Reach - set as REACH+RANGE-1."
   },
   {
-    "slug": "crash-1-2",
-    "label": "Crash 1/2",
+    "slug": "crash-x-y",
+    "label": "Crash X/Y",
     "related": [],
-    "description": "On miss, the user takes damage equal to half the amount the attack would have dealt to the target."
+    "description": "On miss, the user takes damage equal to X/Y of the amount the attack would have dealt to the target.",
+    "placeholders": [
+      {
+        "keyPattern": "crash-\\d+-\\d+",
+        "labelPattern": "X",
+        "valuePattern": "(\\d+)-\\d+",
+        "descriptionPattern": "X/Y",
+        "descriptionReplacement": "{{x}}/Y",
+        "valueDivisor": "/"
+      },
+      {
+        "keyPattern": "crash-\\d+-\\d+",
+        "labelPattern": "Y",
+        "valuePattern": "\\d+$",
+        "descriptionPattern": "/Y",
+        "descriptionReplacement": "/{{x}}"
+      }
+    ],
+    "changes": [
+      {
+        "type": "flat-modifier",
+        "key": "{attack|slug}-attack-crash-flat",
+        "value": "{trait|value}"
+      }
+    ]
   },
   {
     "slug": "crit-1",

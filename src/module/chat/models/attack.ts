@@ -407,6 +407,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         attack: this.attack,
         hasDamage: summonAttack?.damageType === "flat" ? true : this.results.some((result) => !!result.damage),
         hasEffect: this.results.some((result) => result.effectRolls?.origin.length || result.effectRolls?.target.length || result.effectRolls?.defensive.length),
+        crash: this.attack.traits.some(t => t.slug.startsWith("crash-")),
         results: new Map<ActorUUID, AttackMessageRenderContextData>(
           // @ts-expect-error - This is a valid operation
           await Promise.all(
@@ -733,6 +734,45 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     ]))[0];
   }
 
+  async applyCrash(): Promise<void> {
+    if (!this.context) return;
+    const origin = await this.currentOrigin;
+    if (!origin) return;
+
+    const crashes = Array.from(this.context.results.values()).reduce((acc, result) => {
+      // Increment if the attack misses
+      if (["miss", "fumble"].includes(result.hit)) {
+        acc.push({
+          crash: (result.check?.totalModifiers as Record<string, { base: number, flat: number, stage: number, percentile: number }>)?.crash ?? {},
+          damage: result.damage || 0,
+        })
+      }
+      return acc;
+    }, [] as {crash: { base: number, flat: number, stage: number, percentile: number }, damage: number}[]);
+    if (!crashes.length) return void ui.notifications.info("No crash damage to apply.");
+
+    const totalCrash = crashes.reduce((acc, {crash, damage}) => {
+      if(crash.flat > 0) {
+        try {
+          const crashDamage = new Roll(`floor(@damage * (@crashFlat * @crashPercentile))`, {
+            damage: damage,
+            crashFlat: crash.flat,
+            crashPercentile: crash.percentile
+          }).evaluateSync().total;
+          return acc + crashDamage;
+        }
+        catch (error) {
+          console.error("Failed to calculate crash damage", error);
+        }
+      }
+      return acc;
+    }, 0);
+
+    if(totalCrash > 0) {
+      await origin.applyDamage(totalCrash, { silent: false, healShield: false, flat: true, note: `Crash damage from missing ${crashes.length} attack(s)` });
+    }
+  }
+
   async updateTargets(event: JQuery.ClickEvent) {
     const targets = (() => {
       const controlled = canvas.tokens.controlled
@@ -817,6 +857,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           await this.applyDamage(result.target.uuid);
         }
       }
+    });
+    html.find(".apply-crash").on("click", async () => {
+      await this.applyCrash();
     });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
@@ -1041,6 +1084,7 @@ interface AttackMessageRenderContext {
   selfEffectRolls: string[];
   defaultExpanded?: boolean;
   metagameInfo?: Record<string, unknown>;
+  crash: boolean;
 }
 
 interface AttackMessageRenderContextData {
