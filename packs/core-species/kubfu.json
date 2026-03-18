@@ -239,59 +239,20 @@
       "details": null,
       "evolutions": [
         {
-          "name": "urshifu-rapid-strike",
+          "name": "urshifu",
           "uuid": "Compendium.ptr2e.core-species.Item.nXfdmP3ymkZjnczr",
           "methods": [
             {
               "type": "level",
               "level": 50,
               "operand": "or"
-            },
-            {
-              "type": "item",
-              "item": "scroll-of-masteries",
-              "operand": "or",
-              "held": false
             }
           ],
           "perk": {
             "x": 26,
             "y": 26
           },
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
-          "evolutions": []
-        },
-        {
-          "name": "urshifu-single-strike",
-          "uuid": "Compendium.ptr2e.core-species.Item.nXfdmP3ymkZjnczZ",
-          "methods": [
-            {
-              "type": "level",
-              "level": 50,
-              "operand": "or"
-            },
-            {
-              "type": "item",
-              "item": "scroll-of-masteries",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "perk": {
-            "x": 26,
-            "y": 26
-          },
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
+          "details": null,
           "evolutions": []
         }
       ],
@@ -307,7 +268,9 @@
       "pokemon",
       "legendary",
       "bipedal",
-      "jump-5"
+      "jump-5",
+      "slugger",
+      "booter"
     ],
     "diet": [
       "omnivore"
@@ -315,33 +278,15 @@
     "abilities": {
       "starting": [
         {
-          "slug": "unseen-fist"
-        }
-      ],
-      "basic": [
-        {
           "slug": "inner-focus"
         },
         {
-          "slug": "feisty"
+          "slug": "discipline"
         }
       ],
-      "advanced": [
-        {
-          "slug": "iron-fist"
-        },
-        {
-          "slug": "mold-breaker"
-        }
-      ],
-      "master": [
-        {
-          "slug": "cross-counter"
-        },
-        {
-          "slug": "raging-boxer"
-        }
-      ]
+      "basic": [],
+      "advanced": [],
+      "master": []
     },
     "movement": [
       {
@@ -350,13 +295,21 @@
       },
       {
         "type": "swim",
-        "value": 3
+        "value": 4
       }
     ],
     "skills": [
       {
         "slug": "acrobatics",
         "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "aura-sense",
+        "value": 10,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -469,7 +422,8 @@
       "source": "PTR 2e Core - Galar Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Es8JNnumhbL8GOQV",

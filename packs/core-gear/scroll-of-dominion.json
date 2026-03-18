@@ -1,0 +1,151 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Scroll of Dominion",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "scroll-of-dominion",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held",
+      "forme-change",
+      "kubfu",
+      "urshifu"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user deals +20% damage with @Trait[dragon] Attacks. Urshifu deal an additional +10% damage with @Trait[dragon] Attacks, and gain +5 Base DEF, SPDEF, and SPD.</p><p>This item acts as a comprehensive manual to Tutor @UUID[Compendium.ptr2e.core-moves.nqEapzgTHouf7qt9]{Wave Motion Fist} to @Trait[slugger] or @Trait[booter] creatures, and Urshifu can use this item to change Forme.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "S",
+    "fling": {
+      "type": "dragon",
+      "power": 70,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/item-icons/scroll%20of%20dominion.webp",
+  "effects": [
+    {
+      "name": "Scroll of Dominion",
+      "type": "passive",
+      "_id": "0kOCtVdeNXUgQ1OP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "dragpm-attack-damage-percentile",
+            "value": 20,
+            "predicate": [
+              {
+                "not": "item:species:urshifu"
+              }
+            ],
+            "label": "Scroll of Dominion",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "dragon-attack-damage-percentile",
+            "value": 30,
+            "predicate": [
+              "item:species:urshifu"
+            ],
+            "label": "Scroll of Dominion",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "item:species:urshifu"
+            ],
+            "hp": null,
+            "atk": null,
+            "def": 5,
+            "spa": null,
+            "spd": 5,
+            "spe": 5,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Y2jNf9X3ylmcrHj0"
+}
