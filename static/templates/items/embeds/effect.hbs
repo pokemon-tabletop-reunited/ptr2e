@@ -10,7 +10,7 @@
     <content class="effect-embed">
         {{#if (eq document.type 'affliction')}}
             <section class="details">
-                <fieldset> {{log this}}
+                <fieldset>
                     <label for="duration.turns">{{#if (isdefined parentFields)}}{{localize parentFields.duration.fields.turns.label}}{{else}}{{localize fields.duration.fields.turns.label}}{{/if}}</label> <span>{{document.duration.turns}}</span>
                     {{#if (isdefined document.duration.startTurn)}}<label for="duration.startTurn">{{#if (isdefined parentFields)}}{{localize parentFields.duration.fields.startTurn.label}}{{else}}{{localize fields.duration.fields.startTurn.label}}{{/if}}</label> <span>{{document.duration.startTurn}}</span>{{/if}}
                     {{#if (isdefined document.duration.remaining)}}<label for="duration.remaining">{{localize "PTR2E.Effect.Fields.duration.remaining.label"}}</label> <span>{{document.duration.remaining}}</span>{{/if}}

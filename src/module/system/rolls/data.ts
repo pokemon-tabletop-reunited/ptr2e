@@ -1,7 +1,7 @@
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckDC } from "./degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";
-import { AttackPTR2e, Trait } from "@data";
+import { ActionCost, AttackPTR2e, Trait } from "@data";
 import { ActorPTR2e, EffectRoll } from "@actor";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRoll, CheckType } from "./check-roll.ts";
@@ -113,6 +113,7 @@ interface CheckRollContext extends BaseRollContext {
     /** Attack Variants' slugs */
     variants?: string[];
     isChangingVariant?: boolean;
+    outOfTurnCost?: ActionCost;
 }
 
 interface CaptureCheckRollContext extends CheckRollContext {
