@@ -651,10 +651,10 @@ class ActorPTR2e<
       affliction.system.apply(this);
     }
     // Run the _traits array as it may have added changes
-    for(const trait of this.system._traits) {
-      if(!trait.changes?.length) continue;
+    for (const trait of this.system._traits) {
+      if (!trait.changes?.length) continue;
       const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
-      if(!effect?.active) continue;
+      if (!effect?.active) continue;
       for (const change of effect.changes) {
         change.effect.apply(this, change.clone());
       }
@@ -956,7 +956,7 @@ class ActorPTR2e<
 
   async applyDamage(
     damage: number,
-    { silent, healShield, flat, note } = { silent: false, healShield: false, flat: false, note: "" }
+    { silent = false, healShield = false, flat = false, note = "" }: { silent?: boolean, healShield?: boolean, flat?: boolean, note?: string } = { silent: false, healShield: false, flat: false, note: "" }
   ) {
     // If this is damage, apply the vulnerability multiplier
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
@@ -1236,7 +1236,7 @@ class ActorPTR2e<
             }
           }
         }
-        if(result.perish) {
+        if (result.perish) {
           // This Ace Actor is perishing
           isAcePerishing = true;
         }
@@ -1312,9 +1312,9 @@ class ActorPTR2e<
       };
     }
 
-    if(isAcePerishing) {
+    if (isAcePerishing) {
       const weary = await fu.fromUuid<ActiveEffectPTR2e>("Compendium.ptr2e.core-effects.Item.wearyconditiitem");
-      if(weary) {
+      if (weary) {
         await this.createEmbeddedDocuments("ActiveEffect", [weary.toObject()]);
       }
       await ChatMessage.create({
@@ -2239,7 +2239,7 @@ class ActorPTR2e<
       }
     }
 
-    if(changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
+    if (changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
       changed.system.shield.value = this.system.shield.max;
     }
 
@@ -2283,7 +2283,7 @@ class ActorPTR2e<
           }
 
           // Grant abilities at level 20/40/60
-          if(currentLevel < 20 && level >= 20) {
+          if (currentLevel < 20 && level >= 20) {
             const basicAbilities = this.species.abilities.basic;
             const abilities = (await Promise.all(basicAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
             if (abilities.length) {
@@ -2293,7 +2293,7 @@ class ActorPTR2e<
               changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
             }
           }
-          if(currentLevel < 40 && level >= 40) {
+          if (currentLevel < 40 && level >= 40) {
             const advancedAbilities = this.species.abilities.advanced;
             const abilities = (await Promise.all(advancedAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
             if (abilities.length) {
@@ -2303,7 +2303,7 @@ class ActorPTR2e<
               changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
             }
           }
-          if(currentLevel < 60 && level >= 60) {
+          if (currentLevel < 60 && level >= 60) {
             const masterAbilities = this.species.abilities.master;
             const abilities = (await Promise.all(masterAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
             if (abilities.length) {

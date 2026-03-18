@@ -219,6 +219,7 @@ class AttackRoll extends CheckRoll {
       type: typeEffectiveness,
       other: otherModifier,
       flatDamage: flatDamage,
+      ignoresShieldDuringDamage: origin.rollOptions.getFromDomain("item")["special:ignoresShieldDuringDamage"] ? 1 : 0
     };
     const roll = new Roll(
       this.options.isFlat 
