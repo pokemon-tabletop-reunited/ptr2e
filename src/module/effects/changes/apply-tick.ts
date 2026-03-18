@@ -49,7 +49,14 @@ export default class ApplyTickChangeSystem extends ChangeModel {
         const current = this.actor.system.powerPoints.value;
         const newValue = Math.clamp(this.actor.system.powerPoints.value + value, 0, this.actor.system.powerPoints.max);
         await this.actor.update({ "system.powerPoints.value": newValue });
-        ui.notifications.info(`Updated ${actor.name}'s Power Points from ${current} to ${newValue}.`);
+        //@ts-expect-error - Outdated types
+        await ChatMessagePTR2e.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: newValue - current,
+            target: this.actor.uuid,
+          },
+        });
       }
       else {
         await this.actor.applyDamage(value * -1, { healShield: this.method === "Shield" && value > 0, silent: false, flat: true, note: ""});

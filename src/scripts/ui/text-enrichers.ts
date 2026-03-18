@@ -1,6 +1,7 @@
 // Default Pattern
 // /@(?<type>Key)\[(?<slug>[-a-z]+)(\s+)?(?<options>[^\]]+)*](?:{(?<label>[^}]+)})?/gi
 
+import { ChatMessagePTR2e } from "@chat";
 import { PokemonType } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
@@ -270,7 +271,14 @@ export class TextEnricher {
         const current = actor.system.powerPoints.value;
         const newValue = Math.clamp(actor.system.powerPoints.value + amount, 0, actor.system.powerPoints.max);
         await actor.update({ "system.powerPoints.value": newValue });
-        ui.notifications.info(`Updated ${actor.name}'s Power Points from ${current} to ${newValue}.`);
+        //@ts-expect-error - Outdated types
+        await ChatMessagePTR2e.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: newValue - current,
+            target: actor.uuid,
+          },
+        });
       }
       else {
         await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false, flat: true, note: ""})
