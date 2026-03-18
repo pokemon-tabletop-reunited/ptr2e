@@ -12,13 +12,11 @@
       "sci-fi"
     ],
     "actions": [],
-    "description": "<p>This fire-resistant armour is produced by Lysandre Labs to protect firefighters during dangerous rescue operations, although it's a little cumbersome.<br><br>The takes 50% less Fire-Type damage and cannot be Burned. Grants +10 Base DEF, +5 Base SPDEF, and -10 Base SPD.</p>",
+    "description": "<p>This fire-resistant armour is produced by Lysandre Labs to protect firefighters during dangerous rescue operations, although it's a little cumbersome.<br><br>The user takes 50% less Fire-Type damage and cannot be Burned. Grants +10 Base DEF and +5 Base SPDEF, and decreases their SPD by -20% while they take -15% less Special-Category damage.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
-      "materials": [
-        "tbd"
-      ]
+      "materials": []
     },
     "equipped": {
       "carryType": "stowed",
@@ -28,9 +26,14 @@
     "grade": "D",
     "fling": {
       "type": "untyped",
-      "power": 30,
-      "accuracy": 35,
-      "hide": false
+      "power": 80,
+      "accuracy": 75,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -48,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -68,37 +73,24 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "suboptions": [],
             "state": true
           },
           {
-            "type": "basic",
-            "key": "system.attributes.def.base",
-            "value": 10,
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
             "predicate": [],
+            "hp": null,
+            "atk": null,
+            "def": 10,
+            "spa": null,
+            "spd": 5,
+            "spe": null,
             "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "basic",
-            "key": "system.attributes.spd.base",
-            "value": 5,
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "basic",
-            "key": "system.attributes.spe.base",
-            "value": -10,
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
             "ignored": false
           },
           {
@@ -106,18 +98,38 @@
             "key": "fire-attack-damage-percentile",
             "value": -50,
             "predicate": [],
-            "label": "Fire Rescue Armour",
-            "mode": 2,
+            "label": "Fire Rescue Armour (Fire)",
             "priority": null,
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Fire Rescue Armour (Damage)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.2,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -135,16 +147,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Item.odrpewFngco9a07E.ActiveEffect.17e4qYWGAKQfkaIt",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1739581996175,
-        "modifiedTime": 1739581996175,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1767654820273,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

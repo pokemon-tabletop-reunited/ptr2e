@@ -20,12 +20,12 @@
     "grade": "D",
     "fling": {
       "type": "untyped",
-      "power": 70,
-      "accuracy": 90,
+      "power": 0,
+      "accuracy": 100,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 5,
+        "distance": 4,
         "unit": "m"
       }
     },
@@ -36,8 +36,8 @@
       "fling",
       "ball"
     ],
-    "description": "<p>2x Catch Rate modifier.</p>",
-    "modifier": 2,
+    "description": "<p>2.5x Catch Rate modifier.</p>",
+    "modifier": 2.5,
     "quantity": 1,
     "slug": "leaden-ball",
     "stack": 5,
@@ -52,9 +52,67 @@
       ],
       "notes": ""
     },
-    "actions": []
+    "actions": [],
+    "ammoType": []
   },
   "_id": "iWcPq9fyjji5ZUge",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Leaden Ball",
+      "type": "passive",
+      "_id": "3WaTrwwlCDfcMkgE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-leaden-ball-attack",
+            "value": 75,
+            "predicate": [
+              "actor:item:perk:curveball-technique"
+            ],
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771033063264,
+        "modifiedTime": 1771033383316,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "bIBkUsgkWMXMOtHm"
 }

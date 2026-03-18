@@ -1,0 +1,193 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Shuriken (Envenomed)",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "actions": [],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "B",
+    "fling": {
+      "type": "poison",
+      "power": 25,
+      "accuracy": 65,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 6,
+    "rarity": "rare",
+    "ammoType": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "shuriken-envenomed",
+    "description": "<p>A shuriken is a concealed weapon used by ninja and in martial arts as a distraction tool. Shuriken are also known as throwing stars, or ninja stars, although they were originally constructed in many different shapes. Despite their size, they are capable of extraordinary harm, and were frequently used with modifications and additions for certain tasks. These shuriken are coated in a deadly poison.</p><p>Fling Effect: On hit, the target has a 10% chance of gaining @Affliction[blight 8]. On a Critical Hit, the target has a 30% chance of losing @Tick[-1] and a 40% chance of gaining @Affliction[blight 4].</p>",
+    "traits": [
+      "weapon",
+      "consumable",
+      "fling",
+      "projectile",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
+    ],
+    "consumableType": "other",
+    "stack": 6,
+    "cost": 8
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Shuriken (Envenomed)",
+      "type": "passive",
+      "_id": "elZ8dkksVEB1Kyi8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-shuriken-envenomed-attack",
+            "value": "missile",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-shuriken-envenomed-attack",
+            "value": "sharp",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-shuriken-envenomed-attack",
+            "value": "priority-20",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-kunai-envenomed-attack-damage",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-shuriken-envenomed-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-shuriken-envenomed-attack-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 40,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 4
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-shuriken-paralytic-attack-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "WFreZZEs7PzAxNLN"
+}

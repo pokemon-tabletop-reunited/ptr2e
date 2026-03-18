@@ -56,22 +56,25 @@
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "wring-out-attack-power",
-            "value": "((@actor.system.health.percent)-100)*1.4",
+            "type": "alter-attack",
+            "key": "wring-out-attack",
+            "value": "((@target.system.health.percent)-100)*1.4+10",
             "predicate": [],
             "label": "Wring Out Scaling",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "mode": 5,
+            "property": "power",
+            "definition": [],
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -89,16 +92,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.0hJmzpADt8XQzegu.ActiveEffect.4bmmAt7wC34dHKY2",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1743552110454,
-        "modifiedTime": 1743552134644,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "modifiedTime": 1767160293377,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

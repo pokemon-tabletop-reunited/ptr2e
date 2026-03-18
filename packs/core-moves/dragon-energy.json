@@ -57,22 +57,25 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "dragon-energy-attack-power",
-            "value": "((@actor.system.health.percent)-100)*1.9",
+            "type": "alter-attack",
+            "key": "dragon-energy-attack",
+            "value": "@actor.system.health.percent*1.9+10",
             "predicate": [],
             "label": "Dragon Energy",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "mode": 5,
+            "property": "power",
+            "definition": [],
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -90,16 +93,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.6.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1740184044159,
-        "modifiedTime": 1740184979949,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1767165341549,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

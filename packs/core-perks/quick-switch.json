@@ -7,15 +7,15 @@
       "trait:trainer"
     ],
     "cost": 2,
-    "description": "<p>At the cost of 2PP and done across a Simple Action, the user Recalls a creature and selects that or another creature on their Team, freely using Send Out to bring that creature into Combat.</p>",
+    "description": "<p>When the user resolves @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} on a creature, they may spend 1 PP at @Trait[interrupt-4] and @Trait[flinch 20] and freely use @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}.</p>",
     "actions": [
       {
         "name": "Quick Switch",
         "slug": "quick-switch",
-        "description": "The user freely uses Recall on the creature, and freely uses Send Out targeting an elligible creature from their Team.",
+        "description": "<p>Trigger: The user resolves @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall}.</p><p>Effect: The user freely uses @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}.</p>",
         "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
+          "activation": "free",
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
@@ -26,8 +26,8 @@
         },
         "type": "generic",
         "traits": [
-          "manipulate",
-          "basic"
+          "interrupt-4",
+          "flinch-20"
         ],
         "img": "icons/svg/explosion.svg",
         "variant": null,

@@ -12,7 +12,6 @@
       "weapon",
       "blade",
       "fling",
-      "steel",
       "1-handed",
       "switch-grip",
       "modern",
@@ -79,7 +78,8 @@
         "category": "physical",
         "predicate": [],
         "power": 80,
-        "accuracy": 95
+        "accuracy": 95,
+        "free": true
       }
     ],
     "description": "<p>A sword is an edged, bladed weapon intended for manual cutting and thrusting. These are often straight, double-edged weapons with a one-and-a-half-handed hilt, crossguard, and a blade length between 0.7-1.1m.</p>",
@@ -95,10 +95,10 @@
     },
     "grade": "D",
     "fling": {
-      "type": "steel",
+      "type": "untyped",
       "power": 85,
       "accuracy": 90,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 3,
@@ -116,15 +116,14 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponType": "Melee",
-    "weaponRange": "1",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "2MoMKszqC3PlxHxN",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -195,7 +194,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1757548541362,

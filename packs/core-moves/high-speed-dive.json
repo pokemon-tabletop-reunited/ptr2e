@@ -33,7 +33,7 @@
         "category": "physical",
         "power": 20,
         "accuracy": 100,
-        "description": "<p>Effect: This attack's Power is based on how much heavier the user is compared to the target, ranging from 20 to 100.</p><blockquote><p>Damage Formula: Power = max(100, min(20, 10 x (UserWC-TargetWC)))</p></blockquote>",
+        "description": "<p>Effect: This attack's Power is based on how much heavier the user is compared to the target, ranging from 20 to 100.</p>",
         "predicate": []
       }
     ],
@@ -60,22 +60,25 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "high-speed-dive-attack-power",
+            "type": "alter-attack",
+            "key": "high-speed-dive-attack",
             "value": "min(80,max(0,((@actor.system.details.size.weightClass)-(@target.system.details.size.weightClass))*16))",
             "predicate": [],
             "label": "High-Speed Dive Scaling",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -93,16 +96,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Actor.76kEnzj1AIQHiFPJ.Item.ynRKBWUrMjUzN6C7.ActiveEffect.zSYHDDUrMewbhNpR",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1743549327432,
-        "modifiedTime": 1743549419364,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1767161066457,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

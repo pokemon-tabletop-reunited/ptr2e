@@ -13,24 +13,23 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "C",
+    "grade": "D",
     "fling": {
-      "type": "fighting",
+      "type": "untyped",
       "power": 80,
       "accuracy": 85,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 4,
         "unit": "m"
       }
     },
-    "rarity": "uncommon",
+    "rarity": "common",
     "traits": [
       "weapon",
       "fling",
       "blade",
-      "fighting",
       "1-handed",
       "switch-grip",
       "conventional",
@@ -68,7 +67,8 @@
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "predicate": [],
         "power": 40,
-        "accuracy": 90
+        "accuracy": 90,
+        "free": true
       },
       {
         "name": "Sheathed Knife Thrust",
@@ -77,12 +77,14 @@
           "weapon",
           "contact",
           "crit-1",
-          "grapple"
+          "grapple",
+          "adaptable"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "cost": {
-          "activation": "complex"
+          "activation": "complex",
+          "powerPoints": 1
         },
         "range": {
           "target": "creature",
@@ -94,13 +96,12 @@
         ],
         "category": "physical",
         "predicate": [],
-        "power": 70,
-        "accuracy": 85
+        "power": 75,
+        "accuracy": 85,
+        "free": true
       }
     ],
     "description": "<p>A sheath knife is a fixed-bladed knife that fits into a sheath, generally due to the size of the knife's blade. These tools are as versatile as smaller knives, though the broader blade opens the door for different uses of these knives, most significantly for offense and defense.</p>",
-    "weaponType": "untyped",
-    "weaponRange": "Creature",
     "slug": "sheathed-knife",
     "quantity": 1,
     "identification": {
@@ -122,7 +123,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "LrhYW6Hg6szAqBas",
   "effects": [
@@ -152,12 +154,13 @@
             "hideIfDisabled": false
           },
           {
-            "type": "basic",
+            "type": "flat-modifier",
             "key": "fling-sheathed-knife-attack-damage-flat",
             "value": 12,
             "predicate": [],
             "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -188,12 +191,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1757553244816,
-        "modifiedTime": 1757553352207,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+        "modifiedTime": 1770678695273,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
       }
     }
   ],
