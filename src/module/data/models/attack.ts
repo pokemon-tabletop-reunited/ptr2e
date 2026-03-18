@@ -413,6 +413,10 @@ export default class AttackPTR2e extends ActionPTR2e {
       ...(this.types.map(type => `attack:type:${type}`)),
     ]).map(key => prefix ? `${prefix}:${key}` : key);
   }
+
+  get appliedVariantLabels() {
+    return (this.parent as unknown as {appliedVariantLabels: Map<string, string> })?.appliedVariantLabels
+  }
 }
 
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
@@ -428,6 +432,7 @@ export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<A
   statistic: Maybe<AttackStatistic>;
 
   _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
+
 }
 
 interface AttackSchema extends foundry.data.fields.DataSchema {

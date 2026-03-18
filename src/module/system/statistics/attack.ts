@@ -316,7 +316,6 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     else if(effectiveness < 1) selfOptions.add(`effectiveness:resist`);
     else if(effectiveness > 1) selfOptions.add(`effectiveness:super`);
 
-
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
       attack: this.attack,
@@ -519,6 +518,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
           attack.parent?.updateSource({ "actions": actions });
         }
       }
+      this.attack.appliedVariantLabels.clear();
     }
     if(checkContext.isChangingVariant) {
       checkContext.isChangingVariant = false;
