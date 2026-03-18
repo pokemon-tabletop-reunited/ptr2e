@@ -3029,7 +3029,17 @@
     "slug": "execute",
     "label": "Execute",
     "related": [],
-    "description": "On hit, an affected creature has their HP reduced to zero."
+    "description": "On hit, an affected creature has their HP reduced to zero.",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.executeeffecitem",
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "target"
+      }
+    ]
   },
   {
     "slug": "explode",

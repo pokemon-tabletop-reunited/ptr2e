@@ -289,7 +289,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       !["ally", "enemy", "creature", "object"].includes(this.range.target)
     )
       return null;
-    const dangerClose = !!this.traits.get("danger-close");
+    const dangerClose = !this.traits.has("unreliable") && !!this.traits.get("danger-close");
 
     const reach = ({
       0: 1,

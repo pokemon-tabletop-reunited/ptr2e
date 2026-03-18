@@ -368,7 +368,11 @@ class CheckPTR2e {
         targetUnaware: !!targetContext.target?.actor.rollOptions.all["special:unaware"],
         originUnaware: !!targetContext.self.actor.rollOptions.all["special:unaware"],
         strikes: targetCheck.total.strikes?.flat ?? 0,
-        hits: targetCheck.total.hits?.flat ?? 0
+        hits: targetCheck.total.hits?.flat ?? 0,
+        unreliable: context.attack?.traits.has("unreliable") ? {
+          user: targetContext.self.actor.level,
+          target: targetContext.target?.actor.level ?? 0,
+        } : undefined
       };
 
       const rolls: {
