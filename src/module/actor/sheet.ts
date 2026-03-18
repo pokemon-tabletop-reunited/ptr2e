@@ -642,6 +642,36 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       context.abilities = abilities.sort((a, b) => a.sort - b.sort);
     }
 
+    if (partId === "biography") {
+      const history = this.actor.flags.ptr2e?.evolutionHistory ?? [];
+      const entries = [] as { img: string; name: string; uuid: string }[];
+
+      for(const entry of history) {
+        const species = await fu.fromUuid<SpeciesPTR2e>(entry.uuid)
+        if(!species) {
+          entries.push({
+            img: "icons/svg/mystery-man.svg",
+            name: Handlebars.helpers.formatSlug(entry.slug),
+            uuid: ""
+          })
+        } else {
+          entries.push({
+            img: await species.system.getSpeciesArt(this.actor.system.shiny),
+            name: species.name,
+            uuid: entry.uuid
+          })
+        }
+      }
+      if(!entries.length && this.actor.species) {
+        entries.push({
+          img: await this.actor.species.getSpeciesArt(),
+          name: this.actor.species.parent.name,
+          uuid: this.actor.species.parent.uuid
+        });
+      }
+      context.evolutionHistory = entries;
+    }
+
     return context;
   }
 

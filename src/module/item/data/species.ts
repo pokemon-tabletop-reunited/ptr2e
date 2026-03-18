@@ -445,6 +445,18 @@ class SpeciesSystem extends SpeciesExtension {
     return evolutions;
   }
 
+  async getSpeciesArt(isShiny = this.shiny): Promise<ImageFilePath> {
+    if (!["icons/svg/mystery-man.svg", "systems/ptr2e/img/icons/species_icon.webp"].includes(this.parent.img)) return this.parent.img as ImageFilePath;
+    const config = game.ptr.data.artMap.get(this.slug);
+    if(!config) return this.parent.img as ImageFilePath;
+    const resolver = await ImageResolver.createFromSpeciesData({
+      dexId: this.number,
+      shiny: isShiny,
+      forms: this.form ? this.form.split("-") : [],
+    }, config);
+    return (resolver?.result ?? this.parent.img) as ImageFilePath;
+  }
+
   private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<DeepPartial<PerkPTR2e['_source']>> {
 
     const img = await (async () => {

@@ -1859,6 +1859,23 @@
   display: flex;
   flex-direction: column;
 }
+.ptr2e.actor .window-content .tab.active[data-tab="biography"] .left-side .history {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+.ptr2e.actor .window-content .tab.active[data-tab="biography"] .left-side .history .history-entry {
+  height: 32px;
+  width: 32px;
+  object-fit: scale-down;
+}
+.ptr2e.actor .window-content .tab.active[data-tab="biography"] .left-side .history .history-entry.spacer {
+  height: 16px;
+  width: 16px;
+  align-self: center;
+  font-size: 15px;
+}
 .ptr2e.actor .window-content .tab.active[data-tab="biography"] .left-side .biography {
   flex: 0 0 auto;
   padding: 0.5rem;

@@ -2684,6 +2684,7 @@ type ActorFlags2e = ActorFlags & {
     },
     traitEffects?: Record<string, boolean>;
     overrideSkillValidation?: boolean;
+    evolutionHistory?: {slug: string, uuid: string}[];
   };
 };
 

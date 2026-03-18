@@ -260,7 +260,7 @@ class Blueprint extends foundry.abstract.DataModel {
         return table;
       }
 
-      return await fromUuid<ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e>(this._source.species);
+      return await fu.fromUuid<ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e>(this._source.species);
     })();
 
     const { name, img } = doc ?? { name: "Invalid UUID", img: "icons/svg/hazard.svg" };
