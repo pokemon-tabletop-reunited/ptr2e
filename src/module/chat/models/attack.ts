@@ -429,7 +429,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   }
                 } : { some: false, applied: false },
                 hasCaptureRoll: !!(this.attack.slug?.startsWith("fling") && this.attack.flingItemId),
-                check: result.context.check
+                check: result.context.check,
+                
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({

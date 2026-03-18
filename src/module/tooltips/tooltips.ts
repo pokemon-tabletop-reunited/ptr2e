@@ -557,15 +557,11 @@ export default class TooltipsPTR2e {
     if (!target) return false;
 
     const accuracy = target.accuracyRoll;
-    if (!accuracy) {
-      this.tooltip.innerHTML = "No accuracy roll - Auto hit!";
-      return false;
-    };
 
     this.tooltip.classList.add("status");
     await this._renderTooltip({
       path: "systems/ptr2e/templates/chat/tooltips/status.hbs",
-      data: { target, accuracy },
+      data: { target, accuracy, hit: target.hit },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
