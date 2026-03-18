@@ -8,9 +8,10 @@
     },
     "actions": [],
     "slug": "rigorous-fundamentals",
-    "description": "<p>The user selects 4 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 3 times with this Perk and cannot be increased past 40.</p>",
+    "description": "<p>The user gains a +5 increase to a Skill a total of 2 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 40 or more with @Trait[skill-boost] Perks.</p>",
     "traits": [
-      "minor-buff"
+      "minor-buff",
+      "skill-boost"
     ],
     "prerequisites": [],
     "autoUnlock": [],
@@ -208,14 +209,14 @@
             "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.all",
+            "choices": "flags.ptr2e.skillOptions.all40",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "rf11"
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf11}.value",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf11}.mod",
             "value": 5,
             "predicate": [],
             "mode": 2,
@@ -230,14 +231,14 @@
             "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.all",
+            "choices": "flags.ptr2e.skillOptions.all40",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "rf12"
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf12}.value",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf12}.mod",
             "value": 5,
             "predicate": [],
             "mode": 2,

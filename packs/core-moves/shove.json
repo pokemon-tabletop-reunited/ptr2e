@@ -1,0 +1,102 @@
+{
+  "name": "Shove",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+  "type": "move",
+  "system": {
+    "actions": [
+      {
+        "slug": "shove",
+        "name": "Shove",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact",
+          "push-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0
+        },
+        "free": true,
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Effect: This Attack’s Accuracy is reduced based on how much smaller the user is compared to their target. When declaring this Attack, the user can apply @Affliction[delay 30] to itself and increase the Push trait of this Attack by +1, being able to do so 4 times.</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "E",
+    "slug": "shove",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
+  },
+  "_id": "shoveVrexEHDTqTM",
+  "folder": "EpCOePz8omfXbp34",
+  "effects": [
+    {
+      "name": "Shove",
+      "type": "passive",
+      "_id": "1KKs3r94v4wshove",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "shove-attack-accuracy",
+            "value": "max(-100, 22 * min( 0 , @actor.system.details.size.heightClass - @target.system.details.size.heightClass))",
+            "predicate": [],
+            "label": "Shoving Something Big",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.5.1.6",
+        "createdTime": 1737567047600,
+        "modifiedTime": 1737567117780,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}

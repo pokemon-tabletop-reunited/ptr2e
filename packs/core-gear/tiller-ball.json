@@ -21,11 +21,11 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
+      "accuracy": 100,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 8,
         "unit": "m"
       }
     },
@@ -35,10 +35,9 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball",
       "ball"
     ],
-    "description": "<p>4x Catch Rate modifer if used on a target that is Burrowing. 1x Catch Rate modifer otherwise. This Ball can target creatures 4m underground from the user, at which range the target cannot claim cover.</p>",
+    "description": "<p>4xCatch Rate modifer and +50% Fling range if used on a target that is Burrowing. 1x Catch Rate modifer and normal range otherwise. This Ball can target creatures 4m underground from the user, at which range the target cannot claim Cover.</p>",
     "modifier": 4,
     "quantity": 1,
     "slug": "tiller-ball",
@@ -54,9 +53,67 @@
       ],
       "notes": ""
     },
-    "actions": []
+    "actions": [],
+    "ammoType": []
   },
   "_id": "XrexQs4vfSW01bsu",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Tiller Ball",
+      "type": "passive",
+      "_id": "VutRbYkT2C2eastP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-tiller-ball-attack",
+            "value": 1.5,
+            "predicate": [
+              "target:state:burrow"
+            ],
+            "mode": 1,
+            "property": "range",
+            "definition": [],
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771033166707,
+        "modifiedTime": 1771033257634,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "bIBkUsgkWMXMOtHm"
 }
