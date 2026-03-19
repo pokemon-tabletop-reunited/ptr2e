@@ -1,0 +1,204 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Ninjato",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "ninjato",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "blade",
+      "1-handed",
+      "switch-grip",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Ninjato Swing",
+        "slug": "ninjato-swing",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact",
+          "adaptable",
+          "pass-1",
+          "priority-15"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 40,
+        "accuracy": 75
+      },
+      {
+        "name": "Ninjato Thrust",
+        "slug": "ninjato-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "adaptable",
+          "grapple",
+          "flinch-10",
+          "crit-2"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 90,
+        "accuracy": 70,
+        "free": true
+      }
+    ],
+    "description": "<p>The ninjato is a shorter, single-edged guardless short sword that is lauded as the primary weapon of a ninja, though many experts dispute the weapon’s prominence or existence in the times ninja were more prominent. Nevertheless, it being a shorter, straight-edged katana-like sword means it retains a number of the slashing benefits that a katana bestows, but is quicker on the draw and better suited for thrusts. Its slimmed-down, utilitarian configuration that allow for it to be used stealthily mean it’s unwieldy in the hands of the inexperienced.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 80,
+      "accuracy": 90,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Ninjato",
+      "type": "passive",
+      "_id": "tFmMoIRHdSCansSm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 8,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "ninjato-thrust-attack-damage-flat",
+            "value": 11,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-ninjato-attack-damage-flat",
+            "value": 8,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "uHzqFPlbGoL48MYp"
+}

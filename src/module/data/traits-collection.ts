@@ -11,7 +11,7 @@ export default class PTR2eTraits extends Collection<Trait> {
   }
 
   static create() {
-    return new PTR2eTraits().refresh();
+    return new PTR2eTraits();
   }
 
   getTrait(slug: string): Trait | undefined {
@@ -48,7 +48,7 @@ export default class PTR2eTraits extends Collection<Trait> {
     return undefined;
   }
 
-  refresh() {
+  async refresh() {
     this.clear();
 
     for (const trait of CONFIG.PTR.data.traits) {
@@ -77,6 +77,45 @@ export default class PTR2eTraits extends Collection<Trait> {
 
     // Allow modules to add and override Traits
     const toAdd: Trait[] = [];
+
+    // Add based on module flags
+    const modules = [...game.modules.entries()]
+      .filter(([moduleKey, module]) => {
+        if (!module.active) return false;
+        if (!module.flags[moduleKey]?.["ptr2e-traits"]) return false;
+        return true;
+      })
+      .sort(
+        ([aKey, a], [bKey, b]) =>
+          (Number(a.flags[aKey]?.["ptr2e-traits-priority"]) || Infinity) -
+          (Number(b.flags[bKey]?.["ptr2e-traits-priority"]) || Infinity)
+      );
+
+    for (const [moduleKey, foundryModule] of modules) {
+      const moduleTraits = foundryModule.flags[moduleKey]!["ptr2e-traits"];
+      if (typeof moduleTraits !== "string") continue;
+
+      const map = await (async (): Promise<Maybe<Trait[]>> => {
+        try {
+          const response = await fetch(moduleTraits);
+          if (!response.ok) {
+            console.warn(`PTR2E | Traits Collection | Module ${foundryModule.id} | Failed to fetch traits from ${moduleTraits}`);
+            return null;
+          }
+          return await response.json();
+
+        } catch (error) {
+          if (error instanceof Error) {
+            console.warn(`PTR2E | Traits Collection | Module ${foundryModule.id} | Error while fetching traits`, error.message);
+          }
+          return null;
+        }
+      })();
+      if (!map || !Array.isArray(map) || map.length === 0) continue;
+
+      toAdd.push(...map);
+    }
+
     Hooks.callAll("ptr2e.prepareTraits", toAdd);
 
     if (toAdd.length > 0) {

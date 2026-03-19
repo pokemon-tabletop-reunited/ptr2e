@@ -9,16 +9,14 @@
     },
     "slug": "sachet",
     "traits": [
-      "combat",
-      "fairy",
+      "accessory",
+      "held",
       "evolution",
       "spritzee",
-      "aromatisse",
-      "consumable",
-      "accessory"
+      "aromatisse"
     ],
     "actions": [],
-    "description": "<p>Effect: Grants @Trait[fairy]-type creatures +20% EHR.<br><br>Can be consumed by Spritzee to trigger Evolution.</p>",
+    "description": "<p>Effect: @Trait[fairy] creatures gain +10 Base SPATK and SPDEF. @UUID[Compendium.ptr2e.core-species.Az28PlJeld8Zmqoc]{Spritzee} and @UUID[Compendium.ptr2e.core-species.N9X5OvfUJZs5fv53]{Aromatisse} users deal +15% more and take -10% less Special-Category damage.<br><br>A Spritzee may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,23 +24,23 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
+      "handsHeld": 1,
       "slot": "accessory"
     },
     "grade": "C",
     "fling": {
       "type": "fairy",
-      "power": 70,
-      "accuracy": 100,
+      "power": 65,
+      "accuracy": 90,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 5,
         "unit": "m"
       }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -65,19 +63,59 @@
     {
       "name": "Sachet",
       "type": "passive",
-      "_id": "1WZydCAk8pVCOMC7",
+      "_id": "UfK1dUqTeQymPGW1",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.modifiers.effectHitRate",
-            "value": 20,
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
             "predicate": [
               "trait:fairy"
             ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": 10,
+            "spd": 10,
+            "spe": null,
             "mode": 2,
             "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 15,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:spritzee",
+                  "item:species:aromatisse"
+                ]
+              }
+            ],
+            "label": "Sachet",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:spritzee",
+                  "item:species:aromatisse"
+                ]
+              }
+            ],
+            "label": "Sachet",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -108,12 +146,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.4.beta",
-        "createdTime": 1758630794074,
-        "modifiedTime": 1758630820317,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766207127810,
+        "modifiedTime": 1766207274681,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

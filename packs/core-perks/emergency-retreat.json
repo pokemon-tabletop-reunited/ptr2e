@@ -6,21 +6,23 @@
       "trait:trainer"
     ],
     "cost": 1,
-    "description": "You may immediately recall a Pokemon as a Free Action at [Interrupt 2] in the event that Pokemon gains @Affliction[fainted].",
+    "description": "When a creature on the user’s Team gains @Affliction[fainted], the user may freely use @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} on that creature at @Trait[interrupt-4].",
     "actions": [
       {
         "name": "Emergency Retreat",
         "slug": "emergency-retreat",
-        "description": "You may immediately recall a Pokemon as a Free Action at [Interrupt 2] in the event that Pokemon gains @Affliction[fainted].",
+        "description": "<p>Trigger: A creature on the user's Team gains @Affliction[fainted].</p><p>Effect: The user may freely uses @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} on that creature.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 1
+          "powerPoints": 0
         },
         "type": "generic",
-        "traits": [],
+        "traits": [
+          "interrupt-4"
+        ],
         "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "enemy",
+          "target": "ally",
           "unit": "m",
           "distance": 0
         },
@@ -67,7 +69,7 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "support"
+      "archetype": "juggler"
     },
     "publication": {
       "source": "PTR 2e Core",

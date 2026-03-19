@@ -358,7 +358,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
         // Recursively clean schema fields inside an array
         for (const data of value) {
           if (R.isPlainObject(data)) {
-            if (data.predicate) {
+            if (data.predicate || data.definition) {
               cleanPredicate(data);
             }
             cleanDataUsingSchema(field.element.fields, data);
@@ -378,7 +378,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
   }
 }
 
-function cleanPredicate(source: { predicate?: unknown }) {
+function cleanPredicate(source: { predicate?: unknown, definition?: unknown }): void {
   const predicateValue = source.predicate;
   if (typeof predicateValue === "string") {
     if (predicateValue.trim() === "") {
@@ -387,6 +387,24 @@ function cleanPredicate(source: { predicate?: unknown }) {
       try {
         source.predicate = JSON.parse(predicateValue);
       } catch (error) {
+        if (error instanceof Error) {
+          ui.notifications.error(
+            game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),
+          );
+          throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+        }
+      }
+    }
+  }
+  const definitionValue = source.definition;
+  if (typeof definitionValue === "string") {
+    if (definitionValue.trim() === "") {
+      delete source.definition;
+    } else {
+      try {
+        source.definition = JSON.parse(definitionValue);
+      }
+      catch (error) {
         if (error instanceof Error) {
           ui.notifications.error(
             game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),

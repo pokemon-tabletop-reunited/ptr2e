@@ -1,0 +1,134 @@
+{
+  "name": "Arms of the Resistance",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "arms-of-the-resistance",
+    "description": "<p>The user spends 2 fewer IP on @Trait[ninja] items and can purchase @Trait[ninja] items one Rarity higher using IP.</p><p>The user provides a (non-stacking) +10 bonus to their Party’s Thrifting Rolls, doubled for @Trait[ninja] items, and the user’s Attacks and Actions with @Trait[ball] items gain @Trait[ninja].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ace",
+      "trait:ninja",
+      {
+        "gte": [
+          "{actor|skills.handiwork.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.locksmith.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 191,
+        "y": 47,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "secret-ninja-tools"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/magic/control/control-influence-rally-purple.webp",
+  "effects": [
+    {
+      "name": "Arms of Resistance",
+      "type": "passive",
+      "_id": "a4gSGV65LZB9UvcU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "ball-trait-attack",
+            "value": "ninja",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "ball-trait-generic",
+            "value": "ninja",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "1ZmPr9WTnzLdK40k"
+}

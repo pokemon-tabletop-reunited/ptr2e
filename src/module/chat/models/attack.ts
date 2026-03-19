@@ -48,6 +48,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             nullable: true,
             validate: AttackMessageSystem.#validateRoll,
           }),
+          amount: new fields.JSONField({
+            required: true,
+            nullable: true,
+            validate: AttackMessageSystem.#validateRoll,
+          }),
           context: new fields.SchemaField({
             check: new fields.SchemaField({
               breakdown: new fields.StringField({ required: true, blank: true, initial: "" }),
@@ -213,6 +218,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       result.accuracy = fromRollData(source.accuracy);
       result.crit = fromRollData(source.crit);
       result.damage = fromRollData(source.damage);
+      result.amount = fromRollData(source.amount);
       if (source.effectRolls) {
         result.effectRolls = {
           applied: source.effectRolls.applied,
@@ -341,6 +347,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Attack.DamageRandomness",
           }
         ),
+        amount: await foundry.applications.handlebars.renderTemplate(
+          "systems/ptr2e/templates/chat/rolls/x-strike-amount.hbs",
+          {
+            inner: await AttackMessageSystem.renderInnerRoll(data.amount, isPrivate, null),
+            isPrivate,
+            type: "amount",
+            label: "PTR2E.Attack.AmountRandomness",
+          }
+        ),
         effects: [] as string[],
         none: false
       };
@@ -426,6 +441,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                 if (damage) {
                   context.damage = damage.value;
                   context.damageRoll = damage;
+                  context.amount = result.amount?.total ?? null;
                 }
               }
               else if (summonAttack?.damageType === "flat") {
@@ -611,8 +627,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       const target = result.target;
       const damage = result.damage;
       if (!damage) return 0;
-
-      const damageApplied = await target.applyDamage(damage);
+      let damageApplied = 0, amount = result.amount || 1;
+      do {
+        damageApplied += await target.applyDamage(damage);
+      } while (--amount > 0);
       return damageApplied;
     })()
 
@@ -723,6 +741,19 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       if (!targetUuid) return;
       this.applyDamage(targetUuid);
     });
+    html.find(".apply-damage-all").on("click", async () => {
+      for (const result of this.results) {
+        await this.applyDamage(result.target.uuid);
+      }
+    });
+    html.find(".apply-damage-all-hit").on("click", async () => {
+      for (const result of this.results) {
+        const override = this.overrides.get(result.target.uuid);
+        if (["hit", "critical"].includes(override?.value ?? AttackRoll.successCategory(result.accuracy, result.crit))) {
+          await this.applyDamage(result.target.uuid);
+        }
+      }
+    });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
     html.find("[data-action='apply-capture']").on("click", async (event) => {
@@ -748,26 +779,26 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     if (!actor) return;
 
     const number = accuracy.total;
-    const luck = actor.system.skills.get("luck")!.total;
+    const luck = actor.system.skills["luck"]!.total;
     if (luck < number) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
       return;
     }
 
-    const skills = actor.system.skills.map((skill) => {
-      return skill.slug === "luck"
-        ? {
+    const skills = Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+      return slug === "luck"
+        ? [slug, {
           ...skill,
           value: luck - number,
-        }
-        : skill;
-    });
+        }]
+        : [slug, skill];
+    }));
     await actor.update({ "system.skills": skills });
 
     const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: number,
       actor: actor.name,
-      total: actor.system.skills.get("luck")!.total
+      total: actor.system.skills["luck"]!.total
     })
     ui.notifications.info(notification);
 
@@ -787,7 +818,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const actor = ["origin-effect", "defensive-effect"].includes(choice.type) ? await fromUuid<ActorPTR2e>(entry.uuid) : await this.currentOrigin;
     if (!actor) return;
 
-    const luck = actor.system.skills.get("luck")!.total;
+    const luck = actor.system.skills["luck"]!.total;
     if (!entry.result) {
       if (choice.type !== "self-effect") throw new Error("Attempting to spend luck on a Self Effect but no Self Effect was selected");
       if (choice.index === undefined) throw new Error("No Self Effect index was provided");
@@ -804,20 +835,20 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
 
       await actor.update({
-        "system.skills": actor.system.skills.map((skill) => {
-          return skill.slug === "luck"
-            ? {
+        "system.skills": Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+          return slug === "luck"
+            ? [slug, {
               ...skill,
               value: luck - value,
-            }
-            : skill;
-        })
+            }]
+            : [slug, skill];
+        }))
       });
 
       const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
         amount: value,
         actor: actor.name,
-        total: actor.system.skills.get("luck")!.total,
+        total: actor.system.skills["luck"]!.total,
         type: choice.name ?? "Self Effect "
       });
       ui.notifications.info(notification);
@@ -857,20 +888,20 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     await actor.update({
-      "system.skills": actor.system.skills.map((skill) => {
-        return skill.slug === "luck"
-          ? {
+      "system.skills": Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+        return slug === "luck"
+          ? [slug, {
             ...skill,
             value: luck - value,
-          }
-          : skill;
-      })
+          }]
+          : [slug, skill];
+      }))
     });
 
     const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: value,
       actor: actor.name,
-      total: actor.system.skills.get("luck")!.total,
+      total: actor.system.skills["luck"]!.total,
       type: (() => {
         switch (choice.type) {
           case "accuracy": return "Accuracy";
@@ -957,6 +988,7 @@ interface AttackMessageRenderContextData {
   target: ActorPTR2e;
   hit: AccuracySuccessCategory;
   damage?: number;
+  amount?: number | null;
   damageRoll?: DamageCalc;
   accuracyRoll?: AccuracyCalc;
   notes: Maybe<string>;
@@ -1035,6 +1067,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     crit: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     damage: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
+    amount: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     context: foundry.data.fields.SchemaField<
       CheckContextSchema,
       foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>,
@@ -1051,6 +1084,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: string | null;
     crit: string | null;
     damage: string | null;
+    amount: string | null;
     context: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
     effectRolls: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>> | null;
   },
@@ -1059,6 +1093,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: Rolled<AttackRoll> | null;
     crit: Rolled<AttackRoll> | null;
     damage: Rolled<AttackRoll> | null;
+    amount: Rolled<AttackRoll> | null;
     context: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
     effectRolls: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>> | null;
   }

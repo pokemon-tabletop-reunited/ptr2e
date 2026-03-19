@@ -7,6 +7,7 @@ import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { registerSettings } from "./settings/index.ts";
 import { TutorListEditor } from "@module/apps/tutor-list-editor.ts";
+import { ArtMapSettingsMenu } from "@module/apps/custom-art-map/sheet.ts";
 
 export function initializeSettings() {
   registerSettings();
@@ -45,6 +46,27 @@ export function initializeSettings() {
     "icon": "fa-solid fa-shield-alt",
     type: TypeMatrix,
     restricted: true,
+  });
+
+  game.settings.registerMenu("ptr2e", "custom-art-map-menu", {
+    name: "PTR2E.Settings.ArtMap.Name",
+    label: "PTR2E.Settings.ArtMap.Label",
+    hint: "PTR2E.Settings.ArtMap.Hint",
+    icon: "fa-solid fa-image",
+    type: ArtMapSettingsMenu,
+    restricted: true,
+  })
+
+  game.settings.register("ptr2e", "custom-art-map", {
+    name: "PTR2E.Settings.ArtMap.Name",
+    hint: "PTR2E.Settings.ArtMap.Hint",
+    scope: "world",
+    config: false,
+    requiresReload: true,
+    type: new foundry.data.fields.JSONField({
+
+    }),
+    default: {}
   });
 
   game.settings.register("ptr2e", "dev-mode", {
@@ -125,16 +147,6 @@ export function initializeSettings() {
       game.ptr.compendiumBrowser.packLoader.reset();
       game.ptr.compendiumBrowser.initCompendiumList();
     },
-  });
-
-  game.settings.register("ptr2e", "artmap", {
-    name: "PTR2E.Settings.ArtMap.Name",
-    hint: "PTR2E.Settings.ArtMap.Hint",
-    scope: "world",
-    config: false,
-    type: Object,
-    default: {},
-    onChange: () => { game.ptr.data.artMap.refresh(); }
   });
 
   game.settings.register("ptr2e", "clocks", {

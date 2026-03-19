@@ -43,12 +43,117 @@
         "tier": null
       }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "icons/creatures/invertebrates/beetle-grub-larvae-gray.webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "Arthroprods",
+      "type": "passive",
+      "_id": "xKO2RcKsVNXGE3Vz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 10,
+            "predicate": [
+              {
+                "or": [
+                  "self:action:trait:jaw",
+                  "self:action:trait:horn",
+                  "self:action:trait:wind",
+                  "self:action:trait:sonic",
+                  "self:action:trait:tail",
+                  "self:action:trait:sharp"
+                ]
+              }
+            ],
+            "label": "Arthroprods-Power",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "damaging-attack-damage",
+            "value": 5,
+            "predicate": [
+              {
+                "or": [
+                  "self:action:trait:jaw",
+                  "self:action:trait:horn",
+                  "self:action:trait:wind",
+                  "self:action:trait:sonic",
+                  "self:action:trait:tail",
+                  "self:action:trait:sharp"
+                ]
+              }
+            ],
+            "label": "Arthroprods-Damage",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "damaging-attack-crit-stage",
+            "value": 1,
+            "predicate": [
+              {
+                "or": [
+                  "self:action:trait:jaw",
+                  "self:action:trait:horn",
+                  "self:action:trait:wind",
+                  "self:action:trait:sonic",
+                  "self:action:trait:tail",
+                  "self:action:trait:sharp"
+                ]
+              }
+            ],
+            "label": "Arthroprods-Crit",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": 63903211251.34356,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Actor.NDQqimj8y7Vjof6V.Item.VTTPBd6XpaE60tUr.ActiveEffect.Ah2hDT8SrGVChHoc",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767770694873,
+        "modifiedTime": 1767772779959,
+        "lastModifiedBy": "xh6Pq7RQCtnsVX8n"
+      }
+    }
+  ],
   "_id": "gm8Mi7b91bUE385m"
 }

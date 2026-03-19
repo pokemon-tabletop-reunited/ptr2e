@@ -82,6 +82,7 @@ class GithubManager {
   static VALID_DOCUMENT_TYPES: Record<string, string> = {
     move: "ptr2e.core-moves",
     species: "ptr2e.core-species",
+    "ptr2e-digimon-expansion.digimonSpecies": "ptr2e-digimon-expansion.digimon-species",
     ability: "ptr2e.core-abilities",
     perk: "ptr2e.core-perks",
     effect: "ptr2e.core-effects",
@@ -96,10 +97,13 @@ class GithubManager {
   static async getExistingItem<TDocument extends ItemPTR2e>(
     item: TDocument,
     pack: CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>
-  ) {
-    const existing = await (async () => {
+  ): Promise<ItemPTR2e<ItemSystemPTR, null> | null> {
+    const existing = await (async (): Promise<Maybe<ItemPTR2e<ItemSystemPTR, null>>> => {
       const sourceId = item.flags?.core?.sourceId || item._stats?.compendiumSource;
       if (sourceId) {
+        if(!sourceId.startsWith(pack.metadata.packageName)) {
+          return (await fu.fromUuid<ItemPTR2e<ItemSystemPTR, null>>(sourceId) ?? null) as ItemPTR2e<ItemSystemPTR, null> | null;
+        }
         const existing = await pack.getDocument(sourceId.split(".").at(-1)!);
         if (existing) return existing;
       }
@@ -110,7 +114,7 @@ class GithubManager {
       if (existing) return pack.getDocument(existing._id);
       return null;
     })();
-    return existing;
+    return existing ?? null;
   }
 
   static getDiffableItem<TDocument extends ItemPTR2e>(
@@ -288,7 +292,8 @@ class GithubManager {
     const existing = await GithubManager.getExistingItem(document, pack);
     if (!existing) {
       try {
-        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"]);
+        const source = document.pack ? game.packs.get(document.pack)?.metadata.packageName || "core" : "core";
+        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"], source);
       }
       catch {
         ui.notifications.error("An unexpected error occured.");
@@ -300,6 +305,8 @@ class GithubManager {
       ui.notifications.error("You cannot commit the Core Afflictions to Github in this manner.");
       return
     }
+
+    const source = existing.pack ? game.packs.get(existing.pack)?.metadata.packageName || "core" : "core";
 
     const isPack = document === existing;
     const itemData = document.toObject();
@@ -318,7 +325,7 @@ class GithubManager {
       diff["old_name"] = existingData.name;
     }
     try {
-      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], diff);
+      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], source, diff);
     }
     catch (error) {
       ui.notifications.error("An unexpected error occured.");
@@ -372,7 +379,8 @@ class GithubManager {
 
   static async saveBlobToGithub<TDocument extends ItemPTR2e>(
     realDiff: TDocument["_source"],
-    diff?: Record<string, any>
+    source: string,
+    diff?: Record<string, any>,
   ) {
     const identity = await GithubManager.getIdentity();
     if (!identity) {
@@ -392,7 +400,8 @@ class GithubManager {
           data: realDiff,
           diff: diff || {},
           flags: {
-            new: true
+            new: true,
+            source
           }
         }),
       });

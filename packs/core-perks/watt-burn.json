@@ -11,24 +11,21 @@
       {
         "name": "Watt Burn",
         "slug": "watt-burn",
-        "description": "<p>As a Free Action, you may spend 4 ticks of HP to gain @Affliction[charged] 1.</p>",
+        "description": "<p>As a Free Action, you may spend @Tick[-4] to gain @UUID[Compendium.ptr2e.core-effects.chargedcondiitem]{Charged}.</p>",
         "traits": [],
         "type": "generic",
         "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "range": {
           "target": "self",
           "unit": "m",
-          "distance": 0
+          "distance": 10
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "activation": "free"
+        }
       }
     ],
-    "description": "<p>As a free action, you may spend @Tick[-4] to gain @Affliction[charged] 1.</p>",
+    "description": "<p>As a free action, you may spend @Tick[-4] to gain @UUID[Compendium.ptr2e.core-effects.chargedcondiitem]{Charged}.</p>",
     "traits": [],
     "prerequisites": [
       "trait:electric"
@@ -37,6 +34,10 @@
     "slug": "watt-burn",
     "nodes": [
       {
+        "x": 20,
+        "y": 141,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "high-voltage",
           "magnetize",
@@ -48,18 +49,11 @@
           "kinetic-dynamo"
         ],
         "config": {
-          "alpha": null,
+          "texture": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 20,
-        "y": 141,
         "tier": null
       }
     ],
@@ -78,11 +72,86 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Watt Burn",
+      "type": "passive",
+      "_id": "zPBgspoHGdah2eHA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "watt-burn-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.changes.0.value",
+                "value": -4
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "watt-burn-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.chargedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1765233316972,
+        "modifiedTime": 1767470920491,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "_id": "R3ubwylLp9WE21Y5"
 }

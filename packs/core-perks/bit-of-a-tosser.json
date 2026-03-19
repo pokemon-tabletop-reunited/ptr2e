@@ -3,7 +3,84 @@
   "_id": "hiK7fqYYnsT7ThJP",
   "type": "perk",
   "img": "icons/skills/ranged/shuriken-thrown-orange.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Bit Of A Tosser",
+      "type": "passive",
+      "_id": "CdI0SHtobHxq9Srl",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "fling-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-trait-attack-damage",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-trait-attack",
+            "value": 2,
+            "predicate": [],
+            "property": "range",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Actor.tGa5Upvillhew3kv.Item.okq5vNnqfxQRj5A7.ActiveEffect.RtKFuVw7jRDYWvMG",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1759897005106,
+        "modifiedTime": 1771031844777,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,34 +94,38 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
-    "description": "<p>Effect: The user’s Fling Attacks deal +5 flat damage and have a 30% chance of inflicting Flinched 1 on hit.</p>",
+    "slug": "bit-of-a-tosser",
+    "description": "<p>Effect: The user’s Fling Attacks deal +5 flat damage, have +2 range, and have a 30% chance of inflicting @Affliction[delay 10] on hit.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
     "cost": 2,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "power",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 48,
         "y": 50,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "mobilize",
           "berserkergang"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }

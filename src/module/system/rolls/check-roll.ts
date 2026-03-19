@@ -106,6 +106,7 @@ interface AttackRollResult {
     accuracy: Rolled<CheckRoll> | null;
     crit: Rolled<CheckRoll> | null;
     damage: Rolled<CheckRoll> | null;
+    amount: Rolled<CheckRoll> | null;
   };
   degrees: {
     accuracy: DegreeOfSuccess | null;

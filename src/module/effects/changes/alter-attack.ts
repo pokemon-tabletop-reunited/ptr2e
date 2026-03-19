@@ -26,10 +26,15 @@ export default class AlterAttackChangeSystem extends ChangeModel {
       ...super.defineSchema(),
       property: new fields.StringField({
         required: true,
-        choices: Array.from(this.VALID_PROPERTIES),
+        choices: Object.fromEntries(Array.from(this.VALID_PROPERTIES).map((v) => [v, Handlebars.helpers.formatSlug(v)])),
         initial: "power",
+        label: "PTR2E.Effect.FIELDS.property.label",
+        hint: "PTR2E.Effect.FIELDS.property.hint",
       }),
-      definition: new PredicateField(),
+      definition: new PredicateField({
+        label: "PTR2E.Effect.FIELDS.definition.label",
+        hint: "PTR2E.Effect.FIELDS.definition.hint",
+      }),
     }
   }
 

@@ -1,0 +1,185 @@
+{
+  "folder": "1osM6JY51pvLkJ3Q",
+  "name": "Cover Jumper",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "cover-jumper",
+    "description": "<p>When the user is Attacked while they have Light Cover or Heavy Cover, they have a 10% and 25% chance respectively to gain +1 SPD and EVA Stage for 3 Activations.</p><p>When the user leaves Cover via Movement, they retain the Cover they had so long as they end their Movement behind equal or better Cover.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 101,
+        "y": 38,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-10",
+          "hurried-operator",
+          "minor-buff-3",
+          "minor-buff-36"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/magic/movement/trail-streak-impact-blue.webp",
+  "effects": [
+    {
+      "name": "Cover Jumper",
+      "type": "passive",
+      "_id": "t8Ry5PMCAZDsPgLv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [
+              "actor:effect:affliction:light-cover"
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "predicate": [
+              "actor:effect:affliction:light-cover"
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [
+              "actor:effect:affliction:heavy-cover"
+            ],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "predicate": [
+              "actor:effect:affliction:heavy-cover"
+            ],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "hmFcDyAVwIru5mwO"
+}

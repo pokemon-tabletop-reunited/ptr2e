@@ -20,28 +20,27 @@
     "grade": "E",
     "fling": {
       "type": "untyped",
-      "power": 40,
-      "accuracy": 85,
+      "power": 0,
+      "accuracy": 100,
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 6,
+        "distance": 5,
         "unit": "m"
       }
     },
     "rarity": "common",
     "consumableType": "pokeball",
     "traits": [
-      "stack-3",
       "belt",
       "fling",
       "ball"
     ],
-    "description": "<p>1.5x Catch Rate modifier.</p>",
-    "modifier": 1.5,
+    "description": "<p>1.75x Catch Rate modifier.</p>",
+    "modifier": 1.75,
     "quantity": 1,
     "slug": "hefty-ball",
-    "stack": 3,
+    "stack": 5,
     "_migration": {
       "version": null,
       "previous": null
@@ -53,9 +52,67 @@
       ],
       "notes": ""
     },
-    "actions": []
+    "actions": [],
+    "ammoType": []
   },
   "_id": "79EKurPbRzXPOCR5",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Hefty Ball",
+      "type": "passive",
+      "_id": "bj34Hcy1xyJqi4hm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-hefty-ball-attack",
+            "value": 50,
+            "predicate": [
+              "actor:item:perk:curveball-technique"
+            ],
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771032994610,
+        "modifiedTime": 1771033382228,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "bIBkUsgkWMXMOtHm"
 }

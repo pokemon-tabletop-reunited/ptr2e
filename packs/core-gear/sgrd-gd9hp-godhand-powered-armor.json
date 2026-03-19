@@ -1,0 +1,280 @@
+{
+  "folder": "UUWElZA9w1KEqZS7",
+  "name": "SGRD-Gd9hp “Godhand” Powered Armor",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "godhand-powered-armor",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "armor",
+      "sci-fi",
+      "powered"
+    ],
+    "actions": [],
+    "description": "<p>The SGRD-Gd9hp “Godhand” Powered Armor is truly heavy and bulky powered armor, providing greater strength, protection, and potential storage. Equipped with considerable life support and environmental protection, making the bearer a borderline heavy tank all by themselves.</p><p>Grants notable resilience to all types of damage, particularly Physical and ranged weapon damage, grants +15 Base ATK, and +20 DEF and SPDEF, increases the Physical damage the user deals, reduces the user's SPD by -35%, provides +40% RES, and grants +4 Belt Slots.</p><p>As well, whenver the user is hit by a Critical Hit, they are @Affliction[delay 40], have a 30% chance of losing @Tick[-1], and have a 70% chance of losing -1 ATK and SPD Stages for 3 Activations.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "worn",
+      "handsHeld": null
+    },
+    "grade": "S",
+    "fling": {
+      "type": "untyped",
+      "power": 240,
+      "accuracy": 40,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 1,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Godhand Powered Armor",
+      "type": "passive",
+      "_id": "bZlkUldAca9CJWyc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.inventory.belt.max",
+            "value": 4,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "hp": null,
+            "atk": 15,
+            "def": 20,
+            "spa": null,
+            "spd": 20,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -35,
+            "predicate": [],
+            "label": "Godhand Powered Armor (DMG Red)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": -40,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Phys Red)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-flat",
+            "value": -25,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Weapon)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "pulse-trait-attack-damage-flat",
+            "value": -25,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Weapon)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "ray-trait-attack-damage-flat",
+            "value": -25,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Weapon)Wrath Powered Armor (Weapon)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "explode-trait-attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Explode)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "physical-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Phys Flat)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 20,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Phys Perc)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 40,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-crit-stage-flat",
+            "value": -1,
+            "predicate": [],
+            "label": "Godhand Powered Armor (Breakdown Res)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.35,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.amount",
+                "value": -40
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.xbipXPhCJKizKZlg",
+            "predicate": [],
+            "chance": 70,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "1jxCFJqqvdsBEBwj"
+}

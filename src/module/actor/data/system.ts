@@ -143,7 +143,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         accuracy: new fields.SchemaField(getStatField("accuracy")),
         critRate: new fields.SchemaField(getStatField("crit-rate")),
       }),
-      skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
+      skills: new fields.TypedObjectField(new fields.EmbeddedDataField(SkillPTR2e), {
         initial: getInitialSkillList,
       }),
       biology: new fields.ObjectField(),
@@ -371,7 +371,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   set movementType(newType: string) {
-    if(this._movementType === newType) return;
+    if(this._movementType == newType) return;
     if(this._movementType == null || this._movementType == undefined) {
       this.parent.rollOptions.removeOption("self", `state:overland`);
     }
@@ -394,6 +394,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           return { slug: g, uuid: null };
         });
       }
+    }
+
+    if(Array.isArray(source.skills)) {
+      source.skills = Object.fromEntries(source.skills.map(s => [s.slug, s]))
     }
 
     return super.migrateData(source);
@@ -448,6 +452,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
   override prepareBaseData(): void {
     super.prepareBaseData();
+    const skills = this.skills;
+    this.skills[Symbol.iterator] = function* () {
+      for (const skill of Object.values(skills)) {
+        if(skill instanceof SkillPTR2e) yield skill;
+      }
+    }
     this._initializeModifiers();
 
     for (const key in this.inventory) {
@@ -521,7 +531,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.advancement.advancementPoints.spent = 0;
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
-    this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
+    this.inventoryPoints.max = 12 + Math.floor((this.skills.resources?.total ?? 0) / 10);
 
     this.details.size.heightClass = SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass;
     this.details.size.weightClass = this.calculateWeightClass(this.details.size.weight || this.parent.species?.size.weight || 0);
@@ -640,17 +650,18 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
 
-    this.health.max = this.attributes.hp.value;
+    this.shield.max = this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
-    for (const skill of this.skills) {
-      skill.prepareBaseData();
+    for (const skill in this.skills) {
+      this.skills[skill].slug = skill;
+      this.skills[skill].prepareBaseData();
     }
     for (const skill of game.ptr.data.skills) {
-      if (!this.skills.has(skill.slug)) {
+      if (!this.skills[skill.slug]) {
         const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
         newSkill.prepareBaseData();
-        this.skills.set(newSkill.slug, newSkill);
+        this.skills[newSkill.slug] = newSkill;
       }
     }
 
@@ -667,7 +678,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
 
         if(!isNaN(Number(this.modifiers.hpMultiplier)) && this.modifiers.hpMultiplier !== 1) {
-          this.health.max = this.attributes.hp.value = Math.round(this.attributes.hp.value * Number(this.modifiers.hpMultiplier));
+          this.shield.max = this.health.max = this.attributes.hp.value = Math.round(this.attributes.hp.value * Number(this.modifiers.hpMultiplier));
           this.health.percent = Math.round((this.health.value / this.health.max) * 100);
         }
         if(!isNaN(Number(this.modifiers.ppMultiplier)) && this.modifiers.ppMultiplier !== 1) {
@@ -708,10 +719,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
       }
     }
+    // Set movement state option
+    if(this.movementType) {
+      this.parent.rollOptions.addOption("self", `state:${this.movementType}`);
+    }
 
     //@ts-expect-error - The getter needs to be added afterwards.
     this.parent.flags.ptr2e.skillOptions = {
-      data: this.skills.reduce((acc, skill) => {
+      data: Object.values(this.skills).reduce((acc, skill) => {
         if (["luck", "resources"].includes(skill.slug) || skill.hidden) return acc;
         const label = (() => {
           const baseKey = skill.group
@@ -790,22 +805,46 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     })
   }
 
+  static generateDesperationAndIntrepidStates(health: ActorSystemPTR2e["health"]): Set<string> {
+    const states = new Set<string>();
+    switch (true) {
+      case health.value <= Math.floor(health.max * 0.25): {
+        states.add("desperation-1-4");
+      }
+      case health.value <= Math.floor(health.max * (1 / 3)): {
+        states.add("desperation-1-3");
+      }
+      case health.value <= Math.floor(health.max * 0.5): {
+        states.add("desperation-1-2");
+      }
+      case health.value <= Math.floor(health.max * 0.75): {
+        states.add("desperation-3-4");
+      }
+    }
+    switch (true) {
+      case health.value == health.max: {
+        states.add("healthy");
+      }
+      case health.value >= Math.floor(health.max * 0.75): {
+        states.add("intrepid-3-4");
+      }
+      case health.value >= Math.floor(health.max * 0.5): {
+        states.add("intrepid-1-2");
+      }
+      case health.value >= Math.floor(health.max * (1 / 3)): {
+        states.add("intrepid-1-3");
+      }
+      case health.value >= Math.floor(health.max * 0.25): {
+        states.add("intrepid-1-4");
+      }
+    }
+    return states;
+  }
+
   override prepareDerivedData(): void {
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
-
-    for (const key in this.skills) {
-      const skill = this.skills.get(key);
-      if (!skill) continue;
-
-      const { value, rvs } = this.skills[key]!;
-      if (value) skill.value += value;
-      if (rvs) skill.rvs = skill.rvs ? skill.rvs + rvs : rvs;
-      if (value || rvs) {
-        skill.total = skill.value + (skill.rvs ?? 0);
-      }
-    }
 
     for (const ptype of this.type.types) {
       if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
@@ -834,12 +873,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
     }
 
-    this.health.max = this.attributes.hp.value;
+    this.shield.max = this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     this.powerPoints.max = Math.floor((20 + Math.ceil(0.5 * this.advancement.level) + (this.modifiers.powerPoints ?? 0)) * (this.modifiers.ppMultiplier || 1));
     this.powerPoints.percent = Math.round((this.powerPoints.value / this.powerPoints.max) * 100);
-    this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
+    this.inventoryPoints.max = 12 + Math.floor((this.skills.resources?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
 
     // Apply type based immunities
     if (this.type.types.has("poison") || this.type.types.has("steel")) {
@@ -1008,7 +1047,9 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
   movement: Record<string, Movement>;
   _movementType: string;
 
-  skills: Collection<SkillPTR2e> & Record<string, { value?: number, rvs?: number } | undefined>;
+  skills: Record<string, SkillPTR2e> & {
+    [Symbol.iterator](): IterableIterator<SkillPTR2e>;
+  }
 
   investments: {
     ivs: {

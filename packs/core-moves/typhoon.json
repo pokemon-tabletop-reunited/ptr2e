@@ -4,13 +4,13 @@
   "_id": "UIFcGRSEuPQ5afL1",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "typhoon",
     "actions": [
       {
         "name": "Typhoon",
         "slug": "typhoon",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg",
         "traits": [
           "wind"
         ],
@@ -23,44 +23,85 @@
           "activation": "complex",
           "powerPoints": 8
         },
-        "variant": null,
         "types": [
           "flying"
         ],
         "category": "special",
         "power": 150,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: This Attack's Power is equal to: <code>150 x UserCurrentHP/UserMaxHP</code>. </p>"
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 150.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 10900000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719598516183,
-    "modifiedTime": 1719978698202,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Typhoon",
+      "type": "passive",
+      "_id": "XTZF3W9zBGS2r8dy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "typhoon-attack",
+            "value": "@actor.system.health.percent*1.4+10",
+            "predicate": [],
+            "label": "Typhoon",
+            "mode": 5,
+            "property": "power",
+            "definition": [],
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.UIFcGRSEuPQ5afL1.ActiveEffect.XTZF3W9zBGS2r8dy",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767163940084,
+        "modifiedTime": 1767165432561,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

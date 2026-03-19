@@ -134,7 +134,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         { log: "error", data: this._source }
       );
 
-    const skill = origin?.system.skills.get(this._source.slug);
+    const skill = origin?.system.skills[this._source.slug];
     if (!skill && origin)
       Hooks.onError(
         "SkillMessageSystem#skill",
@@ -285,18 +285,18 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     if (!this.luckRoll?.total) return;
 
     await this.context.actor.update({
-      "system.skills": this.context.actor.system.skills.map((skill) => {
-        return skill.slug === "luck"
-          ? {
+      "system.skills": Object.fromEntries(Object.entries(this.context.actor.system.skills).map(([slug, skill]) => {
+        return slug === "luck"
+          ? [slug, {
             ...skill,
             value: (skill.value ?? 0) + this.luckRoll!.total,
-          }
-          : skill;
-      }),
+          }]
+          : [slug, skill];
+      })),
     });
     ui.notifications.info(
       `Successfully applied Luck increase of ${this.luckRoll!.total} to ${this.context.actor.name
-      }. New total: ${this.context.actor.system.skills.get("luck")!.total}`
+      }. New total: ${this.context.actor.system.skills["luck"]!.total}`
     );
 
     await this.parent.update({ "system.appliedLuck": true });

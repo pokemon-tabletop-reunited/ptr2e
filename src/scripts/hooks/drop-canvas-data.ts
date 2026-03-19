@@ -7,8 +7,8 @@ export const DropCanvasData = {
   listen() {
     Hooks.on("dropCanvasData", async (canvas, drop) => {
       if (drop.type === "Item") {
-        const item = await fromUuid<ItemPTR2e>(drop.uuid);
-        if (item?.type === "species") {
+        const item = await fu.fromUuid<ItemPTR2e>(drop.uuid);
+        if (["species", "ptr2e-digimon-expansion.digimonSpecies"].includes(item?.type ?? "")) {
           const folder = await (async () => {
             const folder = game.actors.folders.getName(game.scenes.current!.name);
             if (folder) return folder;
@@ -20,12 +20,12 @@ export const DropCanvasData = {
 
           const blueprint = new ItemPTR2e(
             {
-              name: item.name,
+              name: item!.name,
               type: "blueprint",
               folder: folder?.id,
               system: {
                 blueprints: [{
-                  species: item.uuid,
+                  species: item!.uuid,
                 }]
               },
               ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}

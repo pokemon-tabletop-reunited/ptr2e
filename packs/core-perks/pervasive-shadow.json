@@ -1,0 +1,115 @@
+{
+  "name": "Pervasive Shadow",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>If the user is Undetected by at least one creature at the start of a Combat, the user may freely Move up to the Movement Score of their choice.</p><p>Passive: The user gains +20% EHR while @Affliction[invisible].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ninja"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 182,
+        "y": 50,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "nothing-is-true",
+          "whispering-wound",
+          "minor-buff-68",
+          "minor-buff-67",
+          "flexible-iron"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "pervasive-shadow",
+    "traitWebs": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
+  "effects": [
+    {
+      "name": "Pervasive Shadow",
+      "type": "passive",
+      "_id": "o5nk8uol825sZQrW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 20,
+            "predicate": [
+              "effect:affliction:invisible"
+            ],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "modifiedTime": 1770738235283
+      }
+    }
+  ],
+  "_id": "WTDVHLvuuuI794TT"
+}
