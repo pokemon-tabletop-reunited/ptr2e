@@ -56,10 +56,97 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "ammoType": []
   },
   "_id": "fsqlE3lv75NrSwT2",
   "img": "systems/ptr2e/img/item-icons/scroll%20of%20waters.webp",
-  "effects": [],
-  "flags": {}
+  "effects": [
+    {
+      "name": "Scroll of Waters",
+      "type": "passive",
+      "_id": "prRcDGa1kELkC8KK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "water-attack-damage-percentile",
+            "value": 20,
+            "predicate": [
+              {
+                "not": "item:species:urshifu"
+              }
+            ],
+            "label": "Scroll of Waters",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "water-attack-damage-percentile",
+            "value": 30,
+            "predicate": [
+              "item:species:urshifu"
+            ],
+            "label": "Scroll of Waters",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "item:species:urshifu"
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": 10,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1773788706982,
+        "modifiedTime": 1773788852293,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }
