@@ -4,12 +4,12 @@
   "system": {
     "prerequisites": [],
     "cost": 3,
-    "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack, and have a 20% chance of being @Affliction[advance 10] when hit by a Physical- or Special-Category Attack.</p>",
+    "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack, and have a 20% chance of being @Affliction[advance 10] when hit by a Physical- or Special-Category Attack.</p>",
+        "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack.</p>",
         "cost": {
           "activation": "free"
         },
@@ -92,21 +92,6 @@
             "alterations": [],
             "dontMerge": false,
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
-          },
-          {
-            "type": "roll-effect",
-            "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
-            "predicate": [
-              "effect:affliction:enraged"
-            ],
-            "chance": 20,
-            "isFixedChance": false,
-            "affects": "defensive",
-            "alterations": [],
-            "dontMerge": false,
             "mode": 2,
             "ignored": false
           }
