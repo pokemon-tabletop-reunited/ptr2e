@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "zenith",
-          "blast-2"
+          "blast-2",
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -30,7 +31,8 @@
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 5. Upon resolving this attack, the user freely uses Electric Terrain.</p><p>Requirement: [Electric] Z-Crystal as an Accessory Item and an Electric-Type attack on the user's Active List.</p>",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "_migration": {
@@ -42,8 +44,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "XgUqQZ4AhjbG9slp",
   "effects": [
@@ -63,14 +67,19 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -92,12 +101,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729547795652,
         "modifiedTime": 1729547817946,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]
