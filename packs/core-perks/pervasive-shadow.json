@@ -14,7 +14,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Passive: The user gains +20% EHR while @Affliction[invisible].</p>",
+    "description": "<p>If the user is Undetected by at least one creature at the start of a Combat, the user may freely Move up to the Movement Score of their choice.</p><p>Passive: The user gains +20% EHR while @Affliction[invisible].</p>",
     "traits": [
       "ninja"
     ],
@@ -22,7 +22,7 @@
       "trait:ninja"
     ],
     "autoUnlock": [],
-    "cost": 3,
+    "cost": 2,
     "design": {
       "arena": "mental",
       "approach": "finesse",
@@ -32,20 +32,28 @@
     "webs": [],
     "nodes": [
       {
-        "x": 187,
+        "x": 182,
         "y": 50,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "nothing-is-true",
           "whispering-wound",
-          "silence-is-golden",
-          "smokestep",
-          "dual-wielder"
+          "minor-buff-68",
+          "minor-buff-67",
+          "flexible-iron"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "pervasive-shadow",
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
   "effects": [
@@ -97,11 +105,11 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "modifiedTime": 1770738235283
       }
     }
   ],
-  "flags": {},
   "_id": "WTDVHLvuuuI794TT"
 }

@@ -17,7 +17,7 @@
       {
         "name": "Army of Phantoms",
         "slug": "army-of-phantoms",
-        "description": "<p>Effect: As a Complex Action, the user can make themselves and all allies within range become @Affliction[invisible 3].</p>",
+        "description": "<p>Effect: The user can make themselves and all allies within range gain @Affliction[invisible 3].</p>",
         "traits": [
           "ninja"
         ],
@@ -28,13 +28,13 @@
           "powerPoints": 5
         },
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "emanation",
+          "distance": 3,
           "unit": "m"
         }
       }
     ],
-    "description": "<p>Effect: As a Complex Action, the user can make themselves and all allies within range become @Affliction[invisible 3].</p>",
+    "description": "<p>Effect: By spending 5 PP as a Complex Action, the user and all allies within a 3m Emanation gain @Affliction[invisible 3].</p>",
     "traits": [
       "ninja"
     ],
@@ -42,7 +42,7 @@
       "item:perk:smokestep"
     ],
     "autoUnlock": [],
-    "cost": 4,
+    "cost": 3,
     "design": {
       "arena": "physical",
       "approach": "finesse",
@@ -52,17 +52,27 @@
     "webs": [],
     "nodes": [
       {
-        "x": 188,
-        "y": 39,
-        "connected": [
-          "smokestep",
-          "aura-empathy"
-        ],
+        "x": 182,
+        "y": 35,
         "hidden": false,
         "type": "normal",
+        "connected": [
+          "one-with-the-shadows",
+          "aura-empathy",
+          "smokestep",
+          "monomi-no-ikki"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "army-of-phantoms",
+    "traitWebs": []
   },
   "img": "icons/svg/invisible.svg",
   "effects": [
@@ -128,6 +138,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "klID8J4yUuKFvW43"
 }

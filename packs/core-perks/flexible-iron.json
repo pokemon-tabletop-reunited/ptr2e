@@ -1,0 +1,134 @@
+{
+  "name": "Flexible Iron",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "flexible-iron",
+    "description": "<p>The user’s @Trait[weapon] Attacks have +10 Base Power, deal +5 flat damage, and the user’s @Trait[basic] Attacks gain @Trait[ninja].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:wielder",
+      "trait:ninja"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 194,
+        "y": 52,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "dual-wielder",
+          "secret-ninja-tools",
+          "pyrotechnical",
+          "pervasive-shadow"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/weapons/swords/sword-katana.webp",
+  "effects": [
+    {
+      "name": "Flexible Iron",
+      "type": "passive",
+      "_id": "1CyQ5BrYPKLs3Spk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "weapon-trait-attack",
+            "value": 10,
+            "predicate": [],
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "weapon-trait-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "basic-trait-attack",
+            "value": "ninja",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "kJ2ykq4Nut3Wmec2"
+}

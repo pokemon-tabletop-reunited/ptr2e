@@ -1,0 +1,184 @@
+{
+  "name": "Conservation of Ninjutsu",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "conservation-of-ninjutsu",
+    "description": "<p>The user maintains a Conservation Clock, 10 Spans in size, which empties when a Combat starts or ends. For each @Affliction[fainted] @Trait[ninja] ally in the user’s Party, manually increment the Clock 1 Span. For each Span filled on the Conservation Clock, the user gains the following effects:</p><p>    +6% damage dealt while @Affliction[invisible]<br>    +2% EHR<br>    +1% EHR while @Affliction[invisible]<br>    +2% RES<br>    -2 flat Accuracy to Attacks targeting the user<br>    +5% SPD</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|level}",
+          25
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.stealth.mod}",
+          80
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 5,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 186,
+        "y": 35,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "one-with-the-shadows",
+          "misdirect"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/weapons/thrown/dagger-ringed-steel.webp",
+  "effects": [
+    {
+      "name": "Conservation of Ninjutsu",
+      "type": "passive",
+      "_id": "2XGipYSlTb7G1xoq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "conserNinjaClock",
+            "value": 0,
+            "predicate": [
+              "trait:ninja"
+            ],
+            "max": 10,
+            "color": "#78736f",
+            "private": false,
+            "label": "Conservation",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": "6*@actor.clocks.conserNinjaClock",
+            "predicate": [
+              "effect:affliction:invisible"
+            ],
+            "label": "Conservation of Ninjutsu",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": "2*@actor.clocks.conserNinjaClock",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": "@actor.clocks.conserNinjaClock",
+            "predicate": [
+              "effect:affliction:invisible"
+            ],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": "2*@actor.clocks.conserNinjaClock",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": "-2*@target.clocks.conserNinjaClock",
+            "predicate": [],
+            "label": "Conservation of Ninjutsu",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": "0.05*@target.clocks.conserNinjaClock",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "modifiedTime": 1772120336954
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "ji85RxkoJYlJXhlN"
+}
