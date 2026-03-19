@@ -18,7 +18,7 @@
     },
     "actions": [],
     "slug": "tourniquetting",
-    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;\">When the user crosses the [Desperation 1/2] threshold, they may Use a @Trait[healing] [Consumable] or use Touch Up as a Free Action at [Interrupt 3].</span></p>",
+    "description": "<p>When the user crosses the @Trait[desperation-1-2] threshold, they may Use a @Trait[healing] @Trait[consumable] or use Touch Up as a Free Action @Trait[interrupt].</p>",
     "traits": [
       "healer",
       "desperation-1-2"
@@ -50,17 +50,24 @@
       {
         "x": 47,
         "y": 76,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "fixing-good",
           "minor-buff-38",
           "holistic-care",
           "valetudinary"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "folder": "4UhJK1LInml07WJf"
 }

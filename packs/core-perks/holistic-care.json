@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "holistic-care",
-    "description": "<p>Effect: The user gains Healer as a Tutored Ability.</p>",
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.cEAOUdK51hPAaOtP]{Healer} as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -35,12 +35,9 @@
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-          "alpha": null,
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "tint": null,
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -60,9 +57,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -96,7 +91,9 @@
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -118,7 +115,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": 1746675474333,
