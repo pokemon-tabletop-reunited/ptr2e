@@ -1,0 +1,175 @@
+{
+  "name": "One With The Shadows",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "one-with-the-shadows",
+    "description": "<p>The user’s @Trait[ninja] Attacks have +20 Accuracy and have +10% EHR. Attacks targeting the user have -5 Accuracy and deal +15% more damage, doubled for @Trait[weapon] Attacks.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ninja"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 189,
+        "y": 33,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "army-of-phantoms",
+          "conservation-of-ninjutsu",
+          "misdirect"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+  "effects": [
+    {
+      "name": "One With The Shadows",
+      "type": "passive",
+      "_id": "wuveSay7zTcIqvXZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "key": "ninja-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "ninja-trait-attack",
+            "value": 20,
+            "predicate": [],
+            "property": "accuracy",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": -5,
+            "predicate": [
+              {
+                "not": "self:action:trait:weapon"
+              }
+            ],
+            "label": "One With The Shadows (Acc)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": -10,
+            "predicate": [
+              "self:action:trait:weapon"
+            ],
+            "label": "One With The Shadows (Wpn Acc)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": 15,
+            "predicate": [
+              {
+                "not": "self:action:trait:weapon"
+              }
+            ],
+            "label": "One With The Shadows (Dmg)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": 30,
+            "predicate": [
+              "self:action:trait:weapon"
+            ],
+            "label": "One With The Shadows (Wpn Dmg)",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "YhYbM161HYod7ArC"
+}

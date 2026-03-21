@@ -17,7 +17,7 @@
       {
         "name": "Smokestep",
         "slug": "smokestep",
-        "description": "<p>Effect: As a Simple Action, the user can become @Affliction[invisible 3].<br><br>Passive: Whilst @Affliction[invisible], the user is considered to be Hidden or In Stealth even if enemies are aware of their presence.</p>",
+        "description": "<p>Effect: The user gains @Affliction[invisible 3].</p>",
         "traits": [
           "ninja"
         ],
@@ -33,7 +33,7 @@
         }
       }
     ],
-    "description": "<p>Effect: As a Simple Action, the user can become @Affliction[invisible 3].<br><br>Passive:  Whilst @Affliction[invisible], the user is considered to be Hidden or In Stealth even if enemies are aware of their presence.</p>",
+    "description": "<p>Effect: By spending 3 PP as a Simple Action at @Trait[flinch-20], the user can become @Affliction[invisible 3].<br><br>Passive: While @Affliction[invisible], the user is considered to be Undetected, in addition to Hidden, even if non-allied creatures are aware of their presence.</p>",
     "traits": [
       "ninja"
     ],
@@ -41,7 +41,7 @@
       "trait:ninja"
     ],
     "autoUnlock": [],
-    "cost": 3,
+    "cost": 2,
     "design": {
       "arena": "physical",
       "approach": "finesse",
@@ -51,20 +51,27 @@
     "webs": [],
     "nodes": [
       {
-        "x": 186,
-        "y": 44,
-        "connected": [
-          "nothing-is-true",
-          "edgerunner",
-          "army-of-phantoms",
-          "silence-is-golden",
-          "pervasive-shadow"
-        ],
+        "x": 178,
+        "y": 39,
         "hidden": false,
         "type": "normal",
+        "connected": [
+          "nothing-is-true",
+          "monomi-no-ikki",
+          "army-of-phantoms",
+          "misdirect"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "smokestep",
+    "traitWebs": []
   },
   "img": "icons/svg/invisible.svg",
   "effects": [
@@ -88,6 +95,25 @@
                 "mode": 5,
                 "property": "duration.turns",
                 "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "smokestep-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": -20
               }
             ],
             "dontMerge": false,
@@ -125,11 +151,11 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "modifiedTime": 1770687228125
       }
     }
   ],
-  "flags": {},
   "_id": "xnEnVeWUELOEknw5"
 }

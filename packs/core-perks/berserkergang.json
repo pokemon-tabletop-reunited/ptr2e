@@ -18,10 +18,9 @@
       {
         "name": "Berserkergang",
         "slug": "berserkergang",
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user uses Rage, targeting itself, as a Free Action, gaining @Trait[interrupt-3] and @Affliction[delay 30], on the attack.</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user uses Rage, targeting itself, as a Free Action and gains @Affliction[delay 30].</p>",
         "traits": [
-          "interrupt-3",
-          "flinch-30"
+          "interrupt-3"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -32,13 +31,12 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "delay": 3,
           "trigger": "The user enters combat."
         }
       }
     ],
     "slug": "berserkergang",
-    "description": "<p>When the user enters combat, they may spend 2 PP and may use @UUID[Compendium.ptr2e.core-moves.6OK8vhZYljL4X7cd]{Rage} as a Free Action with @Trait[interrupt-3] and @Affliction[delay 30], targeting itself with the attack.</p>",
+    "description": "<p>When the user enters combat, they may spend @PP[-2] as a Free Action @Trait[interrupt] @Trait[flinch-30] and use @UUID[Compendium.ptr2e.core-moves.6OK8vhZYljL4X7cd]{Rage} as a Free Action, targeting itself with the Attack.</p>",
     "traits": [],
     "prerequisites": [
       "item:move:rage"
@@ -72,9 +70,91 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Berserkergang",
+      "type": "passive",
+      "_id": "AxX5n1kqhNWgNmmq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "berserkergang-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "label": "Berserkergang",
+            "priority": null,
+            "dontMerge": false,
+            "isFixedChance": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "key": "combat-enter",
+            "value": "{actor|link} enters combat and may spend {item|actions.contents.0.cost.powerPoints} PP to use {item|link}!",
+            "predicate": [],
+            "visibility": null,
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.lAzKGhCaE28Nk7gP.ActiveEffect.K8myFiH8KtoNqkyD",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1772814836989,
+        "modifiedTime": 1772814897930,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "_id": "AeHU57coP5PEfWhJ"
 }
