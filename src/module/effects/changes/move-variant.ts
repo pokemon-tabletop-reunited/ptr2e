@@ -105,6 +105,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for accuracy adjustment."); 
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === this.label) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               const accuracy = variant.accuracy;
               if (typeof accuracy !== "number") {
@@ -133,6 +137,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for power adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === this.label) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               const power = variant.power;
               if (typeof power !== "number") {
@@ -168,6 +176,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for type adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}-attack`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}-attack`);
 
               if (this.mode === CHANGE_MODES.ADD) {
                 for (const c of changeArray) {
@@ -206,6 +218,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for type adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}-traits`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}-traits`);
 
               const newTraits = variant === attack ? traits : Array.from(new Set(variant._source.traits));
 
@@ -245,6 +261,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for traits adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               const newTraits = variant === attack ? traits : Array.from(variant._source.traits);
 
@@ -273,6 +293,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for pp-cost adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               const ppCost = variant.cost.powerPoints;
               if (typeof ppCost !== "number") {
@@ -301,6 +325,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for range adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               if (!variant.range) {
                 variant.range = new RangePTR2e({
@@ -331,6 +359,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for rip adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               const rip = variant.range?.distance;
               if (typeof rip !== "number") {
@@ -359,6 +391,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for offensiveStat adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               variant.offensiveStat = change as PTRCONSTS.Stat;
               variant.updateSource({ offensiveStat: variant.offensiveStat });
@@ -381,6 +417,10 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               if (!variant) {
                 return this.failValidation("Could not create or find move variant for defensiveStat adjustment.");
               }
+              if(attack.appliedVariantLabels.get(variant.slug) === `${this.label}`) {
+                return;
+              }
+              attack.appliedVariantLabels.set(variant.slug, `${this.label}`);
 
               variant.defensiveStat = change as PTRCONSTS.Stat;
               variant.updateSource({ defensiveStat: variant.defensiveStat });

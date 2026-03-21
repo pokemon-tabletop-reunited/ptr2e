@@ -289,7 +289,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       !["ally", "enemy", "creature", "object"].includes(this.range.target)
     )
       return null;
-    const dangerClose = !!this.traits.get("danger-close");
+    const dangerClose = !this.traits.has("unreliable") && !!this.traits.get("danger-close");
 
     const reach = ({
       0: 1,
@@ -317,7 +317,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     const isInteger = Number.isInteger(distance);
     const reachLimit = isInteger ? reach : Math.sqrt(2 * Math.pow(reach, 2));
 
-    if (this.range.distance <= 1) return distance > reachLimit ? Infinity : 0;
+    if (this.range.distance <= 1) return distance > reachLimit ? Infinity : dangerClose ? -Infinity : 0;
     const increment = this.range.distance * rangeMultiplier;
 
     const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
@@ -413,6 +413,10 @@ export default class AttackPTR2e extends ActionPTR2e {
       ...(this.types.map(type => `attack:type:${type}`)),
     ]).map(key => prefix ? `${prefix}:${key}` : key);
   }
+
+  get appliedVariantLabels() {
+    return (this.parent as unknown as {appliedVariantLabels: Map<string, string> })?.appliedVariantLabels
+  }
 }
 
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
@@ -428,6 +432,7 @@ export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<A
   statistic: Maybe<AttackStatistic>;
 
   _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
+
 }
 
 interface AttackSchema extends foundry.data.fields.DataSchema {

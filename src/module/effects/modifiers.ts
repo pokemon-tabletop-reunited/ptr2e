@@ -5,6 +5,7 @@ import { signedInteger, sluggify } from "@utils";
 import { ItemPTR2e } from "@item";
 import * as R from "remeda";
 import { RollNote } from "@system/notes.ts";
+import { FLAT_MODIFIER_METHOD_SUFFIXES, FLAT_MODIFIER_TYPE_SUFFIXES} from "./changes/index.ts";
 
 interface RawModifier {
   /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -30,9 +31,9 @@ interface RawModifier {
   /** If this modifier should not show up in the prompt regardless of whether it's disabled */
   hidden?: boolean;
   /** The method of application of this modifier */
-  method?: "base" | "flat" | "percentile" | "stage";
+  method?: typeof FLAT_MODIFIER_METHOD_SUFFIXES[number];
   /** The type of roll this modifier applies to, any if not relevant. */
-  type?: "any" | "damage" | "accuracy" | "evasion" | "crit" | "power" | "stat" | "effectiveness" | "capture" | "strikes" | "hits";
+  type?:  "any" | typeof FLAT_MODIFIER_TYPE_SUFFIXES[number];
 }
 
 interface ModifierAdjustment {
@@ -82,8 +83,8 @@ class ModifierPTR2e implements RawModifier {
   hidden: boolean;
   appliesTo: Map<ActorUUID, boolean>;
 
-  method: "base" | "flat" | "percentile" | "stage";
-  type: "any" | "damage" | "accuracy" | "evasion" | "crit" | "power" | "stat" | "effectiveness" | "capture" | "strikes" | "hits";
+  method: typeof FLAT_MODIFIER_METHOD_SUFFIXES[number];
+  type: "any" | typeof FLAT_MODIFIER_TYPE_SUFFIXES[number];
 
   /**
    * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):

@@ -1,0 +1,238 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Kunai (Explosive)",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "actions": [],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 100,
+      "accuracy": 60,
+      "hide": false,
+      "range": {
+        "target": "blast",
+        "distance": 5,
+        "unit": "m"
+      }
+    },
+    "quantity": 3,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "kunai-explosive",
+    "description": "<p>A kunai is a short, bladed weapon similar to a dagger, believed to be originally derived from the humble trowel. Kunai come in a number of shapes and sizes, frequently designed more like spearheads to be thrown more easily. Their size allows them to be modified more substantially, and can feature some of the nastier tricks up a ninja’s sleeve. These kunai are wrapped with a cloth that has thin pouches filled with smokeless gunpowder and a special aluminum alloy threat, which causes the kunai to detonate on impact.</p><p>Fling Effect: On hit, all valid targets have a 10% chance to gain @Affliction[suppressed 5] (while on miss, this effect applies to creatures affected by the @Trait[blast-1] centered in the space this Flung item Scatters to).<br>On a Critical Hit, all valid targets @Tick[-1] @Trait[explode] damage and have a 40% chance to gain @Affliction[suppressed 3].</p>",
+    "traits": [
+      "weapon",
+      "consumable",
+      "fling",
+      "projectile",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "consumableType": "other",
+    "stack": 3,
+    "cost": 7
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Kunai (Explosive)",
+      "type": "passive",
+      "_id": "9OkaABpPrxITXtz8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "missile",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "sharp",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "horn",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "explode",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "crit-1",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "blast-1",
+            "predicate": [],
+            "property": "power",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-explosive-attack",
+            "value": "flinch-20",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-kunai-explosive-attack-damage",
+            "value": 19,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-explosive-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-explosive-attack-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "predicate": [],
+            "chance": 40,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-explosive-attack-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 2,
+                "property": "system.traits",
+                "value": "explode"
+              }
+            ],
+            "dontMerge": true,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "EUKOUJyVQxFErguF"
+}

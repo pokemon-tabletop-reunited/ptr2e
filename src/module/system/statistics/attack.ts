@@ -316,7 +316,6 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     else if(effectiveness < 1) selfOptions.add(`effectiveness:resist`);
     else if(effectiveness > 1) selfOptions.add(`effectiveness:super`);
 
-
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
       attack: this.attack,
@@ -385,6 +384,10 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         options: new Set([...options, ...effectivenessOptions, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
         skipEffectRolls: args.skipEffectRolls,
+        // traitEffectRolls: args.skipEffectRolls ? [] : traitEffects.flatMap(effect => {
+        //   if(effect.system.changes?.some(c => c.type === "roll-effect" && c.affects !== "self")) return [effect];
+        //   return [];
+        // })
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
@@ -515,6 +518,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
           attack.parent?.updateSource({ "actions": actions });
         }
       }
+      this.attack.appliedVariantLabels.clear();
     }
     if(checkContext.isChangingVariant) {
       checkContext.isChangingVariant = false;

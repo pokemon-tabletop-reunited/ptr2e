@@ -1,0 +1,106 @@
+{
+  "folder": "V4skAU6G3OH5fXgE",
+  "name": "Dual Wield (Multi-Strike)",
+  "type": "effect",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "dual-wield-multi",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": []
+  },
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
+  "effects": [
+    {
+      "name": "Dual Wield (Multi-Strike)",
+      "type": "affliction",
+      "_id": "2aynunzRDBV8KQzL",
+      "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "attack",
+            "value": 1.3,
+            "predicate": [],
+            "mode": 1,
+            "property": "power",
+            "definition": [],
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "strike-trait-attack-hits-flat",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "strike-trait-attack-strikes-flat",
+            "value": 3,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 30,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "turns": 1,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "ojm5vuWcgyYbey6P"
+}

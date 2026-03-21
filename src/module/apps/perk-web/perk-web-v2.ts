@@ -6,7 +6,7 @@ import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
 import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.ts";
 import { ActiveEffectPTR2e } from "@effects";
-import { LevelUpMoveSchema } from "@item/data/species.ts";
+import { EvolutionData, LevelUpMoveSchema } from "@item/data/species.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
 import { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
@@ -207,7 +207,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
 
         const perk = this.currentNode.perk;
-        const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
+        const species = await fu.fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
         if (!species) return;
 
         const current = this.actor.species;
@@ -256,6 +256,30 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         flags.core ??= {};
         flags.core.sourceId = species.uuid;
 
+        //Add evolution data
+        const evolutions = this.actor.flags?.ptr2e?.evolutionHistory ?? [];
+        const sourceUuid = (current.parent.flags?.core?.sourceId || current.parent._stats?.compendiumSource) || (() => {
+          if(!current.evolutions) return undefined
+          if(current.evolutions.name === current.slug) return current.evolutions.uuid;
+          function recursiveFindCurrent(evolutions: EvolutionData[] | null): string | undefined {
+            if(!evolutions) return undefined;
+            for(const evolution of evolutions) {
+              if(evolution.name === current!.slug) return evolution.uuid;
+              const result = recursiveFindCurrent(evolution.evolutions);
+              if(result) return result;
+            }
+            return undefined;
+          }
+          return recursiveFindCurrent(current.evolutions.evolutions);
+        })() || "";
+        if(evolutions.at(-1)?.uuid !== sourceUuid) {
+          evolutions.push({ slug: current.slug, uuid: sourceUuid });
+        }
+        if(evolutions.length === 0) {
+          evolutions.push({ slug: current.slug, uuid: sourceUuid });
+        }
+        evolutions.push({ slug: species.slug, uuid: species.uuid });
+
         await this.actor.update({
           name: this.actor.name == current.name ? species.name : this.actor.name,
           img: img,
@@ -264,7 +288,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             texture: {
               src: tokenImage,
             }
-          }
+          },
+          "flags.ptr2e.evolutionHistory": evolutions
         });
 
         this.actor.updateEmbeddedDocuments("Item", [
@@ -275,7 +300,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             img: img,
             system: species.system.toObject(),
             _id: "actorspeciesitem",
-            effects: species.effects.map(e => e.toObject())
+            effects: species.effects.map(e => e.toObject()),
+            "_stats.compendiumSource": species.uuid
           }
         ]);
 

@@ -26,6 +26,7 @@ import { CaptureRoll, CaptureRollCreationData } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
 import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
+import { ActionCost } from "@data";
 
 class CheckPTR2e {
   static async rollPokeball(
@@ -303,20 +304,38 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
-      if(dialog.variantSelected) {
+      if (dialog.variantSelected) {
         context.isChangingVariant = true;
         return null;
       }
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
     else if (!context.skipDialog) {
+      if (game.combat?.started && game.combat.combatant?.actor !== context.actor) {
+        const baseCost = context.attack?.cost?.activation;
+        const actionCost = await foundry.applications.api.DialogV2.prompt<ActionCost>({
+          window: { title: game.i18n.localize("PTR2E.Dialog.OutOfTurnAction.Title") },
+          classes: ["center-text"],
+          content: `<p>${game.i18n.localize("PTR2E.Dialog.OutOfTurnAction.Content")}</p><select class="center-text" name="outofturn"><option value="complex" ${baseCost === "complex" ? "selected" : ""}>Complex Action</option><option value="simple" ${baseCost === "simple" ? "selected" : ""}>Simple Action</option><option value="free" ${baseCost === "free" ? "selected" : ""}>Free Action</option></select>`,
+          ok: {
+            action: "ok",
+            label: "Perform Action as Interrupt",
+            callback: (_event, _button, dialog) => {
+              return dialog?.element?.querySelector<HTMLSelectElement>("select[name='outofturn']")?.value
+            }
+          }
+        })
+        if (!actionCost) return null;
+        context.outOfTurnCost = actionCost;
+      }
+
       // Show dialog for adding/editing modifiers, unless skipped or flat check
       const dialog = await new AttackModifierPopup(check, sharedModifiers, context).wait();
 
       if (!dialog) {
         return null;
       }
-      if(dialog.variantSelected) {
+      if (dialog.variantSelected) {
         context.isChangingVariant = true;
         return null;
       }
@@ -368,7 +387,11 @@ class CheckPTR2e {
         targetUnaware: !!targetContext.target?.actor.rollOptions.all["special:unaware"],
         originUnaware: !!targetContext.self.actor.rollOptions.all["special:unaware"],
         strikes: targetCheck.total.strikes?.flat ?? 0,
-        hits: targetCheck.total.hits?.flat ?? 0
+        hits: targetCheck.total.hits?.flat ?? 0,
+        unreliable: context.attack?.traits.has("unreliable") ? {
+          user: targetContext.self.actor.level,
+          target: targetContext.target?.actor.level ?? 0,
+        } : undefined
       };
 
       const rolls: {
@@ -507,6 +530,16 @@ class CheckPTR2e {
             if (error instanceof Error) console.warn(error);
           }
         }
+      }
+    }
+    if (context.outOfTurnCost && context.outOfTurnCost !== "free") {
+      const effect = await fu.fromUuid<ActiveEffectPTR2e>(`Compendium.ptr2e.core-effects.outofteffectitem.ActiveEffect.outofturneffect0`);
+      if(effect) {
+        const source = effect.toObject();
+        source.name = `Out of Turn Action used (${context.outOfTurnCost === "complex" ? "Complex" : "Simple"})`;
+        source.description = `<p>This actor used an action as an interrupt during combat.</p><p>${context.attack ? `Action used: ${context.attack.link}` : ""}</p>`;
+        source.img = context.outOfTurnCost === "complex" ? "icons/svg/downgrade.svg" : "icons/svg/down.svg";
+        effectsToApply.push(source);
       }
     }
 

@@ -36,6 +36,13 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const attack = data.attack;
+    // If the attack has the Unreliable trait accuracy calc is different
+    if (options.unreliable) {
+      return new AttackRoll("1d100ms@dc", { 
+        dc: (30 + options.unreliable.user - options.unreliable.target)
+      }, options);
+    }
+
     // If the attack has no accuracy, it always hits
     if (attack.accuracy === null && !options.rip) return null;
 
@@ -219,6 +226,7 @@ class AttackRoll extends CheckRoll {
       type: typeEffectiveness,
       other: otherModifier,
       flatDamage: flatDamage,
+      ignoresShieldDuringDamage: origin.rollOptions.getFromDomain("item")["special:ignoresShieldDuringDamage"] ? 1 : 0
     };
     const roll = new Roll(
       this.options.isFlat 
@@ -291,6 +299,10 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   originUnaware: boolean;
   strikes?: number;
   hits?: number;
+  unreliable?: {
+    user: number;
+    target: number;
+  }
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "warding-shield",
-    "description": "<p>Effect: You gain +33% RES while Shielded.</p>",
+    "description": "<p>Effect: You gain +20% RES while Shielded.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:improved-shielding"
@@ -64,16 +64,15 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "system.modifiers.effectChance",
-            "value": -10,
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 20,
             "predicate": [
-              "target:state:shielded"
+              "self:state:shielded"
             ],
             "priority": null,
             "mode": 2,
-            "ignored": false,
-            "hideIfDisabled": false
+            "ignored": false
           }
         ],
         "slug": null,

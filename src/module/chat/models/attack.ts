@@ -407,6 +407,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         attack: this.attack,
         hasDamage: summonAttack?.damageType === "flat" ? true : this.results.some((result) => !!result.damage),
         hasEffect: this.results.some((result) => result.effectRolls?.origin.length || result.effectRolls?.target.length || result.effectRolls?.defensive.length),
+        crash: this.attack.traits.some(t => t.slug.startsWith("crash-")),
         results: new Map<ActorUUID, AttackMessageRenderContextData>(
           // @ts-expect-error - This is a valid operation
           await Promise.all(
@@ -428,6 +429,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   }
                 } : { some: false, applied: false },
                 hasCaptureRoll: !!(this.attack.slug?.startsWith("fling") && this.attack.flingItemId),
+                check: result.context.check,
+                
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({
@@ -470,7 +473,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         selfEffectRolls: this.selfEffects ? await (async () => {
           const rolls = [];
           for (const roll of this.selfEffects!.rolls) {
-            const item = await fromUuid(roll.effect);
+            const item = await fu.fromUuid(roll.effect);
             if (!item) {
               Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${roll.effect}`), { log: "error" });
               continue;
@@ -622,20 +625,83 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       }
     }
 
+    // If the attack has pierce, handle removing of [Shield] trait effects
+    if (this.context.attack.traits.has("pierce")) {
+      const shieldEffects = result.target.effects.filter(e => (e as ActiveEffectPTR2e).system.traits?.has("shield"));
+      const shieldHP = result.target.system.shield.value || 0;
+      if (shieldEffects.length) {
+        await result.target.deleteEmbeddedDocuments("ActiveEffect", shieldEffects.map(e => e.id));
+      }
+      if (shieldHP) {
+        await result.target.update({ "system.shield.value": 0 });
+      }
+      if (shieldEffects.length || shieldHP) {
+        //@ts-expect-error - Chat messages have not been properly defined yet
+        await ChatMessage.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: shieldHP,
+            shieldApplied: true,
+            target: result.target.uuid,
+            note: `<div class="pl-1 pr-1 center-text" ><p>${result.target.name} had ${shieldEffects.length} @Trait[shield] effect(s) removed and ${shieldHP} shield HP reduced by ${this.context.attack.name} due to its @Trait[pierce] Trait.</p>`
+              + `<p>Removed Effects:</p><ul class="p-0 m-1" style="list-style: none";">${shieldEffects.map(e => `<li>${e.name}</li>`).join("")}</ul><p><small class="fs-10">Please note that @Trait[shield] summons are not automatically deleted and should be manually removed.</small></p></div>`,
+          }
+        });
+      }
+    }
+
     // Damage needs to be applied before all effects are, in case any effect depends on the new HP value.
-    const promise = (async () => {
+    const damageApplied = await (async () => {
       const target = result.target;
       const damage = result.damage;
+      const ignoresShieldDuringDamage = result.damageRoll?.context.ignoresShieldDuringDamage === 1;
       if (!damage) return 0;
       let damageApplied = 0, amount = result.amount || 1;
       do {
-        damageApplied += await target.applyDamage(damage);
+        damageApplied += await target.applyDamage(damage, { flat: ignoresShieldDuringDamage });
       } while (--amount > 0);
       return damageApplied;
     })()
 
+    const { recoil, drain } = (result.check?.totalModifiers as Record<string, { base: number, flat: number, stage: number, percentile: number }>) ?? {}
+    if (recoil) {
+      if (recoil.flat > 0) {
+        try {
+          const recoilDamage = new Roll(`floor(@damage * (@recoilFlat * @recoilPercentile))`, {
+            damage: damageApplied,
+            recoilFlat: recoil.flat,
+            recoilPercentile: recoil.percentile
+          }).evaluateSync().total
+
+          if (recoilDamage > 0 && origin) {
+            await origin.applyDamage(recoilDamage, { silent: false, healShield: false, flat: true, note: `Recoil damage from attacking ${result.target.name}` });
+          }
+        }
+        catch (error) {
+          console.error("Failed to calculate recoil damage", error);
+        }
+      }
+    }
+    if (drain) {
+      if (drain.flat > 0 && origin) {
+        try {
+          const drainDamage = new Roll(`floor(@damage * (@drainFlat * @drainPercentile))`, {
+            damage: damageApplied,
+            drainFlat: drain.flat,
+            drainPercentile: drain.percentile
+          }).evaluateSync().total
+          if (drainDamage > 0) {
+            await origin.applyDamage(-drainDamage, { silent: false, healShield: false, flat: true, note: `Drain heal from attacking ${result.target.name}` });
+          }
+        }
+        catch (error) {
+          console.error("Failed to calculate drain damage", error);
+        }
+      }
+    }
+
     return (await Promise.all([
-      await promise,
+      damageApplied,
       (async (): Promise<void> => {
         const target = result.target;
         await applyEffects(target, result.effect.effects?.target ?? [], result.hit === "critical");
@@ -667,6 +733,45 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         }
       })(),
     ]))[0];
+  }
+
+  async applyCrash(): Promise<void> {
+    if (!this.context) return;
+    const origin = await this.currentOrigin;
+    if (!origin) return;
+
+    const crashes = Array.from(this.context.results.values()).reduce((acc, result) => {
+      // Increment if the attack misses
+      if (["miss", "fumble"].includes(result.hit)) {
+        acc.push({
+          crash: (result.check?.totalModifiers as Record<string, { base: number, flat: number, stage: number, percentile: number }>)?.crash ?? {},
+          damage: result.damage || 0,
+        })
+      }
+      return acc;
+    }, [] as {crash: { base: number, flat: number, stage: number, percentile: number }, damage: number}[]);
+    if (!crashes.length) return void ui.notifications.info("No crash damage to apply.");
+
+    const totalCrash = crashes.reduce((acc, {crash, damage}) => {
+      if(crash.flat > 0) {
+        try {
+          const crashDamage = new Roll(`floor(@damage * (@crashFlat * @crashPercentile))`, {
+            damage: damage,
+            crashFlat: crash.flat,
+            crashPercentile: crash.percentile
+          }).evaluateSync().total;
+          return acc + crashDamage;
+        }
+        catch (error) {
+          console.error("Failed to calculate crash damage", error);
+        }
+      }
+      return acc;
+    }, 0);
+
+    if(totalCrash > 0) {
+      await origin.applyDamage(totalCrash, { silent: false, healShield: false, flat: true, note: `Crash damage from missing ${crashes.length} attack(s)` });
+    }
   }
 
   async updateTargets(event: JQuery.ClickEvent) {
@@ -753,6 +858,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           await this.applyDamage(result.target.uuid);
         }
       }
+    });
+    html.find(".apply-crash").on("click", async () => {
+      await this.applyCrash();
     });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
@@ -977,6 +1085,7 @@ interface AttackMessageRenderContext {
   selfEffectRolls: string[];
   defaultExpanded?: boolean;
   metagameInfo?: Record<string, unknown>;
+  crash: boolean;
 }
 
 interface AttackMessageRenderContextData {
@@ -1002,6 +1111,7 @@ interface AttackMessageRenderContextData {
     };
   };
   hasCaptureRoll?: boolean;
+  check: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextCheckSchema>>;
 }
 
 export type AttackResultsData = ModelPropsFromSchema<AttackMessageSchema>["results"][number];

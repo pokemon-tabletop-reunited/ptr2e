@@ -9,6 +9,21 @@
         <p class="hint">{{localize "PTR2E.FIELDS.details.biography.hint"}}</p>
         {{formField fields.details.fields.device value=source.system.details.device localize=true stacked=true}}
       </fieldset>
+      <fieldset>
+        <legend>{{localize "PTR2E.FIELDS.details.history.label"}}</legend>
+        <div class="history">
+          {{#each evolutionHistory}}
+            <div class="history-entry">
+              <img data-tooltip="{{this.name}}" data-uuid="{{this.uuid}}" src="{{this.img}}" alt="{{this.name}}">
+            </div>
+            {{#unless @last}}
+              <div class="history-entry spacer">
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            {{/unless}}
+          {{/each}}
+        </div>
+      </fieldset>
     </div>
   </div>
   <div class="right-side">

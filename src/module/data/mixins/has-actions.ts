@@ -30,6 +30,8 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
 
       if (!this._isValidParent(this.parent)) return;
 
+      this.appliedVariantLabels = new Map<string, string>();
+
       for (const action of this.actions) {
         if (this.parent.actions.has(action.slug)) continue;
 
@@ -46,6 +48,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
         action.prepareDerivedData();
         this.parent.actions.set(action.slug, action);
       }
+      
     }
 
     private _isValidParent(parent: foundry.abstract.DataModel | null): parent is ActorPTR2e | ItemPTR2e {
@@ -85,6 +88,8 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
     actions: Collection<ActionPTR2e>;
 
     _source: SourceFromSchema<ActionsSchema>;
+
+    appliedVariantLabels: Map<string, string>;
   }
 
   return TemplateClass;

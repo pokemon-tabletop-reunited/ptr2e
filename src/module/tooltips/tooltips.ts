@@ -204,7 +204,7 @@ export default class TooltipsPTR2e {
 
   async _onEffectTooltip() {
     const effect = await (async () => {
-      const effectId = game.tooltip.element?.dataset.id;
+      const effectId = game.tooltip.element?.dataset.id || game.tooltip.element?.dataset.effectId;
       if (!effectId) return null;
 
       const parent = await fu.fromUuid<ActorPTR2e>(
@@ -557,15 +557,11 @@ export default class TooltipsPTR2e {
     if (!target) return false;
 
     const accuracy = target.accuracyRoll;
-    if (!accuracy) {
-      this.tooltip.innerHTML = "No accuracy roll - Auto hit!";
-      return false;
-    };
 
     this.tooltip.classList.add("status");
     await this._renderTooltip({
       path: "systems/ptr2e/templates/chat/tooltips/status.hbs",
-      data: { target, accuracy },
+      data: { target, accuracy, hit: target.hit },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
@@ -850,6 +846,22 @@ export default class TooltipsPTR2e {
     return 2000;
   }
 
+  async #createEffectTooltip(effect: EffectPTR2e) {
+    this.tooltip.classList.add("effect");
+    await this._renderTooltip({
+      path: `systems/ptr2e/templates/items/embeds/effect.hbs`,
+      data: {
+        document: effect,
+        fields: effect.schema.fields
+      },
+      direction: game.tooltip.element?.dataset.tooltipDirection as
+        | TooltipDirections
+        | undefined,
+    });
+
+    return 2000;
+  }
+
   async #createEffectItemTooltip(effect: EffectPTR2e) {
     this.tooltip.classList.add("effect");
     await this._renderTooltip({
@@ -875,7 +887,7 @@ export default class TooltipsPTR2e {
     if (!uuid) return false;
 
     const entityType = element.dataset.type;
-    if (entityType && entityType !== "Item") return false;
+    if (entityType && ["Item", "ActiveEffect"].includes(entityType) === false) return false;
 
     const embedFigure = element.closest("figure.content-embed") as HTMLElement | undefined;
     if (embedFigure?.classList.contains("no-tooltip") && embedFigure.dataset.uuid === uuid)
@@ -885,6 +897,10 @@ export default class TooltipsPTR2e {
     if (!entity) return false;
 
     switch (entity.type) {
+      case "passive":
+      case "affliction": {
+        return await this.#createEffectTooltip(entity as unknown as EffectPTR2e);
+      }
       case "move": {
         const move = entity as MovePTR2e;
         const attack = move.system.attack;

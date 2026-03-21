@@ -1,0 +1,75 @@
+{
+  "name": "Execute",
+  "type": "effect",
+  "img": "icons/svg/skull.svg",
+  "system": {
+    "traits": [
+      "execute"
+    ],
+    "description": "This effect is used for the Automation of the @Trait[execute] Trait. When applied to a creature, their HP is instantly reduced to 0.",
+    "slug": "evasive",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Execute",
+      "img": "icons/svg/skull.svg",
+      "type": "passive",
+      "duration": {
+        "turns": null,
+        "startTime": null,
+        "combat": null,
+        "startTurn": null
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "apply-tick",
+            "key": "",
+            "value": -999,
+            "predicate": [],
+            "method": "HP",
+            "mode": 2,
+            "ignored": false,
+            "isFlat": true
+          }
+        ],
+        "removeOnRecall": true,
+        "removeAfterCombat": true,
+        "traits": [
+          "execute"
+        ],
+        "slug": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "This effect is used for the Automation of the @Trait[execute] Trait. When applied to a creature, their HP is instantly reduced to 0.",
+      "statuses": [],
+      "_id": "executeeffect000",
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": "always"
+        }
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "executeeffecitem"
+}

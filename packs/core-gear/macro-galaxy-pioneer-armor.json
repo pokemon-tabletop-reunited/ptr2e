@@ -12,7 +12,7 @@
       "sci-fi"
     ],
     "actions": [],
-    "description": "<p>The Macro Galaxy Pioneer Armour is a general-purpose protective body-suit intended for exploring worlds with low-hazard fauna and flora.<br><br>Grants +5 Base DEF and +5 Base SPDEF.</p>",
+    "description": "<p>The Macro-Galaxy Pioneer Armour is a general-purpose protective body-suit intended for exploring worlds with low-hazard fauna and flora.</p><p>Grants the user +5 Base DEF and SPDEF, +10% RES, and causes the user to take -5% less damage from Physical- and Special-Category Attacks.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,12 +26,17 @@
     "grade": "E",
     "fling": {
       "type": "untyped",
-      "power": 25,
+      "power": 65,
       "accuracy": 60,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -46,8 +51,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -59,21 +66,35 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.attributes.def.base",
-            "value": 5,
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
             "predicate": [],
+            "hp": null,
+            "atk": null,
+            "def": 5,
+            "spa": null,
+            "spd": 5,
+            "spe": null,
             "mode": 2,
-            "priority": null,
             "ignored": false
           },
           {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -5,
+            "predicate": [],
+            "label": "Pioneer Armor",
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
             "type": "basic",
-            "key": "system.attributes.spd.base",
-            "value": 5,
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
             "predicate": [],
             "mode": 2,
-            "priority": null,
             "ignored": false
           }
         ],
@@ -81,7 +102,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -99,16 +122,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
+        "systemVersion": "1.5.0.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1767654452288,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ],

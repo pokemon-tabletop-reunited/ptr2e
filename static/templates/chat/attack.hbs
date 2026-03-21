@@ -190,4 +190,11 @@
         </button>
       </div>
     {{/if}}
+    {{#if crash}}
+      <div class="target target-footer">
+        <button type="button" class="apply-crash" data-tooltip="Apply Crash Damage (per missed attack)">
+          <i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.ApplyCrash"}}
+        </button>
+      </div>
+    {{/if}}
 </footer>

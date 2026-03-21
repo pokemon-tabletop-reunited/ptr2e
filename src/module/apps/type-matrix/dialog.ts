@@ -132,6 +132,7 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
 
     app.cache[data.type] = typeData;
     for (const key in app.cache) {
+      typeData.effectiveness[key as keyof TypeEffectiveness] = 1;
       app.cache[key as keyof TypeEffectiveness]!.effectiveness[data.type] = 1;
     }
 

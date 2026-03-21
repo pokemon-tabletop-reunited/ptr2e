@@ -13,7 +13,8 @@
           "zenith",
           "move-locked",
           "sonic",
-          "blast-4"
+          "blast-4",
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -70,7 +71,8 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -83,14 +85,17 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -112,12 +117,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.4",
         "createdTime": 1737312882393,
         "modifiedTime": 1737312942508,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

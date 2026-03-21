@@ -232,6 +232,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         continue;
       }
 
+      let speciesUuid = (blueprint._source.doc ?? "") + "";
       const speciesOrActor = await (async () => {
         // Get rolltable result or species data
         if (blueprint.doc instanceof ItemPTR2e) {
@@ -242,8 +243,11 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         for (const result of tableResult.results) {
           if (result.type === CONST.TABLE_RESULT_TYPES.TEXT) continue;
           const uuid = (result.type === CONST.TABLE_RESULT_TYPES.COMPENDIUM ? "Compendium." : "") + result.documentCollection + "." + result.documentId;
-          const doc = await fromUuid<ItemPTR2e | ActorPTR2e>(uuid);
-          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) return doc;
+          const doc = await fu.fromUuid<ItemPTR2e | ActorPTR2e>(uuid);
+          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) {
+            speciesUuid = uuid;
+            return doc;
+          }
           if (doc && doc instanceof ActorPTR2e) return doc;
         }
         throw new Error("No valid species found in rolltable");
@@ -265,6 +269,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       const species = speciesOrActor.toObject() as SpeciesPTR2e['_source'] & {
         system: SpeciesSystemModel['_source'];
       };
+      //@ts-expect-error - Ignore incomplete data
+      species._stats ??= {};
+      species._stats.compendiumSource ||= speciesUuid; // Ensure it's a string
 
       const level = await (async () => {
         // Get level from rolltable result, or range
@@ -395,9 +402,16 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const evolution = getEvolution(species.system.evolutions as unknown as EvolutionData)
         if (!evolution?.uuid) return species;
 
-        return ((await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.toObject() as SpeciesPTR2e['_source'] & {
+        const speciesData = ((await fu.fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.toObject() as SpeciesPTR2e['_source'] & {
           system: SpeciesSystemModel['_source'];
-        } | undefined) ?? species;
+        } | undefined);
+        if(speciesData) {
+          //@ts-expect-error - Ignore incomplete data
+          speciesData._stats ??= {};
+          speciesData._stats.compendiumSource = evolution.uuid;
+        }
+
+        return speciesData ?? species;
       })();
 
       const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
@@ -583,7 +597,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         img: img,
         system: evolution.system,
         _id: "actorspeciesitem",
-        effects: evolution.effects
+        effects: evolution.effects,
       })
 
       // Generate Perks
@@ -861,7 +875,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const itemMap: [string, unknown[]][] = [];
     for(const actorData of toBeCreated) {
       if(!actorData.items?.length) continue;
-      const speciesItemIndex = actorData.items.findIndex(i => i.type === "species");
+      const speciesItemIndex = actorData.items.findIndex(i => i.type === "species" || i.type?.endsWith("Species"));
       if(speciesItemIndex !== -1) {
         const speciesItem = actorData.items[speciesItemIndex];
         // Remove species item from actor creation data

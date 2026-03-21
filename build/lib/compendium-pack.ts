@@ -58,6 +58,7 @@ class CompendiumPack {
       JournalEntry: new Map(),
       Macro: new Map(),
       RollTable: new Map(),
+      Cards: new Map()
     };
   static #idsToEntry: {
     [K in Extract<CompendiumDocumentType, "Actor" | "Item" | "JournalEntry" | "Macro" | "RollTable">]: Map<
@@ -70,6 +71,7 @@ class CompendiumPack {
       JournalEntry: new Map(),
       Macro: new Map(),
       RollTable: new Map(),
+      Cards: new Map()
     };
 
   static #packsMetadata = JSON.parse(fs.readFileSync("static/system.json", "utf-8")).packs as PackMetadata[];
@@ -126,49 +128,53 @@ class CompendiumPack {
     this.data = parsedData;
 
     for (const docSource of this.data) {
-      if(!docSource._id) {
-        throw PackError(`Document source in ${this.packId} has no _id: ${docSource.name}`);
-      }
-      // Populate CompendiumPack.namesToIds for later conversion of compendium links
-      packMap.set(sluggify(docSource.name), docSource._id ?? "");
-      packEntryMap.set(docSource._id ?? docSource.name, docSource);
+      this.handleEntry(docSource, packMap, packEntryMap);
+    }
+  }
 
-      // Check img paths
-      if ("img" in docSource && typeof docSource.img === "string") {
-        const imgPaths = [
-          docSource.img,
-          isActorSource(docSource)
-            ? docSource.items.flatMap((i) => [i.img])
-            : [],
-        ].flat();
-        const documentName = docSource.name;
-        for (const imgPath of imgPaths) {
-          if (imgPath.startsWith("data:image")) {
-            const imgData = imgPath.slice(0, 64);
-            const msg = `${documentName} (${this.packId}) has base64-encoded image data: ${imgData}...`;
-            throw PackError(msg);
-          }
+  private handleEntry(docSource: PackEntry, packMap: Map<string, string>, packEntryMap: Map<string, PackEntry>) {
+    if (!docSource._id) {
+      throw PackError(`Document source in ${this.packId} has no _id: ${docSource.name}`);
+    }
+    // Populate CompendiumPack.namesToIds for later conversion of compendium links
+    packMap.set(sluggify(docSource.name), docSource._id ?? "");
+    packEntryMap.set(docSource._id ?? docSource.name, docSource);
 
-          const isCoreIconPath = coreIcons.has(imgPath) || imgPath.includes("systems/ptr2e/img/item-icons/") || imgPath.includes("icons/")
-          const repoImgPath = path.resolve(
-            process.cwd(),
-            "static",
-            decodeURIComponent(imgPath).replace("systems/ptr2e/", ""),
-          );
-          if (!isCoreIconPath && !fs.existsSync(repoImgPath)) {
-            throw PackError(`${documentName} (${this.packId}) has an unknown image path: ${imgPath}`);
-          }
-          if (!((imgPath as string) === "" || imgPath.match(/\.(?:svg|webp|png)$/))) {
-            throw PackError(`${documentName} (${this.packId}) references a non-WEBP/SVG/PNG image: ${imgPath}`);
-          }
+    // Check img paths
+    if ("img" in docSource && typeof docSource.img === "string") {
+      const imgPaths = [
+        docSource.img,
+        isActorSource(docSource)
+          ? docSource.items.flatMap((i) => [i.img])
+          : [],
+      ].flat();
+      const documentName = docSource.name;
+      for (const imgPath of imgPaths) {
+        if (imgPath.startsWith("data:image")) {
+          const imgData = imgPath.slice(0, 64);
+          const msg = `${documentName} (${this.packId}) has base64-encoded image data: ${imgData}...`;
+          throw PackError(msg);
+        }
+
+        const isCoreIconPath = coreIcons.has(imgPath) || imgPath.includes("systems/ptr2e/img/item-icons/") || imgPath.includes("icons/")
+        const repoImgPath = path.resolve(
+          process.cwd(),
+          "static",
+          decodeURIComponent(imgPath).replace("systems/ptr2e/", ""),
+        );
+        if (!isCoreIconPath && !fs.existsSync(repoImgPath)) {
+          throw PackError(`${documentName} (${this.packId}) has an unknown image path: ${imgPath}`);
+        }
+        if (!((imgPath as string) === "" || imgPath.match(/\.(?:svg|webp|png)$/))) {
+          throw PackError(`${documentName} (${this.packId}) references a non-WEBP/SVG/PNG image: ${imgPath}`);
         }
       }
+    }
 
-      if ("type" in docSource) {
-        if (docSource.type === "script") {
-          // Default macro ownership to 1
-          docSource.ownership ??= { default: 1 };
-        }
+    if ("type" in docSource) {
+      if (docSource.type === "script") {
+        // Default macro ownership to 1
+        docSource.ownership ??= { default: 1 };
       }
     }
   }
@@ -248,7 +254,7 @@ class CompendiumPack {
 
   finalizeAll(): PackEntry[] {
     const results = [];
-    for(const doc of this.data) {
+    for (const doc of this.data) {
       results.push(JSON.parse(this.#finalize(doc)));
     }
 
@@ -286,7 +292,7 @@ class CompendiumPack {
         type: "effect",
         img: d.img,
         system: {
-          ...((d.system as {traits?: []})?.traits ? { traits: (d.system as {traits?: []})?.traits } : {}),
+          ...((d.system as { traits?: [] })?.traits ? { traits: (d.system as { traits?: [] })?.traits } : {}),
           ...(d.description ? { description: localize(d.description) } : {}),
         },
         effects: [
@@ -339,75 +345,75 @@ class CompendiumPack {
       //@ts-expect-error - Slug exists on all documents
       docSource.system.slug ??= sluggify(docSource.name);
 
-      if(docSource.type === "species") {
-        if((docSource.system as {slug: string}).slug !== sluggify(docSource.name) && ((docSource.system as {slug: string}).slug + '-' + sluggify(((docSource.system as {form?: string}).form ?? ""))) !== sluggify(docSource.name)) {
-          throw PackError(`Species '${docSource.name}' has a slug (or lack-thereof) that doesn't match its name '${(docSource.system as {slug: string}).slug}'`);
+      if (docSource.type === "species") {
+        if ((docSource.system as { slug: string }).slug !== sluggify(docSource.name) && ((docSource.system as { slug: string }).slug + '-' + sluggify(((docSource.system as { form?: string }).form ?? ""))) !== sluggify(docSource.name)) {
+          throw PackError(`Species '${docSource.name}' has a slug (or lack-thereof) that doesn't match its name '${(docSource.system as { slug: string }).slug}'`);
         }
 
         ((system) => {
           const abilities = system.abilities
-          for(const key of Object.keys(abilities)) {
+          for (const key of Object.keys(abilities)) {
             const category = system.abilities[key];
-            for(const ability of category) {
+            for (const ability of category) {
               // UUID shouldn't be manually set
-              if(ability.uuid) { 
+              if (ability.uuid) {
                 throw PackError(`Ability '${ability.slug}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
               }
               const abilitySource = CompendiumPack.#namesToIds["Item"]?.get("core-abilities")?.get(ability.slug);
-              if(abilitySource === undefined) {
+              if (abilitySource === undefined) {
                 throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities' for species '${docSource.name}'`);
               }
-              
+
               ability.uuid = `Compendium.ptr2e.core-abilities.Item.${abilitySource}`;
             }
           }
         })(docSource.system as {
-          abilities: Record<string, {slug: string, uuid: string}[]>;
+          abilities: Record<string, { slug: string, uuid: string }[]>;
         });
 
         ((system) => {
           const moves = system.moves
-          for(const key in moves) {
+          for (const key in moves) {
             const moveCategory = moves[key];
-            for(const move of moveCategory) {
+            for (const move of moveCategory) {
               // UUID shouldn't be manually set
-              if(move.uuid) { 
+              if (move.uuid) {
                 throw PackError(`Move '${move.name}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
               }
 
               const moveSource = CompendiumPack.#namesToIds["Item"]?.get("core-moves")?.get(sluggify(move.name));
-              if(moveSource === undefined) {
+              if (moveSource === undefined) {
                 throw PackError(`Failed to find move '${move.name}' in pack 'core-moves' for species '${docSource.name}'`);
               }
-              
+
               move.uuid = `Compendium.ptr2e.core-moves.Item.${moveSource}`;
             }
           }
-          
+
         })(docSource.system as {
-          moves: Record<string, {name: string, uuid: string, gen?: string, level?: number}[]>;
+          moves: Record<string, { name: string, uuid: string, gen?: string, level?: number }[]>;
         });
 
         // Check if species has <510 stats, if so make sure that the underdog trait is added, and otherwise remove said trait.
         const stats = docSource.system as { stats: Record<string, number | null>, traits: string[] };
         const totalStats = Object.values(stats.stats ?? {}).filter(s => s !== null).reduce((a, b) => (a ?? 0) + (b ?? 0), 0) ?? 0;
-        if(totalStats === 0) {
+        if (totalStats === 0) {
           throw PackError(`Species '${docSource.name}' has no stats defined`);
         }
-        if(!stats.traits || !Array.isArray(stats.traits)) {
+        if (!stats.traits || !Array.isArray(stats.traits)) {
           stats.traits = [];
         }
         const hasUnderdog = stats.traits.includes("underdog");
-        if(totalStats < 510 && !hasUnderdog) {
+        if (totalStats < 510 && !hasUnderdog) {
           stats.traits.push("underdog");
-        } else if(totalStats >= 510 && hasUnderdog) {
+        } else if (totalStats >= 510 && hasUnderdog) {
           stats.traits = stats.traits.filter(t => t !== "underdog");
         }
       }
     }
 
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
-      if (match.includes("JournalEntryPage")) return match;
+      if (match.includes("JournalEntryPage") || this.packId === "core-cards") return match;
 
       const isAction = docName.includes(".Actions.");
       const [name, actionName] = isAction ? docName.split(".Actions.") : [docName, null];
@@ -424,7 +430,7 @@ class CompendiumPack {
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
       const source = idsToSource?.get(documentId);
-      if(source) docName = source.name;
+      if (source) docName = source.name;
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });
       const labelBraceOrFullLabel = match.endsWith("{") ? "{" : `{${docName}}`;
 
@@ -459,10 +465,53 @@ class CompendiumPack {
     }
 
     const db = new LevelDatabase(packDir, { packName: path.basename(packDir) });
+    //@ts-expect-error - Cards error
     await db.createPack(this.finalizeAll(), this.folders);
     console.log(`Pack "${this.packId}" with ${this.data.length} entries built successfully.`);
 
     return this.data.length;
+  }
+
+  generateMetronomeDeck(movesPack: CompendiumPack) {
+    const deckItems: PackEntry[] = (movesPack.data as unknown as (ItemSourcePTR2e & { slug?: string, system?: { actions?: { contents?: ({ types: string[], traits: string[] })[] } } })[]).filter((move) => {
+      if (move.type !== "move") return false;
+      if (move.slug == "metronome") return false;
+      for (const action of move.system?.actions?.contents ?? []) {
+        if (!action.types?.length) return false;
+        if (action.types?.includes("nuclear")) return false;
+        let hasUntyped = false;
+        if (action.types?.includes("untyped")) hasUntyped = true;
+        for (const trait of action.traits ?? []) {
+          if (["legendary", "digimon", "max", "zenith", "paradox", "execute", "transform", "shadow"].includes(trait)) return false;
+          if (hasUntyped && trait === "arcane") hasUntyped = false;
+        }
+        if (hasUntyped) return false;
+      }
+      return true;
+    })
+
+    const cardItems = deckItems.map(move => ({
+      name: move.name,
+      faces: [{
+        name: move.name,
+        img: (move as ItemSourcePTR2e).img,
+      }],
+      description: `@UUID[Compendium.ptr2e.core-moves.Item.${move._id}]{${move.name}}`,
+      face: 0,
+      type: "base",
+      _id: move._id
+    }))
+
+    const deckData = {
+      name: "Metronome Deck",
+      type: "deck",
+      _id: "metronomedeck000",
+      description: "Automatically generated deck of moves for the move @UUID[Compendium.ptr2e.core-moves.Item.PZFyt0DGaa8C6SCy]{Metronome}.",
+      cards: cardItems,
+    } as unknown as PackEntry;
+
+    this.data = [deckData];
+    this.handleEntry(deckData, CompendiumPack.#namesToIds[this.documentType]!.get(this.packId)!, CompendiumPack.#idsToEntry[this.documentType]!.get(this.packId)!);
   }
 
   static saveAsJSONMap = new Map<string, object>();

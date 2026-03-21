@@ -12,7 +12,8 @@
         "traits": [
           "zenith",
           "crushing",
-          "contact"
+          "contact",
+          "danger-close"
         ],
         "range": {
           "target": "emanation",
@@ -21,7 +22,6 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
         },
         "category": "physical",
@@ -31,19 +31,23 @@
           "normal"
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal</p><p>Effect: The user may freely move up to their Overland Score when declaring this attack. On hit, all valid targets are Delayed by 40%.</p><p>Requirement: [Snorlax] Z-Power-Crystal as an Accessory Item and Giga Impact on the user's Active List.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "S",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "cx9q7nGDUItDoZd9",
@@ -77,15 +81,41 @@
                 "property": "name",
                 "value": "Delay 40%"
               }
-            ]
+            ],
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
-      }
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {}
     }
   ]
 }

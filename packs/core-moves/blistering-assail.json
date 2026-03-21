@@ -1,0 +1,171 @@
+{
+  "name": "Blistering Assail",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.112,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.350",
+        "system": "1.4.7.beta"
+      }
+    },
+    "slug": "blistering-assail",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Blistering Assail",
+        "slug": "blistering-assail",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "contact",
+          "punch",
+          "kick",
+          "dash",
+          "crash-1-2"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "types": [
+          "fire"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use. This attack's Power ranges based on how damaged the user is, ranging from 40 to 160. On hit, the target has a 50% chance to gain @Affliction[burn 7], @Affliction[bleed 7], and @Affliction[suppressed 7].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 40,
+        "accuracy": 90
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Blistering Assail",
+      "type": "passive",
+      "_id": "M2Owm9S579ZBqEFD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "blistering-assail-attack-power",
+            "value": "1.2 * (100-@actor.system.health.percent)",
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "blistering-assail-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "blistering-assail-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "blistering-assail-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "mJhEwP44FEu94imB"
+}

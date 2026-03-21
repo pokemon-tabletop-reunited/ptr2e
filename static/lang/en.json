@@ -995,7 +995,7 @@
           "fear": "Fear",
           "leech": "Leech",
           "rebound": "Rebound",
-          "ringed": "Ringed",
+          "regen": "Regen",
           "bleed": "Bleed",
           "enraged": "Enraged",
           "charmed": "Charmed",
@@ -1003,6 +1003,8 @@
           "grapple": "Grapple",
           "resolved": "Resolved",
           "boosted": "Boosted",
+          "hale": "Hale",
+          "argute": "Argute",
           "loafing": "Loafing",
           "advance": "Advance",
           "delay": "Delay",
@@ -1019,13 +1021,13 @@
           "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA Stages are reduced by 1. Additional Frozen Stacks cannot be added while Frozen is on a creature. When Frozen ticks down to zero Stacks (not cured), the afflicted creature gains Frostbite 5 and their next Activation is Advanced by 50%.",
           "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF Stages while Frostbite is active.",
           "splinter": "The afflicted creature loses a Tick of HP when they are damaged by a Physical- or Special-Category attack. The creature has Stunted while Splinter is active.",
-          "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 1).",
-          "hindered": "The afflicted creature’s Skill DCs are reduced by -10. Hindered applied from different sources have their own Stacks.",
-          "stunted": "When the afflicted creature recovers HP, that amount is reduced by 2 Ticks (to a minimum of 0 HP healed).",
-          "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
+          "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 2).",
+          "hindered": "The afflicted creature has the EHR of its Attacks and Actions decreased by 15%.",
+          "stunted": "When the afflicted creature gains HP, PP, or Shields that amount is reduced by 2 Ticks (to a minimum of 0 HP/PP/Shields gained).",
+          "confused": "The afflicted creature has its RES decreased by 10%. At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
           "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 2], or have their [Crit X] value increase by +2. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
-          "weary": "While a creature is Weary, its default ACC and EVA Stages are based on its Weary value, X. Specifically, the default ACC and EVA Stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
-          "exposed": "While a creature is Exposed, it cannot remove Weary.",
+          "weary": "<p>While a creature is afflicted with Weary, its default ACC and EVA Stages and its EHR and RES are reduced based on how many Stacks of Weary they possess, and other rules might apply:</p><h4>1 Stack</h4><ul><li>-1 default ACC & EVA Stages</li><li>-10% EHR</li><li>-5% RES</li></ul><h4>2 Stacks</h4><ul><li>-3 default ACC & EVA Stages</li><li>-30% EHR</li><li>-20% RES</li></ul><h4>3 Stacks</h4><ul><li>-1 default ACC & EVA Stages</li><li>-50% EHR</li><li>-35% RES</li></ul><h4>4+ Stacks</h4><ul><li>The afflicted creature is unable to battle.</li></ul><p>A creature gains 1 Stack of Weary whenever they gain @Affliction[fainted]. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items to remove Stacks of Weary.</p>",
+          "exposed": "An afflicted creature has its effect RES decreased by 15% and it cannot remove Weary.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain Stuck; they instead gain Slowed X, rather than Stuck X.",
           "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Affliction.",
@@ -1049,25 +1051,27 @@
           "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
           "true-sight": "<p>The afflicted creature ignores invisibility and illusions.</p><p>Additionally, the user's Normal- and Fighting-Type attacks can hit Ghost-Type creatures, and the user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
           "marked": "While Marked, all creatures unallied to the afflicted creature and within 8m of it can only target the Marked creature with their attacks. Whenever the creature with Marked is hit by an Attack, reduce the Stack Value of its Marked by 1. A creature that starts or enters the Marked creature's range at any point during their Activation must from that moment on target the Marked creature with any attacks they make, even when leaving the 8m range of the Marked effect.",
-          "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
+          "unlucky": "An afflicted creature cannot utilize its Luck, has its effect RES decreased by 20% and the EHR of its Attacks and Actions decreased by 30%.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish Affliction is removed if a creature is switched out or leaves combat. A creature already suffering from Perish will have its duration shortened by 1 when it would normally gain additional Stacks of Perish.",
           "invisible": "<p>The afflicted creature vanishes from sight, and require a special sense to be targeted by Attacks, as covered by Foundry automation.</p><p>Additionally, while Invisible, the creature gains +1 Evasion Stage against AoE Attacks.</p><p>Invisible ends after the creature fully resolves an Attack, after an Attack hitting it is fully resolved, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible.</p><blockquote>You may always attempt to use an attack on a certain tile to try to hit something you cannot see, when doing so, resolve the attack as a Blind GM Roll with a -1 Accuracy Stage penalty.</blockquote>",
           "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all Blocking Terrain. Attacks from unafflicted creatures targeting the user have -40 Accuracy, and afflicted creatures take and deal 75% less damage to/from unafflicted creatures. The afflicted creature loses 1 PP (or gains 1 Weary, if at 0 PP) per Activation while Transient (currently not automated). If the afflicted creature loses Transient while it is an space occupied by a solid material or Blocking Terrain, the creature is forcefully Moved to the nearest open space, taking 2 Ticks of HP per meter Moved.",
-          "fear": "The afflicted creature does 33% less damage to the source of Fear, and suffers -1 default ACC Stage on attacks against them. Fear applied from different sources have their own Stacks.",
+          "fear": "The afflicted creature has its effect RES decreased by 15% and their Physical- and Special-Category Attacks have their Power reduced by 25%.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
           "rebound": "Damage inflicted on the afflicted creature by Physical- or Special-Category attactks deals ¼ of the inflicted damage on the attacking creature.",
-          "ringed": "When a creature with Ringed concludes an Activation, they heal a Tick of HP.",
+          "regen": "When a creature with Regen concludes an Activation, they heal a Tick of HP.",
           "bleed": "When a creature with Bleed concludes an Activation, they lose a Tick of HP.",
           "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
           "charmed": "The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 EVA Stages against attacks from the source of their infatuation.",
-          "taunted": "The afflicted creature does 33% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
+          "taunted": "The afflicted creature does 40% less damage to creatures other than the source of Taunted. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this Affliction. Hostile actions made whilst Grappled must target a participant of the Grapple.",
-          "boosted": "An afflicted creature has the Power of its Physical- and Special-Category Attacks increase by 20%.",
+          "boosted": "An afflicted creature has its Physical- and Special-Category Attacks deal 25% more damage.",
           "resolved": "An afflicted creature takes 20% less damage from Physical- and Special-Category Attacks.",
-          "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>",
+          "hale": "An afflicted creature has its effect RES increased by 10%.",
+          "argute": "An afflicted creature has the EHR of its Attacks and Actions increase by 25%.",
+          "loafing": "<p>A creature automatically gains this Affliction automatically if they are 2+ levels above their Team Leader's level. This Affliction's Stack Count is dynamically determined based on the level of the Afflicted creature and that of their Team Leader. This Affliction applies an assortment of penalties that scale up based on how many Stacks are present:</p><h4>1 Stack</h4><ul><li>-15% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-15% to all Skill checks</li><li>-1 default SPD Stage</li><li>+15% PP Cost</li></ul><h4>2 Stacks</h4><ul><li>-30% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-30% to all Skill Checks</li><li>-1 default SPD Stage</li><li>+30% PP Cost</li><li>-10 flat Accuracy</li><li>Gain @Affliction[unlucky]</li></ul><h4>3 Stacks</h4><ul><li>-50% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-50% to all Skill checks</li><li>-2 default SPD Stage</li><li>+50% PP Cost</li><li>-20 flat Accuracy</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h4>4 Stacks</h4><ul><li>-80% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-80% to all Skill checks</li><li>-2 default SPD Stage</li><li>+80% PP Cost</li><li>-30 flat Accuracy</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>",
           "advance": "The afflicted creature's next Activation is Advanced by XY%. Default is 10%.",
           "delay": "The afflicted creature's next Activation is Delayed by XY%. Default is 10%.",
-          "desync": "<p>When a creature is afflicted with @Affliction[desync], it cannot perform any actions with the @Trait[interrupt-x] trait. When the afflicted creature is hit, it gains +1 stack of @Affliction[desync]. <br><br>At the end of the afflicted creature's next activation, all stacks of @Affliction[desync] are removed.</p><p>On removal of @Affliction[desync], the afflicted creature suffers a number of ticks of @Trait[dot] damage equal to the number of stacks removed. This is inclusive of the use of curative effects.</p>"
+          "desync": "<p>When a creature is afflicted with @Affliction[desync], it cannot perform any Actions with the @Trait[interrupt-x] trait. When the afflicted creature is hit, it gains +1 stack of @Affliction[desync]. <br><br>At the end of the afflicted creature's next activation, all stacks of @Affliction[desync] are removed.</p><p>On removal of @Affliction[desync], the afflicted creature suffers a number of ticks of @Trait[dot] damage equal to the number of stacks removed. This is inclusive of the use of curative effects.</p>"
         }
       }
     },
@@ -1564,6 +1568,13 @@
         "Name": "Tutor List Editor",
         "Title": "Tutor List Editor",
         "Hint": "Manage Tutor Lists and their contents."
+      },
+      "Playtest": {
+        "Label": "Playtest Settings",
+        "AVChanges": {
+          "Name": "AV Playtest (#1842)",
+          "Hint": "Playtest to better balance the AV formula for mid-high level play. Only use Playtest settings if you know what you are doing, these are subject to change and will be removed in a future update!"
+        }
       }
     },
     "SkillsEditor": {
@@ -2302,6 +2313,9 @@
           "label": "Biography",
           "hint": "A free form field to store any details about this character."
         },
+        "history": {
+          "label": "Evolution History"
+        },
         "device": {
           "label": "Capture Device",
           "hint": "The type of Pokéball (/capture device) this Creature is caught in. (this field has no automation associated with it.)"
@@ -2566,6 +2580,7 @@
       "Apply": "Apply",
       "ApplyAll": "Apply All",
       "ApplyAllHit": "Apply All Hit",
+      "ApplyCrash": "Apply Crash",
       "level": {
         "Label": "Level",
         "Hint": "The level of the attacker."
@@ -2656,6 +2671,10 @@
       "DeleteAction": {
         "Title": "Delete?",
         "Content": "Are you sure you want to delete: {name}?"
+      },
+      "OutOfTurnAction": {
+        "Title": "Out of Turn Action",
+        "Content": "It's not your turn! Are you using this as an [Interrupt]?"
       },
       "TargetSelector": {
         "Target": "Target",

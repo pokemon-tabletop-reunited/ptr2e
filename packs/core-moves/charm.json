@@ -27,34 +27,8 @@
           "fairy"
         ],
         "description": "<p>Effect: On hit, the target loses -2 ATK Stages for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "charm-charmed",
-        "name": "Charm (Charmed)",
-        "type": "attack",
-        "traits": [
-          "social"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "trigger": "<p>Target has @Affliction[charmed].</p>"
-        },
-        "category": "status",
-        "accuracy": 100,
-        "types": [
-          "fairy"
-        ],
-        "description": "<p>Trigger: Target has @Affliction[charmed].</p><p>Effect: On hit, the target loses -3 ATK Stages for 7 Activations.</p>",
-        "variant": "charm",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "C",
@@ -66,8 +40,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "qz5m0G6pBtTputPs",
   "effects": [
@@ -82,11 +58,39 @@
             "type": "roll-effect",
             "key": "charm-attack",
             "value": "Compendium.ptr2e.core-effects.Item.Sp0TScnwSTu8Gusr",
-            "predicate": [],
+            "predicate": [
+              {
+                "not": "target:effect:affliction:charmed"
+              }
+            ],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "charm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.uMWvv5ozhm5NRnjc",
+            "predicate": [
+              "target:effect:affliction:charmed"
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "duration.turns",
+                "value": 7
+              }
+            ],
+            "dontMerge": false,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -94,7 +98,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -112,16 +118,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1729531549003,
-        "modifiedTime": 1729531570157,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1768867620557,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
       }
     }
   ]

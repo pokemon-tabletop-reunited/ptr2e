@@ -9,8 +9,10 @@
     },
     "actions": [],
     "slug": "mystery-scholar-4",
-    "description": "<p>The user selects 3 Occult Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
-    "traits": [],
+    "description": "<p>The user gains a +5 increase to an Occult Group Skill a total of 6 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 60 or more with @Trait[skill-boost] Perks.</p>",
+    "traits": [
+      "skill-boost"
+    ],
     "prerequisites": [
       {
         "gte": [
@@ -54,15 +56,15 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.occult",
+            "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms41"
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms41}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms41}.mod",
+            "value": 5,
             "predicate": [],
             "priority": null,
             "mode": 2,
@@ -76,15 +78,15 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.occult",
+            "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms42"
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms42}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms42}.mod",
+            "value": 5,
             "predicate": [],
             "priority": null,
             "mode": 2,
@@ -97,7 +99,7 @@
             "predicate": [],
             "mode": 2,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.occult",
+            "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms43",
@@ -105,8 +107,60 @@
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms43}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms43}.mod",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms44}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms45"
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms45}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms46",
+            "priority": null
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms46}.mod",
+            "value": 5,
             "predicate": [],
             "mode": 2,
             "ignored": false

@@ -1,0 +1,61 @@
+{
+  "name": "Harass",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "harass",
+    "description": "<p>If the user applies @UUID[Compendium.ptr2e.core-perks.1iAaHzCp7bW9108k]{Thug} to a creature after resolving an Attack affected by Shurikenjutsu, the targeted creature gains @Affliction[delay 20].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "item:perk:shurikenjutsu",
+      "item:perk:thug"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 186,
+        "y": 44,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "whispering-wound",
+          "shurikenjutsu",
+          "minor-buff-68"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/weapons/thrown/daggers-kunai-purple.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "X8EqLOs66KcK0lZU"
+}

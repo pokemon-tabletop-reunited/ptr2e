@@ -17,10 +17,11 @@
       {
         "name": "Whispering Wound",
         "slug": "whispering-wound",
-        "description": "<p>Condition: The user must be @Affliction[invisible] or Undetected to use this action.<br><br>Effect: The user inflicts @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged 5} on the target.</p>",
+        "description": "<p>Effect: On hit, the user inflicts @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged 5}.</p><p>Restriction: The user must be @Affliction[invisible] or Undetected to use this Attack.</p>",
         "traits": [
           "ninja",
-          "contact"
+          "contact",
+          "priority-30"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
@@ -42,16 +43,15 @@
         "accuracy": 100
       }
     ],
-    "description": "<p>Condition: The user must be @Affliction[invisible] or Undetected to use this action.<br><br>Effect: The user inflicts @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged 5} on the target.</p>",
+    "description": "<p>While the user is @Affliction[invisible] or Undetected by a creature, they may spend 2 PP as a Complex Action to target that creature with @UUID[Compendium.ptr2e.core-perks.Item.Hya0QN5ldLWP9NVm.Actions.whispering-wound]{Whispering Wound}.</p>",
     "traits": [
-      "ninja",
-      "contact"
+      "ninja"
     ],
     "prerequisites": [
       "trait:ninja"
     ],
     "autoUnlock": [],
-    "cost": 2,
+    "cost": 1,
     "design": {
       "arena": "physical",
       "approach": "finesse",
@@ -61,17 +61,27 @@
     "webs": [],
     "nodes": [
       {
-        "x": 198,
-        "y": 45,
-        "connected": [
-          "pervasive-shadow",
-          "silence-is-golden"
-        ],
+        "x": 183,
+        "y": 46,
         "hidden": false,
         "type": "normal",
+        "connected": [
+          "tag-and-bag",
+          "harass",
+          "pervasive-shadow",
+          "minor-buff-66"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "whispering-wound",
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
   "effects": [
@@ -131,6 +141,5 @@
       }
     }
   ],
-  "flags": {},
   "_id": "Hya0QN5ldLWP9NVm"
 }

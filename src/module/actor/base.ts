@@ -274,9 +274,9 @@ class ActorPTR2e<
     if (isNaN(jumpTraitValue)) return 0;
 
     const jumpMultiplier = {
-      1: 0.1,
-      2: 0.4,
-      3: 0.8,
+      1: 0.2,
+      2: 0.6,
+      3: 1,
       4: 1.4,
       5: 3,
       6: 8,
@@ -284,7 +284,7 @@ class ActorPTR2e<
       8: 30
     }[jumpTraitValue] ?? 0;
 
-    return parseFloat((this.system.details.size.height * jumpMultiplier).toFixed(2));
+    return parseFloat((0.5 + this.system.details.size.height * jumpMultiplier).toFixed(2));
   }
 
   get nullifiableAbilities(): PickableThing[] {
@@ -651,10 +651,10 @@ class ActorPTR2e<
       affliction.system.apply(this);
     }
     // Run the _traits array as it may have added changes
-    for(const trait of this.system._traits) {
-      if(!trait.changes?.length) continue;
+    for (const trait of this.system._traits) {
+      if (!trait.changes?.length) continue;
       const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
-      if(!effect?.active) continue;
+      if (!effect?.active) continue;
       for (const change of effect.changes) {
         change.effect.apply(this, change.clone());
       }
@@ -956,7 +956,7 @@ class ActorPTR2e<
 
   async applyDamage(
     damage: number,
-    { silent, healShield, flat } = { silent: false, healShield: false, flat: false }
+    { silent = false, healShield = false, flat = false, note = "" }: { silent?: boolean, healShield?: boolean, flat?: boolean, note?: string } = { silent: false, healShield: false, flat: false, note: "" }
   ) {
     // If this is damage, apply the vulnerability multiplier
     const multiplier = (this.system.modifiers["vulnerabilityMultiplier"] ?? 1)
@@ -1001,6 +1001,7 @@ class ActorPTR2e<
                 damageApplied: damageAppliedToShield,
                 shieldApplied: true,
                 target: this.uuid,
+                note,
               }
             }
           );
@@ -1025,7 +1026,8 @@ class ActorPTR2e<
         system: {
           damageApplied: damageApplied,
           target: this.uuid,
-          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : []
+          notes: multiplier !== 1 ? [`Vulnerability Multiplier: ${multiplier}`] : [],
+          note
         },
       });
     }
@@ -1234,7 +1236,7 @@ class ActorPTR2e<
             }
           }
         }
-        if(result.perish) {
+        if (result.perish) {
           // This Ace Actor is perishing
           isAcePerishing = true;
         }
@@ -1310,9 +1312,9 @@ class ActorPTR2e<
       };
     }
 
-    if(isAcePerishing) {
+    if (isAcePerishing) {
       const weary = await fu.fromUuid<ActiveEffectPTR2e>("Compendium.ptr2e.core-effects.Item.wearyconditiitem");
-      if(weary) {
+      if (weary) {
         await this.createEmbeddedDocuments("ActiveEffect", [weary.toObject()]);
       }
       await ChatMessage.create({
@@ -2237,7 +2239,7 @@ class ActorPTR2e<
       }
     }
 
-    if(changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
+    if (changed.system?.shield?.value !== undefined && (changed.system.shield.value as number) > this.system.shield.max) {
       changed.system.shield.value = this.system.shield.max;
     }
 
@@ -2281,7 +2283,7 @@ class ActorPTR2e<
           }
 
           // Grant abilities at level 20/40/60
-          if(currentLevel < 20 && level >= 20) {
+          if (currentLevel < 20 && level >= 20) {
             const basicAbilities = this.species.abilities.basic;
             const abilities = (await Promise.all(basicAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
             if (abilities.length) {
@@ -2291,7 +2293,7 @@ class ActorPTR2e<
               changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
             }
           }
-          if(currentLevel < 40 && level >= 40) {
+          if (currentLevel < 40 && level >= 40) {
             const advancedAbilities = this.species.abilities.advanced;
             const abilities = (await Promise.all(advancedAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
             if (abilities.length) {
@@ -2301,7 +2303,7 @@ class ActorPTR2e<
               changed.items.push(...abilities.filter(ability => !this.items.some(item => item.type === "ability" && item.slug === ability.slug)).map(ability => ability.toObject()));
             }
           }
-          if(currentLevel < 60 && level >= 60) {
+          if (currentLevel < 60 && level >= 60) {
             const masterAbilities = this.species.abilities.master;
             const abilities = (await Promise.all(masterAbilities.map(ability => fu.fromUuid<ItemPTR2e<AbilitySystem>>(ability.uuid)))).flatMap(ability => ability ?? []);
             if (abilities.length) {
@@ -2672,7 +2674,7 @@ type ActorFlags2e = ActorFlags & {
     }
     editedSkills?: boolean
     skillOptions?: {
-      data: (PickableThing & { base: number, investment: number, group?: string })[];
+      data: (PickableThing & { base: number, investment: number, group?: string, mod: number })[];
       get all(): PickableThing[];
       get species(): PickableThing[];
     }
@@ -2682,6 +2684,7 @@ type ActorFlags2e = ActorFlags & {
     },
     traitEffects?: Record<string, boolean>;
     overrideSkillValidation?: boolean;
+    evolutionHistory?: {slug: string, uuid: string}[];
   };
 };
 

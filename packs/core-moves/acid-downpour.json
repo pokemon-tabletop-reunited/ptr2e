@@ -10,7 +10,8 @@
         "name": "Acid Downpour",
         "type": "attack",
         "traits": [
-          "zenith"
+          "zenith",
+          "danger-close"
         ],
         "range": {
           "target": "emanation",
@@ -27,9 +28,10 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison] 5.</p><p>Requirement: [Poison] Z-Crystal as an Accessory Item and a Poison-Type attack on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison 5].</p><p>Requirement: [Poison] Z-Crystal as an Accessory Item and a Poison-Type attack on the user's Active List.</p>",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "_migration": {
@@ -41,8 +43,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "sa3BXQkz6DnQXTYW",
   "effects": [
@@ -62,14 +66,19 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -91,12 +100,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729162119150,
         "modifiedTime": 1729162251601,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

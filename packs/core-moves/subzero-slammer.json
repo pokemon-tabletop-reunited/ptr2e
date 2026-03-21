@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "zenith",
-          "blast-3"
+          "blast-3",
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -28,7 +29,7 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[frozen] 3.</p><p>Requirement: [Ice] Z-Crystal as an Accessory Item and an Ice-Type attack on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[frozen 3].</p><p>Requirement: [Ice] Z-Crystal as an Accessory Item and an Ice-Type attack on the user's Active List.</p>",
         "free": true,
         "img": "icons/svg/explosion.svg",
         "predicate": []
@@ -44,7 +45,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "7iD8RvIbxnUNUPRM",
@@ -72,14 +74,18 @@
             ],
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -101,12 +107,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737746603829,
         "modifiedTime": 1737746634681,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

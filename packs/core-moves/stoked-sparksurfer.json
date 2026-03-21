@@ -12,7 +12,8 @@
         "traits": [
           "zenith",
           "dash",
-          "pass-5"
+          "pass-5",
+          "danger-close"
         ],
         "range": {
           "target": "creature",
@@ -21,7 +22,6 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
         },
         "category": "special",
@@ -30,7 +30,7 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: The user may freely move up to double their Flight Score when declaring this attack. On hit, all legal targets gain @Affliction[paralysis] 5.</p><p>Requirement: [Pikachu] Z-Power-Crystal as an Accessory Item and Thunderbolt on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: The user may freely move up to double their Flight Score when declaring this attack. On hit, all legal targets gain @Affliction[paralysis 5].</p><p>Requirement: [Pikachu] Z-Power-Crystal as an Accessory Item and Thunderbolt on the user's Active List.</p>",
         "free": true,
         "img": "icons/svg/explosion.svg",
         "predicate": []
@@ -46,7 +46,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "wlHWup7MYL88PcGg",
@@ -67,14 +68,19 @@
             "affects": "target",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -96,12 +102,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737322494015,
         "modifiedTime": 1737322518136,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

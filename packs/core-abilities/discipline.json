@@ -1,0 +1,127 @@
+{
+  "name": "Discipline",
+  "type": "ability",
+  "system": {
+    "_migration": {
+      "version": 0.112,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.350",
+        "system": "1.4.7.beta"
+      }
+    },
+    "slug": "discipline",
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "PTR2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "defensive"
+    ],
+    "actions": [],
+    "description": "<p>Effect: The user cannot be @Affliction[choice-locked], and when targeted by a @Trait[social] Attack, the user has a 10% chance of gaining +1 DEF, SPDEF,  and ACC Stage for 5 Activations.</p>"
+  },
+  "img": "icons/tools/instruments/drum-snare-red.webp",
+  "effects": [
+    {
+      "name": "Discipline",
+      "type": "passive",
+      "_id": "hqWPXy4TbhKOETac",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:choice-locked",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-effect",
+            "key": "social-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "alterations": [],
+            "affects": "defensive",
+            "chance": 10,
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "social-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "alterations": [],
+            "affects": "defensive",
+            "chance": 10,
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "social-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.iv1l5qSwT9ykajV0",
+            "predicate": [],
+            "alterations": [],
+            "affects": "defensive",
+            "chance": 10,
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1773871865020
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "PGIecQUr573Tf7Va"
+}

@@ -14,7 +14,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Effect: The user gains the @Trait[ninja] trait.</p>",
+    "description": "<p>Connection - @UUID[Compendium.ptr2e.core-moves.PjOZd4TXRrr4PyHx]{Feint}. The user gains the @Trait[ninja] trait and learns 3 Grade D or lower Moves from the @Trait[ninja] Tutor List.</p>",
     "traits": [
       "ninja"
     ],
@@ -27,7 +27,7 @@
       }
     ],
     "autoUnlock": [],
-    "cost": 1,
+    "cost": 2,
     "design": {
       "arena": "physical",
       "approach": "finesse",
@@ -37,20 +37,29 @@
     "webs": [],
     "nodes": [
       {
-        "x": 177,
-        "y": 48,
-        "connected": [
-          "out-of-options",
-          "belt-expansion-1",
-          "pervasive-shadow",
-          "smokestep",
-          "root-2"
-        ],
+        "x": 174,
+        "y": 41,
         "hidden": false,
         "type": "normal",
+        "connected": [
+          "silence-is-golden",
+          "pervasive-shadow",
+          "smokestep",
+          "root-2",
+          "behind-every-blade-of-grass",
+          "minor-buff-66"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "nothing-is-true",
+    "traitWebs": []
   },
   "img": "icons/skills/melee/strike-dagger-poison-green.webp",
   "effects": [
@@ -68,6 +77,32 @@
             "predicate": [],
             "mode": 2,
             "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.PjOZd4TXRrr4PyHx",
+            "predicate": [
+              "trait:ninja"
+            ],
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "mode": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
@@ -100,11 +135,11 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "modifiedTime": 1770738514573
       }
     }
   ],
-  "flags": {},
   "_id": "eJxc0lYNgPi8fooF"
 }

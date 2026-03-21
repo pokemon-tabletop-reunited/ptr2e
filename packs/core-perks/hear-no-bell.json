@@ -9,26 +9,21 @@
       {
         "name": "Hear No Bell",
         "slug": "hear-no-bell",
-        "description": "<p>The Power of your Moves are increased by 1% per 1% of your HP that you are missing, to a maximum of 50%.</p>",
+        "description": "<p>The Power of the user's Attacks is increased based on how much HP they have remaining, to a maximum of 50% at 33% HP remaining.</p>",
         "traits": [],
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg"
       }
     ],
     "slug": "hear-no-bell",
-    "description": "<p>The Power of your Moves are increased by 1% per 1% of your HP that you are missing, to a maximum of 50%.</p>",
+    "description": "<p>The Power of the user's Attacks is increased based on how much HP they have remaining, to a maximum of 50% at 33% HP remaining.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 5,
@@ -42,6 +37,10 @@
     },
     "nodes": [
       {
+        "x": 65,
+        "y": 44,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "adrenaline-rush",
           "glutton-for-punishment",
@@ -50,18 +49,11 @@
           "tubthumping"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#008000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 65,
-        "y": 44,
         "tier": null
       }
     ],
@@ -80,9 +72,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -93,12 +83,13 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "damaging-attack-power-percentile",
-            "value": "min(50, 100 - @actor.system.health.percent)",
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": "floor(min(33, 100 - @actor.system.health.percent)/33*50)",
             "predicate": [],
             "mode": 1,
             "priority": null,
+            "label": "Hear No Bell (Power)",
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -107,7 +98,9 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -119,22 +112,26 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "<p>The Power of your Moves are increased by 1% per 1% of your HP that you are missing, to a maximum of 50%.</p>",
+      "description": "<p>The Power of the user's Attacks is increased based on how much HP they have remaining, to a maximum of 50% at 33% HP remaining.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Actor.vBCspn4IjAKk8EBj.Item.uIfc2ExBTcZKEZTL.ActiveEffect.CVhM2lljJfTSq5Tz",
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.0",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1736858076120,
-        "modifiedTime": 1736858804799,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "modifiedTime": 1772814529206,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
         "exportSource": null
       }
     }
