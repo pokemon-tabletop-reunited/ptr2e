@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "im-with-you",
-    "description": "<p>Connection: Helping Hand<br><br>Effect: The user's @UUID[Compendium.ptr2e.core-moves.losiXPVUcTy72boW]{Helping Hand} move gains @Trait[interrupt-1].</p>",
+    "description": "<p>Connection - @UUID[Compendium.ptr2e.core-moves.losiXPVUcTy72boW]{Helping Hand}</p><p>Effect: The user is able to use Helping Hand as an @Trait[interrupt].</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -61,7 +61,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -96,6 +97,16 @@
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "helping-hand-attack",
+            "value": "interrupt",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -122,12 +133,20 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.Z9RvqAZwW3zjuOrn.ActiveEffect.8rp8aXRLwsRFusz4",
         "duplicateSource": null,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
-        "exportSource": null
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "modifiedTime": 1772120905801
       }
     }
   ]
