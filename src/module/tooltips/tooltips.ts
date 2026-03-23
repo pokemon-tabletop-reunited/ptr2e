@@ -12,9 +12,11 @@ export default class TooltipsPTR2e {
   #observer: MutationObserver | undefined;
   #timeout: number | null = null;
 
-  get tooltip(): HTMLElement {
-    return document.getElementById("tooltip") as HTMLElement;
+  get tooltip() {
+    return this.#tooltip!;
   }
+
+  #tooltip = document.getElementById("tooltip");
 
   /**
    * Initialize the tooltip observer
@@ -56,7 +58,7 @@ export default class TooltipsPTR2e {
 
   _clearAutoLock() {
     if (this.#timeout) {
-      window.clearTimeout(this.#timeout);
+      (this.tooltip.ownerDocument.defaultView ?? window).clearTimeout(this.#timeout);
       this.#timeout = null;
     }
   }
@@ -64,7 +66,7 @@ export default class TooltipsPTR2e {
   _autoLockTooltip(timeout = 2000) {
     if (this.#timeout) return;
 
-    this.#timeout = window.setTimeout(() => {
+    this.#timeout = (this.tooltip.ownerDocument.defaultView ?? window).setTimeout(() => {
       this.#timeout = null;
       if (this.tooltip.classList.contains("active")) {
         game.tooltip.lockTooltip();
@@ -982,6 +984,7 @@ export default class TooltipsPTR2e {
       top?: number | null;
       bottom?: number | null;
     } = {};
+    const {innerHeight, innerWidth} = this.tooltip.ownerDocument.defaultView ?? window;
     switch (direction) {
       case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN:
         position = {
@@ -993,7 +996,7 @@ export default class TooltipsPTR2e {
       case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.LEFT:
         position = {
           textAlign: "left",
-          right: window.innerWidth - targetBox.left + padding,
+          right: innerWidth - targetBox.left + padding,
           top: targetBox.top + targetBox.height / 2 - this.tooltip.offsetHeight / 2,
         };
         break;
@@ -1008,7 +1011,7 @@ export default class TooltipsPTR2e {
         position = {
           textAlign: "center",
           left: targetBox.left - this.tooltip.offsetWidth / 2 + targetBox.width / 2,
-          bottom: window.innerHeight - targetBox.top + padding,
+          bottom: innerHeight - targetBox.top + padding,
         };
         break;
       case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.CENTER:
@@ -1032,12 +1035,12 @@ export default class TooltipsPTR2e {
     const style = this.tooltip.style;
 
     // Left or Right
-    const maxW = window.innerWidth - this.tooltip.offsetWidth;
+    const maxW = innerWidth - this.tooltip.offsetWidth;
     if (position.left) position.left = Math.clamp(position.left, padding, maxW - padding);
     if (position.right) position.right = Math.clamp(position.right, padding, maxW - padding);
 
     // Top or Bottom
-    const maxH = window.innerHeight - this.tooltip.offsetHeight;
+    const maxH = innerHeight - this.tooltip.offsetHeight;
     if (position.top) position.top = Math.clamp(position.top, padding, maxH - padding);
     if (position.bottom) position.bottom = Math.clamp(position.bottom, padding, maxH - padding);
 
