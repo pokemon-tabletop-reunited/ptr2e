@@ -745,7 +745,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       if (["miss", "fumble"].includes(result.hit)) {
         acc.push({
           crash: (result.check?.totalModifiers as Record<string, { base: number, flat: number, stage: number, percentile: number }>)?.crash ?? {},
-          damage: result.damage || 0,
+          damage: (result.damage || 0) * (result.amount || 1),
         })
       }
       return acc;
