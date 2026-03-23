@@ -41,7 +41,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
       for (const speciesData of index) {
-        if (speciesData.type !== "species") continue;
+        if (!["species", "ptr2e-digimon-expansion.digimonSpecies"].includes(speciesData.type)) continue;
 
         speciesData.filters = {};
 
