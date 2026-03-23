@@ -58,7 +58,8 @@ class CompendiumPack {
       JournalEntry: new Map(),
       Macro: new Map(),
       RollTable: new Map(),
-      Cards: new Map()
+      Cards: new Map(),
+      ActiveEffect: new Map(),
     };
   static #idsToEntry: {
     [K in Extract<CompendiumDocumentType, "Actor" | "Item" | "JournalEntry" | "Macro" | "RollTable">]: Map<
@@ -71,7 +72,8 @@ class CompendiumPack {
       JournalEntry: new Map(),
       Macro: new Map(),
       RollTable: new Map(),
-      Cards: new Map()
+      Cards: new Map(),
+      ActiveEffect: new Map(),
     };
 
   static #packsMetadata = JSON.parse(fs.readFileSync("static/system.json", "utf-8")).packs as PackMetadata[];

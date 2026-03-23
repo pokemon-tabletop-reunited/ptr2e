@@ -13,7 +13,7 @@ import { ItemSourcePTR2e } from "./compendium-pack.ts";
 import { tupleHasValue } from "./helpers.ts";
 import { CardsSchema } from "types/foundry/common/documents/cards.js";
 
-const DB_KEYS = ["actors", "items", "journal", "macros", "tables", "cards"] as const;
+const DB_KEYS = ["actors", "items", "journal", "macros", "tables", "cards", "effects"] as const;
 const EMBEDDED_KEYS = ["items", "pages", "results", "effects", "cards"] as const;
 
 class LevelDatabase extends ClassicLevel<string, DBEntry> {
@@ -126,6 +126,8 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
           return "tables";
         case "Cards":
           return "cards";
+        case "ActiveEffect":
+          return "effects";
         default: {
           const key = `${metadata.type.toLowerCase()}s`;
           if (tupleHasValue(DB_KEYS, key)) {
