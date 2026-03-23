@@ -602,8 +602,32 @@ class ActorPTR2e<
   /**
    * Apply any transformations to the Actor data which are caused by ActiveEffects.
    */
-  override applyActiveEffects() {
+  override applyActiveEffects(phase: string) {
     if (this.type === "ptu-actor") return;
+
+    // New AE phase system implementation
+    if ( typeof phase !== "string" ) {
+      phase = this._completedActiveEffectPhases.has("initial") ? "final" : "initial";
+      const message = 'Actor#applyActiveEffects must be called with a string phase identifier, with "initial"'
+        + " as the first phase.";
+      foundry.utils.logCompatibilityWarning(message, {since: 14, until: 16, once: true});
+    } // @ts-expect-error - V14 Compatability
+    else if ( !(phase in ActiveEffect.CHANGE_PHASES) ) {
+      const error = new Error(`"${phase}" is not a registered ActiveEffect application phase.`);
+      Hooks.onError("Actor#applyActiveEffects", error, {log: "error"});
+    }
+    if ( this._completedActiveEffectPhases.has(phase) ) {
+      const error = new Error(`ActiveEffect application phase "${phase}" has already completed and cannot be run again`
+        + " in this Actor's data-preparation cycle.");
+      Hooks.onError("Actor#applyActiveEffects", error, {log: "error"});
+      return;
+    }
+    this._completedActiveEffectPhases.add(phase);
+    // Currently PTR 2e does not support the 'Phase' system.
+    if(phase !== "initial") {
+      return;
+    }
+
     // First finish preparing embedded documents based on System Information
     this.system.prepareEmbeddedDocuments();
 
