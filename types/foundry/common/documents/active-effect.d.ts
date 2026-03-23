@@ -89,6 +89,7 @@ type ActiveEffectSchema<
     transfer: fields.BooleanField;
     statuses: fields.SetField<fields.StringField<string, string, true, false, false>>;
     flags: fields.ObjectField<DocumentFlags>;
+    showIcon: fields.NumberField<0 | 1 | 2, 0 | 1 | 2, false, true, true>;
     _stats: fields.DocumentStatsField;
 };
 

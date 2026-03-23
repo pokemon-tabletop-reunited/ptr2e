@@ -522,15 +522,10 @@ class ActiveEffectPTR2e<
   }
 
   static override shimData(source: ActiveEffectPTR2e["_source"], options: unknown) {
+    // 'Mode' to 'Method' migration
     if(source.system?.changes) {
       for(const change of source.system.changes) {
-        if(change.type === "apply-tick") {
-          change.target = change.method;
-          //@ts-expect-error - Data Migration - Types won't match.
-          delete change.method;
-          delete change.mode;
-        }
-        else if("mode" in change && !("method" in change)) {
+        if("mode" in change && !("method" in change)) {
           //@ts-expect-error - Data Migration - Types won't match.
           change.method = change.mode;
           //@ts-expect-error - Data Migration - Types won't match.
@@ -538,6 +533,16 @@ class ActiveEffectPTR2e<
         }
       }
     }
+    // displayOnToken flag migration
+    if(source.flags?.ptr2e?.displayOnToken) {
+      source.showIcon = source.flags.ptr2e.displayOnToken === "always"
+        ? 2
+        : source.flags.ptr2e.displayOnToken === "never"
+          ? 0
+          : 1;
+      delete source.flags.ptr2e.displayOnToken;
+    }
+
     return super.shimData(source, options);
   }
 }
