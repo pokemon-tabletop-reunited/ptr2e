@@ -23,6 +23,26 @@
         },
         "range": {
           "target": "self",
+          "unit": "m",
+          "distance": 10
+        }
+      },
+      {
+        "name": "Throat Spray (Curative)",
+        "slug": "throat-spray-curative",
+        "description": "<p>Trigger: The user uses a @Trait[sonic] attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.<br><br>Active: Throat Spray may be used to cure the @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged} affliction.</p>",
+        "traits": [
+          "combat",
+          "consumable"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/potion.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
           "unit": "m"
         }
       }
@@ -58,14 +78,16 @@
       ],
       "notes": ""
     },
-    "description": "<p>Trigger: The user uses a @Trait[sonic] attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
+    "description": "<p>Trigger: The user uses a @Trait[sonic] attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.<br><br>Curative: Throat Spray may be used to cure the @UUID[Compendium.ptr2e.core-effects.V8CNzN148X1bYsSS]{Gagged} affliction.</p>",
     "traits": [
       "combat",
       "consumable"
     ],
     "consumableType": "other",
     "stack": 1,
-    "cost": 2
+    "cost": 2,
+    "slug": "throat-spray",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/item-icons/potion.webp",
   "effects": [
@@ -118,13 +140,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.4.4.beta",
         "lastModifiedBy": null
       }
     }
   ],
-  "flags": {},
   "_id": "R339M4pRwP9N0iqf"
 }

@@ -1,3 +1,4 @@
+import { ChatMessagePTR2e } from "@chat";
 import { ChangeModel, ChangeSchema, PokemonType, PTRCONSTS } from "@data";
 import { ItemPTR2e } from "@item";
 
