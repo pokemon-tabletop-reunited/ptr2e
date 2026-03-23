@@ -180,7 +180,7 @@ declare global {
 
     interface ActiveEffect<TParent extends Actor | Item | null, TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseActiveEffect<TParent> {
         duration: PreparedEffectDurationData;
-
+        showIcon: 0 | 1 | 2;
         system: TSchema;
         _source: SourceFromSchema<ActiveEffectSchema<string, TSchema>>;
     }

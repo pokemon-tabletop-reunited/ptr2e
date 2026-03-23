@@ -517,12 +517,6 @@ class ActiveEffectPTR2e<
     }
   }
 
-  override get isTemporary(): boolean {
-    if(this.flags.ptr2e.displayOnToken) return this.flags.ptr2e.displayOnToken === "always";
-
-    return super.isTemporary;
-  }
-
   override get isSuppressed(): boolean {
     return !!(this.system?.isSuppressed ?? this.duration?.expired);
   }
@@ -571,7 +565,6 @@ interface ActiveEffectPTR2e<
         amount?: number;
       };
       traitEffect?: string;
-      displayOnToken?: "always" | "never" | null;
     };
   }
 
