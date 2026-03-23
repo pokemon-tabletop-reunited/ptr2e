@@ -13,7 +13,6 @@
         "type": "grant-effect",
         "value": "bound",
         "key": "",
-        "mode": 2,
         "predicate": [],
         "ignored": false,
         "reevaluateOnUpdate": false,
@@ -25,13 +24,13 @@
         "onDeleteActions": {
           "grantee": "detach",
           "granter": "cascade"
-        }
+        },
+        "method": 2
       },
       {
         "type": "grant-effect",
         "value": "stuck",
         "key": "",
-        "mode": 2,
         "predicate": [],
         "ignored": false,
         "reevaluateOnUpdate": false,
@@ -43,7 +42,8 @@
         "onDeleteActions": {
           "grantee": "detach",
           "granter": "cascade"
-        }
+        },
+        "method": 2
       }
     ],
     "formula": null,

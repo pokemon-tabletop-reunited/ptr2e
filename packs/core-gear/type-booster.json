@@ -83,13 +83,13 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "options.types",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": false,
-            "rollOption": "type-booster-type"
+            "rollOption": "type-booster-type",
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -149,7 +149,6 @@
               }
             ],
             "replaceSelf": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -159,7 +158,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -167,10 +167,10 @@
             "value": 10,
             "predicate": [],
             "label": "Type Booster Power",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -178,10 +178,10 @@
             "value": 10,
             "predicate": [],
             "label": "Type Booster Accuracy",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,

@@ -133,9 +133,9 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "predicate": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -144,7 +144,6 @@
             "replaceSelf": true,
             "reevaluateOnUpdate": false,
             "allowDuplicate": true,
-            "mode": 2,
             "predicate": [],
             "ignored": false,
             "inMemoryOnly": false,
@@ -159,7 +158,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "removeAfterCombat": false,

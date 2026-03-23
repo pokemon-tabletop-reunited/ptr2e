@@ -60,7 +60,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
     const current = fu.getProperty(item, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
+    const change = BasicChangeSystem.getNewValue(this.method, current, value, false)
     fu.setProperty(item, property, change);
   }
 
@@ -86,7 +86,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
     field ??= item.schema.getField(property);
     const current = fu.getProperty(source, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const update = field?.applyChange(current, item, {key: property, mode: this.mode, value, priority: 0});
+    const update = field?.applyChange(current, item, {key: property, mode: this.method, value, priority: 0});
     fu.setProperty(source, property, update);
     return update;
   }
@@ -312,7 +312,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
 interface AttackAlteration extends foundry.abstract.DataModel<ChangeModel>, ModelPropsFromSchema<AttackAlterationSchema> { }
 
 interface AttackAlterationSchema extends foundry.data.fields.DataSchema {
-  mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+  method: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
   property: StringField<string, string, true, false, true>;
   value: ResolvableValueField<true, false, true>;
 }

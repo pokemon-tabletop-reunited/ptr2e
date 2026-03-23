@@ -85,7 +85,6 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
             "choices": [
@@ -100,7 +99,8 @@
             ],
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-option"
+            "rollOption": "te-option",
+            "method": 2
           },
           {
             "type": "choice-set",
@@ -114,13 +114,13 @@
                 ]
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.typeOptions.options",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-add"
+            "rollOption": "te-add",
+            "method": 2
           },
           {
             "type": "choice-set",
@@ -134,13 +134,13 @@
                 ]
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.typeOptions.types",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-remove"
+            "rollOption": "te-remove",
+            "method": 2
           },
           {
             "type": "choice-set",
@@ -154,13 +154,13 @@
                 ]
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.typeOptions.options",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-add"
+            "rollOption": "te-add",
+            "method": 2
           },
           {
             "type": "basic",
@@ -174,9 +174,9 @@
                 ]
               }
             ],
-            "mode": 6,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 6
           },
           {
             "type": "basic",
@@ -184,16 +184,16 @@
             "value": "{effect|flags.ptr2e.choiceSelections.te-add}",
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
             "key": "",
             "value": "untyped",
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,

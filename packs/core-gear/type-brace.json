@@ -59,13 +59,13 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "options.types",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": false,
-            "rollOption": "type-brace-type"
+            "rollOption": "type-brace-type",
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -115,7 +115,6 @@
               }
             ],
             "replaceSelf": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -125,17 +124,18 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
             "key": "attack-damage-percentile",
             "value": -33,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
