@@ -17,6 +17,7 @@ for (const file of fs.readdirSync(effectsPackDataPath)) {
   const effect = data.effects[0];
   effect._id = data._id;
   effect.folder = data.folder;
+  effect.name = data.name;
   if(!effect.system?.description && data.system?.description) {
     effect.system ??= {};
     effect.system.description = data.system.description;

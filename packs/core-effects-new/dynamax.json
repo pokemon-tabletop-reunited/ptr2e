@@ -1,0 +1,146 @@
+{
+  "name": "Dynamax!",
+  "type": "affliction",
+  "_id": "Fe2dcQTF8GKSsMFt",
+  "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
+  "system": {
+    "changes": [
+      {
+        "type": "basic",
+        "key": "system.modifiers.hpMultiplier",
+        "value": 2,
+        "mode": 1,
+        "predicate": [],
+        "priority": null,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.heightClass",
+        "value": 10,
+        "predicate": [],
+        "priority": null,
+        "mode": 2,
+        "ignored": false
+      },
+      {
+        "type": "create-clock",
+        "key": "dynamaxClockUser",
+        "value": 0,
+        "predicate": [],
+        "max": 8,
+        "color": "#c80096",
+        "private": false,
+        "label": "Max PP Spend",
+        "mode": 2,
+        "ignored": false
+      },
+      {
+        "type": "alter-attack",
+        "key": "max-trait-attack",
+        "value": "@actor.clocks.dynamaxClockUser",
+        "predicate": [],
+        "property": "pp-cost",
+        "definition": [],
+        "label": "Dynamax (Boost Cost)",
+        "mode": 2,
+        "ignored": false
+      },
+      {
+        "type": "alter-attack",
+        "key": "max-trait-attack",
+        "value": "1+(0.25*@actor.clocks.dynamaxClockUser)",
+        "predicate": [],
+        "property": "power",
+        "definition": [],
+        "label": "Dynamax (Extra Boost)",
+        "mode": 1,
+        "ignored": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "key": "max-trait-attack",
+        "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+        "predicate": [],
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.changes.0.value",
+            "value": "25*@actor.clocks.dynamaxClockUser"
+          }
+        ],
+        "mode": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "key": "max-trait-attack",
+        "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+        "predicate": [],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "mode": 5,
+            "property": "system.changes.0.key",
+            "value": "dynamaxClockUser"
+          },
+          {
+            "mode": 2,
+            "property": "system.changes.0.value",
+            "value": "-1-@actor.clocks.dynamaxClockUser"
+          }
+        ],
+        "dontMerge": true,
+        "label": "Max Attack Use",
+        "mode": 2,
+        "ignored": false
+      }
+    ],
+    "slug": null,
+    "traits": [],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "stacks": 0,
+    "removeAfterAttacking": false,
+    "removeAfterAttacked": false,
+    "priority": 50,
+    "formula": "",
+    "type": "damage",
+    "description": "<p>This effect will Dynamax your Pokemon, increasing its Size and max HP accordingly.</p><p>Please manually increment the attached clock to \"spend\" the additional PP for the effects of @Trait[max] Attacks.</p><blockquote><p><strong>Dev Note</strong>: Other effects will need to be handled manually at this time.</p></blockquote>"
+  },
+  "disabled": false,
+  "duration": {
+    "startTime": null,
+    "seconds": null,
+    "combat": null,
+    "rounds": null,
+    "turns": 6,
+    "startRound": null,
+    "startTurn": null
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "flags": {
+    "ptr2e": {
+      "displayOnToken": ""
+    }
+  },
+  "_stats": {
+    "compendiumSource": "Item.egJEb7g3wbErCZZG.ActiveEffect.t8yIS103g8UpyjqL",
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "ptr2e",
+    "systemVersion": "1.5.0.beta",
+    "createdTime": 1767920065931,
+    "modifiedTime": 1767920065931,
+    "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+  }
+}
