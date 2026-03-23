@@ -13,7 +13,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   static override defineSchema() {
     const fields = foundry.data.fields;
     return {
-      mode: new fields.NumberField({
+      method: new fields.NumberField({
         required: true,
         initial: CONST.ACTIVE_EFFECT_MODES.ADD,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),

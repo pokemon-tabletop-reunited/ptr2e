@@ -77,7 +77,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         label: "PTR2E.Effect.FIELDS.ChangeValue.label",
         hint: "PTR2E.Effect.FIELDS.ChangeValue.hint",
       }),
-      mode: new fields.NumberField({
+      method: new fields.NumberField({
         integer: true,
         initial: CHANGE_MODES.ADD,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),

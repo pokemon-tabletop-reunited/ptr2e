@@ -25,22 +25,6 @@ class ActiveEffectPTR2e<
     return this.system._source.slug ?? sluggify(this._name);
   }
 
-  // static override get schema() {
-  //   if (this.hasOwnProperty("_schema")) return this._schema!;
-  //   const schema = new foundry.data.fields.SchemaField(Object.freeze(this.defineSchema()));
-  //   Object.defineProperty(this, "_schema", { value: schema, writable: false });
-  //   return schema;
-  // }
-
-  // static override defineSchema() {
-  //   const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
-  //     ActiveEffectSchema,
-  //     "changes"
-  //   >;
-  //   delete schema.changes;
-  //   return schema as ActiveEffectSchema;
-  // }
-
   override get changes() {
     return this.system.changes ?? [];
   }
@@ -541,6 +525,26 @@ class ActiveEffectPTR2e<
 
   override get isSuppressed(): boolean {
     return !!(this.system?.isSuppressed ?? this.duration?.expired);
+  }
+
+  static override shimData(source: ActiveEffectPTR2e["_source"], options: unknown) {
+    if(source.system?.changes) {
+      for(const change of source.system.changes) {
+        if(change.type === "apply-tick") {
+          change.target = change.method;
+          //@ts-expect-error - Data Migration - Types won't match.
+          delete change.method;
+          delete change.mode;
+        }
+        else if("mode" in change && !("method" in change)) {
+          //@ts-expect-error - Data Migration - Types won't match.
+          change.method = change.mode;
+          //@ts-expect-error - Data Migration - Types won't match.
+          delete change.mode;
+        }
+      }
+    }
+    return super.shimData(source, options);
   }
 }
 

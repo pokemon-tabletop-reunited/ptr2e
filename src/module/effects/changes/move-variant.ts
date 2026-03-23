@@ -115,7 +115,7 @@ export default class MoveVariantChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'accuracy' must have a range with a distance value.");
               }
 
-              const newAccuracy = BasicChangeSystem.getNewValue(this.mode, accuracy, change);
+              const newAccuracy = BasicChangeSystem.getNewValue(this.method, accuracy, change);
               variant.accuracy = Math.max(1, newAccuracy);
               variant.updateSource({ accuracy: variant.accuracy });
               variant.prepareDerivedData();
@@ -147,7 +147,7 @@ export default class MoveVariantChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'power' must have a range with a distance value.");
               }
 
-              const newPower = BasicChangeSystem.getNewValue(this.mode, power, change);
+              const newPower = BasicChangeSystem.getNewValue(this.method, power, change);
 
               variant.power = Math.max(1, newPower);
               variant.updateSource({ power: variant.power });
@@ -158,7 +158,7 @@ export default class MoveVariantChangeSystem extends ChangeModel {
         case "type": {
           return {
             adjustAttack: (attack, options) => {
-              if (!([CHANGE_MODES.ADD, CHANGE_MODES.REMOVE, CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, CHANGE_MODES.REMOVE, CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 return this.failValidation(
                   "An attack alteration change of type 'type' must have a mode of 'add', 'subtract', 'remove' or 'override'."
                 );
@@ -181,26 +181,26 @@ export default class MoveVariantChangeSystem extends ChangeModel {
               }
               attack.appliedVariantLabels.set(variant.slug, `${this.label}-attack`);
 
-              if (this.mode === CHANGE_MODES.ADD) {
+              if (this.method === CHANGE_MODES.ADD) {
                 for (const c of changeArray) {
                   if (!variant.types.has(c)) {
                     variant.types.add(c);
                   }
                 }
               }
-              else if (this.mode === CHANGE_MODES.REMOVE) {
+              else if (this.method === CHANGE_MODES.REMOVE) {
                 for (const c of changeArray) {
                   variant.types.delete(c);
                 }
               }
-              else if (this.mode === CHANGE_MODES.OVERRIDE) {
+              else if (this.method === CHANGE_MODES.OVERRIDE) {
                 variant.types = new Set(changeArray);
               }
               variant.updateSource({ types: Array.from(variant.types) });
               variant.prepareDerivedData();
             },
             adjustTraits: (attack, traits, options) => {
-              if (!([CHANGE_MODES.ADD, "subtract", "remove", CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, "subtract", "remove", CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 return this.failValidation(
                   "An attack alteration change of type 'type' must have a mode of 'add', 'subtract', 'remove' or 'override'."
                 );
@@ -225,13 +225,13 @@ export default class MoveVariantChangeSystem extends ChangeModel {
 
               const newTraits = variant === attack ? traits : Array.from(new Set(variant._source.traits));
 
-              if (this.mode === CHANGE_MODES.ADD) {
+              if (this.method === CHANGE_MODES.ADD) {
                 newTraits.push(...changeArray);
               }
-              else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 changeArray.forEach(c => newTraits.findSplice(s => s === c));
               }
-              else if (this.mode === CHANGE_MODES.OVERRIDE) {
+              else if (this.method === CHANGE_MODES.OVERRIDE) {
                 for (const type of Object.values(PTRCONSTS.Types)) {
                   newTraits.findSplice(s => s === type);
                 }
@@ -245,7 +245,7 @@ export default class MoveVariantChangeSystem extends ChangeModel {
         case "traits": {
           return {
             adjustTraits: (attack, traits, options) => {
-              if (!([CHANGE_MODES.ADD, "subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, "subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 return this.failValidation(
                   "An attack alteration change of type 'traits' must have a mode of 'add', 'subtract', or 'remove'."
                 );
@@ -268,9 +268,9 @@ export default class MoveVariantChangeSystem extends ChangeModel {
 
               const newTraits = variant === attack ? traits : Array.from(variant._source.traits);
 
-              if (this.mode === CHANGE_MODES.ADD && !newTraits.includes(change)) {
+              if (this.method === CHANGE_MODES.ADD && !newTraits.includes(change)) {
                 newTraits.push(change);
-              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 newTraits.findSplice(s => s === change);
               }
               variant.updateSource({ traits: Array.from(newTraits) });
@@ -303,7 +303,7 @@ export default class MoveVariantChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'pp-cost' must have a range with a distance value.");
               }
 
-              const newPpCost = BasicChangeSystem.getNewValue(this.mode, ppCost, change);
+              const newPpCost = BasicChangeSystem.getNewValue(this.method, ppCost, change);
               variant.cost.powerPoints = newPpCost;
               variant.updateSource({ "cost.powerPoints": variant.cost.powerPoints });
               variant.prepareDerivedData();
@@ -369,7 +369,7 @@ export default class MoveVariantChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'rip' must have a range with a distance value.");
               }
 
-              const newRangeIncrement = BasicChangeSystem.getNewValue(this.mode, rip, change);
+              const newRangeIncrement = BasicChangeSystem.getNewValue(this.method, rip, change);
               variant.range!.distance = newRangeIncrement;
               variant.updateSource({ range: variant.range });
               variant.prepareDerivedData();

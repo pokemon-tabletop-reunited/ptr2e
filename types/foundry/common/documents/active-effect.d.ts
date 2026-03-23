@@ -68,7 +68,6 @@ type ActiveEffectSchema<
         fields.SchemaField<{
             key: fields.StringField<string, string, true, false, false>;
             value: fields.StringField<string, string, true, false, false> | fields.NumberField<number, number, true, true, true>;
-            mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>;
             priority: fields.NumberField;
         }>
     >;
