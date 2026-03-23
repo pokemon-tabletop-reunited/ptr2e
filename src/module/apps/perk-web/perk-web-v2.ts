@@ -258,24 +258,28 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
         //Add evolution data
         const evolutions = this.actor.flags?.ptr2e?.evolutionHistory ?? [];
-        const sourceUuid = (current.parent.flags?.core?.sourceId || current.parent._stats?.compendiumSource) || (() => {
-          if(!current.evolutions) return undefined
-          if(current.evolutions.name === current.slug) return current.evolutions.uuid;
-          function recursiveFindCurrent(evolutions: EvolutionData[] | null): string | undefined {
-            if(!evolutions) return undefined;
-            for(const evolution of evolutions) {
-              if(evolution.name === current!.slug) return evolution.uuid;
-              const result = recursiveFindCurrent(evolution.evolutions);
-              if(result) return result;
+        const sourceUuid = (() => {
+          const sourceUuid = (current.parent.flags?.core?.sourceId || current.parent._stats?.compendiumSource) || (() => {
+            if (!current.evolutions) return undefined
+            if (current.evolutions.name === current.slug) return current.evolutions.uuid;
+            function recursiveFindCurrent(evolutions: EvolutionData[] | null): string | undefined {
+              if (!evolutions) return undefined;
+              for (const evolution of evolutions) {
+                if (evolution.name === current!.slug) return evolution.uuid;
+                const result = recursiveFindCurrent(evolution.evolutions);
+                if (result) return result;
+              }
+              return undefined;
             }
-            return undefined;
-          }
-          return recursiveFindCurrent(current.evolutions.evolutions);
-        })() || "";
-        if(evolutions.at(-1)?.uuid !== sourceUuid) {
+            return recursiveFindCurrent(current.evolutions.evolutions);
+          })() || "";
+          if (sourceUuid.startsWith("Scene.") || sourceUuid.startsWith("Actor.")) return "";
+          return sourceUuid;
+        })()
+        if (sourceUuid && evolutions.at(-1)?.uuid !== sourceUuid) {
           evolutions.push({ slug: current.slug, uuid: sourceUuid });
         }
-        if(evolutions.length === 0) {
+        if (evolutions.length === 0) {
           evolutions.push({ slug: current.slug, uuid: sourceUuid });
         }
         evolutions.push({ slug: species.slug, uuid: species.uuid });
@@ -712,8 +716,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
                       }
                     ] : []
                 )
-              ], this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : isDigimonPerkEdit ? { pack: "ptr2e-digimon-expansion.digimon-species"} : {});
-              if(isDigimonPerkEdit) {
+              ], this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : isDigimonPerkEdit ? { pack: "ptr2e-digimon-expansion.digimon-species" } : {});
+              if (isDigimonPerkEdit) {
                 this.connectionNode.perk.updateSource({
                   "system.nodes": [
                     {
@@ -1658,15 +1662,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!data) return [];
           const perk = await fu.fromUuid(data.uuid) as PerkPTR2e ?? data.data;
           if (!(perk instanceof ItemPTR2e && perk.type === "perk")) {
-            if (perk.type === "ptr2e-digimon-expansion.digimonSpecies" || (perk?.flags?.ptr2e?.evolution as {uuid?: string})?.uuid?.includes(".digimon-species.")) {
+            if (perk.type === "ptr2e-digimon-expansion.digimonSpecies" || (perk?.flags?.ptr2e?.evolution as { uuid?: string })?.uuid?.includes(".digimon-species.")) {
               const evoPerk = this.speciesEvolutions.find(p => p.slug === (perk.slug ?? perk?.system?.slug));
               if (evoPerk) {
                 const _id = (() => {
-                  if(perk._id) return perk._id;
-                  const parsed = foundry.utils.parseUuid((perk?.flags?.ptr2e?.evolution as {uuid?: string})?.uuid ?? "");
+                  if (perk._id) return perk._id;
+                  const parsed = foundry.utils.parseUuid((perk?.flags?.ptr2e?.evolution as { uuid?: string })?.uuid ?? "");
                   return parsed?.id;
                 })();
-                return [{ perk: evoPerk, x: (evoPerk.system?.node as { x: number })?.x, y: (evoPerk.system?.node as { y: number })?.y, _id  } ];
+                return [{ perk: evoPerk, x: (evoPerk.system?.node as { x: number })?.x, y: (evoPerk.system?.node as { y: number })?.y, _id }];
               }
             }
             return []
@@ -1717,11 +1721,13 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     updates[pack] ??= [];
     updates[pack].push(
       isDigivolutionPerk ? (() => {
-        primaryEntry.perk.updateSource({"system.nodes": [{
-          ...primaryEntry.perk.toObject().system.nodes[0],
-          x: i,
-          y: j,
-        }]})
+        primaryEntry.perk.updateSource({
+          "system.nodes": [{
+            ...primaryEntry.perk.toObject().system.nodes[0],
+            x: i,
+            y: j,
+          }]
+        })
         return {
           _id: (primaryEntry as unknown as { _id: string })?._id,
           "system.node": {
