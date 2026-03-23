@@ -192,6 +192,7 @@ declare global {
         label: string;
         _worldTime?: number;
         _combatTime?: number;
+        expired?: boolean;
     }
 
     interface TemporaryEffect extends ModelPropsFromSchema<ActiveEffectSchema> {

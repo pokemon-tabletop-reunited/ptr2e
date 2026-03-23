@@ -2,7 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { GearPTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ChangeModel, Trait } from "@data";
-import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
+// import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
@@ -25,21 +25,21 @@ class ActiveEffectPTR2e<
     return this.system._source.slug ?? sluggify(this._name);
   }
 
-  static override get schema() {
-    if (this.hasOwnProperty("_schema")) return this._schema!;
-    const schema = new foundry.data.fields.SchemaField(Object.freeze(this.defineSchema()));
-    Object.defineProperty(this, "_schema", { value: schema, writable: false });
-    return schema;
-  }
+  // static override get schema() {
+  //   if (this.hasOwnProperty("_schema")) return this._schema!;
+  //   const schema = new foundry.data.fields.SchemaField(Object.freeze(this.defineSchema()));
+  //   Object.defineProperty(this, "_schema", { value: schema, writable: false });
+  //   return schema;
+  // }
 
-  static override defineSchema() {
-    const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
-      ActiveEffectSchema,
-      "changes"
-    >;
-    delete schema.changes;
-    return schema as ActiveEffectSchema;
-  }
+  // static override defineSchema() {
+  //   const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
+  //     ActiveEffectSchema,
+  //     "changes"
+  //   >;
+  //   delete schema.changes;
+  //   return schema as ActiveEffectSchema;
+  // }
 
   override get changes() {
     return this.system.changes ?? [];
@@ -537,6 +537,10 @@ class ActiveEffectPTR2e<
     if(this.flags.ptr2e.displayOnToken) return this.flags.ptr2e.displayOnToken === "always";
 
     return super.isTemporary;
+  }
+
+  override get isSuppressed(): boolean {
+    return !!(this.system?.isSuppressed ?? this.duration?.expired);
   }
 }
 

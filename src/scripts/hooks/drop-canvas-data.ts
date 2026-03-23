@@ -1,4 +1,4 @@
-import { ActorSheetPTR2e } from "@actor";
+// import { ActorSheetPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 import { BlueprintSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
@@ -56,18 +56,19 @@ export const DropCanvasData = {
       }
     });
 
-    // Handle dropping items onto tokens
-    Hooks.on("dropCanvasData", (_canvas, data) => {
-      const rect = new PIXI.Rectangle(data.x, data.y, 0, 0);
-      const dropTarget = Array.from(canvas.tokens.quadtree.getObjects(rect, {collisionTest: o => o.t.hitArea.contains(data.x - o.t.x, data.y - o.t.y)})).at(0);
+    // TODO: V14
+    // // Handle dropping items onto tokens
+    // Hooks.on("dropCanvasData", (_canvas, data) => {
+    //   const rect = new PIXI.Rectangle(data.x, data.y, 0, 0);
+    //   const dropTarget = Array.from(canvas.tokens.quadtree.getObjects(rect, {collisionTest: o => o.t.hitArea.contains(data.x - o.t.x, data.y - o.t.y)})).at(0);
 
-      const actor = dropTarget?.actor;
-      if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {
-        (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data);
-        return false; // Prevent modules from doing anything further
-      }
+    //   const actor = dropTarget?.actor;
+    //   if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {
+    //     (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data);
+    //     return false; // Prevent modules from doing anything further
+    //   }
 
-      return true;
-    });
+    //   return true;
+    // });
   }
 }
