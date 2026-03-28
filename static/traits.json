@@ -49,13 +49,13 @@
         "type": "basic",
         "key": "system.modifiers.hpMultiplier",
         "value": "{trait|value}",
-        "mode": 5
+        "method": 5
       },
       {
         "type": "basic",
         "key": "system.modifiers.ppMultiplier",
         "value": "{trait|value}",
-        "mode": 5
+        "method": 5
       }
     ]
   },
@@ -163,7 +163,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "sharp"
       }
     ]
@@ -366,7 +366,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "sonic"
       }
     ]
@@ -922,7 +922,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "horn"
       }
     ]
@@ -1202,12 +1202,12 @@
         "predicate": [],
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.actions.0.free",
             "value": "true"
           }
         ],
-        "mode": 2,
+        "method": 2,
         "priority": null,
         "ignored": false,
         "reevaluateOnUpdate": false,
@@ -1574,7 +1574,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "jaw"
       }
     ]
@@ -1590,7 +1590,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "tailed"
       }
     ]
@@ -3020,7 +3020,7 @@
         "predicate": [
           "target:effect:affliction:grounded"
         ],
-        "mode": 2,
+        "method": 2,
         "hideIfDisabled": true
       }
     ]
@@ -3095,12 +3095,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "-{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Delay {trait|value}%"
           }
@@ -3115,12 +3115,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "-{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Delay {trait|value}%"
           }
@@ -3405,12 +3405,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Advance {trait|value}%"
           }
@@ -3425,12 +3425,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Advance {trait|value}%"
           }
