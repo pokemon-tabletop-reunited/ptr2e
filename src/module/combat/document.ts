@@ -112,6 +112,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       });
       await this.combatant?.onStartActivation();
     }
+    await ActiveEffect.registry.refresh("combatStart", {combat: this});
     return result as this;
   }
 
@@ -150,6 +151,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         await oldCombatant?.onEndActivation();
         await this.combatant?.onStartActivation();
       }
+      await ActiveEffect.registry.refresh("turnEnd", {combat: this});
       return result as this;
       // }
     } catch (error: unknown) {

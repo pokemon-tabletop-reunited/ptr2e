@@ -87,7 +87,7 @@ type ActiveEffectSchema<
       turn: fields.NumberField<number, number, true, true, true>;
       time: fields.NumberField<number, number, true, false, true>;
     }>, {
-      combat: string | null;
+      combat: Combat | null;
       combatant: string | null;
       initiative: number | null;
       round: number | null;

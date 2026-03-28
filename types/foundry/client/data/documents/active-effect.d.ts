@@ -36,6 +36,10 @@ declare global {
          */
         static fromStatusEffect<TParent extends Actor | Item | null>(statusId: string, options?: DocumentModificationContext<TParent>): Promise<ActiveEffect<TParent>>;
 
+        static registry: {
+          refresh(event: EffectDurationData["expiry"], context: object): Promise<void>;
+        };
+
         /**
          * Determine whether the ActiveEffect requires a duration update.
          * True if the worldTime has changed for an effect whose duration is tracked in seconds.

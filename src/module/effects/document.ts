@@ -93,11 +93,11 @@ class ActiveEffectPTR2e<
       }
     }
 
-    if(this.system.removeAfterAttacking && this.targetsActor() && this.parent.synthetics) {
+    if (this.system.removeAfterAttacking && this.targetsActor() && this.parent.synthetics) {
       this.parent.synthetics.effectsRemovedAfterAttacking ??= [];
       this.parent.synthetics.effectsRemovedAfterAttacking.push(this);
     }
-    if(this.system.removeAfterAttacked && this.targetsActor() && this.parent.synthetics) {
+    if (this.system.removeAfterAttacked && this.targetsActor() && this.parent.synthetics) {
       this.parent.synthetics.effectsRemovedAfterAttacked ??= [];
       this.parent.synthetics.effectsRemovedAfterAttacked.push(this);
     }
@@ -166,84 +166,144 @@ class ActiveEffectPTR2e<
     return this.modifiesActor;
   }
 
-  /**
-   * Override the implementation of ActiveEffect#_requiresDurationUpdate to support activation-based initiative.
-   * Duration is purely handled in terms of combat turns elapsed.
-   */
-  override _requiresDurationUpdate(): boolean {
-    const { _combatTime, units } = this.duration;
-    if (units === "turns" && game.combat) {
-      if(!this.targetsActor()) return false;
-
-      const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
-      return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
-    }
-    return false;
-  }
-
   override get isTemporary(): boolean {
     const value = this.duration.value ?? this._source.duration.value;
     return !!value && Number.isFinite(value);
   }
 
-  /**
-   * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
-   * Duration is purely handled in terms of combat turns elapsed.
-   */
-  override _prepareDuration(): Partial<ActiveEffectPTR2e["duration"]> {
-    const d = this.duration, s = this.start;
-    if(!d.value) d.value = this._source.duration?.value ?? null;
+  // /**
+  //  * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
+  //  * Duration is purely handled in terms of combat turns elapsed.
+  //  */
+  // override _prepareDuration(): Partial<ActiveEffectPTR2e["duration"]> {
+  //   const d = this.duration, s = this.start;
+  //   if (!d.value) d.value = this._source.duration?.value ?? null;
+  //   if (!d.expiry) d.expiry = this._source.duration?.expiry ?? "turnEnd";
 
-    // Turn-based duration
-    if (this.parent && d.value) {
-      const cbt = game.combat as CombatPTR2e | undefined;
-      if (!cbt || !this.targetsActor())
-        return {
-          units: "turns",
-          _combatTime: undefined,
-        };
+  //   // Turn-based duration
+  //   if (this.parent && d.value) {
+  //     const cbt = game.combat as CombatPTR2e | undefined;
+  //     if (!cbt || !this.targetsActor())
+  //       return {
+  //         units: "turns",
+  //         _combatTime: undefined,
+  //         expiry: d.expiry,
+  //       };
 
-      // Determine the current combat duration
-      const durationTurn = d.value ?? 0;
-      const startTurn = s?.turn ?? 0;
+  //     // Determine the current combat duration
+  //     const durationTurn = d.value ?? 0;
+  //     const startTurn = s?.turn ?? 0;
 
-      // Determine parent combatant's activation amount
-      const currentTurn = this.parent.combatant?.system.activations;
-      if (currentTurn === undefined)
-        return {
-          units: "turns",
-          _combatTime: undefined,
-        };
+  //     // Determine parent combatant's activation amount
+  //     const currentTurn = this.parent.combatant?.system.activations;
+  //     if (currentTurn === undefined)
+  //       return {
+  //         units: "turns",
+  //         _combatTime: undefined,
+  //         expiry: d.expiry,
+  //       };
 
-      // If the effect has not started yet display the full duration
-      if (currentTurn <= startTurn) {
-        return {
-          units: "turns",
-          // duration: durationTurn,
-          remaining: durationTurn,
-          label: this._getDurationLabel(0, d.value),
-          _combatTime: currentTurn,
-        };
-      }
+  //     // If the effect has not started yet display the full duration
+  //     if (currentTurn <= startTurn) {
+  //       return {
+  //         units: "turns",
+  //         // duration: durationTurn,
+  //         remaining: durationTurn,
+  //         label: this._getDurationLabel(0, d.value),
+  //         _combatTime: currentTurn,
+  //         expiry: d.expiry,
+  //       };
+  //     }
 
-      // Some number of remaining turns (possibly zero)
-      const remainingTurns = Math.max(startTurn + durationTurn - currentTurn, 0);
-      return {
-        units: "turns",
-        // duration: durationTurn,
-        remaining: remainingTurns,
-        label: this._getDurationLabel(0, remainingTurns),
-        _combatTime: currentTurn,
-      };
+  //     // Some number of remaining turns (possibly zero)
+  //     const remainingTurns = Math.max(startTurn + durationTurn - currentTurn, 0);
+  //     return {
+  //       units: "turns",
+  //       // duration: durationTurn,
+  //       remaining: remainingTurns,
+  //       label: this._getDurationLabel(0, remainingTurns),
+  //       _combatTime: currentTurn,
+  //       expiry: d.expiry,
+  //     };
+  //   }
+
+  //   // No duration
+  //   return {
+  //     units: d.units,
+  //     // duration: null,
+  //     remaining: Infinity,
+  //     label: game.i18n.localize("None"),
+  //     expiry: d.expiry,
+  //   };
+  // }
+
+  _prepareCombatBasedDuration(duration: ActiveEffectPTR2e["duration"], context: Record<string, unknown>): ActiveEffectPTR2e["duration"] {
+    //@ts-expect-error - Missing typings
+    if (duration.units !== "turns") return super._prepareCombatBasedDuration(duration, context);
+
+    const unitsSingular = duration.units.replace(/s$/, "");
+    //@ts-expect-error - Missing typings
+    const timeConversion = CONFIG.time[`${unitsSingular}Time`] || 0;
+    const seconds = timeConversion ? Math.trunc(duration.value! * timeConversion) : null;
+    //@ts-expect-error - Missing types
+    const combat: CombatPTR2e = game.combats.get(this.start!.combat?.id) ?? game.combat;
+    
+    const combatant = this.actor!.combatant;
+
+    // If no combat information is available, reframe the presented duration as time-based
+    if (!this.start || !combatant || !combat.started || !combat.turns.length) {
+      return (game._documentsReady && Number.isFinite(seconds))
+        //@ts-expect-error - Missing types
+        ? this._prepareTimeBasedDuration({ ...duration, units: "seconds", value: seconds })
+        : Object.assign(duration, { seconds, remaining: Infinity, label: game.i18n.localize("COMMON.None") });
     }
 
-    // No duration
-    return {
-      units: d.units,
-      // duration: null,
-      remaining: Infinity,
-      label: game.i18n.localize("None"),
-    };
+    // Acquire the start round and turn number from the combatant if the current combat is not the same as the starting
+    // one.
+    const startTurn: number = combat === this.start.combat
+      ? this.start.turn ?? combatant.system.activations
+      : combatant.system.activations;
+
+    const currentTurn = combatant.system.activations;
+    const elapsed = Math.max(0, currentTurn - startTurn);
+    const remaining = duration.value! - elapsed;
+    //@ts-expect-error - Missing types
+    const pluralRule = game.i18n.pluralRules.select(Math.abs(remaining));
+    const locKey = remaining >= 0 ? "EFFECT.DURATION.TURNS" : "EFFECT.DURATION.TURNS_AGO";
+    return Object.assign(duration, {
+      seconds, remaining,
+      label: game.i18n.format(`${locKey}.${pluralRule}`, { turns: Math.abs(remaining) })
+    });
+  }
+
+  /**
+   * @override
+   */
+  isExpiryEvent(event: string, context: Record<string, unknown>): boolean {
+    //@ts-expect-error - Missing types
+    if (event !== "turnEnd") return super.isExpiryEvent(event, context);
+
+    if (event !== this.duration.expiry) return false;
+
+    //@ts-expect-error - Missing types
+    return (context.combat ?? game.combat)?.started;
+  }
+
+  /** Implement Backwards Compatibility with removed _getDurationLabel */
+  override _getDurationLabel(rounds: number, turns: number): string {
+    const parts = [];
+    const pluralRules = new Intl.PluralRules(game.i18n.lang);
+    if (rounds > 0) {
+      const unit = game.i18n.localize(`COMBAT.DURATION.ROUNDS.${pluralRules.select(rounds)}`);
+      parts.push(`${rounds} ${unit}`);
+    }
+    if (turns > 0) {
+      const unit = game.i18n.localize(`COMBAT.DURATION.TURNS.${pluralRules.select(turns)}`);
+      parts.push(game.i18n.localize(`${turns} ${unit}`));
+    }
+    else if ((rounds + turns) === 0) parts.push(game.i18n.localize("COMBAT.DURATION.None"));
+    //@ts-expect-error - Missing type
+    return game.i18n.getListFormatter({ style: "narrow" }).format(parts);
   }
 
   toChat(): Promise<unknown> {
@@ -257,23 +317,6 @@ class ActiveEffectPTR2e<
             : game.user.character ?? null,
       }),
     });
-  }
-
-  /** Implement Backwards Compatibility with removed _getDurationLabel */
-  override _getDurationLabel(rounds: number, turns: number): string {
-    const parts = [];
-    const pluralRules = new Intl.PluralRules(game.i18n.lang);
-    if ( rounds > 0 ) {
-      const unit = game.i18n.localize(`COMBAT.DURATION.ROUNDS.${pluralRules.select(rounds)}`);
-      parts.push(`${rounds} ${unit}`);
-    }
-    if ( turns > 0 ) {
-      const unit = game.i18n.localize(`COMBAT.DURATION.TURNS.${pluralRules.select(turns)}`);
-      parts.push(game.i18n.localize(`${turns} ${unit}`));
-    }
-    else if (( rounds + turns ) === 0 ) parts.push(game.i18n.localize("COMBAT.DURATION.None"));
-    //@ts-expect-error - Missing type
-    return game.i18n.getListFormatter({style: "narrow"}).format(parts);
   }
 
   override toObject(source?: true | undefined): this["_source"];
@@ -315,11 +358,11 @@ class ActiveEffectPTR2e<
       }
 
       if (this.target.isImmuneToEffect(this)) {
-        if(this.flags?.ptr2e?.itemGrants && typeof this.flags.ptr2e.itemGrants === "object" && Object.keys(this.flags.ptr2e.itemGrants).length > 0) {
+        if (this.flags?.ptr2e?.itemGrants && typeof this.flags.ptr2e.itemGrants === "object" && Object.keys(this.flags.ptr2e.itemGrants).length > 0) {
           const itemGrants = Object.values(this.flags.ptr2e.itemGrants);
           for (const itemGrant of itemGrants) {
             Hooks.once("preCreateActiveEffect", (effect: unknown) => {
-              if((effect as ActiveEffectPTR2e)._id === itemGrant.id) return false;
+              if ((effect as ActiveEffectPTR2e)._id === itemGrant.id) return false;
               return;
             });
           }
@@ -437,11 +480,11 @@ class ActiveEffectPTR2e<
           const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
             (e) => e.slug === sluggify(source.name)
           );
-          if(existing?.slug === "duel") {
+          if (existing?.slug === "duel") {
             ui.notifications.warn("Only one Duel effect can be applied at a time.");
             return [];
           }
-          if(existing?.slug === "perish") {
+          if (existing?.slug === "perish") {
             existing.update({ "duration.value": Math.clamp((existing.duration.value ?? 0) - 1, 1, Infinity) });
             return [];
           }
@@ -546,17 +589,17 @@ class ActiveEffectPTR2e<
 
   static override shimData(source: ActiveEffectPTR2e["_source"], options: unknown) {
     // 'Mode' to 'Method' migration
-    if(source.system?.changes) {
-      for(const change of source.system.changes) {
-        if("mode" in change && !("method" in change)) {
+    if (source.system?.changes) {
+      for (const change of source.system.changes) {
+        if ("mode" in change && !("method" in change)) {
           //@ts-expect-error - Data Migration - Types won't match.
           change.method = change.mode;
           //@ts-expect-error - Data Migration - Types won't match.
           delete change.mode;
         }
         //@ts-expect-error Some changes may have alterations
-        for(const alteration of change.alterations ?? []) {
-          if("mode" in alteration && !("method" in alteration)) {
+        for (const alteration of change.alterations ?? []) {
+          if ("mode" in alteration && !("method" in alteration)) {
             alteration.method = alteration.mode;
             delete alteration.mode;
           }
@@ -564,7 +607,7 @@ class ActiveEffectPTR2e<
       }
     }
     // displayOnToken flag migration
-    if(source.flags?.ptr2e?.displayOnToken) {
+    if (source.flags?.ptr2e?.displayOnToken) {
       source.showIcon = source.flags.ptr2e.displayOnToken === "always"
         ? 2
         : source.flags.ptr2e.displayOnToken === "never"
@@ -584,6 +627,8 @@ interface ActiveEffectPTR2e<
 > {
   constructor: typeof ActiveEffectPTR2e;
   readonly _source: foundry.documents.ActiveEffectSource<string, TSystem>;
+
+  get actor(): TParent extends ActorPTR2e ? ActorPTR2e : ActorPTR2e | null;
 
   flags: DocumentFlags & {
     ptr2e: {

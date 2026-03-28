@@ -260,7 +260,7 @@ class CompendiumPack {
       results.push(JSON.parse(this.#finalize(doc)));
     }
 
-    if (this.packId !== "core-effects") return results;
+    if (!["core-effects", "core-effects-new"].includes(this.packId)) return results;
 
     // Add core status afflictions
     const statusAfflictions = JSON.parse(fs.readFileSync("src/scripts/config/effects.json", "utf-8")) as StatusEffect[];

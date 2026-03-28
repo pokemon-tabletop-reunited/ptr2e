@@ -55,6 +55,8 @@ export const Init: PTRHook = {
       CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
       CONFIG.ActiveEffect.dataModels = PTRCONFIG.ActiveEffect.dataModels;
       CONFIG.ActiveEffect.legacyTransferral = false;
+      // @ts-expect-error - Missing types
+      CONFIG.ActiveEffect.expiryAction = "delete";
       CONFIG.Actor.documentClass = PTRCONFIG.Actor.documentClass;
       CONFIG.Actor.dataModels = PTRCONFIG.Actor.dataModels;
       // @ts-expect-error this definitely exists
@@ -135,12 +137,12 @@ export const Init: PTRHook = {
 
       // Register tours
       (async () => {
-      //   // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
-      //   const original = game.tooltip.deactivate.bind(game.tooltip);
-      //   game.tooltip.deactivate = (force) => {
-      //     if (foundry.nue.Tour.tourInProgress && !force) return;
-      //     original();
-      //   }
+        //   // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
+        //   const original = game.tooltip.deactivate.bind(game.tooltip);
+        //   game.tooltip.deactivate = (force) => {
+        //     if (foundry.nue.Tour.tourInProgress && !force) return;
+        //     original();
+        //   }
 
         try {
           game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("systems/ptr2e/tours/welcome.json"));
@@ -182,7 +184,7 @@ export const Init: PTRHook = {
       //@ts-expect-error - Monkey Patching
       const core = game.keybindings._registerCoreKeybindings;
       //@ts-expect-error - Monkey Patching
-      game.keybindings._registerCoreKeybindings = function(view: string) {
+      game.keybindings._registerCoreKeybindings = function (view: string) {
         // Run core code
         core.bind(this)(view)
         // Override the macro keybinding to use the PTR2E macro bar instead of the core one
@@ -196,9 +198,9 @@ export const Init: PTRHook = {
       //@ts-expect-error - Monkey Patching
       const original = CONFIG.Token.hudClass.prototype._getMovementActionChoices as (() => Record<string, Record<string, object>>);
       //@ts-expect-error - Monkey Patching
-      CONFIG.Token.hudClass.prototype._getMovementActionChoices = function() {
+      CONFIG.Token.hudClass.prototype._getMovementActionChoices = function () {
         const results = original.bind(this)()
-        if(Object.keys(results).length > 1) delete results[""];
+        if (Object.keys(results).length > 1) delete results[""];
         return results;
       }
     })
@@ -206,8 +208,8 @@ export const Init: PTRHook = {
     Hooks.once('ready', () => {
       console.log('PTR 2e | Ready');
 
-      const config = game.settings.get("core", "combatTrackerConfig") as {turnMarker: {src: string, animation: string}};
-      if(config?.turnMarker && config.turnMarker.src == "") {
+      const config = game.settings.get("core", "combatTrackerConfig") as { turnMarker: { src: string, animation: string } };
+      if (config?.turnMarker && config.turnMarker.src == "") {
         config.turnMarker.src = "icons/svg/circle.svg";
         config.turnMarker.animation = "spinPulse";
         game.settings.set("core", "combatTrackerConfig", config);
