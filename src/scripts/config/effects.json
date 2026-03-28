@@ -191,6 +191,7 @@
       "traits": [
         "sleep",
         "major-affliction",
+        "attention",
         "control"
       ]
     },
@@ -554,7 +555,8 @@
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
-        "minor-affliction"
+        "minor-affliction",
+        "attention"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.confused"
@@ -616,12 +618,38 @@
         },
         {
           "type": "percentile-modifier",
-          "key": "all-damage",
+          "key": "attack-damage",
           "value": 15
-        }
+        },
+        {
+          "type": "stage-modifier",
+          "key": "shadow-trait-attack-crit",
+          "value": 2,
+          "predicate": [],
+          "mode": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-effect",
+          "key": "shadow-trait-attack",
+          "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga.ActiveEffect.4FLjKp9nBo2bfPia",
+          "predicate": [],
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "system.changes.0.value",
+              "value": 30
+            }
+          ],
+  "mode": 2,
+  "ignored": false
+}
       ],
       "traits": [
-        "minor-affliction"
+        "minor-affliction",
+        "attention"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.hyper-mode"
@@ -918,6 +946,7 @@
       "traits": [
         "shadow",
         "major-affliction",
+        "attention",
         "dot"
       ]
     },
@@ -952,6 +981,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1012,6 +1042,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1589,6 +1620,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1695,6 +1727,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1716,6 +1749,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1748,6 +1782,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
