@@ -33,6 +33,10 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     return this.turns.findIndex((c) => c.id === RoundCombatantSystem.id);
   }
 
+  override prepareDerivedData(): void {
+    if ( game.ready && this.combatants.size && !this.turns?.length ) this.setupTurns();
+  }
+
   override async rollInitiative(
     maybeIds: string | string[],
     { updateTurn = true }: RollInitiativeOptions = {}
