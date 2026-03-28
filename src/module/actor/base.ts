@@ -652,7 +652,7 @@ class ActorPTR2e<
       void
     >) {
       if (!effect.active) continue;
-      if (bossTrait && effect.flags?.ptr2e?.traitEffect == bossTrait.slug) continue;
+      if (bossTrait && effect.flags?.ptr2e?.traitEffect == `trait:${bossTrait.slug}`) continue;
       changes.push(
         ...effect.changes.map((change) => {
           const c = foundry.utils.deepClone(change);
@@ -678,6 +678,7 @@ class ActorPTR2e<
     // Run the _traits array as it may have added changes
     for (const trait of this.system._traits) {
       if (!trait.changes?.length) continue;
+      if(bossTrait && trait.slug == bossTrait.slug) continue;
       const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
       if (!effect?.active) continue;
       for (const change of effect.changes) {
