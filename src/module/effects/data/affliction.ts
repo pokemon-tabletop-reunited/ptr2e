@@ -63,7 +63,7 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
 
     const stacksToRemove = (() => {
       if (this.slug.startsWith("blight")) {
-        const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.turns! - this.parent.duration.remaining! - 1));
+        const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.value! - this.parent.duration.remaining! - 1));
         return stacksToRemove || 0;
       }
       if(this.slug.startsWith("desync")) {

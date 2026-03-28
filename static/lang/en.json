@@ -878,17 +878,19 @@
           "hint": "The % to Advance (positive) or Delay (negative) the target's turn by."
         },
         "duration": {
-          "turns": {
+          "value": {
             "label": "Affl. Duration (Activations)",
             "hint": "The number of activations this Affliction will last before it is automatically deleted.\nLeave blank for Afflictions that should persist indefinitely."
-          },
-          "startTurn": {
-            "label": "Applied On Activation",
-            "hint": "The Nth activation of the actor this Affliction applies to, when the Affliction was first applied.\nNote: Generally should not be edited."
           },
           "remaining": {
             "label": "Remaining Activations",
             "hint": "The number of activations remaining before this Affliction expires and is removed."
+          }
+        },
+        "start": {
+          "turn": {
+            "label": "Applied On Activation",
+            "hint": "The Nth activation of the actor this Affliction applies to, when the Affliction was first applied.\nNote: Generally should not be edited."
           }
         },
         "tint": {

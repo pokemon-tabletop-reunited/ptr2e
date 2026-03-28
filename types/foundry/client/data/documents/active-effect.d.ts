@@ -3,6 +3,7 @@ import type {
     ActiveEffectSchema,
     ActiveEffectSource,
     EffectDurationData,
+    EffectStartData,
 } from "../../../common/documents/active-effect.d.ts";
 import type { ClientBaseActiveEffect } from "./client-base-mixes.d.ts";
 
@@ -186,13 +187,11 @@ declare global {
     }
 
     interface PreparedEffectDurationData extends EffectDurationData {
-        type: string;
-        duration: number | null
-        remaining: number | null;
-        label: string;
-        _worldTime?: number;
-        _combatTime?: number;
-        expired?: boolean;
+       seconds: number | null;
+       remaining: number;
+       label: string;
+       _worldTime: number;
+       _combatTime: number;
     }
 
     interface TemporaryEffect extends ModelPropsFromSchema<ActiveEffectSchema> {
