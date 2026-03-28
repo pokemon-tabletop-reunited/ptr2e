@@ -334,6 +334,7 @@ class CompendiumPack {
           ...d,
           name: name || "Unnamed Effect",
           system: {
+            ...(d.system ?? {}),
             ...((d.system as { traits?: [] })?.traits ? { traits: (d.system as { traits?: [] })?.traits } : {}),
             ...(d.description ? { description: localize(d.description) } : {}),
           },

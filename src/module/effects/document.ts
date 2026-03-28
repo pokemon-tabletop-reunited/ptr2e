@@ -67,7 +67,7 @@ class ActiveEffectPTR2e<
     this._name = this._source.name;
     Object.defineProperty(this, "name", {
       get: () =>
-        this.system.stacks > 1
+        this.system.stacks >= 1
           ? `${this._name} ${this.system.stacks}`
           : this.duration.remaining !== null && this.duration.remaining !== undefined && this.duration.remaining !== Infinity
             ? `${this._name} ${this.duration.remaining}`
@@ -258,6 +258,8 @@ class ActiveEffectPTR2e<
     if (result === false) return false;
 
     if (this.targetsActor()) {
+      if(data.duration && data.duration.units !== "turns") this.updateSource({ duration: { units: "turns", expiry: "turnEnd" } });
+
       if (data.duration && data.system.stacks && data.system.stacks > 1) {
         data.duration.value = data.system.stacks;
         this.updateSource({

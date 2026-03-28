@@ -40,6 +40,7 @@ import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 import { RollNote } from "@system/notes.ts";
 import { PlaceholderTrait } from "@module/data/models/trait.ts";
 import AbilitySystem from "@item/data/ability.ts";
+import { BatchUpdate } from "types/foundry/common/documents/module.js";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -1322,10 +1323,17 @@ class ActorPTR2e<
       }
     }
 
+    const batch: BatchUpdate[] = [];
     const updates: DeepPartial<ActorPTR2e["_source"]> = {};
     const validAfflictionUpdates = afflictions.toUpdate.filter((update) => update._id);
-    if (validAfflictionUpdates.length > 0)
-      updates.effects = validAfflictionUpdates as foundry.documents.ActorSource["effects"];
+    if (validAfflictionUpdates.length > 0) {
+      batch.push({
+        action: "update",
+        documentName: "ActiveEffect",
+        updates: validAfflictionUpdates,
+        parent: this
+      })
+    }
 
     const oldHealth = this.system.health.value;
     if (newHealth !== oldHealth) {
@@ -1339,53 +1347,83 @@ class ActorPTR2e<
     if (isAcePerishing) {
       const weary = await fu.fromUuid<ActiveEffectPTR2e>("Compendium.ptr2e.core-effects.Item.wearyconditiitem");
       if (weary) {
-        await this.createEmbeddedDocuments("ActiveEffect", [weary.toObject()]);
+        batch.push({
+          action: "create",
+          documentName: "ActiveEffect",
+          data: [weary.toObject()],
+          parent: this
+        })
       }
-      await ChatMessage.create({
-        content: `${this.link}'s Perish Counter reached 0! They gained a stack of Weary.`,
+      batch.push({
+        action: "create",
+        documentName: "ChatMessage",
+        data: [{
+          content: `${this.link} is Ace Perishing! They gained the Weary condition.`,
+        }]
       })
     }
 
     if (afflictions.toDelete.length !== 0) {
-      await this.deleteEmbeddedDocuments("ActiveEffect", afflictions.toDelete);
+      batch.push({
+        action: "delete",
+        documentName: "ActiveEffect",
+        ids: afflictions.toDelete,
+        parent: this
+      })
     }
     if (!fu.isEmpty(updates)) {
-      await this.update(updates);
+      batch.push({
+        action: "update",
+        documentName: "Actor",
+        updates: [{ _id: this.id, ...updates }],
+        parent: this.parent
+      })
       if (newHealth !== oldHealth) {
-        //@ts-expect-error - Chat messages have not been properly defined yet
-        await ChatMessagePTR2e.create({
-          type: "damage-applied",
-          system: {
-            notes,
-            rollNotes: rollNotes.map(note => note.html),
-            damageApplied: oldHealth - newHealth,
-            target: this.uuid,
-            result: {
-              type: "affliction-dot",
-              options: Array.from(new Set(rollNotes.flatMap(note => note.options))),
-              domains: Array.from(new Set(rollNotes.flatMap(note => note.domains))),
+        batch.push({
+          action: "create",
+          documentName: "ChatMessage",
+          data: [
+            {
+              type: "damage-applied",
+              system: {
+                notes,
+                rollNotes: rollNotes.map(note => note.html),
+                damageApplied: oldHealth - newHealth,
+                target: this.uuid,
+                result: {
+                  type: "affliction-dot",
+                  options: Array.from(new Set(rollNotes.flatMap(note => note.options))),
+                  domains: Array.from(new Set(rollNotes.flatMap(note => note.domains))),
+                }
+              }
             }
-          },
-        });
+          ]
+        })
       }
     } else if (notes.length > 0) {
-      //@ts-expect-error - Chat messages have not been properly defined yet
-      await ChatMessagePTR2e.create({
-        type: "damage-applied",
-        system: {
-          notes,
-          rollNotes: rollNotes.map(note => note.html),
-          damageApplied: 0,
-          undone: true,
-          target: this.uuid,
-          result: {
-            type: "affliction-dot",
-            options: Array.from(new Set(rollNotes.flatMap(note => note.options))),
-            domains: Array.from(new Set(rollNotes.flatMap(note => note.domains))),
+      batch.push({
+        action: "create",
+        documentName: "ChatMessage",
+        data: [
+          {
+            type: "damage-applied",
+            system: {
+              notes,
+              rollNotes: rollNotes.map(note => note.html),
+              damageApplied: 0,
+              undone: true,
+              target: this.uuid,
+              result: {
+                type: "affliction-dot",
+                options: Array.from(new Set(rollNotes.flatMap(note => note.options))),
+                domains: Array.from(new Set(rollNotes.flatMap(note => note.domains))),
+              }
+            },
           }
-        },
-      });
+        ]
+      })
     }
+    if(batch.length) await foundry.documents.modifyBatch(batch);
   }
 
   /**
