@@ -15,7 +15,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     return {
       method: new fields.NumberField({
         required: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+        initial: 2,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({
@@ -61,7 +61,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
     const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)
     if (isArrayChange) {
       switch (this.method) {
-        case CONST.ACTIVE_EFFECT_MODES.ADD: {
+        case 2: {
           if (Array.isArray(current)) {
             current.push(value);
           } else {
@@ -69,7 +69,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           }
           break;
         }
-        case CONST.ACTIVE_EFFECT_MODES.OVERRIDE: {
+        case 5: {
           if (Array.isArray(current)) {
             current.splice(0, current.length, value);
           } else {

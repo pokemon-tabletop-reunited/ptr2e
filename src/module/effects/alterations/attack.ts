@@ -24,7 +24,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
     return {
       method: new fields.NumberField({
         required: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+        initial: 2,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({

@@ -29,7 +29,7 @@ const upperOrWordBoundariedLowerRE = new RegExp(
  */
 function sluggify(text: string, { camel }: { camel: string | null } = { camel: null }): string {
   if (typeof text !== "string") {
-    console.warn("Non-string argument passed to `sluggify`");
+    console.debug("Non-string argument passed to `sluggify`");
     return "";
   }
 
