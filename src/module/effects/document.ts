@@ -531,6 +531,13 @@ class ActiveEffectPTR2e<
           //@ts-expect-error - Data Migration - Types won't match.
           delete change.mode;
         }
+        //@ts-expect-error Some changes may have alterations
+        for(const alteration of change.alterations ?? []) {
+          if("mode" in alteration && !("method" in alteration)) {
+            alteration.method = alteration.mode;
+            delete alteration.mode;
+          }
+          }
       }
     }
     // displayOnToken flag migration

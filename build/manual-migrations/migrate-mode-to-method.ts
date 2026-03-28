@@ -30,6 +30,14 @@ for (const pack of packs) {
           change.method = change.mode;
           delete change.mode;
         }
+        if(change.alterations && change.alterations?.length > 0) {
+          for(const alteration of change.alterations) {
+            if("mode" in alteration && !("method" in alteration)) {
+              alteration.method = alteration.mode;
+              delete alteration.mode;
+            }
+          }
+        }
       }
     } else {
       for (const effect of data.effects) {
@@ -43,6 +51,14 @@ for (const pack of packs) {
             change.method = change.mode;
             delete change.mode;
           }
+          if(change.alterations && change.alterations?.length > 0) {
+          for(const alteration of change.alterations) {
+            if("mode" in alteration && !("method" in alteration)) {
+              alteration.method = alteration.mode;
+              delete alteration.mode;
+            }
+          }
+        }
         }
       }
     }

@@ -23,12 +23,11 @@
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "effects.0.duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               },
               {
-                "mode": 2,
                 "property": "effects.0.system.changes",
                 "value": {
                   "type": "roll-effect",
@@ -38,16 +37,17 @@
                   "chance": 100,
                   "affects": "defensive",
                   "dontMerge": true
-                }
+                },
+                "method": 2
               },
               {
-                "mode": 2,
                 "property": "effects.0.system.changes",
                 "value": {
                   "type": "roll-option",
                   "domain": "all",
                   "value": "enraged-from-rage"
-                }
+                },
+                "method": 2
               }
             ],
             "dontMerge": false,
