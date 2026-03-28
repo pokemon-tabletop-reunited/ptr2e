@@ -468,6 +468,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   _prepareEffectiveness(): Record<string, { value: number, name: string }[]> {
     const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, { value: number, name: string }[]>;
+    
     for (const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
       //TODO: Make this a setting
       if (type === "nuclear") continue;
@@ -493,6 +494,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         name: type
       });
     }
+
+    // Allow modules to manipulate data as needed
+    Hooks.callAll("ptr2e.displayEffectiveness", effectiveness, this.actor);
+
     return effectiveness;
   }
 
