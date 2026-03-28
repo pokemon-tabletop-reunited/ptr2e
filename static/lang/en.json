@@ -959,6 +959,7 @@
           "nightmares": "Nightmares",
           "frozen": "Frozen",
           "frostbite": "Frostbite",
+          "desync": "Desync",
           "splinter": "Splinter",
           "slowed": "Slowed",
           "hindered": "Hindered",
@@ -1009,8 +1010,7 @@
           "argute": "Argute",
           "loafing": "Loafing",
           "advance": "Advance",
-          "delay": "Delay",
-          "desync": "Desync"
+          "delay": "Delay"
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
@@ -1022,12 +1022,13 @@
           "nightmares": "This Affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC Stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Affliction, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
           "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA Stages are reduced by 1. Additional Frozen Stacks cannot be added while Frozen is on a creature. When Frozen ticks down to zero Stacks (not cured), the afflicted creature gains Frostbite 5 and their next Activation is Advanced by 50%.",
           "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has -1 default DEF Stages while Frostbite is active.",
+          "desync": "<p>When a creature is afflicted with @Affliction[desync], it cannot perform any Actions with the @Trait[interrupt-x] trait. When the afflicted creature is hit, it gains +1 stack of @Affliction[desync]. <br><br>At the end of the afflicted creature's next activation, all stacks of @Affliction[desync] are removed.</p><p>On removal of @Affliction[desync], the afflicted creature suffers a number of ticks of @Trait[dot] damage equal to the number of stacks removed. This is inclusive of the use of curative effects.</p>",
           "splinter": "The afflicted creature loses a Tick of HP when they are damaged by a Physical- or Special-Category attack. The creature has Stunted while Splinter is active.",
           "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 2).",
           "hindered": "The afflicted creature has the EHR of its Attacks and Actions decreased by 15%.",
           "stunted": "When the afflicted creature gains HP, PP, or Shields that amount is reduced by 2 Ticks (to a minimum of 0 HP/PP/Shields gained).",
           "confused": "The afflicted creature has its RES decreased by 10%. At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
-          "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 2], or have their [Crit X] value increase by +2. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
+          "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks have +2 default CRIT and +30% EHR. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
           "weary": "<p>While a creature is afflicted with Weary, its default ACC and EVA Stages and its EHR and RES are reduced based on how many Stacks of Weary they possess, and other rules might apply:</p><h4>1 Stack</h4><ul><li>-1 default ACC & EVA Stages</li><li>-10% EHR</li><li>-5% RES</li></ul><h4>2 Stacks</h4><ul><li>-3 default ACC & EVA Stages</li><li>-30% EHR</li><li>-20% RES</li></ul><h4>3 Stacks</h4><ul><li>-1 default ACC & EVA Stages</li><li>-50% EHR</li><li>-35% RES</li></ul><h4>4+ Stacks</h4><ul><li>The afflicted creature is unable to battle.</li></ul><p>A creature gains 1 Stack of Weary whenever they gain @Affliction[fainted]. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items to remove Stacks of Weary.</p>",
           "exposed": "An afflicted creature has its effect RES decreased by 15% and it cannot remove Weary.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
@@ -1072,8 +1073,7 @@
           "argute": "An afflicted creature has the EHR of its Attacks and Actions increase by 25%.",
           "loafing": "<p>A creature automatically gains this Affliction automatically if they are 2+ levels above their Team Leader's level. This Affliction's Stack Count is dynamically determined based on the level of the Afflicted creature and that of their Team Leader. This Affliction applies an assortment of penalties that scale up based on how many Stacks are present:</p><h4>1 Stack</h4><ul><li>-15% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-15% to all Skill checks</li><li>-1 default SPD Stage</li><li>+15% PP Cost</li></ul><h4>2 Stacks</h4><ul><li>-30% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-30% to all Skill Checks</li><li>-1 default SPD Stage</li><li>+30% PP Cost</li><li>-10 flat Accuracy</li><li>Gain @Affliction[unlucky]</li></ul><h4>3 Stacks</h4><ul><li>-50% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-50% to all Skill checks</li><li>-2 default SPD Stage</li><li>+50% PP Cost</li><li>-20 flat Accuracy</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h4>4 Stacks</h4><ul><li>-80% to all Damage dealt with Physical- and Special-Category Attacks</li><li>-80% to all Skill checks</li><li>-2 default SPD Stage</li><li>+80% PP Cost</li><li>-30 flat Accuracy</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>",
           "advance": "The afflicted creature's next Activation is Advanced by XY%. Default is 10%.",
-          "delay": "The afflicted creature's next Activation is Delayed by XY%. Default is 10%.",
-          "desync": "<p>When a creature is afflicted with @Affliction[desync], it cannot perform any Actions with the @Trait[interrupt-x] trait. When the afflicted creature is hit, it gains +1 stack of @Affliction[desync]. <br><br>At the end of the afflicted creature's next activation, all stacks of @Affliction[desync] are removed.</p><p>On removal of @Affliction[desync], the afflicted creature suffers a number of ticks of @Trait[dot] damage equal to the number of stacks removed. This is inclusive of the use of curative effects.</p>"
+          "delay": "The afflicted creature's next Activation is Delayed by XY%. Default is 10%."
         }
       }
     },
