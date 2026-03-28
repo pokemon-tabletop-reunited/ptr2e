@@ -794,19 +794,22 @@ export default class TooltipsPTR2e {
     return 500;
   }
 
-  async #createItemTooltip<TItem extends ItemPTR2e>(perk: TItem, type: string) {
-    const traits = [...(perk.traits?.values() ?? [])].map((t) => ({
+  async #createItemTooltip<TItem extends ItemPTR2e>(item: TItem, type: string) {
+    const traits = [...(item.traits?.values() ?? [])].map((t) => ({
       value: t.slug,
       label: t.label,
       type: t.type
     }));
 
-    const prerequisites = perk.type === "perk" ? (perk as PerkPTR2e).system.getPredicateStrings() : null
+    const prerequisites = item.type === "perk" ? (item as PerkPTR2e).system.getPredicateStrings() : null
+
+    const extraTypeIcons = {icons: new Set()};
+    if(type === "species") Hooks.callAll("ptr2e.getExtraTypeIcons", extraTypeIcons, item);
 
     this.tooltip.classList.add(type);
     await this._renderTooltip({
       path: `systems/ptr2e/templates/items/embeds/${type}.hbs`,
-      data: { fields: perk.system.schema.fields, document: perk, traits, prerequisites },
+      data: { fields: item.system.schema.fields, document: item, traits, prerequisites, extraTypeIcons: extraTypeIcons.icons },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
