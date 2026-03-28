@@ -1093,11 +1093,19 @@ export class ClientBaseActiveEffect<
     static createDialog<TDocument extends foundry.abstract.Document>(
         this: ConstructorOf<TDocument>,
         data?: Record<string, unknown>,
-        context?: {
-            parent?: TDocument["parent"];
-            types?: string[];
-            pack?: Collection<TDocument> | null;
-        } & Partial<FormApplicationOptions>,
+        createOptions?: Record<string, unknown>,
+        {
+          folders, types, template, context, ...dialogOptions
+        }?:
+        {
+          folders?: {id: string, name: string}[];
+          types?: string[];
+          template?: string;
+          context?: {
+              parent?: TDocument["parent"];
+              pack?: Collection<TDocument> | null;
+          } & Partial<FormApplicationOptions>,
+        }
     ): Promise<TDocument | null>;
 
     /**

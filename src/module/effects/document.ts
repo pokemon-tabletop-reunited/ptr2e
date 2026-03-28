@@ -537,6 +537,32 @@ class ActiveEffectPTR2e<
 
     return super.shimData(source, options);
   }
+
+  static override createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; types?: string[]; pack?: Collection<TDocument> | null; } & Partial<FormApplicationOptions>): Promise<TDocument | null>
+  static override async createDialog(
+    data: Record<string, unknown> = {},
+    createOptions: Record<string, unknown> = {},
+    {
+      folders,
+      types,
+      template,
+      context,
+      ...dialogOptions
+    }: {
+      folders?: { id: string, name: string }[];
+      types?: string[];
+      template?: string;
+    } & {
+      context?: { parent?: Actor; pack?: Collection<ActiveEffectPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
+    } = {}
+  ) {
+    if (types?.length) types = types.filter(t => t !== "base");
+    else types = this.TYPES.filter(t => t !== "base");
+
+    return super.createDialog(data, createOptions, {
+      folders, types, template, context, ...dialogOptions
+    });
+  }
 }
 
 interface ActiveEffectPTR2e<
