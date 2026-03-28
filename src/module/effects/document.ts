@@ -69,7 +69,7 @@ class ActiveEffectPTR2e<
       get: () =>
         this.system.stacks > 1
           ? `${this._name} ${this.system.stacks}`
-          : this.duration.remaining !== null && this.duration.remaining !== undefined
+          : this.duration.remaining !== null && this.duration.remaining !== undefined && this.duration.remaining !== Infinity
             ? `${this._name} ${this.duration.remaining}`
             : this._name,
       set: (value: string) => {
@@ -171,72 +171,6 @@ class ActiveEffectPTR2e<
     return !!value && Number.isFinite(value);
   }
 
-  // /**
-  //  * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
-  //  * Duration is purely handled in terms of combat turns elapsed.
-  //  */
-  // override _prepareDuration(): Partial<ActiveEffectPTR2e["duration"]> {
-  //   const d = this.duration, s = this.start;
-  //   if (!d.value) d.value = this._source.duration?.value ?? null;
-  //   if (!d.expiry) d.expiry = this._source.duration?.expiry ?? "turnEnd";
-
-  //   // Turn-based duration
-  //   if (this.parent && d.value) {
-  //     const cbt = game.combat as CombatPTR2e | undefined;
-  //     if (!cbt || !this.targetsActor())
-  //       return {
-  //         units: "turns",
-  //         _combatTime: undefined,
-  //         expiry: d.expiry,
-  //       };
-
-  //     // Determine the current combat duration
-  //     const durationTurn = d.value ?? 0;
-  //     const startTurn = s?.turn ?? 0;
-
-  //     // Determine parent combatant's activation amount
-  //     const currentTurn = this.parent.combatant?.system.activations;
-  //     if (currentTurn === undefined)
-  //       return {
-  //         units: "turns",
-  //         _combatTime: undefined,
-  //         expiry: d.expiry,
-  //       };
-
-  //     // If the effect has not started yet display the full duration
-  //     if (currentTurn <= startTurn) {
-  //       return {
-  //         units: "turns",
-  //         // duration: durationTurn,
-  //         remaining: durationTurn,
-  //         label: this._getDurationLabel(0, d.value),
-  //         _combatTime: currentTurn,
-  //         expiry: d.expiry,
-  //       };
-  //     }
-
-  //     // Some number of remaining turns (possibly zero)
-  //     const remainingTurns = Math.max(startTurn + durationTurn - currentTurn, 0);
-  //     return {
-  //       units: "turns",
-  //       // duration: durationTurn,
-  //       remaining: remainingTurns,
-  //       label: this._getDurationLabel(0, remainingTurns),
-  //       _combatTime: currentTurn,
-  //       expiry: d.expiry,
-  //     };
-  //   }
-
-  //   // No duration
-  //   return {
-  //     units: d.units,
-  //     // duration: null,
-  //     remaining: Infinity,
-  //     label: game.i18n.localize("None"),
-  //     expiry: d.expiry,
-  //   };
-  // }
-
   _prepareCombatBasedDuration(duration: ActiveEffectPTR2e["duration"], context: Record<string, unknown>): ActiveEffectPTR2e["duration"] {
     //@ts-expect-error - Missing typings
     if (duration.units !== "turns") return super._prepareCombatBasedDuration(duration, context);
@@ -287,23 +221,6 @@ class ActiveEffectPTR2e<
 
     //@ts-expect-error - Missing types
     return (context.combat ?? game.combat)?.started;
-  }
-
-  /** Implement Backwards Compatibility with removed _getDurationLabel */
-  override _getDurationLabel(rounds: number, turns: number): string {
-    const parts = [];
-    const pluralRules = new Intl.PluralRules(game.i18n.lang);
-    if (rounds > 0) {
-      const unit = game.i18n.localize(`COMBAT.DURATION.ROUNDS.${pluralRules.select(rounds)}`);
-      parts.push(`${rounds} ${unit}`);
-    }
-    if (turns > 0) {
-      const unit = game.i18n.localize(`COMBAT.DURATION.TURNS.${pluralRules.select(turns)}`);
-      parts.push(game.i18n.localize(`${turns} ${unit}`));
-    }
-    else if ((rounds + turns) === 0) parts.push(game.i18n.localize("COMBAT.DURATION.None"));
-    //@ts-expect-error - Missing type
-    return game.i18n.getListFormatter({ style: "narrow" }).format(parts);
   }
 
   toChat(): Promise<unknown> {

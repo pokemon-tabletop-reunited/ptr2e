@@ -287,44 +287,77 @@ class CompendiumPack {
       return result;
     }
 
-    results.push(...statusAfflictions.map((d) => {
-      const name = localize(d.name);
-      const itemSource = {
-        name: name || "Unnamed Effect",
-        type: "effect",
-        img: d.img,
-        system: {
-          ...((d.system as { traits?: [] })?.traits ? { traits: (d.system as { traits?: [] })?.traits } : {}),
-          ...(d.description ? { description: localize(d.description) } : {}),
-        },
-        effects: [
-          {
-            ...d,
-            name: name || "Unnamed Effect",
+    if (this.packId == "core-effects") {
+      results.push(...statusAfflictions.map((d) => {
+        const name = localize(d.name);
+        const itemSource = {
+          name: name || "Unnamed Effect",
+          type: "effect",
+          img: d.img,
+          system: {
+            ...((d.system as { traits?: [] })?.traits ? { traits: (d.system as { traits?: [] })?.traits } : {}),
             ...(d.description ? { description: localize(d.description) } : {}),
-            statuses: [d.id]
-          }
-        ],
-        folder: "V4skAU6G3OH5fXgD",
-      } as Partial<SourceFromSchema<ItemSchema>>;
-      if (d._id) itemSource._id = itemSource.effects![0]._id = d._id.substring(0, 12) + "item";
-      if (!itemSource._id) {
-        itemSource.effects![0]._id = (() => {
-          if (!d.id) throw PackError("Effect has no id");
-          let id = d.id.replace('-', '');
-          id = id.length > 16 ? id.substring(0, 16) : id;
-          let i = 0;
-          while (id.length < 16) {
-            id = id + "condition0000000"[i++];
-          }
-          return id;
-        })();
-        itemSource._id = itemSource.effects![0]._id.substring(0, 12) + "item";
-      }
-      itemSource.flags = { core: { sourceId: this.#sourceIdOf(itemSource._id ?? "", { docType: "Item" }) } };
-      if (!isItemSource(itemSource as SourceFromSchema<ItemSchema>)) throw PackError("Failed to create item source");
-      return JSON.parse(this.#finalize(itemSource as SourceFromSchema<ItemSchema>));
-    }));
+          },
+          effects: [
+            {
+              ...d,
+              name: name || "Unnamed Effect",
+              ...(d.description ? { description: localize(d.description) } : {}),
+              statuses: [d.id]
+            }
+          ],
+          folder: "V4skAU6G3OH5fXgD",
+        } as Partial<SourceFromSchema<ItemSchema>>;
+        if (d._id) itemSource._id = itemSource.effects![0]._id = d._id.substring(0, 12) + "item";
+        if (!itemSource._id) {
+          itemSource.effects![0]._id = (() => {
+            if (!d.id) throw PackError("Effect has no id");
+            let id = d.id.replace('-', '');
+            id = id.length > 16 ? id.substring(0, 16) : id;
+            let i = 0;
+            while (id.length < 16) {
+              id = id + "condition0000000"[i++];
+            }
+            return id;
+          })();
+          itemSource._id = itemSource.effects![0]._id.substring(0, 12) + "item";
+        }
+        itemSource.flags = { core: { sourceId: this.#sourceIdOf(itemSource._id ?? "", { docType: "Item" }) } };
+        if (!isItemSource(itemSource as SourceFromSchema<ItemSchema>)) throw PackError("Failed to create item source");
+        return JSON.parse(this.#finalize(itemSource as SourceFromSchema<ItemSchema>));
+      }));
+    }
+    else {
+      results.push(...statusAfflictions.map((d) => {
+        const name = localize(d.name);
+        const effectSource = {
+          ...d,
+          name: name || "Unnamed Effect",
+          system: {
+            ...((d.system as { traits?: [] })?.traits ? { traits: (d.system as { traits?: [] })?.traits } : {}),
+            ...(d.description ? { description: localize(d.description) } : {}),
+          },
+          ...(d.description ? { description: localize(d.description) } : {}),
+          statuses: [d.id],
+          folder: "V4skAU6G3OH5fXgD",
+        } as Partial<SourceFromSchema<ItemSchema>>;
+        if (!effectSource._id) {
+          effectSource._id = (() => {
+            if (!d.id) throw PackError("Effect has no id");
+            let id = d.id.replace('-', '');
+            id = id.length > 16 ? id.substring(0, 16) : id;
+            let i = 0;
+            while (id.length < 16) {
+              id = id + "condition0000000"[i++];
+            }
+            return id;
+          })();
+        }
+        effectSource.flags = { core: { sourceId: this.#sourceIdOf(effectSource._id ?? "", { docType: "ActiveEffect" }) } };
+        if (!isItemSource(effectSource as SourceFromSchema<ItemSchema>)) throw PackError("Failed to create item source");
+        return JSON.parse(this.#finalize(effectSource as SourceFromSchema<ItemSchema>));
+      }));
+    }
 
     return results;
   }
