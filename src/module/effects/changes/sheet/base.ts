@@ -324,7 +324,15 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
   // It may merge with the initial value to handle cases where the values where cleaned recursively
   const deleteIfInitial = (key: string, field: foundry.data.fields.DataField): boolean => {
     if (["type"].includes(key)) return false;
-    if (data[key] === undefined) return true;
+    if (data[key] === undefined) {
+      delete data[key];
+      return true;
+    }
+    //@ts-expect-error - Exists on StringField
+    if (data[key] === "" && field instanceof fields.StringField && !field.options.blank) {
+      delete data[key];
+      return true;
+    }
     if (field.options.required ?? ('element' in field ? (field as { element: foundry.data.fields.DataField })?.element?.options.required : false)) return false;
     const initialValue = typeof field.initial === "function" ? field.initial(data) : field.initial;
     const valueRaw = data[key];
