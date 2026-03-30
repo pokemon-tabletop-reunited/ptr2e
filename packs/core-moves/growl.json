@@ -59,17 +59,18 @@
           {
             "type": "roll-effect",
             "key": "growl-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "label": "Effect Roll",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "isFixedChance": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -85,13 +86,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -103,14 +101,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.358",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.2.1",
         "createdTime": 1726136939979,
         "modifiedTime": 1726136992739,
         "lastModifiedBy": "IcBpMqhFuTck9VpX",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
