@@ -136,13 +136,14 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
   async updateValidationErrors(validationFailures: foundry.data.validation.DataModelValidationFailure): Promise<void> {
     const failures = ((): string[] => {
       const sourceFailures = validationFailures?.asError().getAllFailures() ?? {};
+      if(!sourceFailures.length && validationFailures.message) sourceFailures["unknown"] = validationFailures
       const fieldFailures =
         this.change.validationFailures.fields?.asError().getAllFailures() ?? {};
       const jointFailures = this.change.validationFailures.joint
         ? { joint: this.change.validationFailures.joint }
         : {};
       return Object.entries({ ...sourceFailures, ...fieldFailures, ...jointFailures }).map(([key, failure]) =>
-        key === "joint"
+        key === "joint" || key.startsWith("unknown")
           ? failure.message.replace(/^.*Joint Validation Error:\s*/, "")
           : `${key}: ${failure.message}`
       )
