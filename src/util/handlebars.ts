@@ -420,4 +420,12 @@ function _registerBasicHelpers() {
 
     return ret;
   });
+
+  Handlebars.registerHelper("select", function (selected, options) {
+    const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected));
+    const rgx = new RegExp(` value=["']${escapedValue}["']`);
+    //@ts-expect-error - Ignore error
+    const html = options.fn(this);
+    return html.replace(rgx, "$& selected");
+  })
 }
