@@ -109,7 +109,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     const unboundBaseAV = Math.floor(
       this.stretchBaseAV(
         isPlaytestFormula 
-          ? (215 * actor.speed / ((((1.8 * combat.averageLevel + 135) * combat.averageLevel / 100) + 25) + Math.exp(1) * combat.averageLevel)) * ((37 - combat.averageLevel * 7 / 40 ) / 29) - ((combat.averageLevel + 40) / 15) + 15 // Playtest Formula
+          ? (215 * combat.averageLevel / ((((1.8 * actor.speed + 135) * combat.averageLevel / 100) + 25) + Math.exp(1) * combat.averageLevel)) * ((37 - combat.averageLevel * 7 / 40 ) / 29) - ((combat.averageLevel + 40) / 15) + 15 // Playtest Formula
           : (750 * (1 + ((combat.averageLevel) * 23) / 99)) * (1 - speedStages * 0.125) / actor.speed, // Original Formula
         70 - Math.max(5 * Math.min(5, speedStages), 0),
         125 - Math.min(5 * Math.max(-5, speedStages), 0)
