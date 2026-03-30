@@ -155,8 +155,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
     if (canvas.grid.type === CONST.GRID_TYPES.SQUARE) {
       return (canvas.grid as unknown as SquareGridPTR2e).getDistanceBetweenTokens(this, target);
     }
-    //@ts-expect-error - Foundry types are incomplete
-    return canvas.grid.measureDistance(this.position, target.position);
+    return canvas.grid.measurePath([this.position, target.position]).distance;
   }
 
   masks: PIXI.Graphics[] = [];
