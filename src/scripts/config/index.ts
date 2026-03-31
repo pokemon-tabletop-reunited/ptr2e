@@ -112,8 +112,16 @@ export const PTRCONFIG = {
   },
   Folder: {
     documentClass: FolderPTR2e,
+    sheetClass: FolderConfigPTR2e,
     sheetClasses: {
-      folder: FolderConfigPTR2e
+      "ptr2e.FolderConfig": {
+        cls: FolderConfigPTR2e,
+        label: "PTR 2e Folder Config",
+        canBeDefault: true,
+        canConfigure: true,
+        id: "ptr2e.FolderConfig",
+        themes: {}
+      }
     }
   },
   Grid: {

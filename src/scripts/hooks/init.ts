@@ -21,6 +21,7 @@ import { PerkWebTour } from "@module/tours/perk-web.ts";
 import { initializeKeybindings } from "@scripts/keybindings.ts";
 import { UUID_REDIRECTS } from "@scripts/config/uuid-redirects.ts";
 import { Draggable } from "gsap/all";
+import FolderPTR2e from "@module/folder/document.ts";
 
 export const Init: PTRHook = {
   listen() {
@@ -82,6 +83,7 @@ export const Init: PTRHook = {
       CONFIG.Dice.rolls = CONFIG.Dice.rolls.concat(PTRCONFIG.Dice.rolls);
 
       CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
+      // CONFIG.Folder.sheetClasses = fu.mergeObject(CONFIG.Folder.sheetClasses, PTRCONFIG.Folder.sheetClasses, { inplace: false });
 
       CONFIG.Scene.documentClass = PTRCONFIG.Scene.documentClass;
       CONFIG.MeasuredTemplate.defaults.angle = 75;
@@ -130,6 +132,9 @@ export const Init: PTRHook = {
         foundry.applications.apps.DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.form, { types: ['form'], makeDefault: true });
         //@ts-expect-error - Application V2 Compatability
         foundry.applications.apps.DocumentSheetConfig.registerSheet(TokenDocumentPTR2e, "ptr2e", PTRCONFIG.Token.sheetClass, { makeDefault: true });
+
+        //@ts-expect-error - Application V2 Compatability
+        foundry.applications.apps.DocumentSheetConfig.registerSheet(FolderPTR2e, "ptr2e", PTRCONFIG.Folder.sheetClass, { makeDefault: true, types: ["Actor"] });
       }
 
       initializeSettings();
