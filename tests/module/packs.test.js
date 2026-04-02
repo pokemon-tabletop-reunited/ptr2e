@@ -15,7 +15,7 @@ describe("Compendium Pack Data", () => {
     const packDirPaths = fs.readdirSync(packsDataPath).map((dirName) => path.resolve(__dirname, packsDataPath, dirName));
 
     packs = packDirPaths.map((dirPath) => {
-      const {filePaths, folderPaths} = getFilesRecursively(dirPath);
+      const { filePaths, folderPaths } = getFilesRecursively(dirPath);
       const fileData = filePaths.flatMap((filepath) => {
         const jsonString = fs.readFileSync(filepath, "utf-8");
         const packSource = (() => {
@@ -78,8 +78,8 @@ describe("Compendium Pack Data", () => {
           expect(entry).toHaveProperty("_id");
           expect(typeof entry._id).toBe("string");
           expect(entry._id.length).toBeGreaterThan(0);
-  
-          if(entry.effects && Array.isArray(entry.effects)) {
+
+          if (entry.effects && Array.isArray(entry.effects)) {
             for (const effect of entry.effects) {
               try {
                 // eslint-disable-next-line jest/no-conditional-expect
@@ -91,13 +91,13 @@ describe("Compendium Pack Data", () => {
                 // eslint-disable-next-line jest/no-conditional-expect
                 expect(effect._id.length).toBeGreaterThan(0);
               } catch (error) {
-                throw Error(`Effect ${effect.slug ?? effect.system?.slug ?? effect.name ?? effect.label} (${effect._id}) in ${pack.pack} pack within entry ${entry.slug ?? entry.system?.slug ?? entry.name ?? entry.label} (${entry._id}) does not have a valid _id property:\n${error.message}`, { cause: "effect"});
+                throw Error(`Effect ${effect.slug ?? effect.system?.slug ?? effect.name ?? effect.label} (${effect._id}) in ${pack.pack} pack within entry ${entry.slug ?? entry.system?.slug ?? entry.name ?? entry.label} (${entry._id}) does not have a valid _id property:\n${error.message}`, { cause: "effect" });
               }
             }
           }
         }
         catch (error) {
-          if(error.cause === "effect") throw error;
+          if (error.cause === "effect") throw error;
           throw Error(`Entry ${entry.slug ?? entry.system?.slug ?? entry.name ?? entry.label} (${entry._id}) in ${pack.pack} pack does not have a valid _id property:\n${error.message}`);
         }
       }
@@ -108,7 +108,7 @@ describe("Compendium Pack Data", () => {
     const allIds = new Set();
     for (const pack of packs) {
       // TODO: Delete after 1.8 (#2264)
-      if(pack.pack == "core-effects") continue // Skip the duplicate core effects during the transition period.
+      if (pack.pack == "core-effects") continue // Skip the duplicate core effects during the transition period.
       for (const entry of pack.entries) {
         if (allIds.has(entry._id)) {
           throw Error(`Duplicate ID found: ${entry._id} in pack ${pack.pack}`);
@@ -116,8 +116,10 @@ describe("Compendium Pack Data", () => {
         allIds.add(entry._id);
       }
     }
-    
-    expect(allIds.size).toBe(packs.reduce((acc, pack) => acc + pack.entries.length, 0));
+
+    expect(allIds.size).toBe(packs.reduce((acc, pack) =>
+      pack.pack == "core-effects" ? acc : // TODO: Delete line after 1.8 (#2264)
+        acc + pack.entries.length, 0));
   })
 
   // eslint-disable-next-line jest/expect-expect, jest/no-commented-out-tests
