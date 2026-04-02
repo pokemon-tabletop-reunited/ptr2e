@@ -16,7 +16,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -33,7 +34,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "gKpQqu4fBVzUszbc",
@@ -50,9 +52,10 @@
             "key": "system.battleStats.accuracy.stage",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -62,17 +65,16 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "seconds",
+        "value": null,
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -80,7 +82,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {}
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.358",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": 1774860475243,
+        "modifiedTime": 1774860477018,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
     }
   ]
 }
