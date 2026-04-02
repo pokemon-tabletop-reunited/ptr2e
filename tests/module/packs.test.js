@@ -107,6 +107,8 @@ describe("Compendium Pack Data", () => {
   test("Packs cannot contain duplicate IDs", () => {
     const allIds = new Set();
     for (const pack of packs) {
+      // TODO: Delete after 1.8 (#2264)
+      if(pack.pack == "core-effects") continue // Skip the duplicate core effects during the transition period.
       for (const entry of pack.entries) {
         if (allIds.has(entry._id)) {
           throw Error(`Duplicate ID found: ${entry._id} in pack ${pack.pack}`);
