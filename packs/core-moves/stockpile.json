@@ -114,10 +114,10 @@
             "toggleable": true,
             "count": false,
             "alwaysActive": false,
-            "mode": 2,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "create-clock",
@@ -130,13 +130,13 @@
             "color": "#919aa2",
             "private": false,
             "label": "Stockpile",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "stockpile-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
             "predicate": [
               {
                 "and": [
@@ -152,15 +152,15 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "stockpileClockUs"
+                "value": "stockpileClockUs",
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Stockpile Clock",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -169,8 +169,8 @@
             "predicate": [
               "stockpile:active"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -179,8 +179,8 @@
             "predicate": [
               "stockpile:active"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -189,60 +189,60 @@
             "predicate": [
               "stockpile:active"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "spit-up-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "stockpileClockUs"
+                "value": "stockpileClockUs",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "-1-@actor.clocks.stockpileClockUs"
+                "value": "-1-@actor.clocks.stockpileClockUs",
+                "method": 5
               }
             ],
             "dontMerge": false,
             "predicate": [
               "stockpile:active"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "swallow-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "stockpileClockUs"
+                "value": "stockpileClockUs",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "-1-@actor.clocks.stockpileClockUs"
+                "value": "-1-@actor.clocks.stockpileClockUs",
+                "method": 5
               }
             ],
             "dontMerge": false,
             "predicate": [
               "stockpile:active"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -253,13 +253,13 @@
             ],
             "property": "power",
             "definition": [],
-            "mode": 5,
-            "ignored": false
+            "ignored": false,
+            "method": 5
           },
           {
             "type": "roll-effect",
             "key": "swallow-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [
               "stockpile:active"
             ],
@@ -268,19 +268,19 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "min(16, 6*@actor.clocks.stockpileClockUs)"
+                "value": "min(16, 6*@actor.clocks.stockpileClockUs)",
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "swallow-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
             "predicate": [
               {
                 "and": [
@@ -294,14 +294,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -314,8 +314,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -323,11 +323,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Item.Itrn89HfpQHY4j7l.ActiveEffect.fqpoenQH2s0yzeOA",
         "duplicateSource": null,

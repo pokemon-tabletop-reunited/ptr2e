@@ -58,20 +58,20 @@
           {
             "type": "roll-effect",
             "key": "roar-of-time-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.slowedcondititem",
-            "mode": 5,
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.slowedcondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 7
+                "value": 7,
+                "method": 5
               }
             ],
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 5
           }
         ],
         "slug": null,
@@ -82,13 +82,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

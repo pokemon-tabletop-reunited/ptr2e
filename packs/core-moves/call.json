@@ -11,7 +11,8 @@
         "type": "generic",
         "traits": [
           "command",
-          "basic"
+          "basic",
+          "flinch-20"
         ],
         "range": {
           "target": "ally",
@@ -22,7 +23,27 @@
           "activation": "simple",
           "powerPoints": 1
         },
-        "description": "<p>Effect: The @Affliction[drowsy], @Affliction[confused], @Affliction[disabled], @Affliction[suppressed], @Affliction[enraged], @Affliction[charmed], @Affliction[fear], and @Affliction[taunted] Afflictions the user is Afflicted with have their Stack counts reduced by 2. A target afflicted with @Affliction[hyper-mode] is cured of @Affliction[hyper-mode].</p>",
+        "description": "<p>Effect: The target is cured of @Trait[attention] Afflictions and is @Affliction[delay 20]. The user may clear any @Trait[style] or @Trait[stance] effects from the target, if they wish.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "call-interrupt",
+        "name": "Call! (Interrupt)",
+        "type": "generic",
+        "traits": [
+          "flinch-20",
+          "interrupt"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1
+        },
+        "description": "<p>The user may use @UUID[Compendium.ptr2e.core-moves.Item.eir0T0FTafp3GG9i.Actions.call]{Call!}, selecting a valid target.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],

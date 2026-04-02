@@ -24,10 +24,9 @@
       "img": "icons/svg/d20.svg",
       "type": "affliction",
       "duration": {
-        "turns": null,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -35,17 +34,17 @@
             "type": "basic",
             "key": "system.battleStats.acc.stage",
             "value": -1,
-            "mode": 2,
             "predicate": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.battleStats.critRate.stage",
             "value": 2,
-            "mode": 2,
             "predicate": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "removeOnRecall": true,
@@ -80,11 +79,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      }
+      "showIcon": 2
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",

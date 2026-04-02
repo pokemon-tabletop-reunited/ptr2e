@@ -135,14 +135,14 @@
             "value": 9,
             "predicate": [],
             "label": "Chainsaw Swing",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "chainsaw-swing-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
             "predicate": [],
             "chance": 25,
             "isFixedChance": false,
@@ -150,8 +150,8 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Chainsaw Swing (Bleed)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "create-clock",
@@ -162,8 +162,8 @@
             "color": "#c03e3f",
             "private": false,
             "label": "Chainsaw Grind",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -171,9 +171,9 @@
             "value": "5 + 3*@actor.clocks.chainsawGrindClk",
             "predicate": [],
             "label": "Chainsaw Grind (Damage)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -183,53 +183,53 @@
             "label": "Chainsaw Grind (Accuracy)",
             "property": "accuracy",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "chainsaw-grind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": "15*@actor.clocks.chainsawGrindClk"
+                "value": "15*@actor.clocks.chainsawGrindClk",
+                "method": 5
               }
             ],
             "dontMerge": true,
             "label": "Chainsaw Grind (Advance)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "chainsaw-grind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Chainsaw Grind (Bleed)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "chainsaw-grind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "label": "Chainsaw Grind (DEF)",
             "chance": 20,
@@ -237,19 +237,19 @@
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "chainsaw-grind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "label": "Chainsaw Grind (Splinter)",
             "chance": 10,
@@ -257,14 +257,14 @@
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -275,18 +275,18 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "35*@actor.clocks.chainsawGrindClk"
+                "value": "35*@actor.clocks.chainsawGrindClk",
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "chainsaw-grind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
             "predicate": [],
             "label": "Chainsaw Grind (Increment)",
             "chance": 100,
@@ -294,14 +294,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "@actor.clocks.chainsawGrindClk"
+                "value": "@actor.clocks.chainsawGrindClk",
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -309,9 +309,9 @@
             "value": 22,
             "predicate": [],
             "label": "Chainsaw (Fling)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -324,8 +324,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -333,11 +333,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

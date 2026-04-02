@@ -63,10 +63,10 @@
             "value": "-round(min(140,max(0,42*((@actor.system.attributes.spe.final*3.5-@target.system.attributes.spe.final)/@actor.system.attributes.spe.final))))",
             "predicate": [],
             "label": "Gyro Ball Scaling",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -77,13 +77,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

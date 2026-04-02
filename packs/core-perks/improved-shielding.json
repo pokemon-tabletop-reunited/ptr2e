@@ -74,14 +74,17 @@
             "value": 0,
             "predicate": [
               {
-                "nor": ["item:slug:hold-the-line", "item:slug:watchers-protection"]
+                "nor": [
+                  "item:slug:hold-the-line",
+                  "item:slug:watchers-protection"
+                ]
               }
             ],
             "alterations": [
               {
-                "mode": 2,
                 "property": "system.changes.0.value",
-                "value": "2"
+                "value": "2",
+                "method": 2
               }
             ]
           },
@@ -91,14 +94,17 @@
             "value": 0,
             "predicate": [
               {
-                "or": ["item:slug:hold-the-line", "item:slug:watchers-protection"]
+                "or": [
+                  "item:slug:hold-the-line",
+                  "item:slug:watchers-protection"
+                ]
               }
             ],
             "alterations": [
               {
-                "mode": 2,
                 "property": "system.changes.0.value",
-                "value": "floor((@origin.system.health.max / 16) * 2)"
+                "value": "floor((@origin.system.health.max / 16) * 2)",
+                "method": 2
               }
             ]
           }
@@ -113,8 +119,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Whenever you would apply Shields to any Target(s) (including yourself), the target(s) gain an additional @Tick[2 shield].</p>",
       "origin": null,
@@ -122,11 +128,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

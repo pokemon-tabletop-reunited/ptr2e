@@ -242,7 +242,10 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       ),
       fields: this.document.schema.fields,
       system: this.document.system,
-      traits
+      traits,
+      showIconOptions: Object.entries(CONST.ACTIVE_EFFECT_SHOW_ICON).map(([k, value]) => ({
+        value, label: game.i18n.localize(`EFFECT.SHOW_ICON.${k.toLowerCase()}`)
+      })).reverse()
     };
   }
 

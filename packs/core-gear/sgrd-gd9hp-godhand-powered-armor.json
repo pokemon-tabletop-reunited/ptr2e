@@ -71,8 +71,8 @@
             "key": "system.inventory.belt.max",
             "value": 4,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -85,8 +85,8 @@
             "spa": null,
             "spd": 20,
             "spe": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -94,9 +94,9 @@
             "value": -35,
             "predicate": [],
             "label": "Godhand Powered Armor (DMG Red)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -104,9 +104,9 @@
             "value": -40,
             "predicate": [],
             "label": "Godhand Powered Armor (Phys Red)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -114,9 +114,9 @@
             "value": -25,
             "predicate": [],
             "label": "Godhand Powered Armor (Weapon)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -124,9 +124,9 @@
             "value": -25,
             "predicate": [],
             "label": "Godhand Powered Armor (Weapon)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -134,9 +134,9 @@
             "value": -25,
             "predicate": [],
             "label": "Godhand Powered Armor (Weapon)Wrath Powered Armor (Weapon)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -144,9 +144,9 @@
             "value": -15,
             "predicate": [],
             "label": "Godhand Powered Armor (Explode)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -154,9 +154,9 @@
             "value": 10,
             "predicate": [],
             "label": "Godhand Powered Armor (Phys Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -164,17 +164,17 @@
             "value": 20,
             "predicate": [],
             "label": "Godhand Powered Armor (Phys Perc)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.effectResistance",
             "value": 20,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -182,62 +182,62 @@
             "value": -1,
             "predicate": [],
             "label": "Godhand Powered Armor (Breakdown Res)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
             "value": -0.35,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "defensive",
             "alterations": [
               {
-                "mode": 2,
                 "property": "system.amount",
-                "value": -40
+                "value": -40,
+                "method": 2
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [],
             "chance": 30,
             "isFixedChance": true,
             "affects": "defensive",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.xbipXPhCJKizKZlg",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.xbipXPhCJKizKZlg",
             "predicate": [],
             "chance": 70,
             "isFixedChance": true,
             "affects": "defensive",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -250,8 +250,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -259,11 +259,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

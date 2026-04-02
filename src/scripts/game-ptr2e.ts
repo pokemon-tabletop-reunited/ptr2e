@@ -98,6 +98,7 @@ const GamePTR = {
     // This needs to be done in Setup as Combat & Combatants aren't yet initialized when actors get initialized.
     for (const combat of (game.combats?.contents ?? []) as CombatPTR2e[]) {
       if (!combat.active) continue;
+      combat.prepareDerivedData();
       const summons = combat.summons;
       if (!summons?.length) continue;
 

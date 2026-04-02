@@ -83,8 +83,8 @@
             "color": "#78736f",
             "private": false,
             "label": "Conservation",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -94,17 +94,17 @@
               "effect:affliction:invisible"
             ],
             "label": "Conservation of Ninjutsu",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.effectHitRate",
             "value": "2*@actor.clocks.conserNinjaClock",
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -113,16 +113,16 @@
             "predicate": [
               "effect:affliction:invisible"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.effectResistance",
             "value": "2*@actor.clocks.conserNinjaClock",
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -130,17 +130,17 @@
             "value": "-2*@target.clocks.conserNinjaClock",
             "predicate": [],
             "label": "Conservation of Ninjutsu",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
             "value": "0.05*@target.clocks.conserNinjaClock",
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -153,8 +153,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -162,11 +162,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

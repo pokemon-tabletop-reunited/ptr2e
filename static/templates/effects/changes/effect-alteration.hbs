@@ -15,7 +15,7 @@
   <content>
     {{#each change.alterations as |alteration|}}
     <div class="alteration">
-      {{formField ../fields.mode value=alteration.mode localize=true name=(concat ../basePath ".alterations." @index ".mode")}}
+      {{formField ../fields.method value=alteration.method localize=true name=(concat ../basePath ".alterations." @index ".method")}}
 
       <div class="form-group">
           <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeKey.label"}}</label>

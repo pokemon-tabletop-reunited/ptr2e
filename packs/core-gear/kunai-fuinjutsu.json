@@ -74,8 +74,8 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -84,8 +84,8 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -94,8 +94,8 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -104,8 +104,8 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -114,8 +114,8 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -124,17 +124,17 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
             "key": "fling-kunai-fuinjutsu-attack-damage",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -148,61 +148,61 @@
                 ]
               }
             ],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-kunai-fuinjutsu-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 60,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-kunai-fuinjutsu-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.nullifiedconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-kunai-fuinjutsu-attack-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-kunai-fuinjutsu-attack-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.nullifiedconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -215,8 +215,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -224,11 +224,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

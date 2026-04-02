@@ -33,8 +33,8 @@
             "affects": "self",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
@@ -46,14 +46,14 @@
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": -2
+                "value": -2,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
@@ -67,8 +67,8 @@
             "affects": "self",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
@@ -82,14 +82,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": -2
+                "value": -2,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -105,10 +105,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -116,11 +115,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -131,7 +125,8 @@
         "createdTime": 1756042267241,
         "modifiedTime": 1756042278650,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "showIcon": 2
     }
   ],
   "flags": {},

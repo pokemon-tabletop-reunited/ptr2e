@@ -70,16 +70,16 @@
             "key": "system.inventory.belt.max",
             "value": 3,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.inventory.accessory.max",
             "value": 1,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -92,8 +92,8 @@
             "spa": null,
             "spd": null,
             "spe": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -101,9 +101,9 @@
             "value": 5,
             "predicate": [],
             "label": "Expedition Frame (Phys Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -111,9 +111,9 @@
             "value": 15,
             "predicate": [],
             "label": "Expedition Frame (Phys Perc)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -121,9 +121,9 @@
             "value": 1,
             "predicate": [],
             "label": "Expedition Frame (Vuln - Electric)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -131,9 +131,9 @@
             "value": 1,
             "predicate": [],
             "label": "Expedition Frame (Vuln - Nuclear)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -141,9 +141,9 @@
             "value": 1,
             "predicate": [],
             "label": "Expedition Frame (Vuln - Sharp)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -151,68 +151,68 @@
             "value": 1,
             "predicate": [],
             "label": "Expedition Frame (Vuln - Explode)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
             "value": -0.2,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "defensive",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
+                "value": -20,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 15,
             "isFixedChance": true,
             "affects": "defensive",
             "alterations": [
               {
-                "mode": 2,
                 "property": "duration.turns",
-                "value": 3
+                "value": 3,
+                "method": 2
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.xbipXPhCJKizKZlg",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.xbipXPhCJKizKZlg",
             "predicate": [],
             "chance": 30,
             "isFixedChance": true,
             "affects": "defensive",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -225,8 +225,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -234,11 +234,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

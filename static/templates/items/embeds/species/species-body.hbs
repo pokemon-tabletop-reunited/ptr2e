@@ -3,6 +3,11 @@
         {{#each document.system.types as |type|}}
             {{{getIcon type}}}
         {{/each}}
+        {{#if @root.extraTypeIcons}}
+            {{#each @root.extraTypeIcons as |type|}}
+                {{{getIcon type}}}
+            {{/each}}
+        {{/if}}
     </aside>
     <main>
         <section class="species-basestats">

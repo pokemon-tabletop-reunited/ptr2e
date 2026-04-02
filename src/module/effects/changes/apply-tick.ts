@@ -8,7 +8,7 @@ export default class ApplyTickChangeSystem extends ChangeModel {
   static override defineSchema() {
     return {
       ...super.defineSchema(),
-      method: new foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>({
+      target: new foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>({
         required: true,
         nullable: false,
         initial: "HP",
@@ -46,7 +46,7 @@ export default class ApplyTickChangeSystem extends ChangeModel {
     if (isNaN(value)) return this.failValidation("Value field did not resolve to a number");
 
     if(this.isFlat) {
-      if(this.method === "PP") {
+      if(this.target === "PP") {
         const current = this.actor.system.powerPoints.value;
         const newValue = Math.clamp(this.actor.system.powerPoints.value + value, 0, this.actor.system.powerPoints.max);
         await this.actor.update({ "system.powerPoints.value": newValue });
@@ -61,14 +61,14 @@ export default class ApplyTickChangeSystem extends ChangeModel {
         });
       }
       else {
-        await this.actor.applyDamage(value * -1, { healShield: this.method === "Shield" && value > 0, silent: false, flat: true, note: ""});
+        await this.actor.applyDamage(value * -1, { healShield: this.target === "Shield" && value > 0, silent: false, flat: true, note: ""});
       }
     } else {
       await this.actor.applyTickDamage({
         ticks: value,
         apply: true,
-        shield: this.method === "Shield",
-        pp: this.method === "PP",
+        shield: this.target === "Shield",
+        pp: this.target === "PP",
         types: this.types
       })
     }
@@ -97,7 +97,7 @@ export default interface ApplyTickChangeSystem extends ChangeModel, ModelPropsFr
 
 interface ApplyTickChangeSchema extends ChangeSchema {
   /** The method to apply the tick damage */
-  method: foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>;
+  target: foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>;
   types: foundry.data.fields.SetField<foundry.data.fields.StringField<PokemonType, PokemonType, true>>;
   isFlat: foundry.data.fields.BooleanField;
 };

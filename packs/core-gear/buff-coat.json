@@ -71,9 +71,9 @@
             "value": -6,
             "predicate": [],
             "label": "Buff Coat (Physical)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -81,9 +81,9 @@
             "value": -5,
             "predicate": [],
             "label": "Buff Coat (Special)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -91,9 +91,9 @@
             "value": -10,
             "predicate": [],
             "label": "Buff Coat (Missile/Sharp)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -101,9 +101,9 @@
             "value": -10,
             "predicate": [],
             "label": "Buff Coat (Missile/Sharp)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -111,9 +111,9 @@
             "value": 10,
             "predicate": [],
             "label": "Buff Coat (Firearm)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -121,17 +121,17 @@
             "value": 10,
             "predicate": [],
             "label": "Buff Coat (RES)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.attributes.spe.base",
             "value": 0.9,
             "predicate": [],
-            "mode": 1,
             "label": "Buff Coat",
-            "ignored": false
+            "ignored": false,
+            "method": 1
           }
         ],
         "slug": null,
@@ -144,8 +144,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -153,11 +153,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

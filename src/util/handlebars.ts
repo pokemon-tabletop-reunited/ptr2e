@@ -27,12 +27,20 @@ function _registerPTRHelpers() {
     function (img: PokemonType | PokemonCategory, args: { hash: Record<string, string> }) {
       const type = (() => {
         const isType = getTypes().includes(img as PokemonType);
-        if(isType) return game.settings.get("ptr2e", "pokemonTypes")[img as PokemonType];
-        if(foundry.applications.instances.get("type-matrix")) {
+        if (isType) return game.settings.get("ptr2e", "pokemonTypes")[img as PokemonType];
+        if (foundry.applications.instances.get("type-matrix")) {
           const cache = (foundry.applications.instances.get("type-matrix") as TypeMatrix).cache
-          if(Object.keys(cache).includes(img)) return cache[img as PokemonType];
+          if (Object.keys(cache).includes(img)) return cache[img as PokemonType];
         }
-        return null;
+        // Allow modules to provide custom icons for categories or types
+        const type: { images: { icon: string; bar: string } } = {
+          images: {
+            icon: "",
+            bar: ""
+          }
+        }
+        Hooks.callAll("ptr2e.getTypeIcon", { type, img });
+        return type.images.icon ? type : null;
       })()
 
       if (!type && !Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory)) {
@@ -412,4 +420,12 @@ function _registerBasicHelpers() {
 
     return ret;
   });
+
+  Handlebars.registerHelper("select", function (selected, options) {
+    const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected));
+    const rgx = new RegExp(` value=["']${escapedValue}["']`);
+    //@ts-expect-error - Ignore error
+    const html = options.fn(this);
+    return html.replace(rgx, "$& selected");
+  })
 }

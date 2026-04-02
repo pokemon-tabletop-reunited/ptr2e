@@ -172,34 +172,34 @@
             "value": 3,
             "predicate": [],
             "label": "Whip",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-strike-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
+                "value": -20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Delay",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-strike-attack-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
             "predicate": [],
             "label": "Bleed",
             "chance": 100,
@@ -207,8 +207,8 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -216,54 +216,54 @@
             "value": 5,
             "predicate": [],
             "label": "Lash",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-lash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
+                "value": -30,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Auto Delay",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-lash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
+                "value": -30,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Delay",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-lash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bleedconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
@@ -271,13 +271,13 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Lash Bleed",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-lash-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
@@ -285,13 +285,13 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Lash Splinter",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-bind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.boundcondition00",
             "predicate": [],
             "label": "Bind Bound",
             "chance": 100,
@@ -299,13 +299,13 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "whip-bind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.grapplecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
             "predicate": [],
             "label": "Bind Grapple",
             "chance": 100,
@@ -313,8 +313,8 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -327,8 +327,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -336,11 +336,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

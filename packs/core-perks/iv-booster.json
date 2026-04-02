@@ -404,7 +404,6 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": [
@@ -484,16 +483,17 @@
             "prompt": "Pick a Stat",
             "adjustName": true,
             "rollOption": "ivBoosterChoice",
-            "flag": "ivBoosterChoice"
+            "flag": "ivBoosterChoice",
+            "method": 2
           },
           {
             "type": "basic",
             "key": "{effect|flags.ptr2e.choiceSelections.ivBoosterChoice}",
             "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -504,13 +504,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Increase one 's IV by 5.</p>",
       "origin": null,

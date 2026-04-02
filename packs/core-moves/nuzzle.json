@@ -30,10 +30,8 @@
           "electric"
         ],
         "description": "<p>Effect: On hit, the target gains @Affliction[paralysis 5].</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
@@ -45,14 +43,16 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "ZKbVAIPd8HzRUe2y",
   "effects": [
     {
       "name": "Nuzzle",
-      "type": "affliction",
+      "type": "passive",
       "_id": "iEpfNvGc5m2qXcT0",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -60,13 +60,17 @@
           {
             "type": "roll-effect",
             "key": "nuzzle-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -76,17 +80,16 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "seconds",
+        "value": null,
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -98,13 +101,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.358",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.2.1",
         "createdTime": 1726137855636,
-        "modifiedTime": 1726137878042,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1774860829329,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
     }
   ]
 }

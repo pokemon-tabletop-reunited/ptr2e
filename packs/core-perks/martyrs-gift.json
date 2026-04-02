@@ -83,26 +83,26 @@
           {
             "type": "roll-effect",
             "key": "martyrs-gift-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "floor(@origin.system.health.max / 4)"
+                "value": "floor(@origin.system.health.max / 4)",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.changes.0.isFlat",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -115,8 +115,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You may provide an ally with Shields based on your own HP Max. The target ally receives Shields equal to 4 Ticks of the user's HP. If the user has Improved Shielding, this Perk benefits from the effect of that (rather than if the recipient has that perk).</p>",
       "origin": null,
@@ -124,11 +124,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.OeB204Ho5OCVR4xB.ActiveEffect.NDv2ChcRTyYGFpan",
         "duplicateSource": null,

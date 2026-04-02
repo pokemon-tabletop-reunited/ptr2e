@@ -1,8 +1,10 @@
 <section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
   <div class="scroll">
-    {{#if (is data.type "affliction")}}
-      {{formField fields.duration.fields.turns value=data.duration.turns localize=true}}
-      {{formField fields.duration.fields.startTurn value=data.duration.startTurn localize=true}}
+    {{#if (is data.type "affliction")}} 
+      {{formField fields.duration.fields.value value=source.duration.value localize=true}}
+      {{#if source.start}}
+        {{formField fields.start.fields.turn value=source.start.turn localize=true}}
+      {{/if}}
 
       <div class="form-group">
         <label>{{localize "PTR2E.Effect.FIELDS.duration.remaining.label"}}</label>
