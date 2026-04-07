@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's attacks that are 60 Power or less gain [Priority 1], or have their [Priority X] increased by 1. An Attack that already has [Priority X] may be used without triggering Interrupts from opponents.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's attacks that are 60 Power or less gain [Priority 1], or have their [Priority X] increased by 1. An Attack that already has [Priority X] may be used without triggering Interrupts from opponents.</p>",
+    "description": "<p>Effect: The user's Attacks with ≤ 60 Base Power gain @Trait[priority-15], and the user's @Trait[interrupt] Attacks have +10% EHR and a 25% chance to grant @Affliction[advance 25]. Enemy creatures cannot declare @Trait[interrupt] Actions in response to the user's @Trait[interrupt] Attacks.</p>",
     "traits": [],
     "slug": "blink",
     "_migration": {
@@ -31,9 +32,120 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "vvI5pDPH9LusBXYI",
-  "effects": []
+  "effects": [
+    {
+      "name": "Blink",
+      "type": "passive",
+      "_id": "n9P6SsNN2s6jqLv3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "value": "blink-toggle",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Blink - Base Power ≤ 60",
+            "state": true,
+            "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "alter-attack",
+            "key": "damaging-attack",
+            "value": "priority-15",
+            "property": "traits",
+            "definition": [],
+            "predicate": [
+              "blink-toggle"
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "interrupt-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 25
+              }
+            ],
+            "dontMerge": false,
+            "key": "interrupt-trait-attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": "Item.VLi3jY1UGtOro2U7.ActiveEffect.NPmJRC4hR2XyoodZ",
+        "exportSource": null,
+        "coreVersion": "14.359",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "createdTime": 1775569581473,
+        "modifiedTime": 1775570590677,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
+    }
+  ]
 }
