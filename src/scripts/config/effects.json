@@ -39,7 +39,7 @@
           "type": "basic",
           "key": "system.attributes.atk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -71,7 +71,7 @@
           "type": "basic",
           "key": "system.attributes.spa.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -98,7 +98,7 @@
           "type": "basic",
           "key": "system.attributes.spa.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -132,7 +132,7 @@
           "key": "system.attributes.spe.value",
           "value": 0.5,
           "predicate": [],
-          "mode": 1,
+          "method": 1,
           "priority": null,
           "ignored": false
         },
@@ -149,7 +149,7 @@
           "affects": "self",
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "effects.0.duration.turns",
               "value": 2
             }
@@ -189,7 +189,7 @@
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -222,7 +222,7 @@
           "key": "damaging-attack-power",
           "value": -50,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "ignored": false,
           "hideIfDisabled": false
         },
@@ -231,7 +231,7 @@
           "key": "system.attributes.spd.stage",
           "value": -1,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "ignored": false
         },
         {
@@ -241,7 +241,7 @@
           "predicate": [],
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "duration.turns",
               "value": 10
             }
@@ -250,7 +250,7 @@
             "grantee": "detach",
             "granter": "cascade"
           },
-          "mode": 2,
+          "method": 2,
           "ignored": false,
           "reevaluateOnUpdate": false,
           "inMemoryOnly": false,
@@ -294,14 +294,14 @@
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spe.value",
           "value": 1.5,
           "predicate": [],
-          "mode": 1,
+          "method": 1,
           "priority": null,
           "ignored": false
         },
@@ -309,7 +309,7 @@
           "type": "basic",
           "key": "system.attributes.spe.stage",
           "value": 1,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -340,7 +340,7 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -409,7 +409,7 @@
             "grantee": "detach",
             "granter": "cascade"
           },
-          "mode": 2,
+          "method": 2,
           "ignored": false,
           "reevaluateOnUpdate": false,
           "inMemoryOnly": false,
@@ -427,7 +427,7 @@
           "affects": "defensive",
           "alterations": [],
           "dontMerge": false,
-          "mode": 2,
+          "method": 2,
           "ignored": false
         }
       ],
@@ -481,7 +481,7 @@
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -513,7 +513,7 @@
           "value": -15,
           "predicate": [],
           "label": "Hindered",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -570,7 +570,7 @@
           "value": -10,
           "predicate": [],
           "label": "Confusion (RES)",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -601,7 +601,7 @@
           "predicate": [],
           "replaceSelf": true,
           "allowDuplicate": false,
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "reevaluateOnUpdate": false,
@@ -620,7 +620,7 @@
           "predicate": [],
           "replaceSelf": true,
           "allowDuplicate": false,
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "reevaluateOnUpdate": false,
@@ -637,7 +637,7 @@
           "key": "attack-damage-percentile",
           "value": 15,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -652,7 +652,7 @@
           "key": "shadow-trait-attack-crit",
           "value": 2,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "ignored": false,
           "hideIfDisabled": false
         },
@@ -664,12 +664,12 @@
           "affects": "self",
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "system.changes.0.value",
               "value": 30
             }
           ],
-  "mode": 2,
+  "method": 2,
   "ignored": false
 }
       ],
@@ -692,13 +692,13 @@
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
@@ -706,7 +706,7 @@
           "value": "10-20*@effect.system.stacks",
           "predicate": [],
           "label": "Weary (EHR)",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -717,7 +717,7 @@
           "value": "10-15*@effect.system.stacks",
           "predicate": [],
           "label": "Weary (RES)",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -744,7 +744,7 @@
           "value": "-15",
           "predicate": [],
           "label": "Exposed",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -783,7 +783,7 @@
           "replaceSelf": true,
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "effects.0.duration.turns",
               "value": "{effect|duration.turns}"
             }
@@ -835,7 +835,7 @@
           "type": "basic",
           "key": "system.attributes.eva.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -871,7 +871,7 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -903,7 +903,7 @@
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -935,7 +935,7 @@
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -967,13 +967,13 @@
           "type": "basic",
           "key": "system.battleStats.atk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.spatk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -1012,7 +1012,7 @@
           "type": "basic",
           "key": "flags.ptr2e.disableActionOptions.disabled",
           "value": "{effect|flags.ptr2e.choiceSelections.disabled}",
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -1075,7 +1075,7 @@
         {
           "type": "alter-attack",
           "value": 1.5,
-          "mode": 1,
+          "method": 1,
           "property": "pp-cost",
           "definition": []
         }
@@ -1116,7 +1116,7 @@
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": -6,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -1192,25 +1192,25 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": 2,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": 2,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.atk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spa.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "roll-option",
@@ -1246,7 +1246,7 @@
           "key": "all-crit",
           "value": 2,
           "label": "Duel - Duel Partner",
-          "mode": 2,
+          "method": 2,
           "predicate": [
             "target:mark:duel",
             "origin:mark:duel"
@@ -1298,7 +1298,7 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": 1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "percentile-modifier",
@@ -1442,7 +1442,7 @@
           "key": "normal-attack",
           "value": "ignore-type-immunity",
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "property": "traits",
@@ -1455,7 +1455,7 @@
           "key": "fighting-attack",
           "value": "ignore-type-immunity",
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "property": "traits",
@@ -1468,7 +1468,7 @@
           "key": "ghost-attack",
           "value": "ignore-type-immunity",
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "property": "traits",
@@ -1528,7 +1528,7 @@
           "value": -20,
           "predicate": [],
           "label": "Unlucky (RES)",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1539,7 +1539,7 @@
           "value": -30,
           "predicate": [],
           "label": "Unlucky (EHR)",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1619,7 +1619,7 @@
           "value": -40,
           "predicate": [],
           "label": "Attacking a Transient creature.",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1630,7 +1630,7 @@
           "value": -75,
           "predicate": [],
           "label": "Attacking a Transient creature.",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1641,7 +1641,7 @@
           "value": -75,
           "predicate": [],
           "label": "Attacking a non-Transient creature.",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false
         }
@@ -1674,7 +1674,7 @@
           "value": -25,
           "predicate": [],
           "label": "Fear",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false
         },
@@ -1684,7 +1684,7 @@
           "value": -15,
           "predicate": [],
           "label": "Fear (RES)",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1861,7 +1861,7 @@
           "value": -40,
           "predicate": [],
           "label": "Taunt - not targeting Source",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false
         }
@@ -1889,13 +1889,13 @@
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "grant-item",
@@ -1959,7 +1959,7 @@
           "key": "attack-damage-percentile",
           "value": -20,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1991,7 +1991,7 @@
           "value": 25,
           "predicate": [],
           "label": "Boosted",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -2023,7 +2023,7 @@
           "value": 10,
           "predicate": [],
           "label": "Hale",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -2055,7 +2055,7 @@
           "value": 25,
           "predicate": [],
           "label": "Argute",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -2086,19 +2086,19 @@
           "type": "basic",
           "key": "system.modifiers.skills",
           "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spe.stage",
           "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "alter-attack",
           "key": "all",
           "value": "1+((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.30))",
-          "mode": 1,
+          "method": 1,
           "definition": [],
           "property": "pp-cost"
         },
@@ -2119,7 +2119,7 @@
           "type": "basic",
           "key": "system.modifiers.movement",
           "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "grant-effect",
@@ -2132,12 +2132,12 @@
           },
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "type",
               "value": "passive"
             },
             {
-              "mode": 5,
+              "method": 5,
               "property": "duration.turns",
               "value": 0
             }
