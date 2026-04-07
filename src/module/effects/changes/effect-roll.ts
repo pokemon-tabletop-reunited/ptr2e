@@ -31,7 +31,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
   static #validateUuid(
     value: unknown
   ): void | foundry.data.validation.DataModelValidationFailure {
-    if (!UUIDUtils.isItemUUID(value)) {
+    if (!UUIDUtils.isEffectUUID(value) && !UUIDUtils.isItemUUID(value)) {
       return new foundry.data.validation.DataModelValidationFailure({
         invalidValue: value,
         message: game.i18n.localize("PTR2E.Effect.FIELDS.ChangeUuid.invalid.notAnItemUuid"),

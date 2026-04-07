@@ -30,6 +30,15 @@ class UUIDUtils {
     }
   }
 
+  static isEffectUUID(uuid: unknown): uuid is EffectUUID {
+    try {
+      return typeof uuid === "string" && fu.parseUuid(uuid).type === "ActiveEffect";
+    }
+    catch {
+      return false;
+    }
+  }
+
   static isActionUUID(uuid: unknown): uuid is ActionUUID {
     try {
       return typeof uuid === "string" && fu.parseUuid(uuid).type === "Actions";
