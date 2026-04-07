@@ -756,11 +756,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -773,12 +773,11 @@
             "reevaluateOnUpdate": true,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -787,7 +786,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -802,9 +802,9 @@
             "spa": 20,
             "spd": 20,
             "spe": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "token-alterations",
@@ -813,7 +813,6 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "texture": "modules/ptr2e-pkmn-sprites/sprites/115_MEGA.webp",
@@ -821,7 +820,8 @@
             "scale": null,
             "name": null,
             "light": null,
-            "alpha": null
+            "alpha": null,
+            "method": 2
           }
         ],
         "slug": null,

@@ -781,11 +781,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -800,9 +800,9 @@
             "spa": 20,
             "spd": 10,
             "spe": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -811,9 +811,9 @@
             ],
             "key": "",
             "value": "telekinetic-10",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -822,9 +822,9 @@
             ],
             "key": "",
             "value": "telekinetic-6",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -833,9 +833,9 @@
             ],
             "key": "",
             "value": "psycher",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -844,9 +844,9 @@
             ],
             "key": "",
             "value": "jump 5",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -855,9 +855,9 @@
             ],
             "key": "",
             "value": "jump 4",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -866,9 +866,9 @@
             ],
             "key": "system.movement.overland.value",
             "value": 0,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -877,9 +877,9 @@
             ],
             "key": "system.movement.overland.value",
             "value": 2,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -888,9 +888,9 @@
             ],
             "key": "system.movement.swim.value",
             "value": 1,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -899,9 +899,9 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -910,9 +910,9 @@
             ],
             "key": "system.skills.aura-sense.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -921,9 +921,9 @@
             ],
             "key": "system.skills.climb.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -932,9 +932,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 25,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -943,9 +943,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 25,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -954,9 +954,9 @@
             ],
             "key": "system.skills.psychic.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -965,9 +965,9 @@
             ],
             "key": "system.skills.spiritual.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -976,9 +976,9 @@
             ],
             "key": "system.skills.running.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -987,9 +987,9 @@
             ],
             "key": "system.skills.swim.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -998,9 +998,9 @@
             ],
             "key": "system.skills.teaching.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -1013,12 +1013,11 @@
             "reevaluateOnUpdate": true,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -1027,7 +1026,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,

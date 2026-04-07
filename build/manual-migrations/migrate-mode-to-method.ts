@@ -11,6 +11,7 @@ const packs = [
   path.resolve(__dirname, "../../packs/core-gear"),
   path.resolve(__dirname, "../../packs/core-moves"),
   path.resolve(__dirname, "../../packs/core-perks"),
+  path.resolve(__dirname, "../../packs/core-species"),
 ]
 for (const pack of packs) {
   for (const file of fs.readdirSync(pack)) {

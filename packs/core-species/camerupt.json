@@ -644,11 +644,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -663,9 +663,9 @@
             "spa": 40,
             "spd": 30,
             "spe": -20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -674,9 +674,9 @@
             ],
             "key": "",
             "value": "fictile",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -685,9 +685,9 @@
             ],
             "key": "",
             "value": "jump 2",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -696,9 +696,9 @@
             ],
             "key": "",
             "value": "jump 1",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -707,9 +707,9 @@
             ],
             "key": "system.movement.overland.value",
             "value": -2,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -718,9 +718,9 @@
             ],
             "key": "system.skills.climb.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -729,9 +729,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -740,9 +740,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -751,9 +751,9 @@
             ],
             "key": "system.skills.natural-world.value",
             "value": 0,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -762,9 +762,9 @@
             ],
             "key": "system.skills.geology.value",
             "value": 30,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -773,9 +773,9 @@
             ],
             "key": "system.skills.running.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -787,13 +787,12 @@
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 2,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 2
               }
             ],
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -802,7 +801,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
