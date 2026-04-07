@@ -604,5 +604,6 @@ export type TypeEffectiveness = {
     effectiveness: {
       [type in PokemonType]: number;
     };
+    hide?: boolean;
   };
 }

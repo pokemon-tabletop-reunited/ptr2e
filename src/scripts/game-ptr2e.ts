@@ -92,6 +92,19 @@ const GamePTR = {
   onSetup() {
     // Run "delayed" constructor of game.ptr.tooltips
     game.ptr.tooltips.observe();
+
+    // Check if Shadow/Nuclear types have the hide property, and if not, set it.
+    const types = game.settings.get("ptr2e", "pokemonTypes");
+    let needsUpdate = false;
+    for (const type of ["shadow", "nuclear"] as const) {
+      if (types[type] && !("hide" in types[type])) {
+        types[type].hide = true;
+        needsUpdate = true;
+      }
+    }
+    if (needsUpdate) {
+      game.settings.set("ptr2e", "pokemonTypes", types);
+    }
   },
   onReady() {
     // If there are any active combats, make sure to handle Summon Effects
