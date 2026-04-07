@@ -376,7 +376,7 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
   /** The originating item of this attack, if any */
   item?: ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null;
   /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-  rollMode?: RollMode | "roll";
+  rollMode?: RollMode;
   /** Should the dialog be skipped */
   skipDialog?: boolean;
   // /** Should this roll be rolled twice? If so, should it keep highest or lowest? */

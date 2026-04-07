@@ -44,7 +44,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     }
     if (updated) {
       // this._source.rolls = rolls.map(r => JSON.stringify(r));
-      this.updateSource({ rolls: rolls.map((r) => JSON.stringify(r)) });
+      //this.updateSource({ rolls: rolls.map((r) => JSON.stringify(r)) });
     }
     return super.prepareDerivedData();
   }
@@ -419,11 +419,12 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
 
     //@ts-expect-error - Chatmessages aren't typed properly yet
-    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({ //@ts-expect-error - Chatmessages aren't typed properly yet
       type,
       speaker,
       flavor,
       system: fu.duplicate(system),
+      rolls: [roll]
     }, { messageMode: context.rollMode });
   }
 
@@ -460,11 +461,12 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     const flavor = context.title ?? "";
 
     //@ts-expect-error - Chatmessages aren't typed properly yet
-    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({ //@ts-expect-error - Chatmessages aren't typed properly yet
       type,
       speaker,
       flavor,
       system: fu.duplicate(system),
+      rolls: Object.values(system.rolls)
     }, { messageMode: context.rollMode });
   }
 
@@ -557,15 +559,22 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     };
     if (context.attack?.type === "summon") system.originItem = context.item?.toJSON();
 
+    const rollsData = results.map(r => {
+      const results = Object.values(r.rolls).filter((roll): roll is Rolled<CheckRoll> => roll !== null);
+      if(r.context.effectRolls?.origin?.length) results.push(...r.context.effectRolls.origin.map(er => er.roll).filter((roll): roll is Rolled<CheckRoll> => roll !== null));
+      if(r.context.effectRolls?.target?.length) results.push(...r.context.effectRolls.target.map(er => er.roll).filter((roll): roll is Rolled<CheckRoll> => roll !== null));
+      return results;
+    }).concat(context.selfEffectRolls?.map(er => er.roll).filter((roll): roll is Rolled<CheckRoll> => roll !== null) ?? []).filter((roll) => roll !== null).flat();
+
     // @ts-expect-error - Chatmessages aren't typed properly yet
-    return dataOnly ? { type: "attack", speaker, flavor, system, }
-      // @ts-expect-error - Chatmessages aren't typed properly yet
-      : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
+    return dataOnly ? { type: "attack", speaker, flavor, system, rolls: rollsData } 
+      : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({ //@ts-expect-error - Chatmessages aren't typed properly yet
         type: "attack",
         speaker,
         flavor,
         system: fu.duplicate(system),
-      }, { messageMode: context.rollMode });
+        rolls: rollsData
+      }, { messageMode: context.rollMode }) as unknown as Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined>;
   }
 
   override get isRoll(): boolean {
