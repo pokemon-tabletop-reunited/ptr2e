@@ -53,7 +53,7 @@ interface BaseRollContext {
     /** Any notes which should be shown for the roll. */
     notes?: (RollNote | RollNoteSource)[];
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-    rollMode?: RollMode | "roll";
+    rollMode?: RollMode | "roll" | "public";
     /** If this is an attack, the target of that attack */
     target?: RollTarget | null;
     /** Action traits associated with the roll */

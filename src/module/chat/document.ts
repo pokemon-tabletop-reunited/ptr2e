@@ -424,7 +424,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system: fu.duplicate(system),
-    }, { rollMode: context.rollMode });
+    }, { messageMode: context.rollMode });
   }
 
   static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
@@ -465,7 +465,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system: fu.duplicate(system),
-    }, { rollMode: context.rollMode });
+    }, { messageMode: context.rollMode });
   }
 
   static async createFromResults(
@@ -565,7 +565,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         speaker,
         flavor,
         system: fu.duplicate(system),
-      }, { rollMode: context.rollMode });
+      }, { messageMode: context.rollMode });
   }
 
   override get isRoll(): boolean {

@@ -1,4 +1,5 @@
 import * as R from "remeda";
+import { EffectUUID } from "types/foundry/common/documents/active-effect.js";
 
 class UUIDUtils {
   static async fromUUIDs(
