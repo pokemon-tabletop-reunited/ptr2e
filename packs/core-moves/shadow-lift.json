@@ -9,26 +9,29 @@
         "slug": "shadow-lift",
         "name": "Shadow Lift",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "flinch-25"
+        ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 8
+          "powerPoints": 4
         },
         "category": "status",
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: The target is @Affliction[lifted 5]. Shadow Lift fails if the target is @Affliction[grounded].</p>",
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "description": "<p>Effect: The target is @Affliction[lifted 3]. This Attack fails if the target is @Affliction[grounded].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": [],
+        "accuracy": 70
       }
     ],
-    "grade": "A",
+    "grade": "D",
     "traits": [],
     "_migration": {
       "version": null,
@@ -38,7 +41,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "XL2mwxQG7Po2BpvP",
@@ -58,21 +62,34 @@
             "chance": 100,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "alterations": [],
-            "method": 2
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -84,13 +101,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1737746877425,
-        "modifiedTime": 1737746900121,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1775576924048,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
     }
   ]
 }

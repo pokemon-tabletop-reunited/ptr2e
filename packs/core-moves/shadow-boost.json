@@ -9,25 +9,27 @@
         "slug": "shadow-boost",
         "name": "Shadow Boost",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "flinch-20"
+        ],
         "range": {
           "target": "self",
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 6
         },
         "category": "status",
         "types": [
           "shadow"
         ],
         "description": "<p>Effect: The user's DEF and SPDEF Stages are reduced by -1, and their ATK and SPATK Stages are increased by +3 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "traits": [],
     "_migration": {
       "version": null,
@@ -37,7 +39,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "8XIuyqZaczFmCebp",
@@ -55,10 +58,14 @@
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 100,
-            "affects": "target",
+            "affects": "self",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -66,10 +73,14 @@
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
-            "affects": "target",
+            "affects": "self",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -77,10 +88,14 @@
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.tH75RuGeGEDpXSah",
             "predicate": [],
             "chance": 100,
-            "affects": "target",
+            "affects": "self",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -88,22 +103,30 @@
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAz",
             "predicate": [],
             "chance": 100,
-            "affects": "target",
+            "affects": "self",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -115,13 +138,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1737317785606,
-        "modifiedTime": 1737317922811,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1775575295864,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
