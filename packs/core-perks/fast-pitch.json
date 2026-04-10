@@ -11,26 +11,25 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You may spend 4 PP to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action at @Trait[flinch-30] @Trait[interrupt] once before the start of your next Activation.</p>",
+    "description": "<p>Effect: The user may spend @PP[-2] to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action @Trait[interrupt] at @Trait[flinch-30]. This may only be done once between start of one of the user's Activations and the start of the subsequent one.</p>",
     "actions": [
       {
         "name": "Fast Pitch",
         "slug": "fast-pitch",
-        "description": "<p>You may spend 4 PP to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action at @Trait[flinch 30], @Trait[interrupt-2] once before the start of your next Activation.</p>",
+        "description": "<p>Effect: The user may spend @PP[-2] to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action @Trait[interrupt] at @Trait[flinch-20]. This may only be done once between start of one of the user's Activations and the start of the subsequent one.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 2
         },
         "type": "generic",
         "traits": [
-          "interrupt-2",
-          "flinch-30"
+          "interrupt",
+          "flinch-20"
         ],
         "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 10
+          "target": "self",
+          "unit": "m"
         }
       }
     ],
