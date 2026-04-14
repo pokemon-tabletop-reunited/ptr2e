@@ -37,8 +37,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "types": [
           "untyped"
@@ -47,7 +46,8 @@
         "power": 65,
         "accuracy": 100,
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "description": "<p>Ammo Use: 1</p>"
       },
       {
         "name": "Magnum Laser",
@@ -64,8 +64,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "complex"
         },
         "types": [
           "untyped"
@@ -74,7 +73,8 @@
         "power": 140,
         "accuracy": 90,
         "predicate": [],
-        "variant": "las-shot"
+        "variant": "las-shot",
+        "description": "<p>Ammo Use: 4</p>"
       }
     ],
     "description": "<p>The DP4 is a specialty-manufactured directed energy weapon, designed to fit the role of a sidearm for security or military personnel. The DP4 is loaded with current generation capacitor bank magazines as their standard configuration, giving them a fair few number of shots at quite a significant punch and a “Beam Magnum” selector, to allow for higher output and stopping power.</p>",
@@ -88,7 +88,7 @@
       "handsHeld": null,
       "slot": "held"
     },
-    "grade": "B",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": 80,
@@ -131,7 +131,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -141,7 +142,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -155,7 +157,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -167,12 +171,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
         "lastModifiedBy": "5ImYyhOS2D6D7ypO",
-        "modifiedTime": 1767455878957
-      }
+        "modifiedTime": 1767455878957,
+        "createdTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "diU7kRmRRVoAsCX8"
