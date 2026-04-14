@@ -845,6 +845,10 @@
           "label": "Priority",
           "hint": "Affliction's are applied in batches based on their priority, from lowest to highest.\nThe system keeps all healing Affliction at priority 0, and all damaging Afflictions at priority 30, and in-between those numbers special cases are handled.\n\nFor homebrew content we recommend using these same numbers if your Affliction is meant to be applied in the same batch as the system Afflictions."
         },
+        "predicate": {
+          "label": "Formula Predicate",
+          "hint": "The formula's damage/healing will only be applied if this Predicate passes."
+        },
         "formula": {
           "label": "Formula",
           "hint": "The result of this formula will be multiplied by the afflicted target's Max HP.\nExample Input: \"1/16\" (this is 1 tick)"

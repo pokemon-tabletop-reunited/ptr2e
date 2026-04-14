@@ -94,11 +94,11 @@ class SummonStatistic extends AttackStatistic {
    */
   static resolveInjectedProperties<T extends string | number | object | null | undefined>(
     source: T,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack?: AttackPTR2e }
+    injectables: { actor: Maybe<ActorPTR2e>; item: Maybe<ItemPTR2e>; attack?: AttackPTR2e }
   ): T;
   static resolveInjectedProperties(
     source: string | number | object | null | undefined,
-    injectables: { actor: Maybe<ActorPTR2e>; item: ItemPTR2e; attack: AttackPTR2e }
+    injectables: { actor: Maybe<ActorPTR2e>; item: Maybe<ItemPTR2e>; attack: AttackPTR2e }
   ): string | number | object | null | undefined {
     if (
       source === null ||

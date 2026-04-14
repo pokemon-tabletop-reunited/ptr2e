@@ -1388,7 +1388,7 @@ class ActorPTR2e<
               type: "damage-applied",
               system: {
                 notes,
-                rollNotes: rollNotes.map(note => note.html),
+                rollNotes: rollNotes.map(note => note.html).filter(note => note?.length),
                 damageApplied: oldHealth - newHealth,
                 target: this.uuid,
                 result: {
