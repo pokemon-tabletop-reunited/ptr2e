@@ -12,7 +12,7 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
       return {
         ...super.defineSchema(),
 
-        slug: new SlugField({ required: true, label: "PTR2E.FIELDS.slug.label", hint: "PTR2E.FIELDS.slug.hint" }),
+        slug: new SlugField<string, string, true, false, true>({ required: true, label: "PTR2E.FIELDS.slug.label", hint: "PTR2E.FIELDS.slug.hint"}),
       };
     }
 
@@ -46,5 +46,5 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
 }
 
 export interface SlugSchema extends foundry.data.fields.DataSchema {
-  slug: SlugField<string, string, true, false, false>;
+  slug: SlugField<string, string, true, false, true>;
 }

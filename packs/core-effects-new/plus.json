@@ -1,0 +1,64 @@
+{
+  "name": "Plus",
+  "type": "passive",
+  "_id": "6BmJwaHUn9p9QmjO",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "changes": [
+      {
+        "type": "roll-option",
+        "key": "",
+        "value": "plus:active",
+        "predicate": [],
+        "domain": "all",
+        "toggleable": true,
+        "count": false,
+        "state": true,
+        "alwaysActive": false,
+        "ignored": false,
+        "suboptions": [],
+        "method": 2
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.atkMultiplier",
+        "value": 0.5,
+        "predicate": [
+          "plus:active"
+        ],
+        "ignored": false,
+        "method": 2
+      }
+    ],
+    "slug": null,
+    "traits": [],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "removeAfterAttacking": false,
+    "removeAfterAttacked": false,
+    "stacks": 0
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": null
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Item.J2ekYuogY58G0EFZ.ActiveEffect.JTFKaBfQ9bPTy5P3",
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "createdTime": 1765274837267,
+    "modifiedTime": 1765274837267,
+    "lastModifiedBy": "mK35yvCqCgiTUvKf"
+  }
+}

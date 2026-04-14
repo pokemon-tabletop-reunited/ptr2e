@@ -31,18 +31,18 @@
             "domain": "all",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.battleStats.accuracy.stage",
             "value": -1,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -58,10 +58,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -69,11 +68,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -84,7 +78,8 @@
         "createdTime": 1756043708214,
         "modifiedTime": 1756043714153,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "showIcon": 2
     }
   ],
   "flags": {},

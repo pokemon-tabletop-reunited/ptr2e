@@ -671,7 +671,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       if(effect?.active) {
         for(const change of effect.changes.map((change) => {
           const c = foundry.utils.deepClone(change);
-          c.priority = c.priority ?? c.mode * 10;
+          c.priority = c.priority ?? c.method * 10;
           return c;
         }).sort((a, b) => a.priority! - b.priority!)) {
           change.effect.apply(this.parent, change.clone());

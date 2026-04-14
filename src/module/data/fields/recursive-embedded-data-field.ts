@@ -75,7 +75,7 @@ class RecursiveEmbeddedDataField<
   }
 
   //@ts-expect-error - This is correct
-  migrateSource(sourceData, fieldData) {
+  override _migrate(sourceData, fieldData) {
     //@ts-expect-error - This is correct
     if (fieldData) this.model.migrateDataSafe(fieldData);
   }

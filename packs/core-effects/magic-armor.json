@@ -33,10 +33,10 @@
             "key": "special-attack",
             "value": "spd",
             "predicate": [],
-            "mode": 2,
             "ignored": false,
             "property": "offensiveStat",
-            "definition": []
+            "definition": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -54,10 +54,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -65,11 +64,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -79,7 +73,8 @@
         "systemVersion": "1.4.3.beta",
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "modifiedTime": 1756025632490
-      }
+      },
+      "showIcon": 2
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",

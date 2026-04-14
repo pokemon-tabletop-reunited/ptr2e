@@ -30,13 +30,13 @@ export default class BasicChangeSystem extends ChangeModel {
       change: change,
     }
     const changeValue = change.resolveValue(change.value, 0, { resolvables });
-    const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
+    const newValue = BasicChangeSystem.getNewValue(change.method, current, changeValue, change.merge);
     if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
       return change.failValidation(newValue.asError().message);
     }
 
     // Handle arrays
-    if (change.mode === CHANGE_MODES.ADD && (Array.isArray(current) || current instanceof Set)) {
+    if (change.method === CHANGE_MODES.ADD && (Array.isArray(current) || current instanceof Set)) {
       if (Array.isArray(current)) {
         if (!current.includes(newValue)) {
           current.push(newValue);
@@ -45,7 +45,7 @@ export default class BasicChangeSystem extends ChangeModel {
       else {
         current.add(newValue);
       }
-    } else if(change.mode === CHANGE_MODES.REMOVE && (Array.isArray(current) || current instanceof Set)) {
+    } else if(change.method === CHANGE_MODES.REMOVE && (Array.isArray(current) || current instanceof Set)) {
       if (Array.isArray(current)) {
         if (current.includes(newValue)) {
           current.splice(current.indexOf(newValue), 1);

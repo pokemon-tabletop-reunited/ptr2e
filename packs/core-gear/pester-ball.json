@@ -61,7 +61,6 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": [
@@ -167,7 +166,8 @@
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "pb-affliction",
-            "flag": "pb-affliction"
+            "flag": "pb-affliction",
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -176,38 +176,37 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "effects.0.system.changes.0.selection",
-                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction}"
+                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction}",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "effects.0.system.changes.1.key",
-                "value": "fling-pester-ball-{effect|flags.ptr2e.choiceSelections.pb-affliction.slug}-attack"
+                "value": "fling-pester-ball-{effect|flags.ptr2e.choiceSelections.pb-affliction.slug}-attack",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "effects.0.system.changes.1.value",
-                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction.uuid}"
+                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction.uuid}",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Pester Ball ({effect|flags.ptr2e.choiceSelections.pb-affliction.slug|C})"
+                "value": "Pester Ball ({effect|flags.ptr2e.choiceSelections.pb-affliction.slug|C})",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.slug",
-                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction.slug}"
+                "value": "{effect|flags.ptr2e.choiceSelections.pb-affliction.slug}",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.description",
-                "value": "<p>Effect: When Flung and on hit, the target has a 20% chance of gaining @Affliction[{effect|flags.ptr2e.choiceSelections.pb-affliction.slug} 3].</p>"
+                "value": "<p>Effect: When Flung and on hit, the target has a 20% chance of gaining @Affliction[{effect|flags.ptr2e.choiceSelections.pb-affliction.slug} 3].</p>",
+                "method": 5
               }
             ],
             "replaceSelf": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -217,26 +216,27 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "override",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 20,
             "affects": "target",
             "dontMerge": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 3
+                "value": 3,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -250,13 +250,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>When created, the Pester Ball has its designated Affliction selected from a Choice Set of:</p><blockquote><p>Burn, Poison, Paralysis, Drowsy, Frostbite, Splinter, Confused, Stunted, Blinded, Stuck, Suppressed, Nullified, Enraged, Charmed, Taunted.</p></blockquote>",
       "origin": null,

@@ -29,6 +29,12 @@ export const ACTIVE_EFFECT_MODES: {
     OVERRIDE: 5;
 };
 
+export const ACTIVE_EFFECT_SHOW_ICON: {
+  NEVER: 0;
+  CONDITIONAL: 1;
+  ALWAYS: 2;
+}
+
 export const REGION_EVENTS: {
 
   /**

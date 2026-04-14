@@ -36,10 +36,10 @@
             "type": "basic",
             "key": "system.modifiers.hpMultiplier",
             "value": 2,
-            "mode": 1,
             "predicate": [],
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           },
           {
             "type": "basic",
@@ -47,8 +47,8 @@
             "value": 10,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "create-clock",
@@ -59,8 +59,8 @@
             "color": "#c80096",
             "private": false,
             "label": "Max PP Spend",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -70,8 +70,8 @@
             "property": "pp-cost",
             "definition": [],
             "label": "Dynamax (Boost Cost)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -81,8 +81,8 @@
             "property": "power",
             "definition": [],
             "label": "Dynamax (Extra Boost)",
-            "mode": 1,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           },
           {
             "type": "ephemeral-effect",
@@ -92,13 +92,13 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "25*@actor.clocks.dynamaxClockUser"
+                "value": "25*@actor.clocks.dynamaxClockUser",
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
@@ -110,20 +110,20 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "dynamaxClockUser"
+                "value": "dynamaxClockUser",
+                "method": 5
               },
               {
-                "mode": 2,
                 "property": "system.changes.0.value",
-                "value": "-1-@actor.clocks.dynamaxClockUser"
+                "value": "-1-@actor.clocks.dynamaxClockUser",
+                "method": 2
               }
             ],
             "dontMerge": true,
             "label": "Max Attack Use",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -139,13 +139,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 6,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 6,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -153,11 +149,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Item.egJEb7g3wbErCZZG.ActiveEffect.t8yIS103g8UpyjqL",
         "duplicateSource": null,

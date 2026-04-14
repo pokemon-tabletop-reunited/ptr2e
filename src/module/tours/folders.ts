@@ -358,7 +358,7 @@ export class FoldersTour extends PTRTour {
         left:
           window.innerWidth -
           310 -
-          (CONFIG.PTR.Folder.sheetClasses.folder.DEFAULT_OPTIONS.position!.width as number),
+          (CONFIG.PTR.Folder.sheetClass.DEFAULT_OPTIONS.position!.width as number),
       }
     );
     return this.delay(150);

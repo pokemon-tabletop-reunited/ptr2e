@@ -57,7 +57,7 @@
   "effects": [
     {
       "name": "Ballistic",
-      "type": "affliction",
+      "type": "passive",
       "_id": "Ballisticyj07dBR",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -68,10 +68,10 @@
             "value": 30,
             "predicate": [],
             "label": "Ballistic",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -85,13 +85,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

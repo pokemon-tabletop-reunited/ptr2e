@@ -83,7 +83,7 @@
           {
             "type": "roll-effect",
             "key": "bug-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.infestedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.infestedconditio",
             "predicate": [
               "origin:enemy"
             ],
@@ -93,8 +93,8 @@
             "alterations": [],
             "dontMerge": false,
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -107,13 +107,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -121,11 +116,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

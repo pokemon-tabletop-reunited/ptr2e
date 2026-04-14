@@ -68,19 +68,45 @@ type ActiveEffectSchema<
         fields.SchemaField<{
             key: fields.StringField<string, string, true, false, false>;
             value: fields.StringField<string, string, true, false, false> | fields.NumberField<number, number, true, true, true>;
-            mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>;
             priority: fields.NumberField;
         }>
     >;
     disabled: fields.BooleanField;
+    start: fields.SchemaField<{
+      combat: fields.StringField<string, string, true, true, true>;
+      combatant: fields.StringField<string, string, true, true, true>;
+      initiative: fields.NumberField<number, number, true, true, true>;
+      round: fields.NumberField<number, number, true, true, true>;
+      turn: fields.NumberField<number, number, true, true, true>;
+      time: fields.NumberField<number, number, true, false, true>;
+    }, SourceFromSchema<{
+      combat: fields.StringField<string, string, true, true, true>;
+      combatant: fields.StringField<string, string, true, true, true>;
+      initiative: fields.NumberField<number, number, true, true, true>;
+      round: fields.NumberField<number, number, true, true, true>;
+      turn: fields.NumberField<number, number, true, true, true>;
+      time: fields.NumberField<number, number, true, false, true>;
+    }>, {
+      combat: Combat | null;
+      combatant: string | null;
+      initiative: number | null;
+      round: number | null;
+      turn: number | null;
+      time: number;
+    }, false, true, false>;
     duration: fields.SchemaField<{
-        startTime: fields.NumberField<number, number, false, true, true>;
-        seconds: fields.NumberField;
-        combat: fields.ForeignDocumentField;
-        rounds: fields.NumberField;
-        turns: fields.NumberField;
-        startRound: fields.NumberField;
-        startTurn: fields.NumberField;
+        units: fields.StringField<"years" | "months" | "days" | "hours" | "minutes" | "seconds" | "rounds" | "turns">
+        value: fields.NumberField<number, number, true, true, true>;
+        expiry: fields.StringField;
+        expired: fields.BooleanField;
+
+        // startTime: fields.NumberField<number, number, false, true, true>;
+        // seconds: fields.NumberField;
+        // combat: fields.ForeignDocumentField;
+        // rounds: fields.NumberField;
+        // turns: fields.NumberField;
+        // startRound: fields.NumberField;
+        // startTurn: fields.NumberField;
     }>;
     description: fields.HTMLField;
     icon: fields.FilePathField<ImageFilePath>;
@@ -90,6 +116,7 @@ type ActiveEffectSchema<
     transfer: fields.BooleanField;
     statuses: fields.SetField<fields.StringField<string, string, true, false, false>>;
     flags: fields.ObjectField<DocumentFlags>;
+    showIcon: fields.NumberField<0 | 1 | 2, 0 | 1 | 2, false, true, true>;
     _stats: fields.DocumentStatsField;
 };
 
@@ -97,3 +124,4 @@ export type ActiveEffectSource<TType extends string = string, TSystemSource exte
 
 export type EffectChangeData = BaseActiveEffect<null>["changes"][number];
 export type EffectDurationData = BaseActiveEffect<null>["duration"];
+export type EffectStartData = BaseActiveEffect<null>["start"];

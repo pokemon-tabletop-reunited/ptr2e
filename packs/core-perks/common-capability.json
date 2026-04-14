@@ -20,7 +20,6 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
@@ -28,12 +27,13 @@
             "track": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -46,8 +46,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain @UUID[Compendium.ptr2e.core-abilities.DnlBpzjzOQD37SSy]{Tinted Lens} as an Extra Ability.<br /><br />The user learns 3 Moves from its Species, Type, or Egg Tutor lists, up to two Grades above their current Grade.</p>",
       "origin": null,

@@ -56,14 +56,14 @@
           {
             "type": "roll-effect",
             "key": "shadow-mist-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.5MQzVTuubNTERPjS",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.5MQzVTuubNTERPjS",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -74,13 +74,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -110,26 +105,26 @@
           {
             "type": "roll-effect",
             "key": "shadow-mist-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
+                "value": -30,
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Delay 30%"
+                "value": "Delay 30%",
+                "method": 5
               }
-            ]
+            ],
+            "method": 2
           }
         ],
         "slug": null,
@@ -137,6 +132,10 @@
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
       }
     }
   ]

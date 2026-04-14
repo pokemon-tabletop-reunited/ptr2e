@@ -130,9 +130,9 @@
             "key": "",
             "value": "Healer",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -145,13 +145,13 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "alterations": [],
-            "track": false
+            "track": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -164,13 +164,13 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "alterations": [],
-            "track": false
+            "track": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -181,13 +181,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

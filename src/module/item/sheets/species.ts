@@ -89,6 +89,9 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
   };
 
   override async _prepareContext() {
+    const extraTypeIcons = {icons: new Set()};
+    Hooks.callAll("ptr2e.getExtraTypeIcons", extraTypeIcons, this.document);
+
     return {
       ...(await super._prepareContext()),
       copyPresent:
@@ -98,7 +101,8 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         const category = this.document._source.system.abilities[key]! as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[];
         acc[key] = category.map(ability => ({ slug: ability.slug, contentLink: Handlebars.helpers.asContentLink(ability.uuid) }));
         return acc;
-      }, {} as Record<string, { slug: string, contentLink: string }[]>)
+      }, {} as Record<string, { slug: string, contentLink: string }[]>),
+      extraTypeIcons: extraTypeIcons.icons
     };
   }
 

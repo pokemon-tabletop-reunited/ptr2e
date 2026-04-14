@@ -49,13 +49,13 @@
         "type": "basic",
         "key": "system.modifiers.hpMultiplier",
         "value": "{trait|value}",
-        "mode": 5
+        "method": 5
       },
       {
         "type": "basic",
         "key": "system.modifiers.ppMultiplier",
         "value": "{trait|value}",
-        "mode": 5
+        "method": 5
       }
     ]
   },
@@ -163,7 +163,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "sharp"
       }
     ]
@@ -366,7 +366,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "sonic"
       }
     ]
@@ -922,7 +922,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "horn"
       }
     ]
@@ -1202,12 +1202,12 @@
         "predicate": [],
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.actions.0.free",
             "value": "true"
           }
         ],
-        "mode": 2,
+        "method": 2,
         "priority": null,
         "ignored": false,
         "reevaluateOnUpdate": false,
@@ -1574,7 +1574,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "jaw"
       }
     ]
@@ -1590,7 +1590,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "tailed"
       }
     ]
@@ -3020,7 +3020,7 @@
         "predicate": [
           "target:effect:affliction:grounded"
         ],
-        "mode": 2,
+        "method": 2,
         "hideIfDisabled": true
       }
     ]
@@ -3095,12 +3095,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "-{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Delay {trait|value}%"
           }
@@ -3115,12 +3115,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "-{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Delay {trait|value}%"
           }
@@ -3405,12 +3405,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Advance {trait|value}%"
           }
@@ -3425,12 +3425,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Advance {trait|value}%"
           }
@@ -3662,6 +3662,12 @@
     "label": "Social",
     "related": [],
     "description": "Denotes if an attack or ability features social interaction."
+  },
+  {
+    "slug": "attention",
+    "label": "Attention",
+    "related": [],
+    "description": "Denotes if an effect affects a creature's ability to focus."
   },
   {
     "slug": "sonic",
@@ -4652,9 +4658,9 @@
   },
   {
     "slug": "closed-heart",
-    "label": "Closed-Heart",
+    "label": "Closed Heart",
     "related": [],
-    "description": "Creatures with this Trait possess a heart that's been forcefully closed, gaining the following changes:\n1) +50% SPD\n2) The Extra Abilities \"Hyper Agressive\" and \"Coldhearted\"\n3) +1 Active List Slot\n4) Access to the [Shadow] %lt;Type&gt;Learnlist\n5) The Anguish Skill (100 by default) and its associated mechanics\n6) Are susceptible to the \"Hyper Mode\" Affliction\n7) Cannot undergo Evolution or other miscellaneous transformations\n8. Placed onto a slower EXP Track, based on their Species"
+    "description": "Creatures with this Trait possess a heart that's been forcefully closed."
   },
   {
     "slug": "ignore-immunity",

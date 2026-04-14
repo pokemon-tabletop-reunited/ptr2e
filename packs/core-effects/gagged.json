@@ -29,7 +29,9 @@
       "system": {
         "changes": [],
         "slug": null,
-        "traits": ["minor-affliction"],
+        "traits": [
+          "minor-affliction"
+        ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "removeAfterAttacking": false,
@@ -41,10 +43,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": 5,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -52,11 +53,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -65,7 +61,8 @@
         "systemId": "ptr2e",
         "systemVersion": "1.4.4.beta",
         "lastModifiedBy": null
-      }
+      },
+      "showIcon": 2
     }
   ],
   "_id": "V8CNzN148X1bYsSS"

@@ -162,7 +162,7 @@ class FolderPTR2e<
         data
       ),
       createOptions
-    );
+    ) as FolderPTR2e;
     return new Promise((resolve) => {
       dialogOptions.resolve = resolve;
       const position = {
@@ -173,7 +173,10 @@ class FolderPTR2e<
         document: folder,
         position,
       }, { inplace: false }) as Partial<foundry.applications.api.DocumentSheetConfiguration>;
-      new FolderConfigPTR2e(appOptions).render(true);
+      //@ts-expect-error - Missing foundry types
+      const sheetClasses = foundry.applications.apps.DocumentSheetConfig.getSheetClassesForSubType("Folder", folder.type);
+      const cls = (CONFIG.Folder.sheetClasses?.[sheetClasses?.defaultClass]?.cls || FolderConfigPTR2e) as unknown as typeof FolderConfigPTR2e;
+      new cls(appOptions).render(true);
     });
   }
 }

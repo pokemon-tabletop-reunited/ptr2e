@@ -64,7 +64,7 @@
           {
             "type": "roll-effect",
             "key": "ground-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.groundedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.groundedconditio",
             "predicate": [
               "origin:enemy"
             ],
@@ -74,8 +74,8 @@
             "alterations": [],
             "dontMerge": false,
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -88,13 +88,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Passive: Your @Trait[ground] Type moves gain a +20% chance to inflict the @Affliction[grounded] Affliction.</p>",
       "origin": null,
@@ -102,11 +97,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

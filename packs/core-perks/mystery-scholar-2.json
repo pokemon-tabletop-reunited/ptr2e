@@ -54,13 +54,13 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ms21"
+            "rollOption": "ms21",
+            "method": 2
           },
           {
             "type": "basic",
@@ -68,21 +68,21 @@
             "value": 5,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ms22"
+            "rollOption": "ms22",
+            "method": 2
           },
           {
             "type": "basic",
@@ -90,29 +90,29 @@
             "value": 5,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
             "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms23",
-            "priority": null
+            "priority": null,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms23}.mod",
             "value": 5,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -120,21 +120,21 @@
             "value": 5,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ms25"
+            "rollOption": "ms25",
+            "method": 2
           },
           {
             "type": "basic",
@@ -142,29 +142,29 @@
             "value": 5,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
             "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms26",
-            "priority": null
+            "priority": null,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms26}.mod",
             "value": 5,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -177,13 +177,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

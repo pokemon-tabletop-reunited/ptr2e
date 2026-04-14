@@ -75,7 +75,7 @@ export default abstract class MoveSystem extends HasEmbed(
     super.prepareBaseData();
     const primaryAction = this.attack;
     if (primaryAction?.slug !== this.slug) {
-      console.warn(`Primary action slug does not match move slug. Move: ${this.slug}, Primary Action: ${primaryAction?.slug}`);
+      console.debug(`Primary action slug does not match move slug. Move: ${this.slug}, Primary Action: ${primaryAction?.slug}`);
     }
   }
 

@@ -1,0 +1,78 @@
+{
+  "name": "Dual Wield (Multi-Strike)",
+  "type": "affliction",
+  "_id": "ojm5vuWcgyYbey6P",
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
+  "system": {
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "attack",
+        "value": 1.3,
+        "predicate": [],
+        "property": "power",
+        "definition": [],
+        "ignored": false,
+        "method": 1
+      },
+      {
+        "type": "flat-modifier",
+        "key": "strike-trait-attack-hits-flat",
+        "value": 1,
+        "predicate": [],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "flat-modifier",
+        "key": "strike-trait-attack-strikes-flat",
+        "value": 3,
+        "predicate": [],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.effectHitRate",
+        "value": 30,
+        "predicate": [],
+        "ignored": false,
+        "method": 2
+      }
+    ],
+    "slug": null,
+    "traits": [],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "removeAfterAttacking": false,
+    "removeAfterAttacked": false,
+    "stacks": 0,
+    "priority": 50,
+    "formula": "",
+    "type": "damage"
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": 1,
+    "expiry": "turnEnd"
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "ptr2e",
+    "systemVersion": "1.5.0.beta",
+    "lastModifiedBy": null
+  },
+  "folder": "V4skAU6G3OH5fXgE"
+}

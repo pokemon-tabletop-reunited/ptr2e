@@ -30,9 +30,9 @@
             "key": "poison-attack-effectiveness-stage",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -48,10 +48,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": 3,
-        "startTurn": null
+        "units": "turns",
+        "value": 3,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -59,11 +58,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
