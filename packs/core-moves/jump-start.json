@@ -10,16 +10,20 @@
         "name": "Jump-Start",
         "slug": "jump-start",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "traits": [
+          "flinch-20",
+          "social",
+          "drill"
+        ],
         "range": {
           "target": "emanation",
-          "distance": 3,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 7
         },
         "types": [
           "electric"
@@ -29,13 +33,18 @@
         "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B",
+    "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "effects": []
