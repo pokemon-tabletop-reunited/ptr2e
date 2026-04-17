@@ -1,62 +1,18 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import FolderPTR2e from "@module/folder/document.ts";
-import { PTRHook } from "./data.ts";
+import { PTRHook } from "../hooks/data.ts";
+import { PTR2eSocketError, PTR2eSocketInternalError, PTR2eSocketInvalidUserError, PTR2eSocketNoGMConnectedError, PTR2eSocketRemoteException, PTR2eSocketUnregisteredHandlerError, PTR2eSocketDeniedError } from "./errors.ts";
+import { FolderCreateOrUpdateArgs, FolderCreateOrUpdateResult, handleFolderCreateOrUpdateRequest } from "./folder.ts";
 
 export const Sockets: PTRHook = {
   listen: () => {
-    Hooks.once("ready", () => {
-      game.socket.on("system.ptr2e", handleSocketRequest);
-    });
     Hooks.on("userConnected", handleUserActivity);
+
+    Hooks.once("ready", () => {
+      // Register all system socket handlers
+      game.ptr.sockets.system.register(game.ptr.sockets.systemEvents.folderCreateOrUpdate, handleFolderCreateOrUpdateRequest);
+    });
   }
 }
-
-/**
- * Old Implementation - Delete after migrating
- */
-
-export interface SocketRequestData {
-  request: "folderCreateOrUpdate" | "acknowledge" | "acknowledgeFailure";
-  data: Record<string, unknown>;
-  message?: string;
-  id: string;
-  documentId?: string;
-  documentType?: string;
-}
-
-async function handleSocketRequest(data: SocketRequestData): Promise<void> {
-  if (typeof data !== 'object' || !('request' in data)) return;
-  console.log(data);
-  if (game.user !== game.users.activeGM) return;
-
-  switch (data.request) {
-    case "folderCreateOrUpdate": {
-      if (!game.settings.get("ptr2e", "player-folder-create-permission")) return void game.socket.emit("system.ptr2e", { id: data.id, request: "acknowledgeFailure", message: "Player folder creation is disabled. Please ask your GM to enable it in settings." });
-      const folderData = data.data as { name?: string, _id?: string, source?: Folder['_source'], pack?: string } & Record<string, unknown>;
-
-      if (!folderData.name?.trim()) folderData.name = Folder.defaultName();
-      if (folderData._id) {
-        const folder = game.folders.get(folderData._id)
-        if (folder) {
-          delete folderData._id;
-          await folder.update(folderData);
-          return void game.socket.emit("system.ptr2e", { id: data.id, request: "acknowledge", message: `Folder ${folder.name} updated!`, documentId: folder.id, documentType: "Folder" });
-        }
-      }
-      else {
-        if (folderData.source) {
-          const folder = await FolderPTR2e.create(folderData.source, { pack: folderData.pack });
-          return void game.socket.emit("system.ptr2e", { id: data.id, request: "acknowledge", message: `Folder ${folderData.source.name} created!`, documentId: folder?.id, documentType: "Folder" });
-        }
-      }
-      return void game.socket.emit("system.ptr2e", { id: data.id, request: "acknowledgeFailure", message: "An issue occured while trying to create your folder." });
-    }
-  }
-}
-
-/**
- * New Implementation
- */
 
 const RECIPIENT_TYPES = {
   ONE_GM: 0,
@@ -71,6 +27,7 @@ const MESSAGE_TYPES = {
   RESULT: 3,
   EXCEPTION: 4,
   UNREGISTERED: 5,
+  DENIED: 6,
 } as const
 
 export class SocketManagerPTR2e {
@@ -82,7 +39,11 @@ export class SocketManagerPTR2e {
     PTR2eSocketInvalidUserError,
     PTR2eSocketNoGMConnectedError,
     PTR2eSocketRemoteException,
-    PTR2eSocketUnregisteredHandlerError
+    PTR2eSocketUnregisteredHandlerError,
+    PTR2eSocketDeniedError
+  } as const;
+  public readonly systemEvents = {
+    folderCreateOrUpdate: "folderCreateOrUpdate"
   } as const;
 
   constructor() {
@@ -161,7 +122,8 @@ export class SocketPTR2e {
    * @param args Arguments to pass to the handler function.
    * @returns A promise that resolves with the result of the handler function.
    */
-  async executeAsGM<T extends object = object>(handler: string | Function, ...args: unknown[]): Promise<T> {
+  public async executeAsGM(handler: CoreSystemSocketEvent["folderCreateOrUpdate"], ...args: [FolderCreateOrUpdateArgs]): Promise<FolderCreateOrUpdateResult>;
+  public async executeAsGM<T extends object = object>(handler: string | Function, ...args: unknown[]): Promise<T> {
     const [name, func] = this._resolveFunction(handler);
     if (game.user.isGM) {
       return this._executeLocal<T>(func, ...args);
@@ -293,8 +255,8 @@ export class SocketPTR2e {
     game.socket.emit(this.socketName, message);
   }
 
-  private _sendError(id: string, type: SocketMessageType) {
-    const message: SocketMessage = { id, type, userId: game.userId };
+  private _sendError(id: string, type: SocketMessageType, errorMessage?: string) {
+    const message: SocketMessage = { id, type, userId: game.userId, errorMessage };
     game.socket.emit(this.socketName, message);
   }
 
@@ -370,6 +332,9 @@ export class SocketPTR2e {
         result = await func.call(_this, ...args);
       }
       catch (e) {
+        if(e instanceof PTR2eSocketDeniedError) {
+          this._sendError(id!, MESSAGE_TYPES.DENIED, e.message);
+        }
         console.error(`An exception occured while executing handler '${name}'.`);
         this._sendError(id!, MESSAGE_TYPES.EXCEPTION);
         throw e;
@@ -393,10 +358,18 @@ export class SocketPTR2e {
         request.resolve(result);
         break;
       case MESSAGE_TYPES.EXCEPTION:
-        request.reject(new PTR2eSocketRemoteException(`An exception occured during remote execution of handler '${request.handlerName}'. Please see ${game.users.get(message.userId)?.name}'s error console for details.`));
+        request.reject(new PTR2eSocketRemoteException(`An exception occured during remote execution of handler '${request.handlerName}'. Please see ${game.users.get(message.userId)?.name}'s error console for details.`, { cause: message.errorMessage }));
         break;
       case MESSAGE_TYPES.UNREGISTERED:
-        request.reject(new PTR2eSocketUnregisteredHandlerError(`Executing the handler '${request.handlerName}' has been refused by ${game.users.get(message.userId)?.name}'s client, because this handler hasn't been registered on that client.`));
+        if(game.ptr.sockets.systemEvents[request.handlerName as keyof typeof game.ptr.sockets.systemEvents]) {
+          request.reject(new PTR2eSocketUnregisteredHandlerError(`Executing the handler '${request.handlerName}' has been refused by ${game.users.get(message.userId)?.name}'s client, they had yet to load the world properly. Please try again.`));
+        }
+        else { 
+          request.reject(new PTR2eSocketUnregisteredHandlerError(`Executing the handler '${request.handlerName}' has been refused by ${game.users.get(message.userId)?.name}'s client, because this handler hasn't been registered on that client.`));
+        }
+        break;
+      case MESSAGE_TYPES.DENIED:
+        request.reject(new PTR2eSocketDeniedError(`Executing the handler '${request.handlerName}' has been refused by ${game.users.get(message.userId)?.name}'s client, because that client denied the execution request. This could be due to permissions or other checks implemented in the handler function.`, {cause: message.errorMessage}));
         break;
       default:
         request.reject(new PTR2eSocketInternalError(`Unknown result type '${type}' for handler '${request.handlerName}'. This should never happen. If you see this message, please open an issue in the bug tracker of the PTR 2e Socket Manager repository.`));
@@ -443,51 +416,10 @@ function handleUserActivity(user: User, active: boolean) {
   }
 }
 
-export class PTR2eSocketError extends Error {
-  constructor(...args: ConstructorParameters<typeof Error>) {
-    super(...args);
-    this.name = "PTR2eSocketError";
-  }
-}
-
-export class PTR2eSocketInternalError extends PTR2eSocketError {
-  constructor(...args: ConstructorParameters<typeof Error>) {
-    super(...args);
-    this.name = "PTR2eSocketInternalError";
-  }
-}
-
-export class PTR2eSocketInvalidUserError extends PTR2eSocketError {
-  constructor(...args: ConstructorParameters<typeof Error>) {
-    super(...args);
-    this.name = "PTR2eSocketInvalidUserError";
-  }
-}
-
-export class PTR2eSocketNoGMConnectedError extends PTR2eSocketError {
-  constructor(...args: ConstructorParameters<typeof Error>) {
-    super(...args);
-    this.name = "PTR2eSocketNoGMConnectedError";
-  }
-}
-
-export class PTR2eSocketRemoteException extends PTR2eSocketError {
-  constructor(...args: ConstructorParameters<typeof Error>) {
-    super(...args);
-    this.name = "PTR2eSocketRemoteException";
-  }
-}
-
-export class PTR2eSocketUnregisteredHandlerError extends PTR2eSocketError {
-  constructor(...args: ConstructorParameters<typeof Error>) {
-    super(...args);
-    this.name = "PTR2eSocketUnregisteredHandlerError";
-  }
-}
-
 type SocketMessage = SocketRequestMessage | SocketCommandMessage | SocketResponseMessage;
 type SocketMessageType = (typeof MESSAGE_TYPES)[keyof typeof MESSAGE_TYPES];
 type ReciepientType = (typeof RECIPIENT_TYPES)[keyof typeof RECIPIENT_TYPES] | string[] | string;
+type CoreSystemSocketEvent = (typeof game.ptr.sockets.systemEvents)
 
 interface SocketMessageBase {
   handlerName?: string;
@@ -519,6 +451,7 @@ interface SocketResponseMessage extends SocketMessageBase {
   result?: unknown;
   type: SocketMessageType;
   userId?: string;
+  errorMessage?: string;
 }
 
 interface SocketPendingRequest {

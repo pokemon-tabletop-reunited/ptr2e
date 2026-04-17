@@ -16,7 +16,7 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import { CombatPTR2e } from "@combat";
 import GithubManager from "@module/apps/github.ts";
 import { getTypes, TypeEffectiveness } from "./config/effectiveness.ts";
-import { SocketManagerPTR2e } from "./hooks/socket.ts";
+import { SocketManagerPTR2e } from "./sockets/socket.ts";
 
 const GamePTR = {
   onInit() {
