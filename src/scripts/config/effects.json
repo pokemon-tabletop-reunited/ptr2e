@@ -142,7 +142,7 @@
         },
         {
           "type": "roll-effect",
-          "label": "Paralysis Taze Check",
+          "label": "Paralysis Tased Check",
           "key": "attack",
           "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
           "chance": 25,
@@ -400,24 +400,6 @@
     "system": {
       "changes": [
         {
-          "type": "grant-effect",
-          "value": "stunted",
-          "key": "",
-          "predicate": [],
-          "alterations": [],
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          },
-          "mode": 2,
-          "ignored": false,
-          "reevaluateOnUpdate": false,
-          "inMemoryOnly": false,
-          "allowDuplicate": true,
-          "track": false,
-          "replaceSelf": false
-        },
-        {
           "type": "roll-effect",
           "key": "damaging-attack",
           "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
@@ -429,6 +411,21 @@
           "dontMerge": false,
           "mode": 2,
           "ignored": false
+        },
+        {
+          "type": "roll-effect",
+          "label": "Splinter Bleed Check",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
+          "chance": 15,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "effects.0.duration.turns",
+              "value": 2
+            }
+          ]
         }
       ],
       "formula": null,
@@ -2040,7 +2037,7 @@
   {
     "id": "argute",
     "name": "PTR2E.Effect.Statuses.Labels.argute",
-    "img": "icons/svg/ice-shield.svg",
+    "img": "icons/svg/card-hand.svg",
     "type": "affliction",
     "duration": {
       "units": "turns",
