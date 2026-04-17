@@ -16,6 +16,7 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import { CombatPTR2e } from "@combat";
 import GithubManager from "@module/apps/github.ts";
 import { getTypes, TypeEffectiveness } from "./config/effectiveness.ts";
+import { SocketManagerPTR2e } from "./hooks/socket.ts";
 
 const GamePTR = {
   onInit() {
@@ -51,7 +52,8 @@ const GamePTR = {
         tokens: {
           autoscale: game.settings.get("ptr2e", "tokens.autoscale")
         }
-      }
+      },
+      sockets: new SocketManagerPTR2e()
     };
 
     // Add reference for 'fainted' to the 'dead' condition
