@@ -493,8 +493,7 @@ interface OnDeleteActions {
 }
 
 export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[], ignoreRestricted: boolean): Promise<void> {
-  const actor = effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
-
+  const actor = (effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor) ?? effect.actor;
   const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
   const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
   const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});

@@ -29,18 +29,18 @@
             "key": "system.modifiers.effectResistance",
             "value": -35,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
             "key": "fairy-attack",
             "value": "drain-1-4",
             "predicate": [],
-            "mode": 2,
             "property": "traits",
             "definition": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -56,10 +56,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -67,11 +66,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -81,7 +75,8 @@
         "systemVersion": "1.4.6.beta",
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "modifiedTime": 1765211693171
-      }
+      },
+      "showIcon": 2
     }
   ],
   "_id": "lVtK5JwbDBIAq5yV"

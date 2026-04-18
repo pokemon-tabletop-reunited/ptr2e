@@ -29,17 +29,17 @@
             "key": "system.battleStats.evasion.stage",
             "value": -1,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
             "key": "rock-attack-damage-percentile",
             "value": "5(@actor.system.details.size.weightClass)",
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -52,8 +52,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -63,11 +63,6 @@
         "slowed"
       ],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -77,7 +72,8 @@
         "systemVersion": "1.5.0.beta",
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "modifiedTime": 1767567353908
-      }
+      },
+      "showIcon": 2
     }
   ],
   "_id": "0iy9w11FwvKVHDTO"

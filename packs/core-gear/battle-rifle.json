@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 55,
         "accuracy": 95,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Battle Rifle",
         "slug": "battle-rifle",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,16 +62,16 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 125,
         "accuracy": 80,
         "free": true,
@@ -81,7 +81,7 @@
         ],
         "name": "Battle Rifle (Auto)",
         "slug": "battle-rifle-auto",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 4</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -90,17 +90,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "complex"
         },
         "variant": "battle-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 60,
         "accuracy": 75,
         "free": true,
@@ -111,7 +111,7 @@
         ],
         "name": "Battle Rifle (Hip Fire)",
         "slug": "battle-rifle-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -120,11 +120,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "variant": "battle-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -151,7 +151,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A battle rifle is a service rifle chambered to fire a fully powered cartridge. The terms was created largely out of a need to differentiate automatic rifles chambered for fully powered cartridges from automatic rifles chambered for intermediate cartridges, which were later categorized as assault rifles.</p>"
+    "description": "<p>A battle rifle is a service rifle chambered to fire a fully powered cartridge. The terms was created largely out of a need to differentiate automatic rifles chambered for fully powered cartridges from automatic rifles chambered for intermediate cartridges, which were later categorized as assault rifles.</p>",
+    "ammoType": []
   },
   "_id": "xPbMEBEaTsw02Ouy",
   "effects": [
@@ -169,18 +170,20 @@
             "predicate": [],
             "label": "Battle Rifle",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
             "key": "battle-rifle-auto-attack-damage-flat",
             "value": 66,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -193,13 +196,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -207,22 +207,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743893018184,
         "modifiedTime": 1757632011406,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "fwBg1GB1fMcgPklo"

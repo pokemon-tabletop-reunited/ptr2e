@@ -18,7 +18,7 @@
       "type": "steel",
       "power": 50,
       "accuracy": 95,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 10,
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 85,
         "accuracy": 95,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Auto Shotgun",
         "slug": "auto-shotgun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,27 +62,27 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "atk"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 45,
-        "accuracy": 85,
-        "free": true,
+        "category": "physical",
+        "power": 40,
+        "accuracy": 83,
         "traits": [
           "missile",
           "6-strike",
-          "firearm"
+          "firearm",
+          "flinch-10"
         ],
         "name": "Auto Shotgun (Auto)",
         "slug": "auto-shotgun-auto",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 6</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -91,20 +91,19 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 6
+          "activation": "complex"
         },
         "variant": "auto-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 85,
         "accuracy": 80,
-        "free": true,
         "traits": [
           "missile",
           "dash",
@@ -113,7 +112,7 @@
         ],
         "name": "Auto Shotgun (Hip Fire)",
         "slug": "auto-shotgun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 4</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -122,12 +121,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "priority": 1
+          "activation": "complex"
         },
         "variant": "auto-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -154,7 +152,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>An automatic shotgun is an automatic firearm that fires shotgun shells (thereby making it a shotgun) and uses some of the energy of each shot to automatically cycle the action and load a new round. They generally store ammunition in detachable box or drum magazines in order to decrease reloading time, whereas most pump-action and semi-automatic shotguns use under-barrel tubular magazines.</p>"
+    "description": "<p>An automatic shotgun is an automatic firearm that fires shotgun shells (thereby making it a shotgun) and uses some of the energy of each shot to automatically cycle the action and load a new round. They generally store ammunition in detachable box or drum magazines in order to decrease reloading time, whereas most pump-action and semi-automatic shotguns use under-barrel tubular magazines.</p>",
+    "ammoType": []
   },
   "_id": "1JZaCsj2gzdyFMNb",
   "effects": [
@@ -172,9 +171,10 @@
             "predicate": [],
             "label": "Auto Shotgun",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -182,9 +182,10 @@
             "value": 56,
             "predicate": [],
             "label": "Hip",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -197,13 +198,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -211,22 +209,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743971186221,
         "modifiedTime": 1757632062514,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"

@@ -66,8 +66,8 @@
             "max": 5,
             "color": "#aa6bc8",
             "private": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -76,8 +76,8 @@
             "predicate": [],
             "property": "power",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -86,53 +86,53 @@
             "predicate": [],
             "property": "accuracy",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "superspread-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 20,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": "3+@actor.clocks.superspreadClock"
+                "value": "3+@actor.clocks.superspreadClock",
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Superspread (Poison)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "superspread-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 20,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": "3+@actor.clocks.superspreadClock"
+                "value": "3+@actor.clocks.superspreadClock",
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Superspread (SPDEF)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "superspread-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
             "predicate": [
               {
                 "not": "actor:clocks:superspreadClock:value:5"
@@ -143,15 +143,15 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "superspreadClock"
+                "value": "superspreadClock",
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Superspread Clock",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -161,13 +161,13 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": "0+10*@actor.clocks.superspreadClock"
+                "value": "0+10*@actor.clocks.superspreadClock",
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -180,8 +180,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -189,11 +189,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

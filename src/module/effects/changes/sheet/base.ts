@@ -136,13 +136,14 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
   async updateValidationErrors(validationFailures: foundry.data.validation.DataModelValidationFailure): Promise<void> {
     const failures = ((): string[] => {
       const sourceFailures = validationFailures?.asError().getAllFailures() ?? {};
+      if(!sourceFailures.length && validationFailures.message) sourceFailures["unknown"] = validationFailures
       const fieldFailures =
         this.change.validationFailures.fields?.asError().getAllFailures() ?? {};
       const jointFailures = this.change.validationFailures.joint
         ? { joint: this.change.validationFailures.joint }
         : {};
       return Object.entries({ ...sourceFailures, ...fieldFailures, ...jointFailures }).map(([key, failure]) =>
-        key === "joint"
+        key === "joint" || key.startsWith("unknown")
           ? failure.message.replace(/^.*Joint Validation Error:\s*/, "")
           : `${key}: ${failure.message}`
       )
@@ -324,7 +325,15 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
   // It may merge with the initial value to handle cases where the values where cleaned recursively
   const deleteIfInitial = (key: string, field: foundry.data.fields.DataField): boolean => {
     if (["type"].includes(key)) return false;
-    if (data[key] === undefined) return true;
+    if (data[key] === undefined) {
+      delete data[key];
+      return true;
+    }
+    //@ts-expect-error - Exists on StringField
+    if (data[key] === "" && field instanceof fields.StringField && !field.options.blank) {
+      delete data[key];
+      return true;
+    }
     if (field.options.required ?? ('element' in field ? (field as { element: foundry.data.fields.DataField })?.element?.options.required : false)) return false;
     const initialValue = typeof field.initial === "function" ? field.initial(data) : field.initial;
     const valueRaw = data[key];

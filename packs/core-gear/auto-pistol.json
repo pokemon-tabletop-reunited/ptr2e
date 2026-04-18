@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "steel",
       "power": 55,
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 35,
         "accuracy": 95,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Auto Pistol",
         "slug": "auto-pistol",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,18 +62,18 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 60,
-        "accuracy": 90,
+        "accuracy": 87,
         "free": true,
         "traits": [
           "missile",
@@ -81,7 +81,7 @@
         ],
         "name": "Auto Pistol (Double Tap)",
         "slug": "auto-pistol-double-tap",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 2</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -90,19 +90,19 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 2
+          "activation": "complex"
         },
         "variant": "auto-pistol",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 30,
-        "accuracy": 75,
+        "accuracy": 74,
         "free": true,
         "traits": [
           "missile",
@@ -112,7 +112,7 @@
         ],
         "name": "Auto Pistol (Hip Fire)",
         "slug": "auto-pistol-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -122,11 +122,11 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
           "priority": 1
         },
         "variant": "auto-p",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -153,7 +153,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A auto pistol is a repeating handgun that automatically ejects and loads cartridges in its chamber after every shot fired, but only one round of ammunition is fired each time the trigger is pulled. A ubiquitous design in contemporary settings, utilized by militaries and civilians as a sidearm and for personal defense.</p>"
+    "description": "<p>A auto pistol is a repeating handgun that automatically ejects and loads cartridges in its chamber after every shot fired, but only one round of ammunition is fired each time the trigger is pulled. A ubiquitous design in contemporary settings, utilized by militaries and civilians as a sidearm and for personal defense.</p>",
+    "ammoType": []
   },
   "_id": "TD3HM4XSYLbWAemQ",
   "effects": [
@@ -171,17 +172,19 @@
             "predicate": [],
             "label": "Auto Pistol",
             "priority": null,
-            "mode": 2,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
             "type": "flat-modifier",
             "key": "auto-pistol-double-tap-attack-damage-flat",
-            "value": 32,
+            "value": 24,
             "predicate": [],
             "label": "Double Tap",
-            "mode": 2,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -196,13 +199,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -210,22 +210,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1743877436694,
-        "modifiedTime": 1757553567781,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1775571852582,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "MKaFm5Pvt7tvgdAa"

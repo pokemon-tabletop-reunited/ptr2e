@@ -338,6 +338,7 @@ export function logCompatibilityWarning(
     until?: number | string;
     details?: string;
     stack?: boolean;
+    once?: boolean;
   },
 ): void;
 

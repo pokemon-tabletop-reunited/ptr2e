@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "S",
     "fling": {
       "type": "steel",
       "power": 80,
@@ -21,22 +21,22 @@
       "hide": false,
       "range": {
         "target": "creature",
-        "distance": 10,
+        "distance": 2,
         "unit": "m"
       }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "traits": [
       "weapon",
       "fling",
       "firearm",
       "autoload",
       "steel",
-      "charge-pool-4",
-      "reload-4",
       "conventional",
       "modern",
-      "sci-fi"
+      "sci-fi",
+      "charge-pool-6",
+      "reload-5"
     ],
     "actions": [
       {
@@ -48,20 +48,20 @@
         "traits": [
           "set-up",
           "defensive",
-          "priority-20"
+          "priority-40"
         ],
         "name": "Anti-Materiel Rifle (Set Up)",
         "slug": "anti-materiel-rifle-set-up",
-        "description": "<p>Effect: The user spends 2 PP, and gains @Affliction[braced 2].</p>",
+        "description": "<p>Effect: The user gains @Affliction[braced 2].</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
-          "activation": "complex",
-          "priority": 2
+          "activation": "complex"
         },
         "predicate": []
       },
@@ -69,20 +69,20 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 200,
         "accuracy": 95,
         "free": true,
         "traits": [
           "missile",
           "pierce",
-          "flinch-40",
           "firearm",
-          "crit-1"
+          "crit-2",
+          "flinch-20"
         ],
         "name": "Anti-Materiel Rifle (Resolution)",
         "slug": "anti-materiel-rifle-resolution",
-        "description": "<p>Trigger: The user used Anti-Materiel Rifle (Set Up) as their last Action.</p><p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Trigger: The user used Anti-Materiel Rifle (Set Up) as their last Action.</p><p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -92,37 +92,37 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
           "trigger": "<p>The user used Anti-Materiel Rifle (Set Up) as their last Action.</p>"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 200,
-        "accuracy": 45,
+        "accuracy": 55,
         "free": true,
         "traits": [
           "missile",
-          "pierce",
-          "firearm"
+          "firearm",
+          "crit-1",
+          "flinch-30"
         ],
         "name": "Anti-Materiel Rifle (Hip Fire)",
         "slug": "anti-materiel-rifle-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 15,
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "predicate": []
       }
@@ -151,7 +151,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "sRQl1TkcK26ztomy",
   "effects": [
@@ -169,9 +170,10 @@
             "predicate": [],
             "label": "Anti-Materiel Rifle",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -184,13 +186,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -198,22 +197,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743971623486,
         "modifiedTime": 1757632056546,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"

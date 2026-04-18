@@ -407,7 +407,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         attack: this.attack,
         hasDamage: summonAttack?.damageType === "flat" ? true : this.results.some((result) => !!result.damage),
         hasEffect: this.results.some((result) => result.effectRolls?.origin.length || result.effectRolls?.target.length || result.effectRolls?.defensive.length),
-        crash: this.attack.traits.some(t => t.slug.startsWith("crash-")),
+        crash: this.attack.traits?.some(t => t.slug.startsWith("crash-")),
         results: new Map<ActorUUID, AttackMessageRenderContextData>(
           // @ts-expect-error - This is a valid operation
           await Promise.all(
@@ -439,7 +439,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   isCritHit: context.hit === "critical",
                   attack: this.attack,
                   isMultiTarget: this._source.results.length > 1,
-                  useEnemyStats: this.attack.traits.has("use-opponents-stats")
+                  useEnemyStats: this.attack.traits?.has("use-opponents-stats")
                 });
                 if (damage) {
                   context.damage = damage.value;
@@ -626,7 +626,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     // If the attack has pierce, handle removing of [Shield] trait effects
-    if (this.context.attack.traits.has("pierce")) {
+    if (this.context.attack.traits?.has("pierce")) {
       const shieldEffects = result.target.effects.filter(e => (e as ActiveEffectPTR2e).system.traits?.has("shield"));
       const shieldHP = result.target.system.shield.value || 0;
       if (shieldEffects.length) {
@@ -745,7 +745,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       if (["miss", "fumble"].includes(result.hit)) {
         acc.push({
           crash: (result.check?.totalModifiers as Record<string, { base: number, flat: number, stage: number, percentile: number }>)?.crash ?? {},
-          damage: result.damage || 0,
+          damage: (result.damage || 0) * (result.amount || 1),
         })
       }
       return acc;

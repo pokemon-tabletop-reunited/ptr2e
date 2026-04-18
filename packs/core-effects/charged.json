@@ -25,10 +25,9 @@
       "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
       "type": "affliction",
       "duration": {
-        "turns": null,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -36,10 +35,10 @@
             "type": "percentile-modifier",
             "key": "electric-attack-power",
             "value": 100,
-            "mode": 2,
             "predicate": [],
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "removeOnRecall": false,
@@ -75,11 +74,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      }
+      "showIcon": 2
     }
   ],
   "_id": "chargedcondiitem"

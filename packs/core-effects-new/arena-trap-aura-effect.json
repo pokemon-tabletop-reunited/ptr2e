@@ -1,0 +1,84 @@
+{
+  "name": "Arena Trap (Aura Effect)",
+  "type": "passive",
+  "_id": "mH3mrRSypE6N3USQ",
+  "img": "systems/ptr2e/img/icons/effect_icon.webp",
+  "system": {
+    "changes": [
+      {
+        "type": "grant-effect",
+        "key": "",
+        "value": "stuck",
+        "predicate": [],
+        "alterations": [],
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        },
+        "allowDuplicate": false,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "track": false,
+        "replaceSelf": false,
+        "method": 2
+      },
+      {
+        "type": "grant-effect",
+        "key": "",
+        "value": "grounded",
+        "predicate": [],
+        "alterations": [],
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        },
+        "allowDuplicate": false,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "track": false,
+        "replaceSelf": false,
+        "method": 2
+      },
+      {
+        "type": "basic",
+        "key": "system.battleStats.evasion.stage",
+        "value": -2,
+        "predicate": [],
+        "ignored": false,
+        "method": 2
+      }
+    ],
+    "slug": null,
+    "traits": [],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "removeAfterAttacking": false,
+    "removeAfterAttacked": false,
+    "stacks": 0
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": null
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "createdTime": 1765275590825,
+    "modifiedTime": 1765275656693,
+    "lastModifiedBy": "mK35yvCqCgiTUvKf"
+  },
+  "folder": "sP8yfpABdpdAz4aV"
+}

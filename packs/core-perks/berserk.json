@@ -94,9 +94,9 @@
             "predicate": [
               "effect:affliction:enraged"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -105,9 +105,9 @@
             "predicate": [
               "effect:affliction:enraged"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -118,13 +118,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
       "origin": null,

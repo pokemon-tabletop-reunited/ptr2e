@@ -19,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 6
         },
         "category": "special",
         "power": 90,
@@ -27,8 +27,8 @@
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[burn 5].</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: On hit, the target has a 15% chance of gaining @Affliction[burn 5].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
         "predicate": []
       }
     ],
@@ -42,7 +42,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "O57gfX8AHRF03KUM",
@@ -57,12 +58,16 @@
           {
             "type": "roll-effect",
             "key": "shadow-fire-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
-            "chance": 10,
+            "chance": 15,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
             "ignored": false
           }
         ],
@@ -70,17 +75,16 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -92,13 +96,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1737318063895,
-        "modifiedTime": 1737318080178,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1775576432710,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

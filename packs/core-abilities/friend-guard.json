@@ -56,7 +56,6 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "radius": 5,
@@ -86,7 +85,8 @@
               },
               "texture": null
             },
-            "mergeExisting": true
+            "mergeExisting": true,
+            "method": 2
           },
           {
             "type": "roll-option",
@@ -99,9 +99,9 @@
             "count": false,
             "state": true,
             "alwaysActive": false,
-            "mode": 2,
             "ignored": false,
-            "suboptions": []
+            "suboptions": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -114,13 +114,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

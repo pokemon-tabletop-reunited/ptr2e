@@ -47,8 +47,8 @@
         "free": true,
         "traits": [
           "adaptable",
-          "priority-15",
-          "contact"
+          "contact",
+          "priority-20"
         ],
         "name": "Bat (Aluminium)",
         "slug": "bat-aluminium",
@@ -89,7 +89,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "poulKoHX1ZWb4pVr",
   "effects": [
@@ -106,9 +107,10 @@
             "value": 4,
             "predicate": [],
             "label": "Bat (Aluminium)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -121,8 +123,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -130,22 +134,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.ZewWbLPYdCt2qPzv.ActiveEffect.hKiDWsZdq14T4lXi",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1757542093820,
         "modifiedTime": 1757553419362,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "PhrQtZzEwKPjfmK2"

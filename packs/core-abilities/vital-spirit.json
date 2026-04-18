@@ -54,9 +54,9 @@
             "predicate": [
               "effect:passive:weary"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -65,9 +65,9 @@
             "predicate": [
               "effect:passive:weary"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-option",
@@ -77,11 +77,11 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           },
           {
             "type": "roll-option",
@@ -91,11 +91,11 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           }
         ],
         "slug": null,
@@ -108,13 +108,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Effect: The user is immune to the @Affliction[drowsy] Affliction and @Affliction[nightmares]. The user gains +1 EVA Stage and +1 ACC Stage while suffering @Affliction[weary].</p>",
       "origin": null,

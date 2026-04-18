@@ -155,8 +155,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
     if (canvas.grid.type === CONST.GRID_TYPES.SQUARE) {
       return (canvas.grid as unknown as SquareGridPTR2e).getDistanceBetweenTokens(this, target);
     }
-    //@ts-expect-error - Foundry types are incomplete
-    return canvas.grid.measureDistance(this.position, target.position);
+    return canvas.grid.measurePath([this.position, target.position]).distance;
   }
 
   masks: PIXI.Graphics[] = [];
@@ -168,7 +167,7 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
     this.masks = [];
 
     const hasDeadEffect = this.document.hasStatusEffect("dead");
-    if(hasDeadEffect && !this.deadFilter) {
+    if (hasDeadEffect && !this.deadFilter) {
       //@ts-expect-error - Incomplete types
       const filter = new PIXI.ColorMatrixFilter();
       this.mesh.filters = [filter];
@@ -195,7 +194,12 @@ class TokenPTR2e<TDocument extends TokenDocumentPTR2e = TokenDocumentPTR2e> exte
     let i = 0;
     const tokenSize = { width: this.document.width, height: this.document.height };
 
-    const effectIcons = this.effects?.children.slice(1, 1 + (this.actor?.temporaryEffects?.length || 0));
+    const effectIcons = this.effects?.children.slice(1, 1 + (
+      (
+        this.actor?.appliedEffects.filter(e => ((e.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS)
+          || ((e.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.CONDITIONAL) && e.isTemporary))) ?? []
+      ).length || 0
+    ));
     if (!effectIcons || effectIcons.length === 0) return;
 
     const background = this.effects?.children[0];

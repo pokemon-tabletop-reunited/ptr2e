@@ -31,8 +31,8 @@
             "key": "system.battleStats.evasion.stage",
             "value": 2,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -40,17 +40,9 @@
             "value": -25,
             "predicate": [],
             "label": "Heavy Cover (Dmg)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
-          },
-          {
-            "type": "basic",
-            "key": "system.modifiers.effectResistance",
-            "value": 50,
-            "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -58,9 +50,9 @@
             "value": -1,
             "predicate": [],
             "label": "Heavy Cover (Crit)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,10 +68,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -87,22 +78,17 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
+        "systemVersion": "1.6.0.beta",
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1774205314443
       }
     }
   ],
-  "flags": {},
   "_id": "rFa3xkFp2SesCCvP"
 }

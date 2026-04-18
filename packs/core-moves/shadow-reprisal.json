@@ -10,7 +10,9 @@
         "name": "Shadow Reprisal",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "flinch-20",
+          "recoil-1-6"
         ],
         "range": {
           "target": "creature",
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 20,
@@ -32,7 +34,7 @@
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "C",
     "traits": [],
     "publication": {
       "source": "PTR 2e Core",
@@ -64,8 +66,9 @@
             "priority": null,
             "property": "power",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -78,13 +81,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -92,22 +92,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Item.48mv2v1fZIB425Wn.ActiveEffect.3Igoq5pxc0DPxQXN",
         "duplicateSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
         "createdTime": 1740187281641,
         "modifiedTime": 1767161813127,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

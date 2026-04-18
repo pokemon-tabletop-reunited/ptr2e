@@ -68,8 +68,8 @@
             "color": "#c5b78c",
             "private": false,
             "label": "Rollout",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -79,13 +79,13 @@
             "label": "Iterative Boost",
             "property": "power",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "rollout-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
             "predicate": [
               {
                 "not": "actor:clocks:rolloutClockUser:value:4"
@@ -97,14 +97,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.key",
-                "value": "rolloutClockUser"
+                "value": "rolloutClockUser",
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -117,8 +117,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -126,11 +126,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

@@ -51,7 +51,7 @@
   "effects": [
     {
       "name": "Flash",
-      "type": "affliction",
+      "type": "passive",
       "_id": "3Mx7JMxsyo20f0f3",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -59,14 +59,14 @@
           {
             "type": "roll-effect",
             "key": "flash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.wA5oCsgHmZLcHHSn",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -80,13 +80,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

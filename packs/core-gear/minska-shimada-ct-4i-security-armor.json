@@ -70,8 +70,8 @@
             "key": "system.modifiers.speMultiplier",
             "value": -0.05,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -79,9 +79,9 @@
             "value": -5,
             "predicate": [],
             "label": "CT-4i Security Armor (Phys Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -89,9 +89,9 @@
             "value": -5,
             "predicate": [],
             "label": "CT-4i Security Armor (Phys Perc)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -99,9 +99,9 @@
             "value": -10,
             "predicate": [],
             "label": "CT-4i Security Armor (Missile)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -109,9 +109,9 @@
             "value": -5,
             "predicate": [],
             "label": "CT-4i Security Armor (Energy)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -119,9 +119,9 @@
             "value": -5,
             "predicate": [],
             "label": "CT-4i Security Armor (Energy)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -138,9 +138,9 @@
               }
             ],
             "label": "CT-4i Security Armor (Elemental)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -159,14 +159,14 @@
             "affects": "defensive",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "label": "CT-4i Security Armor (Elemental RES)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -179,8 +179,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -188,11 +188,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

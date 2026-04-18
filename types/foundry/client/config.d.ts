@@ -112,6 +112,14 @@ declare global {
         Folder: {
             documentClass: typeof Folder;
             collection: typeof Folders;
+            sheetClasses: Record<string, {
+                        id: string;
+                        cls: typeof ItemSheet;
+                        default: boolean;
+                        label: string;
+                        canConfigure: boolean;
+                        canBeDefault: boolean;
+                    }>;
         };
 
         /** Configuration for the ChatMessage document */

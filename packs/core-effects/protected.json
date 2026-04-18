@@ -32,9 +32,9 @@
             "key": "damaging-attack-damage-percentile",
             "value": -100000,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -50,10 +50,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": 1,
-        "startTurn": null
+        "units": "turns",
+        "value": 1,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

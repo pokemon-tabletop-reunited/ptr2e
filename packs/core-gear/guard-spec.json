@@ -64,15 +64,15 @@
           {
             "type": "roll-effect",
             "key": "guard-spec-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.chantedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.chantedcondition",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -85,8 +85,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -94,11 +94,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Item.oXcmFktEjhAF3qIm.ActiveEffect.H9Sz78eGxOosszs8",
         "duplicateSource": null,

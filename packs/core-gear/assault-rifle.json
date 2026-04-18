@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "steel",
       "power": 75,
@@ -43,8 +43,8 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 35,
+        "category": "physical",
+        "power": 42,
         "accuracy": 95,
         "free": true,
         "traits": [
@@ -53,7 +53,7 @@
         ],
         "name": "Assault Rifle",
         "slug": "assault-rifle",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,17 +62,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 60,
+        "category": "physical",
+        "power": 68,
         "accuracy": 90,
         "free": true,
         "traits": [
@@ -81,7 +81,7 @@
         ],
         "name": "Assault Rifle (Burst)",
         "slug": "assault-rifle-burst",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -90,18 +90,18 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "complex"
         },
         "variant": "assault-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 30,
+        "category": "physical",
+        "power": 22,
         "accuracy": 85,
         "free": true,
         "traits": [
@@ -111,27 +111,27 @@
         ],
         "name": "Assault Rifle (Auto)",
         "slug": "assault-rifle-auto",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 6</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 21,
+          "distance": 16,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 6
+          "activation": "complex"
         },
         "variant": "assault-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 35,
+        "category": "physical",
+        "power": 26,
         "accuracy": 70,
         "free": true,
         "traits": [
@@ -142,7 +142,7 @@
         ],
         "name": "Assault Rifle (Hip Fire)",
         "slug": "assault-rifle-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 5</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -151,11 +151,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 5
+          "activation": "complex"
         },
         "variant": "assault-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -182,7 +182,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>An assault rifle is a select fire rifle that uses an intermediate-rifle cartridge and a detachable magazine. A common primary weapon of modern armies in contemporary settings.</p>"
+    "description": "<p>An assault rifle is a select fire rifle that uses an intermediate-rifle cartridge and a detachable magazine. A common primary weapon of modern armies in contemporary settings.</p>",
+    "ammoType": []
   },
   "_id": "Ba3EyqpUePgGrfQk",
   "effects": [
@@ -200,9 +201,10 @@
             "predicate": [],
             "label": "Assault Rifle",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -210,9 +212,10 @@
             "value": 44,
             "predicate": [],
             "label": "Burst",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -225,13 +228,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -239,22 +239,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743632386665,
         "modifiedTime": 1757632018306,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "fwBg1GB1fMcgPklo"

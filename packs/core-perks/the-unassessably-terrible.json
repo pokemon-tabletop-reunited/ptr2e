@@ -57,7 +57,7 @@
   "effects": [
     {
       "name": "The Unassessably Terrible",
-      "type": "affliction",
+      "type": "passive",
       "_id": "OelVwoXG71tiZGvN",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -69,9 +69,9 @@
             "predicate": [
               "trait:pack-mon"
             ],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -87,10 +87,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -98,11 +97,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Item.A6xkBnPbLdJE68HB.ActiveEffect.pvYUwTseRuOimTJn",
         "duplicateSource": null,

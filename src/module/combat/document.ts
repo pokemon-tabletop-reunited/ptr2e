@@ -33,6 +33,10 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     return this.turns.findIndex((c) => c.id === RoundCombatantSystem.id);
   }
 
+  override prepareDerivedData(): void {
+    if ( game.ready && this.combatants.size && !this.turns?.length ) this.setupTurns();
+  }
+
   override async rollInitiative(
     maybeIds: string | string[],
     { updateTurn = true }: RollInitiativeOptions = {}
@@ -112,6 +116,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       });
       await this.combatant?.onStartActivation();
     }
+    await ActiveEffect.registry.refresh("combatStart", {combat: this});
     return result as this;
   }
 
@@ -150,6 +155,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         await oldCombatant?.onEndActivation();
         await this.combatant?.onStartActivation();
       }
+      await ActiveEffect.registry.refresh("turnEnd", {combat: this});
       return result as this;
       // }
     } catch (error: unknown) {

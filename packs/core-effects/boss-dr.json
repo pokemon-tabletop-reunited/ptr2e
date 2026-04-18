@@ -37,10 +37,10 @@
             "count": false,
             "state": true,
             "alwaysActive": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "suboptions": []
+            "suboptions": [],
+            "method": 2
           },
           {
             "type": "basic",
@@ -49,9 +49,9 @@
             "predicate": [
               "boss-dr-active"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -62,13 +62,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Adds a togglable 75% damage reduction from all sources to this Boss. </p><p>The toggle can be found in the Effects tab under 'Toggles'</p>",
       "origin": null,

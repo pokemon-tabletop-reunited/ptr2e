@@ -83,26 +83,26 @@
           {
             "type": "roll-effect",
             "key": "smelling-salts-paralyzed-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -50
+                "value": -50,
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Delay 50%"
+                "value": "Delay 50%",
+                "method": 5
               }
-            ]
+            ],
+            "method": 2
           }
         ],
         "slug": null,
@@ -110,6 +110,10 @@
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
       }
     }
   ]

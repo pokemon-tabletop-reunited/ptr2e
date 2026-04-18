@@ -72,8 +72,8 @@
             "label": "Shurikenjutsu",
             "affects": "self",
             "alterations": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -93,13 +93,13 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 5
+                "value": 5,
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -118,14 +118,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 5
+                "value": 5,
+                "method": 5
               }
             ],
             "label": "Shurikenjutsu",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -137,8 +137,8 @@
             "label": "Shurikenjutsu",
             "affects": "self",
             "alterations": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -156,13 +156,13 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 5
+                "value": 5,
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -179,19 +179,19 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 5
+                "value": 5,
+                "method": 5
               }
             ],
             "label": "Shurikenjutsu",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "missile-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               {
                 "not": "attack:original:fling"
@@ -202,20 +202,20 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "missile-trait-attack-effect-chance",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               {
                 "and": [
@@ -231,20 +231,20 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "missile-trait-attack-effect-chance",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               {
                 "and": [
@@ -260,20 +260,20 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               "attack:original:fling"
             ],
@@ -282,20 +282,20 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-trait-attack-effect-chance",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               {
                 "and": [
@@ -309,20 +309,20 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "fling-trait-attack-effect-chance",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               {
                 "and": [
@@ -336,15 +336,15 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -357,8 +357,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -366,11 +366,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

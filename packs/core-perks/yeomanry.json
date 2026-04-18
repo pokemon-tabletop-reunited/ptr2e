@@ -21,9 +21,9 @@
                 "not": "self:action:trait:firearm"
               }
             ],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -38,13 +38,13 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 15
+                "value": 15,
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-option",
@@ -57,9 +57,9 @@
             "label": "Wielding a Projectile Weapon?",
             "alwaysActive": false,
             "state": true,
-            "mode": 2,
             "ignored": false,
-            "suboptions": []
+            "suboptions": [],
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -68,9 +68,9 @@
             "predicate": [
               "yeoman-wpn:active"
             ],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -79,9 +79,9 @@
             "predicate": [
               "yeoman-wpn:active"
             ],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -94,8 +94,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": 0,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -103,11 +103,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Actor.yTATR0D63ScmGUlH.Item.3TYY15D6hvycx085.ActiveEffect.5HTr6F4bubtYh1uM",
         "duplicateSource": null,

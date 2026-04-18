@@ -50,7 +50,7 @@
   "effects": [
     {
       "name": "Charge Beam",
-      "type": "affliction",
+      "type": "passive",
       "_id": "bDvbd9tIQOXEVYZV",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -58,16 +58,16 @@
           {
             "type": "roll-effect",
             "key": "charge-beam-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
             "predicate": [],
             "chance": 70,
             "affects": "self",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "isFixedChance": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +83,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

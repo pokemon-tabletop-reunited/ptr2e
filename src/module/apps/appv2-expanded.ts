@@ -254,7 +254,7 @@ export class ActorSheetV2Expanded<
       }
       else {
         if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-        effectData.duration.turns = Number(data.amount);
+        effectData.duration.value = Number(data.amount);
       }
     }
 
@@ -618,7 +618,7 @@ export class ItemSheetV2Expanded<
       }
       else {
         if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-        effectData.duration.turns = Number(data.amount);
+        effectData.duration.value = Number(data.amount);
       }
     }
 
@@ -634,7 +634,7 @@ export class ItemSheetV2Expanded<
     const source = effect.toObject();
     if (source.type === "summon") {
       // Attempt a best-effor conversion.
-      source.type = source.system.formula || source.duration.turns ? "affliction" : "passive";
+      source.type = source.system.formula || source.duration.value ? "affliction" : "passive";
     }
     return ActiveEffectPTR2e.create(source, { parent: this.document });
   }

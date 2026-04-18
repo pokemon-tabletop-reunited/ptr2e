@@ -14,24 +14,24 @@
           {
             "type": "roll-effect",
             "key": "fling-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
             "key": "fling-trait-attack-damage",
             "value": 5,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "alter-attack",
@@ -40,8 +40,8 @@
             "predicate": [],
             "property": "range",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -54,8 +54,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -63,11 +63,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Actor.tGa5Upvillhew3kv.Item.okq5vNnqfxQRj5A7.ActiveEffect.RtKFuVw7jRDYWvMG",
         "duplicateSource": null,

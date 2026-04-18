@@ -13,8 +13,9 @@ const packs = packDirPaths.map((p) => CompendiumPack.loadJSON(p));
 const movesPack = packs.find((p) => p.packId === "core-moves");
 const cardPack = packs.find((p) => p.packId === "core-cards");
 if(cardPack && movesPack) {
+  console.log("Generating metronome deck...");
   cardPack.generateMetronomeDeck(movesPack);
-}
+} else console.log("Could not find core-moves or core-cards pack, skipping metronome deck generation.");
 
 const documentCounts = await Promise.all(packs.map((p) => p.save(asJson)));
 if(asJson) {

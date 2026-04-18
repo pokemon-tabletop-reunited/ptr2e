@@ -19,8 +19,8 @@
               "ability:fossilized:active"
             ],
             "label": "Fossilized (EHR)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -30,8 +30,8 @@
               "ability:fossilized:active"
             ],
             "label": "Fossilized (RES)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -41,9 +41,9 @@
               "ability:fossilized:active"
             ],
             "label": "Fossilized (Damage Inc.)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -53,9 +53,9 @@
               "target:effect:passive:fossilized"
             ],
             "label": "Fossilized (Damage Red.)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,8 +68,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -77,11 +77,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

@@ -1,0 +1,57 @@
+{
+  "name": "Stoked",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "type": "affliction",
+  "duration": {
+    "units": "turns",
+    "value": 5,
+    "expiry": "turnEnd"
+  },
+  "system": {
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "fire-attack-power",
+        "value": 100,
+        "predicate": [],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      }
+    ],
+    "removeOnRecall": true,
+    "removeAfterCombat": true,
+    "traits": [
+      "fire",
+      "pseudo-affliction"
+    ],
+    "slug": null,
+    "removeAfterAttacking": true,
+    "removeAfterAttacked": false,
+    "stacks": 0,
+    "priority": 50,
+    "formula": "",
+    "type": "damage",
+    "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>"
+  },
+  "description": "<p>While afflicted with Stoked, the creature's next damaging @Trait[fire] Attack has +100% Power.</p>",
+  "statuses": [],
+  "_id": "stokedcondititem",
+  "_stats": {
+    "coreVersion": "13.351",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "createdTime": null,
+    "modifiedTime": 1765233439611,
+    "lastModifiedBy": "mK35yvCqCgiTUvKf",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "disabled": false,
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "sort": 0,
+  "showIcon": 2
+}

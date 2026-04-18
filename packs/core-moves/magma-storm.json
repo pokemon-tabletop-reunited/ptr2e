@@ -56,26 +56,26 @@
           {
             "type": "roll-effect",
             "key": "magma-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.boundcondition00",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "label": "Bound",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "magma-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "label": "Burn",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -86,13 +86,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

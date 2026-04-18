@@ -29,10 +29,10 @@
             "key": "attack",
             "value": 0.7,
             "predicate": [],
-            "mode": 1,
             "property": "power",
             "definition": [],
-            "ignored": false
+            "ignored": false,
+            "method": 1
           },
           {
             "type": "alter-attack",
@@ -41,8 +41,8 @@
             "predicate": [],
             "property": "traits",
             "definition": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -58,10 +58,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": 1,
-        "startTurn": null
+        "units": "turns",
+        "value": 1,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -69,11 +68,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
