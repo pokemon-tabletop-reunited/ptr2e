@@ -13,12 +13,12 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "D",
+    "grade": "C",
     "fling": {
       "type": "steel",
       "power": 75,
       "accuracy": 80,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 2,
@@ -41,7 +41,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 100,
         "accuracy": 90,
         "free": true,
@@ -51,7 +51,7 @@
         ],
         "name": "Break-Action Shotgun",
         "slug": "break-action-shotgun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 2</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -60,48 +60,46 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 170,
         "accuracy": 85,
-        "free": true,
         "traits": [
           "missile",
           "firearm"
         ],
         "name": "Break-Action Shotgun (Double)",
         "slug": "break-action-shotgun-double",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 2</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 8,
+          "distance": 9,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 2
+          "activation": "complex"
         },
         "variant": "break-action-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 100,
         "accuracy": 75,
-        "free": true,
         "traits": [
           "missile",
           "dash",
@@ -110,30 +108,28 @@
         ],
         "name": "Break-Action Shotgun (Hip Fire)",
         "slug": "break-action-shotgun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "cone",
-          "distance": 4,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "activation": "complex"
         },
         "variant": "break-action-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 170,
         "accuracy": 70,
-        "free": true,
         "traits": [
           "missile",
           "dash",
@@ -142,21 +138,20 @@
         ],
         "name": "Break-Action Shotgun (Double Hip Fire)",
         "slug": "break-action-shotgun-two-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 2</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "cone",
-          "distance": 4,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 2,
-          "priority": 1
+          "activation": "complex"
         },
         "variant": "break-action-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -183,7 +178,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>Break action is a type of firearm action in which the barrel(s) are hinged much like a door and rotate perpendicularly to the bore axis to expose the breech and allow loading and unloading of cartridges. Nowadays, break-action shotguns are primarily used for home defense, being exceptionally reliable and effective.</p>"
+    "description": "<p>Break action is a type of firearm action in which the barrel(s) are hinged much like a door and rotate perpendicularly to the bore axis to expose the breech and allow loading and unloading of cartridges. Nowadays, break-action shotguns are primarily used for home defense, being exceptionally reliable and effective.</p>",
+    "ammoType": []
   },
   "_id": "HZjQpHFC9gZu7dZc",
   "effects": [
@@ -203,7 +199,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -212,7 +209,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -221,7 +219,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -235,7 +234,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -246,14 +247,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743885620764,
         "modifiedTime": 1757631515218,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "GPebepuiQbZSuf35"

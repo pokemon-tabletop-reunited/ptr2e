@@ -100,7 +100,7 @@
       "type": "steel",
       "power": 120,
       "accuracy": 60,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 2,
@@ -137,7 +137,8 @@
             "label": "Chainsaw Swing",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -151,7 +152,8 @@
             "dontMerge": false,
             "label": "Chainsaw Swing (Bleed)",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "create-clock",
@@ -163,7 +165,8 @@
             "private": false,
             "label": "Chainsaw Grind",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -173,7 +176,8 @@
             "label": "Chainsaw Grind (Damage)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "alter-attack",
@@ -184,7 +188,8 @@
             "property": "accuracy",
             "definition": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -204,7 +209,8 @@
             "dontMerge": true,
             "label": "Chainsaw Grind (Advance)",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -224,7 +230,8 @@
             "dontMerge": false,
             "label": "Chainsaw Grind (Bleed)",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -244,7 +251,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -264,7 +272,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-effect",
@@ -281,7 +290,8 @@
               }
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -301,7 +311,8 @@
             ],
             "dontMerge": true,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -311,7 +322,8 @@
             "label": "Chainsaw (Fling)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -325,7 +337,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -337,13 +351,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "kEB4MUFx1SEM0W3P"
 }
