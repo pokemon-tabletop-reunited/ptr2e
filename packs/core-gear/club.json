@@ -71,7 +71,7 @@
       "type": "untyped",
       "power": 90,
       "accuracy": 80,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 3,
@@ -79,7 +79,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -88,7 +88,10 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "club",
+    "grade": "E",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -107,7 +110,8 @@
             "label": "Club",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -131,7 +135,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -145,7 +150,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -157,13 +164,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "LUqbfyrTjvN8FEYd"
 }
