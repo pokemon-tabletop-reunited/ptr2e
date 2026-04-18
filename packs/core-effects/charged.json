@@ -1,0 +1,81 @@
+{
+  "name": "Charged",
+  "type": "effect",
+  "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+  "system": {
+    "traits": [
+      "electric",
+      "psuedo-affliction"
+    ],
+    "description": "<p>While afflicted with Charged, the creature's next damaging @Trait[electric] Attack has +100% Power.</p>",
+    "slug": "charged",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Charged",
+      "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+      "type": "affliction",
+      "duration": {
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "electric-attack-power",
+            "value": 100,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "removeOnRecall": false,
+        "removeAfterCombat": true,
+        "traits": [
+          "electric",
+          "psuedo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power.",
+      "statuses": [],
+      "_id": "chargedcondition",
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": null,
+        "modifiedTime": 1765233401964,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "showIcon": 2
+    }
+  ],
+  "_id": "chargedcondiitem"
+}

@@ -12,8 +12,7 @@
         "traits": [
           "blast-4",
           "legendary",
-          "defrost",
-          "pp-updated"
+          "defrost"
         ],
         "range": {
           "target": "blast",
@@ -30,7 +29,7 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[burn] 9.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[burn 9].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -40,6 +39,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "s9hHSCryL6AuXfbG",
@@ -54,20 +59,20 @@
           {
             "type": "roll-effect",
             "key": "blue-flare-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 20,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 9
+                "value": 9,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -78,13 +83,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

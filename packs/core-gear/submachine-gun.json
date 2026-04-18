@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,16 +17,26 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-35"
+      "charge-pool-35",
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -34,13 +44,12 @@
           "untyped"
         ],
         "category": "special",
-        "power": 45,
+        "power": 40,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Submachine Gun",
         "slug": "submachine-gun",
@@ -54,27 +63,21 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 95,
+        "power": 105,
         "accuracy": 85,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Submachine Gun (Burst)",
         "slug": "submachine-gun-burst",
@@ -83,32 +86,27 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 12,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
         "variant": "submachine-gun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 70,
-        "accuracy": 80,
+        "power": 130,
+        "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Submachine Gun (Spray)",
         "slug": "submachine-gun-spray",
@@ -122,28 +120,24 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 13,
-          "delay": null,
-          "priority": null
+          "powerPoints": 13
         },
         "variant": "submachine-gun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 115,
         "accuracy": 70,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
           "dash",
-          "priority-1"
+          "firearm",
+          "priority-10"
         ],
         "name": "Submachine Gun (Hip Fire)",
         "slug": "submachine-gun-hip-fire",
@@ -157,22 +151,17 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null
+          "powerPoints": 6
         },
         "variant": "submachine-gun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "Effect: The user may use the Attack Submachine Gun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A submachine gun (SMG) is a magazine-fed automatic carbine designed to fire handgun cartridges. The term \"submachine gun\" was coined to describe its design concept as an automatic firearm with notably less firepower than a machine gun.</p>",
     "weaponType": "untyped",
     "weaponPp": 35,
     "weaponRange": "Creature",
-    "slug": null,
-    "container": null,
+    "slug": "submachine-gun",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -182,26 +171,98 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "lgr7ssZc8fcyeSZn",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!lgr7ssZc8fcyeSZn"
+  "effects": [
+    {
+      "name": "Submachine Gun",
+      "type": "passive",
+      "_id": "JTDjo4sEycjYTfRD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 37,
+            "predicate": [],
+            "label": "Submachine Gun",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "submachine-gun-burst-attack-damage-flat",
+            "value": 74,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "submachine-gun-spray-attack-damage-flat",
+            "value": 185,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "submachine-gun-hip-fire-attack-damage-flat",
+            "value": 111,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743901863356,
+        "modifiedTime": 1757631965062,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "fwBg1GB1fMcgPklo"
 }

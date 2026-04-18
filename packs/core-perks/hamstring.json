@@ -25,7 +25,8 @@
         },
         "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
         "variant": null,
-        "hidden": false
+        "hidden": false,
+        "ephemeralVariant": false
       }
     ],
     "slug": "hamstring",
@@ -43,7 +44,10 @@
           "run-down",
           "mightyena-tactic",
           "stat-iv-booster-1-7",
-          "improved-overland-9"
+          "improved-overland-9",
+          "minor-buff-12",
+          "minor-buff-51",
+          "duelists-glory"
         ],
         "config": {
           "alpha": null,
@@ -70,7 +74,14 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Hunter"
+      "archetype": "hunter"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": [
@@ -84,13 +95,15 @@
           {
             "type": "roll-effect",
             "key": "all-crit",
-            "value": "Compendium.ptr2e.core-effects.Item.9FlxAAlUW2PrKOd0",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.9FlxAAlUW2PrKOd0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -101,13 +114,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -119,12 +127,13 @@
       "_stats": {
         "compendiumSource": "Actor.zzmajvZtYY3MnEp5.Item.AtZG4R8JQtUwWk3S.ActiveEffect.NxgyQBu4WL1YIix2",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1732232681581,
         "modifiedTime": 1732232681581,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

@@ -12,6 +12,19 @@
             {{formField fields.equipped.fields.carryType value=source.system.equipped.carryType localize=true}}
             {{formField fields.equipped.fields.slot value=source.system.equipped.slot localize=true}}
             {{formField fields.equipped.fields.handsHeld value=source.system.equipped.handsHeld localize=true}}
+            {{formField fields.ammoType value=source.system.ammoType localize=true}}
+            <div class="form-group">
+              <label>{{localize "PTR2E.FIELDS.gear.ammo.label"}}</label>
+              <div class="form-fields">
+                <select name="system.ammo">
+                  <option value="">--</option>
+                  {{#each ammoOptions}}
+                    <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <p class="hint">{{localize "PTR2E.FIELDS.gear.ammo.hint"}}</p>
+            </div>
         </fieldset>
         <fieldset>
             <legend>
@@ -31,6 +44,8 @@
             {{formField fields.fling.fields.power value=source.system.fling.power localize=true}}
             {{formField fields.fling.fields.accuracy value=source.system.fling.accuracy localize=true}} 
             {{formField fields.fling.fields.hide value=source.system.fling.hide localize=true}} 
+            {{formField fields.fling.fields.range.fields.target value=source.system.fling.range.target localize=true}} 
+            {{formField fields.fling.fields.range.fields.distance value=source.system.fling.range.distance localize=true}}
         </fieldset>
         <fieldset>
             <legend>
@@ -45,6 +60,14 @@
                 Description
             </legend>
             {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
+        </fieldset>
+        <fieldset>
+          <legend>
+            Publication Details
+          </legend>
+          {{formField fields.publication.fields.source value=source.system.publication.source localize=true}}
+          {{formField fields.publication.fields.authors value=source.system.publication.authors localize=true}}
+          {{formField fields.publication.fields.notes enriched=enrichedNotes value=source.system.publication.notes toggled=true localize=true}}
         </fieldset>
     </div>
 </section>

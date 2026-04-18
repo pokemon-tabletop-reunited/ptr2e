@@ -7,10 +7,31 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Radiation Leak",
         "slug": "radiation-leak",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Fallout.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Radiation Leak (Extend)",
+        "slug": "radiation-leak-extend",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -19,46 +40,93 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares Fallout.</p><p>Effect: The set Glowy Weather has its duration increased by +2 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "fallout",
-        "name": "Fallout",
-        "type": "attack",
-        "traits": [
-          "weather"
-        ],
-        "range": {
-          "target": "field",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4
-        },
-        "category": "status",
-        "types": [
-          "nuclear"
-        ],
-        "description": "<p>Effect: The Weather becomes Glowy for 3 rounds.</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares Fallout.</p><p>Effect: Connection - Fallout. The set Glowy Weather has its duration increased by +2 Rounds.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Fallout. The user freely uses Fallout. When the user sets Glowy Weather, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "connection",
-      "weather"
+      "weather",
+      "partial-automation"
     ],
     "slug": "radiation-leak",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "9GMyw26IHKlC83QN",
-  "effects": []
+  "effects": [
+    {
+      "name": "Radiation Leak",
+      "type": "passive",
+      "_id": "QT55UdCgoD1nosVg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.tvJruA8VQvYfNvaV",
+            "predicate": [
+              "ability:radiation-leak:active"
+            ],
+            "allowDuplicate": false,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "reevaluateOnUpdate": true,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1754320751431,
+        "modifiedTime": 1754320775810,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

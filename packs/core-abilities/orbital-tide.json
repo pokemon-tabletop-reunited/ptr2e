@@ -18,16 +18,23 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "Effect: All creatures within Range gain @Affliction[lifted] 5.</p>",
+        "description": "Effect: All creatures within Range gain @Affliction[lifted 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: Connection - Gravity. All creatures within Range gain @Affliction[lifted] 5.</p>",
+    "description": "Effect: Connection - Gravity. All creatures within Range gain @Affliction[lifted 5].</p>",
     "traits": [],
     "slug": "orbital-tide",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "fwwRKQnqEjKl2jgl",
@@ -43,43 +50,42 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.EGfHyGHlkgY53oIO",
-            "predicate": [],
+            "predicate": [
+              "ability:orbital-tide:active"
+            ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -91,12 +97,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737405699245,
-        "modifiedTime": 1737405721697,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754319875942,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

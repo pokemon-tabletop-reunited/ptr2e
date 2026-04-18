@@ -2,7 +2,7 @@
   "name": "Spellbind",
   "type": "move",
   "_id": "0ODL9uCw44Tre4AX",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "spellbind",
     "actions": [
@@ -10,11 +10,14 @@
         "name": "Spellbind",
         "slug": "spellbind",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "traits": [
+          "arcane",
+          "adaptable"
+        ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
@@ -22,20 +25,27 @@
           "powerPoints": 3
         },
         "types": [
-          "fairy"
+          "untyped"
         ],
         "category": "special",
         "power": 70,
         "accuracy": 95,
-        "description": "<p>Effect: On hit, the target has a 30% chance of inflicting @Affliction[disabled] 5 on the last attack the target used.</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of inflicting @Affliction[disabled 5] on the last attack the target used.</p>",
         "predicate": []
       }
     ],
-    "grade": "A",
+    "grade": "C",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
     }
   },
   "effects": [
@@ -49,14 +59,14 @@
           {
             "type": "roll-effect",
             "key": "spellbind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +77,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

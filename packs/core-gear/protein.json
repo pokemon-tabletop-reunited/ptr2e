@@ -3,7 +3,6 @@
   "img": "systems/ptr2e/img/item-icons/protein.webp",
   "type": "consumable",
   "system": {
-    "cost": null,
     "crafting": {
       "skill": "medicine",
       "spans": 5,
@@ -14,17 +13,23 @@
       ]
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "slotless",
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "S",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "consumableType": "restorative",
     "traits": [
       "held",
@@ -33,31 +38,73 @@
       "natural",
       "empowering"
     ],
-    "description": "The target gains +1 ATK IV.",
-    "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "description": "<p>Effect: The user gains +1 ATK IV (this item is treated as being Consumed while Equipped).</p><p>Restriction: Creatures can usually only have 30 ATK IVs.</p>",
+    "quantity": 3,
+    "slug": "protein",
+    "stack": 3,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "O5w85gi0lyKOVWSJ",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!O5w85gi0lyKOVWSJ"
+  "effects": [
+    {
+      "name": "Protein",
+      "type": "passive",
+      "_id": "R7XT7yE54xuYPspz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.ivs",
+            "value": "@item.system.quantity",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771957526850,
+        "modifiedTime": 1771957565102,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
+  "folder": "Y7AqrGYTyQ9I1vPu"
 }

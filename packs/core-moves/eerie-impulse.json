@@ -9,9 +9,7 @@
         "slug": "eerie-impulse",
         "name": "Eerie Impulse",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -34,6 +32,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "N7TRNI8wScxgaCMO",
@@ -48,13 +52,13 @@
           {
             "type": "roll-effect",
             "key": "eerie-impulse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.EYmp1DeE1Lwzi0D1",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.EYmp1DeE1Lwzi0D1",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -65,13 +69,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

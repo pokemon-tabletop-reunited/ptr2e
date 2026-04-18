@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "mutual-aid",
-    "description": "<p>When healing another creature, you may spend an additional 4PP to also benefit from the healing applied to the creature.</p>",
+    "description": "<p>When the user uses a @Trait[healing] Action on another creature, the user may spend 2 PP as a Free Action at @Trait[flinch-30] to also receive the effects of that @Trait[healing] Action.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -24,23 +24,20 @@
     },
     "nodes": [
       {
+        "x": 58,
+        "y": 80,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "cautious-healer",
           "martyrs-gift"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#000080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 58,
-        "y": 80,
         "tier": null
       }
     ],
@@ -51,7 +48,15 @@
       "arena": "mental",
       "approach": "resilience",
       "archetype": "healer"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "effects": []
 }

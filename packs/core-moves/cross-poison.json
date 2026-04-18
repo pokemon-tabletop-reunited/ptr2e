@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "crit-1",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +28,7 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -37,6 +36,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "GlM8a7MxJdeUJv4V",
@@ -51,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "cross-poison-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,13 +73,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

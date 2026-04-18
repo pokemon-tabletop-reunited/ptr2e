@@ -1,9 +1,31 @@
+// .dice-roll .dice-tooltip > .wrapper {
+//   overflow: unset !important;
+// }
+
 .chat-message.message {
     background: var(--user-color, #fefefe);
     padding: 0;
     color: #1e1e1e;
 
     --color-underline-header: #6f6c66;
+
+    h3 {
+      font-size: 1.25em;
+      font-weight: normal;
+    }
+
+    a.button, button {
+      background: rgba(255, 255, 240, 0.8);
+      min-height: unset;
+
+      &:hover {
+        color: var(--hint-text-color);
+      }
+
+      &.consume-pp {
+        height: 20px;
+      }
+    }
 
     &.whisper {
         background-color: #bcbcbc;
@@ -45,18 +67,30 @@
                 flex-wrap: wrap;
 
                 padding: 0.25rem 0.5rem;
+                align-items: center;
+                gap: 0.25rem;
 
                 &.undone {
                     text-decoration: line-through;
                 }
 
                 p {
-                    flex: 1;
+                  flex: 1;
+                  min-width: 0;
+
+                  &.gm-info {
+                    span {
+                      background: #3500791f;
+                      border: 1px dashed var(--color-dark-6);
+                      padding: 0 2px;
+                    }
+                  }
                 }
 
                 button {
-                    flex: 0 0 50px;
-                    padding: 0;
+                  flex: 0 0 50px;
+                  padding: 0;
+                  margin-left: 0.25rem;
                 }
 
                 .notes {
@@ -150,11 +184,12 @@
                     .collapse-rolls {
                         background-color: #eee;
                         cursor: pointer;
-                        font-size: 15px;
-                        border: none;
+                        border: none !important;
                         outline: none;
                         padding: 0 0.5rem;
-                        border-bottom: 1px solid var(--color-underline-header);
+                        border-bottom: 1px solid var(--color-underline-header) !important;
+                        flex: 1;
+                        white-space: nowrap;
 
                         &:after {
                             content: "▶";
@@ -167,6 +202,10 @@
 
                         &.expanded:after {
                             content: "▼";
+                        }
+
+                        &:hover {
+                          color: #2e2e2e;
                         }
                     }
                 }
@@ -281,10 +320,12 @@
                                 flex-direction: column;
                                 flex: 0 0 44px;
                                 margin: 0.25rem 0.25rem;
+                                margin-right: unset;
                                 gap: 2px;
 
                                 .icon {
                                     border: unset;
+                                    box-shadow: unset;
                                 }
                             }
 
@@ -294,6 +335,7 @@
                                 flex: 1;
                                 place-content: center;
                                 flex-direction: column;
+                                margin-left: 0.25rem;
 
                                 &.center {
                                   display: flex;
@@ -384,6 +426,10 @@
                         span {
                             font-size: 16px;
                         }
+
+                        i.fas {
+                          font-size: 22px;
+                        }
                     }
 
                     .apply {
@@ -396,9 +442,9 @@
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            font-size: 14px;
+                            font-size: 13px;
                             color: #1e1e1e;
-                            padding: 0;
+                            padding: 0.25rem;
 
                             &[disabled] {
                               filter: contrast(0.7);
@@ -412,6 +458,26 @@
                                 }
                             }
                         }
+                    }
+
+                    &.target-footer {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: space-evenly;
+                      align-items: center;
+                      padding: 0.25rem;
+                      background-color: #dedede;
+
+                      button {
+                        flex: 0 0 45%;
+
+                        &.apply-damage-all {
+                          background-color: #f28b8288;
+                        }
+                        &.apply-damage-all-hit {
+                          background-color: #81c99588;
+                        }
+                      }
                     }
                 }
             }
@@ -496,8 +562,35 @@
                 padding: 0.5rem;
                 border: 1px solid var(--border-theme-color);
                 border-radius: 8px;
-                margin-top: 0.25rem;
+                margin-top: 0;
                 margin-bottom: 0;
+            }
+
+            .breakdown {
+              display: flex;
+              flex-direction: column;
+              margin-top: 5px;
+              
+              .dice-tooltip .wrapper > * {
+                padding: 0.25rem 0;
+                margin-bottom: 0.25rem;
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                border: 1px solid var(--color-border-light-2);
+              }
+
+              > span {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+
+              span.pos {
+                color: #18520b;
+              }
+
+              span.neg {
+                color: #aa0200;
+              }
             }
         }
     }
@@ -596,12 +689,11 @@
 
     &.combat {
       border: none;
-      border-radius: 0px;
-      background: unset;
+      border-radius: 8px;
+      background: url(/ui/denim075.png);
       padding: 0pc 5px;
-      margin: 0px;
       box-shadow: none;
-      border-bottom: 1px solid #e9d7a1;
+      border: 1px solid #e9d7a1;
 
       .message-header {
         .message-sender {
@@ -634,7 +726,7 @@
       }
     }
 
-    div.attack-embed {
+    div.attack-embed, div.item-embed {
       footer.buttons {
         button {
           flex: 1 0 100%;
@@ -642,7 +734,7 @@
         }
       }
     }
-    content.attack-embed {
+    content.attack-embed, content.item-embed {
       footer.buttons {
         button {
           font-size: var(--font-size-12);
@@ -681,5 +773,88 @@
         }
       }
     }
+  }
+}
+
+.content-link {
+  &.type-normal {
+    border-color: var(--normal-color);
+    border-width: 2px;
+  }
+  &.type-fighting {
+    border-color: var(--fighting-color);
+    border-width: 2px;
+  }
+  &.type-flying {
+    border-color: var(--flying-color);
+    border-width: 2px;
+  }
+  &.type-poison {
+    border-color: var(--poison-color);
+    border-width: 2px;
+  }
+  &.type-ground {
+    border-color: var(--ground-color);
+    border-width: 2px;
+  }
+  &.type-rock {
+    border-color: var(--rock-color);
+    border-width: 2px;
+  }
+  &.type-bug {
+    border-color: var(--bug-color);
+    border-width: 2px;
+  }
+  &.type-ghost {
+    border-color: var(--ghost-color);
+    border-width: 2px;
+  }
+  &.type-steel {
+    border-color: var(--steel-color);
+    border-width: 2px;
+  }
+  &.type-fire {
+    border-color: var(--fire-color);
+    border-width: 2px;
+  }
+  &.type-water {
+    border-color: var(--water-color);
+    border-width: 2px;
+  }
+  &.type-grass {
+    border-color: var(--grass-color);
+    border-width: 2px;
+  }
+  &.type-electric {
+    border-color: var(--electric-color);
+    border-width: 2px;
+  }
+  &.type-psychic {
+    border-color: var(--psychic-color);
+    border-width: 2px;
+  }
+  &.type-ice {
+    border-color: var(--ice-color);
+    border-width: 2px;
+  }
+  &.type-dragon {
+    border-color: var(--dragon-color);
+    border-width: 2px;
+  }
+  &.type-dark {
+    border-color: var(--dark-color);
+    border-width: 2px;
+  }
+  &.type-fairy {
+    border-color: var(--fairy-color);
+    border-width: 2px;
+  }
+  &.type-nuclear {
+    border-color: var(--nuclear-color);
+    border-width: 2px;
+  }
+  &.type-shadow {
+    border-color: var(--shadow-color);
+    border-width: 2px;
   }
 }

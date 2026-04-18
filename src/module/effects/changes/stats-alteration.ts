@@ -38,7 +38,7 @@ export default class StatsAlterationChangeSystem extends BasicChangeSystem {
       const currentValue = (fu.getProperty(actor, this.paths[key]) ?? null) as number | null;
       if(!currentValue) this.failValidation(`The path "${this.paths[key]}" is not valid for the actor ${actor.id}.`);
       
-      const newValue = BasicChangeSystem.getNewValue(CONST.ACTIVE_EFFECT_MODES.ADD, currentValue, this[key], this.merge);
+      const newValue = BasicChangeSystem.getNewValue(2, currentValue, this[key], this.merge);
       if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
         return this.failValidation(newValue.asError().message);
       }

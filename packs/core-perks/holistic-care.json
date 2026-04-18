@@ -7,13 +7,13 @@
   "system": {
     "actions": [],
     "slug": "holistic-care",
-    "description": "<p>When healing a creature, you may spend an additional 3PP to remove 1 Stack from any Afflictions the creature may be suffering, without triggering the negative effects of removing those Stacks.</p>",
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.cEAOUdK51hPAaOtP]{Healer} as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       {
         "gte": [
           "{actor|skills.medicine.mod}",
-          30
+          60
         ]
       }
     ],
@@ -24,23 +24,21 @@
     },
     "nodes": [
       {
-        "connected": [
-          "chansey-medicine",
-          "involuntary-transfusion"
-        ],
-        "config": {
-          "alpha": null,
-          "backgroundColor": "#ff0000",
-          "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-          "tint": null,
-          "scale": null
-        },
-        "hidden": false,
-        "type": "normal",
         "x": 46,
         "y": 80,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "chansey-medicine",
+          "involuntary-transfusion",
+          "tourniquetting"
+        ],
+        "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
@@ -51,7 +49,75 @@
       "arena": "mental",
       "approach": "resilience",
       "archetype": "healer"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Holistic Care",
+      "type": "passive",
+      "_id": "2njpYM0zfxEWHjoW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.cEAOUdK51hPAaOtP",
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1746675474333,
+        "modifiedTime": 1746675498283,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null
+      }
+    }
+  ]
 }

@@ -13,62 +13,96 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "C",
+    "grade": "D",
     "fling": {
-      "type": "fighting",
-      "power": 50,
-      "accuracy": 100
+      "type": "untyped",
+      "power": 80,
+      "accuracy": 85,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
-    "rarity": "uncommon",
+    "rarity": "common",
     "traits": [
       "weapon",
       "fling",
-      "bladed",
-      "one-handed",
-      "fighting"
+      "blade",
+      "1-handed",
+      "switch-grip",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
     ],
     "actions": [
       {
-        "name": "Sheathed Knife",
-        "slug": "sheathed-knife",
+        "name": "Sheathed Knife Swing",
+        "slug": "sheathed-knife-swing",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Sheathed Knife, drawing upon this item's PP Pool or the user's PP to use the Attack.",
         "traits": [
-          "Weapon",
-          "Fling",
-          "Bladed",
-          "One-Handed",
-          "Fighting"
+          "weapon",
+          "contact",
+          "sharp",
+          "adaptable",
+          "grapple",
+          "priority-20"
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 1
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null,
         "types": [
           "untyped"
         ],
         "category": "physical",
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "power": 40,
+        "accuracy": 90,
+        "free": true
+      },
+      {
+        "name": "Sheathed Knife Thrust",
+        "slug": "sheathed-knife-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "crit-1",
+          "grapple",
+          "adaptable"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 75,
+        "accuracy": 85,
+        "free": true
       }
     ],
-    "description": "Effect: The user may use the Attack Sheathed Knife, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-    "weaponType": "untyped",
-    "weaponRange": "Creature",
-    "slug": null,
-    "container": null,
+    "description": "<p>A sheath knife is a fixed-bladed knife that fits into a sheath, generally due to the size of the knife's blade. These tools are as versatile as smaller knives, though the broader blade opens the door for different uses of these knives, most significantly for offense and defense.</p>",
+    "slug": "sheathed-knife",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -79,26 +113,87 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponPp": 0
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "_id": "LrhYW6Hg6szAqBas",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!LrhYW6Hg6szAqBas"
+  "effects": [
+    {
+      "name": "Sheathed Knife",
+      "type": "passive",
+      "_id": "4WbMbVkeMLhw0MLg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 8,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "sheathed-knife-thrust-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-sheathed-knife-attack-damage-flat",
+            "value": 12,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1757553244816,
+        "modifiedTime": 1770678695273,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
+  "folder": "MKaFm5Pvt7tvgdAa"
 }

@@ -1,0 +1,81 @@
+<div id="hotbar-controls-left" class="hotbar-controls flexrow" data-tooltip-direction="LEFT">
+  <div class="flexcol" {{#unless actor}}style="visibility: hidden;"{{/unless}}>
+    <button type="button" class="plain fa-solid fa-user-group icon{{#if (is toggle "party")}} active{{/if}}" data-action="party" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.party.label'}}"></button>
+    {{!-- <button type="button" class="plain fa-solid fa-person-walking icon{{#if (is toggle "movement")}} active{{/if}}" data-action="movement" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.movement.label'}}"></button> --}}
+    <button type="button" class="plain fa-regular fa-star icon{{#if (is toggle "passives")}} active{{/if}}" data-action="passives" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.passives.label'}}"></button>
+    <button type="button" class="plain fa-regular fa-star icon{{#if (is toggle "effects")}} active{{/if}}" data-action="effects" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.effects.label'}}"></button>
+  </div>
+  <div class="flexcol" {{#unless actor}}style="visibility: hidden;"{{/unless}}>
+    <button type="button" class="plain fa-solid fa-burst icon{{#if (is tab "slots")}} active{{/if}}" data-action="attacks" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.attack-slots.label'}}"></button>
+    <button type="button" class="plain fa-regular fa-burst icon{{#if (is tab "other")}} active{{/if}}" data-action="other" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.attack-other.label'}}"></button>
+        <button type="button" class="plain fa-solid fa-dice-d20 icon{{#if (is tab "generic")}} active{{/if}}" data-action="generic" data-tooltip
+        aria-label="{{localize 'PTR2E.TokenPanel.Tabs.generic-actions.label'}}"></button>
+  </div>
+  {{#if actor}}
+    <menu class="panel{{#if toggle}} {{toggle}}{{/if}}" data-parent="{{actor.uuid}}">
+      {{#if (is toggle "party")}}
+        {{#unless isOwner}}
+          {{#if party.owner}}
+            <div class="party-header mb-0">
+              <span>Party Leader</span>
+            </div>
+            <div class="owner" data-uuid="{{party.owner.uuid}}" draggable="true" data-action="open-entry">
+              <div class="icon actor" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
+                <img src="{{party.owner.img}}" alt="{{party.owner.name}}">
+              </div>
+              <div class="name">{{party.owner.name}}</div>
+            </div>
+          {{/if}}
+        {{/unless}}
+        {{#if party.party}}
+          <div class="party-header">
+            <span>Party Members</span>
+          </div>
+          {{#each party.party as |actor|}}
+            <div class="icon actor" data-action="open-entry" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}" draggable="true">
+              <img src="{{actor.img}}" alt="{{actor.name}}">
+            </div>
+          {{/each}}
+          {{else}}
+          <li class="entry open" style="align-self: center;">
+            <span class="label"><small>No Party Details</small></span>
+          </li>
+        {{/if}}
+      {{/if}}
+      {{#if (is toggle "movement")}}
+      {{/if}}
+      {{#if (is toggle "passives")}}
+        {{#each actions.passives as |action|}}
+          {{#unless action.hidden}}
+            <li class="entry full passive" data-action="open-entry" data-tooltip-direction="LEFT" data-uuid="{{action.uuid}}" data-tooltip aria-label="{{action.name}}">
+              <img src="{{action.img}}" alt="{{action.name}}" class="entry-icon">
+              <span class="label">{{action.name}}</span>
+            </li>
+          {{/unless}}
+        {{else}}
+          <li class="entry open">
+            <span class="label"><small>No Passives Found</small></span>
+          </li>
+        {{/each}}
+      {{/if}}
+      {{#if (is toggle "effects")}}
+        {{#each effects as |effect|}}
+          <li class="effect entry full" data-tooltip-direction="LEFT" data-action="open-entry" data-uuid="{{effect.uuid}}" data-tooltip aria-label="{{effect.name}}">
+            <img src="{{effect.img}}" alt="{{effect.name}}" class="entry-icon">
+            <span class="label">{{effect.name}}</span>
+          </li>
+        {{else}}
+          <li class="effect entry open">
+            <span class="label"><small>No Effects Found</small></span>
+          </li>
+        {{/each}}
+      {{/if}}
+    </menu>
+  {{/if}}
+</div>

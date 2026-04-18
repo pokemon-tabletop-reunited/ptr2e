@@ -3,21 +3,21 @@
   "type": "perk",
   "system": {
     "prerequisites": [],
-    "cost": 2,
-    "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
+    "cost": 3,
+    "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "<p>While @Affliction[enraged], the user's Attacks have a 30% chance on resolution to grant the user +1 SPD Stage for 5 Activations for 5 Activations.</p>",
+        "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack.</p>",
         "cost": {
           "activation": "free"
         },
-        "type": "generic",
+        "type": "passive",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
         }
       }
@@ -25,29 +25,30 @@
     "slug": "frenzied-assault",
     "traits": [],
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.11,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "1.0.6.beta"
+      }
     },
     "nodes": [
       {
+        "x": 57,
+        "y": 41,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "berserker",
           "elemental-rage",
           "seeing-red"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff0000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 57,
-        "y": 41,
         "tier": null
       }
     ],
@@ -57,8 +58,16 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Berserker"
-    }
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "IMn0UktiyUWZXQty",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -72,33 +81,33 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
             "predicate": [
               "effect:affliction:enraged"
             ],
             "chance": 30,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -106,16 +115,16 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
-        "createdTime": 1734211188522,
-        "modifiedTime": 1734212542084,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "1.5.0.beta",
+        "createdTime": null,
+        "modifiedTime": 1772815323036,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
+        "exportSource": null
       }
     }
   ],

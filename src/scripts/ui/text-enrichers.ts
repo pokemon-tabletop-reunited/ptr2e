@@ -1,11 +1,13 @@
 // Default Pattern
 // /@(?<type>Key)\[(?<slug>[-a-z]+)(\s+)?(?<options>[^\]]+)*](?:{(?<label>[^}]+)})?/gi
 
+import { ChatMessagePTR2e } from "@chat";
+import { PokemonType } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
   static init() {
-    const original = TextEditor.activateListeners.bind(TextEditor);
-    TextEditor.activateListeners = function () {
+    const original = foundry.applications.ux.TextEditor.activateListeners.bind(foundry.applications.ux.TextEditor);
+    foundry.applications.ux.TextEditor.activateListeners = function () {
       original();
 
       const body = $("body");
@@ -14,6 +16,8 @@ export class TextEnricher {
       body.on("dragstart", "span.affliction > .content-link", TextEnricher._onDragStartAffliction);
 
       body.on("click", "span.tick > .content-link", TextEnricher._onClickTick);
+
+      body.on("click", "span.flat > .content-link", TextEnricher._onClickFlat);
     }
   }
 
@@ -34,6 +38,16 @@ export class TextEnricher {
       case "Tick": {
         return this.#createTick({ amount: parseInt(amount), options: params, label });
       }
+      case "Shield":
+      case "HP":
+      case "PP": {
+        if (params?.tick || params?.ticks) {
+          if (type === "Shield") params.shield = "true";
+          else if (type === "PP") params.pp = "true";
+          return this.#createTick({ amount: parseInt(amount), options: params, label });
+        }
+        return this.#createFlat({ type, amount: parseInt(amount), options: params, label });
+      }
     }
     return null;
   }
@@ -44,8 +58,18 @@ export class TextEnricher {
       return null;
     }
 
-    const trait = game.ptr.data.traits.get(slug);
-    if (!trait) return null;
+    const trait = game.ptr.data.traits.getTrait(slug);
+    if (!trait) {
+      const decorator = ['[', ']'];
+
+      const span = document.createElement("span");
+      span.classList.add("trait", "invalid");
+      span.dataset.tooltipDirection = options?.direction || "UP";
+      span.dataset.trait = slug;
+      span.dataset.tooltip = `Unknown trait: ${slug}`;
+      span.innerHTML = `<span>${decorator[0]}</span><span class="tag">${label || Handlebars.helpers.formatSlug(slug)}</span><span>${decorator[1]}</span>`
+      return span;
+    }
 
     // TODO: Add keyword decorator
     // eslint-disable-next-line no-constant-condition
@@ -66,19 +90,22 @@ export class TextEnricher {
     const affliction = game.ptr.data.afflictions.get(slug!);
     if (!affliction) return null;
 
+    const amount = options ? parseInt(Object.keys(options)[0]) : null;
+
     const span = document.createElement("span");
     span.classList.add("affliction");
     span.dataset.tooltipDirection = options?.direction || "UP";
     span.dataset.affliction = affliction.id;
     span.dataset.tooltip = affliction.id;
     span.append((() => {
-      const name = label || game.i18n.localize(affliction.name);
-      return TextEditor.createAnchor({
+      const name = label || (game.i18n.localize(affliction.name) + (amount ? ` ${amount}` : ""));
+      return foundry.applications.ux.TextEditor.createAnchor({
         classes: ["content-link"],
         attrs: { draggable: true as unknown as string },
         name,
         dataset: {
           id: affliction.id,
+          ...(amount ? { amount: amount.toString() } : {}),
         },
         icon: "fas fa-sparkles",
       })
@@ -93,6 +120,7 @@ export class TextEnricher {
 
     const isPPBased = !!options?.pp;
     const isShieldBased = !!options?.shield && !isPPBased;
+    const types = new Set(options?.types?.split(":") ?? []) as Set<PokemonType>;
 
     const span = document.createElement("span");
     span.classList.add("tick");
@@ -107,14 +135,68 @@ export class TextEnricher {
       : isShieldBased
         ? `${amount} Tick${biggerThanOne ? "s" : ""} of Shield${isDamage ? " Damage" : ""}`
         : `${amount} Tick${biggerThanOne ? "s" : ""} of ${isDamage ? "Damage" : "Healing"}`;
+
+    if (isDamage && types.size > 0) {
+      span.dataset.tooltip += ` (Typed: ${Array.from(types).map(t => Handlebars.helpers.formatSlug(t)).join(", ")})`;
+    }
+
     span.append((() => {
       const name = label || `${amount} Tick${biggerThanOne ? "s" : ""}`;
-      return TextEditor.createAnchor({
+      return foundry.applications.ux.TextEditor.createAnchor({
+        classes: ["content-link", ...Array.from(types).map(t => `type-${t}`)],
+        attrs: { draggable: true as unknown as string },
+        name,
+        dataset: {  
+          type: "Tick",
+          amount: amount.toString(),
+          shield: isShieldBased.toString(),
+          pp: isPPBased.toString(),
+          types: Array.from(types).join(":"),
+        },
+        icon: isPPBased
+          ? isDamage
+            ? "fa-solid fa-battery-slash"
+            : "fa-solid fa-battery-bolt"
+          : isShieldBased
+            ? isDamage
+              ? "fa-duotone fa-shield-slash"
+              : "fas fa-shield"
+            : isDamage
+              ? "fas fa-burst"
+              : "fas fa-heart",
+      })
+    })());
+    return span;
+  }
+
+  static async #createFlat({ type, amount, options, label }: { type: "Shield" | "HP" | "PP", amount: number, options: Record<string, string | undefined> | null, label?: string }): Promise<HTMLElement | null> {
+    if (!amount) return null;
+    const isDamage = amount < 0;
+
+    const isPPBased = type === "PP";
+    const isShieldBased = type === "Shield";
+
+    const span = document.createElement("span");
+    span.classList.add("flat");
+    span.dataset.tooltipDirection = options?.direction || "UP";
+    span.dataset.amount = amount.toString();
+    span.dataset.pp = isPPBased.toString();
+    span.dataset.shield = isShieldBased.toString();
+    span.dataset.tooltip = isPPBased
+      ? isDamage
+        ? `Drain ${amount} PP`
+        : `Restore ${amount} PP`
+      : isShieldBased
+        ? `${amount} Shield${isDamage ? " Damage" : ""}`
+        : `${amount} ${isDamage ? "Damage" : "Healing"}`;
+    span.append((() => {
+      const name = label || `${amount} ${type}`;
+      return foundry.applications.ux.TextEditor.createAnchor({
         classes: ["content-link"],
         attrs: { draggable: true as unknown as string },
         name,
         dataset: {
-          type: "Tick",
+          type: "Flat",
           amount: amount.toString(),
           shield: isShieldBased.toString(),
           pp: isPPBased.toString(),
@@ -125,7 +207,7 @@ export class TextEnricher {
             : "fa-solid fa-battery-bolt"
           : isShieldBased
             ? isDamage
-              ? "fa-duotone fa-solid fa-shield-slash"
+              ? "fa-duotone fa-shield-slash"
               : "fas fa-shield"
             : isDamage
               ? "fas fa-burst"
@@ -163,10 +245,45 @@ export class TextEnricher {
 
     const isShieldBased = a.dataset.shield === "true";
     const isPPBased = a.dataset.pp === "true";
+    const types = new Set(a.dataset.types?.split(":") ?? []) as Set<PokemonType>
 
     //TODO: This should probably be updated to allow for doing all updates in one, as well as merging all chat messages.
     for (const actor of targets) {
-      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased });
+      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased, types});
+    }
+  }
+
+  static async _onClickFlat(event: JQuery.ClickEvent): Promise<void> {
+    event.preventDefault();
+    const a = event.currentTarget as HTMLAnchorElement;
+    const amount = parseInt(a.dataset.amount ?? "0");
+    if (!amount) return;
+
+    const targets = canvas.tokens.controlled.length ? canvas.tokens.controlled.flatMap(t => t.actor ?? []) : game.user.character ? [game.user.character] : [];
+    if (!targets.length) return void ui.notifications.error(game.i18n.localize("PTR2E.Notifications.NoTokenSelected"));
+
+    const isShieldBased = a.dataset.shield === "true";
+    const isPPBased = a.dataset.pp === "true";
+
+    //TODO: This should probably be updated to allow for doing all updates in one, as well as merging all chat messages.
+    for (const actor of targets) {
+      if (isPPBased) {
+        const current = actor.system.powerPoints.value;
+        const newValue = Math.clamp(actor.system.powerPoints.value + amount, 0, actor.system.powerPoints.max);
+        await actor.update({ "system.powerPoints.value": newValue });
+        //@ts-expect-error - Outdated types
+        await ChatMessagePTR2e.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: current - newValue,
+            target: actor.uuid,
+            ppApplied: true
+          },
+        });
+      }
+      else {
+        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false, flat: true, note: ""})
+      }
     }
   }
 
@@ -176,6 +293,7 @@ export class TextEnricher {
     const dragData = {
       type: "Affliction",
       id: a.dataset.id,
+      amount: a.dataset.amount,
     };
     event.originalEvent?.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
   }
@@ -206,14 +324,14 @@ export class TextEnricher {
 }
 
 const TraitEnricher: TextEditorEnricherConfig = {
-  pattern: /@(?<type>Trait)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
+  pattern: /@(?<type>Trait)\[(?<slug>[-a-z0-9]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
   enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
     return TextEnricher.enrich(match);
   }
 }
 
 const AfflictionEnricher: TextEditorEnricherConfig = {
-  pattern: /@(?<type>Affliction)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi,
+  pattern: /@(?<type>Affliction)\[(?<slug>[-a-z]+)((\s+)(?<options>[0-9]*))?](?:{(?<label>[^}]+)})?/gi,
   enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
     return TextEnricher.enrich(match);
   }
@@ -226,8 +344,32 @@ const TickEnricher: TextEditorEnricherConfig = {
   }
 }
 
+const FlatShieldEnricher: TextEditorEnricherConfig = {
+  pattern: /@(?<type>Shield)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
+  enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+    return TextEnricher.enrich(match);
+  }
+}
+
+const FlatHPEnricher: TextEditorEnricherConfig = {
+  pattern: /@(?<type>HP)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
+  enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+    return TextEnricher.enrich(match);
+  }
+}
+
+const FlatPPEnricher: TextEditorEnricherConfig = {
+  pattern: /@(?<type>PP)\[(?<amount>[0-9-]+)(?<options>[^\]]*)](?:{(?<label>[^}]+)})?/gi,
+  enricher: async (match: RegExpMatchArray): Promise<HTMLElement | null> => {
+    return TextEnricher.enrich(match);
+  }
+}
+
 export default [
   TraitEnricher,
   AfflictionEnricher,
   TickEnricher,
+  FlatShieldEnricher,
+  FlatHPEnricher,
+  FlatPPEnricher,
 ] as TextEditorEnricherConfig[];

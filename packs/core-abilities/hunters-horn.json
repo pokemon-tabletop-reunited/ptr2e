@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's [Horn] attacks gain the [Drain 1/8] and [Flinch 1]/[Flinch X+1] Traits.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's [Horn] attacks gain the [Drain 1/8] and [Flinch 1]/[Flinch X+1] Traits.</p>",
+    "description": "<p>Effect: The user's [Horn] attacks gain the [Drain 1/8] and inflict @Affliction[delay 10] to target creatures.</p>",
     "traits": [
       "healing"
     ],
@@ -30,8 +31,78 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ZTLlUZw0tyg9Baa0",
-  "effects": []
+  "effects": [
+    {
+      "name": "Hunter's Horn",
+      "type": "passive",
+      "_id": "O0YI0cKj69KsVFAu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "horn-trait-attack",
+            "value": "drain-1-8",
+            "predicate": [],
+            "ignored": false,
+            "property": "traits",
+            "definition": [],
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "horn-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765279789088,
+        "modifiedTime": 1765279843417,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

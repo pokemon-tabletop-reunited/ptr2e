@@ -7,28 +7,41 @@
   "system": {
     "actions": [
       {
-        "name": "Harry",
+        "name": "Harry (Set)",
         "slug": "harry",
-        "description": "<p>When wielding a Ranged Weapon you may activate this Perk. Create a Harry Clock with 3 Spans. When attacking targets within line of sight and your first RI, your allies can tick the Harry Clock to gain +1 ACC on their attack. The Harry Clock expires when filled, or at the beginning of your next activation.</p>",
+        "description": "<p>While the user has a ranged @Trait[weapon] equipped, they may spend 4 PP as a Complex Action at @Trait[flinch-30] to gain +1 EVA for 2 Activations and set a Harry Clock, which has a size of 6 Spans.</p><p>When a creature within line of sight and the first or second RI of the user's weapon would be targeted by an Ally’s Attack, the user may Tick the Harry Clock 1 Span to have that Attack gain +1 ACC, +1 CRIT, and +20% EHR.</p>",
         "traits": [],
         "type": "generic",
         "range": {
-          "target": "object",
-          "unit": "m",
-          "distance": 0
+          "target": "self",
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
+      },
+      {
+        "name": "Harry",
+        "slug": "harry-interrupt",
+        "description": "<p>Trigger :A creature within line of sight and the first or second RI of the user's weapon would be targeted by an Ally’s Attack.</p><p>Effect: The triggering Attacker gains +1 ACC, +1 CRIT, and +20% EHR until their Attack is resolved.</p>",
+        "traits": [
+          "interrupt"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        }
       }
     ],
     "slug": "harry",
-    "description": "<p>When wielding a Ranged Weapon you may activate this Perk. Create a Harry Clock with 3 Spans. When attacking targets within line of sight and your first RI, your allies can tick the Harry Clock to gain +1 ACC on their attack. The Harry Clock expires when filled, or at the beginning of your next activation.</p>",
+    "description": "<p>While the user has a ranged @Trait[weapon] equipped, they may spend 4 PP as a Complex Action at @Trait[flinch-30] to gain +1 EVA for 2 Activations and set a Harry Clock, which has a size of 6 Spans.</p><p>When a creature within line of sight and the first or second RI of the user's weapon would be targeted by an Ally’s Attack, the user may Tick the Harry Clock 1 Span to have that Attack gain +1 ACC, +1 CRIT, and +20% EHR.</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder"
@@ -40,39 +53,135 @@
     },
     "nodes": [
       {
+        "x": 188,
+        "y": 73,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "covering-fire",
           "tainted-blades",
           "backpacker-1",
-          "down-the-sights"
+          "down-the-sights",
+          "yeomanry",
+          "nock-shot",
+          "support-and-break-through"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#804000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 187,
-        "y": 72,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Gunslinger"
-    }
+      "archetype": "gunslinger"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Harry",
+      "type": "passive",
+      "_id": "y53zf2QwGFMR0asW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "harry-set-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -30,
+                "method": 2
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "harry-set-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.OUBNweJOMjAEtAye",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "harry-interrupt-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.YVWzAljBIbkBUVlo",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.ZFWJ0Nf1xNYr2LxT.ActiveEffect.BaMtYY9AMZnhYoUc",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1773186870844,
+        "modifiedTime": 1773187602616,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ]
 }

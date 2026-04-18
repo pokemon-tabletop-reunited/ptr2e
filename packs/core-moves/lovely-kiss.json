@@ -10,8 +10,7 @@
         "name": "Lovely Kiss",
         "type": "attack",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +26,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The target gains @Affliction[drowsy] 5.</p>",
+        "description": "<p>Effect: The target gains @Affliction[drowsy 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -36,6 +35,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "lPTvHyHlFLMIjxQj",
@@ -50,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "lovely-kiss-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

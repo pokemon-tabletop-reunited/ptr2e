@@ -1,0 +1,118 @@
+{
+  "name": "Iaido",
+  "_id": "4FUsCa6HSvkeaCP2",
+  "type": "perk",
+  "img": "systems/ptr2e/img/item-icons/razor%20fang.webp",
+  "effects": [
+    {
+      "name": "Iaido",
+      "type": "passive",
+      "_id": "7Xu9RxnRIAwbPK2K",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.ZWYySVbayIvwxTfh",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764895767707,
+        "modifiedTime": 1764895779115,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "iaido",
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.ZWYySVbayIvwxTfh]{Keen Edge} as a tutored ability.</p>",
+    "traits": [
+      "bladed",
+      "sharp"
+    ],
+    "prerequisites": [
+      "trait:bladed"
+    ],
+    "autoUnlock": [
+      "item:ability:keen-edge"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 87,
+        "y": 66,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "thousand-folded",
+          "knee-steering"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  }
+}

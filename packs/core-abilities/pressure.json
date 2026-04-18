@@ -23,7 +23,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: All enemy creatures within range of the user spend an additional 50% PP on all actions that use PP (minimum 1 on Attacks).</p>",
+    "description": "<p>Passive Effect: All enemy creatures within 5m of the user gain @Affliction[suppressed].</p>",
     "traits": [
       "aura"
     ],
@@ -31,8 +31,106 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "RmLYmSTJEvyBNTh5",
-  "effects": []
+  "effects": [
+    {
+      "name": "Pressure",
+      "type": "passive",
+      "_id": "LpaKqURqpjFFKlNh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "pressure:active"
+            ],
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+                "affects": "enemies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": false,
+                "appliesSelfOnly": false,
+                "predicate": []
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "pressure:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Pressure",
+            "state": true,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5.ActiveEffect.LpaKqURqpjFFKlNh",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1754248105563
+      }
+    }
+  ]
 }

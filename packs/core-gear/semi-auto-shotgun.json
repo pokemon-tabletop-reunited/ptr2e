@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,19 +16,27 @@
     "grade": "A",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 95
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
-      "two-handed",
-      "shouldered",
+      "autoload",
       "steel",
-      "charge-pool-10"
+      "charge-pool-10",
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -40,10 +48,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Semi-Auto Shotgun",
         "slug": "semi-auto-shotgun",
@@ -52,19 +58,14 @@
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 6,
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
@@ -75,10 +76,9 @@
         "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
-          "readied"
+          "flinch-30",
+          "firearm"
         ],
         "name": "Semi-Auto Shotgun (Breaching Shots)",
         "slug": "semi-auto-shotgun-breaching-shots",
@@ -87,19 +87,15 @@
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 5,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
         "variant": "semi-auto-shotgun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
@@ -110,11 +106,10 @@
         "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
+          "priority-10",
           "dash",
-          "priority-1"
+          "firearm"
         ],
         "name": "Semi-Auto Shotgun (Hip Fire)",
         "slug": "semi-auto-shotgun-hip-fire",
@@ -123,27 +118,23 @@
         "type": "attack",
         "range": {
           "target": "cone",
-          "distance": 4,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": null,
           "priority": 1
         },
         "variant": "semi-auto-shotgun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "Effect: The user may use the Attack Semi-Auto Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A semi-automatic shotgun is a repeating shotgun with a semi-automatic action, i.e. capable of automatically chambering a new shell after each firing, but requires individual trigger-pull to manually actuate each shot. Semi-automatic shotguns use gas operation, blowback, or recoil operation to cycle the action, eject the empty shell, and load another round.</p>",
     "weaponType": "untyped",
     "weaponPp": 10,
     "weaponRange": "Cone",
-    "slug": null,
-    "container": null,
+    "slug": "semi-auto-shotgun",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -153,26 +144,90 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "PGwWe0q5WpokJsq9",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!PGwWe0q5WpokJsq9"
+  "effects": [
+    {
+      "name": "Semi-Auto Shotgun",
+      "type": "passive",
+      "_id": "WNQamIFyT6KcSiYh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 32,
+            "predicate": [],
+            "label": "Semi-Auto Shotgun",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "semi-auto-shotgun-breaching-shots-attack-damage-flat",
+            "value": 64,
+            "predicate": [],
+            "label": "Breaching Shots",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "semi-auto-shotgun-hip-fire-attack-damage-flat",
+            "value": 32,
+            "predicate": [],
+            "label": "Hip Fire",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743972346372,
+        "modifiedTime": 1757633258502,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "Tn65RZTafVbxqEXT"
 }

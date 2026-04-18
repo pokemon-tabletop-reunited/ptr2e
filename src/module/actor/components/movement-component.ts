@@ -6,7 +6,7 @@ class MovementComponent extends ActorComponent {
 
     override renderComponent(data: Record<string, unknown>): Promise<string> {
         data.movement = Object.values(this.actor.system.movement);
-        return renderTemplate(this.template, data);
+        return foundry.applications.handlebars.renderTemplate(this.template, data);
     }
 }
 

@@ -13,25 +13,21 @@
     "diet": [
       "omnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 3
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
-      "underdog",
-      "well-built"
+      "well-built",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -595,11 +591,9 @@
               "operand": "and"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
+          "perk": {
+            "x": 26,
+            "y": 26
           },
           "evolutions": [
             {
@@ -613,28 +607,24 @@
                 },
                 {
                   "type": "item",
-                  "item": "linking-chord",
+                  "item": "linking-cord",
                   "operand": "or",
                   "held": false
                 }
               ],
+              "perk": {
+                "x": 26,
+                "y": 26
+              },
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": [],
-              "perk": {
-                "x": 26,
-                "y": 26
-              }
+              "evolutions": []
             }
-          ],
-          "perk": {
-            "x": 26,
-            "y": 26
-          }
+          ]
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.iFLjHphgXY8RxuaO",
@@ -652,7 +642,13 @@
       "cave",
       "mountain"
     ],
-    "slug": "machoke"
+    "slug": "machoke",
+    "publication": {
+      "source": "PTR 2e Core - Kanto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "JE4QyFabtD5syQM1",
   "effects": []

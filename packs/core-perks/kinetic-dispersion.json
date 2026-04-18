@@ -10,7 +10,7 @@
     "actions": [
       {
         "name": "Tenkan",
-        "slug": "kinetic-dispersion-action-1",
+        "slug": "kinetic-dispersion",
         "description": "<p>Trigger: The user is damaged by a Physical damaging attack.</p><p>Effect: The directs and enhances the strength of the triggering Attack, dealing twice the amount of damage the was dealt by the triggering attack to all creatures in Range (this is not modified by the target's DEF or other effects).</p>",
         "traits": [],
         "type": "attack",
@@ -30,10 +30,20 @@
         ],
         "category": "physical",
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
-    "description": "<p>The user learns the Move Tenkan. Counter and Tenkan become Connected.</p>",
+    "description": "<p>The user learns the @UUID[Compendium.ptr2e.core-perks.Item.3V5NjQw7ytHQmxw7.Actions.kinetic-dispersion]{Tenkan} Attack. Counter and Tenkan become Connected.</p>",
     "traits": [],
     "prerequisites": [
       "item:move:counter"
@@ -47,7 +57,10 @@
           "guard-up",
           "thug",
           "improved-overland-2",
-          "plain-irritating"
+          "plain-irritating",
+          "minor-buff-5",
+          "the-unassessably-terrible",
+          "close-the-gap"
         ],
         "config": {
           "alpha": null,
@@ -71,8 +84,18 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Combat"
-    }
+      "archetype": "combat"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "effects": [
@@ -90,12 +113,11 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -106,7 +128,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -117,13 +140,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -135,12 +153,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737392192863,
         "modifiedTime": 1737392222392,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

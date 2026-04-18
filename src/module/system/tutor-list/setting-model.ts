@@ -3,7 +3,7 @@ import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TutorListData } from "@scripts/config/tutor-list.ts";
 import { sluggify } from "@utils";
 
-export const TutorListVersion = 3.2 as const;
+export const TutorListVersion = 3.71 as const;
 
 export class TutorListSettings extends foundry.abstract.DataModel {
   static override defineSchema(): TutorListSettingsSchema {
@@ -32,11 +32,11 @@ export class TutorListSettings extends foundry.abstract.DataModel {
     return this.get(`${slug}-${type}`);
   }
 
-  static async initializeAndMigrate() {
+  static async initializeAndMigrate({reset}: { reset?: boolean } = {}) {
     const tutorList = game.settings.get("ptr2e", "tutorListData");
 
     // Migrate Tutor List
-    if (fu.isNewerVersion(TutorListVersion, tutorList._migration?.version ?? 0)) {
+    if (reset || fu.isNewerVersion(TutorListVersion, tutorList._migration?.version ?? 0)) {
       const moveIndex = await game.packs.get("ptr2e.core-moves")!.getIndex();
       const moveMap = new Map<string, string>();
       for (const move of moveIndex) {
@@ -50,14 +50,23 @@ export class TutorListSettings extends foundry.abstract.DataModel {
           ...data,
           moves: [] as { slug: string, uuid: string }[]
         };
-        for (const move of data.moves) {
+
+        const moves = reset ? new Set(data.moves) : new Set([...data.moves, ...(tutorList.list.get(data.slug)?.moves?.map(m => m.slug) ?? [])])
+
+        for (const move of moves) {
           const uuid = moveMap.get(move);
           if (!uuid) {
-            console.warn(`Unable to load ${move} for Tutor List ${data.slug} (${data.type}). Skipping...`);
-            continue;
+            const backup = tutorList.list.get(data.slug)?.moves?.find(m => m.slug === move)?.uuid;
+            if(!backup) {
+              console.warn(`Unable to load ${move} for Tutor List ${data.slug} (${data.type}). Skipping...`);
+              continue;
+            }
+            tutor.moves.push({ slug: move, uuid: backup });
+          } else {
+            tutor.moves.push({ slug: move, uuid });
           }
-          tutor.moves.push({ slug: move, uuid });
         }
+
         tutorData.push(tutor);
       }
 
@@ -74,6 +83,10 @@ export class TutorListSettings extends foundry.abstract.DataModel {
       });
     }
   }
+
+  static async resetDefaults() {
+    return this.initializeAndMigrate({reset: true});
+  }
 }
 
 export interface TutorListSettings extends foundry.abstract.DataModel, ModelPropsFromSchema<TutorListSettingsSchema> {
@@ -84,24 +97,27 @@ export class TutorListSchema extends foundry.abstract.DataModel {
   static override defineSchema() {
     return {
       // Slug of trait or Ability Name
-      slug: new SlugField({ required: true, nullable: false }),
+      slug: new SlugField({ required: true, nullable: false, label: "PTR2E.TutorListSchema.Slug.label", hint: "PTR2E.TutorListSchema.Slug.hint" }),
       // Type of trait or Ability
       type: new foundry.data.fields.StringField({
         choices: ["trait", "egg", "ability", "universal"],
         initial: "trait",
         required: true,
         nullable: false,
+        label: "PTR2E.TutorListSchema.Type.label"
       }),
       moves: new CollectionField(
         new foundry.data.fields.SchemaField({
           // Slug of move
           slug: new SlugField({ required: true, nullable: false }),
           // Uuid of move
-          uuid: new foundry.data.fields.StringField(),
+          uuid: new foundry.data.fields.StringField()
         })
       ),
     };
   }
+
+  grade: string;
 
   get id() {
     return `${this.slug}-${this.type}`;
@@ -143,6 +159,8 @@ export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema
     true
   >;
 }
+
+export type TutorListMove = ModelPropsFromSchema<_MoveSchema>;
 
 interface _MoveSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<string, string, true, false, false>,

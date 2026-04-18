@@ -1,0 +1,82 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Unown Song: Sanctuary Ward",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Sanctuary Ward",
+        "slug": "unown-song-sanctuary-ward",
+        "description": "<p>Through your mastery of the Arcane, you can conjure a choir of Unown to perform a Sanctuary Ward. This effect grants you and your allies on the field +15% RES for the duration of 3 rounds.</p>",
+        "traits": [],
+        "type": "attack",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "predicate": [],
+        "summon": "Compendium.ptr2e.core-summons.gA98zyh1nExOnwEP"
+      }
+    ],
+    "description": "<p>Through your mastery of the Arcane, you can conjure a choir of Unown to perform a Sanctuary Ward. This effect grants you and your allies on the field +15% RES for the duration of 3 rounds.</p>",
+    "traits": [
+      "shield"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "rune-master"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 148,
+        "y": 113,
+        "connected": [
+          "screen-setter",
+          "minor-buff-4",
+          "hasten-conjuration"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "unown-song-sanctuary-ward",
+    "traitWebs": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "_id": "loU95iDUK19XrXIE"
+}

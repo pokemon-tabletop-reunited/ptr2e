@@ -19,7 +19,11 @@
         "connected": [
           "night-eyes",
           "shadow-bubble",
-          "improved-overland-3"
+          "improved-overland-3",
+          "minor-buff-6",
+          "evil-touch",
+          "dastardly-planner",
+          "hostile-shadows"
         ],
         "config": {
           "alpha": null,
@@ -38,15 +42,19 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Dark"
+      "archetype": "dark"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
@@ -61,30 +69,32 @@
           {
             "type": "roll-effect",
             "key": "dark-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
-            "predicate": [],
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.stuntedcondition",
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -92,16 +102,16 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.1.0",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1757798011776,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ],

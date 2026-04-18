@@ -10,8 +10,7 @@
         "name": "Sweet Kiss",
         "type": "attack",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -27,16 +26,23 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: On hit, the target becomes @Affliction[confused] 5.</p>",
+        "description": "<p>Effect: On hit, the target becomes @Affliction[confused 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "B0vBMTGdIVQJAuaJ",
@@ -51,13 +57,14 @@
           {
             "type": "roll-effect",
             "key": "sweet-kiss-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,13 +75,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

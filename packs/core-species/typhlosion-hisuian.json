@@ -14,26 +14,28 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 15
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 5
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 15
+      },
+      {
+        "type": "swim",
+        "value": 5
+      },
+      {
+        "type": "burrow",
+        "value": 10
+      }
+    ],
     "traits": [
       "pokemon",
       "quadrupedal",
       "firestarter",
       "heater",
-      "glow-3"
+      "glow-3",
+      "fully-evolved",
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -57,15 +59,15 @@
           "slug": "flaming-soul"
         },
         {
-          "slug": "nocturnal"
+          "slug": "shadow-dance"
         }
       ],
       "master": [
         {
-          "slug": "radiance"
+          "slug": "pyromancy"
         },
         {
-          "slug": "soul-link"
+          "slug": "witchery"
         }
       ]
     },
@@ -89,6 +91,14 @@
       {
         "slug": "conversation",
         "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -161,6 +171,14 @@
       {
         "slug": "survival",
         "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -529,21 +547,10 @@
                 "x": 26,
                 "y": 26
               },
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              },
-              "evolutions": []
+              "details": null
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          "details": null
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.6r9PIDH1IiIKDIhz",
@@ -557,8 +564,275 @@
       "version": null,
       "previous": null
     },
-    "habitats": []
+    "habitats": [],
+    "publication": {
+      "source": "PTR 2e Core - Hisui Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "rC4Z8rGxMH2XE3xi",
-  "effects": []
+  "effects": [
+    {
+      "name": "Typlhosion Hisuian Mega",
+      "type": "form",
+      "_id": "4AvA069xu0aWN5ab",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:typlhosion-hisuian-mega:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Typlhosion Hisuian Mega Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.QqSRRFW2wjXQ3xR7",
+            "alterations": [
+              {
+                "mode": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "mode": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": -5,
+            "def": 35,
+            "spa": 40,
+            "spd": 35,
+            "spe": null,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "",
+            "value": "spooky",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "",
+            "value": "aura user",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "",
+            "value": "blindsight-15",
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.aura-sense.value",
+            "value": 35,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": -10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.fast-talk.value",
+            "value": 0,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.ghost.value",
+            "value": 35,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.fairy.value",
+            "value": 30,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.thaumaturgy.value",
+            "value": 40,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 25,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.negotiation.value",
+            "value": 20,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 5,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.survival.value",
+            "value": 15,
+            "mode": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:typlhosion-hisuian-mega:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 10,
+            "mode": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1754148329692,
+        "modifiedTime": 1754149823034,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP"
+      }
+    }
+  ]
 }

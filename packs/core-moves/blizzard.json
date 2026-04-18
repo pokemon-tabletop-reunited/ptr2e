@@ -12,7 +12,6 @@
         "traits": [
           "environ",
           "wind",
-          "pp-updated",
           "partial-automation"
         ],
         "range": {
@@ -30,7 +29,7 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 2.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen 2].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       },
@@ -41,7 +40,6 @@
         "traits": [
           "environ",
           "wind",
-          "pp-updated",
           "danger-close",
           "partial-automation"
         ],
@@ -61,7 +59,7 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Snowy Weather is present.</p><p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 3.</p>",
+        "description": "<p>Snowy Weather is present.</p><p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen 3].</p>",
         "variant": "blizzard",
         "img": "icons/svg/explosion.svg",
         "predicate": []
@@ -72,7 +70,13 @@
       "version": null,
       "previous": null
     },
-    "traits": []
+    "traits": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "pMSwY3ECWqqasF1a",
   "effects": [
@@ -86,38 +90,38 @@
           {
             "type": "roll-effect",
             "key": "blizzard-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frozencondition0",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "blizzard-snowy-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frozencondition0",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -128,13 +132,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

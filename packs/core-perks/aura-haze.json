@@ -11,56 +11,52 @@
       }
     ],
     "cost": 2,
-    "description": "<p>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.</p>",
+    "description": "<p>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself.</p><p>You gain the @UUID[Compendium.ptr2e.core-perks.Item.UmbmjzRANft3PAxG.Actions.aura-haze]{Aura Haze} Action which you can use as a Simple Action, spending 2PP, to gain @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{+1 Evasion Stage}.</p>",
     "actions": [
       {
         "name": "Aura Haze",
         "slug": "aura-haze",
-        "description": "<p>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.</p>",
+        "description": "<p>You gain @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{+1 Evasion Stage}.</p>",
         "cost": {
           "activation": "simple",
           "powerPoints": 2
         },
-        "type": "attack",
-        "traits": [],
+        "type": "generic",
+        "traits": [
+          "aura"
+        ],
         "img": "systems/ptr2e/img/perk-icons/Aura.svg",
         "range": {
           "target": "self",
           "unit": "m"
-        },
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": []
+        }
       }
     ],
     "slug": "aura-haze",
-    "traits": [],
+    "traits": [
+      "aura"
+    ],
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
-        "connected": [
-          "aura-user",
-          "shielding-aura"
-        ],
-        "config": {
-          "alpha": null,
-          "backgroundColor": "#e4b9b9",
-          "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-          "tint": "#da7777",
-          "scale": null
-        },
-        "hidden": false,
-        "type": "normal",
         "x": 173,
         "y": 25,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "aura-user",
+          "shielding-aura",
+          "chi-alignment"
+        ],
+        "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
@@ -71,6 +67,13 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": "aura"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "UmbmjzRANft3PAxG",
@@ -80,39 +83,40 @@
       "name": "Aura Haze",
       "type": "passive",
       "_id": "Uh6oIjyCAA77vnOT",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Aura.svg",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
-            "key": "aura-haze-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "key": "aura-haze-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.OUBNweJOMjAEtAye",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
             "ignored": false,
-            "alterations": []
+            "method": 2
           }
         ],
         "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
+        "traits": [
+          "aura"
+        ],
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
-      "description": "",
+      "description": "<p>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself.</p><p>You gain the @UUID[Compendium.ptr2e.core-perks.Item.UmbmjzRANft3PAxG.Actions.aura-haze]{Aura Haze} Action which you can use as a Simple Action, spending 2PP, to gain @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{+1 Evasion Stage}.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -122,12 +126,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1736876041388,
-        "modifiedTime": 1739044383852,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1754302549761,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ],

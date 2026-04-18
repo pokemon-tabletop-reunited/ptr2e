@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,8 +16,9 @@
     "grade": "E",
     "fling": {
       "type": "untyped",
-      "power": null,
-      "accuracy": 100
+      "power": 40,
+      "accuracy": 100,
+      "hide": false
     },
     "rarity": "uncommon",
     "traits": [
@@ -36,21 +37,16 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: Increases the Power and Accuracy of %lt;Type&gt; attacks by 10%.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Effect: Increases the Power and Accuracy of &lt;Type&gt; attacks by 10%.</p>",
+    "slug": "type-booster",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -60,26 +56,163 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
     }
   },
   "_id": "JhU4x5wZQlVuqvfu",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!JhU4x5wZQlVuqvfu"
+  "effects": [
+    {
+      "name": "Type Booster",
+      "type": "passive",
+      "_id": "qov0saUCNploufhW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "choices": "options.types",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": false,
+            "rollOption": "type-booster-type",
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfu",
+            "predicate": [],
+            "alterations": [
+              {
+                "property": "system.traits",
+                "value": "type",
+                "method": 6
+              },
+              {
+                "property": "system.traits",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-booster-type}",
+                "method": 2
+              },
+              {
+                "property": "name",
+                "value": "Type Booster ({effect|flags.ptr2e.choiceSelections.type-booster-type|C})",
+                "method": 5
+              },
+              {
+                "property": "system.description",
+                "value": "<p>Effect: Increases the Power and Accuracy of @Trait[{effect|flags.ptr2e.choiceSelections.type-booster-type}] attacks by 10%.</p>",
+                "method": 5
+              },
+              {
+                "property": "effects.0.name",
+                "value": "Type Booster ({effect|flags.ptr2e.choiceSelections.type-booster-type|C})",
+                "method": 5
+              },
+              {
+                "property": "effects.0.system.changes.0.selection",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-booster-type}",
+                "method": 5
+              },
+              {
+                "property": "effects.0.system.changes.1.label",
+                "value": "Type Booster ({effect|flags.ptr2e.choiceSelections.type-booster-type|C}) Power",
+                "method": 5
+              },
+              {
+                "property": "effects.0.system.changes.2.label",
+                "value": "Type Booster ({effect|flags.ptr2e.choiceSelections.type-booster-type|C}) Accuracy",
+                "method": 5
+              },
+              {
+                "property": "effects.0.system.changes.1.key",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-booster-type}-attack-power",
+                "method": 5
+              },
+              {
+                "property": "effects.0.system.changes.2.key",
+                "value": "{effect|flags.ptr2e.choiceSelections.type-booster-type}-attack-accuracy",
+                "method": 5
+              }
+            ],
+            "replaceSelf": true,
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster Power",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-accuracy",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster Accuracy",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.0.6.beta",
+        "createdTime": 1740662839495,
+        "modifiedTime": 1740666301532,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ],
+  "folder": "6VDJBcrqVDh5bYtA"
 }

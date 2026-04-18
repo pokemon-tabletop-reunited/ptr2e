@@ -1,0 +1,129 @@
+{
+  "folder": "eXSEV54jXXZfP27D",
+  "name": "Nature’s Punishment",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Nature’s Punishment",
+        "slug": "natures-punishment",
+        "description": "<p>Effect: The user can spend 3 PP as a Complex Action and gain @Affliction[rebound 5].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/magic/nature/root-vine-entwined-thorns.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "natures-punishment",
+    "description": "<p>Effect: The user can spend 3 PP as a Complex Action and gain @Affliction[rebound 5].</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          "trait:grass",
+          "trait:ground"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "grass"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 49,
+        "y": 123,
+        "connected": [
+          "minor-buff-28",
+          "lethal-restraint",
+          "nurturing-shoots",
+          "minor-buff-11",
+          "gaean-retribution"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/magic/nature/root-vine-entwined-thorns.webp",
+  "effects": [
+    {
+      "name": "Nature's Punishment",
+      "type": "passive",
+      "_id": "KbaW6L0GRWdUMvCx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "natures-punishment-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.reboundcondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764896463921,
+        "modifiedTime": 1764896489582,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
+  "_id": "6B96M4qcy1ScbyWO"
+}

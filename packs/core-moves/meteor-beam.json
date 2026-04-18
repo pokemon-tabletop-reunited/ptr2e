@@ -6,22 +6,23 @@
     "slug": "meteor-beam",
     "actions": [
       {
-        "slug": "meteor-beam",
-        "name": "Meteor Beam",
+        "slug": "meteor-beam-resolution",
+        "name": "Meteor Beam (Resolution)",
         "type": "attack",
         "traits": [
           "set-up",
           "ray",
-          "pp-updated"
+          "priority-20"
         ],
         "range": {
-          "target": "creature",
+          "target": "line",
           "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 3,
+          "trigger": "The user used Meteor Beam (Set-Up) as their last Action."
         },
         "category": "special",
         "power": 120,
@@ -29,15 +30,44 @@
         "types": [
           "rock"
         ],
-        "description": "<p>Effect: Set-Up: The user gains +1 SPATK and SPD Stage for 5 Activations, and ends their Activation.</p><p>Resolution: On their next Activation, they attack with and resolve Meteor Beam.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Trigger: The user used Meteor Beam (Set-Up) as their last Action.</p>",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "predicate": []
+      },
+      {
+        "name": "Meteor Beam (Set-Up)",
+        "slug": "meteor-beam-set-up",
+        "description": "<p>Effect: The user gains +1 SPATK and SPD Stage for 5 Activations, and @Affliction[regen 5].</p>",
+        "traits": [
+          "set-up",
+          "defensive",
+          "flinch-40"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "types": [
+          "rock"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "qjIdtrGviUe3PExZ",
   "effects": []

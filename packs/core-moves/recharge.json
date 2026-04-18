@@ -4,17 +4,16 @@
   "_id": "u8W8WBIrhmNxc2gE",
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "recharge",
     "actions": [
       {
         "name": "Recharge",
         "slug": "recharge",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "traits": [
           "delay-2",
-          "healing",
-          "pp-updated"
+          "healing"
         ],
         "range": {
           "target": "emanation",
@@ -26,38 +25,87 @@
           "powerPoints": 3,
           "delay": 2
         },
-        "variant": null,
         "types": [
           "electric"
         ],
         "category": "status",
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: The user and any allies in range heal 4 ticks of Hit Points.</p>"
+        "description": "<p>Effect: The user and any allies in range heal @Tick[4].</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "D"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 8300000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1718743228627,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Recharge",
+      "type": "passive",
+      "_id": "SYIOsDRpyv9zR8lq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "recharge-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 4,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "createdTime": 1752173354528,
+        "modifiedTime": 1752173400262,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

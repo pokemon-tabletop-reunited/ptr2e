@@ -1,0 +1,232 @@
+{
+  "folder": "UUWElZA9w1KEqZS7",
+  "name": "Minska-Shimada CV-5r Security Armor",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "cv-5r-security-armor",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "armor",
+      "sci-fi"
+    ],
+    "actions": [],
+    "description": "<p>The Minska-Shimada CV-5r Security Armor is a more expensive, higher-end lightweight ceramic armor, with improved resistance to small arms and fire, acid, electricity, and ice-based threats over the CT and CU models of body armor. It is sometimes seen among law enforcement and security forces, usually given to riot control personnel and officers.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "worn",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 110,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "CV-5r Security Armor",
+      "type": "passive",
+      "_id": "DCUt93cUQS3RfY5L",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.15,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": -10,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Phys Flat)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Phys Perc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-percentile",
+            "value": -20,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Missile)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "explode-trait-attack-damage-percentile",
+            "value": -5,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Explode)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "pulse-trait-attack-damage-flat",
+            "value": -5,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Energy Flat)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "ray-trait-attack-damage-flat",
+            "value": -5,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Energy Flat)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "pulse-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Energy)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "ray-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "CV-5r Security Armor (Energy)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -15,
+            "predicate": [
+              {
+                "or": [
+                  "attack:type:fire",
+                  "attack:type:ice",
+                  "attack:type:poison",
+                  "attack:type:electric"
+                ]
+              }
+            ],
+            "label": "CV-5r Security Armor (Elemental)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "predicate": [
+              {
+                "or": [
+                  "attack:type:fire",
+                  "attack:type:ice",
+                  "attack:type:poison",
+                  "attack:type:electric"
+                ]
+              }
+            ],
+            "label": "CV-5r Security Armor (Elemental RES)",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 35,
+                "method": 5
+              }
+            ],
+            "affects": "defensive",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "D4zmOXcxrZuQXli8"
+}

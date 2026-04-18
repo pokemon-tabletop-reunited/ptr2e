@@ -9,9 +9,7 @@
         "slug": "thunder-shock",
         "name": "Thunder Shock",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -27,24 +25,30 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis 5].</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "g0tf8DHabi55oj5C",
   "effects": [
     {
       "name": "Thunder Shock",
-      "type": "affliction",
+      "type": "passive",
       "_id": "zAd4Vr0jBWUo767Q",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -52,13 +56,17 @@
           {
             "type": "roll-effect",
             "key": "thunder-shock-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -68,17 +76,16 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "seconds",
+        "value": null,
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -90,13 +97,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.358",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.2.1",
         "createdTime": 1726140883766,
-        "modifiedTime": 1726140903383,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1774860810421,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
     }
   ]
 }

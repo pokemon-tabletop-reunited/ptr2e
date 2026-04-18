@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "sky",
-          "environ",
-          "pp-updated"
+          "environ"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +28,7 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis 5]. If Rainy Weather is active, this attack gains [Danger Close].</p>",
         "img": "icons/svg/explosion.svg"
       },
       {
@@ -39,8 +38,7 @@
         "traits": [
           "sky",
           "environ",
-          "danger-close",
-          "pp-updated"
+          "danger-close"
         ],
         "range": {
           "target": "creature",
@@ -57,7 +55,7 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis 5]. If Rainy Weather is active, this attack gains [Danger Close].</p>",
         "variant": "thunder",
         "free": true,
         "img": "icons/svg/explosion.svg"
@@ -67,6 +65,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "l0mROFo4zk1nZ15X",
@@ -81,24 +85,24 @@
           {
             "type": "roll-effect",
             "key": "thunder-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "thunder-rainy-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -109,13 +113,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

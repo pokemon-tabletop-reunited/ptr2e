@@ -10,8 +10,7 @@
         "name": "Bulldoze",
         "type": "attack",
         "traits": [
-          "earthbound",
-          "pp-updated"
+          "earthbound"
         ],
         "range": {
           "target": "wide-line",
@@ -39,13 +38,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "NJALFd8RUbc6uoOU",
   "effects": [
     {
       "name": "Bulldoze",
-      "type": "affliction",
+      "type": "passive",
       "_id": "0gU0hmEf2yOtECJR",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -53,13 +58,13 @@
           {
             "type": "roll-effect",
             "key": "bulldoze-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -73,13 +78,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

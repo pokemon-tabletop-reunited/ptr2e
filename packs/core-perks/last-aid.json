@@ -9,29 +9,26 @@
     "actions": [
       {
         "name": "Last Aid",
-        "slug": "parting-gift-action-1",
-        "description": "<p>Trigger: The User is Fainted<br><br>Effect: All allies (fully excluding the User) within 5m of the User recover 50% of the User's max HP. Activation of this perk prevents the user from benefitting from either Tubthumping or Keep Fighting.</p>",
+        "slug": "last-aid",
+        "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: Allies creatures within range recover HP equal to @Tick[8] based on the user's HP.</p><p>Restriction: The user may not use @UUID[Compendium.ptr2e.core-perks.NjAYGkmZsg9QxiQY]{Tubthumping} or @UUID[Compendium.ptr2e.core-perks.3RMFsZTuMdDhCyZg]{Keep Fighting!} in conjunction with this Perk.</p>",
         "traits": [
-          "interrupt-6"
+          "healing"
         ],
         "type": "generic",
         "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
         "range": {
-          "target": "wide-line",
+          "target": "emanation",
           "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "free",
           "powerPoints": 5,
-          "trigger": "Fainted",
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
+          "trigger": "The user gains @Affliction[fainted]."
+        }
       }
     ],
-    "description": "<p>Trigger: The User is Fainted<br><br>Effect: All allies (fully excluding the User) within 5m of the User recover 50% of the User's max HP. Activation of this perk prevents the user from benefitting from either Tubthumping or Keep Fighting. </p>",
+    "description": "<p>When the user gains @Affliction[fainted], they may spend @PP[-5] as a Free Action [Interrupt] to grant allied creatures within a 5m Emanation HP equal to @Tick[8] based on the user's HP.</p><p>Restriction: The user may not use @UUID[Compendium.ptr2e.core-perks.NjAYGkmZsg9QxiQY]{Tubthumping} or @UUID[Compendium.ptr2e.core-perks.3RMFsZTuMdDhCyZg]{Keep Fighting!} in conjunction with this Perk.</p>",
     "traits": [],
     "prerequisites": [
       "trait:healer"
@@ -40,40 +37,106 @@
     "slug": "last-aid",
     "nodes": [
       {
+        "x": 55,
+        "y": 83,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "cautious-healer",
           "martyrs-gift"
         ],
         "config": {
-          "alpha": null,
+          "texture": "icons/magic/holy/barrier-shield-winged-cross.webp",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "icons/magic/holy/barrier-shield-winged-cross.webp",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 55,
-        "y": 83,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "resilience",
-      "archetype": "Healer"
-    }
+      "archetype": "healer"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "img": "icons/magic/holy/barrier-shield-winged-cross.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Last Aid",
+      "type": "passive",
+      "_id": "vkLyvdOmONwB7rA2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "last-aid-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": "floor(@origin.system.health.max / 2)",
+                "method": 5
+              },
+              {
+                "property": "system.changes.0.isFlat",
+                "value": "true",
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764895915410,
+        "modifiedTime": 1764895972935,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "_id": "NdMvPPncrs15tvOz",
   "folder": "4UhJK1LInml07WJf"
 }

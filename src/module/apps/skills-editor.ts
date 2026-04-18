@@ -2,61 +2,58 @@ import { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
-import { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 
-type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number, total: number };
+type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; max: number; min: number, total: number };
 
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.api.ApplicationV2
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      tag: "form",
-      classes: ["sheet skill-sheet"],
-      position: {
-        height: 'auto',
-        width: 550,
-      },
-      form: {
-        submitOnChange: false,
-        closeOnSubmit: true,
-        handler: SkillsEditor.#onSubmit,
-      },
-      window: {
-        minimizable: true,
-        resizable: false,
-      },
-      actions: {
-        "reset-skills": SkillsEditor.#onResetSkills,
-        "change-resources": SkillsEditor.#onChangeResources,
-        "change-luck": SkillsEditor.#onChangeLuck,
-        "roll-luck": SkillsEditor.#onRollLuck,
-        "toggle-sort": async function (this: SkillsEditor) {
-          this.sort = this.sort === "a" ? "v" : "a";
-          this.render({ parts: ["skills"] });
-        }
-      },
+  static override DEFAULT_OPTIONS = {
+    tag: "form",
+    classes: ["sheet skill-sheet"],
+    position: {
+      height: 'auto' as const,
+      width: 550,
     },
-    { inplace: false }
-  );
+    window: {
+      minimizable: true,
+      resizable: false,
+    },
+    actions: {
+      "reset-skills": SkillsEditor.#onResetSkills,
+      "change-resources": SkillsEditor.#onChangeResources,
+      "change-luck": SkillsEditor.#onChangeLuck,
+      "roll-luck": SkillsEditor.#onRollLuck,
+      "toggle-sort": async function (this: SkillsEditor) {
+        this.sort = this.sort === "a" ? "v" : "a";
+        this.render({ parts: ["skills"] });
+      },
+      "toggle-override": async function (this: SkillsEditor) {
+        if (!game.user.isGM) return void ui.notifications.warn("Only GMs can use the Override Submit feature.");
+        await this.document.setFlag("ptr2e", "overrideSkillValidation", !this.document.flags.ptr2e?.overrideSkillValidation);
+        this.render({ parts: ["skills"] });
+      }
+    },
+  };
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     skills: {
       id: "skills",
       template: "systems/ptr2e/templates/apps/skills-editor.hbs",
-    },
+    }
   };
 
   document: ActorPTR2e;
-  skills: SkillBeingEdited[];
+  hasMadeAChange = false;
   filter: SearchFilter;
   sort: "a" | "v" = "a";
 
   override get title() {
     return `${this.document.name}'s Skills Editor`;
   }
+
+  skills: SkillBeingEdited[];
 
   constructor(
     document: ActorPTR2e,
@@ -66,7 +63,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     super(options);
     this.document = document;
     this.skills = this.resetSkills();
-    this.filter = new SearchFilter({
+    this.filter = new foundry.applications.ux.SearchFilter({
       inputSelector: "input[name='filter']",
       contentSelector: "fieldset.skills .scroll",
       callback: this._onSearchFilter.bind(this),
@@ -85,8 +82,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         return [{
           ...skill,
           label,
-          investment: 0,
-          max: 70 - (skill?.rvs ?? 0),
+          max: 70,
           min: skill?.slug === 'resources' ? -((skill?.value ?? 0) - 10 - ((skill?.rvs ?? 0) < 0 ? -skill.rvs! : 0)) : -(skill?.rvs ?? 0),
         }];
       } else {
@@ -95,8 +91,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           return [{
             ...skill,
             label: skillData.label || Handlebars.helpers.formatSlug(skill.slug),
-            investment: 0,
-            max: 70 - (skill?.rvs ?? 0),
+            max: 70,
             min: skill?.slug === 'resources' ? -((skill?.value ?? 0) - 10 - ((skill?.rvs ?? 0) < 0 ? -skill.rvs! : 0)) : -(skill?.rvs ?? 0),
           }];
         }
@@ -115,29 +110,27 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     const points: {
       total: number;
       spent: number;
-      available?: number;
+      available: number;
     } = {
       total: this.document.system.advancement.rvs.total,
-      spent: (() => {
-        let spent = this.document.system.advancement.rvs.spent;
-        for (const skill of this.skills) {
-          spent += skill.investment;
-        }
-        return spent;
-      })(),
+      spent: this.document.system.advancement.rvs.spent,
+      available: 0
     };
-    points.available = points.total - points.spent;
+    Object.defineProperty(points, "available", {
+      get: () => points.total - points.spent,
+      enumerable: true,
+    });
     const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
 
     // clamp the max to not exceed the available points
     const skills = this.skills.map((s) => ({
       ...s,
-      max: Math.max(s.min, Math.min(s.max, s.investment + points.available!)),
+      max: Math.max(s.min, Math.min(s.max, points.available!)),
     })).sort((a, b) => {
-      if(a.slug === "luck") return -1;
-      if(b.slug === "luck") return 1;
-      if(a.slug === "resources") return -1;
-      if(b.slug === "resources") return 1;
+      if (a.slug === "luck") return -1;
+      if (b.slug === "luck") return 1;
+      if (a.slug === "resources") return -1;
+      if (b.slug === "resources") return 1;
       function alphaSort(a: SkillBeingEdited, b: SkillBeingEdited) {
         if (a.group === b.group) return a.label.localeCompare(b.label);
         if (!a.group) return -1;
@@ -156,22 +149,23 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     })
 
     // check if this configuration is valid, and can pass validation
-    const valid = points.available >= 0 && !skills.some((skill) => (skill.slug === "resources" ? (skill.investment <= -skill.value) : (skill.investment < skill.min)) || skill.investment > skill.max);
+    // const valid = points.available >= 0 && !skills.some((skill) => (skill.slug === "resources" ? (skill.investment <= -skill.value) : (skill.investment < skill.min)) || skill.investment > skill.max);
 
     return {
       document: this.document,
       skills,
       points,
       isReroll:
-        !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
+        !levelOne || (levelOne && this.document.system.skills["luck"]!.value! > 1),
       levelOne,
-      valid,
-      showOverrideSubmit: game?.user?.isGM ?? false,
-      sort: this.sort === "a"
+      valid: points.available >= 0,
+      overrideValidation: !!this.document.flags.ptr2e?.overrideSkillValidation,
+      sort: this.sort === "a",
+      hasLuck: this.document.traits.has("ace"),
     };
   }
 
-  override async render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<this> {
+  override async render(options: boolean | foundry.applications.api.ApplicationRenderOptions, _options?: foundry.applications.api.ApplicationRenderOptions): Promise<this> {
     const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
     const renderResult = await super.render(options, _options);
     // set the scroll location
@@ -188,26 +182,109 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     options: foundry.applications.api.HandlebarsRenderOptions
   ): void {
     super._attachPartListeners(partId, htmlElement, options);
+    if (partId !== "skills") return;
+    const availableLabel = htmlElement.querySelector<HTMLElement>("#points-available-label"),
+      spentLabel = htmlElement.querySelector<HTMLElement>("#points-spent-label");
+    if (!availableLabel || !spentLabel) return void ui.notifications.error("Something went wrong trying to render the Skills Editor.");
+    const shouldOverrideValidation = this.document.flags.ptr2e?.overrideSkillValidation ?? false;
 
-    for (const input of htmlQueryAll(htmlElement, ".skill input")) {
-      input.addEventListener("change", this.#onSkillChange.bind(this));
+    for (const input of htmlQueryAll<HTMLInputElement>(htmlElement, ".skill input")) {
+      input.addEventListener("focus", () => {
+
+        const slug = input.dataset.slug;
+        const skill = this.skills.find((skill) => skill.slug === slug);
+        if (!slug || !skill) return;
+
+        input.dataset.prevValue = input.value;
+        input.value = "";
+        input.placeholder = `${skill.min} / +${shouldOverrideValidation ? "∞" : (skill.max - (skill.rvs ?? 0))}`;
+        async function handleBlur(this: SkillsEditor) {
+          const newValue = parseInt(input.value);
+          if (isNaN(newValue) || newValue === 0) {
+            input.value = input.dataset.prevValue || "0";
+            delete input.dataset.prevValue;
+            return;
+          }
+
+          if (!skill || !slug) {
+            input.value = input.dataset.prevValue || "0";
+            delete input.dataset.prevValue;
+            return;
+          }
+
+          const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
+          if (levelOne && slug === "resources") {
+            const newResourceValue = Math.clamp((skill.value ?? 0) + newValue, 10, shouldOverrideValidation ? Infinity : skill.max);
+            if (newResourceValue === skill.value) {
+              if (skill.value === skill.max) {
+                ui.notifications.warn(`Woops! The maximum value for ${skill.label} is ${skill.max}, you cannot increase it further.`);
+              }
+              else if (skill.value === 10) {
+                ui.notifications.warn(`Woops! The minimum value for ${skill.label} is 10, you cannot reduce it further.`);
+              }
+              input.value = String(skill.rvs);
+              delete input.dataset.prevValue;
+              return;
+            }
+
+            skill.value = newResourceValue;
+            // const baseLabel = htmlElement.querySelector(".skill[data-slug='resources'] label.value");
+            // if (baseLabel) baseLabel.textContent = String(skill.value);
+
+            await this.document.update({
+              "system.skills": {
+                [slug]: {
+                  ...this.document.system.skills[slug],
+                  value: skill.value,
+                }
+              }
+            });
+          }
+          else {
+            const newRvs = Math.clamp((skill.rvs ?? 0) + newValue, skill.min, shouldOverrideValidation ? Infinity : skill.max);
+            if (newRvs === skill.rvs) {
+              if (skill.rvs === skill.max) {
+                ui.notifications.warn(`Woops! The maximum investment for ${skill.label} is ${skill.max}, you cannot invest more.`);
+              }
+              else if (skill.rvs === skill.min) {
+                ui.notifications.warn(`Woops! The minimum investment for ${skill.label} is ${skill.min}, you cannot reduce it further.`);
+              }
+              input.value = String(skill.rvs);
+              delete input.dataset.prevValue;
+              return;
+            }
+
+            skill.rvs = newRvs;
+
+            await this.document.update({
+              "system.skills": {
+                [slug]: {
+                  ...this.document.system.skills[slug],
+                  rvs: skill.rvs,
+                }
+              }
+            })
+          }
+
+          input.value = String(skill.rvs);
+          delete input.dataset.prevValue;
+
+          this.hasMadeAChange = true;
+          // if (spentLabel) spentLabel.textContent = `${this.document.system.advancement.rvs.spent} / ${this.document.system.advancement.rvs.total}`;
+          // if (availableLabel) {
+          //   availableLabel.textContent = this.document.system.advancement.rvs.available.toString();
+          //   if( this.document.system.advancement.rvs.available < 0 ) {
+          //     availableLabel.classList.add("invalid");
+          //   } else {
+          //     availableLabel.classList.remove("invalid");
+          //   }
+          // }
+        }
+        input.addEventListener("blur", handleBlur.bind(this), { once: true });
+      });
     }
 
     this.filter.bind(this.element);
-  }
-
-  #onSkillChange(event: Event) {
-    const input = event.currentTarget as HTMLInputElement;
-    const slug = input.dataset.slug;
-    if (!slug) return;
-    const value = parseInt(input.value);
-    if (isNaN(value)) return;
-
-    const skill = this.skills.find((skill) => skill.slug === slug);
-    if (!skill) return;
-
-    skill.investment = value;
-    this.render({});
   }
 
   _onSearchFilter(_event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) {
@@ -217,9 +294,25 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         continue;
       }
       const { slug, group } = entry.dataset;
-      const match = (slug && rgx.test(SearchFilter.cleanQuery(slug))) || (group && rgx.test(SearchFilter.cleanQuery(group)));
+      const match = (slug && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(slug))) || (group && rgx.test(foundry.applications.ux.SearchFilter.cleanQuery(group)));
       entry.classList.toggle("hidden", !match);
     }
+  }
+
+  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onClose(options);
+    if (this.hasMadeAChange) {
+      this.document.setFlag("ptr2e", "editedSkills", true);
+    }
+
+    //@ts-expect-error - App v1 compatability
+    delete this.document.apps[this.id];
+  }
+
+  /** @override */
+  override _onFirstRender() {
+    //@ts-expect-error - App v1 compatability
+    this.document.apps[this.id] = this;
   }
 
   static #onResetSkills(this: SkillsEditor) {
@@ -236,20 +329,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       }),
       yes: {
         callback: async () => {
-          await document.update({
-            "system.skills": document.system._source.skills.map((skill) => {
-              if (skill.slug === "resources") return {
-                ...skill,
-                rvs: 0,
-                value: 10,
-              };
-              return {
-                ...skill,
-                rvs: 0,
-              };
-            }),
-            "flags.ptr2e.editedSkills": false,
-          });
+          await document.update({ "system.==skills": {}, "flags.ptr2e.editedSkills": false });
           this.skills = this.resetSkills();
           this.render({});
         },
@@ -259,7 +339,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   static #onChangeResources(this: SkillsEditor) {
     const document = this.document;
-    const resources = document.system.skills.find((skill) => skill.slug === "resources");
+    const resources = document.system.skills.resources
     if (!resources) return;
 
     foundry.applications.api.DialogV2.prompt({
@@ -268,10 +348,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.ChangeResources.content", {
-        name: document.name,
-        value: resources.total,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.ChangeResources.content", {
+          name: document.name,
+          value: resources.total,
+        });
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       ok: {
         action: "submit",
         label: game.i18n.localize("PTR2E.SkillsEditor.ChangeResources.submit"),
@@ -297,15 +382,11 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             (resources.rvs ?? 0) + value;
 
           await document.update({
-            "system.skills": document.system.skills.map((skill) => {
-              return skill.slug === "resources"
-                ? {
-                  ...skill,
-                  rvs: (skill.rvs ?? 0) + value,
-                }
-                : skill;
-            }),
-          });
+            "system.skills.resources": {
+              ...document.system.skills.resources,
+              rvs: (document.system.skills.resources.rvs ?? 0) + value,
+            }
+          })
           this.render({});
         },
       },
@@ -314,7 +395,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   static #onChangeLuck(this: SkillsEditor) {
     const document = this.document;
-    const luck = document.system.skills.find((skill) => skill.slug === "luck");
+    const luck = document.system.skills.luck
     if (!luck) return;
 
     foundry.applications.api.DialogV2.prompt({
@@ -323,10 +404,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
-        name: document.name,
-        value: luck.total,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
+          name: document.name,
+          value: luck.total,
+        });
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       ok: {
         action: "submit",
         label: game.i18n.localize("PTR2E.SkillsEditor.ChangeLuck.submit"),
@@ -352,14 +438,10 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             (luck.value ?? 0) + value;
 
           await document.update({
-            "system.skills": document.system.skills.map((skill) => {
-              return skill.slug === "luck"
-                ? {
-                  ...skill,
-                  value: (skill.value ?? 0) + value,
-                }
-                : skill;
-            }),
+            "system.skills.luck": {
+              ...document.system.skills.luck,
+              value: (document.system.skills.luck.value ?? 0) + value,
+            }
           });
           this.render({});
         },
@@ -369,12 +451,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
   static async #onRollLuck(this: SkillsEditor) {
     const document = this.document;
-    const luck = document.system.skills.find((skill) => skill.slug === "luck");
+    const luck = document.system.skills.luck
     if (!luck) return;
 
     const levelOne = this.document.system.advancement.level === 1;
     const isReroll =
-      !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1);
+      !levelOne || (levelOne && this.document.system.skills.luck!.value! > 1);
 
     const rollAndApplyLuck = async (isReroll = false) => {
       const roll = await new Roll("3d6 * 5").roll();
@@ -394,14 +476,10 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
       this.skills.find((skill) => skill.slug === "luck")!.value = roll.total;
       await document.update({
-        "system.skills": document.system.skills.map((skill) => {
-          return skill.slug === "luck"
-            ? {
-              ...skill,
-              value: roll.total,
-            }
-            : skill;
-        }),
+        "system.skills.luck": {
+          ...document.system.skills.luck,
+          value: roll.total,
+        }
       });
       this.render({});
     };
@@ -417,84 +495,17 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           name: document.name,
         }),
       },
-      content: game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
-        name: document.name,
-      }),
+      content: (() => {
+        const htmlString = game.i18n.format("PTR2E.SkillsEditor.RollLuck.content", {
+          name: document.name,
+        })
+        const html = globalThis.document.createElement("div");
+        html.innerHTML = htmlString;
+        return html;
+      })(),
       yes: {
         callback: rollAndApplyLuck.bind(this, true),
       },
-    });
-  }
-
-  static async #onSubmit(
-    this: SkillsEditor,
-    _event: SubmitEvent | Event,
-    _form: HTMLFormElement,
-    formData: FormDataExtended
-  ) {
-    const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
-    const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
-    const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
-    const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
-
-    const avoidValidation = !!((_event as SubmitEvent)?.submitter?.getAttribute("formnovalidate"));
-
-    let resourceMod = 0;
-    for (const skill of skills) {
-      const skillData = data[skill.slug];
-      if (!skillData) continue;
-      const investment = parseInt(skillData.investment);
-      if (isNaN(investment) || !investment) continue;
-
-      if (skill.slug === "resources") {
-        if (investment < 0) resourceMod = investment;
-        if (levelOne) {
-          resourceMod = investment
-          delete data[skill.slug];
-          continue;
-        }
-      };
-      if (avoidValidation) {
-        skill.rvs = (skill.rvs ?? 0) + investment;
-      } else {
-        skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
-      }
-      delete data[skill.slug];
-    }
-
-    for (const slug in data) {
-      const investment = parseInt(data[slug].investment);
-      if (isNaN(investment) || !investment) continue;
-
-      const skillData = game.ptr.data.skills.get(slug);
-      if (!skillData) continue;
-
-      if (slug === "resources" && (investment < 0 || levelOne)) resourceMod = investment;
-
-      const rvs = avoidValidation ? investment : Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment);
-
-      skills.push({
-        slug,
-        value: 1,
-        rvs,
-        favourite: skillData.favourite ?? false,
-        hidden: skillData.hidden ?? false,
-        group: skillData.group || undefined,
-      });
-    }
-
-    if (levelOne) {
-      const resourceIndex = skills.findIndex((skill) => skill.slug === "resources");
-      if (resourceIndex !== -1) {
-        const resources = skills[resourceIndex];
-        resources.value += resourceMod;
-        resources.rvs = resources.rvs ?? 0;
-      }
-    }
-
-    await this.document.update({
-      "flags.ptr2e.editedSkills": true,
-      "system.skills": skills,
     });
   }
 }

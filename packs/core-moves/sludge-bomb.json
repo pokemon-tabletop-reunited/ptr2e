@@ -12,8 +12,7 @@
         "traits": [
           "explode",
           "missile",
-          "blast-2",
-          "pp-updated"
+          "blast-2"
         ],
         "range": {
           "target": "blast",
@@ -30,7 +29,7 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -40,13 +39,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "3NZj02Fbw14aWuTa",
   "effects": [
     {
       "name": "Sludge Bomb",
-      "type": "affliction",
+      "type": "passive",
       "_id": "dmXgQCjv6Eg6FkSj",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -54,15 +59,15 @@
           {
             "type": "roll-effect",
             "key": "sludge-bomb-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "label": "Sludge Bomb",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,13 +81,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

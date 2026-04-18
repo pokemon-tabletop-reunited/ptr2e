@@ -1,0 +1,186 @@
+{
+  "name": "Polar Shoulder",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.112,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.350",
+        "system": "1.4.7.beta"
+      }
+    },
+    "slug": "polar-shoulder",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Polar Shoulder",
+        "slug": "polar-shoulder",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "traits": [
+          "crit-1",
+          "contact",
+          "grapple"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: This Attack includes +30% of the user's DEF and SPDEF in damage calculation in addition to the original attacking stat. On hit, the user has a 15% chance to gain +1 DEF and SPDEF Stage for 5 Activations.</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 50,
+        "accuracy": 90
+      }
+    ],
+    "grade": "B"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Polar Shoulder",
+      "type": "passive",
+      "_id": "Va3LmJdqpK0hjWiv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "polar-shoulder-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.def.value * ((2 + @actor.system.attributes.def.stage) / 2)) * 0.3)",
+            "predicate": [
+              {
+                "gte": [
+                  "{actor|system.attributes.def.stage}",
+                  0
+                ]
+              }
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "polar-shoulder-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.def.value * (2 / (2 + abs(@actor.system.attributes.def.stage)))) * 0.3)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.def.stage}",
+                  0
+                ]
+              }
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "polar-shoulder-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spd.value * ((2 + @actor.system.attributes.spd.stage) / 2)) * 0.3)",
+            "predicate": [
+              {
+                "gte": [
+                  "{actor|system.attributes.spd.stage}",
+                  0
+                ]
+              }
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "polar-shoulder-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spd.value * (2 / (2 + abs(@actor.system.attributes.spd.stage)))) * 0.3)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.spd.stage}",
+                  0
+                ]
+              }
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "polar-shoulder-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 15,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "polar-shoulder-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 15,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "p5YWbPoOrO5PkbVM"
+}

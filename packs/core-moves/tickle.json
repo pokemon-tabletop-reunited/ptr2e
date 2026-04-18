@@ -10,8 +10,7 @@
         "name": "Tickle",
         "type": "attack",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -38,13 +37,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "d1lLjcyOH6nsTrJ0",
   "effects": [
     {
       "name": "Tickle",
-      "type": "affliction",
+      "type": "passive",
       "_id": "QmsL2c7XlSO1kcbS",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -52,24 +57,24 @@
           {
             "type": "roll-effect",
             "key": "tickle-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "tickle-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +88,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

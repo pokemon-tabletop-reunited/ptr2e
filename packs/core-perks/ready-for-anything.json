@@ -1,0 +1,108 @@
+{
+  "folder": "c29hnIAtXgwB7FeY",
+  "name": "Ready For Anything",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Gain +20% RES whilst under the effects of @Affliction[braced].</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 96,
+        "y": 98,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "punishment-ward",
+          "unbending-steel",
+          "minor-buff-44",
+          "minor-buff-39",
+          "natural-steel",
+          "grounded-line"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "ready-for-anything"
+  },
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": [
+    {
+      "name": "Ready For Anything",
+      "type": "passive",
+      "_id": "Dau5aZQUXKVDJX0Z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 20,
+            "predicate": [
+              "effect:affliction:braced"
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764896712918,
+        "modifiedTime": 1764896741939,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
+  "_id": "0PCYjKndhybEYReD"
+}

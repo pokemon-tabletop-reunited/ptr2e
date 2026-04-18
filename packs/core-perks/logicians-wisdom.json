@@ -39,7 +39,8 @@
           "lasting-harm",
           "acute-affliction",
           "stage-vampirism",
-          "cultivate-weakness"
+          "cultivate-weakness",
+          "grendelian-tribute"
         ],
         "config": {
           "alpha": null,
@@ -64,7 +65,64 @@
       "arena": "mental",
       "approach": "finesse",
       "archetype": "tactician"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Logician's Wisdom",
+      "type": "passive",
+      "_id": "Pv8I9WQ60oYdMNtN",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-damage",
+            "value": "(@target.afflictionCount.major * 10) + (@target.afflictionCount.minor * 5)",
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1748800010482,
+        "modifiedTime": 1754852516775,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

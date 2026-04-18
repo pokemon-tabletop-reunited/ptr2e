@@ -9,53 +9,50 @@ import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Tagify from "@yaireo/tagify";
+import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
 ) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["active-effect-sheet"],
-      position: {
-        width: 550,
-        height: "auto",
-      },
-      form: {
-        handler: ActiveEffectConfig.#onSubmit,
-        closeOnSubmit: false,
-        submitOnChange: true,
-      },
-      actions: {
-        "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
-          event.preventDefault();
-          const inspector = new DataInspector(this.document);
-          inspector.render(true);
-        },
-        "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
-          event.preventDefault();
-          const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
-          const parent = this.document.parent;
-          await this.document.delete();
-          const docs = await ActiveEffectPTR2e.createDocuments([newEffect], {keepId: true, parent});
-          docs?.at(0)?.sheet?.render(true);
-        }
-      },
-      window: {
-        resizable: true,
-        controls: [
-          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-atom",
-            label: "PTR2E.ActorSheet.Inspector",
-            action: "open-inspector",
-            visible: true
-          }
-        ],
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["active-effect-sheet", "ptr2e", "standard-form"],
+    position: {
+      width: 550,
+      height: "auto" as const
     },
-    { inplace: false }
-  );
+    form: {
+      handler: ActiveEffectConfig.#onSubmit,
+      closeOnSubmit: false,
+      submitOnChange: true,
+    },
+    actions: {
+      "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
+        event.preventDefault();
+        const inspector = new DataInspector(this.document);
+        inspector.render(true);
+      },
+      "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
+        event.preventDefault();
+        const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
+        const parent = this.document.parent;
+        await this.document.delete();
+        const docs = await ActiveEffectPTR2e.createDocuments([newEffect], { keepId: true, parent });
+        docs?.at(0)?.sheet?.render(true);
+      }
+    },
+    window: {
+      resizable: true,
+      controls: [
+        ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+        {
+          icon: "fas fa-atom",
+          label: "PTR2E.ActorSheet.Inspector",
+          action: "open-inspector",
+          visible: true
+        }
+      ],
+    },
+  } as unknown as Omit<DeepPartial<DocumentSheetConfigurationExpanded>, "uniqueId">;
 
   #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
@@ -156,7 +153,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   override async _prepareContext(options?: DocumentSheetConfiguration<ActiveEffectPTR2e>) {
     const context = (await super._prepareContext(options)) as Record<string, unknown>;
 
-    context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
+    context.descriptionHTML = await foundry.applications.ux.TextEditor.enrichHTML(this.document.description, {
       secrets: this.document.isOwner,
     });
     const legacyTransfer = CONFIG.ActiveEffect.legacyTransferral;
@@ -187,13 +184,13 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
     context.hasDescription = "description" in this.document;
     if (context.hasDescription) {
-      context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
+      context.descriptionHTML = await foundry.applications.ux.TextEditor.enrichHTML(this.document.description, {
         secrets: this.document.isOwner,
         relativeTo: this.document,
       });
     }
 
-    const traits  = (() => {
+    const traits = (() => {
       if ("traits" in this.document.system) {
         const traits = [];
         for (const trait of this.document.system.traits) {
@@ -245,7 +242,10 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       ),
       fields: this.document.schema.fields,
       system: this.document.system,
-      traits
+      traits,
+      showIconOptions: Object.entries(CONST.ACTIVE_EFFECT_SHOW_ICON).map(([k, value]) => ({
+        value, label: game.i18n.localize(`EFFECT.SHOW_ICON.${k.toLowerCase()}`)
+      })).reverse()
     };
   }
 
@@ -321,7 +321,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new foundry.applications.ux.FormDataExtended(this.element);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
             this.element as HTMLFormElement,
@@ -348,7 +348,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new foundry.applications.ux.FormDataExtended(this.element);
 
           // Manually update the JSON data with the new type if it doesn't exist
           const selectValue =
@@ -403,7 +403,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
           $(this.element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
           });
-          const formData = new FormDataExtended(this.element);
+          const formData = new foundry.applications.ux.FormDataExtended(this.element);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
             this.element as HTMLFormElement,
@@ -670,13 +670,13 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
   static async #onSubmit(
     this: ActiveEffectConfig,
-    event: SubmitEvent,
+    event: SubmitEvent | Event,
     form: HTMLFormElement,
     formData: FormDataExtended
   ) {
     event.preventDefault();
     event.stopPropagation();
-    const submitData = this._prepareSubmitData(event, form, formData);
+    const submitData = this._prepareSubmitData(event as SubmitEvent, form, formData);
     if (fu.isEmpty(submitData)) return;
 
     await this.document.update(submitData);

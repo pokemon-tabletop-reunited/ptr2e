@@ -1,5 +1,5 @@
-<content data-target-uuid="{{targetUuid}}" data-message-id="{{messageId}}">
-  {{#if effects.target}}
+<content data-target-uuid="{{targetUuid}}" data-message-id="{{messageId}}"> 
+  {{#if (or effects.target.length effects.defensive.length)}}
   <header>
     <small>Effect Rolls to Target</small>
   </header>
@@ -7,9 +7,12 @@
     {{#each effects.target}}
       {{> effect type="target"}}
     {{/each}}
+    {{#each effects.defensive}}
+      {{> effect type="defensive"}}
+    {{/each}}
   </main>
   {{/if}}
-  {{#if effects.origin}}
+  {{#if effects.origin.length}}
     <header>
       <small>Effect Rolls to Source</small>
     </header>

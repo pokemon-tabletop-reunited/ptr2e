@@ -10,7 +10,7 @@
         "name": "Chord Strike",
         "slug": "chord-strike",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "traits": [
           "sonic",
           "contact"
@@ -22,7 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 2
         },
         "types": [
           "normal"
@@ -30,14 +30,23 @@
         "category": "physical",
         "power": 80,
         "accuracy": 90,
-        "description": "<p>Effect: On hit, the target has a 20% chance of being @Affliction[confused] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of being @Affliction[confused 5].</p>",
+        "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -50,13 +59,14 @@
           {
             "type": "roll-effect",
             "key": "chord-strike-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +77,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

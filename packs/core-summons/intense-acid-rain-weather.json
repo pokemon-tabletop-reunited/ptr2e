@@ -8,11 +8,21 @@
     },
     "traits": [
       "partial-automation",
-      "weather"
+      "weather",
+      "poison"
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "intense-acid-rain-weather",
+    "description": "<p><strong>Intense Acid Rain</strong> consists of the showers that result from the polluted clouds growing too heavy and full. Unless you naturally thrive in poisons, this utterly corrosive rain can melt even the toughest of steel beams.</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>For the purposes of Abilities, Attacks, Perks, and Traits, this Weather is considered to also be “Smoggy”.</li><li>Poison-Type Attacks deal 40% more damage, and have an additional 25% chance to inflict Poison or Blight.</li><li>All non-Poison creatures take 25% more damage from Physical-Category Attacks and deal 25% less damage with those Attacks.</li><li>At the end of their Activation, non Poison-Type creatures lose a Tick of HP.</li><li>At the end of the Round, Poison-Type creatures gain two Ticks of HP.</li><li>While a creature is Poisoned or Blighted, they possess -1 default ACC and are Stunted.</li><li>When a creature takes a Critical Hit from a [Sharp] attack, they gain Blight 8.</li></ul>"
   },
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "effects": [
@@ -75,7 +85,9 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -88,7 +100,9 @@
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
@@ -103,7 +117,9 @@
         "formula": "1/16",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -125,15 +141,15 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-summons.Item.nXGTvwoiQ7Cr3kPZ.ActiveEffect.RnUBhAHQxzG4FotL",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "1.0.3.beta",
         "createdTime": null,
         "modifiedTime": 1739486061357,
-        "lastModifiedBy": "OCI1vTFsIMTEwU21"
+        "lastModifiedBy": "OCI1vTFsIMTEwU21",
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "QJK3V4l4ZeQd4t6U"
 }

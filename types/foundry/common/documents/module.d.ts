@@ -28,3 +28,39 @@ export { default as BaseTile, TileSource } from "./tile.ts";
 export { default as BaseToken, TokenSource } from "./token.ts";
 export { default as BaseUser, UserSource } from "./user.ts";
 export { default as BaseWall, WallSource } from "./wall.ts";
+export const collections: {Actors: typeof Actors, Items: typeof Items}
+export const modifyBatch: (batch: BatchUpdate[]) => Promise<void>;
+
+export type BatchUpdate = {
+  documentName: string;
+  broadcast?: boolean;
+  parent?: object | null;
+  pack?: string | null;
+  parentUuid?: string | null;
+  dryRun?: boolean;
+  modifiedTime?: number;
+  noHook?: boolean;
+} & ({
+  action: "create";
+  documentName: string;
+  data: object[];
+  keepId?: boolean;
+  keepEmbeddedIds?: boolean;
+  render?: boolean;
+  controlObject?: boolean;
+  renderSheet?: boolean;
+} | {
+  action: "update";
+  documentName: string;
+  updates: object[];
+  diff?: boolean;
+  recursive?: boolean;
+  render?: boolean;
+} | {
+  action: "delete";
+  documentName: string;
+  ids: string[];
+  deleteAll?: boolean;
+  replacements?: Record<string, string>;
+  noHook?: boolean;
+})

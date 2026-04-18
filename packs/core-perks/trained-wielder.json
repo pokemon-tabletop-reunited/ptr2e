@@ -25,7 +25,9 @@
           "root-2",
           "covering-fire",
           "backpacker-1",
-          "down-the-sights"
+          "down-the-sights",
+          "arms-race",
+          "needle-threader"
         ],
         "config": {
           "alpha": null,
@@ -48,7 +50,15 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": "weapon"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "Noilrz4vhlRIcrO3",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -65,26 +75,23 @@
             "key": "",
             "value": "wielder",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain the @Trait[wielder] Trait.</p>",
       "origin": null,
@@ -96,12 +103,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737565954035,
         "modifiedTime": 1737566017540,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ],

@@ -1,0 +1,148 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Rose Incense",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "rose-incense",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held",
+      "needs-automation"
+    ],
+    "actions": [],
+    "description": "<p>Grass-Type users deal/take 10% more/less Special-Category damage. @UUID[Compendium.ptr2e.core-species.u0tWJ21vXRWiVZtH]{Budew}, @UUID[Compendium.ptr2e.core-species.VoBt5EWOY1vbTH8Z]{Roselia}, and @UUID[Compendium.ptr2e.core-species.tUAo0jg7dNMExftf]{Roserade} users have +10 Base SPATK, and have a 20% chance to freely use Accupressure on itself when resolving a @Trait[drain-x] or @Trait[poison] Attack.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 100,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "8Pg6vQrsatWJzfBh",
+  "img": "systems/ptr2e/img/item-icons/rose incense.webp",
+  "effects": [
+    {
+      "name": "Rose Incense",
+      "type": "passive",
+      "_id": "EbxsgpZmIsI4F1Hb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 10,
+            "predicate": [
+              "trait:grass"
+            ],
+            "label": "Rose Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:grass"
+            ],
+            "label": "Rose Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "stats-alteration",
+            "key": "system.modifiers.effectHitRate",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:budew",
+                  "item:species:roselia",
+                  "item:species:roserade"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": 10,
+            "spd": null,
+            "spe": null,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766447278815,
+        "modifiedTime": 1766447533724,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
+}

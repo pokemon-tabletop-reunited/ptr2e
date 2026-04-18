@@ -1,0 +1,233 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Lucasine BX-03 Beam Sword",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "lucasine-beam-sword",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "1-handed",
+      "switch-grip",
+      "blade",
+      "sci-fi"
+    ],
+    "actions": [
+      {
+        "name": "Beam Strike",
+        "slug": "beam-strike",
+        "traits": [
+          "weapon",
+          "contact",
+          "sharp",
+          "ray",
+          "pulse"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 65,
+        "accuracy": 100
+      },
+      {
+        "name": "Beam Thrust",
+        "slug": "beam-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "sharp",
+          "ray",
+          "pulse",
+          "pierce",
+          "flinch-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "variant": "beam-strike",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 95,
+        "accuracy": 90
+      },
+      {
+        "name": "Beam Flurry",
+        "slug": "beam-flurry",
+        "traits": [
+          "weapon",
+          "contact",
+          "sharp",
+          "ray",
+          "pulse",
+          "5-strike",
+          "flinch-30"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "variant": "beam-strike",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 35,
+        "accuracy": 85
+      }
+    ],
+    "description": "<p>Lucasine’s BX-03 Beam Sword is the modern innovation of a “beam sword”, a technology doggedly pursued by corporate executives with major nostalgia complexes. The BX line is the first iteration of “true” beam swords - ones that do not require an emission skeleton to bind the plasma in place to form the blade. Instead, the BX line has innovated and miniaturized the emission and binding mechanisms solely into the hilt. However, still short of the nostalgic dream, the BX line requires a substantial power supply, which is carried on the hip or on the back and wired into the hilt.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "B",
+    "fling": {
+      "type": "steel",
+      "power": 80,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "eNUnXzFjxW2lgmKy",
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Lucasine BX-03 Beam Sword",
+      "type": "passive",
+      "_id": "XqBJbeRIb9HkfiSa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "beam-strike-damage",
+            "value": 35,
+            "predicate": [],
+            "label": "Beam Strike",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "beam-thrust-damage",
+            "value": 50,
+            "predicate": [],
+            "label": "Beam Thrust",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "beam-flurry-damage",
+            "value": 25,
+            "predicate": [],
+            "label": "Beam Flurry",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767457889286,
+        "modifiedTime": 1767458691871,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ],
+  "flags": {}
+}

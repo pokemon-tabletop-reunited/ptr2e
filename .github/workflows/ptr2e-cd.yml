@@ -1,0 +1,54 @@
+name: PTR2e CD
+
+on:
+  workflow_run:
+    workflows: ["PTR2e CI"]
+    types:
+        - completed
+    branches:
+        - Stable
+
+jobs:
+    release:
+        if: github.event.workflow_run.conclusion == 'success' && github.event.repository.fork == false
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js 24.x
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24.x
+
+            - name: Install 7-Zip
+              run: sudo apt-get install -y p7zip-full
+
+            - name: Build
+              run: |
+                  npm ci
+                  npm run build
+                  npm run build:packs:json
+
+            - name: Update Manifest
+              run: |
+                  SYSTEM_VERSION=$(grep -oP '(?<="version": ")[^"]+' dist/system.json | tr -d '\n')
+                  perl -pi -E "s|latest/download/ptr2e\\.zip|download/$SYSTEM_VERSION/ptr2e.zip|" dist/system.json
+                  echo "systemVersion=$SYSTEM_VERSION" >> $GITHUB_ENV
+
+            - name: Zip Files
+              working-directory: dist
+              run: |
+                  7z a -tzip ptr2e.zip ./*
+
+            - name: Create Version Release
+              id: create_version_release
+              uses: ncipollo/release-action@v1
+              with:
+                  name: ${{ env.systemVersion }}
+                  allowUpdates: false
+                  draft: false
+                  prerelease: false
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  artifacts: "./dist/system.json,./dist/ptr2e.zip,./json-assets/packs/data.json"
+                  tag: ${{ env.systemVersion }}

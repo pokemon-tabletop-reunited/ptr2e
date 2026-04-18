@@ -23,11 +23,11 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of either gaining @Affliction[paralysis] 5, gaining @Affliction[drowsy] 5, or gaining @Affliction[poison] 5.</p>",
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of either gaining @Affliction[paralysis 5], gaining @Affliction[drowsy 5], or gaining @Affliction[poison 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 10% chance of gaining @Affliction[paralysis] 5, a 10% chance of gaining @Affliction[drowsy] 5, and a 10% chance of gaining @Affliction[poison] 5.</p>",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 10% chance of gaining @Affliction[paralysis 5], a 10% chance of gaining @Affliction[drowsy 5], and a 10% chance of gaining @Affliction[poison 5].</p>",
     "traits": [
       "defensive",
       "powder"
@@ -36,6 +36,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "pJbJP7MrfEXo8XSe",
@@ -50,38 +57,41 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "affects": "origin",
             "chance": 10,
             "label": "Effect Spore Paralysis",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "label": "Effect Spore Drowsy",
             "chance": 10,
             "affects": "origin",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "label": "Effect Spore Poison",
             "chance": 10,
             "affects": "origin",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -90,15 +100,10 @@
         "removeOnRecall": false,
         "stacks": 0
       },
-      "disabled": true,
+      "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -114,7 +119,7 @@
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.1",
         "createdTime": 1727997025623,
-        "modifiedTime": 1727997193272,
+        "modifiedTime": 1741894094610,
         "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }

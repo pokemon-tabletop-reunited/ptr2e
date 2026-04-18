@@ -3,8 +3,51 @@
   "type": "ability",
   "img": "systems/ptr2e/img/icons/status_icon.png",
   "system": {
-    "actions": [],
-    "description": "<p>Trigger: The user declares Trick Room.</p><p>Effect: Connection - Trick Room. The set Trick Room lasts 5 rounds, and the triggering attack gains [Priority 5] until the end of the user's Activation.</p>",
+    "actions": [
+      {
+        "traits": [
+          "room",
+          "interrupt-4"
+        ],
+        "name": "Regression Field",
+        "slug": "regression-field",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Trick Room.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "room",
+          "interrupt-2"
+        ],
+        "name": "Regression Field (Extend)",
+        "slug": "regression-field-extend",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Foghorn.</p>"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user declares Foghorn.</p><p>Effect: The set Trick Room has its duration increased by +2 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Trick Room. The user freely uses Trick Room. When the user sets Trick Room, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "room",
       "connection"
@@ -13,6 +56,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "vHlzzoEuyzHoBsbT",
@@ -28,43 +78,42 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.0o8uUraEHLc4mDq4",
-            "predicate": [],
+            "predicate": [
+              "ability:regression-field:active"
+            ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "allowDuplicate": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -76,12 +125,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737418447843,
-        "modifiedTime": 1737418486380,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754320838940,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

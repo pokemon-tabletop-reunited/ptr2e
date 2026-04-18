@@ -8,7 +8,7 @@
     "actions": [
       {
         "name": "Condemn",
-        "slug": "condemn-1",
+        "slug": "condemn",
         "description": "<p>You may spend 3PP to condemn a target within 5m as a Simple Action. This is considered an Attack with the [Social] trait, and may only be used once per Activation. The target loses -1 DEF and SPDEF stages for 3 Activations.</p>",
         "traits": [
           "social"
@@ -61,7 +61,9 @@
       {
         "connected": [
           "hesitation",
-          "groomer"
+          "groomer",
+          "not-the-face",
+          "agitator"
         ],
         "config": {
           "alpha": null,
@@ -85,8 +87,16 @@
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Socialite"
-    }
+      "archetype": "socialite"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -99,55 +109,56 @@
           {
             "type": "roll-effect",
             "key": "condemn-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 3
+                "value": 3,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false,
+            "isFixedChance": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "condemn-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 3
+                "value": 3,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false,
+            "isFixedChance": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -159,12 +170,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737935473142,
         "modifiedTime": 1737935537139,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

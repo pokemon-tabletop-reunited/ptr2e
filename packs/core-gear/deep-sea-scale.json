@@ -1,10 +1,10 @@
 {
   "name": "Deep Sea Scale",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/deepseascale.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -15,16 +15,24 @@
     },
     "grade": "C",
     "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100
+      "type": "water",
+      "power": 55,
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 7,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "combat",
       "clamperl",
       "gorebyss",
-      "evolution"
+      "evolution",
+      "accessory",
+      "consumable"
     ],
     "actions": [
       {
@@ -40,21 +48,17 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has their Base SPATK increased by 100%.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Effect: @UUID[Compendium.ptr2e.core-species.2wumLQ2NYg5Ap45z]{Clamperl} users have their SPATK increased by +50% and their SPDEF increased by +100%, and @UUID[Compendium.ptr2e.core-species.3ZgIUXJDSbDqf9Ec]{Huntail} and @UUID[Compendium.ptr2e.core-species.THhQI9ecKnBtCMI4]{Gorebyss} users have their SPATK increased by +25% and their SPDEF increased by +50%.<br><br>Clamperl may consume this item to trigger Evolution.</p>",
+    "slug": "deep-sea-scale",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -64,26 +68,120 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "yJURm9nIRnR83wGd",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!yJURm9nIRnR83wGd"
+  "effects": [
+    {
+      "name": "Deep Sea Scale",
+      "type": "passive",
+      "_id": "Tc5QvPQrfNHH327d",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "species:clamperl"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 1,
+            "predicate": [
+              "species:clamperl"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.25,
+            "predicate": [
+              "species:huntail"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "species:huntail"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.25,
+            "predicate": [
+              "species:gorebyss"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "species:gorebyss"
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758624195736,
+        "modifiedTime": 1758624344519,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXae"
 }

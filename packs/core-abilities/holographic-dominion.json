@@ -20,7 +20,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The triggering effect does not affect the user, and the user gains @Affliction[transient].</p>",
         "img": "icons/svg/explosion.svg"
@@ -29,16 +30,17 @@
         "traits": [
           "legendary"
         ],
-        "name": "Holographic Dominion (Simple)",
-        "slug": "holographic-dominion-simple",
+        "name": "Holographic Dominion (Free)",
+        "slug": "holographic-dominion-free",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "free",
           "powerPoints": 1
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user gains or loses @Affliction[transient].</p>",
         "img": "icons/svg/explosion.svg"
@@ -53,15 +55,16 @@
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>",
+        "description": "<p>Passive: While @Affliction[transient], the user's Attacks have +40 Accuracy, +10 effect chance, and deal double damage against non @Affliction[transient] targets, and the user gains 2 PP at the start of each of its Activations.</p>",
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
-    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user may use a Simple Action using 1 PP to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>",
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user may use a Simple Action using 1 PP to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks have +40 Accuracy, +10 effect chance, and deal double damage against non @Affliction[transient] targets, and the user gains 2 PP at the start of each of its Activations.</p>",
     "traits": [
       "legendary",
       "connection",
@@ -71,6 +74,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ymmPtEzXzLSc9bOd",
@@ -86,26 +96,28 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.3FUbV3cOXazvisJ0",
-            "predicate": [],
+            "predicate": [
+              "ability:holographic-dominion:active"
+            ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "allowDuplicate": false,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -114,27 +126,24 @@
             "predicate": [
               "effect:affliction:transient"
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -146,12 +155,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737403251186,
-        "modifiedTime": 1737403346765,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754319197233,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

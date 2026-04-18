@@ -7,30 +7,26 @@
       "trait:trainer"
     ],
     "cost": 2,
-    "description": "<p>At the cost of 2PP and done across a Simple Action, the user Recalls a creature and selects that or another creature on their Team, freely using Send Out to bring that creature into Combat.</p>",
+    "description": "<p>When the user resolves @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall}, they may spend @PP[-1] as a Free Action @Trait[interrupt] at @Trait[flinch-15] and freely use @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}.</p>",
     "actions": [
       {
         "name": "Quick Switch",
         "slug": "quick-switch",
-        "description": "The user freely uses Recall on the creature, and freely uses Send Out targeting an elligible creature from their Team.",
+        "description": "<p>Trigger: The user resolves @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall}.</p><p>Effect: The user freely uses @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}.</p>",
         "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "activation": "free",
+          "powerPoints": 1
         },
         "range": {
-          "target": "ally",
-          "unit": "m",
-          "distance": 0
+          "target": "self",
+          "unit": "m"
         },
         "type": "generic",
         "traits": [
-          "manipulate",
-          "basic"
+          "interrupt",
+          "flinch-15"
         ],
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg"
       }
     ],
     "slug": "quick-switch",
@@ -41,36 +37,38 @@
     },
     "nodes": [
       {
+        "x": 18,
+        "y": 125,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "emergency-retreat"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff8000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-          "tint": "#151515",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 18,
-        "y": 125,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "Juggler"
-    }
+      "archetype": "juggler"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "kGNc0h7Xs3dmXRjt",
   "img": "systems/ptr2e/img/perk-icons/Juggler.svg",

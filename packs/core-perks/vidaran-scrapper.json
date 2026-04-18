@@ -1,0 +1,65 @@
+{
+  "name": "Vidaran Scrapper",
+  "_id": "0jJgAoABhpgCzKto",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "vidaran-scrapper",
+    "description": "<p>When the user hits a Steel-Type creature with a @Trait[contact] or @Trait[hammer] Attack, they have a 20% chance to gain @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage for 5 activations}, and a 10% chance to restore @Tick[2 pp]. The user’s Thief gains @Trait[hammer] and[Drain 1/2].</p>",
+    "traits": [
+      "tinkatuff",
+      "tinkaton"
+    ],
+    "prerequisites": [
+      {
+        "or": [
+          "item:species:tinkatuff",
+          "item:species:tinkaton"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "global": false,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": null
+    },
+    "webs": [
+      "Compendium.ptr2e.core-species.Item.nbZYPVZGTYnXkQCz"
+    ],
+    "nodes": [
+      {
+        "x": 10,
+        "y": 15,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "duende-tinkerer"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "folder": "e9XnhZdjIE7hroYs"
+}

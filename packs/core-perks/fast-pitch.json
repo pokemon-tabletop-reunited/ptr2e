@@ -11,21 +11,24 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.</p>",
+    "description": "<p>Effect: The user may spend @PP[-2] to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action @Trait[interrupt] at @Trait[flinch-30]. This may only be done once between start of one of the user's Activations and the start of the subsequent one.</p>",
     "actions": [
       {
         "name": "Fast Pitch",
         "slug": "fast-pitch",
-        "description": "<p>You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.</p>",
+        "description": "<p>Effect: The user may spend @PP[-2] to Fling a @Trait[ball] or @Trait[concoction] item as a Free Action @Trait[interrupt] at @Trait[flinch-20]. This may only be done once between start of one of the user's Activations and the start of the subsequent one.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 2
         },
         "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "interrupt",
+          "flinch-20"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
         }
       }
@@ -38,23 +41,20 @@
     },
     "nodes": [
       {
+        "x": 68,
+        "y": 114,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "capture-ace-1",
           "curveball-technique"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff8040",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 68,
-        "y": 114,
         "tier": null
       }
     ],
@@ -64,8 +64,16 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Capture"
-    }
+      "archetype": "capture"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "P49Aro4LHhgEkPC5",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",

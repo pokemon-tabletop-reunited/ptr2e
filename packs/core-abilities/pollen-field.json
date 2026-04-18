@@ -35,6 +35,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "qTEHzVYL4axnlRO7",
@@ -52,27 +59,24 @@
             "value": -20,
             "predicate": [],
             "label": "Pollen Field",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -84,12 +88,13 @@
       "_stats": {
         "compendiumSource": "Actor.6K9P8ATjBFtFFA6f.Item.dn3jJqa3FfT84HbX.ActiveEffect.DAedmgqhafIYZu79",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1732752541130,
         "modifiedTime": 1734210116099,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     },
     {
@@ -103,8 +108,9 @@
             "type": "aura",
             "key": "",
             "value": 0,
-            "predicate": [],
-            "mode": 2,
+            "predicate": [
+              "pollen-field:active"
+            ],
             "priority": null,
             "ignored": false,
             "radius": 5,
@@ -134,24 +140,37 @@
               },
               "texture": null
             },
-            "mergeExisting": true
+            "mergeExisting": true,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "pollen-field:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Pollen Field",
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -163,12 +182,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1732752558691,
-        "modifiedTime": 1732752834786,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1753018483088,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

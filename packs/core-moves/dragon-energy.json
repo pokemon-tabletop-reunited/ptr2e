@@ -11,34 +11,94 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "pulse",
-          "pp-updated"
+          "pulse"
         ],
         "range": {
           "target": "emanation",
-          "distance": 5,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10
+          "powerPoints": 8
         },
         "category": "special",
-        "power": 150,
+        "power": 200,
         "accuracy": 100,
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><p><blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 200.</p>",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "xf2NuI372VOQGVIL",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dragon Energy",
+      "type": "passive",
+      "_id": "YKMJMRUWhZfZFacZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "dragon-energy-attack",
+            "value": "@actor.system.health.percent*1.9+10",
+            "predicate": [],
+            "label": "Dragon Energy",
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 5
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1740184044159,
+        "modifiedTime": 1767165341549,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

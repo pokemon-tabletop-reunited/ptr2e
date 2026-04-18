@@ -11,66 +11,95 @@
     "equipped": {
       "slot": "held",
       "carryType": "stowed",
-      "handsHeld": null
+      "handsHeld": 1
     },
     "grade": "D",
     "fling": {
       "type": "dark",
-      "power": 40,
-      "accuracy": 100
+      "power": 60,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "traits": [
       "weapon",
       "fling",
-      "bladed",
-      "one-handed",
+      "blade",
       "concealable",
-      "dark"
+      "dark",
+      "1-handed",
+      "conventional",
+      "modern",
+      "early-modern"
     ],
     "actions": [
       {
-        "name": "Pocket Knife",
-        "slug": "pocket-knife",
+        "name": "Pocket Knife Swing",
+        "slug": "pocket-knife-swing",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Pocket Knife, drawing upon this item's PP Pool or the user's PP to use the Attack.",
         "traits": [
-          "Weapon",
-          "Fling",
-          "Bladed",
-          "One-Handed",
-          "Concealable",
-          "Dark"
+          "weapon",
+          "contact",
+          "sharp",
+          "adaptable",
+          "grapple",
+          "priority-30"
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 1
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null,
         "types": [
           "untyped"
         ],
         "category": "physical",
-        "power": null,
-        "accuracy": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "power": 30,
+        "accuracy": 95
+      },
+      {
+        "name": "Pocket Knife Thrust",
+        "slug": "pocket-knife-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "crit-1",
+          "grapple",
+          "priority-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 55,
+        "accuracy": 90
       }
     ],
-    "description": "Effect: The user may use the Attack Pocket Knife, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "<p>A pocket knife is a knife with one or more blades that fold into the handle. Pocket knives are versatile tools, and may be used for anything from whittling and woodcarving, to butchering small game, gutting and filleting small fish, aiding in the preparation of tinder and kindling for fires, boring holes in soft material, to opening an envelope, cutting twine, slicing fruits and vegetables or as a means of self-defense.</p>",
     "weaponType": "untyped",
     "weaponRange": "Creature",
-    "slug": null,
-    "container": null,
+    "slug": "pocket-knife",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -81,26 +110,86 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponPp": 0
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "kvrgCQjgU2sDuLal",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!kvrgCQjgU2sDuLal"
+  "effects": [
+    {
+      "name": "Pocket Knife",
+      "type": "passive",
+      "_id": "s5OhalZgBrilaWEM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Pocket Knife",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "pocket-knife-thrust-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "label": "Thrust",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "fling-pocket-knife-attack-damage-flat",
+            "value": 9,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757547044775,
+        "modifiedTime": 1757553354211,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
+  "folder": "GPebepuiQbZSuf35"
 }

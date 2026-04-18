@@ -18,21 +18,15 @@
         "slug": "aura-empathy",
         "description": "<p>You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "aura-empathy",
@@ -45,7 +39,8 @@
       {
         "connected": [
           "aura-user",
-          "aura-bonding"
+          "aura-bonding",
+          "army-of-phantoms"
         ],
         "config": {
           "alpha": null,
@@ -64,16 +59,21 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Aura"
-    }
+      "archetype": "aura"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "0oopLlKDWl1rf2Sm",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

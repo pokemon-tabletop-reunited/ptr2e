@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "pulse",
-          "blast-2",
-          "pp-updated"
+          "blast-2"
         ],
         "range": {
           "target": "blast",
@@ -39,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "1YuCkdlx4r8g3RJ3",
@@ -53,24 +58,24 @@
           {
             "type": "roll-effect",
             "key": "gaia-force-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "gaia-force-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -81,13 +86,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -32,7 +32,7 @@
         "category": "physical",
         "power": 120,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison 5].</p>",
         "predicate": []
       }
     ],
@@ -41,6 +41,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "effects": [
@@ -54,13 +60,13 @@
           {
             "type": "roll-effect",
             "key": "toxicrash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +77,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

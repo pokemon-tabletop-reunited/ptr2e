@@ -24,26 +24,7 @@
     "traits": [
       "combat"
     ],
-    "actions": [
-      {
-        "name": "Bright Powder",
-        "slug": "bright-powder",
-        "type": "generic",
-        "description": "Trigger: A creature declares an attack on the user.\nEffect: The triggering creature gains -2 ACC Stages for 2 activations.",
-        "traits": [
-          "Combat"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "trigger": "A creature declares an attack on the user."
-        },
-        "img": "icons/svg/explosion.svg"
-      }
-    ],
+    "actions": [],
     "description": "<p>Attacks directed towards the user suffer a -10% accuracy penalty.</p>",
     "slug": "bright-powder",
     "quantity": 1,
@@ -59,6 +40,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "fZxtxgw3k8IDHhY1",
@@ -75,10 +62,10 @@
             "key": "attack-accuracy-percentile",
             "value": -10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -89,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -116,5 +98,5 @@
       }
     }
   ],
-  "folder": "V4skAU6G3OH5fXad"
+  "folder": "6VDJBcrqVDh5bYtA"
 }

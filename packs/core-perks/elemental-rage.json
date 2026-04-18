@@ -16,17 +16,12 @@
         "img": "systems/ptr2e/img/icons/physical_icon.png",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "hidden": true,
-        "variant": null
+        "hidden": true
       }
     ],
     "description": "<p>This perk confers the [Adaptable] trait to your Rage move.</p>",
@@ -40,7 +35,9 @@
       {
         "connected": [
           "berserk",
-          "frenzied-assault"
+          "frenzied-assault",
+          "berserkergang",
+          "gut-punch"
         ],
         "config": {
           "alpha": null,
@@ -59,16 +56,21 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Berserker"
-    }
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "JuIFxWj59MwTL1Og",
   "img": "systems/ptr2e/img/icons/physical_icon.png",

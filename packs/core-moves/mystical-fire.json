@@ -10,7 +10,7 @@
         "name": "Mystical Fire",
         "type": "attack",
         "traits": [
-          "pp-updated"
+          "pulse"
         ],
         "range": {
           "target": "creature",
@@ -27,14 +27,24 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: On hit, the target loses -1 SPATK stage for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, the target loses -1 SPATK stage for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "BDnwHRVgFCVHnzo8",
   "effects": [
@@ -48,30 +58,30 @@
           {
             "type": "roll-effect",
             "key": "mystical-fire-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -83,12 +93,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.BDnwHRVgFCVHnzo8.ActiveEffect.BFyiNFJo2DGQgIJQ",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1732232133239,
         "modifiedTime": 1732232161135,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

@@ -4,13 +4,13 @@
   "_id": "iWdcVdEe3eMHGjUu",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "box-in",
     "actions": [
       {
         "name": "Box In",
         "slug": "box-in",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "traits": [],
         "range": {
           "target": "creature",
@@ -21,38 +21,80 @@
           "activation": "complex",
           "powerPoints": 5
         },
-        "variant": null,
         "types": [
           "psychic"
         ],
         "category": "special",
         "power": 20,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: This attack's Power is dependent on the target's Size Category, ranging from 20 to 140.</p><blockquote><p>Damage Formula: Power = min(140, targetCatMod*20+20)</p></blockquote>"
+        "description": "<p>Effect: This attack's Power is dependent on the target's Size Category, ranging from 20 to 140.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721260610434,
-    "modifiedTime": 1721261432358,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Box In",
+      "type": "passive",
+      "_id": "RWoOCmigMhLceiZI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "box-in-attack",
+            "value": "max(20,min(140,@target.system.details.size.heightClass*20))",
+            "predicate": [],
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 5
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1743514353940,
+        "modifiedTime": 1767160781229,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

@@ -13,23 +13,20 @@
     "diet": [
       "nullivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 6
-        },
-        {
-          "type": "swim",
-          "value": 6
-        },
-        {
-          "type": "flight",
-          "value": 9
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 6
+      },
+      {
+        "type": "swim",
+        "value": 6
+      },
+      {
+        "type": "flight",
+        "value": 9
+      }
+    ],
     "traits": [
       "pokemon",
       "bipedal",
@@ -48,10 +45,10 @@
       ],
       "basic": [
         {
-          "slug": "battery"
+          "slug": "analytic"
         },
         {
-          "slug": "analytic"
+          "slug": "elemental-charge"
         }
       ],
       "advanced": [
@@ -59,15 +56,15 @@
           "slug": "elementalist"
         },
         {
-          "slug": "regression-field"
+          "slug": "natural-cure"
         }
       ],
       "master": [
         {
-          "slug": "elemental-charge"
+          "slug": "self-sufficient"
         },
         {
-          "slug": "perfectionist"
+          "slug": "regression-field"
         }
       ]
     },
@@ -491,7 +488,11 @@
                 "level": null,
                 "knownMove": null
               },
-              "evolutions": []
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
             }
           ],
           "details": {
@@ -499,11 +500,19 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.wi4WJ5XlGJO7eMA9",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "city"
@@ -512,7 +521,14 @@
       "version": null,
       "previous": null
     },
-    "genderRatio": -1
+    "genderRatio": -1,
+    "publication": {
+      "source": "PTR 2e Core - Johto Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "_id": "bfUNgdPtQbCWvOm1",
   "effects": []

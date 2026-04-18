@@ -9,9 +9,7 @@
         "slug": "helping-hand",
         "name": "Helping Hand",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,22 +17,30 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 4
+          "powerPoints": 2
         },
         "category": "status",
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The targets gains @Affliction[boosted] 2 and @Affliction[resolved] 2.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: The targets gains @Affliction[boosted 2] and @Affliction[resolved 2].</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "B",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "losiXPVUcTy72boW",
   "effects": [
@@ -48,24 +54,26 @@
           {
             "type": "roll-effect",
             "key": "helping-hand-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.boostedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.boostedcondition",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "helping-hand-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.resolvedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,13 +84,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

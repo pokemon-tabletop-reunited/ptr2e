@@ -19,5 +19,11 @@ export { default as TokenAlterationsChangeSystem } from "./token-alterations.ts"
 export { default as StatsAlterationChangeSystem } from "./stats-alteration.ts";
 export { default as AuraChangeSystem } from "./aura.ts";
 export { default as TokenTagChangeSystem } from "./token-tag/token-tag.ts";
+export { default as CreateClockChangeSystem } from "./create-clock.ts";
+export { default as IncrementClockChangeSystem } from "./increment-clock.ts";
+export { default as ApplyTickChangeSystem } from "./apply-tick.ts";
+export { default as EffectAlterationChangeSystem } from "./effect-alteration.ts";
+export { default as MoveVariantChangeSystem } from "./move-variant.ts";
+export { FLAT_MODIFIER_TYPE_SUFFIXES, FLAT_MODIFIER_METHOD_SUFFIXES } from "./flat-modifier.ts";
 export type * from "./choice-set/change-model.ts";
 export type * from "./data.ts";

@@ -10,7 +10,7 @@ on:
 
 jobs:
     wiki-sync:
-        if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
+        if: github.event.repository.fork == false && github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
         runs-on: ubuntu-latest
 
         steps:
@@ -32,6 +32,16 @@ jobs:
             - name: Create Wiki Pages
               run: |
                   npm ci
+                  rm -r ptr2e-wiki/data/abilities/**/*.md
+                  rm -r ptr2e-wiki/data/items/consumables/**/*.md
+                  rm -r ptr2e-wiki/data/items/equipment/**/*.md
+                  rm -r ptr2e-wiki/data/items/gear/**/*.md
+                  rm -r ptr2e-wiki/data/items/weapons/**/*.md
+                  rm -r ptr2e-wiki/data/lists/**/*.md
+                  rm -r ptr2e-wiki/data/moves/**/*.md
+                  rm -r ptr2e-wiki/data/perks/**/*.md
+                  rm -r ptr2e-wiki/data/species/**/*.md
+                  rm -r ptr2e-wiki/data/traits/**/*.md
                   npm run sync:wiki
 
             - name: Git Push Wiki Pages

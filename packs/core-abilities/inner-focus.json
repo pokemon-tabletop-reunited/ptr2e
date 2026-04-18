@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is unaffected by [Flinch X] and [Flinch Chance X] effects, and [Social] Ability effects.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user is unaffected by [Flinch X] and [Flinch Chance X] effects, and [Social] Ability effects.</p>",
+    "description": "<p>Effect: The user is unaffected by @Trait[social] effects and cannot be afflicted with @Affliction[delay].</p>",
     "traits": [
       "defensive"
     ],
@@ -30,8 +31,81 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "SaEKwKaz49q3qV4M",
-  "effects": []
+  "effects": [
+    {
+      "name": "Inner Focus",
+      "type": "passive",
+      "_id": "3ps0MZirwlqQfd5M",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "trait:social",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "ignored": false,
+            "suboptions": [],
+            "state": true,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:delay",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "ignored": false,
+            "suboptions": [],
+            "state": true,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1773871502044,
+        "modifiedTime": 1773871646186,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

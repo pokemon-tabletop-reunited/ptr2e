@@ -1,0 +1,104 @@
+{
+  "name": "Behind Every Blade of Grass",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Behind Every Blade of Grass",
+        "slug": "behind-every-blade-of-grass-generic",
+        "description": "<p>Effect: The user gains a @Trait[consumable] Item following standard out-of-Combat IP procurement rules, spending IP as necessary.</p>",
+        "traits": [
+          "ninja",
+          "flinch-20",
+          "manipulate"
+        ],
+        "type": "generic",
+        "img": "icons/consumables/plants/grass-bundle-green.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Behind Every Blade of Grass",
+        "slug": "behind-every-blade-of-grass-exploration",
+        "description": "<p>Trigger: The current Combat ends.</p><p>Effect: The user may make a Luck Roll, recovering 1/3 IP per DoS.</p>",
+        "traits": [
+          "ninja"
+        ],
+        "type": "exploration",
+        "img": "icons/consumables/plants/grass-bundle-green.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "behind-every-blade-of-grass",
+    "description": "<p>The user spends 1 fewer IP on @Trait[ninja] items and can purchase @Trait[ninja] items one Rarity higher using IP.</p><p>The user can spend 3 PP as a @Trait[manipulate] @Trait[flinch-20] Simple Generic Action to spend IP and obtain a @Trait[consumable] using the standard out-of-Combat IP procurement rules, even during Combat.</p><p>At the end of Combat, the user may make a Luck Roll, recovering 1/3 IP per DoS.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ace",
+      "trait:ninja",
+      {
+        "gte": [
+          "{actor|skills.navigate.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.survival.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 178,
+        "y": 41,
+        "connected": [
+          "nothing-is-true",
+          "minor-buff-66"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/consumables/plants/grass-bundle-green.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "nvbP95mP7UxbnaUf"
+}

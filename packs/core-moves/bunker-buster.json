@@ -10,12 +10,10 @@
         "name": "Bunker Buster",
         "slug": "bunker-buster",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
         "traits": [
-          "pierce",
           "explode",
-          "missile",
-          "flinch-5"
+          "missile"
         ],
         "range": {
           "target": "creature",
@@ -24,7 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 4
         },
         "variant": "bunker-buster",
         "types": [
@@ -33,38 +31,8 @@
         "category": "physical",
         "power": 40,
         "accuracy": 100,
-        "predicate": []
-      },
-      {
-        "name": "Bunker Buster (Shield)",
-        "slug": "bunker-buster-shield",
-        "type": "attack",
-        "img": "systems/ptr2e/img/svg/rock_icon.svg",
-        "traits": [
-          "pierce",
-          "explode",
-          "missile",
-          "flinch-5"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 6,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "trigger": "<p>The target has a [Shield] effect when this attack is declared.</p>"
-        },
-        "variant": "bunker-buster",
-        "types": [
-          "rock"
-        ],
-        "category": "physical",
-        "power": 120,
-        "accuracy": 100,
-        "description": "<p>Trigger: The target has a [Shield] effect when this attack is declared.</p><p>Effect: This attack's Power is tripled, and on hit, the target is Flinched.</p>",
-        "predicate": []
+        "predicate": [],
+        "description": "<p>Trigger: The target has a [Shield] effect when this attack is declared.</p><p>Effect: This attack's Power is tripled, and on hit, the target is Delayed by 50% and they lose @Tick[-2].</p>"
       }
     ],
     "grade": "B",
@@ -72,7 +40,109 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Bunker Buster",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "bunker-buster-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [
+              "target:state:shielded"
+            ],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "priority": null,
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 50,
+                "method": 5
+              }
+            ],
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bunker-buster-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [
+              "target:state:shielded"
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "bunker-buster-attack",
+            "value": 80,
+            "predicate": [
+              "target:state:shielded"
+            ],
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "_stats": {
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": null,
+        "modifiedTime": 1767158544705,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0
+    }
+  ]
 }

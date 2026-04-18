@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "dash",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -21,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 20,
@@ -29,16 +28,77 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p><p><blockquote>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p>",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "yoBSCEEZtzbZESMt",
-  "effects": []
+  "effects": [
+    {
+      "name": "Power Trip",
+      "type": "passive",
+      "_id": "SGs4pJyAdVY8y4Ah",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "power-trip-attack",
+            "value": "20 * (max(0,@actor.system.attributes.atk.stage)+max(0,@actor.system.attributes.def.stage)+max(0,@actor.system.attributes.spa.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.attributes.spd.stage)+max(0,@actor.system.battleStats.accuracy.stage)+max(0,@actor.system.battleStats.evasion.stage)+max(0,round(@actor.system.battleStats.critRate.stage*1.5)))",
+            "predicate": [],
+            "label": "Power Trip",
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1740187535596,
+        "modifiedTime": 1767161279796,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

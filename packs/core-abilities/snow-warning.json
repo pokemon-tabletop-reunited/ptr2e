@@ -7,25 +7,47 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Snow Warning",
         "slug": "snow-warning",
         "type": "generic",
         "cost": {
           "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Snowscape.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Snow Warning (Extend)",
+        "slug": "snow-warning-extend",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
           "powerPoints": 2,
-          "trigger": "<p>The user declares Snowscape.</p>"
+          "trigger": "<p>The user declares Drought.</p>"
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares Snowscape.</p><p>Effect: The set Snowy Weather has its duration increased by +2 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares Snowscape.</p><p>Effect: Connection - Snowscape. The set Snowy Weather has its duration increased by +2 Rounds.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Snowscape. The user freely uses Snowscape. When the user sets Snowy Weather, they may spend 2 PP to increase its duration by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather",
@@ -35,6 +57,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "CNKfFD2LtrnuqHQB",
@@ -51,44 +80,41 @@
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.KQ8pNG4ebggQwd8k",
             "predicate": [
-              "item:ability:snow-warning:active"
+              "ability:snow-warning:active"
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -100,12 +126,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737420585643,
-        "modifiedTime": 1739622009361,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754321581939,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

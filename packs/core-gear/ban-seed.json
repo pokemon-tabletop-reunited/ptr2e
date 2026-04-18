@@ -1,11 +1,11 @@
 {
   "name": "Ban Seed",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
   "type": "consumable",
   "system": {
     "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 90
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
@@ -26,38 +32,110 @@
       "combat",
       "consumable",
       "natural",
-      "fling",
       "seed",
-      "held",
-      "stash",
-      "stack-3",
-      "fling"
+      "stack-3"
     ],
-    "description": "On hit, the target becomes @Affliction[disabled] 5.",
+    "description": "<p>On hit, the target becomes @Affliction[disabled 5].</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "ban-seed",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Ban Seed",
+        "slug": "ban-seed",
+        "description": "<p>On hit, the target becomes @Affliction[disabled 5].</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "natural",
+          "seed",
+          "stack-3"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": [],
+        "accuracy": 90
+      }
+    ]
   },
   "_id": "Pt9qUWpZlKGBztlq",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!Pt9qUWpZlKGBztlq"
+  "effects": [
+    {
+      "name": "Ban Seed",
+      "type": "passive",
+      "_id": "tW5Qe45vRcCQ1HfE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ban-seed-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758758793858,
+        "modifiedTime": 1758758809829,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "4MbEHvhwmG5DYTkB"
 }

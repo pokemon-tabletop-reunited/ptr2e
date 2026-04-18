@@ -1,99 +1,109 @@
-<section class="{{cssClass}}" id="{{cssId}}" data-tab="{{tabName}}">
-    <h2>{{localize 'SETTINGS.InfoHeader'}}</h2>
-    <ul id="game-details">
-        <li class="version">Foundry Virtual Tabletop
-            <span>
-                {{#if coreUpdate}}
-                    <i class="notification-pip update fas fa-exclamation-circle" data-action="core-update" data-tooltip="{{ coreUpdate }}"></i>
-                {{/if}}
-                {{ versionDisplay }}
-            </span>
-        </li>
-        <li class="build">{{localize "MODMANAGE.Build"}} <span>{{ release.build }}</span></li>
-        <hr />
-        <li class="system flexrow">
-            <span class="system-title">{{system.title}}</span>
-            <span class="system-info">
-                {{#if systemUpdate}}
-                <i class="notification-pip update fas fa-exclamation-circle" data-action="system-update" data-tooltip="{{ systemUpdate }}"></i>
-                {{/if}}
-                {{system.version}}
-            </span>
-        </li>
-        <li class="modules">{{localize "MODMANAGE.FilterActive"}} <span>{{ modules }}</span></li>
-        {{#if isDemo}}
-        <li class="demo">{{ localize "SETTINGS.DemoMode" }}</li>
-        {{/if}}
-    </ul>
-
-    <h2>{{localize 'SETTINGS.SettingsHeader'}}</h2>
-    <div id="settings-game">
-        <button data-action="configure">
-            <i class="fas fa-cogs"></i> {{localize 'SETTINGS.Configure'}}
-        </button>
-        <button data-action="controls">
-            <i class="fas fa-gamepad"></i> {{localize 'SETTINGS.Keybindings'}}
-        </button>
-        <button data-action="modules">
-            <i class="fas fa-cube"></i>
-            {{#if canConfigure}}{{localize 'SETTINGS.ManageModules'}}
-            {{else}}{{localize "SETTINGS.ViewModules"}}
-            {{/if}}
-        </button>
-        {{#if canEditWorld }}
-        <button data-action="world">
-            <i class="fas fa-globe"></i> {{localize 'SETUP.WorldEdit'}}
-        </button>
-        {{/if}}
-        {{#if canManagePlayers}}
-        <button data-action="players">
-            <i class="fas fa-users"></i> {{localize 'SETTINGS.Players'}}
-        </button>
-        {{/if}}
-        <button data-action="tours">
-            <i class="fas fa-person-hiking"></i> {{localize 'SETTINGS.Tours'}}
-        </button>
-        <button data-action="compendium-browser">
-            <i class="fas fa-magnifying-glass"></i> {{localize "PTR2E.CompendiumBrowser.Title"}}
-        </button>
-        <button data-action="tutor-list">
-            <i class="fas fa-list"></i> {{localize 'SETTINGS.TutorList'}}
-        </button>
-        {{#if (devMode)}}
-          <button data-action="github-app">
-              <i class="fa-brands fa-github"></i> {{localize 'SETTINGS.Github'}}
-          </button>
-        {{/if}}
+<section class="info flexcol">
+    <h1 class="title">Foundry Virtual Tabletop</h1>
+    <p class="subtitle version">{{versionDisplay}}</p>
+    {{#if isDemo}}
+    <p class="subtitle demo">{{localize "SIDEBAR.SETTINGS.LABELS.Demo"}}</p>
+    {{/if}}
+    <div class="build">
+        <span class="label">{{localize "SIDEBAR.SETTINGS.LABELS.Build"}}</span>
+        <span class="value">
+            {{~release.build~}}
+            {{~#if coreUpdate}}
+            <a class="notification-pip active fa-solid fa-circle-exclamation" data-tooltip-text="{{coreUpdate}}"
+               data-action="notifyUpdate" data-update="core"></a>
+            {{/if~}}
+        </span>
     </div>
-
-    <h2>{{localize 'SETTINGS.DocsHeader'}}</h2>
-    <div id="settings-documentation">
-        <button data-action="support">
-            <i class="fas fa-hands-helping"></i> {{localize 'SETTINGS.Support'}}
-            {{#if issues}}({{issues}}){{/if}}
-        </button>
-        <button data-action="docs">
-            <i class="fas fa-book"></i> {{localize 'SETTINGS.Docs'}}
-        </button>
-        <button data-action="wiki">
-            <i class="fas fa-landmark"></i> {{localize 'SETTINGS.Wiki'}}
-        </button>
+    <div class="system">
+        <span class="label">{{system.title}}</span>
+        <span class="value">
+            {{~system.version~}}
+            {{~#if systemUpdate}}
+            <a class="notification-pip active fa-solid fa-circle-exclamation" data-tooltip-text="{{systemUpdate}}"
+               data-action="notifyUpdate" data-update="system"></a>
+            {{/if~}}
+        </span>
     </div>
-
-    <h2>{{localize 'SETTINGS.AccessHeader'}}</h2>
-    <div id="settings-access">
-        {{#if user.isGM }}
-        <button data-action="invitations">
-            <i class="fas fa-wifi"></i> {{localize 'SETTINGS.Invite'}}
-        </button>
-        {{/if}}
-        <button data-action="logout">
-            <i class="fas fa-door-closed"></i> {{localize 'SETTINGS.Logout'}}
-        </button>
-        {{#if canReturnSetup}}
-        <button data-action="setup">
-            <i class="fas fa-home"></i> {{localize 'GAME.ReturnSetup'}}
-        </button>
-        {{/if}}
+    <div class="modules">
+        <span class="label">{{localize "SIDEBAR.SETTINGS.LABELS.Modules"}}</span>
+        <span class="value">{{modules}}</span>
     </div>
+</section>
+
+<section class="settings flexcol">
+    <h4 class="divider">{{localize "SIDEBAR.SETTINGS.HEADERS.Settings"}}</h4>
+    <button data-action="openApp" data-app="configure">
+        <i class="fa-solid fa-gears"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Configure"}}
+    </button>
+    <button data-action="openApp" data-app="controls">
+        <i class="fa-solid fa-gamepad"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Keybindings"}}
+    </button>
+    <button data-action="openApp" data-app="modules">
+        <i class="fa-solid fa-cube"></i>
+        {{#if canConfigure}}{{localize "SIDEBAR.SETTINGS.ACTIONS.ManageModules"}}
+        {{else}}{{localize "SIDEBAR.SETTINGS.ACTIONS.ViewModules"}}
+        {{/if}}
+    </button>
+    {{#if canEditWorld}}
+    <button data-action="openApp" data-app="world">
+        <i class="fa-solid fa-globe"></i> {{localize "SETUP.WorldEdit"}}
+    </button>
+    {{/if}}
+    {{#if canManagePlayers}}
+    <button data-action="openApp" data-app="players">
+        <i class="fa-solid fa-users"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Players"}}
+    </button>
+    {{/if}}
+    <button data-action="openApp" data-app="tours">
+        <i class="fa-solid fa-person-hiking"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Tours"}}
+    </button>
+</section>
+
+<section class="system-settings flexcol">
+  <h4 class="divider">{{localize "PTR2E.Settings.Sidebar.Header"}}</h4>
+  <button data-action="compendium-browser">
+    <i class="fa-solid fa-magnifying-glass"></i> {{localize "PTR2E.CompendiumBrowser.Title"}}
+  </button>
+  <button data-action="tutor-list">
+    <i class="fa-solid fa-list"></i> {{localize 'SETTINGS.TutorList'}}
+  </button>
+  <button data-action="global-perk-config">
+    <i class="fa-solid fa-list"></i> {{localize 'SETTINGS.GlobalPerkConfig'}}
+  </button>
+  {{#if (devMode)}}
+  <button data-action="github-app">
+    <i class="fa-brands fa-github"></i> {{localize 'SETTINGS.Github'}}
+  </button>
+  {{/if}}
+</section>
+
+<section class="documentation flexcol" data-help-docs>
+    <h4 class="divider">{{localize "SIDEBAR.SETTINGS.HEADERS.Docs"}}</h4>
+    <button data-action="openApp" data-app="support">
+        <i class="fa-solid fa-handshake-angle"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Support"}}
+        {{#if issues}}({{issues}}){{/if}}
+    </button>
+    <a class="button" href="https://foundryvtt.com/kb/" rel="nofollow" target="_blank">
+        <i class="fa-solid fa-book"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Docs"}}
+    </a>
+    <a class="button" href="https://foundryvtt.wiki/" rel="nofollow noopener" target="_blank">
+        <i class="fa-solid fa-landmark"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Wiki"}}
+    </a>
+</section>
+
+<section class="access flexcol">
+    <h4 class="divider">{{localize "SIDEBAR.SETTINGS.HEADERS.Access"}}</h4>
+    {{#if user.isGM }}
+    <button data-action="openApp" data-app="invitations">
+        <i class="fa-solid fa-wifi"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Invite"}}
+    </button>
+    {{/if}}
+    <button data-action="openApp" data-app="logout">
+        <i class="fa-solid fa-door-closed"></i> {{localize "SIDEBAR.SETTINGS.ACTIONS.Logout"}}
+    </button>
+    {{#if canReturnSetup}}
+    <button data-action="openApp" data-app="setup">
+        <i class="fa-solid fa-house"></i> {{localize "GAME.ReturnSetup"}}
+    </button>
+    {{/if}}
 </section>

@@ -2,7 +2,7 @@
   "name": "Mana Cannon",
   "type": "move",
   "_id": "fAOqThi2wPLSKPY2",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "mana-cannon",
     "actions": [
@@ -10,34 +10,44 @@
         "name": "Mana Cannon",
         "slug": "mana-cannon",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "traits": [
-          "blast-1",
-          "pulse"
+          "pulse",
+          "arcane",
+          "adaptable"
         ],
         "range": {
           "target": "blast",
-          "distance": 12,
+          "distance": 15,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 7
         },
         "types": [
-          "fairy"
+          "untyped"
         ],
         "category": "special",
-        "power": 105,
+        "power": 110,
         "accuracy": 85,
-        "description": "<p>Effect: On hit, the user has a 10% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>"
+        "description": "<p>Effect: On hit, the user has a 20% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "grade": "B",
+    "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "<p>Effect: On hit, the user has a 20% chance of increasing their SPATK Stage by +1 for 5 Activations.</p>"
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -50,13 +60,14 @@
           {
             "type": "roll-effect",
             "key": "mana-cannon-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
             "predicate": [],
-            "chance": 10,
+            "chance": 20,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +78,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -87,10 +93,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.0",
+        "systemVersion": "1.0.7.beta",
         "createdTime": 1736717521543,
-        "modifiedTime": 1736717561000,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1740849426772,
+        "lastModifiedBy": "01onCaJSVMVOgMDI"
       }
     }
   ]

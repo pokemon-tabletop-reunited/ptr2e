@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "pulse",
-          "missile",
-          "pp-updated"
+          "missile"
         ],
         "range": {
           "target": "creature",
@@ -21,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 5
         },
         "category": "special",
         "power": 40,
@@ -29,16 +28,77 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: This attack is more powerful the faster the user is compared to the target, ranging from 40 to 160.</p><p><blockquote>Damage Formula: Power = min(160, (20*UserSPD / TargetSPD) + 40)</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack is more powerful the faster the user is compared to the target, ranging from 40 to 160.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "eMhdr1eKjt0NLcfO",
-  "effects": []
+  "effects": [
+    {
+      "name": "Electro Ball",
+      "type": "passive",
+      "_id": "gn6RsjanbR62xSHt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "electro-ball-attack",
+            "value": "round(min(121,36*max(1,(@actor.system.attributes.spe.final-@target.system.attributes.spe.final)/@target.system.attributes.spe.final)))-1",
+            "predicate": [],
+            "label": "Electro Ball Scaling",
+            "priority": null,
+            "ignored": false,
+            "property": "power",
+            "definition": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1743513488121,
+        "modifiedTime": 1767164215171,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

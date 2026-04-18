@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "pp-updated"
+          "flinch-20",
+          "recoil-1-6"
         ],
         "range": {
           "target": "creature",
@@ -20,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 20,
@@ -28,16 +29,84 @@
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.</p><p><blockquote>Damage Formula: Power = min(20, (200 x UserCurrentHP/UserMaxHP+20))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "C",
+    "traits": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "vLIEAHyewpzlrioS",
-  "effects": []
+  "effects": [
+    {
+      "name": "Shadow Reprisal",
+      "type": "passive",
+      "_id": "QgltErXoRHrh8CZj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "shadow-reprisal-attack",
+            "value": "1.8 * (100-@actor.system.health.percent)",
+            "label": "Shadow Reprisal",
+            "predicate": [],
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Item.48mv2v1fZIB425Wn.ActiveEffect.3Igoq5pxc0DPxQXN",
+        "duplicateSource": null,
+        "coreVersion": "14.359",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1740187281641,
+        "modifiedTime": 1767161813127,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ]
 }

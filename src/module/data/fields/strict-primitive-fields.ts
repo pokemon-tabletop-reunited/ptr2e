@@ -1,3 +1,5 @@
+import { CleanFieldOptions } from "types/foundry/common/data/fields.js";
+
 const { fields } = foundry.data;
 
 /** A `StringField` that does not cast the source value */
@@ -51,8 +53,8 @@ class StrictArrayField<
     }
 
     /** Parent method assumes array-wrapping: pass through unchanged */
-    protected override _cleanType(value: unknown): unknown {
-        return Array.isArray(value) ? super._cleanType(value) : value;
+    protected override _cleanType(value: unknown, options: CleanFieldOptions, _state: unknown): unknown {
+        return Array.isArray(value) ? super._cleanType(value, options, _state) : value;
     }
 
     override initialize(

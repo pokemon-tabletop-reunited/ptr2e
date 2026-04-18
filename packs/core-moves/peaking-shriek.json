@@ -13,9 +13,7 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "sonic",
-          "blast-2",
-          "flinch-3",
-          "pp-updated"
+          "blast-2"
         ],
         "range": {
           "target": "blast",
@@ -37,13 +35,63 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, all valid targets are Flinched.</p>"
+        "description": "<p>Effect: On hit, all valid targets are Delayed by 30%.</p>"
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "D",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Peaking Shriek",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "peaking-shriek-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -30,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Delay 30%",
+                "method": 5
+              }
+            ],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
+      }
+    }
+  ],
   "sort": 7100000,
   "ownership": {
     "default": 0,

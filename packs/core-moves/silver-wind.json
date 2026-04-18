@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "wind",
-          "powder",
-          "pp-updated"
+          "powder"
         ],
         "range": {
           "target": "wide-line",
@@ -39,6 +38,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "Tiyl0SKP24f05kAu",
@@ -53,13 +59,15 @@
           {
             "type": "roll-effect",
             "key": "silver-wind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rMNLqloV5nLmCLrZ",
             "predicate": [],
             "chance": 10,
-            "affects": "target",
-            "mode": 2,
+            "affects": "self",
             "priority": null,
-            "ignored": false
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -70,13 +78,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -88,12 +91,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.3.2.beta",
         "createdTime": 1737320914817,
-        "modifiedTime": 1737320938483,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1747604874427,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

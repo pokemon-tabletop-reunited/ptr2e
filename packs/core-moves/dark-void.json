@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "blast-4",
-          "pp-updated"
+          "blast-4"
         ],
         "range": {
           "target": "blast",
@@ -28,7 +27,7 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 7.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy 7].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -38,6 +37,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "1PokUazkRwGGoiG7",
@@ -52,20 +57,20 @@
           {
             "type": "roll-effect",
             "key": "dark-void-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.nightmarescoitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nightmarescondit",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 7
+                "value": 7,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,13 +81,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

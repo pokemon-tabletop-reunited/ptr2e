@@ -27,13 +27,13 @@ class FolderPTR2e<
 
   get owner(): string {
     if (this.type !== "Actor") return '';
-    if(this.compendium) return '';
+    if(this.inCompendium) return '';
     return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id)?.uuid ?? '';
   }
 
   get ownerActor(): ActorPTR2e | null {
     if (this.type !== "Actor") return null;
-    if(this.compendium) return null;
+    if(this.inCompendium) return null;
     return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id) as unknown as ActorPTR2e | null;
   }
 
@@ -45,7 +45,7 @@ class FolderPTR2e<
 
   get party() {
     if (this.type !== "Actor") return [];
-    if(this.compendium) return [];
+    if(this.inCompendium) return [];
     return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
   }
 
@@ -144,7 +144,8 @@ class FolderPTR2e<
 
   static override createDialog<TDocument extends EnfolderableDocument>(
     data: Record<string, unknown> = {},
-    options:
+    createOptions: {pack?: string} = {},
+    dialogOptions:
       | ({
         parent?: TDocument["parent"] | undefined;
         pack?: CompendiumCollection<TDocument> | null | string;
@@ -155,24 +156,27 @@ class FolderPTR2e<
     const folder = new Folder.implementation(
       foundry.utils.mergeObject(
         {
-          name: Folder.defaultName(),
+          name: Folder.defaultName({pack: createOptions.pack}),
           sorting: "a",
         },
         data
       ),
-      { pack: options.pack}
-    );
+      createOptions
+    ) as FolderPTR2e;
     return new Promise((resolve) => {
-      options.resolve = resolve;
+      dialogOptions.resolve = resolve;
       const position = {
-        top: options.top ?? undefined,
-        left: options.left ?? undefined,
+        top: dialogOptions.top ?? undefined,
+        left: dialogOptions.left ?? undefined,
       }
-      const appOptions = foundry.utils.mergeObject<Partial<FormApplicationOptions>, Partial<foundry.applications.api.DocumentSheetConfiguration>>(options, {
+      const appOptions = foundry.utils.mergeObject<Partial<FormApplicationOptions>, Partial<foundry.applications.api.DocumentSheetConfiguration>>(dialogOptions, {
         document: folder,
         position,
       }, { inplace: false }) as Partial<foundry.applications.api.DocumentSheetConfiguration>;
-      new FolderConfigPTR2e(appOptions).render(true);
+      //@ts-expect-error - Missing foundry types
+      const sheetClasses = foundry.applications.apps.DocumentSheetConfig.getSheetClassesForSubType("Folder", folder.type);
+      const cls = (CONFIG.Folder.sheetClasses?.[sheetClasses?.defaultClass]?.cls || FolderConfigPTR2e) as unknown as typeof FolderConfigPTR2e;
+      new cls(appOptions).render(true);
     });
   }
 }

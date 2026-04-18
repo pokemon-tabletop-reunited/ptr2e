@@ -7,24 +7,18 @@
       {
         "traits": [
           "social",
-          "friendly",
-          "aura",
-          "interrupt-3"
+          "friendly"
         ],
         "name": "Petrify",
         "slug": "petrify",
-        "type": "attack",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>The user enters combat.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "emanation",
-          "distance": 10,
+          "target": "enemy-aura",
+          "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range lose -1 SPD Stage for 5 Activations. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
+        "description": "<p>Effect: All valid creatures in range have -2 default SPD Stages. When an affected creature leaves the range of this effect, they lose -2 SPD Stages for 5 Activations. NEEDS REAUTOMATED.</p>",
         "img": "icons/svg/terror.svg",
         "types": [
           "untyped"
@@ -34,7 +28,7 @@
         "predicate": []
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range lose -1 SPD Stage for 5 Activations. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
+    "description": "<p>Effect: All valid creatures in range have -2 default SPD Stages. When an affected creature leaves the range of this effect, they lose -2 SPD Stages for 5 Activations. NEEDS REAUTOMATED.</p>",
     "traits": [
       "social",
       "friendly",
@@ -44,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "13JbJwxpMrrdRTMm",
@@ -61,21 +61,21 @@
             "value": 10,
             "predicate": [],
             "label": "Petrify Ability",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "petrify-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -86,13 +86,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

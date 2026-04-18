@@ -10,9 +10,7 @@
         "name": "Air Slash",
         "type": "attack",
         "traits": [
-          "sharp",
-          "flinch-chance-3",
-          "pp-updated"
+          "sharp"
         ],
         "range": {
           "target": "creature",
@@ -39,52 +37,57 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "lxpXiXqapEF8GFPC",
   "effects": [
     {
-      "name": "Air Slash",
-      "type": "advancement",
-      "_id": "VrxettEItzXCeva9",
+      "name": "Air Slash (Roll Effect)",
+      "type": "passive",
+      "_id": "XLHPx6oPkaiE2Ije",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
             "key": "air-slash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
+                "value": -30,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Flinch 30%",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
-        "amount": 0
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -98,10 +101,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
-        "createdTime": 1737651928799,
-        "modifiedTime": 1737676628954,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "systemVersion": "1.0.7.beta",
+        "createdTime": 1740921940039,
+        "modifiedTime": 1740922008149,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

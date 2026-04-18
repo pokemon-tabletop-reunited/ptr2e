@@ -10,17 +10,16 @@
         "name": "Grass Knot",
         "type": "attack",
         "traits": [
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 4
         },
         "category": "special",
         "power": 20,
@@ -28,16 +27,77 @@
         "types": [
           "grass"
         ],
-        "description": "<p>Effect: This attack's Power is based on how heavy the target is, ranging from 20 to 140.</p><p><blockquote>Damage Formula: Power = max(140, min(20, TargetWC x 10)))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power is based on how heavy the target is, ranging from 20 to 140.</p>",
+        "img": "systems/ptr2e/img/svg/grass_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "QUfozsylvlJ6LoVT",
-  "effects": []
+  "effects": [
+    {
+      "name": "Grass Knot",
+      "type": "passive",
+      "_id": "rQxfT0bCIPYKpQlV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "grass-knot-attack",
+            "value": "max(20,min(140,@target.system.details.size.weightClass*10))",
+            "predicate": [],
+            "label": "Grass Knot Scaling",
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 5
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.iWdcVdEe3eMHGjUu.ActiveEffect.RWoOCmigMhLceiZI",
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1743515719282,
+        "modifiedTime": 1767160838473,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

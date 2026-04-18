@@ -2,19 +2,21 @@
   "name": "Mana Spear",
   "type": "move",
   "_id": "sgvceQ0swcoPD2ag",
-  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "mana-spear",
     "actions": [
       {
         "name": "Mana Spear",
         "slug": "mana-spear",
         "type": "attack",
-        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "traits": [
           "sharp",
           "pulse",
-          "missile"
+          "missile",
+          "adaptable",
+          "arcane"
         ],
         "range": {
           "target": "creature",
@@ -26,17 +28,28 @@
           "powerPoints": 3
         },
         "types": [
-          "fairy"
+          "untyped"
         ],
         "category": "special",
         "power": 80,
         "accuracy": 95,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter 5].</p>",
         "predicate": []
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "effects": [
     {
@@ -49,13 +62,14 @@
           {
             "type": "roll-effect",
             "key": "mana-spear-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -66,13 +80,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

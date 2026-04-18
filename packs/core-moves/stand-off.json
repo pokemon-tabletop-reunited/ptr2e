@@ -9,9 +9,7 @@
         "slug": "stand-off",
         "name": "Stand Off",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 20,
@@ -25,7 +23,7 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: The target gains the @Affliction[duel] 5.</p>",
+        "description": "<p>Effect: The target gains the @Affliction[duel 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -35,6 +33,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "MBgMy5w6O5j5Ux9Q",
@@ -49,14 +53,14 @@
           {
             "type": "roll-effect",
             "key": "stand-off-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.duelconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.duelcondition000",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +71,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

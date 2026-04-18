@@ -1,4 +1,5 @@
 <content>
+  {{#if accuracy}}
     <header>
         <small>Accuracy Roll</small>
         {{#with accuracy.context}}
@@ -10,19 +11,21 @@
     </header>
     <main>
         <figure>
-            <code>@accuracyRoll &le; <br>&#40;@moveAccuracy &plus; @otherModifiers&#41;<br> &times; @adjustedStages</code>
+            <code>@accuracyRoll &le; <br>&#40;@moveAccuracy &plus; @otherModifiers&#41;<br> &times; @adjustedStages &plus; @flatModifier</code>
         </figure>
         <figure>
             {{#with accuracy.context}}
-                <code>{{accuracyRoll}} &le; &#40;{{moveAccuracy}} &times; {{stageModifier}} &times; {{otherModifiers}}&#41;</code>
+                <code>{{accuracyRoll}} &le; &#40;{{moveAccuracy}} &times; {{percentileModifier}}&#41; &times; {{stageModifier}} &plus; {{otherModifiers}}</code>
             {{/with}}
         </figure>
         {{#with accuracy.context}}
             {{#if accuracyRoll}}{{> variable label="PTR2E.Status.AccuracyRoll.Label" hint="PTR2E.Status.AccuracyRoll.Hint" value=accuracyRoll}}{{/if}}
             {{#if moveAccuracy}}{{> variable label="PTR2E.Status.MoveAccuracy.Label" hint="PTR2E.Status.MoveAccuracy.Hint" value=moveAccuracy}}{{/if}}
+            {{#if percentileModifier}}{{> variable label="PTR2E.Status.AccuracyPercentileMod.Label" hint="PTR2E.Status.AccuracyPercentileMod.Hint" value=percentileModifier}}{{/if}}
             {{#if (isdefined adjustedStages)}}{{> variable label="PTR2E.Status.AdjustedStages.Label" hint="PTR2E.Status.AdjustedStages.Hint" value=adjustedStages division="3" value2=stageModifier}}{{/if}}
-            {{#if accuracyModifier}}
-                {{#each accuracyModifier}}
+            {{#if otherModifiers}}{{> variable label="PTR2E.Status.AccuracyFlatMod.Label" hint="PTR2E.Status.AccuracyFlatMod.Hint" value=otherModifiers}}{{/if}}
+            {{#if accuracyModifiers}}
+                {{#each accuracyModifiers}}
                     {{#if label}}
                     {{> variable label=label hint=hint value=value}}
                     {{else}}
@@ -60,6 +63,18 @@
             {{#unless (is accuracy.category "miss")}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
         </footer>
     {{/if}}
+  {{else}}
+    <main>
+        <p>No accuracy roll - Auto hit!</p>
+    </main>
+    <footer>
+        {{#if (is hit "critical")}}
+            {{> control id="hit" label="PTR2E.Status.ChangeToHit"}}
+        {{else}}
+            {{> control id="critical" label="PTR2E.Status.ChangeToCritical"}}
+        {{/if}}
+    </footer>
+  {{/if}}
 </content>
 
 {{#*inline "control"}}

@@ -17,7 +17,7 @@ export class FoldersTour extends PTRTour {
       case "create-dialog": {
         await this.createDialog();
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
@@ -48,10 +48,9 @@ export class FoldersTour extends PTRTour {
             }
           }
         ])
-
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
         break;
@@ -82,13 +81,13 @@ export class FoldersTour extends PTRTour {
           }
         ])
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
       case "opened-party-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -114,12 +113,12 @@ export class FoldersTour extends PTRTour {
 
         await folder.renderPartySheet();
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         break;
       }
       case "organize-party": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -146,7 +145,7 @@ export class FoldersTour extends PTRTour {
         const sheet = await folder.renderPartySheet();
         sheet?.changeTab("party", "sheet");
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         break;
       }
       case "add-party-members": {
@@ -176,7 +175,7 @@ export class FoldersTour extends PTRTour {
         ])
 
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
         break;
@@ -207,17 +206,16 @@ export class FoldersTour extends PTRTour {
             }
           }
         ])
-
         await dialog.render({ parts: ["members"] })
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
         break;
       }
       case "open-team-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -242,13 +240,13 @@ export class FoldersTour extends PTRTour {
         ])
 
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
       case "opened-team-sheet": {
         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-        
+
         await Actor.updateDocuments([
           {
             _id: tourSan.id,
@@ -274,7 +272,7 @@ export class FoldersTour extends PTRTour {
 
         await folder.renderTeamSheet();
         //@ts-expect-error - Bypass protected property
-        await ui.actors._render(true)
+        ui.sidebar.changeTab("actors", "primary")
         await this.delay(250)
         break;
       }
@@ -354,13 +352,13 @@ export class FoldersTour extends PTRTour {
 
   protected createDialog() {
     CONFIG.PTR.Folder.documentClass.createDialog(
-      { type: "Actor" },
+      { type: "Actor" }, {},
       {
         top: $('[data-tab="actors"] button.create-folder')[0].offsetTop,
         left:
           window.innerWidth -
           310 -
-          CONFIG.PTR.Folder.sheetClasses.folder.DEFAULT_OPTIONS.position.width,
+          (CONFIG.PTR.Folder.sheetClass.DEFAULT_OPTIONS.position!.width as number),
       }
     );
     return this.delay(150);
@@ -374,7 +372,7 @@ export class FoldersTour extends PTRTour {
   protected openTourSanDialog(folder: FolderPTR2e = game.folders.get("toursantmpfolder") as FolderPTR2e) {
     const li = htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']");
     const r = li?.getBoundingClientRect();
-    const context = r ? { document: folder, position: { top: r.top, left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10 } } : { document: folder };
+    const context = r ? { document: folder, position: { top: r.top, left: r.left - (FolderConfigPTR2e.DEFAULT_OPTIONS.position!.width as number) - 10 } } : { document: folder };
     return new FolderConfigPTR2e(context).render(true);
   }
 

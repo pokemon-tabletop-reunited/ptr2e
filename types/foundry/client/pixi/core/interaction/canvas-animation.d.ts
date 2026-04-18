@@ -31,7 +31,7 @@ interface CanvasAnimationOptions<TObject extends PIXI.DisplayObject = PIXI.Displ
      */
     easing?: Function | string;
     /** A callback function which fires after every frame */
-    ontick?: (frame: number, data: CanvasAnimationData) => void;
+    ontick?: (frame: number, animation: CanvasAnimationData, data?: TokenAnimationData) => void;
 }
 
 interface CanvasAnimationData extends CanvasAnimationOptions {

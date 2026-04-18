@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "sharp",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -29,94 +28,7 @@
         "types": [
           "bug"
         ],
-        "description": "<p>Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, @Affliction[fainted], combat ends or an item is used on the user.</p>",
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
-      },
-      {
-        "slug": "fury-cutter-1",
-        "name": "Fury Cutter 1",
-        "type": "attack",
-        "traits": [
-          "sharp",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3
-        },
-        "category": "physical",
-        "power": 80,
-        "accuracy": 95,
-        "types": [
-          "bug"
-        ],
-        "description": "<p>Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, @Affliction[fainted], combat ends or an item is used on the user.</p>",
-        "variant": "fury-cutter",
-        "img": "systems/ptr2e/img/svg/bug_icon.svg",
-        "predicate": []
-      },
-      {
-        "slug": "fury-cutter-2",
-        "name": "Fury Cutter 2",
-        "type": "attack",
-        "traits": [
-          "sharp",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2
-        },
-        "category": "physical",
-        "power": 120,
-        "accuracy": 95,
-        "types": [
-          "bug"
-        ],
-        "description": "<p>Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, @Affliction[fainted], combat ends or an item is used on the user.</p>",
-        "variant": "fury-cutter",
-        "img": "systems/ptr2e/img/svg/bug_icon.svg",
-        "predicate": []
-      },
-      {
-        "slug": "fury-cutter-3",
-        "name": "Fury Cutter 3",
-        "type": "attack",
-        "traits": [
-          "sharp",
-          "contact",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 2
-        },
-        "category": "physical",
-        "power": 160,
-        "accuracy": 95,
-        "types": [
-          "bug"
-        ],
-        "description": "<p>Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, @Affliction[fainted], combat ends or an item is used on the user.</p>",
-        "variant": "fury-cutter",
+        "description": "<p>Effect: For each consecutive time this attack hits after the first, this Attack's Power increases by 100% up to a maximum Power of 160, with this progress tracked by the Clock named for this Attack.</p><p>This Clock resets if the user misses with this Attack, does not use this Attack during their Activation, leaves combat, or gains @Affliction[fainted].</p>",
         "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "predicate": []
       }
@@ -126,8 +38,106 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ZKLifoB2o3zYLOwK",
-  "effects": []
+  "effects": [
+    {
+      "name": "Fury Cutter",
+      "type": "passive",
+      "_id": "f1oJQofP03ulohiF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "furycutterClockU",
+            "value": 0,
+            "predicate": [],
+            "max": 3,
+            "color": "#91c12f",
+            "private": false,
+            "label": "Fury Cutter",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fury-cutter",
+            "value": "40*@actor.clocks.furycutterClockU",
+            "predicate": [],
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fury-cutter-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
+            "predicate": [
+              {
+                "not": "actor:clocks:fury-cutter:value:3"
+              }
+            ],
+            "label": "Fury Cutter Clock",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.key",
+                "value": "furycutterClockU",
+                "method": 5
+              },
+              {
+                "property": "",
+                "value": 0,
+                "method": 2
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1766452351033,
+        "modifiedTime": 1767157008104,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

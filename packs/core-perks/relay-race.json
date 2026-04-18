@@ -7,8 +7,51 @@
       "version": 0.109,
       "previous": null
     },
-    "actions": [],
-    "description": "<p>You learn and are able to use Baton Pass on behalf of your Pokemon, switching them out as if they had used the Move themselves.<br><br>Connection: Baton Pass</p>",
+    "actions": [
+      {
+        "name": "Relay Race",
+        "slug": "relay-race",
+        "description": "<p>Trigger: The user targets a creature with @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} or the Recall effect of \"Projectile Entry\".</p><p>Effect: The user freely uses @UUID[Compendium.ptr2e.core-perks.Item.jdQ27YKL5LkVTATx.Actions.baton-relay]{Baton Pass (Relay)}, targeting the original triggering target.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": [
+          "interrupt",
+          "flinch-25"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        }
+      },
+      {
+        "slug": "baton-relay",
+        "name": "Baton Pass (Relay)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "ally",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The target leaves Combat (as per @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall}) and the user designates a creature on their Team, who then enters Combat (as per @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}). The designated ally gains the user’s @Trait[stage-change] effects, @Trait[pseudo-affliction]s, and other beneficial effects.</p><p>Restriction: This Attack can only target creatures that are part of the user’s Team.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
+      }
+    ],
+    "description": "<p>Connection: @UUID[Compendium.ptr2e.core-moves.OhO8s2Gaw1AAnuJl]{Baton Pass}</p><p>The user can use @UUID[Compendium.ptr2e.core-perks.Item.jdQ27YKL5LkVTATx.Actions.baton-relay]{Baton Pass (Relay)}. The user can spend @PP[-2] at @Trait[interrupt] and @Trait[flinch-25] to freely use @UUID[Compendium.ptr2e.core-perks.Item.jdQ27YKL5LkVTATx.Actions.baton-relay]{Baton Pass (Relay)} on a creature they target with @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} or the Recall effect of \"Projectile Entry\".</p>",
     "traits": [],
     "prerequisites": [
       "trait:trainer",
@@ -18,22 +61,19 @@
     "slug": "relay-race",
     "nodes": [
       {
+        "x": 16,
+        "y": 121,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "emergency-retreat"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 16,
-        "y": 121,
         "tier": null
       }
     ],
@@ -43,8 +83,16 @@
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": ""
-    }
+      "archetype": "juggler"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
   "effects": [
@@ -62,12 +110,11 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -78,24 +125,25 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -107,13 +155,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1737392260800,
         "modifiedTime": 1737392301952,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "_id": "jdQ27YKL5LkVTATx"

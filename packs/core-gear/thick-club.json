@@ -1,15 +1,15 @@
 {
   "name": "Thick Club",
-  "img": "systems/ptr2e/img/item-icons/thick club.webp",
+  "img": "systems/ptr2e/img/item-icons/thick%20club.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "accessory",
+      "slot": "held",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -17,7 +17,13 @@
     "fling": {
       "type": "untyped",
       "power": null,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -40,21 +46,17 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "complex"
         },
-        "variant": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has their Base ATK increased by 100%.",
-    "slug": null,
-    "container": null,
+    "description": "<p>Effect: @UUID[Compendium.ptr2e.core-species.2cvIGjbnuAQvx1Qx]{Cubone}, @UUID[Compendium.ptr2e.core-species.wvyyCqanDEY5QZY9]{Marowak} and @UUID[Compendium.ptr2e.core-species.42Nx0JjL8UFTG6RH]{Alolan Marowak} users have their Base ATK increased by 100%.</p>",
+    "slug": "thick-club",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -64,26 +66,76 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "grTDFrK7LJhXVzYQ",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!grTDFrK7LJhXVzYQ"
+  "effects": [
+    {
+      "name": "Thick Club",
+      "type": "passive",
+      "_id": "D21970ACuVnmsSaq",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 2,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:cubone",
+                  "item:species:marowak",
+                  "item:species:marowak-alolan"
+                ]
+              }
+            ],
+            "ignored": false,
+            "method": 1
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1759316143502,
+        "modifiedTime": 1765592560873,
+        "lastModifiedBy": "OOfI7hV743ETBRV2"
+      }
+    }
+  ],
+  "folder": "6VDJBcrqVDh5bYtA"
 }

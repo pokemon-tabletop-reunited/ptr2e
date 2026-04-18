@@ -21,7 +21,7 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user hits a creature that possesses a higher CatMod than the user with Behemoth Blade.</p><p>Effect: The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7.</p>",
+        "description": "<p>Trigger: The user hits a creature that possesses a higher CatMod than the user with Behemoth Blade.</p><p>Effect: The triggering creature gains @Affliction[fear 7], and the user gains @Affliction[chanted 7].</p>",
         "img": "icons/svg/explosion.svg"
       },
       {
@@ -38,11 +38,12 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
-    "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK Stage is +1.</p>",
+    "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[fear 7], and the user gains @Affliction[chanted 7]. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK Stage is +1.</p>",
     "traits": [
       "legendary",
       "partial-automation"
@@ -51,6 +52,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "oAcbRHt5mlUrMtux",
@@ -66,53 +74,51 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv",
-            "predicate": [],
+            "predicate": [
+              "ability:intrepid-sword:active"
+            ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
-              },
-              {
-                "mode": 2,
-                "property": "",
-                "value": 0
-              },
-              {
-                "mode": 2,
-                "property": "",
-                "value": 0
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -124,12 +130,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.nseOdT3vpRN0AW0K.ActiveEffect.SL5wDgqnuATW2IkH",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737403811338,
-        "modifiedTime": 1737403822374,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754319296738,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

@@ -9,9 +9,7 @@
         "slug": "block",
         "name": "Block",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -25,7 +23,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The target is @Affliction[taunted] 5 and @Affliction[stuck] 9.</p>",
+        "description": "<p>Effect: The target is @Affliction[taunted 5] and @Affliction[stuck 9].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -35,6 +33,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "bsgf6INiGdJJ90lm",
@@ -49,32 +53,32 @@
           {
             "type": "roll-effect",
             "key": "block-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.tauntedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.tauntedcondition",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "block-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.stuckconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.stuckcondition00",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 9
+                "value": 9,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -85,13 +89,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

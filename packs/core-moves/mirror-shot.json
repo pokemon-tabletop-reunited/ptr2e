@@ -9,9 +9,7 @@
         "slug": "mirror-shot",
         "name": "Mirror Shot",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -32,11 +30,19 @@
         "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": "undefined"
+    },
+    "traits": []
   },
   "_id": "vALidK8djNyae3c0",
   "effects": [
@@ -50,13 +56,14 @@
           {
             "type": "roll-effect",
             "key": "mirror-shot-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.wA5oCsgHmZLcHHSn",
             "predicate": [],
-            "chance": 100,
+            "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +74,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -83,14 +85,14 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
         "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
-        "createdTime": 1737240552240,
-        "modifiedTime": 1737240607924,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
       }
     }
   ]

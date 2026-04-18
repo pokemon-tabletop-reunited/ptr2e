@@ -10,8 +10,7 @@
         "name": "Fake Tears",
         "type": "attack",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -35,6 +34,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "Aqr7QQnhxr1VN2Ot",
@@ -49,13 +54,13 @@
           {
             "type": "roll-effect",
             "key": "fake-tears-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.PYz1Z32uiXoulkW2",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.PYz1Z32uiXoulkW2",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -66,13 +71,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

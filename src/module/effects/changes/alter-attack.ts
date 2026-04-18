@@ -26,10 +26,15 @@ export default class AlterAttackChangeSystem extends ChangeModel {
       ...super.defineSchema(),
       property: new fields.StringField({
         required: true,
-        choices: Array.from(this.VALID_PROPERTIES),
+        choices: Object.fromEntries(Array.from(this.VALID_PROPERTIES).map((v) => [v, Handlebars.helpers.formatSlug(v)])),
         initial: "power",
+        label: "PTR2E.Effect.FIELDS.property.label",
+        hint: "PTR2E.Effect.FIELDS.property.hint",
       }),
-      definition: new PredicateField(),
+      definition: new PredicateField({
+        label: "PTR2E.Effect.FIELDS.definition.label",
+        hint: "PTR2E.Effect.FIELDS.definition.hint",
+      }),
     }
   }
 
@@ -71,7 +76,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'accuracy' must have a range with a distance value.");
               }
 
-              const newAccuracy = BasicChangeSystem.getNewValue(this.mode, accuracy, change);
+              const newAccuracy = BasicChangeSystem.getNewValue(this.method, accuracy, change);
               attack.accuracy = Math.max(1, newAccuracy);
               attack.updateSource({ accuracy: attack.accuracy });
             }
@@ -93,7 +98,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'power' must have a range with a distance value.");
               }
 
-              const newPower = BasicChangeSystem.getNewValue(this.mode, power, change);
+              const newPower = BasicChangeSystem.getNewValue(this.method, power, change);
 
               attack.power = Math.max(1, newPower);
               attack.updateSource({ power: attack.power });
@@ -103,7 +108,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
         case "type": {
           return {
             adjustAttack: (attack, options) => {
-              if (!([CHANGE_MODES.ADD, CHANGE_MODES.REMOVE, CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, CHANGE_MODES.REMOVE, CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 return this.failValidation(
                   "An attack alteration change of type 'type' must have a mode of 'add', 'subtract', 'remove' or 'override'."
                 );
@@ -117,25 +122,25 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              if (this.mode === CHANGE_MODES.ADD) {
+              if (this.method === CHANGE_MODES.ADD) {
                 for (const c of changeArray) {
                   if (!attack.types.has(c)) {
                     attack.types.add(c);
                   }
                 }
               }
-              else if (this.mode === CHANGE_MODES.REMOVE) {
+              else if (this.method === CHANGE_MODES.REMOVE) {
                 for (const c of changeArray) {
                   attack.types.delete(c);
                 }
               }
-              else if (this.mode === CHANGE_MODES.OVERRIDE) {
+              else if (this.method === CHANGE_MODES.OVERRIDE) {
                 attack.types = new Set(changeArray);
               }
               attack.updateSource({ types: Array.from(attack.types) });
             },
             adjustTraits: (attack, traits, options) => {
-              if (!([CHANGE_MODES.ADD, "subtract", "remove", CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, "subtract", "remove", CHANGE_MODES.OVERRIDE] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 return this.failValidation(
                   "An attack alteration change of type 'type' must have a mode of 'add', 'subtract', 'remove' or 'override'."
                 );
@@ -149,13 +154,13 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              if (this.mode === CHANGE_MODES.ADD) {
+              if (this.method === CHANGE_MODES.ADD) {
                 traits.push(...changeArray);
               }
-              else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 changeArray.forEach(c => traits.findSplice(s => s === c));
               }
-              else if (this.mode === CHANGE_MODES.OVERRIDE) {
+              else if (this.method === CHANGE_MODES.OVERRIDE) {
                 for (const type of Object.values(PTRCONSTS.Types)) {
                   traits.findSplice(s => s === type);
                 }
@@ -168,7 +173,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
         case "traits": {
           return {
             adjustTraits: (attack, traits, options) => {
-              if (!([CHANGE_MODES.ADD, "subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              if (!([CHANGE_MODES.ADD, "subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 return this.failValidation(
                   "An attack alteration change of type 'traits' must have a mode of 'add', 'subtract', or 'remove'."
                 );
@@ -180,9 +185,9 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return;
               }
 
-              if (this.mode === CHANGE_MODES.ADD && !traits.includes(change)) {
+              if (this.method === CHANGE_MODES.ADD && !traits.includes(change)) {
                 traits.push(change);
-              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.mode)) {
+              } else if ((["subtract", "remove"] as unknown as ActiveEffectChangeMode[]).includes(this.method)) {
                 traits.findSplice(s => s === change);
               }
               attack.updateSource({ traits: Array.from(traits) });
@@ -205,7 +210,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'pp-cost' must have a range with a distance value.");
               }
 
-              const newPpCost = BasicChangeSystem.getNewValue(this.mode, ppCost, change);
+              const newPpCost = BasicChangeSystem.getNewValue(this.method, ppCost, change);
               attack.cost.powerPoints = newPpCost;
               attack.updateSource({ "cost.powerPoints": attack.cost.powerPoints });
             }
@@ -251,7 +256,7 @@ export default class AlterAttackChangeSystem extends ChangeModel {
                 return this.failValidation("An attack that meets the definition of 'rip' must have a range with a distance value.");
               }
 
-              const newRangeIncrement = BasicChangeSystem.getNewValue(this.mode, rip, change);
+              const newRangeIncrement = BasicChangeSystem.getNewValue(this.method, rip, change);
               attack.range!.distance = newRangeIncrement;
               attack.updateSource({ range: attack.range });
             }
@@ -292,7 +297,9 @@ export default class AlterAttackChangeSystem extends ChangeModel {
       }
     });
 
-    actor.synthetics.attackAdjustments.push(adjustment);
+    actor.synthetics.attackAdjustments ??= {};
+    actor.synthetics.attackAdjustments[this.selector] ??= [];
+    actor.synthetics.attackAdjustments[this.selector].push(adjustment);
   }
 }
 

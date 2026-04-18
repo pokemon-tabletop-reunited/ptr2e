@@ -9,9 +9,7 @@
         "slug": "eruption",
         "name": "Eruption",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "emanation",
           "distance": 3,
@@ -19,7 +17,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 9
+          "powerPoints": 8
         },
         "category": "special",
         "power": 150,
@@ -27,16 +25,77 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.</p><p><blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power ranges based on how healthy the user is, ranging from 10 to 150.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "23Z3l1FUmOXJv9mx",
-  "effects": []
+  "effects": [
+    {
+      "name": "Eruption",
+      "type": "passive",
+      "_id": "KHZgTcD3Aqtls7yS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "eruption-attack",
+            "value": "@actor.system.health.percent*1.4+10",
+            "predicate": [],
+            "label": "Eruption",
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 5
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.xf2NuI372VOQGVIL.ActiveEffect.YKMJMRUWhZfZFacZ",
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1740185024105,
+        "modifiedTime": 1767165381108,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "powder",
-          "blast-3",
-          "pp-updated"
+          "blast-3"
         ],
         "range": {
           "target": "blast",
@@ -29,7 +28,7 @@
         "types": [
           "grass"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[drowsy] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[drowsy 5].</p>",
         "img": "systems/ptr2e/img/svg/grass_icon.svg",
         "predicate": []
       }
@@ -39,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "n4rGUelHpp7rVQoM",
@@ -53,14 +58,14 @@
           {
             "type": "roll-effect",
             "key": "lotus-pods-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

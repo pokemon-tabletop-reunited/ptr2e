@@ -1,5 +1,5 @@
 import { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
-import { EffectSourcePTR2e } from "@effects";
+import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemAlteration } from "@module/effects/alterations/item.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -17,9 +17,12 @@ export interface EffectRoll {
   effect: ItemUUID;
   label: string;
   roll?: Rolled<Roll>;
+  isFixedChance?: boolean;
   success?: boolean;
   critOnly?: boolean;
   alterations?: ItemAlteration[];
+  dontMerge: boolean;
+  slug?: string;
   [key: string]: unknown;
 }
 
@@ -33,12 +36,16 @@ export interface EffectRollSource {
   [key: string]: unknown;
 }
 
+export interface EffectAlteration {
+  alterations: ItemAlteration[];
+}
+
 export type DeferredEphemeralEffect = DeferredPromise<EffectSourcePTR2e[] | null>;
 export type DeferredEffectRoll = DeferredPromise<EffectRoll | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
 interface ActorSynthetics {
-  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[] } | undefined>;
+  ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[], self: DeferredEphemeralEffect[], defensive: DeferredEphemeralEffect[] } | undefined>;
   ephemeralModifiers: Record<string, DeferredModifier[]>;
   modifierAdjustments: ModifierAdjustmentSynthetics;
   modifiers: ModifierSynthetics;
@@ -51,8 +58,12 @@ interface ActorSynthetics {
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
   effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[], defensive: DeferredEffectRoll[] }>;
+  effectAlterations: Record<string, DeferredValue<EffectAlteration>[]>;
+  effectsRemovedAfterAttacking: ActiveEffectPTR2e[];
+  effectsRemovedAfterAttacked: ActiveEffectPTR2e[];
   toggles: RollOptionToggle[];
-  attackAdjustments: (() => AttackAdjustment)[];
+  moveVariants: Record<string, (() => AttackAdjustment)[]>;
+  attackAdjustments: Record<string, (() => AttackAdjustment)[]>;
   tokenTags: Map<TokenDocumentUUID, string>;
   tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {
     alpha?: number | null;

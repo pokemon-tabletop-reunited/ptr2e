@@ -9,7 +9,7 @@
     "actions": [
       {
         "name": "Watcher's Protection",
-        "slug": "watchers-protection-action-1",
+        "slug": "watchers-protection",
         "description": "<p>You confer shields to all allies within 10m equal to four ticks of you, the user's, Max HP. This benefits from the user having Improved Shielding, but not if the recipient does.</p>",
         "traits": [],
         "type": "generic",
@@ -21,11 +21,11 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 8
         }
       }
     ],
-    "description": "<p>You confer shields to all allies within 10m equal to four ticks of your Max HP. This benefits from the user having Improved Shielding, but not if the recipient does.</p>",
+    "description": "<p>Effect: Allied creatures in range gain @Tick[4 shield], based on the user's HP. Targeted creatures benefit from any Perks the user possesses that affects the user when the user would gain Shields.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:hold-the-line"
@@ -34,22 +34,19 @@
     "slug": "watchers-protection",
     "nodes": [
       {
+        "x": 36,
+        "y": 56,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hold-the-line"
         ],
         "config": {
-          "alpha": null,
+          "texture": "icons/magic/defensive/shield-barrier-blue.webp",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "icons/magic/defensive/shield-barrier-blue.webp",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 36,
-        "y": 56,
         "tier": null
       }
     ],
@@ -59,11 +56,82 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": ""
+      "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "icons/magic/defensive/shield-barrier-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Watcher's Protection",
+      "type": "passive",
+      "_id": "JaGmX1CKViOXza2E",
+      "img": "icons/equipment/shield/heater-crystal-blue.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "watchers-protection-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": "floor(@origin.system.health.max / 4)",
+                "method": 5
+              },
+              {
+                "property": "system.changes.0.isFlat",
+                "value": "true",
+                "method": 5
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "<p>You may provide an ally with Shields based on your own HP Max. The target ally receives Shields equal to 4 Ticks of the user's HP. If the user has Improved Shielding, this Perk benefits from the effect of that (rather than if the recipient has that perk).</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.OeB204Ho5OCVR4xB.ActiveEffect.NDv2ChcRTyYGFpan",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1760296395520,
+        "modifiedTime": 1760296423621,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "g0CU5wD2ydeGnGDU",
   "folder": "PAZ8zWUPw7Azm5V6"
 }

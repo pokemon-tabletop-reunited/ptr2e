@@ -13,8 +13,7 @@
           "social",
           "sonic",
           "friendly",
-          "delay-3",
-          "pp-updated"
+          "delay-3"
         ],
         "range": {
           "target": "cone",
@@ -30,7 +29,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: All valid targets gain @Affliction[fear] 5.</p>",
+        "description": "<p>Effect: All valid targets gain @Affliction[fear 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -40,6 +39,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "JkdiBWMUql7JsHN6",
@@ -54,13 +59,13 @@
           {
             "type": "roll-effect",
             "key": "roar-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

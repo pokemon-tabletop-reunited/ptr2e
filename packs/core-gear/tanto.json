@@ -1,0 +1,198 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Tanto",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "tanto",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "blade",
+      "1-handed",
+      "switch-grip",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Tanto Swing",
+        "slug": "tanto-swing",
+        "type": "attack",
+        "traits": [
+          "weapon",
+          "contact",
+          "sharp",
+          "adaptable",
+          "grapple",
+          "priority-20"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 1
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "power": 30,
+        "accuracy": 65,
+        "free": true
+      },
+      {
+        "name": "Tanto Thrust",
+        "slug": "tanto-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "grapple",
+          "adaptable",
+          "crit-2",
+          "flinch-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 80,
+        "accuracy": 60
+      }
+    ],
+    "description": "<p>The tanto is a traditional, guardless dagger that is the more common edged weapon utilized by ninja for their missions or for self-defense. These blades can have a wide variety of blade shapes and configurations, but the common configurations resembled the ninjato more than a katana - straighter with an increased emphasis on thrusts.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 70,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Tanto",
+      "type": "passive",
+      "_id": "OseMp3FbqNlcXfXx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "tanto-thrust-attack-damage-flat",
+            "value": 11,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-tanto-attack-damage-flat",
+            "value": 10,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "licn4f2AwAU2hKLY"
+}

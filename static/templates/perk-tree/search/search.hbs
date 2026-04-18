@@ -25,8 +25,8 @@
             </a>
         </dd>
     </dl>
-    {{#each filterData.selects as |selectData type|}}
-      {{#unless (is type "showOnlyOnWeb")}}
+    {{#each filterData.selects as |selectData type|}} 
+      {{#unless (or (is type "showOnlyOnWeb") (is type "source"))}}
         <dl class="{{type}}">
             <dt>{{localize selectData.label}}:</dt>
             <dd><select name="{{type}}">
@@ -38,6 +38,7 @@
     <button type="button" class="clear-filters">{{localize "PTR2E.CompendiumBrowser.ClearFilters"}}</button>
   </div>
   {{#each filterData.checkboxes as |checkbox name|}}
+    {{#unless (is name "source")}}
       <div class="filtercontainer" data-filter-type="checkboxes" data-filter-name="{{name}}">
           <div class="title">
               <h3>{{localize checkbox.label}}</h3>
@@ -54,6 +55,7 @@
               {{/each}}
           </dl>
       </div>
+    {{/unless}}
   {{/each}}
   {{#each filterData.multiselects as |selectData type|}}
     <div class="filtercontainer" data-filter-type="multiselects" data-filter-name="{{type}}">

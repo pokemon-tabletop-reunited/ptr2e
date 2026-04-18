@@ -8,11 +8,21 @@
     },
     "slug": "snowy-weather",
     "traits": [
-      "partial-automation"
+      "partial-automation",
+      "weather",
+      "ice"
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p><strong>Snowy</strong> consists of a fairly heavy flurry of snow, with the chill to accompany it. Ice-Types are quite content in the snow, and the cold has some knock-on effects that you may not expect!</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>Ice-Type Attacks deal 30% more damage when they are Critical Hits.</li><li>Ice-Type creatures have their DEF stat increased by 50%.</li><li>At the end of the Round, non-Ice Type creatures lose a Tick of HP.</li><li>All Hazards gain the Ice-Type.</li><li>Ice-Type Moves and Physical-Category Steel-Type attacks have a 10% chance to inflict Frostbite 5. Attacks that would already cause Frostbite instead increase their chance to inflict Frostbite by 10%.</li></ul>"
   },
   "img": "icons/magic/air/weather-clouds-snow.webp",
   "effects": [
@@ -26,12 +36,12 @@
           {
             "type": "basic",
             "key": "system.modifiers.defMultiplier",
-            "value": 1.5,
-            "mode": 1,
+            "value": 0.5,
             "predicate": [
-              "self:type:ice"
+              "trait:ice"
             ],
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
@@ -41,10 +51,12 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -55,10 +67,12 @@
             ],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -67,10 +81,12 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "isFixedChance": false,
+            "dontMerge": false,
+            "mode": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -82,7 +98,9 @@
         "formula": "1/16",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -100,19 +118,23 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "modifiedTime": 1737831745145,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null,
+        "modifiedTime": 1762906323835
       }
     }
   ],
-  "flags": {},
   "_id": "8EVtue4CUOjddZIP"
 }

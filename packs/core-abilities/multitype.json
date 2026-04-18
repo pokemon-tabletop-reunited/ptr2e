@@ -6,43 +6,62 @@
     "actions": [
       {
         "traits": [
-          "legendary",
-          "interrupt-7"
+          "legendary"
         ],
-        "name": "Multitype",
+        "name": "Multitype (Judgment)",
         "slug": "multitype",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
-          "trigger": "<p>The user declares Judgment.</p>"
+          "trigger": "The user declares Judgment."
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation.</span></p>",
+        "img": "systems/ptr2e/img/perk-icons/Touched.svg"
       },
       {
         "traits": [
           "legendary"
         ],
         "name": "Multitype",
-        "slug": "multitype",
+        "slug": "multitype-passive",
         "type": "passive",
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: The user can equip a Type Plate item without using their Accessory Slot, and the user's type changes to match the Type Plate. If the user has two different Type Plates equipped, the user gains both types. If the user possesses the Legend Plate, Judgement instead always receives STAB and always deals damage as if it was one step super effective.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Passive: The user can equip Type Plate items without using their Accessory Slot, and have their effects' intensity doubled. If the user possesses the Legend Plate, the user's Judgment always receives STAB and deals damage as if it was one step super effective.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Touched.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m"
+          "target": "creature",
+          "unit": "m",
+          "distance": 10
+        }
+      },
+      {
+        "name": "Multitype (Plate Change)",
+        "slug": "multitype-plate-change",
+        "description": "<p>Effect: Once, on each of their Activations, as a Free Action at @Trait[interrupt-7] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p>",
+        "traits": [
+          "legendary",
+          "interrupt-7"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Touched.svg",
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "cost": {
+          "activation": "free"
         }
       }
     ],
-    "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation. Passive: The user can equip a Type Plate item without using their Accessory Slot, and the user's type changes to match the Type Plate. If the user has two different Type Plates equipped, the user gains both types. If the user possesses the Legend Plate, Judgement instead always receives STAB and always deals damage as if it was one step super effective.</p>",
+    "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: Connection - Judgment. The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation. Once, on each of their Activations, as a Free Action at @Trait[interrupt-7] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p><p>Passive: The user can equip Type Plate items without using their Accessory Slot, and have their effects' intensity doubled. If the user possesses the Legend Plate, the user's Judgment always receives STAB and deals damage as if it was one step super effective.</p>",
     "traits": [
       "legendary"
     ],
@@ -50,8 +69,84 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "HJnjAGEDc4lmRMP4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Multitype",
+      "type": "passive",
+      "_id": "jYdFZiHaSr9SryqE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.E6mtSx71sinnVvZH",
+            "predicate": [
+              "ability:multitype:active"
+            ],
+            "alterations": [
+              {
+                "property": "system.actions.0.free",
+                "value": "true",
+                "method": 2
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "label": "Multitype",
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1745174587112,
+        "modifiedTime": 1754319739701,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ]
 }

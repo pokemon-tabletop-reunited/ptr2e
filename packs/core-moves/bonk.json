@@ -11,7 +11,7 @@
         "type": "attack",
         "traits": [
           "contact",
-          "pp-updated"
+          "hammer"
         ],
         "range": {
           "target": "creature",
@@ -28,15 +28,24 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[drowsy] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[drowsy 5].</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "E",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "hYGnftBlueFsDJlV",
   "effects": [
@@ -50,30 +59,30 @@
           {
             "type": "roll-effect",
             "key": "bonk-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -85,12 +94,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.2.2",
         "createdTime": 1734821536886,
         "modifiedTime": 1734821555519,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

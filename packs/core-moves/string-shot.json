@@ -9,9 +9,7 @@
         "slug": "string-shot",
         "name": "String Shot",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -37,13 +35,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "TijijTYIY2UOVWOn",
   "effects": [
     {
       "name": "String Shot",
-      "type": "affliction",
+      "type": "passive",
       "_id": "UCnWrisOhzQ9nLd2",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -51,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "string-shot-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.9FlxAAlUW2PrKOd0",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.9FlxAAlUW2PrKOd0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +75,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

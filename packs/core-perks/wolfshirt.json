@@ -1,0 +1,125 @@
+{
+  "folder": "zrVtKATNxzLNxTUa",
+  "name": "Wolfshirt",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Wolfshirt",
+        "slug": "wolfshirt",
+        "description": "<p>Effect: While the user meets the @Trait[desperation-1-3] Condition, the user has +20% RES.</p>",
+        "traits": [
+          "desperation-1-3",
+          "defensive"
+        ],
+        "type": "passive",
+        "img": "systems/ptr2e/img/perk-icons/Chef.svg",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free"
+        }
+      }
+    ],
+    "slug": "wolfshirt",
+    "description": "<p>While the user meets the @Trait[desperation-1-3] Condition, the user has +20% RES.</p>",
+    "traits": [
+      "desperation-1-3"
+    ],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "berserker"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 69,
+        "y": 39,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-37"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "systems/ptr2e/img/perk-icons/Chef.svg",
+  "effects": [
+    {
+      "name": "Wolfshirt",
+      "type": "passive",
+      "_id": "k5PqAzLNWtsDLjBg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 20,
+            "predicate": [
+              "self:state:desperation-1-3"
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": null,
+        "modifiedTime": 1765417457819,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "jaiP6AFQdZhLqMz3"
+}

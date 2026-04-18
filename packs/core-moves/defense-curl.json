@@ -9,9 +9,7 @@
         "slug": "defense-curl",
         "name": "Defense Curl",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "unit": "m"
@@ -24,13 +22,19 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains @Affliction[curled] 5.</p>",
+        "description": "<p>Effect: The user gains @Affliction[curled 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "D",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "jKO1iK8Z81n7LQXt",
   "effects": [
@@ -44,13 +48,13 @@
           {
             "type": "roll-effect",
             "key": "defense-curl-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.curledcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.curledcondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -61,13 +65,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

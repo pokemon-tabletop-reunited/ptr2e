@@ -10,8 +10,7 @@
         "name": "Spectral Tail",
         "type": "attack",
         "traits": [
-          "tail",
-          "pp-updated"
+          "tail"
         ],
         "range": {
           "target": "line",
@@ -28,16 +27,23 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: On hit, all legal targets have a 20% chance of gaining @Affliction[frostbite] 5.</p>",
+        "description": "<p>Effect: On hit, all legal targets have a 20% chance of gaining @Affliction[frostbite 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ofDL7eMpRZMnBcdi",
@@ -52,13 +58,14 @@
           {
             "type": "roll-effect",
             "key": "spectral-tail-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -69,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

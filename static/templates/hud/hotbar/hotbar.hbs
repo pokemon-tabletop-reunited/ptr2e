@@ -1,0 +1,33 @@
+<menu id="action-bar" class="flexrow" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
+    {{#each slots as |slot|}}
+    <li class="slot {{slot.cssClass}}" role="button" data-action="execute" data-slot="{{slot.slot}}"
+        style="{{slot.style}}" aria-label="{{slot.ariaLabel}}" data-tooltip-direction="UP"
+        {{#if slot.tooltip}}data-tooltip-text="{{slot.tooltip}}"{{/if}}
+        {{#if slot.attack}}data-uuid="{{slot.attack.uuid}}"{{/if}}
+        {{#if slot.skill}}data-skill="{{slot.skill.slug}}"{{/if}}
+        {{#if slot.action}}data-uuid="{{slot.action.uuid}}"{{/if}}>
+        {{#if slot.img}}<img class="slot-icon" src="{{slot.img}}" alt="{{slot.ariaLabel}}">{{/if}}
+        <span class="key">{{slot.key}}</span>
+        {{#if slot.macro}}<span class="label">{{slot.macro.name}}</span>{{/if}}
+        {{#if slot.attack}}<span class="label">{{slot.attack.name}}</span>{{/if}}
+        {{#if slot.skill}}<span class="label">{{formatSlug slot.skill.slug}}</span>{{/if}}
+        {{#if slot.action}}<span class="label">{{slot.action.name}}</span>{{/if}}
+    </li>
+    {{/each}}
+    {{#if actor}}
+      <div class="footer" {{#if style}}style="{{style}}"{{/if}}>
+        <label>{{actor.name}}</label>
+        <div class="movement" data-flip-id="footer-movement">
+          {{#each movement as |movement|}}
+            <div class="movement-entry{{#if movement.css}} {{css}}{{/if}}" data-tooltip-direction="UP" data-tooltip-text="{{localize movement.label}}: Max {{movement.value}}">
+              <i class="{{movement.icon}}"></i>
+              <span>{{numberFormat movement.available decimals=1}}</span>
+            </div>
+          {{/each}}
+        </div>
+        <div class="avatar" data-action="open-actor">
+          <img src="{{actor.img}}">
+        </div>
+      </div>
+    {{/if}}
+</menu>

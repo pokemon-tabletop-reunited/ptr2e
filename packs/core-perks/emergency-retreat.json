@@ -6,21 +6,22 @@
       "trait:trainer"
     ],
     "cost": 1,
-    "description": "You may immediately recall a Pokemon as a Free Action at [Interrupt 2] in the event that Pokemon gains @Affliction[fainted].",
+    "description": "<p>When a creature on the user’s Team gains @Affliction[fainted], the user may freely use @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} targeting that creature.</p>",
     "actions": [
       {
         "name": "Emergency Retreat",
         "slug": "emergency-retreat",
-        "description": "You may immediately recall a Pokemon as a Free Action at [Interrupt 2] in the event that Pokemon gains @Affliction[fainted].",
+        "description": "<p>Trigger: A creature on the user's Team gains @Affliction[fainted].</p><p>Effect: The user may freely uses @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} targeting the triggering creature.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 1
+          "activation": "free"
         },
         "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "interrupt"
+        ],
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
         "range": {
-          "target": "enemy",
+          "target": "ally",
           "unit": "m"
         }
       }
@@ -44,17 +45,13 @@
           "root-6",
           "masters-whip",
           "improved-flight-4",
-          "rigorous-fundamentals-5",
-          "fisherman"
+          "rigorous-fundamentals-5"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#0d0d0d",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-          "tint": "#ffff00",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -65,8 +62,16 @@
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Support"
-    }
+      "archetype": "juggler"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "COOTzCdaHbTPL7uT",
   "img": "systems/ptr2e/img/perk-icons/Juggler.svg",

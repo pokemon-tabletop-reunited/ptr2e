@@ -13,7 +13,9 @@
           "zenith",
           "move-locked",
           "blast-6",
-          "sky"
+          "sky",
+          "hammer",
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -30,16 +32,25 @@
         "types": [
           "steel"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: On hit, all valid targets are @Affliction[grounded] 5.</p><p>Requirement: [Tinkaton] Z-Power-Crystal as an Accessory Item and Gigaton Hammer on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: On hit, all valid targets are @Affliction[grounded 5].</p><p>Requirement: [Tinkaton] Z-Power-Crystal as an Accessory Item and Gigaton Hammer on the user's Active List.</p>",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "_migration": {
       "version": null,
       "previous": null
     },
-    "grade": "E"
+    "grade": "S",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "3YV7SrI9KU76X4il",
   "effects": [
@@ -53,30 +64,30 @@
           {
             "type": "roll-effect",
             "key": "horizonfilling-hammer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.groundedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.groundedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -88,12 +99,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729552913301,
         "modifiedTime": 1729552941329,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

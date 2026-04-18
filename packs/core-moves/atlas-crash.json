@@ -13,9 +13,7 @@
           "recoil-1-2",
           "crushing",
           "dash",
-          "legendary",
-          "flinch-5",
-          "pp-updated"
+          "legendary"
         ],
         "range": {
           "target": "creature",
@@ -32,7 +30,7 @@
         "types": [
           "rock"
         ],
-        "description": "<p>Effect: On hit, the target becomes Flinched and gains @Affliction[confused] 7.</p>",
+        "description": "<p>Effect: On hit, the target becomes Delayed by 50% and gains @Affliction[confused 7].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -42,6 +40,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "nGNLKSSBn9QOTUn6",
@@ -56,20 +60,20 @@
           {
             "type": "roll-effect",
             "key": "atlas-crash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 7
+                "value": 7,
+                "method": 5
               }
-            ]
+            ],
+            "method": 2
           }
         ],
         "slug": null,
@@ -80,15 +84,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
-      "description": "<p>Effect: On hit, the target becomes Flinched and gains @Affliction[confused] 7.</p>",
+      "description": "<p>Effect: On hit, the target becomes Flinched and gains @Affliction[confused 7].</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -104,6 +103,49 @@
         "createdTime": 1737571491768,
         "modifiedTime": 1737571649330,
         "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    },
+    {
+      "name": "Atlas Crash",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "atlas-crash-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -50,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Delay 50%",
+                "method": 5
+              }
+            ],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
       }
     }
   ]

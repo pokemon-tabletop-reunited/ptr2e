@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Electirizer",
   "type": "equipment",
   "system": {
@@ -10,15 +10,15 @@
     "slug": "electirizer",
     "traits": [
       "combat",
-      "type",
-      "dragon",
       "evolution",
       "elekid",
       "electabuzz",
-      "electivire"
+      "electivire",
+      "accessory",
+      "electric"
     ],
     "actions": [],
-    "description": "<p><span style=\"font-family: bp_gender, sans-serif\">A box packed with a tremendous amount of electric energy that boosts the power of Electric-type moves. It's loved by a certain Pokémon.</span></p><p></p><p><span style=\"font-family: Signika, sans-serif\">Effect: Increases the Power and Accuracy of attacks by 10%</span></p>",
+    "description": "<p>Effect: The user spends 20% fewer PP (minimum 1) with Electric-Type Attacks. @UUID[Compendium.ptr2e.core-species.n9XZo28FDi9hNNTd]{Elekid}, @UUID[Compendium.ptr2e.core-species.kathQV3S2hUodGAP]{Electabuzz}, and @UUID[Compendium.ptr2e.core-species.LhpXKz4usNNQmJMS]{Electivire} deal 20% more damage with Physical-Category Attacks.<br><br>An Electabuzz may consume this to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -29,15 +29,20 @@
       "handsHeld": null,
       "slot": "accessory"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "electric",
-      "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "power": 85,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -46,55 +51,64 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/electirizer.webp",
   "effects": [
     {
-      "name": "Type Booster (Dragon)",
+      "name": "Electirizer",
       "type": "passive",
-      "_id": "Q6zn9sod4O2yqmp1",
+      "_id": "kaMSShHKWD5a2PKU",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "dragon-attack-power",
-            "value": 10,
+            "type": "alter-attack",
+            "key": "electric-attack",
+            "value": -1,
             "predicate": [],
-            "label": "Type Booster (Dragon) Power",
-            "mode": 2,
-            "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "property": "pp-cost",
+            "definition": [],
+            "method": 2
           },
           {
             "type": "percentile-modifier",
-            "key": "dragon-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Dragon)",
-            "mode": 2,
-            "priority": null,
+            "key": "physical-attack-damage",
+            "value": 20,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:elekid",
+                  "item:species:electabuzz",
+                  "item:species:electivire"
+                ]
+              }
+            ],
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -102,19 +116,18 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.zQRQn1X9bw5xOApv.ActiveEffect.kaMSShHKWD5a2PKU",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758626477212,
+        "modifiedTime": 1758626685927,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
-  "flags": {},
   "_id": "zQRQn1X9bw5xOApv"
 }

@@ -17,17 +17,32 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
       ppApplied: new fields.BooleanField({ required: true, initial: false }),
       undone: new fields.BooleanField({ required: true, initial: false }),
       notes: new fields.ArrayField(new fields.ArrayField(new fields.HTMLField({ blank: false, nullable: false })), { required: true, initial: [] }),
+      note: new fields.StringField({ required: false, blank: true, nullable: true, initial: "" }),
       rollNotes: new fields.ArrayField(new fields.StringField({ blank: false, nullable: false }), { required: true, initial: [] }),
       result: new fields.SchemaField({
         domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
         type: new fields.StringField({ required: true, blank: true, initial: "" }),
         options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-      }, {nullable: true, initial: null})
+      }, { nullable: true, initial: null })
     }
   }
 
-  override prepareBaseData(): void {
+  get hideInfo() {
+    const showDamageTaken = game.settings.get("ptr2e", "metagame.show-damage-taken");
+    const hasPlayerOwner = () => {
+      const actor = fromUuidSync<ActorPTR2e>(this._source.target!);
+      return actor?.hasPlayerOwner ? true : false
+    }
+    return game.user.isGM
+      ? hasPlayerOwner()
+        ? false
+        : "GM" 
+      : showDamageTaken === "show"
+        ? false
+        : !hasPlayerOwner()
+  }
 
+  override prepareBaseData(): void {
     this.target = (() => {
       const actor = fromUuidSync<ActorPTR2e>(this._source.target!);
       return actor;
@@ -51,7 +66,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
   }
 
   async getHTMLContent() {
-    return renderTemplate('systems/ptr2e/templates/chat/damage-applied.hbs', this);
+    return foundry.applications.handlebars.renderTemplate('systems/ptr2e/templates/chat/damage-applied.hbs', this);
   }
 
   async undoDamage() {
@@ -59,7 +74,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     if (!this.target) return;
 
     await this.parent.update({ "system.undone": true });
-    if(this.ppApplied) {
+    if (this.ppApplied) {
       await this.target.update({
         "system.powerPoints.value": Math.clamp(
           this.target.system.powerPoints.value - -this.damageApplied,
@@ -69,7 +84,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
       })
     }
     else {
-      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied });
+      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied, flat: false, note: this.note || "" });
     }
   }
 
@@ -91,6 +106,7 @@ interface DamageAppliedMessageSchema extends foundry.data.fields.DataSchema {
   ppApplied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   undone: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   notes: foundry.data.fields.ArrayField<foundry.data.fields.ArrayField<foundry.data.fields.HTMLField>>;
+  note: foundry.data.fields.StringField<string, string, false, true, false>;
   result: foundry.data.fields.SchemaField<
     DamageAppliedResultSchema,
     foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<DamageAppliedResultSchema>>,

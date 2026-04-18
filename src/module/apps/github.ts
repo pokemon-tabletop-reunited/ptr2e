@@ -3,62 +3,57 @@ import { ActionPTR2e } from "@data";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
-import { ApplicationV2Expanded } from "./appv2-expanded.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 
 class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      id: "github-commit-manager",
-      tag: "form",
-      classes: ["sheet", "github-commit-manager", "default-sheet"],
-      position: {
-        width: 565,
-      },
-      window: {
-        title: "Github Commit Manager",
-        minimizable: true,
-        resizable: true,
-      },
-      actions: {
-        finalize: async function (this: GithubSheet) {
-          ui.notifications.info("Finalizing commit to Github");
-
-          const commitMessage = this.element.querySelector<HTMLTextAreaElement>("[name='commit-message']")?.value;
-          const prTitle = this.element.querySelector<HTMLInputElement>("[name='pr-title']")?.value;
-
-          const result = await GithubManager.finalizeCommitToGithub({ message: commitMessage, title: prTitle });
-          if (result.success) {
-            ui.notifications.info("Successfully finalized commit to Github");
-          }
-          this.close();
-        },
-        cancel: async function (this: GithubSheet) {
-          if (this.ongoing) {
-            ui.notifications.info("Cancelling commit to Github");
-            await GithubManager.finalizeCommitToGithub({ deletePR: true });
-          }
-          this.close();
-        },
-        delete: async function (this: GithubSheet, event: MouseEvent) {
-          if (!this.ongoing) return;
-
-          const button = event.target as HTMLButtonElement;
-          const path = button.dataset.path;
-          if (!path) return;
-          button.disabled = true;
-
-          const result = await GithubManager.finalizeCommitToGithub({ deletePR: path });
-          if (result.success) {
-            ui.notifications.info("Successfully deleted entry");
-          }
-          return this.render(true);
-        },
-      }
+  static override DEFAULT_OPTIONS = {
+    id: "github-commit-manager",
+    tag: "form",
+    classes: ["sheet", "ptr2e", "github-commit-manager", "default-sheet", "standard-form"],
+    position: {
+      width: 565,
     },
-    { inplace: false }
-  );
+    window: {
+      title: "Github Commit Manager",
+      minimizable: true,
+      resizable: true,
+    },
+    actions: {
+      finalize: async function (this: GithubSheet) {
+        ui.notifications.info("Finalizing commit to Github");
+
+        const commitMessage = this.element.querySelector<HTMLTextAreaElement>("[name='commit-message']")?.value;
+        const prTitle = this.element.querySelector<HTMLInputElement>("[name='pr-title']")?.value;
+
+        const result = await GithubManager.finalizeCommitToGithub({ message: commitMessage, title: prTitle });
+        if (result.success) {
+          ui.notifications.info("Successfully finalized commit to Github");
+        }
+        this.close();
+      },
+      cancel: async function (this: GithubSheet) {
+        if (this.ongoing) {
+          ui.notifications.info("Cancelling commit to Github");
+          await GithubManager.finalizeCommitToGithub({ deletePR: true });
+        }
+        this.close();
+      },
+      delete: async function (this: GithubSheet, event: MouseEvent) {
+        if (!this.ongoing) return;
+
+        const button = event.target as HTMLButtonElement;
+        const path = button.dataset.path;
+        if (!path) return;
+        button.disabled = true;
+
+        const result = await GithubManager.finalizeCommitToGithub({ deletePR: path });
+        if (result.success) {
+          ui.notifications.info("Successfully deleted entry");
+        }
+        return this.render(true);
+      },
+    }
+  } as unknown as Omit<DeepPartial<ApplicationConfigurationExpanded>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     main: {
@@ -70,7 +65,7 @@ class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ap
 
   ongoing = false;
 
-  override async _prepareContext(options?: HandlebarsRenderOptions | undefined) {
+  override async _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
     const context = await super._prepareContext(options);
 
     const status = await GithubManager.getCommitStatus();
@@ -87,6 +82,7 @@ class GithubManager {
   static VALID_DOCUMENT_TYPES: Record<string, string> = {
     move: "ptr2e.core-moves",
     species: "ptr2e.core-species",
+    "ptr2e-digimon-expansion.digimonSpecies": "ptr2e-digimon-expansion.digimon-species",
     ability: "ptr2e.core-abilities",
     perk: "ptr2e.core-perks",
     effect: "ptr2e.core-effects",
@@ -101,10 +97,13 @@ class GithubManager {
   static async getExistingItem<TDocument extends ItemPTR2e>(
     item: TDocument,
     pack: CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>
-  ) {
-    const existing = await (async () => {
-      const sourceId = item.flags?.core?.sourceId;
+  ): Promise<ItemPTR2e<ItemSystemPTR, null> | null> {
+    const existing = await (async (): Promise<Maybe<ItemPTR2e<ItemSystemPTR, null>>> => {
+      const sourceId = item.flags?.core?.sourceId || item._stats?.compendiumSource;
       if (sourceId) {
+        if(!sourceId.startsWith(pack.metadata.packageName)) {
+          return (await fu.fromUuid<ItemPTR2e<ItemSystemPTR, null>>(sourceId) ?? null) as ItemPTR2e<ItemSystemPTR, null> | null;
+        }
         const existing = await pack.getDocument(sourceId.split(".").at(-1)!);
         if (existing) return existing;
       }
@@ -115,7 +114,7 @@ class GithubManager {
       if (existing) return pack.getDocument(existing._id);
       return null;
     })();
-    return existing;
+    return existing ?? null;
   }
 
   static getDiffableItem<TDocument extends ItemPTR2e>(
@@ -144,6 +143,7 @@ class GithubManager {
         Record<string, any>,
       ][]) {
         for (const [key, value] of Object.entries(action)) {
+          if (key === "slot") delete action[key];
           if (value === null || value === undefined) {
             delete action[key];
           }
@@ -165,6 +165,9 @@ class GithubManager {
       if (fu.isEmpty(diff.system.actions)) {
         delete diff.system.actions;
       }
+    }
+    if (diff.system?.slot !== undefined && !isNaN(Number(diff.system.slot))) {
+      delete diff.system.slot;
     }
     if (fu.isEmpty(diff.system)) {
       delete diff.system;
@@ -289,7 +292,8 @@ class GithubManager {
     const existing = await GithubManager.getExistingItem(document, pack);
     if (!existing) {
       try {
-        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"]);
+        const source = document.pack ? game.packs.get(document.pack)?.metadata.packageName || "core" : "core";
+        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"], source);
       }
       catch {
         ui.notifications.error("An unexpected error occured.");
@@ -301,6 +305,8 @@ class GithubManager {
       ui.notifications.error("You cannot commit the Core Afflictions to Github in this manner.");
       return
     }
+
+    const source = existing.pack ? game.packs.get(existing.pack)?.metadata.packageName || "core" : "core";
 
     const isPack = document === existing;
     const itemData = document.toObject();
@@ -319,7 +325,7 @@ class GithubManager {
       diff["old_name"] = existingData.name;
     }
     try {
-      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], diff);
+      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], source, diff);
     }
     catch (error) {
       ui.notifications.error("An unexpected error occured.");
@@ -373,7 +379,8 @@ class GithubManager {
 
   static async saveBlobToGithub<TDocument extends ItemPTR2e>(
     realDiff: TDocument["_source"],
-    diff?: Record<string, any>
+    source: string,
+    diff?: Record<string, any>,
   ) {
     const identity = await GithubManager.getIdentity();
     if (!identity) {
@@ -393,7 +400,8 @@ class GithubManager {
           data: realDiff,
           diff: diff || {},
           flags: {
-            new: true
+            new: true,
+            source
           }
         }),
       });
@@ -407,8 +415,8 @@ class GithubManager {
           const reference = window.open(commitJson['auth_url'], identity, "popup=true");
           await new Promise((resolve, reject) => {
             function check(depth = 0) {
-              if(reference?.closed) resolve(true);
-              if(depth > 100) return void reject();
+              if (reference?.closed) resolve(true);
+              if (depth > 100) return void reject();
               setTimeout(() => check(depth + 1), 2500);
             }
             check();

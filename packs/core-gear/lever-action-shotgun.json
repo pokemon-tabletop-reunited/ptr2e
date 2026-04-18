@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,17 +16,27 @@
     "grade": "D",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 100
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-6"
+      "charge-pool-6",
+      "reload-2",
+      "conventional",
+      "modern",
+      "early-modern"
     ],
     "actions": [
       {
@@ -34,13 +44,12 @@
           "untyped"
         ],
         "category": "special",
-        "power": 65,
+        "power": 70,
         "accuracy": 90,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Lever-Action Shotgun",
         "slug": "lever-action-shotgun",
@@ -54,63 +63,54 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 135,
-        "accuracy": 80,
+        "power": 140,
+        "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
-          "readied",
-          "priority-1"
+          "firearm",
+          "priority-20"
         ],
-        "name": "Lever-Action Shotgun (Quick Shot)",
+        "name": "Lever-Action Shotgun (Quick Shots)",
         "slug": "lever-action-shotgun-quick-shot",
         "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 6,
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "delay": null,
           "priority": 1
         },
         "variant": "lever-action-shotgun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 65,
+        "power": 70,
         "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
           "missile",
           "dash",
-          "priority-1"
+          "firearm",
+          "priority-10"
         ],
         "name": "Lever-Action Shotgun (Hip Fire)",
         "slug": "lever-action-shotgun-hip-fire",
@@ -119,27 +119,21 @@
         "type": "attack",
         "range": {
           "target": "cone",
-          "distance": 3,
+          "distance": 4,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 1,
-          "delay": null,
           "priority": 1
         },
         "variant": "lever-action-shotgun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 6,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "lever-action-shotgun",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -149,26 +143,81 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>A lever-action shotgun is a shotgun where the loading, firing, and unloading processes are all cycled by a lever located behind the trigger, which extracts and ejects the cartridge case and recocks the weapon. Contemporary lever-action shotguns are generally smaller gauge, for hunting small game and personal defense.</p>"
   },
   "_id": "OqtyemHRq5CXKLyF",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!OqtyemHRq5CXKLyF"
+  "effects": [
+    {
+      "name": "Lever-Action Shotgun",
+      "type": "passive",
+      "_id": "1PLO6oNBGiSvJAbu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 33,
+            "predicate": [],
+            "label": "Lever-Action Shotgun",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "lever-action-shotgun-quick-shot-attack-damage-flat",
+            "value": 66,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743883292416,
+        "modifiedTime": 1757631557056,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "GPebepuiQbZSuf35"
 }

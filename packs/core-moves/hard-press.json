@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "dash",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -21,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 3
         },
         "category": "special",
         "power": 100,
@@ -29,16 +28,77 @@
         "types": [
           "steel"
         ],
-        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 1 to 100.</p><p><blockquote>Damage Formula: Power = max(1, 100 x TargetCurrentHP/TargetMaxHP)</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power varies based on how healthy the target is, ranging from 10 to 100.</p>",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "56Qggb1dJfEL8OTJ",
-  "effects": []
+  "effects": [
+    {
+      "name": "Hard Press",
+      "type": "passive",
+      "_id": "6M403IXs9YabwYMU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "hard-press-attack",
+            "value": "((@target.system.health.percent)-100)*0.9+10",
+            "predicate": [],
+            "label": "Hard Press Scaling",
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 5
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.0hJmzpADt8XQzegu.ActiveEffect.4bmmAt7wC34dHKY2",
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1743547821895,
+        "modifiedTime": 1767160313478,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

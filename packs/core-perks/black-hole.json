@@ -1,0 +1,52 @@
+{
+  "name": "Black Hole",
+  "_id": "8pJerN8P2YuhyLiQ",
+  "type": "perk",
+  "img": "systems/ptr2e/img/conditions/stuck.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "black-hole",
+    "description": "<p>Foes affected by the user's Shadow Bubble are @Affliction[stuck] and @Affliction[slowed]. Teleport Movement cannot be used to enter or leave squares within the user's Shadow Bubble.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:dark",
+      "item:perk:shadow-bubble"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "dark"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 131,
+        "y": 92,
+        "connected": [
+          "minor-buff-39",
+          "hostile-shadows",
+          "dastardly-planner"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "3FMJcmOMjNlPT6A0"
+}

@@ -20,11 +20,11 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance for the triggering attack to become @Affliction[disabled] 5.</p>",
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance for the triggering attack to become @Affliction[disabled 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance for the triggering attack to become @Affliction[disabled] 5.</p>",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance for the triggering attack to become @Affliction[disabled 5].</p>",
     "traits": [
       "defensive"
     ],
@@ -32,6 +32,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "rIKiInEzes5D9bVC",
@@ -46,14 +53,16 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 30,
             "affects": "origin",
             "label": "Cursed Body",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -62,15 +71,10 @@
         "removeOnRecall": false,
         "stacks": 0
       },
-      "disabled": true,
+      "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -86,8 +90,8 @@
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.1",
         "createdTime": 1728037747318,
-        "modifiedTime": 1728037779561,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1745782600705,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

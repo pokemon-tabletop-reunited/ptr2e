@@ -5,12 +5,12 @@
   "system": {
     "prerequisites": [],
     "cost": 3,
-    "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
+    "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default).</p><p>Additionally, you may instantly add 2 E-Grade moves from that &lt;Type&gt;'s Tutor List to your 'Known Attacks' list.</p><blockquote>A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</blockquote>",
     "actions": [
       {
         "name": "Type Embodiment <Type> 2",
         "slug": "type-embodiment-type-2",
-        "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
+        "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default).</p><p>Additionally, you may instantly add 2 E-Grade moves from that &lt;Type&gt;'s Tutor List to your 'Known Attacks' list.</p><blockquote>A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</blockquote>",
         "cost": {
           "activation": "free"
         },
@@ -61,6 +61,13 @@
       "arena": "mental",
       "approach": "resilience",
       "archetype": "elemental"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "Ele0eTIzN2GUFQD7",
@@ -78,7 +85,6 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
             "choices": [
@@ -93,7 +99,8 @@
             ],
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-option"
+            "rollOption": "te-option",
+            "method": 2
           },
           {
             "type": "choice-set",
@@ -107,13 +114,13 @@
                 ]
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.typeOptions.options",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-add"
+            "rollOption": "te-add",
+            "method": 2
           },
           {
             "type": "choice-set",
@@ -127,13 +134,13 @@
                 ]
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.typeOptions.types",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-remove"
+            "rollOption": "te-remove",
+            "method": 2
           },
           {
             "type": "choice-set",
@@ -147,13 +154,13 @@
                 ]
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "flags.ptr2e.typeOptions.options",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "te-add"
+            "rollOption": "te-add",
+            "method": 2
           },
           {
             "type": "basic",
@@ -167,35 +174,40 @@
                 ]
               }
             ],
-            "mode": 6,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 6
           },
           {
             "type": "basic",
             "key": "system.type.types",
             "value": "{effect|flags.ptr2e.choiceSelections.te-add}",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "remove-trait",
+            "key": "",
+            "value": "untyped",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain a &lt;Type&gt; trait, from the baseline 18 &lt;Type&gt;s (at default). A recommended limit on &lt;Type&gt; traits is 3 total, but this can be revised at GM discretion. May replace an existing &lt;Type&gt;.</p>",
       "origin": null,
@@ -207,12 +219,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.3hmeZeafNkHeCKvi.ActiveEffect.GE0TilBXs6WMXRph",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1739730444929,
-        "modifiedTime": 1739730444929,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1755359333133,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

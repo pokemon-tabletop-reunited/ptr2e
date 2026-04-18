@@ -1,12 +1,11 @@
 {
   "name": "Strange Ball",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/strange ball.webp",
   "type": "consumable",
   "system": {
-    "cost": null,
     "crafting": {
       "skill": "electronics",
-      "spans": 10,
+      "spans": 8,
       "materials": [
         "12x-tumblestone",
         "1x-green-apricorn"
@@ -21,40 +20,42 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "12x Catch Rate modifer if used on a [Paradox] creature. 1x Catch Rate modifer otherwise.",
-    "modifier": 12,
+    "description": "<p>5x Catch Rate modifer if used on a @Trait[paradox] creature. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 5,
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "stack": 5
+    "slug": "strange-ball",
+    "stack": 5,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "yRg97xxzNbQGfFWe",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!yRg97xxzNbQGfFWe"
+  "folder": "bIBkUsgkWMXMOtHm"
 }

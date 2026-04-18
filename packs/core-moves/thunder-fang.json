@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "jaw",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +28,7 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5, and a 10% chance of being @Affliction[tased] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis 5], and a 10% chance of being @Affliction[tased 5].</p>",
         "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "predicate": []
       }
@@ -39,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "gADis21rh3UuejhI",
@@ -53,26 +58,26 @@
           {
             "type": "roll-effect",
             "key": "thunder-fang-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "thunder-fang-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.tasedcondition00",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +88,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

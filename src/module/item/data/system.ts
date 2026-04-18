@@ -14,7 +14,8 @@ type ItemType =
     | "perk"
     | "species"
     | "weapon"
-    | "summon";
+    | "summon"
+    | "ptr2e-digimon-expansion.digimonSpecies";
 
 type BaseItemSourcePTR2e<
     TType extends ItemType,
@@ -102,6 +103,12 @@ interface ItemSystemSource {
     container?: DocumentUUID | null;
 
     _migration?: MigrationRecord;
+
+    publication: {
+      title: string;
+      authors: string[]
+      notes?: string;
+    }
 }
 
 export type {

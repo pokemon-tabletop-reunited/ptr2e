@@ -18,7 +18,13 @@
     "fling": {
       "type": "untyped",
       "power": 40,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -27,33 +33,28 @@
       "consumable",
       "wonder-orb",
       "held",
-      "fling"
+      "fling",
+      "mystery-dungeon"
     ],
-    "description": "All allies of the target on the Floor are teleported to the target. The target and its allies gain @Affliction[bound] 5.",
+    "description": "<p>All allies of the target on the Floor are teleported to the target. The target and its allies gain @Affliction[bound 5]. This can be broken out of with a -30 Lift Check or  -10 Thaumaturgy check.</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "lasso-orb",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "j4ovHYdNWAAAHvHM",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!j4ovHYdNWAAAHvHM"
+  "folder": "4MbEHvhwmG5DYTkB"
 }

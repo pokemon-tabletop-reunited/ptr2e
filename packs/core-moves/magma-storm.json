@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "blast-2",
-          "legendary",
-          "pp-updated"
+          "legendary"
         ],
         "range": {
           "target": "blast",
@@ -29,7 +28,7 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: All valid targets become @Affliction[bound] 5 & @Affliction[burn] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[bound 7] and @Affliction[burn 7]. While @Affliction[bound], they also suffer from @Affliction[splinter] and @Affliction[bleed]. This @Affliction[bound] effect can be removed with a Difficut Movement-related Skill, Acrobatics, Geology, or Survival Skill Check taken as a Complex Action. EFFECT NEEDS REAUTOMATED.</p>",
         "img": "systems/ptr2e/img/svg/fire_icon.svg"
       }
     ],
@@ -37,6 +36,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "8Orxtt3ZLifqWqde",
@@ -51,26 +56,26 @@
           {
             "type": "roll-effect",
             "key": "magma-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.boundconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.boundcondition00",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "label": "Bound",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "magma-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "label": "Burn",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -81,13 +86,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -1,0 +1,190 @@
+{
+  "name": "Yeomanry",
+  "_id": "KWW5eOGkAuGnaPHK",
+  "type": "perk",
+  "img": "icons/weapons/bows/shortbow-recurve-yellow.webp",
+  "effects": [
+    {
+      "name": "Yeomanry",
+      "type": "passive",
+      "_id": "V5yuSoMghua9up8o",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "missile-trait-attack-damage",
+            "value": 40,
+            "predicate": [
+              "self:action:trait:weapon",
+              {
+                "not": "self:action:trait:firearm"
+              }
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "missile-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "self:action:trait:weapon",
+              {
+                "not": "self:action:trait:firearm"
+              }
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 15,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "yeoman-wpn:active",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Wielding a Projectile Weapon?",
+            "alwaysActive": false,
+            "state": true,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "struggle-attack",
+            "value": 20,
+            "predicate": [
+              "yeoman-wpn:active"
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "hand-weapon-strike-attack-power",
+            "value": 10,
+            "predicate": [
+              "yeoman-wpn:active"
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Actor.yTATR0D63ScmGUlH.Item.3TYY15D6hvycx085.ActiveEffect.5HTr6F4bubtYh1uM",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1773234675126,
+        "modifiedTime": 1773234675126,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "yeomanry",
+    "description": "<p>The user’s non-@Trait[firearm] @Trait[missile] @Trait[weapon] attacks deal +40% more damage, and the user’s Struggle has +20 Power when they are holding a @Trait[projectile] @Trait[weapon], and improvised Attacks with that Weapon have +10 Power.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:wielder",
+      {
+        "gte": [
+          "{actor|skills.survival.mod}",
+          40
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.lift.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          40
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 187,
+        "y": 63,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "dual-wielder",
+          "down-the-sights",
+          "harry",
+          "arms-race",
+          "needle-threader"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  },
+  "folder": "VCEaYPpKcCqDx7yx"
+}

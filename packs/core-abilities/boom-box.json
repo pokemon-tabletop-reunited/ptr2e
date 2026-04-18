@@ -14,7 +14,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's [Sonic] Physical- and Special-Category Attacks gain [Crit 1] (or [Crit X+1]), and their [Sonic] Status-Category Attacks have +20 Accuracy, max 100.</p>",
         "img": "icons/svg/explosion.svg"
@@ -26,8 +27,77 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "LYW1ARgWIsUwo5Yn",
-  "effects": []
+  "effects": [
+    {
+      "name": "Boom Box",
+      "type": "passive",
+      "_id": "sCwlnXK3JmAcAjJ4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stage-modifier",
+            "key": "sonic-trait-attack-crit",
+            "value": 1,
+            "predicate": [],
+            "label": "Boom Box (Crit)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "status-attack-accuracy",
+            "value": 20,
+            "predicate": [
+              "item:trait:sonic"
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.1.beta",
+        "createdTime": 1753746649731,
+        "modifiedTime": 1753746722550,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -31,7 +31,7 @@
         "category": "special",
         "power": 70,
         "accuracy": 90,
-        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[unlucky] 5 and a 20% chance of gaining @Affliction[disabled] 5 for a random attack on their Active List.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[unlucky 5] and a 20% chance of gaining @Affliction[disabled 5] for a random attack on their Active List.</p>",
         "predicate": []
       }
     ],
@@ -40,6 +40,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "effects": [
@@ -53,26 +59,26 @@
           {
             "type": "roll-effect",
             "key": "natures-chorale-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.unluckycondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.unluckycondition",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "natures-chorale-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +89,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

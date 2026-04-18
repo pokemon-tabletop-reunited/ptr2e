@@ -1,0 +1,123 @@
+{
+  "name": "Coachman",
+  "_id": "Sog9ZmzWvASR3hnR",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Mechanist.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "coachman",
+    "description": "<p>Effect: The user may use @Trait[readied] Actions @Trait[flinch-20], ignoring the trait’s Movement restrictions for vehicles the user is Crewing. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
+    "traits": [
+      "pilot"
+    ],
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.bike.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.small-motor-vehicles.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.cars.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.utility-vehicles.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.military-ground-vehicles.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.walkers.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aircraft.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aerospace-vehicles.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.exotic-vehicle-specific.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.watercraft.mod}",
+              50
+            ]
+          }
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "pilot"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 76,
+        "y": 77,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-54",
+          "hard-swerve",
+          "power-steering",
+          "take-the-wheel"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  }
+}

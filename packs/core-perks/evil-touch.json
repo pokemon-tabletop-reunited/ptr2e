@@ -1,0 +1,103 @@
+{
+  "folder": "3FMJcmOMjNlPT6A0",
+  "name": "Evil Touch",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>You gain the @Trait[evil-touch] trait.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:dark"
+    ],
+    "autoUnlock": [
+      "trait:evil-touch"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "dark"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 140,
+        "y": 91,
+        "connected": [
+          "salted-wounds",
+          "shadow-bubble",
+          "minor-buff-34",
+          "type-domain",
+          "dastardly-planner"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "evil-touch"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Evil Touch",
+      "type": "passive",
+      "_id": "FUiKvfpNl0qQfmnn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "evil-touch",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764895381742,
+        "modifiedTime": 1764895395416,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
+  "_id": "7FXmQ5jO5AhAdXiQ"
+}

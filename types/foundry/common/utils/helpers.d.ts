@@ -1,3 +1,36 @@
+export function fromUuid(uuid: Maybe<CompendiumUUID>, relative?: Maybe<ClientDocument>): Promise<CompendiumDocument | null>;
+export function fromUuid(
+    uuid: Maybe<ActorUUID>,
+    relative?: Maybe<ClientDocument>,
+): Promise<Actor<TokenDocument<Scene> | null> | null>;
+export function fromUuid(
+    uuid: Maybe<ItemUUID>,
+    relative?: Maybe<ClientDocument>,
+): Promise<Item<Actor<TokenDocument<Scene> | null>> | null>;
+export function fromUuid(uuid: Maybe<TokenDocumentUUID>, relative?: Maybe<ClientDocument>): Promise<TokenDocument<Scene> | null>;
+export function fromUuid<TDocument extends ClientDocument>(
+    uuid: Maybe<string>,
+    options?: {relative?: Maybe<ClientDocument>},
+): Promise<TDocument | null>;
+
+/**
+     * Retrieve a Document by its Universally Unique Identifier (uuid) synchronously. If the uuid resolves to a compendium
+     * document, that document's index entry will be returned instead.
+     * @param uuid The uuid of the Document to retrieve.
+     * @param {} [relative]  A document to resolve relative UUIDs against.
+     * @returns The Document or its index entry if it resides in a Compendium, otherwise null.
+     * @throws If the uuid resolves to a Document that cannot be retrieved synchronously.
+     */
+export function fromUuidSync(uuid: Maybe<ItemUUID>, relative?: Maybe<ClientDocument>): Item | CompendiumIndexData | null;
+export function fromUuidSync<TDocument extends WorldDocument>(
+    uuid: Maybe<WorldDocumentUUID<TDocument>>,
+    relative?: Maybe<ClientDocument>,
+): TDocument | null;
+export function fromUuidSync<TDocument extends ClientDocument | CompendiumIndexData>(
+    uuid: Maybe<string>,
+    relative?: Maybe<ClientDocument>,
+): TDocument | null;
+
 /**
  * Wrap a callback in a debounced timeout.
  * Delay execution of the callback function until the function has not been called for delay milliseconds
@@ -305,8 +338,42 @@ export function logCompatibilityWarning(
     until?: number | string;
     details?: string;
     stack?: boolean;
+    once?: boolean;
   },
 ): void;
+
+/**
+ * Parse an HTML string, returning a processed HTMLElement or HTMLCollection.
+ * A single HTMLElement is returned if the provided string contains only a single top-level element.
+ * An HTMLCollection is returned if the provided string contains multiple top-level elements.
+ */
+export function parseHTML(htmlString: string): HTMLCollection | HTMLElement;
+
+/**
+ * Escape the given unescaped string.
+ *
+ * Escaped strings are safe to use inside inner HTML of most tags and in most quoted HTML attributes.
+ * They are not NOT safe to use in `<script>` tags, unquoted attributes, `href`, `onmouseover`, and similar.
+ * They must be unescaped first if they are used inside a context that would escape them.
+ *
+ * Handles only `&`, `<`, `>`, `"`, and `'`.
+ * @see {@link unescapeHTML}
+ * @param {string|any} value    An unescaped string
+ * @returns {string}            The escaped string
+ */
+export function escapeHTML(value: string | unknown): string;
+
+/* -------------------------------------------- */
+
+/**
+ * Unescape the given escaped string.
+ *
+ * Handles only `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#x27;`.
+ * @see {@link escapeHTML}
+ * @param {string} value    An escaped string
+ * @returns {string}        The escaped string
+ */
+export function unescapeHTML(value: string): string;
 
 export * from "./http.ts";
 

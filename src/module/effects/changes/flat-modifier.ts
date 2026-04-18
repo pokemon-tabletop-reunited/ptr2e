@@ -2,6 +2,24 @@ import { ActorPTR2e, DeferredValueParams } from "@actor";
 import { ChangeModel } from "@data";
 import { ModifierPTR2e } from "../modifiers.ts";
 
+export const FLAT_MODIFIER_TYPE_SUFFIXES = [
+  "accuracy",
+  "evasion",
+  "damage",
+  "crit",
+  "power",
+  "stat",
+  "effectiveness",
+  "capture",
+  "strikes",
+  "hits",
+  "recoil",
+  "drain",
+  "crash"
+] as const;
+
+export const FLAT_MODIFIER_METHOD_SUFFIXES = ["percentile", "stage", "base", "flat"] as const;
+
 export default class FlatModifierChangeSystem extends ChangeModel {
   static override TYPE = "flat-modifier";
 
@@ -36,7 +54,7 @@ export default class FlatModifierChangeSystem extends ChangeModel {
 
     const { selector, type, method } = ((): { selector: string; type: ModifierPTR2e["type"], method: ModifierPTR2e["method"] } => {
       const { selector, method } = (() => {
-        const methodSuffixes = ["percentile", "stage", "base", "flat"] as const;
+        const methodSuffixes = FLAT_MODIFIER_METHOD_SUFFIXES;
 
         for (const suffix of methodSuffixes) {
           if (resolvedSelector.endsWith("-" + suffix)) {
@@ -49,7 +67,7 @@ export default class FlatModifierChangeSystem extends ChangeModel {
         return { selector: resolvedSelector, method: providedMethod };
       })();
 
-      const suffixes = ["accuracy", "evasion", "damage", "crit", "power", "stat", "effectiveness", "capture"] as const;
+      const suffixes = FLAT_MODIFIER_TYPE_SUFFIXES;
 
       for (const suffix of suffixes) {
         if (selector.endsWith("-" + suffix)) {
@@ -66,7 +84,15 @@ export default class FlatModifierChangeSystem extends ChangeModel {
     const slug = `${this.slug}-${type}-${method}`;
 
     const construct = (options: DeferredValueParams = {}): ModifierPTR2e | null => {
-      const resolvedValue = Number(this.resolveValue(this.value, 0, options));
+      const value = this.resolveValue(this.value, 0, options);
+      const resolvedValue = isNaN(Number(value)) ? (() => {
+        try {
+          return new Roll(value + "").evaluateSync()?.total || NaN;
+        }
+        catch {
+          return NaN;
+        }
+      })() : Number(value);
       if (this.ignored || isNaN(resolvedValue)) return null;
 
       const predicate = this.predicate.clone();
@@ -87,7 +113,7 @@ export default class FlatModifierChangeSystem extends ChangeModel {
       return modifier;
     };
 
-    if(returnEarly) return construct;
+    if (returnEarly) return construct;
 
     const modifiers = (actor.synthetics.modifiers[selector] ??= []);
     modifiers.push(construct);

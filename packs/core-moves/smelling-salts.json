@@ -10,8 +10,7 @@
         "name": "Smelling Salts",
         "type": "attack",
         "traits": [
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -38,10 +37,7 @@
         "slug": "smelling-salts-paralyzed",
         "name": "Smelling Salts (Paralyzed)",
         "type": "attack",
-        "traits": [
-          "flinch-5",
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -58,7 +54,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Trigger: The target has @Affliction[paralysis]..</p><p>Effect: On resolution, the target is cured of The target has @Affliction[paralysis], and is Flinched.</p>",
+        "description": "<p>Trigger: The target has @Affliction[paralysis]..</p><p>Effect: On resolution, the target is cured of The target has @Affliction[paralysis], and is Delayed by 50%.</p>",
         "contestType": "",
         "contestEffect": "",
         "variant": "smelling-salts",
@@ -67,8 +63,58 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "qtFxob1JHeUKKR2H",
-  "effects": []
+  "effects": [
+    {
+      "name": "Smelling Salts",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "smelling-salts-paralyzed-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -50,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Delay 50%",
+                "method": 5
+              }
+            ],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
+      }
+    }
+  ]
 }

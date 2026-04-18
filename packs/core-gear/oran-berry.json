@@ -5,7 +5,7 @@
   "system": {
     "cost": 1,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,13 @@
     "fling": {
       "type": "untyped",
       "power": 10,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
@@ -29,39 +35,111 @@
       "healing",
       "berry",
       "fling",
-      "held",
-      "stash",
-      "desperation-1-2",
-      "spicy-1",
-      "sweet-1",
-      "bitter-1",
-      "sour-1"
+      "desperation-1-3",
+      "combat"
     ],
-    "description": "The target is healed 2 Ticks of HP. This item can be consumed as a Free Action if the user meets the Desperation threshold.",
+    "description": "<p>The target is healed @Tick[2]. This item can be consumed as a Free Action if the user meets the Desperation threshold.</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "oran-berry",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Oran Berry",
+        "slug": "oran-berry",
+        "description": "<p>The target is healed @Tick[2]. This item can be consumed as a Free Action if the user meets the Desperation threshold.</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "healing",
+          "berry",
+          "fling",
+          "desperation-1-3",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/oran berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "fBdz6xN2dmk6ft9b",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!fBdz6xN2dmk6ft9b"
+  "effects": [
+    {
+      "name": "Oran Berry",
+      "type": "passive",
+      "_id": "dOzyb2N25m8vW8xT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "oran-berry-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.UVxaQB25eP6KZMTz.ActiveEffect.ll30xJMa3t6M4gA4",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758643829850,
+        "modifiedTime": 1758643849880,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "yR1GFstYOCdI2jOz"
 }

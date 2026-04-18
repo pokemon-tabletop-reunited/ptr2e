@@ -25,7 +25,8 @@
           "distance": 0
         },
         "variant": null,
-        "hidden": false
+        "hidden": false,
+        "ephemeralVariant": false
       }
     ],
     "slug": "berserk",
@@ -66,7 +67,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Berserker"
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ZPro1HlauzutizPK",
@@ -86,9 +94,9 @@
             "predicate": [
               "effect:affliction:enraged"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -97,9 +105,9 @@
             "predicate": [
               "effect:affliction:enraged"
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -110,13 +118,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
       "origin": null,
@@ -128,12 +131,13 @@
       "_stats": {
         "compendiumSource": "Actor.lTDYTENRcyqC9loP.Item.fBZuao5DcF2ei4Sn.ActiveEffect.ztQj8SwTmtq4JuDu",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.1.5.2",
         "createdTime": 1721641583642,
         "modifiedTime": 1721641583642,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ],

@@ -11,9 +11,7 @@
         "type": "attack",
         "traits": [
           "jaw",
-          "contact",
-          "flinch-chance-5",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -40,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "mIp7WV1qNmFePStS",
@@ -54,25 +58,25 @@
           {
             "type": "roll-effect",
             "key": "hyper-fang-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -50
+                "value": -50,
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Flinch 50%"
+                "value": "Flinch 50%",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +87,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

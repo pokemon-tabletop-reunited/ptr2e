@@ -13,7 +13,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
   override scrollLimit = 50;
 
   override searchFields = ["name", "number"];
-  override storeFields = ["type", "name", "img", "uuid", "number", "traits", "skills", "eggGroups", "moves"];
+  override storeFields = ["type", "name", "img", "uuid", "number", "traits", "skills", "eggGroups", "moves", "source"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -32,6 +32,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     const tutorMoves = new Set<string>();
     const levelUpMoves = new Set<string>();
     const allAbilities = new Set<string>();
+    const publications = new Set<string>();
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
       "Item",
@@ -40,7 +41,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
       for (const speciesData of index) {
-        if (speciesData.type !== "species") continue;
+        if (!["species", "ptr2e-digimon-expansion.digimonSpecies"].includes(speciesData.type)) continue;
 
         speciesData.filters = {};
 
@@ -82,6 +83,9 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           }
         }
 
+        const pubSource = (speciesData.system.publication?.source ?? "").trim()
+        if(pubSource) publications.add(pubSource);
+
         species.push({
           name: speciesData.name,
           img: speciesData.img,
@@ -92,7 +96,8 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           skills: speciesData.system.skills ? R.fromEntries(speciesData.system.skills.map((skill: SkillPTR2e) => [skill.slug, skill.value])) : [],
           eggGroups: speciesData.system.eggGroups,
           moves,
-          abilities
+          abilities,
+          source: pubSource
         })
       }
     }
@@ -126,11 +131,13 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
       return acc;
     }, {} as Record<string, string>));
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
-      const traitData = game.ptr.data.traits.get(trait);
+      const traitData = game.ptr.data.traits.getTrait(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;
     }, {} as Record<string, string>));
+
+    this.filterData.checkboxes.source.options = this.generateCheckboxOptions(publications.reduce((acc, source) => ({[source]: source, ...acc}), {} as Record<string, string>));
 
     debug("Finished loading data");
   }
@@ -183,6 +190,11 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
+    // Source
+    if (checkboxes.source.selected.length) {
+      if (!checkboxes.source.selected.includes(entry.source)) return false;
+    }
+
     return true;
   }
 
@@ -194,6 +206,12 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           options: {},
           selected: [],
           isExpanded: false
+        },
+        source: {
+          isExpanded: false,
+          label: "PTR2E.CompendiumBrowser.Filters.Source",
+          options: {},
+          selected: [],
         }
       },
       selects: {

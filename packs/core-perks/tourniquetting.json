@@ -1,0 +1,73 @@
+{
+  "name": "Tourniquetting",
+  "_id": "BrTtQoJadOqRCGtt",
+  "type": "perk",
+  "img": "icons/magic/life/heart-area-circle-red-green.webp",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "tourniquetting",
+    "description": "<p>When the user crosses the @Trait[desperation-1-2] threshold, they may Use a @Trait[healing] @Trait[consumable] or use Touch Up as a Free Action @Trait[interrupt].</p>",
+    "traits": [
+      "healer",
+      "desperation-1-2"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.pharmacy.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "healer"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 47,
+        "y": 76,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "fixing-good",
+          "minor-buff-38",
+          "holistic-care",
+          "valetudinary"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  },
+  "folder": "4UhJK1LInml07WJf"
+}

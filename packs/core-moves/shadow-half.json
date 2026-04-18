@@ -10,9 +10,7 @@
         "name": "Shadow Half",
         "type": "attack",
         "traits": [
-          "exhaust",
-          "contact",
-          "pp-updated"
+          "flinch-40"
         ],
         "range": {
           "target": "emanation",
@@ -21,22 +19,31 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 8
         },
         "category": "status",
         "accuracy": 90,
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose 1/2 of their current HP. The user also loses half of its current HP. This attack always deals a minimum of 1 HP in damage.</p>",
-        "img": "systems/ptr2e/img/svg/shadow_icon.svg"
+        "description": "<p>Effect: On hit, all valid targets lose 50% of the current value of the HP and Shields, minimum 1.</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "U9Oa4lRhtSpeRkej",
   "effects": []

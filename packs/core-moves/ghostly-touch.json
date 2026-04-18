@@ -12,8 +12,7 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -29,14 +28,23 @@
         ],
         "category": "status",
         "accuracy": 95,
-        "description": "<p>Effect: The target loses -1 SPATK and SPDEF Stages for 5 Activations.</p>"
+        "description": "<p>Effect: The target loses -1 SPATK and SPDEF Stages for 5 Activations.</p>",
+        "predicate": []
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -49,24 +57,26 @@
           {
             "type": "roll-effect",
             "key": "ghostly-touch-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.1JXumQz0QqthT9Iv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "ghostly-touch-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -77,13 +87,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

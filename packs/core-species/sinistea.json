@@ -243,7 +243,13 @@
           "methods": [
             {
               "type": "item",
-              "item": "antique-pot",
+              "item": "chipped-pot",
+              "operand": "or",
+              "held": false
+            },
+            {
+              "type": "item",
+              "item": "cracked-pot",
               "operand": "or",
               "held": false
             },
@@ -257,12 +263,7 @@
             "x": 26,
             "y": 26
           },
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
+          "details": null,
           "evolutions": []
         }
       ],
@@ -279,7 +280,8 @@
       "hover",
       "breathless",
       "silent",
-      "stealth"
+      "stealth",
+      "jump-1"
     ],
     "diet": [
       "auravore"
@@ -287,46 +289,40 @@
     "abilities": {
       "starting": [
         {
-          "slug": "weak-armor"
-        },
-        {
-          "slug": "cursed-body"
+          "slug": "the-tea-to-be"
         }
       ],
       "basic": [
         {
-          "slug": "gluttony"
+          "slug": "weak-armor"
         },
         {
-          "slug": "aroma-veil"
+          "slug": "gluttony"
         }
       ],
       "advanced": [
         {
-          "slug": "water-absorb"
+          "slug": "prankster"
         },
         {
-          "slug": "witchery"
+          "slug": "liquified"
         }
       ],
       "master": [
         {
-          "slug": "power-leech"
+          "slug": "water-absorb"
         },
         {
-          "slug": "prankster"
+          "slug": "aroma-veil"
         }
       ]
     },
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 8
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 8
+      }
+    ],
     "skills": [
       {
         "slug": "conversation",
@@ -409,6 +405,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Galar Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "R0n6lG1d5H9GZCX2",

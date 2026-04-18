@@ -3,15 +3,14 @@
   "type": "move",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
-    "slug": "psychic",
+    "slug": "psychic-attack",
     "actions": [
       {
-        "slug": "psychic-move",
+        "slug": "psychic-attack",
         "name": "Psychic",
         "type": "attack",
         "traits": [
-          "push-3",
-          "pp-updated"
+          "push-3"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +28,7 @@
           "psychic"
         ],
         "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 SPDEF Stage for 5 activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "predicate": []
       }
     ],
@@ -37,6 +36,14 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "traits": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "NO3wo8dZeZsPzeW5",
@@ -50,31 +57,31 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "psychic-move-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "key": "psychic-attack-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "alterations": [],
+            "dontMerge": false,
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -86,12 +93,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
-        "createdTime": 1732970407385,
-        "modifiedTime": 1737227736695,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": null
       }
     }
   ]

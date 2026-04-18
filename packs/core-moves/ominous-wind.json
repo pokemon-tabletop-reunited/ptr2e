@@ -10,8 +10,7 @@
         "name": "Ominous Wind",
         "type": "attack",
         "traits": [
-          "wind",
-          "pp-updated"
+          "wind"
         ],
         "range": {
           "target": "wide-line",
@@ -36,6 +35,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "ldbAbUuyzZpiYKDh",
@@ -50,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "ominous-wind-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rMNLqloV5nLmCLrZ",
             "predicate": [],
             "chance": 10,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

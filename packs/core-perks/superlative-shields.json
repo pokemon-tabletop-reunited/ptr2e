@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "superlative-shields",
-    "description": "<p>Upon gaining Shields, you may spend 4PP to gain @Affliction[resolved] 5.</p>",
+    "description": "<p>Upon gaining Shields, you may spend 4PP to gain @Affliction[resolved 5].</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:improved-shielding"
@@ -20,7 +20,8 @@
     "nodes": [
       {
         "connected": [
-          "improved-shielding"
+          "improved-shielding",
+          "fortress-doctrine"
         ],
         "config": {
           "alpha": null,
@@ -47,7 +48,14 @@
     "design": {
       "arena": "mental",
       "approach": "resilience",
-      "archetype": "Tank"
+      "archetype": "tank"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "effects": []

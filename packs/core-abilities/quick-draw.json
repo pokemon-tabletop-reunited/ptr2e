@@ -16,16 +16,23 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user's [Missile] attacks gain [Priority 2] or [Priority X+2].</p>",
+        "description": "<p>Effect: The user's @Trait[missile] attacks gain @Trait[priority-2] or [Priority X+2].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's [Missile] attacks gain [Priority 2] or [Priority X+2].</p>",
+    "description": "<p>Effect: The user's @Trait[missile] attacks gain @Trait[priority-2] or [Priority X+2].</p>",
     "traits": [],
     "slug": "quick-draw",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "3gU77YvsknBgWXat",
@@ -40,25 +47,26 @@
           {
             "type": "roll-effect",
             "key": "missile-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 100,
+            "dontMerge": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Advance 20"
+                "value": "Advance 20%",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -69,13 +77,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -87,12 +90,13 @@
       "_stats": {
         "compendiumSource": "Actor.XMvKhKU2wT1KaqEG.Item.JLLXjz8iXmJXERiZ.ActiveEffect.GoqKyTjXpVMAzHXR",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.344",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737665297412,
         "modifiedTime": 1737665297412,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

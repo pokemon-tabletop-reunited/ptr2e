@@ -9,23 +9,26 @@
     "traits": [
       "weapon",
       "laser",
-      "adaptable-ammunition",
-      "firearm",
       "energy-weapon",
-      "sci-fi"
+      "sci-fi",
+      "charge-pool-18",
+      "reload-3",
+      "2-handed"
     ],
     "actions": [
       {
         "name": "Laslock Beam",
-        "slug": "silphco-laslock-rifle-action-1",
+        "slug": "laslock-beam",
         "description": "<p>The SilphCo Laslock is a single-shot rifle that trades out on the convenience of the Defender for a higher power output and thus longer effective range.</p>",
         "traits": [
-          "weapon"
+          "weapon",
+          "ray",
+          "flinch-25"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "distance": 25,
           "unit": "m"
         },
@@ -37,9 +40,10 @@
           "untyped"
         ],
         "category": "special",
-        "power": 65,
-        "accuracy": 100,
-        "free": true
+        "power": 80,
+        "accuracy": 95,
+        "free": true,
+        "predicate": []
       }
     ],
     "description": "<p>The SilphCo Laslock is a single-shot rifle that trades out on the convenience of the Defender for a higher power output and thus longer effective range.</p>",
@@ -58,9 +62,14 @@
     "grade": "D",
     "fling": {
       "type": "untyped",
-      "power": 40,
-      "accuracy": 100,
-      "hide": null
+      "power": 80,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -76,10 +85,67 @@
     "weaponType": "Rifle (Energy)",
     "weaponPp": 8,
     "weaponRange": "25",
-    "slug": "silphco-laslock-rifle"
+    "slug": "silphco-laslock-rifle",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
+  "effects": [
+    {
+      "name": "SilphCo Laslock Rifle",
+      "type": "passive",
+      "_id": "QO0MYb3X5EGQF0Iv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "laslock-beam-attack-damage",
+            "value": 30,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1758158061278,
+        "modifiedTime": 1767461598425,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ],
+  "folder": "GPebepuiQbZSuf35",
   "_id": "fhfuptGmpadYy37I"
 }

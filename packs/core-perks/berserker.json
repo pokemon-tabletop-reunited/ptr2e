@@ -39,7 +39,10 @@
           "guard-up",
           "trained-rider",
           "stat-iv-booster-1-5",
-          "stat-iv-booster-1-10"
+          "stat-iv-booster-1-10",
+          "minor-buff-49",
+          "minor-buff-54",
+          "berserkergang"
         ],
         "config": {
           "alpha": null,
@@ -61,8 +64,18 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Berserker"
-    }
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -77,16 +90,15 @@
             "key": "",
             "value": "Berserker",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.6OK8vhZYljL4X7cd",
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -98,14 +110,14 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.ZNl94X4B6JuegB6H",
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -117,21 +129,15 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q",
             "predicate": [],
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.actions.1.free",
-                "value": "true"
-              }
-            ],
-            "mode": 2,
+            "alterations": [],
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -142,7 +148,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -153,13 +160,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -171,12 +173,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.5",
         "createdTime": 1732232360900,
         "modifiedTime": 1737391812514,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

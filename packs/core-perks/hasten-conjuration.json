@@ -1,0 +1,91 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Hasten Conjuration",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": {
+        "schema": 0.11,
+        "foundry": "12.331",
+        "system": "1.0.7.beta"
+      }
+    },
+    "actions": [
+      {
+        "name": "Hasten Conjuration",
+        "slug": "hasten-conjuration-action-1",
+        "description": "<p>This perk allows you to advance a summon's activation forward by 30% as a Simple Action costing 3PP.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+        "range": {
+          "target": "object",
+          "unit": "m",
+          "distance": 0
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "variant": null,
+        "ephemeralVariant": false
+      }
+    ],
+    "description": "<p>This perk allows you to advance a summon's activation forward by 30%.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.spiritual.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 140,
+        "y": 119,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "screen-setter",
+          "type-style",
+          "unown-song-sanctuary-ward"
+        ],
+        "config": {
+          "texture": null,
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "tint": null,
+          "scale": null
+        },
+        "tier": null
+      }
+    ],
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": "undefined"
+    },
+    "slug": "hasten-conjuration",
+    "originSlug": null,
+    "variant": null,
+    "mode": null
+  },
+  "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+  "effects": [],
+  "flags": {},
+  "_id": "Gap1jWYR7HF7hjPf"
+}

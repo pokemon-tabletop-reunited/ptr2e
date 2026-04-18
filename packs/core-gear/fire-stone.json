@@ -10,10 +10,12 @@
     "slug": "fire-stone",
     "traits": [
       "evolution",
-      "fire"
+      "belt",
+      "held",
+      "charge-pool-6"
     ],
     "actions": [],
-    "description": "<p>This stone may be used to evolve a number of Fire-type Pokemon.</p>",
+    "description": "<p>This item’s Charge Pool refreshes following Camp. While equipped in a Held or Belt Slot, the user may spend Charge in place of PP (1 Tick of the Clock equals 1 PP) for their Fire-Type Attacks.</p><p>This is also a catalyst for Evolution. When used to evolve a creature, this item is Consumed.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -21,15 +23,20 @@
     },
     "equipped": {
       "carryType": "stowed",
-      "handsHeld": null,
+      "handsHeld": 1,
       "slot": "backpack"
     },
     "grade": "C",
     "fling": {
       "type": "fire",
       "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 7,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -41,10 +48,16 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "88bxi9P2v8wiaflG",
   "img": "systems/ptr2e/img/item-icons/fire%20stone.webp",
-  "effects": [],
-  "flags": {}
+  "effects": []
 }

@@ -26,6 +26,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "wSaTOGsfMnAQUGtL",
@@ -39,30 +46,30 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.battleStats.evasion.Stage",
+            "key": "system.battleStats.evasion.stage",
             "value": -2,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.attributes.def.base",
             "value": 1.5,
-            "mode": 1,
             "predicate": [],
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           },
           {
             "type": "basic",
             "key": "system.attributes.spd.base",
             "value": 1.5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           }
         ],
         "slug": null,
@@ -73,13 +80,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -93,10 +95,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.2.1.beta",
         "createdTime": 1729468218737,
-        "modifiedTime": 1734443830092,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1744317467355,
+        "lastModifiedBy": "0n86nYgSGphC6dEA"
       }
     }
   ]

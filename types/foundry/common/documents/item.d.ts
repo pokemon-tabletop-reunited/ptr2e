@@ -96,7 +96,7 @@ export type ItemSource<TType extends string = string, TSystemSource extends obje
 
 interface ItemFlags extends DocumentFlags {
     core?: {
-        sourceId?: ItemUUID;
+        sourceId?: ItemUUID | string;
     };
     [key: string]: Record<string, unknown> | undefined;
 }

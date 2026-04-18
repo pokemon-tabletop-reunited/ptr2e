@@ -1,5 +1,5 @@
 import { PerkPTR2e } from "@item";
-import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
+import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations, HasPublication } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
@@ -10,9 +10,11 @@ import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { Predicate, PredicateStatement, StatementValidator } from "@system/predication/predication.ts";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
+import { ActorSizePTR2e } from "@actor/data/size.ts";
 
 const PerkExtension = HasEmbed(
-  HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel))))),
+  HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(HasPublication(foundry.abstract.TypeDataModel)))))),
   "perk"
 );
 
@@ -60,6 +62,7 @@ export default abstract class PerkSystem extends PerkExtension {
 
       global: new fields.BooleanField({ required: true, initial: true, label: "PTR2E.FIELDS.perk.global.label", hint: "PTR2E.FIELDS.perk.global.hint" }),
       webs: new fields.SetField(new fields.DocumentUUIDField({ type: "Item" }), { required: true, initial: [], label: "PTR2E.FIELDS.perk.webs.label", hint: "PTR2E.FIELDS.perk.webs.hint" }),
+      traitWebs: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.perk.traitWebs.label", hint: "PTR2E.FIELDS.perk.traitWebs.hint" }),
 
       nodes: new fields.ArrayField(
         new fields.SchemaField({
@@ -175,6 +178,8 @@ export default abstract class PerkSystem extends PerkExtension {
             case "level":
             case "system.advancement.level":
               return "Level";
+            case "size.rank":
+              return "Size Rank";
           }
 
           return `'${path}'`;
@@ -191,6 +196,14 @@ export default abstract class PerkSystem extends PerkExtension {
       if (predicate && typeof predicate === "object" && Object.keys(predicate).length > 0) {
         const statement = predicate as object
         if (StatementValidator.isBinaryOp(statement)) {
+          // Handle Size Category options specifically
+          if ('gte' in statement && typeof statement.gte[0] === "string" && statement.gte[0] == "{actor|size.rank}" && typeof statement.gte[1] === "number") {
+            return `Size Category: ${ActorSizePTR2e.toString(ActorSizePTR2e.sizeFromRank(statement.gte[1]))} or larger`;
+          }
+          if('lte' in statement && typeof statement.lte[0] === "string" && statement.lte[0] == "{actor|size.rank}" && typeof statement.lte[1] === "number") {
+            return `Size Category: ${ActorSizePTR2e.toString(ActorSizePTR2e.sizeFromRank(statement.lte[1]))} or smaller`;
+          }
+
           if ('eq' in statement) {
             //@ts-expect-error - Could be attempting to evaluate truthy value
             if (statement.eq[1] == true) {
@@ -228,6 +241,7 @@ export default abstract class PerkSystem extends PerkExtension {
           if (Array.isArray(or) && or.length === 1) {
             return or[0];
           }
+
           return `One of: ${Array.isArray(or) ? `<ul><li>${or.join('</li><li>')}</li></ul>` : or}`;
         }
         if (StatementValidator.isNand(statement)) {
@@ -389,6 +403,14 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
     false,
     true
   >;
+  traitWebs: foundry.data.fields.SetField<
+    SlugField<string, string, true, false, true>,
+    string[],
+    Set<string>,
+    true,
+    false,
+    true
+  >;
 };
 
 interface PerkDesignSchema extends foundry.data.fields.DataSchema {
@@ -453,7 +475,7 @@ interface NodeTierSchema extends foundry.data.fields.DataSchema {
   uuid: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
 }
 
-type PerkSystemSchemaExtension = SlugSchema & ActionsSchema & DescriptionSchema & MigrationSchema & TraitsSchema;
+type PerkSystemSchemaExtension = SlugSchema & ActionsSchema & DescriptionSchema & MigrationSchema & TraitsSchema & PublicationSchema;
 
 export type PerkSource = BaseItemSourcePTR2e<"perk", PerkSystemSource>;
 

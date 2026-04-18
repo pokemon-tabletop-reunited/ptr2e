@@ -6,7 +6,7 @@ import { sluggify } from "@utils";
 export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = {
     tag: "form",
-    classes: ["sheet", "type-matrix", "default-sheet"],
+    classes: ["sheet", "type-matrix", "default-sheet", "ptr2e"],
     id: "type-matrix-dialog",
     position: {
       height: "auto" as const,
@@ -16,6 +16,7 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
       title: "PTR2E.TypeMatrix.Dialog.Title",
       minimizable: false,
       resizable: false,
+      contentClasses: ["standard-form"]
     },
     form: {
       handler: TypeMatrixDialog.onSubmit,
@@ -131,6 +132,7 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
 
     app.cache[data.type] = typeData;
     for (const key in app.cache) {
+      typeData.effectiveness[key as keyof TypeEffectiveness] = 1;
       app.cache[key as keyof TypeEffectiveness]!.effectiveness[data.type] = 1;
     }
 
@@ -148,13 +150,9 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
 
     const typeData = {
       images: data.images,
-      effectiveness: defaultEffectiveness.untyped.effectiveness
+      effectiveness: app.cache[data.type]?.effectiveness ?? defaultEffectiveness.untyped.effectiveness
     }
-
     app.cache[data.type] = typeData;
-    for (const key in app.cache) {
-      app.cache[key as keyof TypeEffectiveness]!.effectiveness[data.type] = 1;
-    }
 
     return void app.render({ parts: ["content"] });
   }

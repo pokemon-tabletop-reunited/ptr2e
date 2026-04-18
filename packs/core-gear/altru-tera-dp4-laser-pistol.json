@@ -1,0 +1,179 @@
+{
+  "folder": "fwBg1GB1fMcgPklo",
+  "name": "Altru-Tera DP4 Laser Pistol",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "laser",
+      "reload-3",
+      "steel",
+      "charge-pool-20",
+      "sci-fi",
+      "1-handed"
+    ],
+    "actions": [
+      {
+        "name": "Las-Shot",
+        "slug": "las-shot",
+        "traits": [
+          "ray"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 14,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 65,
+        "accuracy": 100,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Magnum Laser",
+        "slug": "magnum-laser",
+        "traits": [
+          "ray",
+          "flinch-15"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 9,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 140,
+        "accuracy": 90,
+        "predicate": [],
+        "variant": "las-shot"
+      }
+    ],
+    "description": "<p>The DP4 is a specialty-manufactured directed energy weapon, designed to fit the role of a sidearm for security or military personnel. The DP4 is loaded with current generation capacitor bank magazines as their standard configuration, giving them a fair few number of shots at quite a significant punch and a “Beam Magnum” selector, to allow for higher output and stopping power.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": null,
+      "slot": "held"
+    },
+    "grade": "B",
+    "fling": {
+      "type": "untyped",
+      "power": 80,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "slug": "altru-tera-dp4-laser-pistol",
+    "ammoType": []
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "DP4 Laser Pistol",
+      "type": "passive",
+      "_id": "pfivblvcvj5UbYlu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "las-shot-attack-damage",
+            "value": 20,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "magnum-laser-attack-damage",
+            "value": 50,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "modifiedTime": 1767455878957
+      }
+    }
+  ],
+  "_id": "diU7kRmRRVoAsCX8"
+}

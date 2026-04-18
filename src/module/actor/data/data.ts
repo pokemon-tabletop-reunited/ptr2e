@@ -9,14 +9,14 @@ import SkillPTR2e from "@module/data/models/skill.ts";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { Nature } from "@scripts/config/natures.ts";
 
-interface Movement { method: string; value: number; type: "primary" | "secondary" }
+interface Movement { method: string; value: number; available: number; }
 
 interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.fields.DataSchema {
   species: foundry.data.fields.SchemaField<SpeciesSchema, SourceFromSchema<SpeciesSchema>, SpeciesSystem, false, true, true>;
   advancement: foundry.data.fields.SchemaField<AdvancementSchema, SourceFromSchema<AdvancementSchema>, ModelPropsFromSchema<AdvancementSchema>, true, false, false>;
   attributes: foundry.data.fields.SchemaField<AttributesSchema, SourceFromSchema<AttributesSchema>, ModelPropsFromSchema<AttributesSchema>, true, false, false>;
   battleStats: foundry.data.fields.SchemaField<BattleStatsSchema, SourceFromSchema<BattleStatsSchema>, ModelPropsFromSchema<BattleStatsSchema>, true, false, false>;
-  skills: CollectionField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
+  skills: foundry.data.fields.TypedObjectField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
   biology: foundry.data.fields.ObjectField<object, object, true, false, false>;
   capabilities: foundry.data.fields.ObjectField<object, object, true, false, false>;
   type: foundry.data.fields.SchemaField<TypeSchema, SourceFromSchema<TypeSchema>, ModelPropsFromSchema<TypeSchema>, true, false, false>;
@@ -37,7 +37,22 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
     true, false, true
   >;
   immunities: foundry.data.fields.SetField<SlugField, string[], Set<string>, true, false, true>;
+  investments: foundry.data.fields.SchemaField<InvestmentSchema, SourceFromSchema<InvestmentSchema>, ModelPropsFromSchema<InvestmentSchema>, true, false, false>;
 }
+
+interface InvestmentSchema extends foundry.data.fields.DataSchema {
+  ivs: foundry.data.fields.SchemaField<InvestmentIVsSchema, SourceFromSchema<InvestmentIVsSchema>, ModelPropsFromSchema<InvestmentIVsSchema>, true, false, false>;
+}
+
+interface InvestmentIVsSchema extends foundry.data.fields.DataSchema {
+  hp: foundry.data.fields.NumberField<number, number, true, false, true>;
+  atk: foundry.data.fields.NumberField<number, number, true, false, true>;
+  def: foundry.data.fields.NumberField<number, number, true, false, true>;
+  spa: foundry.data.fields.NumberField<number, number, true, false, true>;
+  spd: foundry.data.fields.NumberField<number, number, true, false, true>;
+  spe: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
 
 interface PartySchema extends foundry.data.fields.DataSchema {
   ownerOf: foundry.data.fields.DocumentIdField<string, false, false, false>;

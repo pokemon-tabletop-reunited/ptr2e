@@ -10,8 +10,7 @@
         "name": "Freezing Glare",
         "type": "attack",
         "traits": [
-          "legendary",
-          "pp-updated"
+          "legendary"
         ],
         "range": {
           "target": "line",
@@ -29,7 +28,7 @@
           "psychic",
           "ice"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[frozen] 3. This attack is both Ice- and Psychic-Type.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[frozen 3]. This attack is both Ice- and Psychic-Type.</p>",
         "img": "systems/ptr2e/img/svg/psychic_icon.svg"
       }
     ],
@@ -37,6 +36,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "p6CRPedtiA7nzBuH",
@@ -51,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "freezing-glare",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frozencondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,13 +73,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

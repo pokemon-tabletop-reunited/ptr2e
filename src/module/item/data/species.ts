@@ -1,5 +1,5 @@
 import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasPublication, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
@@ -14,9 +14,10 @@ import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { Predicate, PredicateStatement } from "@system/predication/predication.ts";
 import { ImageResolver, sluggify } from "@utils";
+import { PublicationSchema } from "@module/data/mixins/has-publication.ts";
 
 const SpeciesExtension = HasEmbed(
-  HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))),
+  HasMigrations(HasTraits(HasDescription(HasSlug(HasPublication(foundry.abstract.TypeDataModel))))),
   "species"
 );
 
@@ -52,7 +53,7 @@ class SpeciesSystem extends SpeciesExtension {
     }
 
     return {
-      ...super.defineSchema() as TraitsSchema & MigrationSchema & DescriptionSchema & SlugSchema,
+      ...super.defineSchema() as TraitsSchema & MigrationSchema & DescriptionSchema & SlugSchema & PublicationSchema,
       number: new fields.NumberField({
         required: true,
         min: 0,
@@ -178,42 +179,24 @@ class SpeciesSystem extends SpeciesExtension {
           uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
-      movement: new fields.SchemaField({
-        primary: new fields.ArrayField(
-          new fields.SchemaField({
-            type: new SlugField({
-              required: true,
-              blank: true,
-              nullable: false,
-              initial: "",
-            }),
-            value: new fields.NumberField({ required: true, min: 0 }),
-          }),
-          {
+      movement: new fields.ArrayField(
+        new fields.SchemaField({
+          type: new SlugField({
             required: true,
-            initial: [],
-            label: "PTR2E.FIELDS.movement.primary.label",
-          }
-        ),
-        secondary: new fields.ArrayField(
-          new fields.SchemaField({
-            type: new SlugField({
-              required: true,
-              blank: true,
-              nullable: false,
-              initial: "",
-            }),
-            value: new fields.NumberField({ required: true, min: 0 }),
+            blank: true,
+            nullable: false,
+            initial: "",
           }),
-          {
-            required: true,
-            initial: [],
-            label: "PTR2E.FIELDS.movement.secondary.label",
-          }
-        ),
-      }),
+          value: new fields.NumberField({ required: true, min: 0 }),
+        }),
+        {
+          required: true,
+          initial: [],
+          label: "PTR2E.FIELDS.movement.primary.label",
+        }
+      ),
       skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
-        initial: getInitialSkillList,
+        initial: () => Object.values(getInitialSkillList()),
       }),
       moves: new fields.SchemaField({
         levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
@@ -263,6 +246,11 @@ class SpeciesSystem extends SpeciesExtension {
           return { slug: g, uuid: null };
         });
       }
+    }
+    //@ts-expect-error - Old typing
+    if (!Array.isArray(source.movement) && (source.movement.primary?.length || source.movement.secondary?.length)) {
+      //@ts-expect-error - Old typing
+      source.movement = [...Array.from(source.movement.primary ?? []), ...Array.from(source.movement.secondary ?? [])].filter(m => !!m)
     }
     return super.migrateData(source);
   }
@@ -363,7 +351,7 @@ class SpeciesSystem extends SpeciesExtension {
     super.prepareBaseData();
 
     if (!this.evolutions) {
-      const uuid = this.parent.flags.core?.sourceId ?? this.parent.uuid;
+      const uuid = (this.parent.flags.core?.sourceId || this.parent._stats?.compendiumSource) ?? this.parent.uuid;
       const result = fu.parseUuid(uuid);
       if (result.documentId) {
         this.evolutions = new EvolutionData({
@@ -457,10 +445,22 @@ class SpeciesSystem extends SpeciesExtension {
     return evolutions;
   }
 
+  async getSpeciesArt(isShiny = this.shiny): Promise<ImageFilePath> {
+    if (!["icons/svg/mystery-man.svg", "systems/ptr2e/img/icons/species_icon.webp"].includes(this.parent.img)) return this.parent.img as ImageFilePath;
+    const config = game.ptr.data.artMap.get(this.slug);
+    if(!config) return this.parent.img as ImageFilePath;
+    const resolver = await ImageResolver.createFromSpeciesData({
+      dexId: this.number,
+      shiny: isShiny,
+      forms: this.form ? this.form.split("-") : [],
+    }, config);
+    return (resolver?.result ?? this.parent.img) as ImageFilePath;
+  }
+
   private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<DeepPartial<PerkPTR2e['_source']>> {
 
     const img = await (async () => {
-      const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
+      const species = await fu.fromUuid<SpeciesPTR2e>(evolution.uuid);
       if (!species) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const config = game.ptr.data.artMap.get(species.slug);
@@ -469,6 +469,7 @@ class SpeciesSystem extends SpeciesExtension {
       const resolver = await ImageResolver.createFromSpeciesData({
         dexId: species.system.number,
         shiny: isShiny,
+        female: (this.parent?.actor?.system?.gender ?? "") == "female",
         forms: []
       }, config);
       return resolver?.result ?? this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
@@ -524,11 +525,20 @@ class SpeciesSystem extends SpeciesExtension {
 
     const evolutions = this.evolutions ? this.evolutions : {
       name: this.parent.slug,
-      uuid: this.parent.flags?.core?.sourceId ?? this.parent.uuid,
+      uuid: (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid,
     } as EvolutionData;
-    if (!evolutions.uuid) evolutions.uuid = this.parent.flags?.core?.sourceId ?? this.parent.uuid;
+    if (!evolutions.uuid) evolutions.uuid = (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid;
+
+    const packs = game.settings.get("ptr2e", "compendiumBrowserPacks")?.species ?? {};
+    const sources = Object.values(game.settings.get("ptr2e", "compendiumBrowserSources")?.sources ?? {});
 
     for await (const [evolution, depth] of recursiveEvolution(evolutions)) {
+      // Check if Evolution should be loaded
+      const species = await fu.fromUuid<SpeciesPTR2e>(evolution.uuid);
+      if (!species) continue;
+      if(species.pack && packs[species.pack]?.load === false) continue;
+      if(species.system.publication?.source && sources.find(s => s && s.name === species.system.publication.source)?.load === false) continue;
+
       const data = await this.createEvolutionPerk(evolution, isShiny);
       (data.flags!.ptr2e!.evolution as Record<string, unknown>).tier = depth;
 
@@ -906,7 +916,7 @@ interface SpeciesSystem extends ModelPropsFromSchema<SpeciesSchema> {
   // virtual: boolean;
 }
 
-export interface SpeciesSchema extends foundry.data.fields.DataSchema, TraitsSchema, MigrationSchema, DescriptionSchema, SlugSchema {
+export interface SpeciesSchema extends foundry.data.fields.DataSchema, TraitsSchema, MigrationSchema, DescriptionSchema, SlugSchema, PublicationSchema {
   number: foundry.data.fields.NumberField<number, number, true, false, true>;
   form: SlugField<string, string, false, true, true>;
   stats: foundry.data.fields.SchemaField<StatsSchema, SourceFromSchema<StatsSchema>, ModelPropsFromSchema<StatsSchema>>;
@@ -914,7 +924,14 @@ export interface SpeciesSchema extends foundry.data.fields.DataSchema, TraitsSch
   size: foundry.data.fields.SchemaField<SizeSchema, SourceFromSchema<SizeSchema>, ModelPropsFromSchema<SizeSchema>>;
   diet: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
   abilities: foundry.data.fields.SchemaField<AbilitySchema, SourceFromSchema<AbilitySchema>, ModelPropsFromSchema<AbilitySchema>>;
-  movement: foundry.data.fields.SchemaField<MovementSchema, SourceFromSchema<MovementSchema>, ModelPropsFromSchema<MovementSchema>>;
+  movement: foundry.data.fields.ArrayField<
+    foundry.data.fields.SchemaField<MovementTypeSchema, SourceFromSchema<MovementTypeSchema>, ModelPropsFromSchema<MovementTypeSchema>>,
+    SourcePropFromDataField<MovementTypeSchema>[],
+    ModelPropsFromSchema<MovementTypeSchema>[],
+    true,
+    false,
+    true
+  >;
   skills: CollectionField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
   moves: foundry.data.fields.SchemaField<MovesSchema, SourceFromSchema<MovesSchema>, ModelPropsFromSchema<MovesSchema>>;
   captureRate: foundry.data.fields.NumberField<number, number, true, false, true>;
@@ -954,25 +971,6 @@ export interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
 
 export type AbilityReference = Required<{ slug: string, uuid: string }>;
 
-interface MovementSchema extends foundry.data.fields.DataSchema {
-  primary: foundry.data.fields.ArrayField<
-    foundry.data.fields.SchemaField<MovementTypeSchema, SourceFromSchema<MovementTypeSchema>, ModelPropsFromSchema<MovementTypeSchema>>,
-    SourcePropFromDataField<MovementTypeSchema>[],
-    ModelPropsFromSchema<MovementTypeSchema>[],
-    true,
-    false,
-    true
-  >;
-  secondary: foundry.data.fields.ArrayField<
-    foundry.data.fields.SchemaField<MovementTypeSchema, SourceFromSchema<MovementTypeSchema>, ModelPropsFromSchema<MovementTypeSchema>>,
-    SourcePropFromDataField<MovementTypeSchema>[],
-    ModelPropsFromSchema<MovementTypeSchema>[],
-    true,
-    false,
-    true
-  >;
-}
-
 interface MovementTypeSchema extends foundry.data.fields.DataSchema {
   type: SlugField<string, string, true, false, true>;
   value: foundry.data.fields.NumberField<number, number, true, false, false>;
@@ -1004,6 +1002,7 @@ export interface LevelUpMoveSchema extends MoveSchema {
 interface MoveSchema extends foundry.data.fields.DataSchema {
   name: SlugField<string, string, true, false, true>;
   uuid: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
+  grade: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
   gen: SlugField<string, string, false, true, true>;
 }
 

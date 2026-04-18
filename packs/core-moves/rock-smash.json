@@ -12,8 +12,7 @@
         "traits": [
           "basic",
           "contact",
-          "field",
-          "pp-updated"
+          "field"
         ],
         "range": {
           "target": "creature",
@@ -41,13 +40,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "x8owJfS8Dnlj3Wbe",
   "effects": [
     {
       "name": "Rock Smash",
-      "type": "affliction",
+      "type": "passive",
       "_id": "YSsIts2EaOlxBwJG",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -55,13 +60,13 @@
           {
             "type": "roll-effect",
             "key": "rock-smash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -75,13 +80,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

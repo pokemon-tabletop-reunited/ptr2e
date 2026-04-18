@@ -26,13 +26,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "m9Ag7JCZvcx28Sy7",
   "effects": [
     {
       "name": "Tough Claws",
-      "type": "affliction",
+      "type": "passive",
       "_id": "oc7Knfvggyj07dBR",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -43,10 +49,10 @@
             "value": 30,
             "predicate": [],
             "label": "Tough Claws",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -60,13 +66,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

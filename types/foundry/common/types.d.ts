@@ -1,5 +1,6 @@
 import type { DataModel, Document } from "./abstract/module.d.ts";
 import { ApplicationConfiguration, ApplicationRenderOptions, ApplicationV2 } from "./applications/api.js";
+import { DataField } from "./data/fields.js";
 
 declare global {
     interface DocumentConstructionContext<TParent extends Document | null>
@@ -100,13 +101,14 @@ declare global {
             | ObjectConstructor
             | ArrayConstructor
             | ConstructorOf<DataModel>
-            | Function;
+            | Function
+            | DataField;
         /** For string Types, defines the allowable values */
         choices?: TChoices;
         /** For numeric Types, defines the allowable range */
         range?: this["type"] extends NumberConstructor ? { min: number; max: number; step: number } : never;
         /** The default value */
-        default: number | string | boolean | object | (() => number | string | boolean | object);
+        default: number | string | boolean | object | (() => number | string | boolean | object) | null;
         /** Executes when the value of this Setting changes */
         onChange?: (choice: TChoices extends object ? keyof TChoices : unknown) => void | Promise<void>;
     }

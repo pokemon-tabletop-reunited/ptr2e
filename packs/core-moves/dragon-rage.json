@@ -10,28 +10,74 @@
         "name": "Dragon Rage",
         "type": "attack",
         "traits": [
-          "pp-updated"
+          "flat"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 4
         },
         "category": "special",
-        "power": null,
         "accuracy": 100,
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: This attack always deals 70 damage on hit.</p>"
+        "description": "<p>Effect: This attack deals flat damage based on the user's level.</p><blockquote><p>Damage Formula: Damage = 1.75 x UserLevel</p></blockquote></p>",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "predicate": []
       }
     ],
-    "grade": "D"
+    "grade": "C",
+    "traits": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "PFcT7WCVrxW0GXub",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dragon Rage",
+      "type": "passive",
+      "_id": "74frxdejaaJMCMwX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "dragon-rage-attack-damage-flat",
+            "value": "floor(@actor.system.advancement.level * 1.75)",
+            "label": "Dragon Rage",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {}
+    }
+  ]
 }

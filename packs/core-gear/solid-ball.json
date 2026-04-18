@@ -21,7 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -29,33 +35,28 @@
       "stack-5",
       "belt",
       "fling",
-      "type-ball"
+      "ball"
     ],
-    "description": "4x Catch Rate modifier if used on a Rock- or Steel-Type creature. 1x Catch Rate modifier otherwise.",
-    "modifier": 4,
+    "description": "<p>3x Catch Rate modifier if used on a Rock- or Steel-Type creature. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 3,
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "stack": 5
+    "slug": "solid-ball",
+    "stack": 5,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "ChUBfCpKyt7YCLd4",
   "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!ChUBfCpKyt7YCLd4"
+  "folder": "bIBkUsgkWMXMOtHm"
 }

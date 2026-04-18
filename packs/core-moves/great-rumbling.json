@@ -13,8 +13,7 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "5-strike",
-          "earthbound",
-          "pp-updated"
+          "earthbound"
         ],
         "range": {
           "target": "cone",
@@ -31,13 +30,19 @@
         "category": "physical",
         "power": 20,
         "accuracy": 90,
-        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[slowed] 5.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[slowed 5].</p>"
       }
     ],
     "grade": "B",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "effects": [
@@ -51,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "great-rumbling-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.slowedcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.slowedcondition0",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,13 +73,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

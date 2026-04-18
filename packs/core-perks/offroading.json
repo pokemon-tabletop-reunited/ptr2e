@@ -1,0 +1,128 @@
+{
+  "name": "Offroading",
+  "_id": "fM7vICrggQxDix5f",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Mechanist.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "offroading",
+    "description": "<p>Effect: When Moving using a Crewed vehicle through Rough Terrain, the user gains +10 to Pilot Skill Rolls with the Crewed vehicle. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
+    "traits": [
+      "pilot"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.navigate.mod}",
+          45
+        ]
+      },
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.bike.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.small-motor-vehicles.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.cars.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.utility-vehicles.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.military-ground-vehicles.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.walkers.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aircraft.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aerospace-vehicles.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.exotic-vehicle-specific.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.watercraft.mod}",
+              35
+            ]
+          }
+        ],
+        "x": 2
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "pilot"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 66,
+        "y": 82,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-54",
+          "hard-swerve"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  }
+}

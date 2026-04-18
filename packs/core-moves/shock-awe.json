@@ -10,10 +10,8 @@
         "name": "Shock & Awe",
         "type": "attack",
         "traits": [
-          "2-strike",
-          "social",
-          "flinch-chance-2",
-          "pp-updated"
+          "double-strike",
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -30,7 +28,7 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched, and a 20% chance of gaining @Affliction[fear] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched, and a 20% chance of gaining @Affliction[fear 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -40,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "I5B0mFAtNLeLyq30",
@@ -54,37 +58,37 @@
           {
             "type": "roll-effect",
             "key": "shock-awe-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 20,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
+                "value": -20,
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Flinch 20%"
+                "value": "Flinch 20%",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "shock-awe-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -95,13 +99,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -1,0 +1,114 @@
+{
+  "name": "Up The Beat",
+  "_id": "SHri9g04j6zMBwDG",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [
+    {
+      "name": "Up The Beat",
+      "type": "passive",
+      "_id": "ndna8JIAXBYpuhGx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-moves.Item.m6eeM9WpSKpSS3rw",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765236408322,
+        "modifiedTime": 1765236426046,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "PTR2 Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "up-the-beat",
+    "description": "<p>The user learns Metronome, and can Tutor it to any creature, albeit at a -30 if the creature does not have it on a Tutor List.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:ace",
+      "item:perk:gambit-style"
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "gambler"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 85,
+        "y": 183,
+        "connected": [
+          "minor-buff-13",
+          "quick-and-the-dead",
+          "lets-go-gambling",
+          "minor-buff-65",
+          "gambit-style-1",
+          "cant-break-my-winning-streak",
+          "lucky-duck"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "E5JYWji5073kTXhD"
+}

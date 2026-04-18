@@ -20,36 +20,18 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3
+          "powerPoints": 2
         },
-        "description": "Effect: The target may use DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.",
+        "description": "<p>Effect: The target uses DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.</p>",
         "type": "generic",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "name": "Assault Armor! (Self)",
-        "slug": "assault-armor-self",
-        "traits": [
-          "command",
-          "style"
-        ],
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 3
-        },
-        "description": "Effect: The user may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next Activation.",
-        "type": "generic",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "assault-armor-style",
-    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next full Activation.</p>",
+    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature uses DEF in place of their ATK when using a Physical-Category Attack until the end of their next full Activation.</p>",
     "traits": [
-      "command"
+      "command",
+      "style"
     ],
     "prerequisites": [
       {
@@ -66,27 +48,27 @@
     },
     "nodes": [
       {
+        "x": 101,
+        "y": 124,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "gambit-style",
           "evasive-style",
           "stat-iv-booster-1-11",
           "improved-burrow-3",
           "improved-overland-13",
-          "improved-overland-5"
+          "improved-overland-5",
+          "minor-buff-8",
+          "minor-buff-16",
+          "minor-buff-29"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 101,
-        "y": 124,
         "tier": null
       }
     ],
@@ -96,8 +78,65 @@
     "design": {
       "arena": "physical",
       "approach": "resilience",
-      "archetype": "Tactician"
+      "archetype": "tactician"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Assault Armor Style",
+      "type": "passive",
+      "_id": "znFSIGgTruab5igy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "assault-armor-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.v94DtQcoeLWVMpyv",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e"
+      }
+    }
+  ]
 }

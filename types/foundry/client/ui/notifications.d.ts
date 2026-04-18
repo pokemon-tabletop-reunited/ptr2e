@@ -68,6 +68,15 @@ declare global {
 
         /** Retrieve a pending notification from the queue and display it */
         fetch(): void;
+
+        update(notification: Notification | number, update: {
+          message?: string;
+          localize?: boolean;
+          escape?: boolean;
+          clean?: boolean;
+          format?: Record<string, unknown>;
+          pct?: number;
+        }): void
     }
 }
 
@@ -78,6 +87,14 @@ interface NotifyOptions {
     localize?: boolean;
     /** Whether to log the message to the console */
     console?: boolean;
+
+    progress?: boolean;
+
+    escape?: boolean;
+
+    clean?: boolean;
+
+    format?: Record<string, unknown>;
 }
 
 interface NotificationData {

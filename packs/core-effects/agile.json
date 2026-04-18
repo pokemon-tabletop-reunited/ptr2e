@@ -1,0 +1,111 @@
+{
+  "name": "Agile",
+  "type": "effect",
+  "img": "icons/svg/thrust.svg",
+  "system": {
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "description": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
+    "slug": "agile",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Agile",
+      "img": "icons/svg/thrust.svg",
+      "type": "affliction",
+      "duration": {
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": -20,
+            "predicate": [],
+            "label": "Agile",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Advance 20% (Agile)",
+                "method": 5
+              },
+              {
+                "property": "system.removeAfterAttacking",
+                "value": "true",
+                "method": 5
+              }
+            ],
+            "predicate": [],
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "removeOnRecall": true,
+        "removeAfterCombat": true,
+        "traits": [
+          "pseudo-affliction"
+        ],
+        "slug": null,
+        "removeAfterAttacking": true,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "description": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
+      "statuses": [],
+      "_id": "agilecondition00",
+      "_stats": {
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": null,
+        "modifiedTime": 1755991985076,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "sort": 0,
+      "showIcon": 2
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXgE",
+  "_id": "agileconditiitem"
+}

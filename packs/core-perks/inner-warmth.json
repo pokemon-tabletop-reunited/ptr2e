@@ -6,28 +6,22 @@
       "trait:fire"
     ],
     "cost": 1,
-    "description": "<p>You gain the [Heater] trait.</p>",
+    "description": "<p>You gain the @Trait[heater] trait.</p>",
     "actions": [
       {
         "name": "Inner Warmth",
         "slug": "inner-warmth",
         "description": "<p>You gain the [Heater] trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "inner-warmth",
@@ -38,39 +32,41 @@
     },
     "nodes": [
       {
+        "x": 169,
+        "y": 91,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "intense-heat",
           "midnight-oil",
-          "root-3"
+          "root-3",
+          "flare-ignition"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 169,
-        "y": 91,
         "tier": null
       }
     ],
     "autoUnlock": [
       "trait:heater"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "[Fire]"
+      "archetype": "fire"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "vgrtXLOiip6DrtUb",
@@ -80,7 +76,7 @@
       "name": "Inner Warmth",
       "type": "passive",
       "_id": "9sPoZxBVcS4lYsy5",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/fire_icon.svg",
       "system": {
         "changes": [
           {
@@ -88,28 +84,25 @@
             "key": "",
             "value": "heater",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
-      "description": "",
+      "description": "<p>You gain the @Trait[heater] trait.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -119,12 +112,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1733019363144,
-        "modifiedTime": 1733019373225,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754225562149,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "exportSource": null
       }
     }
   ],

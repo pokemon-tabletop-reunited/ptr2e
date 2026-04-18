@@ -1,8 +1,9 @@
 import { formatSlug, sluggify } from "@utils";
-import Trait from "./models/trait.ts";
+import Trait, { PlaceholderTrait } from "./models/trait.ts";
 
 export default class PTR2eTraits extends Collection<Trait> {
   rawModuleTraits: Trait[] = [];
+  placeholders: PlaceholderTrait[] = [];
 
   constructor() {
     super();
@@ -10,16 +11,54 @@ export default class PTR2eTraits extends Collection<Trait> {
   }
 
   static create() {
-    return new PTR2eTraits().refresh();
+    return new PTR2eTraits();
   }
 
-  refresh() {
+  getTrait(slug: string): Trait | undefined {
+    if(!slug) return undefined;
+    const early = this.get(slug);
+    if (early) return early;
+
+    for (const placeholder of this.placeholders) {
+      let gotHit = false;
+      const trait: PlaceholderTrait = {...placeholder};
+      for (const entry of placeholder.placeholders) {
+        const result = slug.match("^"+entry.keyPattern+"$");
+        if(!result) continue;
+
+        const value = slug.match(entry.valuePattern);
+        if(!value) continue;
+
+        const realValue = value.length > 1 ? value[1] : value[0];
+
+        trait.slug = slug;
+        trait.label = trait.label.replace(entry.labelPattern, realValue);
+        trait.description = trait.description.replace(entry.descriptionPattern, entry.descriptionReplacement.replaceAll("{{x}}", realValue));
+        if(!trait.value) {
+          trait.value = realValue + (entry.valueDivisor ? entry.valueDivisor : "");
+        } else {
+          trait.value += realValue + (entry.valueDivisor ? entry.valueDivisor : "");
+        }
+        gotHit = true;
+      }
+
+      if(gotHit) return trait;
+    }
+
+    return undefined;
+  }
+
+  async refresh() {
     this.clear();
 
     for (const trait of CONFIG.PTR.data.traits) {
       if (!trait.description) trait.description = "";
       //@ts-expect-error - This is a valid operation
-      if(!trait.changes) trait.changes = [];
+      if (!trait.changes) trait.changes = [];
+      if (trait.placeholders && trait.placeholders.length > 0) {
+        this.placeholders.push(trait as unknown as PlaceholderTrait);
+      }
+
       this.set(trait.slug, trait as unknown as Trait);
     }
 
@@ -38,6 +77,45 @@ export default class PTR2eTraits extends Collection<Trait> {
 
     // Allow modules to add and override Traits
     const toAdd: Trait[] = [];
+
+    // Add based on module flags
+    const modules = [...game.modules.entries()]
+      .filter(([moduleKey, module]) => {
+        if (!module.active) return false;
+        if (!module.flags[moduleKey]?.["ptr2e-traits"]) return false;
+        return true;
+      })
+      .sort(
+        ([aKey, a], [bKey, b]) =>
+          (Number(a.flags[aKey]?.["ptr2e-traits-priority"]) || Infinity) -
+          (Number(b.flags[bKey]?.["ptr2e-traits-priority"]) || Infinity)
+      );
+
+    for (const [moduleKey, foundryModule] of modules) {
+      const moduleTraits = foundryModule.flags[moduleKey]!["ptr2e-traits"];
+      if (typeof moduleTraits !== "string") continue;
+
+      const map = await (async (): Promise<Maybe<Trait[]>> => {
+        try {
+          const response = await fetch(moduleTraits);
+          if (!response.ok) {
+            console.warn(`PTR2E | Traits Collection | Module ${foundryModule.id} | Failed to fetch traits from ${moduleTraits}`);
+            return null;
+          }
+          return await response.json();
+
+        } catch (error) {
+          if (error instanceof Error) {
+            console.warn(`PTR2E | Traits Collection | Module ${foundryModule.id} | Error while fetching traits`, error.message);
+          }
+          return null;
+        }
+      })();
+      if (!map || !Array.isArray(map) || map.length === 0) continue;
+
+      toAdd.push(...map);
+    }
+
     Hooks.callAll("ptr2e.prepareTraits", toAdd);
 
     if (toAdd.length > 0) {

@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/item-icons/cheri%20berry.webp",
   "system": {
     "actions": [],
-    "description": "<p>Effect: Whenever the user consumes a [Food] item, they recover @Tick[5] in addition to the [Food] item's effect.</p><p>Passive: The user possesses an additional [Stash] Slot.<br><br>Connection: Stuff Cheeks.</p>",
+    "description": "<p>Effect: Whenever the user consumes a @Trait[food] item, they recover @Tick[5] in addition to the @Trait[food] item's effect.</p><p>Passive: The user possesses an additional @Trait[belt], which can only be filled by a @Trait[food] item.<br><br>Connection: Stuff Cheeks.</p>",
     "traits": [
       "healing",
       "partial-automation"
@@ -13,6 +13,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "L7FriVV2nV1w5PhE",
@@ -28,43 +35,42 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.QJjxOISEcfO0vgmP",
-            "predicate": [],
+            "predicate": [
+              "ability:cheek-pouch:active"
+            ],
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "replaceSelf": true,
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "track": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "reevaluateOnUpdate": true,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -76,12 +82,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1739566976681,
-        "modifiedTime": 1739567012288,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1754317052231,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

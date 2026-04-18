@@ -37,6 +37,14 @@ import { Habitats } from "./habitats.ts";
 import { HabitatRollTable } from "@system/habitat-table.ts";
 import { RollTableDirectoryPTR2e } from "@module/apps/sidebar/rolltables-directory.ts";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
+import { HotbarPTR2e } from "@module/apps/hotbar.ts";
+import { TokenRulerPTR2e } from "@module/canvas/token-ruler.ts";
+import { PrototypeTokenConfigPTR2e, TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { ImageResolver } from "@utils";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -104,8 +112,16 @@ export const PTRCONFIG = {
   },
   Folder: {
     documentClass: FolderPTR2e,
+    sheetClass: FolderConfigPTR2e,
     sheetClasses: {
-      folder: FolderConfigPTR2e
+      "ptr2e.FolderConfig": {
+        cls: FolderConfigPTR2e,
+        label: "PTR 2e Folder Config",
+        canBeDefault: true,
+        canConfigure: true,
+        id: "ptr2e.FolderConfig",
+        themes: {}
+      }
     }
   },
   Grid: {
@@ -150,7 +166,11 @@ export const PTRCONFIG = {
   Token: {
     documentClass: TokenDocumentPTR2e,
     objectClass: TokenPTR2e,
-    trackableAttributes
+    trackableAttributes,
+    hudClass: TokenHUDPTR2e,
+    rulerClass: TokenRulerPTR2e,
+    sheetClass: TokenConfigPTR2e,
+    prototypeSheetClass: PrototypeTokenConfigPTR2e
   },
   Scene: {
     documentClass: ScenePTR2e,
@@ -165,7 +185,8 @@ export const PTRCONFIG = {
     actors: ActorDirectoryPTR2e,
     compendium: CompendiumDirectoryPTR2e,
     settings: SettingsSidebarPTR2e,
-    tables: RollTableDirectoryPTR2e
+    tables: RollTableDirectoryPTR2e,
+    hotbar: HotbarPTR2e
   },
   data: {
     traits: Traits,
@@ -194,6 +215,63 @@ export const PTRCONFIG = {
     max: "PTR2E.ActorSize.Max"
   } as Record<Size, string>,
   utils: {
-    predicate: Predicate
-  }
+    predicate: Predicate,
+    SlugField,
+    PredicateField,
+    ImageResolver
+  },
+  options: {} as Record<string, PickableThing[]>,
+  movementTypes: {
+    overland: {
+      label: "PTR2E.TokenMovement.Actions.Overland",
+      icon: "fa-solid fa-fw fa-person-walking",
+      canSelect: (token) => token?.actor?.hasMovementType("overland") ?? false,
+      order: 1
+    },
+    burrow:{
+      label: "PTR2E.TokenMovement.Actions.Burrow",
+      icon: "fa-solid fa-fw fa-shovel",
+      canSelect: (token) => token?.actor?.hasMovementType("burrow") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 4}),
+      order: 2
+    },
+    swim: {
+      label: "PTR2E.TokenMovement.Actions.Swim",
+      icon: "fa-solid fa-fw fa-fish",
+      canSelect: (token) => token?.actor?.hasMovementType("swim") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 4}),
+      order: 3
+    },
+    flight: {
+      label: "PTR2E.TokenMovement.Actions.Flight",
+      icon: "fa-solid fa-fw fa-dove",
+      canSelect: (token) => token?.actor?.hasMovementType("flight") ?? false,
+      getAnimationOptions: () => ({movementSpeed: 8, easing: "easeInCircle"}),
+      order: 4
+    },
+    threaded: {
+      label: "PTR2E.TokenMovement.Actions.Threaded",
+      icon: "fa-solid fa-fw fa-reel",
+      canSelect: (token) => token?.actor?.hasMovementType("threaded") ?? false,
+      order: 5
+    },
+    teleport: {
+      label: "PTR2E.TokenMovement.Actions.Teleport",
+      icon: "fa-solid fa-fw fa-transporter",
+      canSelect: (token) => token?.actor?.hasMovementType("teleport") ?? false,
+      teleport: true,
+      getAnimationOptions: () => ({movementSpeed: 10, easing: "easeOutCircle"}),
+      order: 6
+    },
+    free: {
+      label: "PTR2E.TokenMovement.Actions.Free",
+      icon: "fa-solid fa-fw fa-street-view",
+      canSelect: (token) => !!token?.actor,
+      getCostFunction: () => () => 0,
+      measure: false,
+      visualize: false,
+      teleport: true,
+      order: 999
+    }
+  } as Record<string, TokenMovementAction<TokenPTR2e, TokenDocumentPTR2e>>
 }

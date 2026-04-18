@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Magmarizer",
   "type": "equipment",
   "system": {
@@ -10,15 +10,16 @@
     "slug": "magmarizer",
     "traits": [
       "combat",
-      "type",
       "fire",
       "evolution",
-      "magbi",
       "magmar",
-      "magmortor"
+      "accessory",
+      "magby",
+      "magmortar",
+      "consumable"
     ],
     "actions": [],
-    "description": "<p>A box packed with a tremendous amount of magma energy that boosts the power of Fire-type moves. It's loved by a certain Pokémon.<br><br><span style=\"font-family: Signika, sans-serif\">Effect: Increases the Power and Accuracy of attacks by 10%.</span></p>",
+    "description": "<p>Effect: The user spends 20% fewer PP (minimum 1) with Fire-Type Attacks. @UUID[Compendium.ptr2e.core-species.vRrFjiJqWrWO9TOM]{Magby}, @UUID[Compendium.ptr2e.core-species.GNqFnmJflqTwbblh]{Magmar}, and @UUID[Compendium.ptr2e.core-species.9JEs6FimVnUGxLAu]{Magmortar} deal 20% more damage with Special-Category Attacks.<br><br>A Magmar may consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -29,15 +30,20 @@
       "handsHeld": null,
       "slot": "accessory"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "fire",
-      "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "power": 85,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -46,55 +52,64 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/magmarizer.webp",
   "effects": [
     {
-      "name": "Type Booster (Fire)",
+      "name": "Magmarizer",
       "type": "passive",
-      "_id": "VyowOF7JzAYbZCSP",
+      "_id": "u2aQzz4bSYTp4rwB",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "fire-attack-power",
-            "value": 10,
+            "type": "alter-attack",
+            "key": "fire-attack",
+            "value": -1,
             "predicate": [],
-            "label": "Type Booster (Fire) Power",
-            "mode": 2,
-            "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "property": "pp-cost",
+            "definition": [],
+            "method": 2
           },
           {
             "type": "percentile-modifier",
-            "key": "fire-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Fire)",
-            "mode": 2,
-            "priority": null,
+            "key": "special-attack-damage",
+            "value": 20,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:magby",
+                  "item:species:magmar",
+                  "item:species:magmortar"
+                ]
+              }
+            ],
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -102,19 +117,18 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.zQRQn1X9bw5xOApv.ActiveEffect.kaMSShHKWD5a2PKU",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758628915705,
+        "modifiedTime": 1758628956014,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
-  "flags": {},
   "_id": "z2tpg5PbD7FYa9BD"
 }

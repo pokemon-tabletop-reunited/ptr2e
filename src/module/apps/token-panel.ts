@@ -30,19 +30,15 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     this._token = token;
   }
 
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["token-panel"],
-      tag: "aside",
-      window: {
-        minimizable: false,
-        frame: false,
-        positioned: false,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["ptr2e", "token-panel"],
+    tag: "aside",
+    window: {
+      minimizable: false,
+      frame: false,
+      positioned: false,
     },
-    { inplace: false }
-  );
+  };
 
   static override PARTS = {
     info: {
@@ -350,7 +346,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
           const slug = ((event.currentTarget as HTMLElement).parentElement as HTMLElement).dataset.slug;
           if (!slug) return;
 
-          const skill = this.token!.actor!.system.skills.get(slug);
+          const skill = this.token!.actor!.system.skills[slug];
           if (!skill) return;
 
           return skill.roll();

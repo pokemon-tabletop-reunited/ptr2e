@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXac",
   "name": "Jetpack",
   "type": "equipment",
   "system": {
@@ -10,12 +10,10 @@
     "traits": [
       "sci-fi",
       "backpack",
-      "charge-pool-6",
-      "hover",
-      "propulsion"
+      "ufo"
     ],
     "actions": [],
-    "description": "<p>When equipped, this Jetpack grants a Flight Movement Allowance of 15m to a creature which otherwise cannot fly, along with the @Trait[hover] trait. <br><br>Jetpacks contain a 6-segment clock's worth of fuel, and this fuel costs 3IP to replace. It consumes 1 segment of fuel per combat encounter, or per day span in exploration.</p>",
+    "description": "<p>When equipped, a Jetpack grants a Flight Movement Allowance of 10m to a creature in gravitized spaces (20m in low- or zero-G), along with the @Trait[ufo] trait. It also can aid the user's movements.</p><p>The user's SPD is reduced by -15%, and gain +30 to Rush Rolls, +40 to Leap and Breach Rolls, and +50 to Jump Rolls.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,15 +24,20 @@
       "handsHeld": null,
       "slot": "backpack"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "untyped",
-      "power": null,
-      "accuracy": 100,
-      "hide": true
+      "power": 100,
+      "accuracy": 80,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -43,10 +46,82 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "jetpack",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "Jetpack",
+      "type": "passive",
+      "_id": "qev2dtlx8mj0ehn8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "UFO",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.flight.value",
+            "value": 10,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.15,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1758380648692,
+        "modifiedTime": 1767661107185,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "1OzWRc7h3SJbeQol"
 }

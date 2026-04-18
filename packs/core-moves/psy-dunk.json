@@ -11,10 +11,7 @@
         "slug": "psy-dunk",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [
-          "flinch-chance-2",
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 6,
@@ -30,7 +27,7 @@
         "category": "special",
         "power": 100,
         "accuracy": 80,
-        "description": "<p>Effect: On hit, the target gains @Affliction[grounded] 5 and has a 30% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[grounded 5] and has a 30% chance of being Flinched.</p>",
         "predicate": []
       }
     ],
@@ -39,6 +36,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "effects": [
@@ -52,37 +55,37 @@
           {
             "type": "roll-effect",
             "key": "psy-dunk-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.groundedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.groundedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "psy-dunk-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 0
+                "value": 0,
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Flinch 20%"
+                "value": "Flinch 20%",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -93,13 +96,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

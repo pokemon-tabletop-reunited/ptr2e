@@ -21,7 +21,7 @@
       }
     ],
     "cost": 1,
-    "description": "<p>You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.</p>",
+    "description": "<p>You gain the @Trait[pack-leader] Trait, and may designate consenting creatures with the @Trait[pack-mon] Trait as members of your pack.</p>",
     "actions": [
       {
         "name": "Pack Alpha",
@@ -55,16 +55,15 @@
           "pack-mon",
           "lead-from-behind",
           "root-4",
-          "packmarked"
+          "packmarked",
+          "minor-buff-33",
+          "yousa-bad-bombin"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": "#ffffff",
-          "scale": null
+          "tint": null
         },
         "tier": null
       }
@@ -78,6 +77,13 @@
       "arena": "social",
       "approach": "power",
       "archetype": "pack-leader"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "ee07hyZxFObQ5emn",
@@ -87,36 +93,33 @@
       "name": "Pack Alpha",
       "type": "passive",
       "_id": "m46h0r03OspDM45U",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
       "system": {
         "changes": [
           {
             "type": "add-trait",
             "key": "",
-            "value": "Pack Leader",
+            "value": "pack-leader",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
-      "description": "",
+      "description": "<p>You gain the @Trait[pack-leader] Trait, and may designate consenting creatures with the @Trait[pack-mon] Trait as members of your pack.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -126,12 +129,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.1.beta",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1739314032552,
-        "modifiedTime": 1739314051765,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1754227264436,
+        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "exportSource": null
       }
     }
   ],

@@ -1,0 +1,100 @@
+{
+  "folder": "53FtVeHm7lIHHCiS",
+  "name": "Fountain",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>You gain the @Trait[fountain] trait.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:water"
+    ],
+    "autoUnlock": [
+      "trait:fountain"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "water"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 149,
+        "y": 24,
+        "connected": [
+          "swimming-lessons",
+          "overboard"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "fountain"
+  },
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": [
+    {
+      "name": "Fountain",
+      "type": "passive",
+      "_id": "00VKkhrOGoAzTg5M",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "fountain",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764895592129,
+        "modifiedTime": 1764895598386,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
+  "_id": "IyY1V6vDljD6IqR7"
+}

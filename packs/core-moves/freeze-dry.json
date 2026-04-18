@@ -9,9 +9,7 @@
         "slug": "freeze-dry",
         "name": "Freeze-Dry",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -27,7 +25,7 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite] 5. This attack is super effective against the Water Type.</p>",
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite 5]. This attack is super effective against the Water Type.</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -37,6 +35,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "y5H4C8WkE4feSmwt",
@@ -56,22 +60,22 @@
               "target:trait:water"
             ],
             "label": "Super Effective vs Water",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "freeze-dry-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -82,13 +86,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -12,11 +12,10 @@
         "traits": [
           "legendary",
           "blast-4",
-          "wind",
-          "pp-updated"
+          "wind"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 10,
           "unit": "m"
         },
@@ -30,8 +29,9 @@
         "types": [
           "ground"
         ],
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "img": "systems/ptr2e/img/svg/ground_icon.svg",
+        "predicate": [],
+        "description": "<p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn 7].</p>"
       },
       {
         "slug": "sandsear-storm-blowing",
@@ -42,8 +42,7 @@
           "wind",
           "blast-4",
           "environ",
-          "danger-close",
-          "pp-updated"
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -61,7 +60,7 @@
         "types": [
           "ground"
         ],
-        "description": "<pTrigger: Dusty or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn] 7.</p>",
+        "description": "<pTrigger: Dusty or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn 7].</p>",
         "variant": "sandsear-storm",
         "free": true,
         "img": "icons/svg/explosion.svg",
@@ -73,6 +72,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "RjC3zQO0l8woLVRk",
@@ -87,20 +93,21 @@
           {
             "type": "roll-effect",
             "key": "sandsear-storm-blowing-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 7
+                "value": 7,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -111,13 +118,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

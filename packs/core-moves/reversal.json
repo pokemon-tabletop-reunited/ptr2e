@@ -10,8 +10,7 @@
         "name": "Reversal",
         "type": "attack",
         "traits": [
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -20,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 9
+          "powerPoints": 5
         },
         "category": "physical",
         "power": 20,
@@ -28,16 +27,77 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.</p><p><blockquote>Damage Formula: Power = min(20, (200 x (UserMaxHP-UserCurrentHP)/UserMaxHP + 20))</blockquote>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "A"
+    "grade": "A",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "tIQTfOlIt3xkZvQZ",
-  "effects": []
+  "effects": [
+    {
+      "name": "Reversal",
+      "type": "passive",
+      "_id": "eS1hXYfkbCprsR4b",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "reversal-attack",
+            "value": "1.8 * (100-@actor.system.health.percent)",
+            "label": "Reversal",
+            "predicate": [],
+            "priority": null,
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Item.48mv2v1fZIB425Wn.ActiveEffect.3Igoq5pxc0DPxQXN",
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1740186777414,
+        "modifiedTime": 1767161690175,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ]
 }

@@ -11,10 +11,9 @@
         ],
         "name": "Perish Body",
         "slug": "perish-body",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit by a [Contact] attack.</p>"
         },
         "range": {
@@ -22,11 +21,11 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish] 7.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish 7].</p>",
+        "img": "icons/svg/biohazard.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish] 7.</p>",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish 7].</p>",
     "traits": [
       "defensive"
     ],
@@ -34,8 +33,94 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "KqyPzTljiboUIBaf",
-  "effects": []
+  "effects": [
+    {
+      "name": "Perish Body",
+      "type": "passive",
+      "_id": "VWwSS7toPBXmuf69",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.perishcondition0",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 7,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.perishcondition0",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 7,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.346",
+        "systemId": "ptr2e",
+        "systemVersion": "1.3.8.beta",
+        "createdTime": 1753363957053,
+        "modifiedTime": 1753364040216,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

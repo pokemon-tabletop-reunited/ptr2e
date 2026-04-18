@@ -10,41 +10,158 @@
         "slug": "perfectionist",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: All of the user's actions use 1 more PP. The user's attacks with <60 default Power gain [Crit 1], and those with <40 default Power also gain [Priority 1]. If any affected attack already had either of these Trait types, their values increase by +1.</p>"
+        "description": "<p>Effect: The user's Attacks with ≤ 60 Base Power gain @Trait[crit-1], and those with ≤ 30 default Power also gain @Trait[priority-15] and have +15% EHR.</p>",
+        "img": "systems/ptr2e/img/icons/ability_icon.webp"
       }
     ],
-    "description": "<p>Effect: All of the user's actions use 1 more PP. The user's attacks with <60 default Power gain [Crit 1], and those with <40 default Power also gain [Priority 1]. If any affected attack already had either of these Trait types, their values increase by +1.</p>",
+    "description": "<p>Effect: The user's Attacks with ≤ 60 Base Power gain @Trait[crit-1], and those with ≤ 30 default Power also gain @Trait[priority-15] and have +15% EHR.</p>",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "perfectionist",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "UOESqHqU7JsWxllJ",
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!UOESqHqU7JsWxllJ"
+  "effects": [
+    {
+      "name": "Perfectionist",
+      "type": "passive",
+      "_id": "HqsCAbN3YQ6PGSyZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "value": "perfectionist-60",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "label": "Perfectionist - Base Power ≤ 60",
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "roll-option",
+            "value": "perfectionist-30",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "label": "Perfectionist - Base Power ≤ 30",
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "stage-modifier",
+            "key": "damaging-attack-crit",
+            "value": 1,
+            "predicate": [
+              "perfectionist-60"
+            ],
+            "label": "Perfectionist",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "damaging-attack",
+            "value": "priority-15",
+            "property": "traits",
+            "definition": [],
+            "predicate": [
+              "perfectionist-30"
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [
+              "perfectionist-30"
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 15
+              }
+            ],
+            "key": "damaging-attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": "Item.zOucHwxKtjsMiXTs.ActiveEffect.Xaw1O9L0wIl9RHWg",
+        "exportSource": null,
+        "coreVersion": "14.359",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "createdTime": 1775569856311,
+        "modifiedTime": 1775570621226,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
+    }
+  ]
 }

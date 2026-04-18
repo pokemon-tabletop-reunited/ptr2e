@@ -24,14 +24,71 @@
     ],
     "description": "<p>Effect: [Major Afflictions] and [Minor Afflictions] applied to the user have their set duration reduced by -2. The user takes 50% reduced damage from Ghost-Type attacks.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "partial-automation"
     ],
     "slug": "purifying-salt",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "8FifNhOnTvGDzMiE",
-  "effects": []
+  "effects": [
+    {
+      "name": "Purifying Salt",
+      "type": "passive",
+      "_id": "bZ454cZhE2ccpvQ3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "ghost-attack-damage-percentile",
+            "value": -50,
+            "predicate": [],
+            "label": "Purifying Salt",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "1.1.0.beta",
+        "createdTime": 1741606202557,
+        "modifiedTime": 1741606227250,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

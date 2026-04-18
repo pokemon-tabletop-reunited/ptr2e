@@ -13,8 +13,7 @@
           "legendary",
           "friendly",
           "blast-4",
-          "wind",
-          "pp-updated"
+          "wind"
         ],
         "range": {
           "target": "blast",
@@ -44,8 +43,7 @@
           "wind",
           "blast-4",
           "environ",
-          "danger-close",
-          "pp-updated"
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -75,6 +73,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "QCln8FVxc5CNC1ZG",
@@ -89,14 +93,14 @@
           {
             "type": "roll-effect",
             "key": "springtide-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -107,13 +111,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

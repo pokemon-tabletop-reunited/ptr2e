@@ -7,28 +7,59 @@
   "system": {
     "actions": [
       {
-        "name": "Covering Fire",
-        "slug": "covering-fire",
-        "description": "<p>Using a Ranged Weapon, the user may provide Covering Fire and delay their next Activation by 20%. Set up a Covering Fire Clock with 3 Spans. The user and their allies may tick a Span on this Clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming non-[Contact] attacks. The Covering Fire effect ends when either the clock is filled, or the user's next Activation begins.</p>",
+        "name": "Covering Fire (Set)",
+        "slug": "covering-fire-set",
+        "description": "<p>While the user has a ranged @Trait[weapon] equipped, they may spend 4 PP as a Complex Action at @Trait[flinch-30] to gain @Affliction[braced 2] and to set a Covering Fire Clock, which has a size of 6 Spans.</p><p>When an Ally within line of sight and within the first or second RI of the user's ranged weapon would be targeted by an Attack, the user may Tick the Covering Fire Clock 1 Span to have that ally gain Light Cover (or Heavy Cover, if they already had Light) on the incoming Attack. Alternatively, the user can Tick 2 Spans to give that ally Heavy Cover outright.</p>",
         "traits": [],
         "type": "generic",
         "range": {
-          "target": "object",
-          "unit": "m",
-          "distance": 0
+          "target": "self",
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 4
         },
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
+      },
+      {
+        "name": "Covering Fire (Light)",
+        "slug": "covering-fire-light",
+        "description": "<p>Trigger: An Ally within line of sight and within the first or second RI of the user's ranged weapon would be targeted by an Attack.</p><p>Effect: The triggering creature gains Light Cover.</p>",
+        "traits": [
+          "interrupt"
+        ],
+        "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "variant": null
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Covering Fire (Heavy)",
+        "slug": "covering-fire-heavy",
+        "description": "<p>Trigger: An Ally within line of sight and within the first or second RI of the user's ranged weapon would be targeted by an Attack.</p><p>Effect: The triggering creature gains Heavy Cover.</p>",
+        "traits": [
+          "interrupt"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "cost": {
+          "activation": "free",
+          "trigger": "An Ally within line of sight and within the first or second RI of the user's ranged weapon would be targeted by an Attack."
+        },
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        }
       }
     ],
     "slug": "covering-fire",
-    "description": "<p>As a Complex Action costing 2PP, the user uses a Ranged Weapon to provide Covering Fire, delayling their next Activation by 20%. Set up a Covering Fire Clock with 3 Spans. The user and their allies may tick a Span on this Clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming non-[Contact] attacks. The Covering Fire effect ends when either the clock is filled, or the user's next Activation begins.</p>",
+    "description": "<p>While the user has a ranged @Trait[weapon] equipped, they may spend 4 PP as a Complex Action at @Trait[flinch-30] to gain @Affliction[braced 2] and to set a Covering Fire Clock, which has a size of 6 Spans.</p><p>When an Ally within line of sight and within the first or second RI of the user's ranged weapon would be targeted by an Attack, the user may Tick the Covering Fire Clock 1 Span to have that ally gain Light Cover (or Heavy Cover, if they already had Light) on the incoming Attack. Alternatively, the user can Tick 2 Spans to give that ally Heavy Cover outright.</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder"
@@ -40,40 +71,150 @@
     },
     "nodes": [
       {
+        "x": 176,
+        "y": 71,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hobby-gardener",
           "tainted-blades",
           "harry",
           "trained-wielder",
-          "down-the-sights"
+          "down-the-sights",
+          "arms-race",
+          "mudrunner",
+          "defense-in-depth",
+          "support-and-break-through"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": "#000000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 177,
-        "y": 70,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "physical",
       "approach": "finesse",
-      "archetype": "Gunslinger"
-    }
+      "archetype": "gunslinger"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Covering Fire",
+      "type": "passive",
+      "_id": "BaMtYY9AMZnhYoUc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-set-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -30,
+                "method": 2
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-set-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bracedcondition0",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-light-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.UZLs3Yvq83swNW9p",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "covering-fire-heavy-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rFa3xkFp2SesCCvP",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1773186357999,
+        "modifiedTime": 1773187573375,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ]
 }

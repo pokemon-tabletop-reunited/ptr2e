@@ -11,6 +11,12 @@
         "foundry": "12.329",
         "system": "0.10.0-alpha.2.0.1"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "effects": [
@@ -26,13 +32,15 @@
             "key": "system.battleStats.accuracy.stage",
             "value": -3,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
-        "traits": [],
+        "traits": [
+          "stage-change"
+        ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0,
@@ -42,13 +50,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 5,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -56,7 +60,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -66,7 +69,8 @@
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null
-      }
+      },
+      "showIcon": 0
     }
   ],
   "folder": "V4skAU6G3OH5fXgz",

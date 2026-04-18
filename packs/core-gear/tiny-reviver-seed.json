@@ -1,6 +1,6 @@
 {
   "name": "Tiny Reviver Seed",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
   "type": "consumable",
   "system": {
     "cost": 4,
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "restorative",
@@ -29,10 +34,9 @@
       "natural",
       "healing",
       "seed",
-      "held",
-      "stash"
+      "mystery-dungeon"
     ],
-    "description": "<p>When you gain @Affliction[fainted] you may use @UUID[Compendium.ptr2e.core-moves.Item.NlcDvnyup6PzQIoK]{Use} as an Interrupt action to consume this item, when you do your HP is set to 20% of its Max. You still gain @Affliction[weary] as normal from fainting.</p>",
+    "description": "<p>When you would gain @Affliction[fainted] you may use @UUID[Compendium.ptr2e.core-moves.Item.NlcDvnyup6PzQIoK]{Use} as an Interrupt action to consume this item from the Belt.<br><br>Effect: You recover @Tick[16].</p>",
     "quantity": 1,
     "slug": "tiny-reviver-seed",
     "stack": 1,
@@ -43,9 +47,100 @@
         "foundry": "12.331",
         "system": "1.0.0.beta-ready.2"
       }
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Tiny Reviver Seed",
+        "slug": "tiny-reviver-seed",
+        "description": "<p>When you would gain @Affliction[fainted] you may use @UUID[Compendium.ptr2e.core-moves.Item.NlcDvnyup6PzQIoK]{Use} as an Interrupt action to consume this item from the Belt.<br><br>Effect: You recover @Tick[16].</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "healing",
+          "seed"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        }
+      }
+    ],
+    "ammoType": []
   },
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
+  "effects": [
+    {
+      "name": "Tiny Reviver Seed",
+      "type": "passive",
+      "_id": "9MyEeuOHEUlSqoy7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "tiny-reviver-seed-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 16,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759240558002,
+        "modifiedTime": 1759240599426,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "4MbEHvhwmG5DYTkB",
   "_id": "5vkD1bptOvS1wkFH"
 }

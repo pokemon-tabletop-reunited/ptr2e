@@ -5,7 +5,25 @@
   "_id": "1hbtcyVMpmrRmtVA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
   "system": {
-    "actions": [],
+    "actions": [
+      {
+        "name": "Guard Up!",
+        "slug": "guard-up",
+        "description": "<p>You may expend a Simple Action and 3PP to gain @Tick[2 shield].</p>",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        }
+      }
+    ],
     "slug": "guard-up",
     "description": "<p>You may expend a Simple Action and 3PP to gain @Tick[2 shield].</p>",
     "traits": [],
@@ -39,7 +57,13 @@
           "stat-iv-booster-1-3",
           "stat-iv-booster-1-10",
           "lethal-restraint",
-          "rigorous-fundamentals-5"
+          "rigorous-fundamentals-5",
+          "minor-buff-5",
+          "minor-buff-41",
+          "minor-buff-44",
+          "minor-buff-47",
+          "minor-buff-54",
+          "experienced-educator"
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -60,7 +84,73 @@
       "arena": "physical",
       "approach": "resilience",
       "archetype": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Guard Up!",
+      "type": "passive",
+      "_id": "EWJRFhW6Yd9V3etk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "guard-up-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1754245352667,
+        "modifiedTime": 1757808480892,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

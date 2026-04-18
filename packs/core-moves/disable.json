@@ -10,8 +10,7 @@
         "name": "Disable",
         "type": "attack",
         "traits": [
-          "interrupt-1",
-          "pp-updated"
+          "interrupt-1"
         ],
         "range": {
           "target": "creature",
@@ -28,7 +27,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Trigger: A foe uses an attack.</p><p>Effect: The triggering attack becomes @Affliction[disabled] 5 after it resolves.</p>",
+        "description": "<p>Trigger: A foe uses an attack.</p><p>Effect: The triggering attack becomes @Affliction[disabled 5] after it resolves.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -36,6 +35,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "g2dBn6zaIVcZCIuM",
@@ -50,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "disable-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

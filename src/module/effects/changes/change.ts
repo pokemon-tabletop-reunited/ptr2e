@@ -17,7 +17,8 @@ export const CHANGE_MODES = Object.freeze({
   DOWNGRADE: 3,
   UPGRADE: 4,
   OVERRIDE: 5,
-  REMOVE: 6
+  REMOVE: 6,
+  CONCAT: 7
 })
 
 class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<
@@ -31,7 +32,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   get sourceIndex(): number | null {
-    return this.#sourceIndex ?? this.effect.changes.indexOf(this);
+    return this.#sourceIndex ?? this.effect?.changes.indexOf(this);
   }
 
   #sourceIndex: number | null = null;
@@ -56,7 +57,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         actor: this.actor?.name ?? null,
         item: this.item?.name ?? null,
       })
-      : this.effect.name;
+      : this.effect?.name;
   }
 
   static override defineSchema(): ChangeSchema {
@@ -76,7 +77,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         label: "PTR2E.Effect.FIELDS.ChangeValue.label",
         hint: "PTR2E.Effect.FIELDS.ChangeValue.hint",
       }),
-      mode: new fields.NumberField({
+      method: new fields.NumberField({
         integer: true,
         initial: CHANGE_MODES.ADD,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
@@ -84,13 +85,14 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
       }),
       priority: new fields.NumberField({}),
+      phase: new fields.StringField({required: true, blank: false, initial: "initial"}),
 
       // Type field
       type: new fields.StringField({
         required: true,
         blank: false,
         initial: this.TYPE,
-        choices: ChangeModelTypes,
+        choices: Object.entries(ChangeModelTypes() as Record<string, { label: string }>).reduce((acc, [k, v]: [string, { label: string }]) => ({ ...acc, [k]: v.label }), {}),
         validate: (value) => value === this.TYPE,
         validationError: `must be equal to "${this.TYPE}"`,
         label: "PTR2E.Effect.FIELDS.ChangeType.label",
@@ -121,19 +123,19 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   get effect() {
-    return this.parent.parent;
+    return this.parent?.parent;
   }
   set effect(_) {
     return;
   }
 
   get actor() {
-    return (this.effect.parent && this.effect.targetsActor()) ? this.effect.target : null;
+    return (this.effect?.parent && this.effect?.targetsActor()) ? this.effect?.target : null;
   }
 
   get item() {
     const effect = this.effect;
-    return effect.parent instanceof ItemPTR2e ? effect.parent : null;
+    return effect?.parent instanceof ItemPTR2e ? effect.parent : null;
   }
 
   get slug() {
@@ -141,7 +143,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   protected getReducedLabel(label = this.label): string {
-    return label === this.effect.name ? reduceItemName(label) : label;
+    return label === this.effect?.name ? reduceItemName(label) : label;
   }
 
   /** Include parent effect name & UUID in `DataModel` validation error messages. */
@@ -152,7 +154,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       if (error instanceof foundry.data.validation.DataModelValidationError) {
         const message = error.message.replace(
           /validation errors|Joint Validation Error/,
-          `validation errors on effect ${this.effect.name} (${this.effect.uuid})`
+          `validation errors on effect ${this.effect?.name} (${this.effect?.uuid})`
         );
         console.warn(message);
         return false;
@@ -185,7 +187,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
     const fullMessage = message.join(" ");
     const { name, uuid } = this.effect;
     if (!this.suppressWarnings) {
-      const ruleName = game.i18n.localize(`PTR2E.RuleElement.${this.effect.type}`);
+      const ruleName = game.i18n.localize(`PTR2E.RuleElement.${this.effect?.type}`);
       this.actor?.synthetics.preparationWarnings.add(
         `PTR2e System | ${ruleName} rules element on effect ${name} (${uuid}) failed to validate: ${fullMessage}`
       );
@@ -250,21 +252,27 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect|attack)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect|attack|trait)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
               : key === "actor" || key === "item" || key === "effect"
                 ? this[key] ?? resolvables[key]
                 : resolvables[key] ?? this.effect;
+
+          if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
+            const value = this.actor?.system?.skills?.[prop.split(".")[1]]?.total;
+            if(value != undefined && !isNaN(value)) return String(value); 
+          }
+
           const value = fu.getProperty(data ?? {}, prop);
           if (value === undefined) {
             this.ignored = true;
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }
@@ -316,15 +324,15 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
           const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }
@@ -401,7 +409,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   getRollOptions(): string[] {
-    return this.effect.getRollOptions();
+    return this.effect?.getRollOptions();
   }
 }
 
@@ -452,7 +460,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
   /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}>;
+  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[]; }>;
 
   /**
    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can
@@ -529,6 +537,8 @@ namespace ChangeModel {
     context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
     /** Whether this preCreate run is from a pre-update reevaluation */
     reevaluation?: boolean;
+    /** Item Source in case of name changes */
+    itemSource?: ItemSourcePTR2e;
   }
 
   export interface PreDeleteParams {

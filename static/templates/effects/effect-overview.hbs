@@ -19,6 +19,8 @@
             {{formField fields.transfer value=data.transfer localize=true}}
         {{/if}}
 
+        {{formField fields.showIcon value=data.showIcon options=showIconOptions rootId=rootId label="Show Icon on Token"}}
+
         <div class="form-group">
             <label>Status Conditions</label>
             <div class="form-fields">

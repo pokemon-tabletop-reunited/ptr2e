@@ -13,19 +13,16 @@
     "diet": [
       "carnivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 3
-        },
-        {
-          "type": "swim",
-          "value": 2
-        }
-      ],
-      "secondary": []
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 3
+      },
+      {
+        "type": "swim",
+        "value": 2
+      }
+    ],
     "traits": [
       "pokemon",
       "bait",
@@ -33,7 +30,8 @@
       "gilled",
       "reach",
       "underdog",
-      "lumbering"
+      "lumbering",
+      "jump-1"
     ],
     "abilities": {
       "starting": [
@@ -41,15 +39,15 @@
           "slug": "suction-cups"
         },
         {
-          "slug": "seaweed"
+          "slug": "storm-drain"
         }
       ],
       "basic": [
         {
-          "slug": "storm-drain"
+          "slug": "seaweed"
         },
         {
-          "slug": "power-leech"
+          "slug": "fossilized"
         }
       ],
       "advanced": [
@@ -57,15 +55,15 @@
           "slug": "amphibious"
         },
         {
-          "slug": "stalwart"
+          "slug": "power-leech"
         }
       ],
       "master": [
         {
-          "slug": "fossilized"
+          "slug": "regenerator"
         },
         {
-          "slug": "regenerator"
+          "slug": "absorbant"
         }
       ]
     },
@@ -498,13 +496,33 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.mZM3ZMkosWkAVTl5"
-    }
+      "uuid": "Compendium.ptr2e.core-species.Item.mZM3ZMkosWkAVTl5",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
+    },
+    "publication": {
+      "source": "PTR 2e Core - Hoenn Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "habitats": []
   },
   "_id": "mZM3ZMkosWkAVTl5",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

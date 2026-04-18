@@ -1,0 +1,116 @@
+{
+  "name": "Rapid Fire Style",
+  "type": "perk",
+  "system": {
+    "prerequisites": [],
+    "cost": 2,
+    "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +5.</p>",
+    "actions": [
+      {
+        "name": "Rapid Fire!",
+        "slug": "rapid-fire",
+        "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +5.</p>",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 20
+        },
+        "variant": null,
+        "ephemeralVariant": false
+      },
+      {
+        "name": "Rapid Fire! (Self)",
+        "slug": "rapid-fire-self",
+        "description": "<p>Your next non-[Contact] Attack gains the [5-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced by 55%. If it already had [X-Strike], that value increases by +5.</p>",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "type": "generic",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m",
+          "distance": 0
+        },
+        "variant": null,
+        "ephemeralVariant": false
+      }
+    ],
+    "slug": "rapid-fire-style",
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "nodes": [
+      {
+        "connected": [
+          "type-style",
+          "stat-iv-booster-1-4",
+          "evasive-style",
+          "improved-burrow-3",
+          "improved-flight-6",
+          "minor-buff-29",
+          "minor-buff-48",
+          "minor-buff-64",
+          "duelist-trainer"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 116,
+        "y": 125,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "originSlug": null,
+    "variant": null,
+    "mode": null,
+    "global": true,
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "combat"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "_id": "4FH3vIN3aJLVe0x0",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": [],
+  "folder": "JZrGRskscJOkkPWA"
+}

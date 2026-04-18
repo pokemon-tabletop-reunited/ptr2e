@@ -10,9 +10,8 @@
         "name": "Tesla Prod",
         "type": "attack",
         "traits": [
-          "2-strike",
-          "contact",
-          "pp-updated"
+          "double-strike",
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +28,7 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -39,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "0YbbHZV3600MTBHw",
@@ -53,13 +58,13 @@
           {
             "type": "roll-effect",
             "key": "tesla-prod-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -70,13 +75,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

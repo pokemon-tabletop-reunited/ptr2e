@@ -18,21 +18,15 @@
         "slug": "stonecunning",
         "description": "<p>You gain the [Tremorsense 20] trait.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "stonecunning",
@@ -46,10 +40,11 @@
         "connected": [
           "powerlifter",
           "shovel-hands",
-          "hardy-trekker",
           "parkour",
           "immovable-stone",
-          "scree"
+          "scree",
+          "bedrock-body",
+          "ionization"
         ],
         "config": {
           "alpha": null,
@@ -70,16 +65,21 @@
     "autoUnlock": [
       "trait:tremorsense-20"
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "finesse",
-      "archetype": "[Ground]"
-    }
+      "archetype": "ground"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "lTOiK3AutkgbMo7J",
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
@@ -96,26 +96,23 @@
             "key": "",
             "value": "Tremorsense 20",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -127,12 +124,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1732233306323,
         "modifiedTime": 1732233319995,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ],

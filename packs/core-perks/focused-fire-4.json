@@ -1,0 +1,99 @@
+{
+  "name": "Focused Fire 4",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Passive Effect: When making an @Trait[x-strike] roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br /><br />For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br /><br />This perk is disabled when the creature with it has the @UUID[Compendium.ptr2e.core-abilities.m3NkhaFegGTH5ZuK]{Skill Link} ability slotted.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "metamove"
+    },
+    "variant": "tiered",
+    "mode": "coexist",
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "entry",
+        "connected": [],
+        "tier": {
+          "rank": 1,
+          "uuid": null
+        },
+        "config": {
+          "texture": "icons/equipment/head/goggles-leather-grey.webp",
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "tint": null,
+          "scale": null
+        }
+      }
+    ],
+    "slug": "focused-fire-4",
+    "originSlug": null
+  },
+  "img": "icons/equipment/head/goggles-leather-grey.webp",
+  "effects": [
+    {
+      "name": "Focused Fire 4",
+      "type": "passive",
+      "_id": "MejT2BEwNyRUvZZc",
+      "img": "icons/equipment/head/goggles-leather-grey.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "strike-trait-attack-hits-flat",
+            "value": 1,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "<p>Passive Effect: When making an @Trait[x-strike] roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br /><br />For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br /><br />This perk is disabled when the creature with it has the @UUID[Compendium.ptr2e.core-abilities.m3NkhaFegGTH5ZuK]{Skill Link} ability slotted.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0
+    }
+  ],
+  "folder": "zrVtKATNxzLNxTUX",
+  "flags": {},
+  "_id": "mLzdq1QTiLDGXe9Z"
+}

@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,16 +17,26 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 95
+      "accuracy": 95,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-14"
+      "charge-pool-14",
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -34,14 +44,12 @@
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 85,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
-          "readied"
+          "firearm"
         ],
         "name": "Auto Shotgun",
         "slug": "auto-shotgun",
@@ -50,34 +58,27 @@
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 6,
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 28,
+        "power": 45,
         "accuracy": 85,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
-          "readied",
-          "6-stike"
+          "6-strike",
+          "firearm"
         ],
         "name": "Auto Shotgun (Auto)",
         "slug": "auto-shotgun-auto",
@@ -86,34 +87,29 @@
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 5,
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null
+          "powerPoints": 6
         },
         "variant": "auto-shotgun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 60,
-        "accuracy": 85,
+        "power": 85,
+        "accuracy": 80,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "missile",
           "dash",
-          "priority-1"
+          "priority-10",
+          "firearm"
         ],
         "name": "Auto Shotgun (Hip Fire)",
         "slug": "auto-shotgun-hip-fire",
@@ -122,27 +118,21 @@
         "type": "attack",
         "range": {
           "target": "cone",
-          "distance": 4,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
           "priority": 1
         },
         "variant": "auto-shotgun",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 16,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "auto-shotgun",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -152,26 +142,82 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>An automatic shotgun is an automatic firearm that fires shotgun shells (thereby making it a shotgun) and uses some of the energy of each shot to automatically cycle the action and load a new round. They generally store ammunition in detachable box or drum magazines in order to decrease reloading time, whereas most pump-action and semi-automatic shotguns use under-barrel tubular magazines.</p>"
   },
   "_id": "1JZaCsj2gzdyFMNb",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!1JZaCsj2gzdyFMNb"
+  "effects": [
+    {
+      "name": "Auto Shotgun",
+      "type": "passive",
+      "_id": "q6gH634HEsqv9nSR",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 28,
+            "predicate": [],
+            "label": "Auto Shotgun",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "auto-shotgun-hip-fire-attack-damage-flat",
+            "value": 56,
+            "predicate": [],
+            "label": "Hip",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743971186221,
+        "modifiedTime": 1757632062514,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "Tn65RZTafVbxqEXT"
 }

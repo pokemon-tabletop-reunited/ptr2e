@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,17 +16,27 @@
     "grade": "C",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 95
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-7"
+      "reload-1",
+      "charge-pool-8",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -38,10 +48,8 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Bolt-Action Rifle",
         "slug": "bolt-action-rifle",
@@ -55,14 +63,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
@@ -73,11 +76,9 @@
         "accuracy": 85,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "2-strike",
-          "readied",
-          "missile"
+          "double-strike",
+          "missile",
+          "firearm"
         ],
         "name": "Bolt-Action Rifle (Snap Shot)",
         "slug": "bolt-action-rifle-snap-shot",
@@ -86,33 +87,28 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 36,
+          "distance": 38,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
         "variant": "bolt-action-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 60,
+        "power": 65,
         "accuracy": 75,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "dash",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Bolt-Action Rifle (Hip Fire)",
         "slug": "bolt-action-rifle-hip-fire",
@@ -121,27 +117,20 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 12,
+          "distance": 15,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
         "variant": "bolt-action-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 7,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "bolt-action-rifle",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -151,26 +140,72 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Bolt action is a type of manual firearm action that is operated by directly manipulating the turn-bolt via a bolt handle, most commonly placed on the right-hand side of the firearm (as most users are right-handed). The majority of bolt-action firearms are rifles, and generally are chambered in fuller powered calibers.</p>"
   },
   "_id": "7SB0KILKuBpiLVmr",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!7SB0KILKuBpiLVmr"
+  "effects": [
+    {
+      "name": "Bolt-Action Rifle",
+      "type": "passive",
+      "_id": "vFhsiUUe4ZU036z3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 38,
+            "predicate": [],
+            "label": "Bolt-Action Rifle",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743901236922,
+        "modifiedTime": 1757553621193,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "MKaFm5Pvt7tvgdAa"
 }

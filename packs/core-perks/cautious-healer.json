@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "cautious-healer",
-    "description": "<p>When you heal another creature using a Healing Move, you gain @Affliction[resolved] 3.</p>",
+    "description": "<p>When you heal another creature using a Healing Move, you gain @Affliction[resolved 3].</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -52,7 +52,17 @@
       "arena": "mental",
       "approach": "resilience",
       "archetype": "healer"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "effects": [
     {
@@ -65,20 +75,21 @@
           {
             "type": "roll-effect",
             "key": "healing-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.resolvedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 3
+                "value": 3,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -89,13 +100,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -107,12 +113,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737934950597,
         "modifiedTime": 1737934990638,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

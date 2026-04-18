@@ -13,26 +13,22 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 9
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 6
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "flight",
+        "value": 9
+      },
+      {
+        "type": "overland",
+        "value": 6
+      }
+    ],
     "traits": [
       "pokemon",
       "flying",
       "wallclimber",
       "fully-evolved",
-      "underdog"
+      "jump-2"
     ],
     "abilities": {
       "starting": [
@@ -88,6 +84,14 @@
       {
         "slug": "conversation",
         "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -168,230 +172,90 @@
       "spe": 89
     },
     "types": [
-      "bug",
-      "flying"
+      "flying",
+      "bug"
     ],
     "moves": {
       "levelUp": [
         {
           "name": "gust",
-          "level": 0,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 0
         },
         {
           "name": "poison-powder",
-          "level": 1,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "stun-spore",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "sleep-powder",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "struggle-bug",
-          "level": 1,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "stun-spore",
+          "gen": "scarlet-violet",
+          "level": 1
         },
         {
           "name": "light-screen",
-          "level": 12,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 12
         },
         {
           "name": "psybeam",
-          "level": 17,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 17
         },
         {
           "name": "supersonic",
-          "level": 21,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 21
         },
         {
           "name": "draining-kiss",
-          "level": 25,
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "safeguard",
-          "level": 31,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 25
         },
         {
           "name": "aromatherapy",
-          "level": 31,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 31
+        },
+        {
+          "name": "safeguard",
+          "gen": "scarlet-violet",
+          "level": 31
         },
         {
           "name": "bug-buzz",
-          "level": 35,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 35
         },
         {
           "name": "quiver-dance",
-          "level": 45,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 45
         },
         {
           "name": "hurricane",
-          "level": 50,
-          "gen": "scarlet-violet"
+          "gen": "scarlet-violet",
+          "level": 50
         },
         {
           "name": "powder",
-          "level": 55,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 55
         }
       ],
       "tutor": [
         {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endeavor",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "signal-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "tailwind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "defog",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "laser-focus",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "solar-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "confuse-ray",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dream-eater",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thief",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psych-up",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "weather-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "air-cutter",
+          "name": "acrobatics",
           "gen": "scarlet-violet"
         },
         {
@@ -399,19 +263,7 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "iron-defense",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "roost",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "u-turn",
+          "name": "air-cutter",
           "gen": "scarlet-violet"
         },
         {
@@ -419,27 +271,91 @@
           "gen": "scarlet-violet"
         },
         {
-          "name": "energy-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
+          "name": "attract",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "acrobatics",
-          "gen": "scarlet-violet"
+          "name": "bug-bite",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "calm-mind",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "confide",
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "confuse-ray",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "defog",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "dream-eater",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "electroweb",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endeavor",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "energy-ball",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "facade",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "flash",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-drain",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "giga-impact",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "hidden-power",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "infestation",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "iron-defense",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "laser-focus",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -447,15 +363,103 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "pounce",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "protect",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "psych-up",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "psychic",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "rest",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "roost",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "round",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "secret-power",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "signal-beam",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
           "name": "skitter-smack",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "sleep-talk",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "solar-beam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "sunny-day",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "swagger",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "swift",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "tailwind",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "tera-blast",
           "gen": "scarlet-violet"
         },
         {
-          "name": "pounce",
+          "name": "thief",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "weather-ball",
           "gen": "scarlet-violet"
         }
       ]
@@ -501,6 +505,10 @@
                 "item": null,
                 "level": null,
                 "knownMove": null
+              },
+              "perk": {
+                "x": 26,
+                "y": 26
               }
             }
           ],
@@ -509,13 +517,22 @@
             "item": null,
             "level": null,
             "knownMove": null
+          },
+          "perk": {
+            "x": 26,
+            "y": 26
           }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.mVmws75rSZEER476"
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kalos Dex",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "9QBq4iWUVzFy8Ovf",
-  "effects": [],
-  "folder": null
+  "effects": []
 }

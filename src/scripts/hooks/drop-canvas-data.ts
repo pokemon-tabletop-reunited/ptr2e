@@ -1,4 +1,4 @@
-import { ActorSheetPTR2e } from "@actor";
+// import { ActorSheetPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 import { BlueprintSystemModel } from "@item/data/index.ts";
 import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
@@ -7,8 +7,8 @@ export const DropCanvasData = {
   listen() {
     Hooks.on("dropCanvasData", async (canvas, drop) => {
       if (drop.type === "Item") {
-        const item = await fromUuid<ItemPTR2e>(drop.uuid);
-        if (item?.type === "species") {
+        const item = await fu.fromUuid<ItemPTR2e>(drop.uuid);
+        if (["species", "ptr2e-digimon-expansion.digimonSpecies"].includes(item?.type ?? "")) {
           const folder = await (async () => {
             const folder = game.actors.folders.getName(game.scenes.current!.name);
             if (folder) return folder;
@@ -20,12 +20,12 @@ export const DropCanvasData = {
 
           const blueprint = new ItemPTR2e(
             {
-              name: item.name,
+              name: item!.name,
               type: "blueprint",
               folder: folder?.id,
               system: {
                 blueprints: [{
-                  species: item.uuid,
+                  species: item!.uuid,
                 }]
               },
               ownership: {default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}
@@ -56,23 +56,19 @@ export const DropCanvasData = {
       }
     });
 
-    // Handle dropping items onto tokens
-    Hooks.on("dropCanvasData", (_canvas, data) => {
-      const dropTarget = [...canvas.tokens.placeables]
-        .sort((a, b) => b.document.sort - a.document.sort)
-        .find((token) => {
-          const maximumX = token.x + (token.hitArea?.right ?? 0);
-          const maximumY = token.y + (token.hitArea?.bottom ?? 0);
-          return data.x >= token.x && data.y >= token.y && data.x <= maximumX && data.y <= maximumY;
-        });
+    // TODO: V14
+    // // Handle dropping items onto tokens
+    // Hooks.on("dropCanvasData", (_canvas, data) => {
+    //   const rect = new PIXI.Rectangle(data.x, data.y, 0, 0);
+    //   const dropTarget = Array.from(canvas.tokens.quadtree.getObjects(rect, {collisionTest: o => o.t.hitArea.contains(data.x - o.t.x, data.y - o.t.y)})).at(0);
 
-      const actor = dropTarget?.actor;
-      if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {
-        (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data);
-        return false; // Prevent modules from doing anything further
-      }
+    //   const actor = dropTarget?.actor;
+    //   if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {
+    //     (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data);
+    //     return false; // Prevent modules from doing anything further
+    //   }
 
-      return true;
-    });
+    //   return true;
+    // });
   }
 }

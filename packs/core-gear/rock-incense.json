@@ -1,0 +1,168 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Rock Incense",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "rock-incense",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held"
+    ],
+    "actions": [],
+    "description": "<p>Rock-Type users deal/take 10% more/less Physical-Category damage. @UUID[Compendium.ptr2e.core-species.xSLD7YhXycnvxbYZ]{Bonsly} and @UUID[Compendium.ptr2e.core-species.oFy9QKAEAHsgijtt]{Sudowoodo} users have +20 Base SPDEF and +20 Effect Chance for @Affliction[delay] effects.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 100,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "maa3PNQkoslw7yFo",
+  "img": "systems/ptr2e/img/item-icons/rock incense.webp",
+  "effects": [
+    {
+      "name": "Rock Incense",
+      "type": "passive",
+      "_id": "1GFid1Fa7FdEpRLj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 10,
+            "predicate": [
+              "trait:rock"
+            ],
+            "label": "Rock Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:rock"
+            ],
+            "label": "Rock Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:bonsly",
+                  "item:species:sudowoodo"
+                ]
+              }
+            ],
+            "hp": null,
+            "atk": null,
+            "def": null,
+            "spa": null,
+            "spd": 20,
+            "spe": null,
+            "label": "Rock Incense",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack-effect-chance",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:bonsly",
+                  "item:species:sudowoodo"
+                ]
+              }
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Rock Incense (Delay increase)",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766446685502,
+        "modifiedTime": 1766447786123,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
+}

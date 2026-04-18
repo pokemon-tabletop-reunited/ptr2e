@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "sharp",
-          "pp-updated"
+          "sharp"
         ],
         "range": {
           "target": "emanation",
@@ -37,6 +36,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "tksxYaXVMrev5G2D",
@@ -51,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "diamond-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.sMystTj3FBJ00AZp",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
             "predicate": [],
             "chance": 33,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,13 +73,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

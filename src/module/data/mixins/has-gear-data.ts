@@ -1,4 +1,4 @@
-import { EquipmentData, PokemonType, PTRCONSTS } from "@data";
+import { EquipmentData, PokemonType, PTRCONSTS, RangePTR2e } from "@data";
 import { TemplateConstructor } from "./data-template.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "../fields/slug-field.ts";
@@ -77,6 +77,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             label: "PTR2E.FIELDS.gear.fling.hide.label",
             hint: "PTR2E.FIELDS.gear.fling.hide.hint",
           }),
+          range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
         }),
         quantity: new fields.NumberField({
           required: true,
@@ -97,6 +98,8 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
           label: "PTR2E.FIELDS.gear.rarity.label",
           hint: "PTR2E.FIELDS.gear.rarity.hint",
         }),
+        ammoType: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.gear.ammoType.label", hint: "PTR2E.FIELDS.gear.ammoType.hint" }),
+        ammo: new fields.DocumentUUIDField({ required: false, nullable: true, initial: null, label: "PTR2E.FIELDS.gear.ammo.label", hint: "PTR2E.FIELDS.gear.ammo.hint" }),
       };
     }
 
@@ -267,7 +270,9 @@ interface _FlingSchema extends foundry.data.fields.DataSchema {
   power: foundry.data.fields.NumberField<number, number, true, true, true>;
   accuracy: foundry.data.fields.NumberField<number, number, true, false, true>;
   hide: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
+  range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
 }
 
 export const grades = ["E", "D", "C", "B", "A", "S"] as const;
+export const rarities = ["common", "uncommon", "rare", "unique"] as const;
 export type GearGrade = typeof grades[number];

@@ -7,11 +7,22 @@
       "previous": null
     },
     "traits": [
-      "partial-automation"
+      "partial-automation",
+      "weather",
+      "flying"
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "windy-weather",
+    "description": "<p><strong>Windy</strong> is the pretty obvious presence of high speed winds. If you lose your footing, you're likely to be picked up and thrown about! But, creatures adapted to the air are in their element with these heavy winds.</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>Flying-Type creatures and creatures with in the Flying Movement State have their SPD increased 30%.</li><li>[Wind] attacks deal 40% more damage.</li><li>All creatures with a Flight Movement Score have that Score increase by 30%.</li><li>All [Dash] and [Reckless] attacks without [Push X] gain [Push 1]. When Pushed, all creatures are Pushed an additional X meters (minimum of 0), where X is equal to 6 minus their Weight Class.</li></ul>"
   },
   "img": "icons/magic/air/wind-weather-sailing-ship.webp",
   "effects": [
@@ -24,13 +35,19 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.value",
-            "value": 1.3,
+            "key": "system.modifiers.speMultiplier",
+            "value": 0.3,
             "predicate": [
-              "actor:trait:flying"
+              {
+                "or": [
+                  "trait:flying",
+                  "movement:flight"
+                ]
+              }
             ],
-            "mode": 1,
             "priority": null,
+            "label": "Flying SpeedBoost",
+            "mode": 2,
             "ignored": false
           },
           {
@@ -38,8 +55,9 @@
             "key": "wind-trait-attack-damage",
             "value": 40,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "label": "Wind Damage Modifier",
+            "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -53,7 +71,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -71,26 +91,23 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": "Item.OxTYO0dQOmMBT2OZ.ActiveEffect.btSZQSeig8xrmoQ4",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null,
+        "modifiedTime": 1762906560145
       }
     }
   ],
-  "flags": {
-    "exportSource": {
-      "world": "alices-test",
-      "system": "ptr2e",
-      "coreVersion": "12.331",
-      "systemVersion": "1.0.3.beta"
-    }
-  },
   "_id": "JkgrSB6ARoHoyayT"
 }

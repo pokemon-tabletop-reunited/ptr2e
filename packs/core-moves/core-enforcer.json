@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "blast-5",
-          "pp-updated"
+          "blast-5"
         ],
         "range": {
           "target": "blast",
@@ -29,7 +28,7 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[nullified] 7.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[nullified 7].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -39,6 +38,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "Dga2700B3ulU2Op0",
@@ -53,20 +58,20 @@
           {
             "type": "roll-effect",
             "key": "core-enforcer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.nullifiedconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 7
+                "value": 7,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -77,13 +82,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

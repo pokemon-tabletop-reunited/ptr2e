@@ -14,9 +14,7 @@
         "description": "<p>You gain the [Telekinetic 2] trait.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 0
         },
         "type": "passive",
         "traits": [],
@@ -27,6 +25,7 @@
           "distance": 0
         },
         "variant": null,
+        "ephemeralVariant": false,
         "hidden": false
       }
     ],
@@ -47,7 +46,13 @@
           "screen-setter",
           "mindscramble",
           "improved-telekinesis",
-          "improved-telekinesis-1"
+          "improved-telekinesis-1",
+          "minor-buff-1",
+          "minor-buff-4",
+          "minor-buff-30",
+          "minor-buff-31",
+          "minor-buff-46",
+          "planar-tactician"
         ],
         "config": {
           "alpha": null,
@@ -66,18 +71,35 @@
       }
     ],
     "autoUnlock": [
-      "trait:telekinetic-2"
+      {
+        "or": [
+          "trait:telekinetic-x",
+          "trait:telekinetic-2",
+          "trait:telekinetic-4",
+          "trait:telekinetic-6",
+          "trait:telekinetic-8",
+          "trait:telekinetic-10",
+          "trait:telekinetic-12"
+        ]
+      }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "[Psychic]"
-    }
+      "archetype": "psychic"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
   "_id": "d152HgMF55iaUMiu",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
@@ -94,9 +116,9 @@
             "key": "",
             "value": "Telekinetic 2",
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -107,13 +129,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -125,12 +142,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1732232011268,
         "modifiedTime": 1732232022457,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ],

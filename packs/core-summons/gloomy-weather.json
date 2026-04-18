@@ -7,11 +7,22 @@
       "previous": null
     },
     "traits": [
-      "partial-automation"
+      "partial-automation",
+      "weather",
+      "dark"
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "gloomy-weather",
+    "description": "<p><strong>Gloomy</strong> is that electricity in the air at dusk and twilight, the charge of life changing gears from day to night. And when the supernatural comes into play, the doors to witchcraft, demons, and the otherworld creak open to the plight of those that are unprepared.</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>Ghost, Dark, and Fairy-Type Attacks deal 20% more damage.</li><li>Ghost, Dark, and Fairy-Type creatures’s Attacks and Abilities have their effect chances increase by 5%.</li><li>Non-Ghost, Dark, and Fairy-Type creatures are Hindered.</li><li>When a Ghost, Dark, or Fairy-Type creature inflicts a Status Affliction on a target, that target gains Fear 2.</li><li>All [Hazard] attacks and abilities used by a Ghost, Dark, or Fairy-Type creature have a 30% longer range (minimum 1), and the number of Hazards they create is increased by 50% (minimum 1).</li><li>When a creature is affected by a Hazard created by Ghost, Dark, and Fairy-Type creature, that creature loses a Tick of HP, in addition to the Hazard’s other effects.</li></ul>"
   },
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "effects": [
@@ -62,7 +73,9 @@
         "formula": "",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -84,15 +97,15 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": null,
         "modifiedTime": null,
-        "lastModifiedBy": null
+        "lastModifiedBy": null,
+        "exportSource": null
       }
     }
   ],
-  "flags": {},
   "_id": "IE0BtA3l4YIfPsSv"
 }

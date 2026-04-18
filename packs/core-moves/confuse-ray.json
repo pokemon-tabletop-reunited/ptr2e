@@ -10,31 +10,40 @@
         "name": "Confuse Ray",
         "type": "attack",
         "traits": [
-          "pp-updated"
+          "ray"
         ],
         "range": {
-          "target": "cone",
-          "distance": 4,
+          "target": "creature",
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "simple",
+          "powerPoints": 2
         },
         "category": "status",
         "accuracy": 100,
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: On hit, all valid targets are @Affliction[confused] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: On hit, all valid targets are @Affliction[confused 5].</p>",
+        "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "YmwqpmoCpgcMoEk7",
   "effects": [
@@ -48,13 +57,15 @@
           {
             "type": "roll-effect",
             "key": "confuse-ray-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -65,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -83,12 +89,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.342",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729181198100,
         "modifiedTime": 1729181220751,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

@@ -11,17 +11,24 @@
       }
     },
     "slug": "dynamax",
-    "description": "<p>This effect will Dynamax your Pokemon, increasing it's size and it's max HP accordingly. Other effects will need to be handled manually at this time.</p>",
+    "description": "<p>This effect will Dynamax your Pokemon, increasing its Size and max HP accordingly.</p><p>Please manually increment the attached clock to \"spend\" the additional PP for the effects of @Trait[max] Attacks.</p><blockquote><p><strong>Dev Note</strong>: Other effects will need to be handled manually at this time.</p></blockquote>",
     "traits": [
       "partial-automation"
-    ]
+    ],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
   },
   "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
   "effects": [
     {
       "name": "Dynamax!",
-      "type": "passive",
-      "_id": "t8yIS103g8UpyjqL",
+      "type": "affliction",
+      "_id": "6lzmDopRc9xXktGC",
       "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
       "system": {
         "changes": [
@@ -29,36 +36,112 @@
             "type": "basic",
             "key": "system.modifiers.hpMultiplier",
             "value": 2,
-            "mode": 1,
             "predicate": [],
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           },
           {
             "type": "basic",
             "key": "system.modifiers.heightClass",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "create-clock",
+            "key": "dynamaxClockUser",
+            "value": 0,
+            "predicate": [],
+            "max": 8,
+            "color": "#c80096",
+            "private": false,
+            "label": "Max PP Spend",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "max-trait-attack",
+            "value": "@actor.clocks.dynamaxClockUser",
+            "predicate": [],
+            "property": "pp-cost",
+            "definition": [],
+            "label": "Dynamax (Boost Cost)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "max-trait-attack",
+            "value": "1+(0.25*@actor.clocks.dynamaxClockUser)",
+            "predicate": [],
+            "property": "power",
+            "definition": [],
+            "label": "Dynamax (Extra Boost)",
+            "ignored": false,
+            "method": 1
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "max-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": "25*@actor.clocks.dynamaxClockUser",
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "max-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.miMt3zxPrOOJe1wF",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.key",
+                "value": "dynamaxClockUser",
+                "method": 5
+              },
+              {
+                "property": "system.changes.0.value",
+                "value": "-1-@actor.clocks.dynamaxClockUser",
+                "method": 2
+              }
+            ],
+            "dontMerge": true,
+            "label": "Max Attack Use",
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 6,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -66,16 +149,16 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Item.egJEb7g3wbErCZZG.ActiveEffect.t8yIS103g8UpyjqL",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
-        "createdTime": null,
-        "modifiedTime": 1737115807775,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767920065931,
+        "modifiedTime": 1767920065931,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

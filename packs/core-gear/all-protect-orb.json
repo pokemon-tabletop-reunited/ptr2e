@@ -18,42 +18,132 @@
     "fling": {
       "type": "untyped",
       "power": 40,
-      "accuracy": 100
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "The user and all allies witiin a 3m Burst freely use Protect.",
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected 2} and all allies within a 5m Emanation gain @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected 1}.<br><br>Note: Targeting Self not required.</p>",
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "modifier": null,
-    "stack": 1
+    "slug": "all-protect-orb",
+    "stack": 1,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "All-Protect Orb",
+        "slug": "all-protect-orb",
+        "description": "<p>The user gains @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected 2} and all allies within a 5m Emanation gain @UUID[Compendium.ptr2e.core-effects.z7BfyuquHkly9OfK]{Protected 1}.<br><br>Note: Targeting Self not required.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "VHekn9UmGLigTikZ",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!VHekn9UmGLigTikZ"
+  "effects": [
+    {
+      "name": "All-Protect Orb",
+      "type": "passive",
+      "_id": "eLtvJk8NGHd353CI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "all-protect-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.z7BfyuquHkly9OfK",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-protect-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.z7BfyuquHkly9OfK",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758646126967,
+        "modifiedTime": 1758646236350,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "4MbEHvhwmG5DYTkB"
 }

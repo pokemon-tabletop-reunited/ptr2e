@@ -1,0 +1,122 @@
+{
+  "name": "Morgul Blade",
+  "_id": "B6lIBIEfDek67evS",
+  "type": "perk",
+  "img": "icons/skills/melee/strike-weapon-polearm-ice-blue.webp",
+  "effects": [
+    {
+      "name": "Morgul Blade",
+      "type": "passive",
+      "_id": "Cg0q7KFiw5ARMUGt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "morgul-blade",
+            "predicate": [],
+            "domain": "all",
+            "label": "Morgul Blade",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "weapon-trait-attack",
+            "value": "ghost",
+            "predicate": [
+              "morgul-blade"
+            ],
+            "ignored": false,
+            "property": "type",
+            "definition": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.qzpbsWBCsiDZlcMD.ActiveEffect.S9NI6JHCCqM3iPYd",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765235625415,
+        "modifiedTime": 1765235678087,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "morgul-blade",
+    "description": "<p>You may add the @Trait[ghost] typing to your @Trait[weapon] attacks, in addition to their normal typing.</p>",
+    "traits": [
+      "ghost",
+      "weapon"
+    ],
+    "prerequisites": [
+      "trait:ghost",
+      "trait:wielder"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "ghost"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 165,
+        "y": 109,
+        "connected": [
+          "grim-haunt",
+          "spooky",
+          "type-embodiment-type"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "mYLGJuVcLTxYkgvC"
+}

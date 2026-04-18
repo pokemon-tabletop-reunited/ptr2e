@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Syrupy Apple",
   "type": "equipment",
   "system": {
@@ -9,34 +9,36 @@
     },
     "slug": "syrupy-apple",
     "traits": [
-      "applin",
-      "dipplin",
-      "hydrapple",
-      "grass",
-      "worn",
+      "accessory",
+      "held",
       "evolution"
     ],
     "actions": [],
-    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, Helvetica, Arial, sans-serif\">A peculiar apple that can make a certain species of Pokémon evolve. It's exceptionally syrupy.<br><br>Effect: None yet<br><br>Restriction: Only affects [Applin], [Dipplin], or [Hydrapple] Creatures</span></p>",
+    "description": "<p>Effect: The user’s SPDEF is increased by +15%. Effect is doubled for @Trait[grass] creatures.<br><br>An Applin may consume this item in order to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "carryType": "equipped",
-      "handsHeld": null,
-      "slot": "worn"
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "accessory"
     },
-    "grade": "E",
+    "grade": "D",
     "fling": {
       "type": "grass",
-      "power": 85,
+      "power": 95,
       "accuracy": 85,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -45,10 +47,76 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
-  "flags": {},
+  "img": "systems/ptr2e/img/item-icons/syrupy apple.webp",
+  "effects": [
+    {
+      "name": "Syrupy Apple",
+      "type": "passive",
+      "_id": "fsemi0JtSKKOdKiY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": "0.15",
+            "predicate": [],
+            "label": "Syrupy Apple",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": "0.15",
+            "predicate": [
+              "trait:grass"
+            ],
+            "label": "Syrupy Apple (Grass)",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766186347031,
+        "modifiedTime": 1766186885637,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "SEGARxzaPJmba5zN"
 }

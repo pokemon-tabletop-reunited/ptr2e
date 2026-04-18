@@ -1,0 +1,209 @@
+{
+  "name": "Your Target's Right Here!",
+  "_id": "3JzUu6EOj3XHAwlt",
+  "type": "perk",
+  "img": "icons/creatures/birds/chicken-hen-white.webp",
+  "effects": [
+    {
+      "name": "Your Target's Right Here!",
+      "type": "passive",
+      "_id": "s5iztFqKXXT3xkQ1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 1,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.resolvedconditio",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.jEX7s3GbbAtzgyS3",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "your-targets-right-here-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.markedcondition0",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1772124176935,
+        "modifiedTime": 1772124395990,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Your Target's Right Here!",
+        "slug": "your-targets-right-here",
+        "description": "<p>Effect: The target gains @Tick[1 shield], @Affliction[resolved 2], +1 DEF and SPDEF Stage for 2 Activations, and @Affliction[marked 3].</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/creatures/birds/chicken-hen-white.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "ally",
+          "distance": 5,
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "your-targets-right-here",
+    "description": "<p>Effect: The user spends @PP[-5] as a Complex Action. An Ally within 5m gains @Tick[1 shield], @Affliction[resolved 2], +1 DEF and SPDEF Stage for 2 Activations, and @Affliction[marked 3].</p>",
+    "traits": [],
+    "prerequisites": [],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "tactician"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 31,
+        "y": 61,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "hold-the-line",
+          "minor-buff-35",
+          "tactician"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  },
+  "folder": "PAZ8zWUPw7Azm5V6"
+}

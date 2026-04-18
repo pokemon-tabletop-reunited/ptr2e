@@ -10,8 +10,7 @@
         "name": "Swords Dance",
         "type": "attack",
         "traits": [
-          "dance",
-          "pp-updated"
+          "dance"
         ],
         "range": {
           "target": "self",
@@ -34,6 +33,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "DfeVcS4PIWcHqut8",
@@ -41,28 +46,24 @@
     {
       "name": "Swords Dance",
       "img": "systems/ptr2e/img/icons/physical_icon.png",
-      "type": "affliction",
+      "type": "passive",
       "duration": {
-        "turns": 5,
-        "startTime": 1703098388,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "startRound": 1,
-        "startTurn": 0
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
           {
             "type": "roll-effect",
             "key": "swords-dance-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.g1Gt9mJWimAqrqZ0",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.g1Gt9mJWimAqrqZ0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,24 +72,13 @@
         "removeOnRecall": false,
         "stacks": 0
       },
-      "description": "<p>+2 Attack Stages</p>",
+      "description": "",
       "statuses": [],
       "_id": "m4TnGrODsVuLi0lM",
       "disabled": false,
-      "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
-      },
-      "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
-      "statuses": [],
       "sort": 0,
       "flags": {},
       "_stats": {

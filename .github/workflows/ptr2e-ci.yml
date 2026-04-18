@@ -1,0 +1,38 @@
+name: PTR2e CI
+on:
+    push:
+        branches: [Stable]
+    workflow_dispatch:
+    pull_request:
+        branches: [Stable, Staging]
+        types: [opened, synchronize, reopened]
+    merge_group:
+        branches: [Stable, Staging]
+jobs:
+    build:
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.event.pull_request.draft == false) || github.event_name == 'merge_group'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js 24.x
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24.x
+
+            - name: Cache NPM Deps
+              id: cache-npm
+              uses: actions/cache@v3
+              with:
+                path: node_modules/
+                key: npm-${{ hashFiles('package-lock.json') }}
+
+            - name: Install NPM Deps
+              if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+              run: npm ci
+
+            - name: Build
+              run: npm run build
+
+            - name: Run tests
+              run: npm run test

@@ -10,8 +10,7 @@
         "name": "Taunt",
         "type": "attack",
         "traits": [
-          "social",
-          "pp-updated"
+          "social"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +26,7 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: On hit, the target becomes @Affliction[taunted] 5.</p>",
+        "description": "<p>Effect: On hit, the target becomes @Affliction[taunted 5].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,13 +37,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "IB5iMsqBlnOZpPM9",
   "effects": [
     {
       "name": "Taunt",
-      "type": "affliction",
+      "type": "passive",
       "_id": "lUt8kKq6dIzrh3Y3",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -52,13 +57,13 @@
           {
             "type": "roll-effect",
             "key": "taunt-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.tauntedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.tauntedcondition",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,13 +77,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

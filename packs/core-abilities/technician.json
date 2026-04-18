@@ -14,20 +14,107 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's attacks that are at base 60 Power or less have 50% increased Power.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's attacks that have ≤ 60 Base Power have +50% Base Power.</p>",
+        "img": "systems/ptr2e/img/icons/automated_icon.webp"
       }
     ],
-    "description": "<p>Effect: The user's attacks that are at base 60 Power or less have 50% increased Power.</p>",
+    "description": "<p>Effect: The user's attacks that have ≤ 60 Base Power have +50% Base Power.</p>",
     "traits": [],
     "slug": "technician",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "mBiveQH3XnR90DS3",
-  "effects": []
+  "effects": [
+    {
+      "name": "Technician",
+      "type": "passive",
+      "_id": "AHkueXKtQUrEw1B7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "value": "technician-toggle",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Technician - Base Power ≤ 60",
+            "state": true,
+            "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "alter-attack",
+            "key": "damaging-attack",
+            "value": 1.5,
+            "property": "power",
+            "definition": [],
+            "predicate": [
+              "technician-toggle"
+            ],
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": "Item.U44XlAQbNc2gvkCy.ActiveEffect.BMYIavMKRHMFEyb3",
+        "exportSource": null,
+        "coreVersion": "14.359",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "createdTime": 1775570361222,
+        "modifiedTime": 1775570511088,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
+    }
+  ]
 }

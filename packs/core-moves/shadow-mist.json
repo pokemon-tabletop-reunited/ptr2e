@@ -10,9 +10,7 @@
         "name": "Shadow Mist",
         "type": "attack",
         "traits": [
-          "friendly",
-          "flinch-3",
-          "pp-updated"
+          "friendly"
         ],
         "range": {
           "target": "emanation",
@@ -21,15 +19,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 7
         },
         "category": "status",
-        "accuracy": 85,
+        "accuracy": 75,
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations and are Flinched.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: On hit, all valid targets lose -2 EVA Stage for 5 Activations and are @Affliction[delay 30].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
         "predicate": []
       }
     ],
@@ -38,6 +36,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "joTVpu34LTla2KBr",
@@ -52,31 +57,61 @@
           {
             "type": "roll-effect",
             "key": "shadow-mist-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.5MQzVTuubNTERPjS",
-            "predicate": [],
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.5MQzVTuubNTERPjS",
+            "predicate": [
+              {
+                "not": "origin:ally"
+              }
+            ],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "origin:ally"
+              }
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": -30
+              }
+            ],
+            "dontMerge": false,
+            "key": "shadow-mist-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -88,13 +123,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1737745027309,
-        "modifiedTime": 1737745048259,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1775577072790,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

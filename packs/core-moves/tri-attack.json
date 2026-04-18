@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "pulse",
-          "ray",
-          "pp-updated"
+          "ray"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +28,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: On hit, the target has a 15% chance of gaining @Affliction[paralysis] 5, a 15% chance of gaining @Affliction[burn] 5, and a 15% chance of gaining @Affliction[frozen] 1.</p>",
+        "description": "<p>Effect: On hit, the target has a 15% chance of gaining @Affliction[paralysis 5], a 15% chance of gaining @Affliction[burn 5], and a 15% chance of gaining @Affliction[frozen 1].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -37,6 +36,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "yy01fk9ACLAv0lDv",
@@ -51,35 +56,35 @@
           {
             "type": "roll-effect",
             "key": "tri-attack-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 15,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "tri-attack-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 15,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "tri-attack-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frozencondition0",
             "predicate": [],
             "chance": 15,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -90,13 +95,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

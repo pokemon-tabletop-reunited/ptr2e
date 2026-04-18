@@ -10,34 +10,15 @@
           "manipulate",
           "basic"
         ],
-        "name": "Recall (Fainted)",
-        "slug": "recall-fainted",
-        "description": "<p>Trigger: The target is @Affliction[fainted].</p><p>Effect: Using the method of their choosing, the user takes a creature from their Team out of combat.<br>Most commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).</p>",
-        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
-        "type": "generic",
-        "range": {
-          "target": "ally",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "free",
-          "trigger": "<p>The target is @Affliction[fainted].</p>"
-        }
-      },
-      {
-        "free": true,
-        "traits": [
-          "manipulate",
-          "basic"
-        ],
         "name": "Recall",
         "slug": "recall",
-        "description": "<p>Effect: Using the method of their choosing, the user takes a creature from their Team out of combat.<br>Most commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).</p>",
+        "description": "<p>Using the method of their choosing, the user takes a creature from their Team out of combat.<br><br>In @Trait[conventional] settings creatures are stored and released from @Trait[ball]s. Creatures can be recalled by:</p><ul><li>Being hit with their Ball via Fling (this Fling is freely done as part of this Action)</li><li>Being touched with their Ball</li><li>Being hit by the Ball’s \"recall emitter\" laser, which can be used on a creature within the Ball’s line of sight</li></ul>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "generic",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple"
@@ -45,8 +26,15 @@
       }
     ],
     "slug": "recall",
-    "grade": "E"
+    "grade": "E",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
+  "folder": "EpCOePz8omfXbp34",
   "_id": "MXPyYtoPDsZ4ByPh",
   "effects": []
 }

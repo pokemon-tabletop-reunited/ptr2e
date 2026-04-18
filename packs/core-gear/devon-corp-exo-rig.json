@@ -42,7 +42,13 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "slug": "devon-corp-exo-rig"
+    "slug": "devon-corp-exo-rig",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -58,28 +64,28 @@
             "key": "system.attributes.atk.base",
             "value": 10,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.attributes.def.base",
             "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
             "key": "electric-attack-damage-percentile",
             "value": 25,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -90,13 +96,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -117,6 +118,6 @@
       }
     }
   ],
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXac",
   "_id": "e9TZKDFHvjfrwDfJ"
 }

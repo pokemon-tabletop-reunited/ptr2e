@@ -11,17 +11,14 @@
       }
     ],
     "cost": 1,
-    "description": "<p>You are able to issue Commands to allied creatures which you are not deemed to have ownership of.</p>",
+    "description": "<p>Effect: The user may target creatures other than itself or its Team with @Trait[command] Actions, and the target(s) of the user's @Trait[command] Actions are @Affliction[advance 10].</p>",
     "actions": [
       {
         "name": "Tactician",
         "slug": "tactician",
         "description": "<p>You are able to issue Commands to allied creatures which you are not deemed to have ownership of.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
@@ -29,10 +26,8 @@
         "range": {
           "target": "enemy",
           "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false
+          "distance": 10
+        }
       }
     ],
     "slug": "tactician",
@@ -55,34 +50,109 @@
           "chansey-medicine",
           "root-1",
           "heroic-transformation",
-          "pack-mon-2"
+          "pack-mon-2",
+          "minor-buff-35",
+          "victory-march",
+          "your-targets-right-here"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#80ffff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": "#0f0f0f",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "finesse",
-      "archetype": "Support"
-    }
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "13JRGGWEpyfuZZuG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Tactician",
+      "type": "passive",
+      "_id": "lRv8TMEODJtvgosb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "command-trait-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "command-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1764897157595,
+        "modifiedTime": 1772123940611,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "PAZ8zWUPw7Azm5V6"
 }

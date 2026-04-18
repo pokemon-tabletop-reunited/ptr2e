@@ -29,13 +29,19 @@
         "category": "physical",
         "power": 50,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, all valid targets have a 10% chance of being @Affliction[confused] 5.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of being @Affliction[confused 5].</p>"
       }
     ],
     "grade": "E",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "effects": [
@@ -49,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "barbed-sting-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -66,13 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

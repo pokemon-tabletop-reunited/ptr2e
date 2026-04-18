@@ -23,12 +23,19 @@
         "img": "systems/ptr2e/img/perk-icons/Combat.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a Physical-Category attack. </p><p>Effect: The user loses -1 DEF Stage and gains +1 SPD Stage for 5 Activations.</p>",
+    "description": "<p>Trigger: The user is hit by a Physical-Category attack.</p><p>Effect: The user loses -1 DEF Stage and gains +2 SPD Stage for 5 Activations.</p>",
     "traits": [],
     "slug": "weak-armor",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "NlLmGi66S7A0TTjg",
@@ -43,24 +50,28 @@
           {
             "type": "roll-effect",
             "key": "physical-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 100,
             "affects": "defensive",
-            "mode": 2,
+            "dontMerge": false,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "physical-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLZ",
             "predicate": [],
             "chance": 100,
             "affects": "defensive",
-            "mode": 2,
+            "dontMerge": false,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +82,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -91,10 +97,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.1.3.beta",
         "createdTime": 1729246091402,
-        "modifiedTime": 1736881773684,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1743348724253,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ]

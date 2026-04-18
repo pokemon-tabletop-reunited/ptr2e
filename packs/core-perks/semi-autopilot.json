@@ -1,0 +1,120 @@
+{
+  "name": "Semi-Autopilot",
+  "_id": "JnYQxzfm3t56La3X",
+  "type": "perk",
+  "img": "systems/ptr2e/img/perk-icons/Mechanist.svg",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "semi-autopilot",
+    "description": "<p>Effect: The user may Move the vehicle on their Activation and not require that Movement to utilize both of their hands, leaving one open for other uses. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
+    "traits": [
+      "pilot"
+    ],
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.bike.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.small-motor-vehicles.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.cars.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.utility-vehicles.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.military-ground-vehicles.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.walkers.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aircraft.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aerospace-vehicles.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.exotic-vehicle-specific.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.watercraft.mod}",
+              60
+            ]
+          }
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "pilot"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 79,
+        "y": 81,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "take-the-wheel"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  }
+}

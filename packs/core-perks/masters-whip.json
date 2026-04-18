@@ -11,7 +11,7 @@
         "slug": "masters-whip",
         "description": "<p>You may advance a targeted ally's activation forward by 30% as a Simple Action, costing 3PP.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "attack",
         "range": {
           "target": "ally",
           "unit": "m",
@@ -19,12 +19,25 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": [],
+        "variant": null,
+        "ephemeralVariant": false,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null,
+        "summon": null,
+        "defaultVariant": null,
+        "flingItemId": "",
+        "offensiveStat": null,
+        "defensiveStat": null
       }
     ],
     "slug": "masters-whip",
@@ -56,7 +69,8 @@
           "bloodthirst",
           "root-6",
           "climatologist",
-          "emergency-retreat"
+          "emergency-retreat",
+          "driven"
         ],
         "config": {
           "alpha": null,
@@ -71,16 +85,87 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Tactician"
-    }
+      "archetype": "tactician"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "originSlug": null,
+    "variant": null,
+    "mode": null
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Master's Whip",
+      "type": "passive",
+      "_id": "KmbdRnMxcXvy45b2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "masters-whip-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 30,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Advance 30%",
+                "method": 5
+              }
+            ],
+            "label": "Master's Whip",
+            "dontMerge": false,
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.342",
+        "systemId": "ptr2e",
+        "systemVersion": "1.2.1.beta",
+        "createdTime": 1742128847826,
+        "modifiedTime": 1745186004290,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      }
+    }
+  ]
 }

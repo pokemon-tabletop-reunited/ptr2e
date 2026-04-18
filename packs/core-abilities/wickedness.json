@@ -29,13 +29,19 @@
     "traits": [
       "domain",
       "aura",
-      "dark",
-      "partial-automation"
+      "dark"
     ],
     "slug": "wickedness",
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "6o74KpM7eBLJij3Z",
@@ -53,27 +59,24 @@
             "value": 20,
             "predicate": [],
             "label": "Wickedness",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -85,12 +88,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.6o74KpM7eBLJij3Z.ActiveEffect.iv8BCajSNudSRgRh",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722263626083,
         "modifiedTime": 1733415391339,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     },
     {
@@ -104,8 +108,9 @@
             "type": "aura",
             "key": "",
             "value": 0,
-            "predicate": [],
-            "mode": 2,
+            "predicate": [
+              "wickedness:active"
+            ],
             "priority": null,
             "ignored": false,
             "radius": 5,
@@ -119,9 +124,7 @@
                 "removeOnExit": true,
                 "includesSelf": false,
                 "appliesSelfOnly": false,
-                "predicate": [
-                  "target:trait:dark"
-                ]
+                "predicate": []
               }
             ],
             "appearance": {
@@ -135,24 +138,37 @@
               },
               "texture": null
             },
-            "mergeExisting": true
+            "mergeExisting": true,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "wickedness:active",
+            "predicate": [],
+            "domain": "all",
+            "state": true,
+            "toggleable": true,
+            "count": false,
+            "label": "Wickedness",
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -164,12 +180,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.3.8.beta",
         "createdTime": 1733415511407,
-        "modifiedTime": 1733415572852,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1753018687764,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

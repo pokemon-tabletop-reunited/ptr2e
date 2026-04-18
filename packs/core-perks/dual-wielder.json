@@ -5,25 +5,9 @@
     "prerequisites": [
       "trait:wielder"
     ],
-    "cost": 4,
+    "cost": 2,
     "description": "<p>Gain a second Held Item slot.</p>",
-    "actions": [
-      {
-        "name": "Dual Wielder",
-        "slug": "dual-wielder",
-        "description": "<p>Gain a second Wielded Item Slot.</p>",
-        "cost": {
-          "activation": "free"
-        },
-        "type": "passive",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
-        "range": {
-          "target": "enemy",
-          "unit": "m"
-        }
-      }
-    ],
+    "actions": [],
     "slug": "dual-wielder",
     "traits": [],
     "_migration": {
@@ -32,24 +16,24 @@
     },
     "nodes": [
       {
+        "x": 192,
+        "y": 55,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "backpacker-1",
           "belt-expansion-1",
-          "dress-to-impress"
+          "dress-to-impress",
+          "yeomanry",
+          "nock-shot",
+          "flexible-iron"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 192,
-        "y": 55,
         "tier": null
       }
     ],
@@ -60,7 +44,15 @@
       "arena": "physical",
       "approach": "finesse",
       "archetype": "weapon"
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "QioUEl6UBFclZvzG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -69,7 +61,7 @@
       "name": "Dual Wielder",
       "type": "passive",
       "_id": "KS2tYC5yodOQrCN2",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
       "system": {
         "changes": [
           {
@@ -77,26 +69,23 @@
             "key": "system.inventory.held.max",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Gain a second Held Item slot.</p>",
       "origin": null,
@@ -108,12 +97,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.1.beta",
         "createdTime": 1737566059443,
-        "modifiedTime": 1737566090456,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "modifiedTime": 1754299623416,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ],

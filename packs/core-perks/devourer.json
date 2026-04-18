@@ -1,0 +1,112 @@
+{
+  "name": "Devourer",
+  "_id": "myHVSAQ7YlPxcfUU",
+  "type": "perk",
+  "img": "icons/creatures/abilities/mouth-teeth-rows-needles-purple.webp",
+  "effects": [
+    {
+      "name": "Devourer",
+      "type": "passive",
+      "_id": "bdlEEnP77wLBCMpb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.TQNGoLOtYTLLnoTY",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764894992909,
+        "modifiedTime": 1764895011046,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "devourer",
+    "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.TQNGoLOtYTLLnoTY]{Jaws of Carnage} as a Tutored Ability.</p>",
+    "traits": [
+      "jaw",
+      "lockjaw"
+    ],
+    "prerequisites": [
+      "trait:lockjaw"
+    ],
+    "autoUnlock": [
+      "item:ability:jaws-of-carnage"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 99,
+        "y": 70,
+        "connected": [
+          "minor-buff-5",
+          "swallow-whole"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  }
+}

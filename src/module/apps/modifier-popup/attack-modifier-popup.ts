@@ -7,19 +7,15 @@ import { htmlQueryAll, htmlQuery, tupleHasValue } from "@utils";
 import { AttackPTR2e } from "@data";
 
 export class AttackModifierPopup extends ModifierPopup {
-  static override DEFAULT_OPTIONS = fu.mergeObject(
-    super.DEFAULT_OPTIONS,
-    {
-      classes: ["attack"],
-      position: {
-        width: 440,
-      },
-      form: {
-        handler: AttackModifierPopup.#onSubmit,
-      },
+  static override DEFAULT_OPTIONS = {
+    classes: ["attack"],
+    position: {
+      width: 440,
     },
-    { inplace: false }
-  );
+    form: {
+      handler: AttackModifierPopup.#onSubmit,
+    },
+  } as unknown as Omit<DeepPartial<foundry.applications.api.ApplicationConfiguration>, "uniqueId">;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     modifiers: {
@@ -80,6 +76,10 @@ export class AttackModifierPopup extends ModifierPopup {
             return method === "flat" ? "stat-flat" : "invalid";
           case "effectiveness":
             return method === "stage" ? "effectiveness-stage" : "invalid";
+          case "strikes": 
+            return method === "flat" ? "strikes-flat" : "invalid";
+          case "hits":
+            return method === "flat" ? "hits-flat" : "invalid";
           default:
             return "invalid";
         }
@@ -95,7 +95,9 @@ export class AttackModifierPopup extends ModifierPopup {
         "damage-percentile": 7,
         "damage-flat": 8,
         "effectiveness-stage": 9,
-        invalid: 10,
+        "strikes-flat": 10,
+        "hits-flat": 11,
+        invalid: 12,
       };
 
       const checkModifiers = this.check.modifiers.map((m) => {
@@ -200,7 +202,7 @@ export class AttackModifierPopup extends ModifierPopup {
     })();
 
     const variants = (() => {
-      if(!this.context.variants?.length || !this.context.actor) return null;
+      if (!this.context.variants?.length || !this.context.actor) return null;
 
       interface AttackVariant {
         slug: string;
@@ -213,29 +215,42 @@ export class AttackModifierPopup extends ModifierPopup {
       let original = false;
       let selected = false;
 
-      for(const variant of this.context.variants) {
+      for (const variant of this.context.variants) {
         const action = this.context.actor.actions.attack.get(variant);
-        if(!action) continue;
-        if(!action.variant) original = true;
-        if(this.context.action === variant) {
-          variantMap.set(variant, {slug: variant, uuid: action.uuid, label: action.name, category: action.category, selected: true });
+        if (!action) continue;
+        if (!action.variant) original = true;
+        if (this.context.action === variant) {
+          variantMap.set(variant, { slug: variant, uuid: action.uuid, label: action.name, category: action.category, selected: true });
           selected = true;
         }
         else {
-          variantMap.set(variant, {slug: variant, uuid: action.uuid, label: action.name, category: action.category});
-        }  
+          variantMap.set(variant, { slug: variant, uuid: action.uuid, label: action.name, category: action.category });
+        }
       }
 
-      const variants = Array.from(variantMap.values()).sort((a, b) => a.label.localeCompare(b.label));
-      if(!original) {
+      const variants = Array.from(variantMap.values()).sort((a, b) => {
+        const varA = this.context.actor?.actions.attack.get(a.slug);
+        const varB = this.context.actor?.actions.attack.get(b.slug);
+        if (!varA || !varB) return 0;
+        if(!varA.flingItemId && varB.flingItemId) return -1;
+        if(varA.flingItemId && !varB.flingItemId) return 1;
+        return a.label.localeCompare(b.label);
+      });
+      if (!original) {
         const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
-        if(!original) return null;
+        if (!original) return null;
+        const specialAdaptableVariant = variants.findIndex(v => v.slug === `${original.slug}-physical` || v.slug === `${original.slug}-special`);
+        if (specialAdaptableVariant !== -1) {
+          const specialVariant = variants[specialAdaptableVariant];
+          variants.splice(specialAdaptableVariant, 1);
+          variants.unshift(specialVariant);
+        }
         variants.unshift({
           slug: original.slug,
-          label: original.slug === 'fling' ? `${original.name} (No Item)` :`${original.name} (Original)`,
+          label: original.slug === 'fling' ? `${original.name} (No Item)` : `${original.name} (Original)`,
           category: original.category,
           uuid: original.uuid,
-          ...(!selected ? {selected: true} : {})
+          ...(!selected ? { selected: true } : {})
         })
       }
       return variants;
@@ -381,7 +396,9 @@ export class AttackModifierPopup extends ModifierPopup {
           "damage-percent",
           "damage-flat",
           "stat-flat",
-          "effectiveness-stage"
+          "effectiveness-stage",
+          "strikes-flat",
+          "hits-flat",
         ].includes(modifierType)
       ) {
         errors.push("Invalid modifier type. Please select a valid modifier type.");
@@ -416,6 +433,10 @@ export class AttackModifierPopup extends ModifierPopup {
               return { method: "flat", type: "stat" };
             case "effectiveness-stage":
               return { method: "stage", type: "effectiveness" };
+            case "strikes-flat":
+              return { method: "flat", type: "strikes" };
+            case "hits-flat":
+              return { method: "flat", type: "hits" };
           }
           return {};
         })(modifierType);
@@ -494,17 +515,17 @@ export class AttackModifierPopup extends ModifierPopup {
     const variantSlug = select.value;
 
     const uuid = this.context.actor?.uuid ?? this.context.attack?.actor?.uuid;
-    const origin = await fromUuid<ActorPTR2e>(uuid);
-    if(!origin) return;
+    const origin = await fu.fromUuid<ActorPTR2e>(uuid);
+    if (!origin) return;
 
     const variant = origin.actions.attack.get(variantSlug);
-    if(!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
+    if (!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
 
-    this.resolve?.(null);
+    this.resolve?.({variantSelected: true});
     this.promise = null;
     this.resolve = undefined;
 
-    variant.roll({modifierDialog: this});
+    variant.roll({ modifierDialog: this });
   }
 
   updateDetails(

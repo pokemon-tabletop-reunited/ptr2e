@@ -19,28 +19,125 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "restorative",
     "traits": [
       "stack-3",
       "combat",
-      "held",
       "restorative",
-      "consumable",
-      "healing"
+      "consumable"
     ],
-    "description": "The target is healed 15 PP.",
+    "description": "<p>The target is healed @PP[15].</p>",
     "quantity": 1,
     "slug": "max-ether",
     "stack": 3,
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Max Ether",
+        "slug": "max-ether",
+        "description": "<p>The target is healed @PP[15].</p>",
+        "traits": [
+          "stack-3",
+          "combat",
+          "restorative",
+          "consumable"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/max ether.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "JfPpPgJyqcJF8hhU",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab"
+  "effects": [
+    {
+      "name": "Max Ether",
+      "type": "passive",
+      "_id": "LCLnYZJuPtFYs5yh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "max-ether-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.LHUTMAC0nCJWDRFt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.isFlat",
+                "value": "true",
+                "method": 5
+              },
+              {
+                "property": "system.changes.0.value",
+                "value": 15,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.UGTXYL1GX6QLUfM5.ActiveEffect.RyVoE01nh7JpzY4y",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758620316505,
+        "modifiedTime": 1758620329856,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "srQci2ThhRKdmC6g"
 }

@@ -1,7 +1,7 @@
 {
   "name": "Origin Bolt",
   "type": "move",
-  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "origin-bolt",
     "actions": [
@@ -10,11 +10,10 @@
         "name": "Origin Bolt",
         "type": "attack",
         "traits": [
-          "legendary",
-          "pp-updated"
+          "legendary"
         ],
         "range": {
-          "target": "line",
+          "target": "wide-line",
           "distance": 8,
           "unit": "m"
         },
@@ -26,17 +25,26 @@
         "power": 100,
         "accuracy": 100,
         "types": [
-          "electric"
+          "steel"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. When using this attack while @Affliction[harden], the user gains 2 Ticks of HP.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis 5]. When using this attack while @Affliction[harden], the user gains 2 Ticks of HP.</p>",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg",
+        "predicate": []
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "TExeUgZTCNriTVlk",
   "effects": []

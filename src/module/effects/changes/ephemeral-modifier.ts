@@ -1,5 +1,5 @@
 import { ActorPTR2e, DeferredValueParams } from "@actor";
-import { ChangeModel } from "@data";
+import { ChangeModel, FLAT_MODIFIER_METHOD_SUFFIXES, FLAT_MODIFIER_TYPE_SUFFIXES } from "@data";
 import { ModifierPTR2e } from "../modifiers.ts";
 
 export default class EphemeralModifierChangeSystem extends ChangeModel {
@@ -35,7 +35,7 @@ export default class EphemeralModifierChangeSystem extends ChangeModel {
 
     const { selector, type, method } = ((): { selector: string; type: ModifierPTR2e["type"], method: ModifierPTR2e["method"] } => {
       const { selector, method } = (() => {
-        const methodSuffixes = ["percentile", "stage", "base", "flat"] as const;
+        const methodSuffixes = FLAT_MODIFIER_METHOD_SUFFIXES
 
         for (const suffix of methodSuffixes) {
           if (resolvedSelector.endsWith("-" + suffix)) {
@@ -48,7 +48,7 @@ export default class EphemeralModifierChangeSystem extends ChangeModel {
         return { selector: resolvedSelector, method: providedMethod };
       })();
 
-      const suffixes = ["accuracy", "evasion", "damage", "crit", "power"] as const;
+      const suffixes = FLAT_MODIFIER_TYPE_SUFFIXES
 
       for (const suffix of suffixes) {
         if (selector.endsWith("-" + suffix)) {

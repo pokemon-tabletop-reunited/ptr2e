@@ -17,19 +17,17 @@
       }
     ],
     "cost": 4,
-    "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover 5 Ticks of HP.</p>",
+    "description": "<p>Effect: The user can spend @PP[-7] as an @Trait[interrupt] @Trait[flinch-40] Complex Action when an Ally within 10m gains @Affliction[fainted],. The Ally is healed @HP[5 tick] and cured of 1 Stack of @Affliction[weary].</p>",
     "actions": [
       {
         "name": "Keep Fighting!",
         "slug": "keep-fighting",
-        "description": "Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover 5 Ticks of HP.",
+        "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed @HP[5 tick] and loses 1 Stack of @Affliction[weary].</p>",
         "type": "generic",
         "cost": {
-          "activation": "free",
-          "powerPoints": 10,
-          "trigger": "An ally gains @Affliction[fainted].",
-          "delay": null,
-          "priority": null
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "An ally gains @Affliction[fainted]."
         },
         "range": {
           "target": "ally",
@@ -37,11 +35,10 @@
           "unit": "m"
         },
         "traits": [
-          "interrupt-4",
-          "healing"
+          "healing",
+          "interrupt"
         ],
-        "img": "icons/svg/explosion.svg",
-        "variant": null
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
       }
     ],
     "slug": "keep-fighting",
@@ -52,40 +49,123 @@
     },
     "nodes": [
       {
-        "connected": [
-          "hold-the-line",
-          "resolute-watcher"
-        ],
-        "config": {
-          "alpha": null,
-          "backgroundColor": "#ffffff",
-          "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": "#191919",
-          "scale": null
-        },
-        "hidden": false,
-        "type": "normal",
         "x": 34,
         "y": 58,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "hold-the-line",
+          "resolute-watcher",
+          "rapid-fire-commands"
+        ],
+        "config": {
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "social",
       "approach": "power",
-      "archetype": "Support"
-    }
+      "archetype": "support"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traitWebs": []
   },
   "_id": "3RMFsZTuMdDhCyZg",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Keep Fighting!",
+      "type": "passive",
+      "_id": "tnn2ivALneFn1Sif",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "keep-fighting-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [
+              "origin:ally"
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 5,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "the-meaning-of-haste-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -40,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1765234874919,
+        "modifiedTime": 1772123680193,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "PAZ8zWUPw7Azm5V6"
 }

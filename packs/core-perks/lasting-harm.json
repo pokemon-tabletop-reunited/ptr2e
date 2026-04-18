@@ -8,27 +8,21 @@
       {
         "name": "Lasting Harm",
         "slug": "lasting-harm",
-        "description": "<p>Your created [Major Affliction]s and [Minor Affliction]s that inflict effect damage start with +2 Stacks.</p>",
+        "description": "<p>Whenever you apply a @Trait[major-affliction] or @Trait[minor-affliction], their Duration (or Stack amount) is increased by 2 turns.</p>",
         "traits": [],
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg",
-        "variant": null,
-        "hidden": false
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "lasting-harm",
-    "description": "<p>Your created [Major Affliction]s and [Minor Affliction]s that inflict effect damage start with +2 Stacks.</p>",
+    "description": "<p>Whenever you apply a @Trait[major-affliction] or @Trait[minor-affliction], their Duration (or Stack amount) is increased by 2 turns.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 4,
@@ -38,6 +32,10 @@
     },
     "nodes": [
       {
+        "x": 157,
+        "y": 74,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hexcraft",
           "acceptance",
@@ -48,33 +46,86 @@
           "cultivate-weakness"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#000000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 157,
-        "y": 74,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
       "arena": "mental",
       "approach": "power",
-      "archetype": "Affliction"
+      "archetype": "affliction"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Lasting Harm",
+      "type": "passive",
+      "_id": "uBYUieWkSnIj4LrI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "dot-trait-applied",
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 2,
+                "method": 2
+              }
+            ],
+            "value": 0,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.2.beta",
+        "createdTime": 1755162831765,
+        "modifiedTime": 1755162888196,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "a1w2zpzavg6qtJFn"
 }

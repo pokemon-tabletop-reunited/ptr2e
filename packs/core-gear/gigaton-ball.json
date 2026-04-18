@@ -20,41 +20,94 @@
     "grade": "C",
     "fling": {
       "type": "untyped",
-      "power": 50,
-      "accuracy": 85
+      "power": 0,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
     "traits": [
-      "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "5x Catch Rate modifier.",
-    "modifier": 5,
+    "description": "<p>3.5x Catch Rate modifier.</p>",
+    "modifier": 3.5,
     "quantity": 1,
-    "container": null,
-    "slug": null,
-    "stack": 3
+    "slug": "gigaton-ball",
+    "stack": 5,
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "HC12vQhqD7gZ5hGc",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXab",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!HC12vQhqD7gZ5hGc"
+  "effects": [
+    {
+      "name": "Gigaton Ball",
+      "type": "passive",
+      "_id": "XbO26RfH0h3uhhLm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-gigaton-ball-attack",
+            "value": 100,
+            "predicate": [
+              "actor:item:perk:curveball-technique"
+            ],
+            "property": "power",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771033139231,
+        "modifiedTime": 1771033365222,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
+  "folder": "bIBkUsgkWMXMOtHm"
 }

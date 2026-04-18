@@ -4,6 +4,8 @@ import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import AdvancementActiveEffectSystem from "@module/effects/data/advancement.ts";
+import { AttackRollCallback } from "@system/rolls/check-roll.ts";
+import { AttackMessageSystem } from "@chat";
 
 class CharacterCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e;
@@ -69,7 +71,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     });
 
     const existingFumble = this.actor.actions.attack.get("fumble");
-    const fumble = existingFumble ?? await fromUuid<ItemPTR2e>("Compendium.ptr2e.core-moves.Item.xoFyO6Z8yZJ9Ko8e");
+    const fumble = existingFumble ?? await fu.fromUuid<ItemPTR2e>("Compendium.ptr2e.core-moves.Item.xoFyO6Z8yZJ9Ko8e");
     if (!fumble) return void await ChatMessage.create({
       type: "combat",
       flavor: "An error occured trying to resolve Fumble. Please resolve it manually."
@@ -79,7 +81,12 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
         await this.actor.createEmbeddedDocuments("Item", [fumble.toObject()]);
       }
 
-      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true });
+      const actorUuid = this.actor.uuid;
+      const applyDamage: AttackRollCallback = async (_context, _results, message) => {
+        await (message?.system as AttackMessageSystem)?.applyDamage(actorUuid);
+      }
+
+      await this.actor.actions.attack.get("fumble")!.roll({ targets: [this.actor], skipDialog: true, callback: applyDamage, skipEffectRolls: true, noCrit: true });
     }
     catch {
       return void await ChatMessage.create({
@@ -96,10 +103,14 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   ): number {
     if (!actor) return Infinity;
 
+    const isPlaytestFormula = game.settings.get("ptr2e", "playtest.av-changes");
+
     // Calculate base AV and stretch it values between 45 and 150
     const unboundBaseAV = Math.floor(
       this.stretchBaseAV(
-        (750 * (1 + ((combat.averageLevel) * 23) / 99)) * (1 - speedStages * 0.125) / actor.speed,
+        isPlaytestFormula 
+          ? 117 * (0.1 * (1.841 * combat.averageLevel + 72) * combat.averageLevel + 10) / (actor.speed + combat.averageLevel + 5) / Math.log10(125 - (combat.averageLevel / 2)) * (2 + (speedStages / 9)) - (combat.averageLevel / 2) + 50 // Playtest Formula
+          : (750 * (1 + ((combat.averageLevel) * 23) / 99)) * (1 - speedStages * 0.125) / actor.speed, // Original Formula
         70 - Math.max(5 * Math.min(5, speedStages), 0),
         125 - Math.min(5 * Math.max(-5, speedStages), 0)
       )

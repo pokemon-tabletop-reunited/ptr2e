@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Dubious Disc",
   "type": "equipment",
   "system": {
@@ -9,16 +9,12 @@
     },
     "slug": "dubious-disc",
     "traits": [
-      "combat",
-      "type",
-      "normal",
-      "evolution",
-      "porygon",
-      "porygon2",
-      "porygon-z"
+      "accessory",
+      "held",
+      "evolution"
     ],
     "actions": [],
-    "description": "<p>A transparent device overflowing with dubious data that boosts the power Normal-type moves. It's loved by a certain Pokémon<br><br>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Effect: The @Trait[digital] user’s ATK, SPATK, and SPD are increased by 20%, and the user has a 20% chance to gain @Affliction[bleed 3] whenever they use an Attack. @Trait[electric-soldier] creatures have these effects doubled.<br><br>@UUID[Compendium.ptr2e.core-species.bfUNgdPtQbCWvOm1]{Porygon2} can consume this item to trigger evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -29,12 +25,17 @@
       "handsHeld": null,
       "slot": "accessory"
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "normal",
-      "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "power": 60,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 6,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -46,55 +47,163 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/dubious%20disk.webp",
   "effects": [
     {
-      "name": "Type Booster (Normal)",
+      "name": "Dubious Disc",
       "type": "passive",
-      "_id": "Buja40HsH5dQ7120",
+      "_id": "h0p6R5axIMwaRZkZ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-power",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal) Power",
-            "mode": 2,
-            "priority": null,
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.2,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:virus",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
             "ignored": false,
-            "hideIfDisabled": false
+            "method": 2
           },
           {
-            "type": "percentile-modifier",
-            "key": "normal-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Normal)",
-            "mode": 2,
-            "priority": null,
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.2,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:virus",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
             "ignored": false,
-            "hideIfDisabled": false
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.2,
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:virus",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
+            "predicate": [
+              {
+                "or": [
+                  "trait:digital",
+                  "trait:digimon",
+                  "trait:electric-soldier"
+                ]
+              }
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.2,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.2,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.2,
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
+            "predicate": [
+              "trait:electric-soldier"
+            ],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -102,19 +211,18 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766188536741,
+        "modifiedTime": 1766190806194,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],
-  "flags": {},
   "_id": "snBkkT4L8tAqShnG"
 }

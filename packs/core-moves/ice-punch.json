@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "punch",
-          "contact",
-          "pp-updated"
+          "contact"
         ],
         "range": {
           "target": "creature",
@@ -29,15 +28,24 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frostbite] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frostbite 5].</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "Y4swIcPTHvLab8Ev",
   "effects": [
@@ -51,13 +59,15 @@
           {
             "type": "roll-effect",
             "key": "ice-punch-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,13 +78,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

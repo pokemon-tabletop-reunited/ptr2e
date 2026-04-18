@@ -1,92 +1,125 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Electric Seed",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
-    "crafting": {
-      "skill": null,
-      "spans": null,
-      "materials": []
+    "_migration": {
+      "version": 0.111,
+      "previous": null
     },
-    "equipped": {
-      "slot": "held",
-      "carryType": "stowed",
-      "handsHeld": null
-    },
-    "grade": "C",
-    "fling": {
-      "type": "untyped",
-      "power": null,
-      "accuracy": 100
-    },
-    "rarity": "uncommon",
-    "traits": [
-      "combat",
-      "consumable",
-      "environ",
-      "stash",
-      "defensive"
-    ],
     "actions": [
       {
         "name": "Electric Seed",
         "slug": "electric-seed",
-        "type": "generic",
-        "description": "Trigger: The user is affected by Electric Terrain.\nEffect: The user gains +1 default DEF Stage.",
+        "description": "<p>Trigger: Electric Terrain is summoned.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.sMystTj3FBJ00AZp]{+1 Defense Stage} for 5 Activations.</p>",
         "traits": [
-          "Combat",
-          "Consumable",
-          "Environ",
-          "Stash",
-          "Defensive"
+          "consumable",
+          "combat"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 0,
-          "unit": "m"
-        },
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
         "cost": {
-          "activation": "complex",
-          "trigger": "The user is affected by Electric Terrain.",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "variant": null
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
-    "description": "Trigger: The user is affected by Electric Terrain.\nEffect: The user gains +1 default DEF Stage.",
-    "slug": null,
-    "container": null,
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "electric",
+      "power": 50,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
     "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
+    "rarity": "common",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: @UUID[Compendium.ptr2e.core-summons.dinLBMHBNUshV0Og]{Electric Terrain} is summoned.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.sMystTj3FBJ00AZp]{+1 Defense Stage} for 5 Activations.</p>",
+    "traits": [
+      "consumable",
+      "combat"
+    ],
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 2
+  },
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+  "effects": [
+    {
+      "name": "Electric Seed",
+      "type": "passive",
+      "_id": "1ldZfIhrMgxZveeH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electric-seed-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
       }
     }
-  },
-  "_id": "Hm8yUxqSWNS5sJnb",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXad",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
+  ],
   "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!Hm8yUxqSWNS5sJnb"
+  "_id": "Iub4QuaaL32PQrPp"
 }

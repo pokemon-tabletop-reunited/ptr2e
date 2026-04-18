@@ -6,51 +6,37 @@
       "version": 0.107,
       "previous": null
     },
-    "actions": [
-      {
-        "name": "Muse",
-        "slug": "muse-action-1",
-        "description": "<p>As a Simple Action, designate an ally as your Muse and set a Muse Clock for 6 Spans. When that ally ends an Activation, tick one Span on the Muse Clock. When the Clock fills, your next Attack has its Power doubled.</p><p>NOTE: create generic action</p>",
-        "traits": [],
-        "type": "generic",
-        "img": "systems/ptr2e/img/conditions/cheered.svg",
-        "range": {
-          "target": "ally",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple"
-        }
-      }
-    ],
-    "description": "<p>As a Simple Action, designate an ally as your Muse and set a Muse Clock for 6 Spans. When that ally ends an Activation, tick one Span on the Muse Clock. When the Clock fills, your next Attack has its Power doubled.</p>",
+    "actions": [],
+    "description": "<p>Effect: The user maintains a Muse Clock with a size of 6 Spans. As a Simple Action, the user designates an ally as their Muse, setting the Muse Clock to 0 Spans.<br><br>When the user's designated Muse ends an Activation, increment one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20% and their EHR is increased 10%, up to a max increase of 100% and 50% respectively. When the Muse Clock is filled, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits and gains @Tick[3], and the Muse Clock is emptied.</p><p>The Muse Clock is emptied if either the user or their Muse leaves combat or is @Affliction[fainted], or if combat ends.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
     "slug": "muse",
     "nodes": [
       {
+        "x": 150,
+        "y": 164,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "pack-mon",
           "root-4",
           "telepathic-potential",
           "hit-run",
           "improved-overland-12",
-          "improved-swim-1"
+          "improved-swim-1",
+          "minor-buff-15",
+          "minor-buff-21",
+          "minor-buff-33",
+          "dance-partner",
+          "yousa-bad-bombin"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/conditions/cheered.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/conditions/cheered.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 150,
-        "y": 164,
         "tier": null
       }
     ],
@@ -61,10 +47,89 @@
       "arena": "social",
       "approach": "power",
       "archetype": "pack-mon"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "img": "systems/ptr2e/img/conditions/cheered.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Muse",
+      "type": "passive",
+      "_id": "bWbFulLS6hF5rVVK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "museClockUser000",
+            "value": 0,
+            "predicate": [],
+            "max": 6,
+            "color": "#c2f55f",
+            "private": false,
+            "label": "Muse",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": "min(100,0+20*@actor.clocks.museClockUser000)",
+            "predicate": [],
+            "label": "Muse",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": "min(50,0+10*@actor.clocks.museClockUser000)",
+            "predicate": [],
+            "label": "Muse",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765585453387,
+        "modifiedTime": 1766013643261,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      },
+      "showIcon": 0
+    }
+  ],
   "_id": "OXVqgQQ78QUgRinK",
   "folder": "UZGN1glVNXLieg48"
 }

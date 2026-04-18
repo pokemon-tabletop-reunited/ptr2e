@@ -1,9 +1,12 @@
-{{formField fields.mode value=change.mode localize=true name=(concat basePath ".mode")}}
+
+{{formField fields.method value=change.method localize=true name=(concat basePath ".method")}}
+
+{{formField fields.property value=change.property localize=true name=(concat basePath ".property")}}
 
 <div class="form-group">
-    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeProperty.label"}}</label>
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeSelector.label"}}</label>
     <div class="form-fields">
-        <input type="text" name="{{basePath}}.property" value="{{change.property}}"/>
+        <input type="text" name="{{basePath}}.key" value="{{change.selector}}" />
     </div>
 </div>
 
@@ -24,6 +27,6 @@
 </div>
 
 <div class="form-group">
-    <label class="short">{{localize fields.definition.label}}</label>
+    <label class="short" data-tooltip="{{localize "PTR2E.Effect.FIELDS.definition.hint"}}">{{localize fields.definition.label}}</label>
     <input type="text" name="{{basePath}}.definition" value="{{json change.definition spaces=0}}" />
 </div>

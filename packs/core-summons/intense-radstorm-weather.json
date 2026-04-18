@@ -8,11 +8,21 @@
     },
     "traits": [
       "partial-automation",
-      "weather"
+      "weather",
+      "nuclear"
     ],
     "actions": [],
     "baseAV": 150,
-    "duration": 3
+    "duration": 3,
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "intense-radstorm-weather",
+    "description": "<p><strong>Intense Radstorm</strong> really ratchets up the terrifying, all-consuming nature of the Nuclear Type, making it a truly oppressive and smothering weather to find oneself in. Particularly, Nuclear-Type creatures are supercharged here, making them almost terrifyingly effective combatants against basically everything else.</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>At the end of their Activation, non-Steel- and Nuclear-Type creatures lose two Ticks of HP.</li><li>Nuclear-Type creatures gain 50% to their Movement Allowances each Round, their SPD is increased 50%.</li><li>At the end of each round, non-Nuclear-Type creatures have one of their Abilities randomly Nullified 7.</li><li>At the end of each round, Nuclear-Type creatures gain a Tick of HP and a Tick of PP.</li><li>Non-Steel- and Nuclear-Type creatures are Blinded and Stunted.</li><li>Steel-Type Attacks have a 25% chance to inflict Unlucky 5. Attacks that would already cause Unlucky 5 instead increase their chance to cause Unlucky by 25%.</li><li>Nuclear-Type Attacks have a 50% chance to inflict Unlucky 5. Attacks that would already cause Unlucky 5 instead increase their chance to cause Unlucky by 50%.</li></ul>"
   },
   "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
   "effects": [
@@ -25,14 +35,14 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.value",
-            "value": 1.5,
+            "key": "system.modifiers.speMultiplier",
+            "value": 0.5,
             "predicate": [
-              "actor:trait:nuclear"
+              "trait:nuclear"
             ],
             "label": "Nuclear SpeedBoost",
-            "mode": 2,
             "priority": null,
+            "mode": 2,
             "ignored": false
           }
         ],
@@ -48,7 +58,9 @@
         "formula": "1/16",
         "type": "damage",
         "targetType": "all",
-        "targetUuid": null
+        "targetUuid": null,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -66,19 +78,23 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "modifiedTime": 1739484439130,
-        "lastModifiedBy": "OCI1vTFsIMTEwU21"
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null,
+        "modifiedTime": 1762905906485
       }
     }
   ],
-  "flags": {},
   "_id": "IZfUOgGn8H1XJ5GS"
 }

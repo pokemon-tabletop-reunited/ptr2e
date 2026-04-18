@@ -13,20 +13,16 @@
     "diet": [
       "herbivore"
     ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 2
-        }
-      ]
-    },
+    "movement": [
+      {
+        "type": "overland",
+        "value": 5
+      },
+      {
+        "type": "swim",
+        "value": 2
+      }
+    ],
     "traits": [
       "pokemon",
       "chiller",
@@ -34,7 +30,9 @@
       "freezer",
       "fully-evolved",
       "rock",
-      "ice"
+      "ice",
+      "jump-1",
+      "fossil"
     ],
     "abilities": {
       "starting": [
@@ -47,26 +45,26 @@
       ],
       "basic": [
         {
-          "slug": "freezing-point"
+          "slug": "ice-body"
         },
         {
-          "slug": "slush-rush"
+          "slug": "fossilized"
         }
       ],
       "advanced": [
         {
-          "slug": "illuminate"
+          "slug": "snow-cloak"
         },
         {
-          "slug": "snow-cloak"
+          "slug": "ice-scales"
         }
       ],
       "master": [
         {
-          "slug": "chill-wave"
+          "slug": "north-wind"
         },
         {
-          "slug": "north-wind"
+          "slug": "crystallize"
         }
       ]
     },
@@ -554,21 +552,31 @@
               "operand": "and"
             }
           ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          "perk": {
+            "x": 26,
+            "y": 26
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.MZx7FtYJlvnr0R7y",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core - Kalos Dex",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "SJoqVQNi0QMuCgLP",

@@ -1,0 +1,144 @@
+{
+  "folder": "YOjkwRlXiBOynxGV",
+  "name": "Ionization",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "ionization",
+    "description": "<p>Effect: The user gains their choice of Anionic or Cationic as a Tutored Ability.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          "trait:rock",
+          "trait:steel",
+          "trait:electric",
+          "trait:ground"
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "rock"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 137,
+        "y": 29,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "stonecunning",
+          "shovel-hands",
+          "minor-buff-26"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/commodities/stone/masonry-block-cube-grey-teal.webp",
+  "effects": [
+    {
+      "name": "Ionization",
+      "type": "passive",
+      "_id": "KudMzNMQfJSqFIlQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "prompt": "Select An Ability",
+            "adjustName": false,
+            "flag": "ionization",
+            "rollOption": "ionization",
+            "allowNoSelection": false,
+            "showDisabled": true,
+            "choices": [
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.2GaxM2z5LX59UmbI"
+              },
+              {
+                "value": "Compendium.ptr2e.core-abilities.Item.vPEGQexm8QvcHC29"
+              }
+            ],
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.ionization}",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765234484953,
+        "modifiedTime": 1765235407494,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "gqinWHq2LiHX7DQj"
+}

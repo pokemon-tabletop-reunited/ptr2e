@@ -1,5 +1,5 @@
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
-import ChangeModel from "../changes/change.ts";
+import ChangeModel, { CHANGE_MODES } from "../changes/change.ts";
 import { ItemPTR2e, ItemSourcePTR2e } from "@item";
 import { StringField } from "types/foundry/common/data/fields.js";
 import { BasicChangeSystem, ResolveValueParams } from "@data";
@@ -22,10 +22,10 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
   static override defineSchema() {
     const fields = foundry.data.fields;
     return {
-      mode: new fields.NumberField({
+      method: new fields.NumberField({
         required: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-        choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+        initial: 2,
+        choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({
         required: true,
@@ -60,7 +60,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
     const current = fu.getProperty(item, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
+    const change = BasicChangeSystem.getNewValue(this.method, current, value, false)
     fu.setProperty(item, property, change);
   }
 
@@ -86,7 +86,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
     field ??= item.schema.getField(property);
     const current = fu.getProperty(source, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const update = field?.applyChange(current, item, {key: property, mode: this.mode, value, priority: 0});
+    const update = field?.applyChange(current, item, {key: property, mode: this.method, value, priority: 0});
     fu.setProperty(source, property, update);
     return update;
   }
@@ -159,8 +159,8 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|change|effect)\|(.*?)}/g,
-        (_match, key: string, prop: string) => {
+        /{(actor|item|change|effect)\|(.*?)(\|C)?}/g,
+        (_match, key: string, prop: string, modifier: string) => {
           const data =
             key === "change"
               ? this
@@ -173,7 +173,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : String(value);
         }
       );
     }
@@ -225,15 +225,15 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
           const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
           // Allow failure of "@target" and "@actor.conditions" with no warning
           if (unresolveds.length > 0) {
-            const shouldWarn =
-              warn &&
-              !unresolveds.every(
-                (u) =>
-                  u.startsWith("@target.") || u.startsWith("@actor.conditions.")
-              );
-            this.ignored = true;
-            if (shouldWarn) {
-              this.failValidation(`unable to resolve formula, "${formula}"`);
+            const ignoredCase = unresolveds.every(
+              (u) =>
+                u.startsWith("@target.") || u.startsWith("@actor.conditions.")
+            );
+            if (!ignoredCase) {
+              this.ignored = true;
+              if (warn) {
+                this.failValidation(`unable to resolve formula, "${formula}"`);
+              }
             }
             return Number(defaultValue);
           }
@@ -312,7 +312,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
 interface AttackAlteration extends foundry.abstract.DataModel<ChangeModel>, ModelPropsFromSchema<AttackAlterationSchema> { }
 
 interface AttackAlterationSchema extends foundry.data.fields.DataSchema {
-  mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+  method: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
   property: StringField<string, string, true, false, true>;
   value: ResolvableValueField<true, false, true>;
 }

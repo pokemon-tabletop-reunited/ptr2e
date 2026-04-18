@@ -9,9 +9,7 @@
         "slug": "cotton-guard",
         "name": "Cotton Guard",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "unit": "m"
@@ -30,7 +28,13 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "B",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "9qBda99CIxi8USR5",
   "effects": [
@@ -44,13 +48,13 @@
           {
             "type": "roll-effect",
             "key": "cotton-guard-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.mmrwiSq22RoCTCbg",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.mmrwiSq22RoCTCbg",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -61,13 +65,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

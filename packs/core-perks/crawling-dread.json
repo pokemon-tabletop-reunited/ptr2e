@@ -1,0 +1,115 @@
+{
+  "name": "Crawling Dread",
+  "_id": "PtbZSdcxlu1c8mRy",
+  "type": "perk",
+  "img": "icons/creatures/invertebrates/bug-sixlegged-gray.webp",
+  "effects": [
+    {
+      "name": "Crawling Dread",
+      "type": "passive",
+      "_id": "2RJ1wAr6HXXfRZyo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.movement",
+            "value": 2,
+            "predicate": [
+              "effect:summon:gloomy-weather"
+            ],
+            "label": "Gloomy",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.movement",
+            "value": 2,
+            "predicate": [
+              "effect:summon:foggy-weather"
+            ],
+            "label": "Foggy",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765224259988,
+        "modifiedTime": 1765224334250,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "crawling-dread",
+    "description": "<p>Effect: You increase your Movement Allowances by 2 in either Gloomy or Foggy Weather, stacking additively if both weathers are present.</p>",
+    "traits": [
+      "bug"
+    ],
+    "prerequisites": [
+      "trait:bug"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "bug"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 95,
+        "y": 33,
+        "connected": [
+          "ocular-evolution",
+          "minor-buff-24",
+          "minor-buff-25"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "folder": "o5iIUG4Bj40M86yi"
+}

@@ -10,58 +10,40 @@
         ],
         "name": "Zero to Hero",
         "slug": "zero-to-hero",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
           "trigger": "<p>The user switches-out.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user switches-out.</p><p>Effect: The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. When using Flip Turn, the user can spend an additional 4 PP to transform into their Hero Forme for 3 Activations. Zero to Hero cannot activate if the user is @Affliction[weary].</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user switches out, or is Hidden while in Combat.</p><p>Effect: The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted].</p>",
+        "img": "icons/magic/control/silhouette-grow-shrink-blue.webp"
       },
       {
         "traits": [
-          "forme-change"
+          "forme-change",
+          "flinch-80"
         ],
         "name": "Zero to Hero (Henshin)",
         "slug": "zero-to-hero-henshin",
         "type": "generic",
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user does not have @Affliction[weary].</p>"
+          "powerPoints": 3
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user does not have @Affliction[weary].</p><p>Effect: The user enters their Hero Forme for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [
-          "forme-change",
-          "exhaust"
-        ],
-        "name": "Zero to Hero (Henshin Weary)",
-        "slug": "zero-to-hero-henshin-weary",
-        "type": "generic",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Effect: The user enters their Hero Forme for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user enters their Hero Forme.</p>",
+        "img": "icons/magic/control/silhouette-grow-shrink-blue.webp"
       }
     ],
-    "description": "<p>Trigger: The user switches-out.</p><p>Effect: Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. The user can spend an 4 PP to transform into their Hero Forme for 5 Activations as a Complex Action. This effect costs 2 more PP and gains [Exhaust] if the user has @Affliction[weary].</p><p>Passive: While the user is in their Hero Forme, they gain Connection - Jet Punch.</p>",
+    "description": "<p>Effect: Connection - @UUID[Compendium.ptr2e.core-moves.Item.mQ7A5gRxvfUfZ8ew]. If the user switches out or becomes Hidden during combat (including if they start Combat while Hidden), the user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. The user can instead spend 3 PP as a @Trait[flinch-80] Complex Action to transform into their Hero Forme.</p><p>Passive: The user gains @UUID[Compendium.ptr2e.core-abilities.Item.OaDKuFZu1MXY7sQV] and @UUID[Compendium.ptr2e.core-abilities.Item.Iyq0hYJwLpuCncDP] as Connected Abilities. While the user is in their Hero Forme, they instead gain @UUID[Compendium.ptr2e.core-moves.Item.lyjLX6WIIrbdvqXS] as a Connected Move and instead gain @UUID[Compendium.ptr2e.core-abilities.Item.urMg5doRiuVtnIsi] and @UUID[Compendium.ptr2e.core-abilities.Item.Dh63Xai1qofF7Zo8] as Connected Abilities.</p>",
     "traits": [
       "forme-change",
       "innate",
@@ -71,6 +53,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "gfJ5DPR5rW4LmiZA",
@@ -84,45 +73,191 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.mQ7A5gRxvfUfZ8ew",
-            "predicate": [],
+            "predicate": [
+              "item:species:palafin",
+              {
+                "not": "forme:palafin-hero:active"
+              }
+            ],
             "alterations": [
               {
-                "mode": 5,
+                "property": "system.actions.0.free",
+                "value": "true",
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "phase": "initial",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "item:species:palafin",
+              "forme:palafin-hero:active"
+            ],
+            "value": "Compendium.ptr2e.core-moves.Item.lyjLX6WIIrbdvqXS",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "method": 5,
                 "property": "system.actions.0.free",
                 "value": "true"
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.OaDKuFZu1MXY7sQV",
+            "phase": "initial",
+            "predicate": [
+              "item:species:palafin",
+              {
+                "not": "forme:palafin-hero:active"
+              }
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.Iyq0hYJwLpuCncDP",
+            "phase": "initial",
+            "predicate": [
+              "item:species:palafin",
+              {
+                "not": "forme:palafin-hero:active"
+              }
+            ],
+            "alterations": [],
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "item:species:palafin",
+              "forme:palafin-hero:active"
+            ],
+            "value": "Compendium.ptr2e.core-abilities.Item.urMg5doRiuVtnIsi",
+            "reevaluateOnUpdate": true,
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "phase": "initial",
+            "allowDuplicate": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "item:species:palafin",
+              "forme:palafin-hero:active"
+            ],
+            "value": "Compendium.ptr2e.core-abilities.Item.Dh63Xai1qofF7Zo8",
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false,
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -134,13 +269,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1737422198535,
-        "modifiedTime": 1737422234674,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1775567471154,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

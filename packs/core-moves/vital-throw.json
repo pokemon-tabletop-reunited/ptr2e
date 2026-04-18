@@ -13,9 +13,7 @@
           "push-3",
           "delay-1",
           "contact",
-          "flinch-4",
-          "grapple",
-          "pp-updated"
+          "grapple"
         ],
         "range": {
           "target": "creature",
@@ -33,7 +31,7 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable, is Pushed, and is Flinched.</p>",
+        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable, is Pushed, and is Delayed by 40%.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -41,8 +39,58 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "C",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "_id": "tNXN4HCcmKCZO3Ju",
-  "effects": []
+  "effects": [
+    {
+      "name": "Vital Throw",
+      "type": "passive",
+      "_id": "z7y1zzA2z4Rf7Nwm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "vital-throw-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "predicate": [],
+            "chance": 100,
+            "dontMerge": true,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -40,
+                "method": 5
+              },
+              {
+                "property": "name",
+                "value": "Delay 40%",
+                "method": 5
+              }
+            ],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
+      }
+    }
+  ]
 }

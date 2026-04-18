@@ -4,7 +4,7 @@
   "type": "weapon",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -13,20 +13,30 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "A",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 95
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "traits": [
       "weapon",
       "fling",
       "firearm",
-      "reload",
+      "autoload",
       "steel",
-      "charge-pool-18"
+      "reload-1",
+      "charge-pool-24",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -34,14 +44,12 @@
           "untyped"
         ],
         "category": "special",
-        "power": 55,
+        "power": 35,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Assault Rifle",
         "slug": "assault-rifle",
@@ -55,28 +63,21 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "priority": null,
-          "delay": null
+          "powerPoints": 1
         },
-        "variant": null,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 95,
-        "accuracy": 95,
+        "power": 60,
+        "accuracy": 90,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "readied",
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Assault Rifle (Burst)",
         "slug": "assault-rifle-burst",
@@ -90,29 +91,23 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "priority": null,
-          "delay": null
+          "powerPoints": 3
         },
         "variant": "assault-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 32,
+        "power": 30,
         "accuracy": 85,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
-          "4-strike",
-          "readied",
-          "missile"
+          "missile",
+          "6-strike",
+          "firearm"
         ],
         "name": "Assault Rifle (Auto)",
         "slug": "assault-rifle-auto",
@@ -121,33 +116,29 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 15,
+          "distance": 21,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "priority": null,
-          "delay": null
+          "powerPoints": 6
         },
         "variant": "assault-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 65,
-        "accuracy": 75,
+        "power": 35,
+        "accuracy": 70,
         "free": true,
         "traits": [
-          "load-adaptive",
-          "two-handed",
           "dash",
-          "missile"
+          "missile",
+          "5-strike",
+          "firearm"
         ],
         "name": "Assault Rifle (Hip Fire)",
         "slug": "assault-rifle-hip-fire",
@@ -161,23 +152,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "priority": null,
-          "delay": null
+          "powerPoints": 5
         },
         "variant": "assault-rifle",
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null
+        "predicate": []
       }
-      
     ],
-    "description": "",
     "weaponType": "untyped",
     "weaponPp": 18,
-    "weaponRange": "",
-    "slug": null,
-    "container": null,
+    "slug": "assault-rifle",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -187,26 +170,82 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>An assault rifle is a select fire rifle that uses an intermediate-rifle cartridge and a detachable magazine. A common primary weapon of modern armies in contemporary settings.</p>"
   },
   "_id": "Ba3EyqpUePgGrfQk",
-  "effects": [],
-  "folder": "V4skAU6G3OH5fXaf",
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!Ba3EyqpUePgGrfQk"
+  "effects": [
+    {
+      "name": "Assault Rifle",
+      "type": "passive",
+      "_id": "uOxpw5kHcRtpv4pa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 22,
+            "predicate": [],
+            "label": "Assault Rifle",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "assault-rifle-burst-attack-damage-flat",
+            "value": 44,
+            "predicate": [],
+            "label": "Burst",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1743632386665,
+        "modifiedTime": 1757632018306,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": "fwBg1GB1fMcgPklo"
 }

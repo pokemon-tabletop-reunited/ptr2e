@@ -13,6 +13,7 @@ import { EffectSourcePTR2e } from "@effects";
 import { ItemGrantDeleteAction } from "@item/data/system.ts";
 import * as R from "remeda";
 import { UUIDUtils } from "src/util/uuid.ts";
+import { extractEffectAlterations } from "src/util/change-helpers.ts";
 
 export default class GrantItemChangeSystem extends ChangeModel {
   static override TYPE = "grant-item";
@@ -67,8 +68,8 @@ export default class GrantItemChangeSystem extends ChangeModel {
       track: new fields.BooleanField(),
       replaceSelf: new fields.BooleanField({ label: "PTR2E.Effect.FIELDS.ChangeReplaceSelf.label" }),
       onDeleteActions: new fields.SchemaField({
-        grantee: new fields.StringField({ required:true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "detach" }),
-        granter: new fields.StringField({ required:true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "cascade" }),
+        grantee: new fields.StringField({ required: true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "detach" }),
+        granter: new fields.StringField({ required: true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "cascade" }),
       })
     };
   }
@@ -126,7 +127,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
   public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fromUuid(key + ""))?.clone() ?? null
+      return (await fu.fromUuid(key + ""))?.clone() ?? null
     } catch (error) {
       console.error(error);
       return null;
@@ -161,7 +162,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     // If we shouldn't allow duplicates, check for an existing item with this source ID
     const existingItem = this.type === "grant-effect"
       ? this.actor.effects.find(e => (e as ActiveEffectPTR2e).slug === grantedDocument.slug) as ActiveEffectPTR2e
-      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
+      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid || i?._stats.compendiumSource === uuid) as ItemPTR2e;
     if (!this.allowDuplicate && existingItem) {
       this.#setGrantFlags(effectSource, existingItem);
 
@@ -180,7 +181,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     grantedSource._id = fu.randomID();
 
     // An item may grant another copy of itself, but at least strip the copy of its grant CMs
-    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
+    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId || grantedSource._stats?.compendiumSource)) {
       if (this.type === "grant-effect") {
         (grantedSource as ActiveEffectPTR2e['_source']).system.changes = (grantedSource as ActiveEffectPTR2e['_source']).system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
       }
@@ -203,6 +204,34 @@ export default class GrantItemChangeSystem extends ChangeModel {
     } catch (error) {
       if (error instanceof Error) this.failValidation(error.message);
     }
+    // Check if there are any effect alterations to apply
+    try {
+      const effectAdjustments = this.actor?.synthetics.effectAlterations ?? [];
+      const options = this.actor.getSelfRollOptions();
+      for (const effect of grantedDocument instanceof ItemPTR2e ? grantedDocument.effects.contents as ActiveEffectPTR2e[] : [grantedDocument as ActiveEffectPTR2e]) {
+        const effectDomains = Array.from(new Set([
+          `${effect.slug}-received`,
+          ...(effect.system.traits.map(t => `${t.slug}-trait-received`)),
+        ]));
+
+        const alterations = await extractEffectAlterations(
+          effectAdjustments,
+          effectDomains,
+          {},
+          options,
+          { actor: this.actor, effect }
+        );
+
+        for (const alteration of alterations.flatMap(a => a.alterations ?? [])) {
+          alteration.applyTo(
+            grantedDocument instanceof ItemPTR2e ? (grantedSource as ItemPTR2e['_source']).effects.find((e) => e._id === effect.id) as unknown as ItemSourcePTR2e : grantedSource as ItemSourcePTR2e
+          );
+        }
+      }
+    }
+    catch (error) {
+      if (error instanceof Error) this.failValidation(error.message);
+    }
 
     const tempGranted = this.type === "grant-effect" ? new ActiveEffectPTR2e(fu.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(fu.deepClone(grantedSource), { parent: this.actor });
     // tempGranted.grantedBy = this.effect;
@@ -215,13 +244,13 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     if (this.ignored) return;
 
-    if(this.type !== "grant-effect") args.tempItems.push(tempGranted as ItemPTR2e);
+    if (this.type !== "grant-effect") args.tempItems.push(tempGranted as ItemPTR2e);
 
     this._grantedId = grantedSource._id;
     context.keepId = true;
 
     this.#setGrantFlags(effectSource, grantedSource as ItemSourcePTR2e);
-    if(this.type !== "grant-effect") this.#trackItem(tempGranted as ItemPTR2e);
+    if (this.type !== "grant-effect") this.#trackItem(tempGranted as ItemPTR2e);
 
     // Add to pending items before running pre-creates to preserve creation order
     if (this.replaceSelf) {
@@ -234,20 +263,20 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
     if (!args.reevaluation) {
-      if(this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
-      else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, context);
+      if (this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
+      else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, grantedSource as ItemSourcePTR2e, context);
     }
   }
 
   /** Grant an item if this rule element permits it and the predicate passes */
-  override async preUpdateActor(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}> {
+  override async preUpdateActor(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; } | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[]; }> {
     const noAction = { create: [], delete: [] };
 
     if (this.ignored || !this.reevaluateOnUpdate || this.inMemoryOnly || !this.actor) return noAction;
 
     if (this.grantedId && (this.actor.items.has(this.grantedId) || this.actor.effects.has(this.grantedId))) {
       if (!this.test()) {
-        if(this.type === "grant-effect") return { createEffects: [], deleteEffects: [this.grantedId] };
+        if (this.type === "grant-effect") return { createEffects: [], deleteEffects: [this.grantedId] };
         return { create: [], delete: [this.grantedId] };
       }
       return noAction;
@@ -276,7 +305,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
       }
       return { create: pendingItems, delete: [] };
     }
-    if(pendingEffects.length > 0) {
+    if (pendingEffects.length > 0) {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
       const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as { id: string }).id === this.grantedId);
       if (updatedKey) {
@@ -315,15 +344,15 @@ export default class GrantItemChangeSystem extends ChangeModel {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // #applyChoicePreselections(_grantedItem: ItemPTR2e): void {
   //   return;
-    // const source = grantedItem._source;
-    // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
-    //     for(const effect of grantedItem.effects) {
-    //         const change = (effect as ActiveEffectPTR2e).system.changes.find(c => c.type === "choice-set" && c.key === flag);
-    //         if (change) {
+  // const source = grantedItem._source;
+  // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
+  //     for(const effect of grantedItem.effects) {
+  //         const change = (effect as ActiveEffectPTR2e).system.changes.find(c => c.type === "choice-set" && c.key === flag);
+  //         if (change) {
 
-    //         }
-    //     }
-    // }
+  //         }
+  //     }
+  // }
   // }
 
   /** Set flags on granting and grantee items to indicate relationship between the two */
@@ -363,14 +392,20 @@ export default class GrantItemChangeSystem extends ChangeModel {
   async #runGrantedItemPreCreates(
     originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
     grantedItem: ItemPTR2e,
+    grantedSource: ItemSourcePTR2e,
     context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>,
   ): Promise<void> {
-    for (const effect of grantedItem.effects.contents) {
-      for (const change of (effect as ActiveEffectPTR2e).system.changes) {
+    for (let i = 0; i < grantedSource.effects.length; i++) {
+      const tempEffect = grantedItem.effects.contents[i] as ActiveEffectPTR2e;
+      const effectSource = grantedSource.effects[i] as EffectSourcePTR2e;
+      for (let i = 0; i < tempEffect.system.changes.length; i++) {
+        const change = tempEffect.system.changes[i];
+        const changeSource = effectSource.system.changes[i];
         await change.preCreate?.({
           ...originalArgs,
-          changeSource: change,
-          effectSource: effect.toObject() as EffectSourcePTR2e,
+          changeSource,
+          effectSource,
+          itemSource: grantedSource,
           context,
         });
       }
@@ -458,8 +493,7 @@ interface OnDeleteActions {
 }
 
 export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[], ignoreRestricted: boolean): Promise<void> {
-  const actor = effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
-
+  const actor = (effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor) ?? effect.actor;
   const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
   const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
   const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});

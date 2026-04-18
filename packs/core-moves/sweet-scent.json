@@ -11,8 +11,7 @@
         "type": "attack",
         "traits": [
           "friendly",
-          "field",
-          "pp-updated"
+          "field"
         ],
         "range": {
           "target": "emanation",
@@ -28,7 +27,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -1 EVA Stages for 5 Activations and gain @Affliction[charmed] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets lose -1 EVA Stages for 5 Activations and gain @Affliction[charmed 5].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -39,13 +38,19 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "zA5XW7baWLv7XUqt",
   "effects": [
     {
       "name": "Sweet Scent",
-      "type": "affliction",
+      "type": "passive",
       "_id": "4i6ksGznJdOUoeFs",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -53,24 +58,24 @@
           {
             "type": "roll-effect",
             "key": "sweet-scent-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.hIE6W3Y5E9CyHiTy",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "sweet-scent-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.charmedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.charmedcondition",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -84,13 +89,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

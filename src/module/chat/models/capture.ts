@@ -116,7 +116,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
 
       // TODO: Implement effect checks
       const rolls = {
-        accuracy: await renderTemplate(
+        accuracy: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.accuracy, isPrivate),
@@ -125,13 +125,13 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Capture.AccuracyCheck",
           }
         ),
-        crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+        crit: await foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
           inner: await renderInnerRoll(this.rolls.crit, isPrivate),
           isPrivate,
           type: "crit",
           label: "PTR2E.Capture.CritCheck",
         }),
-        shake1: await renderTemplate(
+        shake1: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake1, isPrivate),
@@ -140,7 +140,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Capture.ShakeCheck",
           }
         ),
-        shake2: await renderTemplate(
+        shake2: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake2, isPrivate),
@@ -149,7 +149,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Capture.ShakeCheck",
           }
         ),
-        shake3: await renderTemplate(
+        shake3: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake3, isPrivate),
@@ -158,7 +158,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Capture.ShakeCheck",
           }
         ),
-        shake4: await renderTemplate(
+        shake4: await foundry.applications.handlebars.renderTemplate(
           "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake4, isPrivate),
@@ -212,8 +212,8 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null,
     });
 
-    context.defaultExpanded = game.settings.get("ptr2e", "expand-rolls");
-    return renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
+    context.defaultExpanded = game.settings.get("ptr2e", "preferences.expand-rolls");
+    return foundry.applications.handlebars.renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
   }
 
   public async applyLuckIncrease(number: number) {
@@ -228,24 +228,24 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
     const actor = await this.currentOrigin;
     if (!actor) return;
 
-    const luck = actor.system.skills.get("luck")!.total;
+    const luck = actor.system.skills["luck"]!.total;
     if (luck < number) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
       return;
     }
 
-    const skills = actor.system.skills.map((skill) => {
-      return skill.slug === "luck"
-        ? {
+    const skills = Object.fromEntries(Object.entries(actor.system.skills).map(([slug, skill]) => {
+      return slug === "luck"
+        ? [slug, {
           ...skill,
           value: luck - number,
-        }
-        : skill;
-    });
+        }]
+        : [slug, skill];
+    }));
     await actor.update({ "system.skills": skills });
 
     const notification = `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
-      }. New total: ${actor.system.skills.get("luck")!.total}`
+      }. New total: ${actor.system.skills["luck"]!.total}`
     ui.notifications.info(notification);
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.

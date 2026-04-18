@@ -7,7 +7,13 @@
       "previous": null
     },
     "traits": [],
-    "slug": "curry-breath-passive-effect"
+    "slug": "curry-breath-passive-effect",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
+    }
   },
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",
   "effects": [
@@ -25,10 +31,10 @@
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -39,13 +45,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

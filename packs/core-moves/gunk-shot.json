@@ -10,8 +10,7 @@
         "name": "Gunk Shot",
         "type": "attack",
         "traits": [
-          "blast-3",
-          "pp-updated"
+          "blast-2"
         ],
         "range": {
           "target": "blast",
@@ -20,23 +19,32 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8
+          "powerPoints": 7
         },
-        "category": "special",
+        "category": "physical",
         "power": 120,
         "accuracy": 80,
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison 5].</p>",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "A",
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "YbvoZLameUtUOaJT",
   "effects": [
@@ -50,13 +58,15 @@
           {
             "type": "roll-effect",
             "key": "gunk-shot-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -67,13 +77,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

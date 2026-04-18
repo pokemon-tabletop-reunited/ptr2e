@@ -1,5 +1,5 @@
 {
-  "folder": "V4skAU6G3OH5fXad",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Metal Coat",
   "type": "equipment",
   "system": {
@@ -10,12 +10,13 @@
     "slug": "metal-coat",
     "traits": [
       "combat",
-      "type",
       "steel",
-      "evolution"
+      "evolution",
+      "consumable",
+      "accessory"
     ],
     "actions": [],
-    "description": "<p><span style=\"font-family: bp_gender, sans-serif\">An item to be held by a Pokémon. It's a special metallic coating that boosts the power of the holder's Steel-type moves.</span></p><p></p><p>Effect: <span style=\"font-family: Signika, sans-serif\">Increases the Power and Accuracy of attacks by 10%.</span></p>",
+    "description": "<p>Effect: @Trait[steel]-type creatures gain +10% RES.<br><br>Can be consumed by certain species to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -31,7 +32,12 @@
       "type": "steel",
       "power": 70,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -43,55 +49,48 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/metal%20coat.webp",
   "effects": [
     {
-      "name": "Type Booster (Steel)",
+      "name": "Metal Coat",
       "type": "passive",
-      "_id": "vKlTSnMarPKjXCOW",
+      "_id": "1HyO3gK0cToZ69YL",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "steel-attack-power",
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
             "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Steel) Power",
-            "mode": 2,
-            "priority": null,
+            "predicate": [
+              "trait:steel"
+            ],
+            "label": "Metal Coat (Steel)",
             "ignored": false,
-            "hideIfDisabled": false
-          },
-          {
-            "type": "percentile-modifier",
-            "key": "steel-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Steel)",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -99,19 +98,18 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758629191275,
+        "modifiedTime": 1758629246557,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }
   ],
-  "flags": {},
   "_id": "YMXWN09sEo9uEsAi"
 }

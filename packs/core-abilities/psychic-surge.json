@@ -7,10 +7,31 @@
       {
         "traits": [
           "terrain",
-          "interrupt-2"
+          "interrupt-4"
         ],
         "name": "Psychic Surge",
         "slug": "psychic-surge",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5,
+          "trigger": "<p>The user enters combat or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: The user freely uses Psychic Terrain.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "terrain",
+          "interrupt-2"
+        ],
+        "name": "Psychic Surge (Extend)",
+        "slug": "psychic-surge-extend",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -19,7 +40,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares Psychic Terrain.</p><p>Effect: Increase the number of rounds Psychic Terrain persists by 2.</p>",
         "img": "icons/svg/explosion.svg"
@@ -29,8 +51,8 @@
           "terrain",
           "environ"
         ],
-        "name": "Psychic Surge",
-        "slug": "psychic-surge",
+        "name": "Psychic Surge (Adjacency)",
+        "slug": "psychic-surge-adjaceny",
         "type": "passive",
         "cost": {
           "activation": "free"
@@ -44,7 +66,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares Psychic Terrain.</p><p>Effect: Connection - Psychic Terrain. Increase the number of rounds Psychic Terrain persists by 2.</p><p>Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.</p>",
+    "description": "<p>Trigger: The user enters combat or emerges from stealth.</p><p>Effect: Connection - Psychic Terrain. The user freely uses Psychic Terrain. When the user sets Psychic Terrain, they may spend 2 PP to increase the number of rounds Psychic Terrain persists by 2.</p><p>Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.</p>",
     "traits": [
       "terrain",
       "connection",
@@ -55,6 +77,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "lW75LfBFpHkKWpPA",
@@ -70,43 +99,42 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.McNMuaosHAbgfV8b",
-            "predicate": [],
+            "predicate": [
+              "ability:psychic-surge:active"
+            ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "allowDuplicate": false,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -118,12 +146,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1737418371174,
-        "modifiedTime": 1737418405097,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754320632129,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]

@@ -7,26 +7,22 @@
       {
         "traits": [
           "social",
-          "friendly",
-          "interrupt-5"
+          "friendly"
         ],
         "name": "Guard Down",
         "slug": "guard-down",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "trigger": "<p>The user enters combat.</p>"
-        },
+        "type": "passive",
+        "cost": {},
         "range": {
-          "target": "emanation",
-          "distance": 10,
+          "target": "enemy-aura",
+          "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 DEF for 5 Activations and -1 EVA Stage for 2 Activations. The user's Conversation Skill checks have an additional +10 bonus.</p>",
+        "description": "<p>Effect: All valid creatures in range have -1 default DEF Stage. When an affected creature leaves the range of this effect, they lose -1 DEF Stage for 3 Activations. The user's Attacks have a 10% chance to inflict Flinched 2. NEEDS REAUTOMATED.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: AThe user enters combat.</p><p>Effect: All valid creatures in range lose -1 DEF for 5 Activations and -1 EVA Stage for 2 Activations. The user's Conversation Skill checks have an additional +10 bonus.</p>",
+    "description": "<p>Effect: All valid creatures in range have -1 default DEF Stage. When an affected creature leaves the range of this effect, they lose -1 DEF Stage for 3 Activations. The user's Attacks have a 10% chance to inflict Flinched 2. NEEDS REAUTOMATED.</p>",
     "traits": [
       "social",
       "friendly"
@@ -35,6 +31,12 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ]
     }
   },
   "_id": "WTCc949kqybFx9TU",

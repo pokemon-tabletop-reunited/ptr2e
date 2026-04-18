@@ -10,19 +10,18 @@
         "name": "Twineedle",
         "type": "attack",
         "traits": [
-          "2-strike",
+          "double-strike",
           "sharp",
-          "horn",
-          "pp-updated"
+          "horn"
         ],
         "range": {
           "target": "creature",
-          "distance": 1,
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 2
         },
         "category": "physical",
         "power": 25,
@@ -30,16 +29,23 @@
         "types": [
           "bug"
         ],
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison 5].</p>",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "traits": [],
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "rLMUMSSHkXGIqGab",
@@ -54,13 +60,15 @@
           {
             "type": "roll-effect",
             "key": "twineedle-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +79,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

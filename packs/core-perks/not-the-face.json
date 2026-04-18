@@ -1,0 +1,147 @@
+{
+  "folder": "jLhPGZvYVjjs7D54",
+  "name": "Not The Face!",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Not The Face!",
+        "slug": "not-the-face",
+        "description": "<p>Trigger: The user crosses the @Trait[desperation-1-2] or @Trait[desperation-1-3] threshold.<br><br>Effect: The targeted creature gains @Affliction[marked 4].</p>",
+        "traits": [
+          "interrupt-4"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+        "range": {
+          "target": "ally",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user crosses the @Trait[desperation-1-2] or @Trait[desperation-1-3] threshold."
+        }
+      }
+    ],
+    "description": "<p>Effect: When the user crosses the @Trait[desperation-1-2] or @Trait[desperation-1-3] threshold, the user may spend 3 PP as a Free Action at @Trait[interrupt-4] to apply @Affliction[marked 4] to an ally within 6m.</p>",
+    "traits": [
+      "interrupt-4"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.fast-talk.mod}",
+          55
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "social"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 172,
+        "y": 142,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "minor-buff-46",
+          "condemn",
+          "beauty",
+          "agitator"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "not-the-face",
+    "traitWebs": []
+  },
+  "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+  "effects": [
+    {
+      "name": "Not The Face!",
+      "type": "passive",
+      "_id": "yK70Unmg5UbFl87g",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "not-the-face-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.markedcondition0",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 4,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": null,
+        "modifiedTime": 1773050883782,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      }
+    }
+  ],
+  "_id": "iM0KiuzwCbIA6XU8"
+}

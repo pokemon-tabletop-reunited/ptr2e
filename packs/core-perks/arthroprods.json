@@ -1,0 +1,154 @@
+{
+  "folder": "o5iIUG4Bj40M86yi",
+  "name": "Arthroprods",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Dev"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "arthroprods",
+    "description": "<p>Effect: The user’s [Jaw], [Horn], [Wind], [Sonic], [Tail], and [Sharp] have +10% Power, deal +5 flat damage, and gain [Crit 1] (or have their Crit value increased by 1).</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:bug"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "bug"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 88,
+        "y": 25,
+        "connected": [
+          "arthroarmor",
+          "adhesive-digits"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "traitWebs": []
+  },
+  "img": "icons/creatures/invertebrates/beetle-grub-larvae-gray.webp",
+  "effects": [
+    {
+      "name": "Arthroprods",
+      "type": "passive",
+      "_id": "xKO2RcKsVNXGE3Vz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 10,
+            "predicate": [
+              {
+                "or": [
+                  "self:action:trait:jaw",
+                  "self:action:trait:horn",
+                  "self:action:trait:wind",
+                  "self:action:trait:sonic",
+                  "self:action:trait:tail",
+                  "self:action:trait:sharp"
+                ]
+              }
+            ],
+            "label": "Arthroprods-Power",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "damaging-attack-damage",
+            "value": 5,
+            "predicate": [
+              {
+                "or": [
+                  "self:action:trait:jaw",
+                  "self:action:trait:horn",
+                  "self:action:trait:wind",
+                  "self:action:trait:sonic",
+                  "self:action:trait:tail",
+                  "self:action:trait:sharp"
+                ]
+              }
+            ],
+            "label": "Arthroprods-Damage",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "damaging-attack-crit-stage",
+            "value": 1,
+            "predicate": [
+              {
+                "or": [
+                  "self:action:trait:jaw",
+                  "self:action:trait:horn",
+                  "self:action:trait:wind",
+                  "self:action:trait:sonic",
+                  "self:action:trait:tail",
+                  "self:action:trait:sharp"
+                ]
+              }
+            ],
+            "label": "Arthroprods-Crit",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Actor.NDQqimj8y7Vjof6V.Item.VTTPBd6XpaE60tUr.ActiveEffect.Ah2hDT8SrGVChHoc",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767770694873,
+        "modifiedTime": 1767772779959,
+        "lastModifiedBy": "xh6Pq7RQCtnsVX8n"
+      }
+    }
+  ],
+  "_id": "gm8Mi7b91bUE385m"
+}

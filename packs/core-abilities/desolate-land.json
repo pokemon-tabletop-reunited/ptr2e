@@ -20,7 +20,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Sunny Day. Sunny Weather is set until it is overridden or if the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Sunny Weather is present, Sunny Weather will remain for 3 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
@@ -39,7 +40,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Intense Heat Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Heat is present, the Weather is set to Sunny for 5 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
@@ -60,7 +62,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user undergoes a Phenomenal Transformation.</p><p>Effect: Intense Heat Weather is set until it is overridden or the user gains @Affliction[fainted] or leaves combat. If the user gains @Affliction[fainted] or leaves combat while Intense Heat is present, the Weather is set to Sunny for 5 Rounds.</p>",
         "img": "icons/svg/explosion.svg"
@@ -77,6 +80,13 @@
     "_migration": {
       "version": null,
       "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
     }
   },
   "_id": "vVueHKs6qyhvEBFU",
@@ -92,43 +102,42 @@
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.oZFYMEJhZ3CZSNEZ",
-            "predicate": [],
+            "predicate": [
+              "ability:desolate-land:active"
+            ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false,
+            "reevaluateOnUpdate": true,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "allowDuplicate": false,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -140,12 +149,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.346",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.4.2.beta",
         "createdTime": 1733069184244,
-        "modifiedTime": 1737396240444,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1754317533059,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
       }
     }
   ]
