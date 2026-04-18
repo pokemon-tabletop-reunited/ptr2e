@@ -122,6 +122,10 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
   override async nextTurn(): Promise<this> {
     if (!game.user.isGM) {
+      if(!game.settings.get("ptr2e", "player-end-turn-permission")) {
+        ui.notifications.warn("Your GM has disabled the ability for players to end their turn. Please wait for them to end your turn or ask them to enable this setting.");
+        return this;
+      }
       // if the user isn't a GM, confirm they mean to click end turn.
       const dialog = game.keyboard.downKeys.has("ShiftLeft") ? true : await foundry.applications.api.DialogV2.prompt<boolean>({
         window: {title: game.i18n.localize("PTR2E.Dialog.ConfirmEndTurn.Title")},
