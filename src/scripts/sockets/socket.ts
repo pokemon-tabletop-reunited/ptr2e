@@ -4,6 +4,7 @@ import { PTRHook } from "../hooks/data.ts";
 import { handleNextTurn } from "./combat.ts";
 import { PTR2eSocketError, PTR2eSocketInternalError, PTR2eSocketInvalidUserError, PTR2eSocketNoGMConnectedError, PTR2eSocketRemoteException, PTR2eSocketUnregisteredHandlerError, PTR2eSocketDeniedError } from "./errors.ts";
 import { FolderCreateOrUpdateArgs, FolderCreateOrUpdateResult, handleFolderCreateOrUpdateRequest } from "./folder.ts";
+import { createSummonCombatant, CreateSummonCombatantArgs } from "./summon.ts";
 
 export const Sockets: PTRHook = {
   listen: () => {
@@ -13,6 +14,7 @@ export const Sockets: PTRHook = {
       // Register all system socket handlers
       game.ptr.sockets.system.register(game.ptr.sockets.systemEvents.folderCreateOrUpdate, handleFolderCreateOrUpdateRequest);
       game.ptr.sockets.system.register(game.ptr.sockets.systemEvents.nextTurn, handleNextTurn);
+      game.ptr.sockets.system.register(game.ptr.sockets.systemEvents.createSummonCombatant, createSummonCombatant);
     });
   }
 }
@@ -47,7 +49,8 @@ export class SocketManagerPTR2e {
   } as const;
   public readonly systemEvents = {
     folderCreateOrUpdate: "folderCreateOrUpdate",
-    nextTurn: "nextTurn"
+    nextTurn: "nextTurn",
+    createSummonCombatant: "createSummonCombatant",
   } as const;
 
   constructor() {
@@ -128,6 +131,7 @@ export class SocketPTR2e {
    */
   public async executeAsGM(handler: CoreSystemSocketEvent["folderCreateOrUpdate"], ...args: [FolderCreateOrUpdateArgs]): Promise<FolderCreateOrUpdateResult>;
   public async executeAsGM(handler: CoreSystemSocketEvent["nextTurn"], ...args: [{combatId: string, combatantId?: string}]): Promise<CombatPTR2e>;
+  public async executeAsGM(handler: CoreSystemSocketEvent["createSummonCombatant"], ...args: [CreateSummonCombatantArgs]): Promise<void>;
   public async executeAsGM<T extends object = object>(handler: string | Function, ...args: unknown[]): Promise<T> {
     const [name, func] = this._resolveFunction(handler);
     if (game.user.isGM) {
