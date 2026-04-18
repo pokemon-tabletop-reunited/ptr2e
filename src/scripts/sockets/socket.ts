@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
+import { CombatPTR2e } from "@combat";
 import { PTRHook } from "../hooks/data.ts";
+import { handleNextTurn } from "./combat.ts";
 import { PTR2eSocketError, PTR2eSocketInternalError, PTR2eSocketInvalidUserError, PTR2eSocketNoGMConnectedError, PTR2eSocketRemoteException, PTR2eSocketUnregisteredHandlerError, PTR2eSocketDeniedError } from "./errors.ts";
 import { FolderCreateOrUpdateArgs, FolderCreateOrUpdateResult, handleFolderCreateOrUpdateRequest } from "./folder.ts";
 
@@ -10,6 +12,7 @@ export const Sockets: PTRHook = {
     Hooks.once("ready", () => {
       // Register all system socket handlers
       game.ptr.sockets.system.register(game.ptr.sockets.systemEvents.folderCreateOrUpdate, handleFolderCreateOrUpdateRequest);
+      game.ptr.sockets.system.register(game.ptr.sockets.systemEvents.nextTurn, handleNextTurn);
     });
   }
 }
@@ -43,7 +46,8 @@ export class SocketManagerPTR2e {
     PTR2eSocketDeniedError
   } as const;
   public readonly systemEvents = {
-    folderCreateOrUpdate: "folderCreateOrUpdate"
+    folderCreateOrUpdate: "folderCreateOrUpdate",
+    nextTurn: "nextTurn"
   } as const;
 
   constructor() {
@@ -123,6 +127,7 @@ export class SocketPTR2e {
    * @returns A promise that resolves with the result of the handler function.
    */
   public async executeAsGM(handler: CoreSystemSocketEvent["folderCreateOrUpdate"], ...args: [FolderCreateOrUpdateArgs]): Promise<FolderCreateOrUpdateResult>;
+  public async executeAsGM(handler: CoreSystemSocketEvent["nextTurn"], ...args: [{combatId: string, combatantId?: string}]): Promise<CombatPTR2e>;
   public async executeAsGM<T extends object = object>(handler: string | Function, ...args: unknown[]): Promise<T> {
     const [name, func] = this._resolveFunction(handler);
     if (game.user.isGM) {
