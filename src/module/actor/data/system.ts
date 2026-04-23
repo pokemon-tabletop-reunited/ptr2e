@@ -689,6 +689,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     if (this.shield.value > 0) this.parent.rollOptions.addOption("self", "state:shielded");
     switch (true) {
+      case this.health.value <= Math.floor(this.health.max * 0.125): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-8");
+      }
       case this.health.value <= Math.floor(this.health.max * 0.25): {
         this.parent.rollOptions.addOption("self", "state:desperation-1-4");
       }
@@ -697,6 +700,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
       case this.health.value <= Math.floor(this.health.max * 0.5): {
         this.parent.rollOptions.addOption("self", "state:desperation-1-2");
+      }
+      case this.health.value <= Math.floor(this.health.max * (2 / 3)): {
+        this.parent.rollOptions.addOption("self", "state:desperation-2-3");
       }
       case this.health.value <= Math.floor(this.health.max * 0.75): {
         this.parent.rollOptions.addOption("self", "state:desperation-3-4");
@@ -709,6 +715,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       case this.health.value >= Math.floor(this.health.max * 0.75): {
         this.parent.rollOptions.addOption("self", "state:intrepid-3-4");
       }
+      case this.health.value >= Math.floor(this.health.max * (2 / 3)): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-2-3");
+      }
       case this.health.value >= Math.floor(this.health.max * 0.5): {
         this.parent.rollOptions.addOption("self", "state:intrepid-1-2");
       }
@@ -717,6 +726,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
       case this.health.value >= Math.floor(this.health.max * 0.25): {
         this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.125): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-8");
       }
     }
     // Set movement state option
@@ -838,6 +850,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   static generateDesperationAndIntrepidStates(health: ActorSystemPTR2e["health"]): Set<string> {
     const states = new Set<string>();
     switch (true) {
+      case health.value <= Math.floor(health.max * 0.125): {
+        states.add("desperation-1-8");
+      }
       case health.value <= Math.floor(health.max * 0.25): {
         states.add("desperation-1-4");
       }
@@ -846,6 +861,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
       case health.value <= Math.floor(health.max * 0.5): {
         states.add("desperation-1-2");
+      }
+      case health.value <= Math.floor(health.max * (2 / 3)): {
+        states.add("desperation-2-3");
       }
       case health.value <= Math.floor(health.max * 0.75): {
         states.add("desperation-3-4");
@@ -858,6 +876,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       case health.value >= Math.floor(health.max * 0.75): {
         states.add("intrepid-3-4");
       }
+      case health.value >= Math.floor(health.max * (2 / 3)): {
+        states.add("intrepid-2-3");
+      }
       case health.value >= Math.floor(health.max * 0.5): {
         states.add("intrepid-1-2");
       }
@@ -866,6 +887,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
       case health.value >= Math.floor(health.max * 0.25): {
         states.add("intrepid-1-4");
+      }
+      case health.value >= Math.floor(health.max * 0.125): {
+        states.add("intrepid-1-8");
       }
     }
     return states;
