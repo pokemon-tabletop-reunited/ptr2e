@@ -94,7 +94,8 @@ const GamePTR = {
   onSetup() {
     // Run "delayed" constructor of game.ptr.tooltips
     game.ptr.tooltips.observe();
-
+  },
+  onReady() {
     // Check if Shadow/Nuclear types have the hide property, and if not, set it.
     const types = game.settings.get("ptr2e", "pokemonTypes");
     let needsUpdate = false;
@@ -107,8 +108,7 @@ const GamePTR = {
     if (needsUpdate) {
       game.settings.set("ptr2e", "pokemonTypes", types);
     }
-  },
-  onReady() {
+
     // If there are any active combats, make sure to handle Summon Effects
     // This needs to be done in Setup as Combat & Combatants aren't yet initialized when actors get initialized.
     for (const combat of (game.combats?.contents ?? []) as CombatPTR2e[]) {
