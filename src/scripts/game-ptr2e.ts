@@ -16,6 +16,7 @@ import { TutorListApp } from "@module/apps/tutor-list.ts";
 import { CombatPTR2e } from "@combat";
 import GithubManager from "@module/apps/github.ts";
 import { getTypes, TypeEffectiveness } from "./config/effectiveness.ts";
+import { SocketManagerPTR2e } from "./sockets/socket.ts";
 
 const GamePTR = {
   onInit() {
@@ -51,7 +52,8 @@ const GamePTR = {
         tokens: {
           autoscale: game.settings.get("ptr2e", "tokens.autoscale")
         }
-      }
+      },
+      sockets: new SocketManagerPTR2e()
     };
 
     // Add reference for 'fainted' to the 'dead' condition
@@ -92,6 +94,19 @@ const GamePTR = {
   onSetup() {
     // Run "delayed" constructor of game.ptr.tooltips
     game.ptr.tooltips.observe();
+
+    // Check if Shadow/Nuclear types have the hide property, and if not, set it.
+    const types = game.settings.get("ptr2e", "pokemonTypes");
+    let needsUpdate = false;
+    for (const type of ["shadow", "nuclear"] as const) {
+      if (types[type] && !("hide" in types[type])) {
+        types[type].hide = true;
+        needsUpdate = true;
+      }
+    }
+    if (needsUpdate) {
+      game.settings.set("ptr2e", "pokemonTypes", types);
+    }
   },
   onReady() {
     // If there are any active combats, make sure to handle Summon Effects

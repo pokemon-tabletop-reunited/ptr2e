@@ -17,38 +17,106 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
-    "description": "<p>Effect: When the user declares the use of a vehicle’s Ram Attack against another vehicle, they may spend 4 PP at 30% Delay to cause the attack to lose 20 Accuracy, -40% Power, and on hit inflict Delay 50%, @Affliction[slowed 5], @Affliction[stuck 5], @Affliction[stunted 5], and @UUID[Compendium.ptr2e.core-effects.5MQzVTuubNTERPjS]{-2 Evasion Stages for 5 activations}. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
+    "slug": "pit-maneuver",
+    "description": "<p>Effect: When the user declares the use of a vehicle’s Ram Attack against another vehicle, they may spend @PP[-4] at @Trait[flinch-30] to cause the attack to lose 20 Accuracy, -40% Power, and on hit inflict @Affliction[delay 50], @Affliction[slowed 5], @Affliction[stuck 5], @Affliction[stunted 5], and @UUID[Compendium.ptr2e.core-effects.5MQzVTuubNTERPjS]{-2 Evasion Stages} for 5 Activations. The user may only apply this Perk with vehicles that share the same category of Pilot Skill that the user has that meets the prerequisites for this Perk.</p>",
     "traits": [
       "pilot"
     ],
     "prerequisites": [
-      "One Pilot Skill at 55 (Not Automated)"
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.bike.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.small-motor-vehicles.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.cars.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.utility-vehicles.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.military-ground-vehicles.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.walkers.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aircraft.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.aerospace-vehicles.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.exotic-vehicle-specific.mod}",
+              45
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.watercraft.mod}",
+              45
+            ]
+          }
+        ],
+        "x": 3
+      }
     ],
     "autoUnlock": [],
     "cost": 2,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "power",
       "archetype": "pilot"
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 78,
         "y": 64,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "power-steering",
           "minor-buff-49"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }

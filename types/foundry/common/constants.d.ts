@@ -292,10 +292,11 @@ export const DOCUMENT_LINK_TYPES: [
 
 /** The supported dice roll visibility modes */
 export const DICE_ROLL_MODES: {
-    PUBLIC: "publicroll";
-    PRIVATE: "gmroll";
-    BLIND: "blindroll";
-    SELF: "selfroll";
+    PUBLIC: "public";
+    PRIVATE: "gm";
+    BLIND: "blind";
+    SELF: "self";
+    IC: "ic";
 };
 
 /**

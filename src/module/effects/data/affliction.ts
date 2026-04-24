@@ -3,6 +3,8 @@ import ChangeModel from "../changes/change.ts";
 import ActiveEffectSystem, { ActiveEffectSystemSchema } from "../system.ts";
 import { extractNotes } from "src/util/change-helpers.ts";
 import { RollNote } from "@system/notes.ts";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { SummonStatistic } from "@system/statistics/summon.ts";
 
 class AfflictionActiveEffectSystem extends ActiveEffectSystem {
   static override defineSchema(): AfflictionSystemSchema {
@@ -25,6 +27,7 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
         nullable: true, //@ts-expect-error - This is a valid choice
         choices: { damage: "damage", healing: "healing" },
       }),
+      predicate: new PredicateField({ hint: "PTR2E.Effect.FIELDS.predicate.hint" }),
     };
   }
 
@@ -36,12 +39,12 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
     const output = {} as EndOfTurn;
     if (this.remainingActivations === 0) {
       output.type = "delete";
-      if(this.slug === "perish" && this.parent.targetsActor()) {
+      if (this.slug === "perish" && this.parent.targetsActor()) {
         const isAce = this.parent?.target?.traits?.has("ace");
-        if(isAce) {
+        if (isAce) {
           output.perish = true;
           return output;
-        } 
+        }
         else {
           output.damage = {
             formula: Number.MAX_SAFE_INTEGER.toString(),
@@ -66,7 +69,7 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
         const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.value! - this.parent.duration.remaining!));
         return stacksToRemove || 0;
       }
-      if(this.slug.startsWith("desync")) {
+      if (this.slug.startsWith("desync")) {
         return Math.min(this.stacks || 0, 5);
       }
 
@@ -90,6 +93,14 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
     const damage = this._calculateDamage(stacksToRemove);
     if (damage) {
       output.damage = damage;
+
+      if (this.predicate?.length) {
+        output.note = {
+          options: this.parent.getRollOptions(),
+          domains: [],
+          html: ""
+        }
+      }
     }
 
     if (this.parent.targetsActor() && this.parent.parent?.synthetics?.rollNotes) {
@@ -116,17 +127,18 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
    */
   protected _calculateDamage(stacksToRemove: number): { formula: string; type: "damage" | "healing" } | void {
     if (!this.formula || !this.type) return;
+    if (!this.test()) return;
 
-    if(this.type === 'damage' && this.parent.targetsActor()) {
+    if (this.type === 'damage' && this.parent.targetsActor()) {
       const immunities = this.parent.target.rollOptions.getFromDomain("immunities");
-      
-      const isImmune = this.parent.target.isImmuneToEffect(this.parent) 
+
+      const isImmune = this.parent.target.isImmuneToEffect(this.parent)
         || (
           (immunities[`damage:indirect`] || immunities[`damage:affliction:${this.parent.slug}`])
           && !this.parent.traits.has("ignore-immunity") && !this.parent.traits.has(`ignore-immunity:${this.parent.slug}`)
         )
-      
-      if(isImmune) return;
+
+      if (isImmune) return;
     }
 
     const formula = Roll.replaceFormulaData(
@@ -143,6 +155,21 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
       formula,
       type: this.type,
     };
+  }
+
+  /** Test this rule element's predicate, if present */
+  public test(options?: Iterable<string> | null) {
+    if (this.predicate.length === 0) return true;
+
+    const actor = this.parent.actor,
+      item = this.parent.parent instanceof Item ? this.parent.parent : null
+
+    const optionSet = new Set([
+      ...(options ?? []),
+      ...(this.parent.getRollOptions())
+    ]);
+
+    return SummonStatistic.resolveInjectedProperties(this.predicate.clone(), { actor, item }).test(optionSet);
   }
 
   override apply(actor: ActorPTR2e, change?: ChangeModel, options?: string[]): unknown {
@@ -171,6 +198,7 @@ type AfflictionSystemSchema = {
     true,
     true
   >;
+  predicate: PredicateField
 } & ActiveEffectSystemSchema;
 
 type EndOfTurn =

@@ -239,7 +239,7 @@ class SpeciesSystem extends SpeciesExtension {
   }
 
   static override migrateData(source: SpeciesSystem['_source']) {
-    if (source.abilities) {
+    if (source?.abilities) {
       for (const abGroup of Object.keys(source.abilities)) {
         source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
           if (typeof g == "object") return g;
@@ -248,7 +248,7 @@ class SpeciesSystem extends SpeciesExtension {
       }
     }
     //@ts-expect-error - Old typing
-    if (!Array.isArray(source.movement) && (source.movement.primary?.length || source.movement.secondary?.length)) {
+    if (!Array.isArray(source.movement) && (source.movement?.primary?.length || source.movement?.secondary?.length)) {
       //@ts-expect-error - Old typing
       source.movement = [...Array.from(source.movement.primary ?? []), ...Array.from(source.movement.secondary ?? [])].filter(m => !!m)
     }

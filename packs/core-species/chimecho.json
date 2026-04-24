@@ -679,10 +679,19 @@
             "level": null,
             "knownMove": null
           },
-          "evolutions": []
+          "evolutions": [],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.y5lxdl8nq0TmWq9Y"
+      "uuid": "Compendium.ptr2e.core-species.Item.y5lxdl8nq0TmWq9Y",
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "habitats": [
       "woodland",
@@ -694,10 +703,144 @@
       "source": "PTR 2e Core - Hoenn Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "6THltAMaj0ldckUs",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Mega Chimecho",
+      "type": "form",
+      "_id": "wwKTvksuJX7a7CQX",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-chimecho:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Chimecho Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.vEXfzPFttBFhylJ9",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-chimecho:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-chimecho:active"
+            ],
+            "hp": null,
+            "atk": -5,
+            "def": 30,
+            "spa": 40,
+            "spd": 35,
+            "spe": null,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.type.types",
+            "value": "steel",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-chimecho:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "noisy",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-chimecho:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "createdTime": 1776788389695,
+        "modifiedTime": 1776788548876,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

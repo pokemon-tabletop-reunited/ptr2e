@@ -9,7 +9,9 @@
         "slug": "shadow-bolt",
         "name": "Shadow Bolt",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pulse"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -17,7 +19,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 6
         },
         "category": "special",
         "power": 90,
@@ -25,8 +27,8 @@
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis 5].</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: On hit, the target has a 15% chance of gaining @Affliction[paralysis 5].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
         "predicate": []
       }
     ],
@@ -40,7 +42,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "9QeNvziOB80xdTut",
@@ -57,23 +60,31 @@
             "key": "shadow-bolt-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
-            "chance": 10,
+            "chance": 15,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,13 +96,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1737317680157,
-        "modifiedTime": 1737317699884,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1775575214465,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

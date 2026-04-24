@@ -10,13 +10,13 @@
       {
         "name": "Watcher's Protection",
         "slug": "watchers-protection",
-        "description": "<p>You confer shields to all allies within 10m equal to four ticks of you, the user's, Max HP. This benefits from the user having Improved Shielding, but not if the recipient does.</p>",
+        "description": "<p>You confer shields to all allies within 3m equal to four ticks of you, the user's, Max HP. This benefits from the user having Improved Shielding, but not if the recipient does. On resolution, the user is afflicted with @Affliction[delay 20].</p>",
         "traits": [],
         "type": "generic",
         "img": "icons/magic/defensive/shield-barrier-blue.webp",
         "range": {
           "target": "emanation",
-          "distance": 10,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
@@ -25,12 +25,12 @@
         }
       }
     ],
-    "description": "<p>Effect: Allied creatures in range gain @Tick[4 shield], based on the user's HP. Targeted creatures benefit from any Perks the user possesses that affects the user when the user would gain Shields.</p>",
+    "description": "<p>You confer shields to all allies within 3m equal to four ticks of you, the user's, Max HP. This benefits from the user having Improved Shielding, but not if the recipient does. On resolution, the user is afflicted with @Affliction[delay 20].</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:hold-the-line"
     ],
-    "cost": 3,
+    "cost": 4,
     "slug": "watchers-protection",
     "nodes": [
       {
@@ -64,7 +64,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "img": "icons/magic/defensive/shield-barrier-blue.webp",
   "effects": [
@@ -97,7 +98,8 @@
             "affects": "target",
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -111,7 +113,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>You may provide an ally with Shields based on your own HP Max. The target ally receives Shields equal to 4 Ticks of the user's HP. If the user has Improved Shielding, this Perk benefits from the effect of that (rather than if the recipient has that perk).</p>",
       "origin": null,
@@ -123,13 +127,17 @@
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.OeB204Ho5OCVR4xB.ActiveEffect.NDv2ChcRTyYGFpan",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1760296395520,
         "modifiedTime": 1760296423621,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "g0CU5wD2ydeGnGDU",

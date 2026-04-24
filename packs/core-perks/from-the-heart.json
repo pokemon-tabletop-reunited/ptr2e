@@ -1,0 +1,158 @@
+{
+  "folder": "PAZ8zWUPw7Azm5V6",
+  "name": "From the Heart",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "from-the-heart",
+    "description": "<p>Connection - @UUID[Compendium.ptr2e.core-moves.Item.NOcGQgz4eyWeo9Be]{Encouragement}</p><p>Effect: The user is able to use Encouragement as an @Trait[interrupt].</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.negotiation.mod}",
+              30
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.writing.mod}",
+              30
+            ]
+          }
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 105,
+        "y": 139,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "agile-style",
+          "mental-alarm",
+          "strong-style"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "_id": "QkSbGvf1YHhV7zYD",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": [
+    {
+      "name": "From the Heart",
+      "type": "passive",
+      "_id": "43qepgfZywa73ycm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-moves.Item.NOcGQgz4eyWeo9Be",
+            "predicate": [
+              "item:perk:from-the-heart"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "encouragement-attack",
+            "value": "interrupt",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "modifiedTime": 1776356136997,
+        "createdTime": 1776356136997,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null,
+      "flags": {}
+    }
+  ],
+  "flags": {}
+}

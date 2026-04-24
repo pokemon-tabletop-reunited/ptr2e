@@ -799,11 +799,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -818,9 +818,9 @@
             "spa": null,
             "spd": 20,
             "spe": null,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -832,12 +832,11 @@
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -847,7 +846,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -856,9 +856,9 @@
             ],
             "key": "",
             "value": "lumbering",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -867,9 +867,9 @@
             ],
             "key": "system.type.types",
             "value": "rock",
-            "mode": 6,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 6
           },
           {
             "type": "remove-trait",
@@ -878,9 +878,9 @@
             ],
             "key": "",
             "value": "rock",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -889,9 +889,9 @@
             ],
             "key": "system.movement.overland.value",
             "value": -2,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -900,9 +900,9 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": -25,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -911,9 +911,9 @@
             ],
             "key": "system.skills.climb.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -922,9 +922,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -933,9 +933,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -944,9 +944,9 @@
             ],
             "key": "system.skills.running.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,

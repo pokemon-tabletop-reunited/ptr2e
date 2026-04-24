@@ -1,3 +1,4 @@
+import { getApplicableCompendiums } from "@utils";
 import { RollTableSchema } from "types/foundry/common/documents/roll-table.js";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,8 +61,10 @@ class HabitatRollTable extends RollTable {
 
     const notification = ui.notifications.info(`Initializing Dynamic Table: ${this.name}...`, { permanent: true });
 
-    const data = await game.packs.get("ptr2e.core-species")!.getIndex({ fields: ["system.habitats", "system.slug", "system.number", "system.form"] });
-    const species = data.filter(d => d.system.habitats?.includes(this.habitat));
+    const packs = getApplicableCompendiums("species");
+    const results = await Promise.all(packs.map(p => game.packs.get(p)!.getIndex({ fields: ["system.habitats", "system.slug", "system.number", "system.form"] })));
+
+    const species = results.flatMap(r => r.filter(d => d.system.habitats?.includes(this.habitat)));
     this.updateSource({
       results: (species.map( (s, i) => {
         return {

@@ -6,28 +6,24 @@
       "trait:trainer"
     ],
     "cost": 1,
-    "description": "When a creature on the user’s Team gains @Affliction[fainted], the user may freely use @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} on that creature at @Trait[interrupt-4].",
+    "description": "<p>When a creature on the user’s Team gains @Affliction[fainted], the user may freely use @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} targeting that creature.</p>",
     "actions": [
       {
         "name": "Emergency Retreat",
         "slug": "emergency-retreat",
-        "description": "<p>Trigger: A creature on the user's Team gains @Affliction[fainted].</p><p>Effect: The user may freely uses @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} on that creature.</p>",
+        "description": "<p>Trigger: A creature on the user's Team gains @Affliction[fainted].</p><p>Effect: The user may freely uses @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} targeting the triggering creature.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
         "type": "generic",
         "traits": [
-          "interrupt-4"
+          "interrupt"
         ],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
         "range": {
           "target": "ally",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "emergency-retreat",
@@ -52,13 +48,10 @@
           "rigorous-fundamentals-5"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#0d0d0d",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-          "tint": "#ffff00",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
         "tier": null
       }
@@ -78,9 +71,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "COOTzCdaHbTPL7uT",
   "img": "systems/ptr2e/img/perk-icons/Juggler.svg",

@@ -564,10 +564,10 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -582,8 +582,8 @@
             "spa": -10,
             "spd": 25,
             "spe": 30,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -592,8 +592,8 @@
             ],
             "key": "system.movement.overland.value",
             "value": 9,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -602,8 +602,8 @@
             ],
             "key": "system.movement.swim.value",
             "value": 4,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -612,8 +612,8 @@
             ],
             "key": "",
             "value": "Mud Runner",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -622,8 +622,8 @@
             ],
             "key": "",
             "value": "Quadrupedal",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -632,8 +632,8 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": 30,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -642,8 +642,8 @@
             ],
             "key": "system.skills.climb.value",
             "value": 40,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -652,8 +652,8 @@
             ],
             "key": "system.skills.conversation.value",
             "value": 10,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -662,8 +662,8 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 20,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -672,8 +672,8 @@
             ],
             "key": "system.skills.lift.value",
             "value": 20,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -682,8 +682,8 @@
             ],
             "key": "system.skills.listen.value",
             "value": 25,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -692,8 +692,8 @@
             ],
             "key": "system.skills.natural-world.value",
             "value": 10,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -702,8 +702,8 @@
             ],
             "key": "system.skills.navigate.value",
             "value": 15,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -712,8 +712,8 @@
             ],
             "key": "system.skills.negotiation.value",
             "value": 5,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -722,8 +722,8 @@
             ],
             "key": "system.skills.psychology.value",
             "value": 15,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -732,8 +732,8 @@
             ],
             "key": "system.skills.spot.value",
             "value": 20,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -742,8 +742,8 @@
             ],
             "key": "system.skills.stealth.value",
             "value": 15,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -752,8 +752,8 @@
             ],
             "key": "system.skills.running.value",
             "value": 40,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -762,8 +762,8 @@
             ],
             "key": "system.skills.swim.value",
             "value": 15,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -772,8 +772,8 @@
             ],
             "key": "system.skills.track.value",
             "value": 40,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -784,22 +784,22 @@
             "value": "Compendium.ptr2e.core-abilities.Item.f3n7PYbX40yiCnYD",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": true,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,

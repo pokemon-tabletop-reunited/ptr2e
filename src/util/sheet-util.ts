@@ -20,16 +20,16 @@ function eventToRollParams(
 
     const params: ParamsFromEvent = { skipDialog: event.shiftKey ? !skipDefault : skipDefault };
     if (event.ctrlKey || event.metaKey) {
-        params.rollMode = game.user.isGM ? "gmroll" : "blindroll";
+        params.rollMode = game.user.isGM ? "gm" : "blind";
     }
 
     return params;
 }
 
 /** Set roll mode from a user's input: used for messages that are not actually rolls. */
-function eventToRollMode(event: Maybe<Event>): RollMode | "roll" {
-    if (!isRelevantEvent(event) || !(event.ctrlKey || event.metaKey)) return "roll";
-    return game.user.isGM ? "gmroll" : "blindroll";
+function eventToRollMode(event: Maybe<Event>): RollMode {
+    if (!isRelevantEvent(event) || !(event.ctrlKey || event.metaKey)) return "public";
+    return game.user.isGM ? "gm" : "blind";
 }
 
 export { eventToRollMode, eventToRollParams };

@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "shielded-fortune",
-    "description": "<p>You gain +1 default CRIT while you have Shields.</p>",
+    "description": "<p>The user has +1 default CRIT and +10% EHR while they have Shields.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -17,29 +17,23 @@
     },
     "nodes": [
       {
+        "x": 84,
+        "y": 92,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "guard-up"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#408080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 84,
-        "y": 92,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -53,7 +47,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -71,20 +66,36 @@
               "self:state:shielded"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "self:state:shielded"
+            ],
+            "key": "system.modifiers.effectHitRate",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -96,14 +107,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.D1QCKKrT1mEcaRK2.ActiveEffect.ugRbKwSW0EdJx8s8",
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.1.0",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1729979534307,
-        "modifiedTime": 1729979652584,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1776354436626,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

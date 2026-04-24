@@ -342,7 +342,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     const state = Flip.getState(element, { props: "color" });
 
     const context = await this._preparePartContext("hotbar", await this._prepareContext({}), {});
-    const html = await renderTemplate(HotbarPTR2e.PARTS.hotbar.template, context);
+    const html = await foundry.applications.handlebars.renderTemplate(HotbarPTR2e.PARTS.hotbar.template, context);
     const newElement = document.createElement("div");
     newElement.innerHTML = html;
     const newMovement = newElement.querySelector<HTMLDivElement>(`.footer .movement`);

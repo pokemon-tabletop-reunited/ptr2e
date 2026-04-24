@@ -41,6 +41,15 @@ export function fromUuidSync<TDocument extends ClientDocument | CompendiumIndexD
 export function debounce<T extends unknown[]>(callback: (...args: T) => unknown, delay: number): (...args: T) => void;
 
 /**
+ * Wrap a callback in a throttled timeout.
+ * Delay execution of the callback function when the last time the function was called was delay milliseconds ago
+ * @param {Function} callback       A function to execute once the throttled threshold has been passed
+ * @param {number} delay            A maximum amount of time in milliseconds between to execution
+ * @returns {Function}              A wrapped function which can be called to throttle execution
+ */
+export function throttle<T extends unknown[]>(callback: (...args: T) => unknown, delay: number): (...args: T) => void;
+
+/**
  * Quickly clone a simple piece of data, returning a copy which can be mutated safely.
  * This method DOES support recursive data structures containing inner objects or arrays.
  * This method DOES NOT support advanced object types like Set, Map, or other specialized classes.

@@ -26,7 +26,9 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
   }
 
   override get isEditable(): boolean {
-    if (this.document instanceof ActiveEffect && !this.document.parent) return false;
+    if (this.document instanceof ActiveEffect && !this.document.pack && !this.document.parent) {
+      return false;
+    }
     return super.isEditable;
   }
 

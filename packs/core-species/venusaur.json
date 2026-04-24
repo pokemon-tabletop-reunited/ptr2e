@@ -710,11 +710,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -729,9 +729,9 @@
             "spa": 22,
             "spd": 20,
             "spe": null,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -740,9 +740,9 @@
             ],
             "key": "",
             "value": "Jump 2",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -751,9 +751,9 @@
             ],
             "key": "",
             "value": "Jump 1",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -766,12 +766,11 @@
             "reevaluateOnUpdate": true,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -780,7 +779,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "basic",
@@ -789,9 +789,9 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": -5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -800,9 +800,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -811,9 +811,9 @@
             ],
             "key": "system.skills.leadership.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -822,9 +822,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -833,9 +833,9 @@
             ],
             "key": "system.skills.stealth.value",
             "value": -5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "token-alterations",
@@ -844,7 +844,6 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "texture": "modules/ptr2e-pkmn-sprites/sprites/003_MEGA.webp",
@@ -852,7 +851,8 @@
             "scale": null,
             "name": null,
             "light": null,
-            "alpha": null
+            "alpha": null,
+            "method": 2
           }
         ],
         "slug": null,

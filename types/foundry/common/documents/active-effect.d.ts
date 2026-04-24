@@ -125,3 +125,4 @@ export type ActiveEffectSource<TType extends string = string, TSystemSource exte
 export type EffectChangeData = BaseActiveEffect<null>["changes"][number];
 export type EffectDurationData = BaseActiveEffect<null>["duration"];
 export type EffectStartData = BaseActiveEffect<null>["start"];
+export type EffectUUID = `ActiveEffect.${string}`;
