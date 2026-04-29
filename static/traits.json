@@ -3733,8 +3733,22 @@
     "slug": "zenith",
     "label": "Zenith",
     "related": [],
-    "description": "These attacks deal 1/4 of the damage they would deal if they are negated by a @Trait[shield] effect."
-  },
+    "description": "These attacks naturally possess the @Trait[pierce] trait and follow the rules for Z-Moves.",
+    "type": "automated",
+    "changes": [
+      {
+          "type": "alter-attack",
+          "value": "pierce",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }
+    ]
+    },
   {
     "slug": "connection",
     "label": "Connection",
