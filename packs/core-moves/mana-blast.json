@@ -42,7 +42,7 @@
         "power": 70,
         "accuracy": 95,
         "predicate": [],
-        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 EVA Stage for 5 Activations, and a 50% chance of being Flinched.</p>"
+        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 EVA Stage for 5 Activations, and a 50% chance of being @Affliction[delay 15].</p>"
       }
     ],
     "grade": "C"
@@ -59,19 +59,14 @@
           {
             "type": "roll-effect",
             "key": "mana-blast-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 50,
             "affects": "target",
             "alterations": [
               {
                 "property": "system.amount",
-                "value": -10,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinched 10%",
+                "value": -15,
                 "method": 5
               }
             ],
