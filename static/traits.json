@@ -3733,7 +3733,7 @@
     "slug": "zenith",
     "label": "Zenith",
     "related": [],
-    "description": "These attacks naturally possess the @Trait[pierce] trait and follow the rules for Z-Moves.",
+    "description": "Gear, creatures, and Actions with this Attacks with this Trait are mechanically involved with the Z-Move @Trait[phenomenon]. Moves with this Trait also possess @Trait[pierce] and @Trait[danger-close].",
     "type": "automated",
     "changes": [
       {
@@ -3747,6 +3747,17 @@
           "method": 2,
           "ignored": false
       }
+      {
+          "type": "alter-attack",
+          "value": "danger-close",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }      
     ]
     },
   {
