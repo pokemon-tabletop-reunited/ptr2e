@@ -3733,8 +3733,33 @@
     "slug": "zenith",
     "label": "Zenith",
     "related": [],
-    "description": "These attacks deal 1/4 of the damage they would deal if they are negated by a @Trait[shield] effect."
-  },
+    "description": "Gear, creatures, and Actions with this Attacks with this Trait are mechanically involved with the Z-Move @Trait[phenomenon]. Moves with this Trait also possess @Trait[pierce] and @Trait[danger-close].",
+    "type": "automated",
+    "changes": [
+      {
+          "type": "alter-attack",
+          "value": "pierce",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }
+      {
+          "type": "alter-attack",
+          "value": "danger-close",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }      
+    ]
+    },
   {
     "slug": "connection",
     "label": "Connection",
