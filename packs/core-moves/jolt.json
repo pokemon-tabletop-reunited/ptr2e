@@ -29,7 +29,7 @@
         "category": "physical",
         "power": 30,
         "accuracy": 100,
-        "description": "<p>On hit, the target has a 10% chance of being Flinched.</p>",
+        "description": "<p>On hit, the target has a 10% chance of being @Affliction[delay 20].</p>",
         "predicate": []
       }
     ],
@@ -57,7 +57,7 @@
           {
             "type": "roll-effect",
             "key": "jolt-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 10,
             "affects": "target",
@@ -65,11 +65,6 @@
               {
                 "property": "system.amount",
                 "value": -20,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 20%",
                 "method": 5
               }
             ],

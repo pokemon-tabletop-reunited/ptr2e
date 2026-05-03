@@ -166,10 +166,10 @@ async function extractEffectRolls({
         if(!effectItem) return e;
 
         const effectDomains = Array.from(new Set([
-          ...(effectItem.effects as unknown as ActiveEffectPTR2e[]).map(e  => [
+          ...(effectItem.effects as unknown as ActiveEffectPTR2e[])?.map(e  => [
             `${e.slug}-applied`,
             ...(e.system.traits.map(t => `${t.slug}-trait-applied`))
-          ]).flat(),
+          ])?.flat() ?? [],
           `${effectItem.slug}-applied`,
           ...(effectItem.system.traits.map(t => `${t.slug}-trait-applied`)),
           "all-applied",
@@ -185,10 +185,10 @@ async function extractEffectRolls({
         );
 
         const targetEffectDomains = Array.from(new Set([
-          ...(effectItem.effects as unknown as ActiveEffectPTR2e[]).map(e  => [
+          ...(effectItem.effects as unknown as ActiveEffectPTR2e[])?.map(e  => [
             `${e.slug}-received`,
             ...(e.system.traits.map(t => `${t.slug}-trait-received`))
-          ]).flat(),
+          ])?.flat() ?? [],
           `${effectItem.slug}-received`,
           "all-received",
           ...(effectItem.system.traits.map(t => `${t.slug}-trait-received`)),

@@ -1363,7 +1363,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             return "#ffffff";
           }
-          return "#898989";
+          return this.web.includes(".digimon-species.") ? "#0c0b16" : "#898989";
         })();
 
         line.setAttribute("x1", x1.toString());

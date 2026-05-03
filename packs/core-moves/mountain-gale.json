@@ -27,7 +27,7 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being @Affliction[delay 40].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -57,19 +57,14 @@
           {
             "type": "roll-effect",
             "key": "mountain-gale-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
                 "property": "system.amount",
-                "value": 0,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 40%",
+                "value": 40,
                 "method": 5
               }
             ],

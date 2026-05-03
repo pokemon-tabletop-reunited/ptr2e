@@ -8,7 +8,7 @@
       {
         "type": "roll-effect",
         "key": "attack",
-        "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+        "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
         "predicate": [],
         "chance": 100,
         "affects": "defensive",
@@ -17,11 +17,6 @@
           {
             "property": "system.amount",
             "value": "5 + clamp(-3 * @actor.system.attributes.spe.stage, -5, 18)",
-            "method": 5
-          },
-          {
-            "property": "name",
-            "value": "On-Hit Boss AA",
             "method": 5
           }
         ],
