@@ -16,7 +16,8 @@
           "adaptable",
           "contact",
           "crit-1",
-          "grapple"
+          "grapple",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -61,8 +62,8 @@
         "unit": "m"
       }
     },
-    "quantity": 1,
-    "rarity": "common",
+    "quantity": 8,
+    "rarity": "uncommon",
     "publication": {
       "source": "",
       "authors": [],
@@ -80,7 +81,8 @@
     ],
     "consumableType": "other",
     "stack": 8,
-    "cost": 3
+    "cost": 3,
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -97,9 +99,10 @@
             "value": 4,
             "predicate": [],
             "label": "Dart",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "flat-modifier",
@@ -107,9 +110,32 @@
             "value": 7,
             "predicate": [],
             "label": "Dart (Fling)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "missile",
+            "phase": "initial",
+            "predicate": [],
+            "key": "fling-dart-attack",
+            "property": "traits",
+            "definition": [],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "adaptable",
+            "phase": "initial",
+            "predicate": [],
+            "key": "fling-dart-attack",
+            "property": "traits",
+            "definition": [],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -123,7 +149,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -135,13 +163,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.2.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1775701562458,
+        "modifiedTime": 1775701625272
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "35sZHVUQMo1g7jTO"
 }

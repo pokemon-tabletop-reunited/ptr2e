@@ -16,6 +16,14 @@
 
       {{formField system.schema.fields.priority value=data.system.priority localize=true}}
 
+      <div class="form-group">
+        <label class="short">{{localize system.schema.fields.predicate.label}}</label>
+        <div class="form-fields">
+          <input type="text" name="system.predicate" value="{{json source.system.predicate spaces=0}}" />
+        </div>
+        <p class="hint">{{localize system.schema.fields.predicate.hint}}</p>
+      </div>
+
       {{formField system.schema.fields.formula value=data.system.formula localize=true}}
 
       {{formField system.schema.fields.type value=data.system.type localize=true}}

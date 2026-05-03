@@ -521,6 +521,26 @@ function NORMINV(p: number, mean: number, std: number) {
   return -sqrt2 * std * erfcinv(2 * pFix) + mean;
 }
 
+function getApplicableCompendiums(documentType: string) {
+  const settings = game.settings.get("ptr2e", "compendiumBrowserPacks");
+  const setting = settings[documentType as keyof typeof settings];
+  const defaults = {
+    species: ["ptr2e.core-species"],
+    move: ["ptr2e.core-moves"],
+    ability: ["ptr2e.core-abilities"],
+    gear: ["ptr2e.core-gear"],
+    perk: ["ptr2e.core-perks"],
+  };
+  if(!setting) return defaults[documentType as keyof typeof defaults] ?? [];
+
+  const result = [];
+  for(const [key, entry] of Object.entries(setting)) {
+    if(!entry?.load) continue;
+    result.push(key);
+  }
+  return result.length > 0 ? result : (defaults[documentType as keyof typeof defaults] ?? []);
+}
+
 export {
   fontAwesomeIcon,
   formatSlug,
@@ -546,6 +566,7 @@ export {
   isImageOrVideoPath,
   NORMINV,
   exportToJSON,
-  importFromJSON
+  importFromJSON,
+  getApplicableCompendiums
 };
 export type { FontAwesomeStyle, SlugCamel };

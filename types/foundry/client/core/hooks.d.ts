@@ -10,6 +10,7 @@ declare global {
     type HookParamsCanvasInit = HookParameters<"canvasInit", [DrawnCanvas]>;
     type HookParamsCanvasReady = HookParameters<"canvasReady", [DrawnCanvas]>;
     type HookParamsReady = HookParameters<"ready", never>;
+    type HooksParamsUserConnected = HookParameters<"userConnected", [User, boolean]>;
 
     type HookParamsClose<T extends Application, N extends string> = HookParameters<`close${N}`, [T, JQuery]>;
     type HookParamsDeleteCombat = HookParameters<"deleteCombat", [Combat, { [key: string]: unknown }, string]>;
@@ -64,6 +65,7 @@ declare global {
         static on(...args: HookParamsI18nInit): number;
         static on(...args: HookParamsCanvasInit): number;
         static on(...args: HookParamsCanvasReady): number;
+        static on(...args: HooksParamsUserConnected): number;
         static on(...args: HookParamsClose<CombatTrackerConfig, "CombatTrackerConfig">): number;
         static on(...args: HookParamsDropCanvasData): number;
         static on(...args: HookParamsGetChatLogEntryContext): number;

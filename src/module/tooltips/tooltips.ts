@@ -1,6 +1,5 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
-import { CombatantPTR2e } from "@combat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
@@ -374,20 +373,11 @@ export default class TooltipsPTR2e {
           const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
-          const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+          await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.createSummonCombatant, { 
             name: summonItem.name,
-            type: "summon",
-            system: {
-              owner: action.actor?.uuid ?? null,
-              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
-            }
-          }])
-
-          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
-
-          ChatMessage.create({
-            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
-          });
+            owner: action.actor?.uuid ?? null,
+            item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
+           });
         });
       }
     }
@@ -519,21 +509,12 @@ export default class TooltipsPTR2e {
 
           const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
-
-          const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+          
+          await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.createSummonCombatant, { 
             name: summonItem.name,
-            type: "summon",
-            system: {
-              owner: action.actor?.uuid ?? null,
-              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
-            }
-          }])
-
-          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
-
-          ChatMessage.create({
-            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
-          });
+            owner: action.actor?.uuid ?? null,
+            item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
+           });
         });
       }
     }

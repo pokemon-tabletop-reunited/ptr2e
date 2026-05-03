@@ -201,19 +201,19 @@ declare global {
     namespace ChatMessage {
         function create<TDocument extends ChatMessage>(
             this: ConstructorOf<TDocument>,
-            data: DeepPartial<Omit<TDocument["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>[],
+            data: DeepPartial<Omit<TDocument["_source"], "rolls"> & { rolls: (string | RollJSON)[], type?: string }>[],
             context?: ChatMessageModificationContext,
         ): Promise<TDocument[]>;
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
-            data: DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>,
+            data: DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[], type?: string }>,
             context?: ChatMessageModificationContext,
         ): Promise<T | undefined>;
         function create<T extends ChatMessage>(
             this: ConstructorOf<T>,
             data:
-                | DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>[]
-                | DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[] }>,
+                | DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[], type?: string }>[]
+                | DeepPartial<Omit<T["_source"], "rolls"> & { rolls: (string | RollJSON)[], type?: string }>,
             context?: ChatMessageModificationContext,
         ): Promise<T[] | T | undefined>;
     }

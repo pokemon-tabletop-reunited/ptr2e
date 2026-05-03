@@ -263,10 +263,10 @@ export class AttackModifierPopup extends ModifierPopup {
 
     return {
       modifiers,
-      rollModes: CONFIG.Dice.rollModes,
+      rollModes: CONFIG.ChatMessage.modes,
       rollMode:
-        this.context.rollMode === "roll"
-          ? game.settings.get("core", "rollMode")
+        this.context.rollMode === "public"
+          ? game.settings.get("core", "messageMode")
           : this.context.rollMode,
       avatarScroll: this.targets.length > 9,
       consumePP,
@@ -448,10 +448,10 @@ export class AttackModifierPopup extends ModifierPopup {
     const rollModeInput = htmlQuery<HTMLSelectElement>(htmlElement, "select[name='rollmode']");
     rollModeInput?.addEventListener("change", () => {
       const rollMode = rollModeInput.value;
-      if (!tupleHasValue(Object.values(CONST.DICE_ROLL_MODES), rollMode)) {
+      if (!tupleHasValue(Object.keys(CONFIG.ChatMessage.modes), rollMode)) {
         throw Error("Unexpected roll mode");
       }
-      this.context.rollMode = rollMode;
+      this.context.rollMode = rollMode as RollMode;
     });
 
     const variantSelector = htmlQuery<HTMLSelectElement>(htmlElement, "select[name='variant']");

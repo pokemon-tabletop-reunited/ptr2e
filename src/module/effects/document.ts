@@ -167,6 +167,7 @@ class ActiveEffectPTR2e<
   }
 
   override get isTemporary(): boolean {
+    if(this.type === "passive") return false;
     const value = this.duration.value ?? this._source.duration.value;
     return !!value && Number.isFinite(value);
   }

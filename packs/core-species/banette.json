@@ -676,11 +676,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -695,9 +695,9 @@
             "spa": 10,
             "spd": 20,
             "spe": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -706,9 +706,9 @@
             ],
             "key": "",
             "value": "spooky",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -717,9 +717,9 @@
             ],
             "key": "",
             "value": "jump 1",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -728,9 +728,9 @@
             ],
             "key": "",
             "value": "jump 2",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -739,9 +739,9 @@
             ],
             "key": "system.movement.overland.value",
             "value": -3,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -750,9 +750,9 @@
             ],
             "key": "system.movement.flight.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -761,9 +761,9 @@
             ],
             "key": "system.movement.swim.value",
             "value": 1,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -772,9 +772,9 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -783,9 +783,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -794,9 +794,9 @@
             ],
             "key": "system.skills.fast-talk.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -805,9 +805,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -816,9 +816,9 @@
             ],
             "key": "system.skills.ghost.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -827,9 +827,9 @@
             ],
             "key": "system.skills.psychology.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -838,9 +838,9 @@
             ],
             "key": "system.skills.stealth.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -853,12 +853,11 @@
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 2,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 2
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -867,7 +866,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,

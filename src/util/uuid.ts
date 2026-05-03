@@ -1,4 +1,5 @@
 import * as R from "remeda";
+import { EffectUUID } from "types/foundry/common/documents/active-effect.js";
 
 class UUIDUtils {
   static async fromUUIDs(
@@ -26,6 +27,15 @@ class UUIDUtils {
     try {
       return typeof uuid === "string" && fu.parseUuid(uuid).type === "Item";
     } catch {
+      return false;
+    }
+  }
+
+  static isEffectUUID(uuid: unknown): uuid is EffectUUID {
+    try {
+      return typeof uuid === "string" && fu.parseUuid(uuid).type === "ActiveEffect";
+    }
+    catch {
       return false;
     }
   }

@@ -70,4 +70,5 @@ declare global {
     type WorldItemUUID = WorldDocumentUUID<Item<null>>;
     type CompendiumItemUUID = `Compendium.${string}.Item.${string}`;
     type ItemUUID = WorldItemUUID | EmbeddedItemUUID | CompendiumItemUUID;
+    
 }

@@ -41,8 +41,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
@@ -289,8 +289,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
@@ -634,8 +634,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
