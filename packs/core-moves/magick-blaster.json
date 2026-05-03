@@ -10,7 +10,7 @@
     "publication": {
       "source": "",
       "authors": [],
-      "notes": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>"
+      "notes": ""
     },
     "traits": [],
     "actions": [
@@ -33,7 +33,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "types": [
           "untyped"
@@ -42,7 +42,7 @@
         "power": 60,
         "accuracy": 85,
         "predicate": [],
-        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of being @Affliction[delay 20].</p>"
       }
     ],
     "grade": "B"
@@ -59,7 +59,7 @@
           {
             "type": "roll-effect",
             "key": "magick-blaster-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 50,
             "affects": "target",
@@ -67,11 +67,6 @@
               {
                 "property": "system.amount",
                 "value": -20,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinched 20%",
                 "method": 5
               }
             ],

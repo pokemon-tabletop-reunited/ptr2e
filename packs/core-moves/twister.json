@@ -29,7 +29,7 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of being @Affliction[delay 20].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -59,7 +59,7 @@
           {
             "type": "roll-effect",
             "key": "twister-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
@@ -67,11 +67,6 @@
               {
                 "property": "system.amount",
                 "value": -20,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": 0,
                 "method": 5
               }
             ],

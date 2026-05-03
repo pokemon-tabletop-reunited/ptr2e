@@ -29,7 +29,7 @@
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 60% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 60% chance of being @Affliction[delay 35].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       },
@@ -60,7 +60,7 @@
         "types": [
           "flying"
         ],
-        "description": "<pTrigger: Snowy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 60% chance of being Flinched.</p>",
+        "description": "<pTrigger: Snowy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 60% chance of being @Affliction[delay 50].</p>",
         "variant": "bleakwind-storm",
         "img": "icons/svg/explosion.svg",
         "predicate": []
@@ -91,7 +91,7 @@
           {
             "type": "roll-effect",
             "key": "bleakwind-storm-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 60,
             "affects": "target",
@@ -99,11 +99,6 @@
               {
                 "property": "system.amount",
                 "value": -50,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 50%",
                 "method": 5
               }
             ],

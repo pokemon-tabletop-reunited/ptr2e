@@ -30,7 +30,7 @@
         "category": "special",
         "power": 110,
         "accuracy": 95,
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining Flinched.</p>",
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[delay 40].</p>",
         "predicate": []
       }
     ],
@@ -58,7 +58,7 @@
           {
             "type": "roll-effect",
             "key": "sonic-cannon-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 50,
             "affects": "target",
@@ -66,11 +66,6 @@
               {
                 "property": "system.amount",
                 "value": -40,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 40%",
                 "method": 5
               }
             ],

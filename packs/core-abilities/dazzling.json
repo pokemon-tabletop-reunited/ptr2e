@@ -7,25 +7,25 @@
       {
         "traits": [
           "defensive",
-          "interrupt-4"
+          "interrupt"
         ],
         "name": "Dazzling",
         "slug": "dazzling",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "trigger": "<p>Trigger: A creature within range uses a [Priority X] or [Interrupt X] Action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 3 PP if it was an [Interrupt X] action.</p>"
+          "trigger": "<p>Trigger: A creature within range uses a [Priority X] or @Trait[interrupt] Action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 3 PP if it was an @Trait[interrupt] action.</p>"
         },
         "range": {
           "target": "aura",
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: A creature within range uses a [Priority X] or [Interrupt X] Action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 3 PP if it was an [Interrupt X] action.</p>",
+        "description": "<p>Trigger: A creature within range uses a [Priority X] or @Trait[interrupt] Action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 3 PP if it was an @Trait[interrupt] action.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: Other creatures' [Interrupt X] Actions cannot be declared on the user's Activations.</p>",
+    "description": "<p>Effect: Other creatures' @Trait[interrupt] Actions cannot be declared on the user's Activations.</p>",
     "traits": [
       "defensive"
     ],

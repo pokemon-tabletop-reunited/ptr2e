@@ -15,15 +15,13 @@
           "activation": "free"
         },
         "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 10
+          "target": "self"
         },
-        "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, the user's [Punch] attacks gain [Priority 1] or [Priority X+1].</p>",
+        "description": "<p>Effect: While the user meets the @Trait[intrepid-3-4] Condition, they gain @Affliction[advance 15] when resolving a @Trait[punch] Attack.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, the user's [Punch] attacks gain [Priority 1] or [Priority X+1].</p>",
+    "description": "<p>Effect: While the user meets the @Trait[intrepid-3-4] Condition, they gain @Affliction[advance 15] when resolving a @Trait[punch] Attack.</p>",
     "traits": [
       "intrepid-3-4"
     ],
@@ -59,7 +57,13 @@
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
-            "alterations": [],
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 15,
+                "method": 5
+              }
+            ],
             "dontMerge": false,
             "ignored": false,
             "method": 2

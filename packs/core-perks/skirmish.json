@@ -11,7 +11,7 @@
         "slug": "skirmish",
         "description": "<p>Trigger: The user enters Combat.</p><p>Effect: The user advances their Initiative by 50%.</p><blockquote><p>Ideally this should be done prior to the GM pressing the 'Begin Combat' button.</p></blockquote>",
         "traits": [
-          "interrupt-2"
+          "interrupt"
         ],
         "type": "generic",
         "cost": {
@@ -27,7 +27,7 @@
       }
     ],
     "slug": "skirmish",
-    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 4 PP advance their Initiative by 50%.</p>",
+    "description": "<p>Upon entering combat, as a Free Action @Trait[interrupt], you may spend 4 PP advance their Initiative by 50%.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -86,7 +86,7 @@
           {
             "type": "roll-effect",
             "key": "skirmish-generic",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "affects": "target",
@@ -94,11 +94,6 @@
               {
                 "property": "system.amount",
                 "value": 50,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Skirmish - Advance 50%",
                 "method": 5
               }
             ],

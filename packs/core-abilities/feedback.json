@@ -6,15 +6,13 @@
     "actions": [
       {
         "traits": [
-          "defensive",
-          "interrupt-2"
+          "defensive"
         ],
         "name": "Feedback",
         "slug": "feedback",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit by a Physical- or Special-Category Attack.</p>"
         },
         "range": {
@@ -22,11 +20,11 @@
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The attacking creature takes two Ticks of HP damage.</p>",
+        "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The user is @Affliction[delay 15], and the Attacking creatures loses @Tick[-2].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The attacking creature takes two Ticks of HP damage.</p>",
+    "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The user is @Affliction[delay 15], and the Attacking creatures loses @Tick[-2].</p>",
     "traits": [
       "defensive"
     ],
@@ -64,6 +62,25 @@
               {
                 "property": "system.changes.0.value",
                 "value": -2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -15,
                 "method": 5
               }
             ],

@@ -27,7 +27,7 @@
         "category": "special",
         "power": 100,
         "accuracy": 80,
-        "description": "<p>Effect: On hit, the target gains @Affliction[grounded 5] and has a 30% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[grounded 5] and has a 30% chance of being @Affliction[delay 20].</p>",
         "predicate": []
       }
     ],
@@ -67,19 +67,14 @@
           {
             "type": "roll-effect",
             "key": "psy-dunk-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
                 "property": "system.amount",
-                "value": 0,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 20%",
+                "value": 20,
                 "method": 5
               }
             ],

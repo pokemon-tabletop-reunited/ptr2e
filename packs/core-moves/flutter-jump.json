@@ -28,7 +28,7 @@
           "fairy"
         ],
         "category": "physical",
-        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being @Affliction[delay 20].</p>",
         "power": 30,
         "accuracy": 100,
         "predicate": []
@@ -58,7 +58,7 @@
           {
             "type": "roll-effect",
             "key": "flutter-jump-attacl",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
@@ -66,11 +66,6 @@
               {
                 "property": "system.amount",
                 "value": -20,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 20%",
                 "method": 5
               }
             ],
