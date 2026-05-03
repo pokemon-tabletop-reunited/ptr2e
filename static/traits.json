@@ -3733,8 +3733,33 @@
     "slug": "zenith",
     "label": "Zenith",
     "related": [],
-    "description": "These attacks deal 1/4 of the damage they would deal if they are negated by a @Trait[shield] effect."
-  },
+    "description": "Gear, creatures, and Actions with this Attacks with this Trait are mechanically involved with the Z-Move @Trait[phenomenon]. Moves with this Trait also possess @Trait[pierce] and @Trait[danger-close].",
+    "type": "automated",
+    "changes": [
+      {
+          "type": "alter-attack",
+          "value": "pierce",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }
+      {
+          "type": "alter-attack",
+          "value": "danger-close",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }      
+    ]
+    },
   {
     "slug": "connection",
     "label": "Connection",
@@ -3820,6 +3845,18 @@
     "description": "An effect activates when the user's health is below 3/4 of their Max HP. The effect is usually listed in the source's effect descripion. For Gear, such as Berries, this means they can only be used when meeting the trigger conditions for [Desperation 3/4]."
   },
   {
+    "slug": "desperation-2-3",
+    "label": "Desperation 2/3",
+    "related": [],
+    "description": "An effect activates when the user's health is below 2/3 of their Max HP. The effect is usually listed in the source's effect descripion. For Gear, such as Berries, this means they can only be used when meeting the trigger conditions for [Desperation 2/3]."
+  },
+  {
+    "slug": "desperation-1-8",
+    "label": "Desperation 1/8",
+    "related": [],
+    "description": "An effect activates when the user's health is below 1/8 of their Max HP. The effect is usually listed in the source's effect descripion. For Gear, such as Berries, this means they can only be used when meeting the trigger conditions for [Desperation 1/8]."
+  },
+  {
     "slug": "intrepid-x",
     "label": "Intrepid X",
     "related": [],
@@ -3841,13 +3878,25 @@
     "slug": "intrepid-1-4",
     "label": "Intrepid 1/4",
     "related": [],
-    "description": "An effect activates when the user's health is above 1/4 of their Max 1/4 HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 1/4]."
+    "description": "An effect activates when the user's health is above 1/4 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 1/4]."
   },
   {
     "slug": "intrepid-3-4",
     "label": "Intrepid 3/4",
     "related": [],
     "description": "An effect activates when the user's health is above 3/4 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 3/4]."
+  },
+  {
+    "slug": "intrepid-2-3",
+    "label": "Intrepid 2/3",
+    "related": [],
+    "description": "An effect activates when the user's health is above 2/3 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 2/3]."
+  },
+  {
+    "slug": "intrepid-1-8",
+    "label": "Intrepid 1/8",
+    "related": [],
+    "description": "An effect activates when the user's health is above 1/8 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 1/8]."
   },
   {
     "slug": "bug",
