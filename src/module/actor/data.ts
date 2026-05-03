@@ -5,6 +5,7 @@ import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
 import { Predicate } from "@system/predication/predication.ts";
+import { EffectUUID } from "types/foundry/common/documents/active-effect.js";
 
 type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
 type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & Record<
@@ -14,7 +15,7 @@ type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: Modifie
 
 export interface EffectRoll {
   chance: number;
-  effect: ItemUUID;
+  effect: ItemUUID | EffectUUID;
   label: string;
   roll?: Rolled<Roll>;
   isFixedChance?: boolean;
@@ -28,7 +29,7 @@ export interface EffectRoll {
 
 export interface EffectRollSource {
   chance: number;
-  effect: ItemUUID;
+  effect: ItemUUID | EffectUUID;
   label: string;
   roll: RollJSON | null;
   success?: boolean;

@@ -292,7 +292,7 @@ class ActiveEffectPTR2e<
       }
     }
 
-    if (data.description.startsWith("PTR2E.Effect.")) {
+    if (data.description?.startsWith("PTR2E.Effect.")) {
       this.updateSource({
         description: game.i18n.localize(data.description),
       });
