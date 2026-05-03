@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user's Sonic Attacks have a 30% to chance to cause target(s) to Flinch and lose -1 EVA Stage for 5 Activations.</p>",
+        "description": "<p>Effect: The user's Sonic Attacks have a 30% to chance to cause target(s) to be @Affliction[delay 20] and lose -1 EVA Stage for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's Sonic Attacks have a 30% to chance to cause target(s) to Flinch and lose -1 EVA Stage for 5 Activations.</p>",
+    "description": "<p>Effect: The user's Sonic Attacks have a 30% to chance to cause target(s) to be @Affliction[delay 20] and lose -1 EVA Stage for 5 Activations.</p>",
     "traits": [
       "stage-change"
     ],
@@ -51,7 +51,7 @@
           {
             "type": "roll-effect",
             "key": "sonic-trait-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
@@ -59,11 +59,6 @@
               {
                 "property": "system.amount",
                 "value": -30,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 30%",
                 "method": 5
               }
             ],

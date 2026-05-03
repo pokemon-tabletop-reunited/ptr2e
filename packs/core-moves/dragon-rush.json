@@ -29,7 +29,7 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target has a 20% chance of being @Affliction[delay 30].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -59,19 +59,14 @@
           {
             "type": "roll-effect",
             "key": "dragon-rush-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 20,
             "affects": "target",
             "alterations": [
               {
                 "property": "system.amount",
-                "value": 0,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 30%",
+                "value": 30,
                 "method": 5
               }
             ],

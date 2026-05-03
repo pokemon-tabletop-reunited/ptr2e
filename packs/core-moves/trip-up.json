@@ -45,7 +45,7 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "dash",
-          "interrupt-4",
+          "interrupt",
           "contact"
         ],
         "range": {
@@ -56,7 +56,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 3,
-          "trigger": "<p>A [Priority X] or [Interrupt X] Attack is declared against the user.</p>"
+          "trigger": "<p>A [Priority X] or @Trait[interrupt] Attack is declared against the user.</p>"
         },
         "variant": "trip-up",
         "types": [
@@ -69,7 +69,7 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Trigger: A [Priority X] or [Interrupt X] Attack is declared against the user.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Trip Up, if possible. On hit, the target is Delayed by 40% and gains -3 ACC Stages for 1 Activation. If the target gains @Affliction[fainted] due to damage from this attack, the triggering attack fails.</p>"
+        "description": "<p>Trigger: A [Priority X] or @Trait[interrupt] Attack is declared against the user.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with Trip Up, if possible. On hit, the target is Delayed by 40% and gains -3 ACC Stages for 1 Activation. If the target gains @Affliction[fainted] due to damage from this attack, the triggering attack fails.</p>"
       }
     ],
     "container": null,
@@ -92,7 +92,7 @@
           {
             "type": "roll-effect",
             "key": "trip-up-interrupt-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
@@ -103,11 +103,6 @@
               {
                 "property": "system.amount",
                 "value": -40,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Delay 40%",
                 "method": 5
               }
             ],

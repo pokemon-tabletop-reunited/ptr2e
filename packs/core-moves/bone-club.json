@@ -27,7 +27,7 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of being @Affliction[delay 40].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -58,7 +58,7 @@
           {
             "type": "roll-effect",
             "key": "bone-club-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 10,
             "affects": "target",
@@ -66,11 +66,6 @@
               {
                 "property": "system.amount",
                 "value": -40,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 40%",
                 "method": 5
               }
             ],

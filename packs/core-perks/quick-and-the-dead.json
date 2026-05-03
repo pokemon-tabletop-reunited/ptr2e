@@ -9,7 +9,7 @@
       {
         "name": "Quick And The Dead",
         "slug": "quick-and-the-dead",
-        "description": "<p>All of your Combat Actions gain @Affliction[advance 10], stacking with any existing advances.</p>",
+        "description": "<p>The user's Attacks and Generic Actions cause the user to gain @Affliction[advance 10] on use.</p>",
         "traits": [],
         "type": "passive",
         "range": {
@@ -24,7 +24,7 @@
       }
     ],
     "slug": "quick-and-the-dead",
-    "description": "<p>All of your Combat Actions gain @Affliction[advance 10], stacking with any existing advances.</p>",
+    "description": "<p>The user's Attacks and Generic Actions cause the user to gain @Affliction[advance 10] on use.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -81,7 +81,7 @@
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
@@ -95,7 +95,7 @@
           {
             "type": "roll-effect",
             "key": "generic",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
