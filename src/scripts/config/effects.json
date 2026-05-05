@@ -37,9 +37,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.atk.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.atkMultiplier",
+          "value": "-@actor.system.modifiers.atkMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -69,9 +73,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spaMultiplier",
+          "value": "-@actor.system.modifiers.spaMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -96,9 +104,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spaMultiplier",
+          "value": "-@actor.system.modifiers.spaMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -129,11 +141,12 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spe.value",
-          "value": 0.5,
+          "key": "system.modifiers.speMultiplier",
+          "value": "-@actor.system.modifiers.speMultiplier/2",
+          "phase": "initial",
           "predicate": [],
-          "method": 1,
-          "priority": null,
+          "method": 2,
+          "priority": 90,
           "ignored": false
         },
         {
@@ -142,7 +155,7 @@
         },
         {
           "type": "roll-effect",
-          "label": "Paralysis Tased Check",
+          "label": "Tased Chance",
           "key": "attack",
           "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
           "chance": 25,
@@ -183,13 +196,17 @@
         {
           "type": "percentile-modifier",
           "key": "attack-power",
-          "value": -33.33
+          "value": -25
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spdMultiplier",
+          "value": "-@actor.system.modifiers.spdMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -220,7 +237,16 @@
         {
           "type": "percentile-modifier",
           "key": "damaging-attack-power",
-          "value": -50,
+          "value": -33.33,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "attack-accuracy",
+          "value": -25,
           "predicate": [],
           "method": 2,
           "ignored": false,
@@ -228,35 +254,13 @@
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": -1,
+          "key": "system.modifiers.spdMultiplier",
+          "value": "-@actor.system.modifiers.spdMultiplier/2",
+          "phase": "initial",
           "predicate": [],
           "method": 2,
+          "priority": 90,
           "ignored": false
-        },
-        {
-          "type": "grant-effect",
-          "value": "slowed",
-          "key": "",
-          "predicate": [],
-          "alterations": [
-            {
-              "method": 5,
-              "property": "duration.turns",
-              "value": 10
-            }
-          ],
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          },
-          "method": 2,
-          "ignored": false,
-          "reevaluateOnUpdate": false,
-          "inMemoryOnly": false,
-          "allowDuplicate": true,
-          "track": false,
-          "replaceSelf": false
         }
       ],
       "priority": 30,
@@ -291,25 +295,40 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.battleStats.evasion.stage",
-          "value": -1,
-          "method": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spe.value",
-          "value": 1.5,
+          "type": "ephemeral-modifier",
+          "key": "attack-accuracy-percentile",
+          "value": 30,
           "predicate": [],
-          "method": 1,
-          "priority": null,
-          "ignored": false
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": -33.33,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 33,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": 1,
-          "method": 2
+          "key": "system.modifiers.speMultiplier",
+          "value": "@actor.system.modifiers.speMultiplier*0.7",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 94,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -338,9 +357,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.defMultiplier",
+          "value": "-@actor.system.modifiers.defMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -355,37 +378,6 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
-  },
-  {
-    "id": "desync",
-    "name": "PTR2E.Effect.Statuses.Labels.desync",
-    "img": "icons/svg/portal.svg",
-    "type": "affliction",
-    "system": {
-      "changes": [
-        {
-          "type": "roll-effect",
-          "key": "attack",
-          "value": "Compendium.ptr2e.core-effects.Item.desynccondititem",
-          "predicate": [],
-          "chance": 100,
-          "isFixedChance": true,
-          "affects": "defensive",
-          "dontMerge": false
-        }
-      ],
-      "priority": 30,
-      "formula": "(1/16 * @stacksToRemove)",
-      "type": "damage",
-      "removeOnRecall": false,
-      "removeAfterCombat": true,
-      "traits": [
-        "major-affliction",
-        "dot"
-      ],
-      "stacks": 1
-    },
-    "description": "PTR2E.Effect.Statuses.Descriptions.desync"
   },
   {
     "id": "splinter",
@@ -414,7 +406,7 @@
         },
         {
           "type": "roll-effect",
-          "label": "Splinter Bleed Check",
+          "label": "Bleed Chance",
           "key": "attack",
           "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
           "chance": 15,
@@ -440,6 +432,37 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.splinter"
   },
   {
+    "id": "desync",
+    "name": "PTR2E.Effect.Statuses.Labels.desync",
+    "img": "icons/svg/portal.svg",
+    "type": "affliction",
+    "system": {
+      "changes": [
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.desynccondition0",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "dontMerge": false
+        }
+      ],
+      "priority": 30,
+      "formula": "(1/16 * @stacksToRemove)",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "major-affliction",
+        "dot"
+      ],
+      "stacks": 1
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.desync"
+  },
+  {
     "id": "slowed",
     "name": "PTR2E.Effect.Statuses.Labels.slowed",
     "img": "systems/ptr2e/img/conditions/slowed.svg",
@@ -450,34 +473,14 @@
       "value": 5
     },
     "system": {
-      "changes": [],
-      "formula": null,
-      "type": null,
-      "removeOnRecall": false,
-      "removeAfterCombat": true,
-      "traits": [
-        "minor-affliction",
-        "control"
-      ]
-    },
-    "description": "PTR2E.Effect.Statuses.Descriptions.slowed"
-  },
-  {
-    "id": "blinded",
-    "name": "PTR2E.Effect.Statuses.Labels.blinded",
-    "img": "systems/ptr2e/img/conditions/blindness.svg",
-    "type": "affliction",
-    "duration": {
-      "units": "turns",
-      "expiry": "turnEnd",
-      "value": 5
-    },
-    "system": {
       "changes": [
         {
           "type": "basic",
-          "key": "system.battleStats.accuracy.stage",
-          "value": -1,
+          "key": "system.modifiers.movement",
+          "value": "-@actor.system.modifiers.movement/2",
+          "predicate": [],
+          "priority": 95,
+          "ignored": false,
           "method": 2
         }
       ],
@@ -490,7 +493,7 @@
         "control"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.blinded"
+    "description": "PTR2E.Effect.Statuses.Descriptions.slowed"
   },
   {
     "id": "hindered",
@@ -645,6 +648,15 @@
           "value": 15
         },
         {
+          "type": "basic",
+          "key": "system.modifiers.movement",
+          "value": 1.2,
+          "predicate": [],
+          "priority": 91,
+          "ignored": false,
+          "method": 5
+        },
+        {
           "type": "stage-modifier",
           "key": "shadow-trait-attack-crit",
           "value": 2,
@@ -700,7 +712,7 @@
         {
           "type": "basic",
           "key": "system.modifiers.effectHitRate",
-          "value": "10-20*@effect.system.stacks",
+          "value": "15-25*@effect.system.stacks",
           "predicate": [],
           "label": "Weary (EHR)",
           "method": 2,
@@ -711,7 +723,7 @@
         {
           "type": "basic",
           "key": "system.modifiers.effectResistance",
-          "value": "10-15*@effect.system.stacks",
+          "value": "15-20*@effect.system.stacks",
           "predicate": [],
           "label": "Weary (RES)",
           "method": 2,
@@ -1187,32 +1199,39 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": 2,
-          "method": 2
+          "key": "system.modifiers.defMultiplier",
+          "value": "@actor.system.modifiers.defMultiplier",
+          "method": 2,
+          "priority": 89
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": 2,
-          "method": 2
+          "key": "system.modifiers.spdMultiplier",
+          "value": "@actor.system.modifiers.spdMultiplier",
+          "method": 2,
+          "priority": 89
         },
         {
           "type": "basic",
-          "key": "system.attributes.atk.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.atkMultiplier",
+          "value": "-@actor.system.modifiers.atkMultiplier/2",
+          "method": 2,
+          "priority": 89
         },
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spaMultiplier",
+          "value": "-@actor.system.modifiers.spaMultiplier/2",
+          "method": 2,
+          "priority": 89
         },
         {
-          "type": "roll-option",
-          "key": "immunity",
-          "value": "crit"
+          "type": "ephemeral-modifier",
+          "key": "attack-crit-stage",
+          "value": -2,
+          "label": "Braced (Crit)",
+          "method": 2,
+          "predicate": []
         }
       ],
       "removeOnRecall": true,
@@ -1251,15 +1270,31 @@
         },
         {
           "type": "percentile-modifier",
-          "key": "all-damage",
+          "key": "attack-damage",
           "label": "Duel - non-Duel Partner",
-          "value": -33.33,
+          "value": -40,
           "predicate": [
             {
-              "not": "target:mark:duel"
-            },
+              "nand":
+              [
+                "target:mark:duel",
+                "origin:mark:duel"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "label": "Duel - non-Duel Partner",
+          "value": -40,
+          "predicate": [
             {
-              "not": "origin:mark:duel"
+              "nand":
+              [
+                "target:mark:duel",
+                "origin:mark:duel"
+              ]
             }
           ]
         },
@@ -1274,10 +1309,35 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
-        "control"
+        "control",
+        "attention"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.duel"
+  },
+  {
+    "id": "puppet",
+    "name": "PTR2E.Effect.Statuses.Labels.puppet",
+    "img": "icons/magic/control/control-influence-puppet.webp",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 3
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control",
+        "attention"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.puppet"
   },
   {
     "id": "curled",
@@ -1423,6 +1483,36 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.cursed"
   },
   {
+    "id": "blinded",
+    "name": "PTR2E.Effect.Statuses.Labels.blinded",
+    "img": "systems/ptr2e/img/conditions/blindness.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": -1,
+          "method": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.blinded"
+  },
+  {
     "id": "true-sight",
     "name": "PTR2E.Effect.Statuses.Labels.true-sight",
     "img": "icons/svg/eye.svg",
@@ -1485,6 +1575,50 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.true-sight"
   },
   {
+    "id": "gagged",
+    "name": "PTR2E.Effect.Statuses.Labels.gagged",
+    "img": "icons/svg/silenced.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.gagged"
+  },
+  {
+    "id": "muzzled",
+    "name": "PTR2E.Effect.Statuses.Labels.muzzled",
+    "img": "icons/svg/silenced.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.muzzled"
+  },
+  {
     "id": "marked",
     "name": "PTR2E.Effect.Statuses.Labels.marked",
     "img": "icons/svg/target.svg",
@@ -1502,6 +1636,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "draw-in",
         "control"
       ]
     },
@@ -2003,38 +2138,6 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.boosted"
   },
   {
-    "id": "hale",
-    "name": "PTR2E.Effect.Statuses.Labels.hale",
-    "img": "icons/svg/ice-shield.svg",
-    "type": "affliction",
-    "duration": {
-      "units": "turns",
-      "expiry": "turnEnd",
-      "value": 2
-    },
-    "system": {
-      "changes": [
-        {
-          "type": "basic",
-          "key": "system.modifiers.effectResistance",
-          "value": 10,
-          "predicate": [],
-          "label": "Hale",
-          "method": 2,
-          "priority": null,
-          "ignored": false,
-          "hideIfDisabled": false
-        }
-      ],
-      "removeOnRecall": true,
-      "removeAfterCombat": true,
-      "traits": [
-        "pseudo-affliction"
-      ]
-    },
-    "description": "PTR2E.Effect.Statuses.Descriptions.hale"
-  },
-  {
     "id": "argute",
     "name": "PTR2E.Effect.Statuses.Labels.argute",
     "img": "icons/svg/card-hand.svg",
@@ -2067,6 +2170,38 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.argute"
   },
   {
+    "id": "hale",
+    "name": "PTR2E.Effect.Statuses.Labels.hale",
+    "img": "icons/svg/ice-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": 10,
+          "predicate": [],
+          "label": "Hale",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.hale"
+  },
+  {
     "id": "loafing",
     "_id": "loafingcondition",
     "name": "PTR2E.Effect.Statuses.Labels.loafing",
@@ -2077,19 +2212,43 @@
         {
           "type": "flat-modifier",
           "key": "attack-damage-percentile",
-          "value": "-((@effect.system.stacks * 15) + (max(0, (@effect.system.stacks - 2)) * 5) + (max(0, (@effect.system.stacks - 3)) * 10))"
+          "value": "max(-90,-10-20*@effect.system.stacks)"
         },
         {
           "type": "basic",
           "key": "system.modifiers.skills",
-          "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
+          "value": "max(-0.6,-0.15*@effect.system.stacks)",
           "method": 2
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
-          "method": 2
+          "key": "system.modifiers.speMultiplier",
+          "value": "min(@effect.system.stacks,4)*@actor.system.modifiers.speMultiplier*-0.2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 99,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "max(-30,-10-5*@effect.system.stacks)",
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": "max(-70,-10-15*@effect.system.stacks)",
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "alter-attack",
@@ -2117,36 +2276,6 @@
           "key": "system.modifiers.movement",
           "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
           "method": 2
-        },
-        {
-          "type": "grant-effect",
-          "value": "unlucky",
-          "reevaluateOnUpdate": true,
-          "allowDuplicate": false,
-          "onDeleteActions": {
-            "grantee": "restrict",
-            "granter": "cascade"
-          },
-          "alterations": [
-            {
-              "method": 5,
-              "property": "type",
-              "value": "passive"
-            },
-            {
-              "method": 5,
-              "property": "duration.turns",
-              "value": 0
-            }
-          ],
-          "predicate": [
-            {
-              "gt": [
-                "{effect|system.stacks}",
-                1
-              ]
-            }
-          ]
         }
       ],
       "traits": [

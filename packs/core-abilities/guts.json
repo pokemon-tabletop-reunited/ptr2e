@@ -17,11 +17,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a Major Status Affliction. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
+        "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a @Trait[major-affliction]. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a Major Status Affliction. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
+    "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a @Trait[major-affliction]. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
     "traits": [],
     "slug": "guts",
     "_migration": {
@@ -52,21 +52,26 @@
           {
             "type": "basic",
             "key": "system.modifiers.atkMultiplier",
-            "value": 0.5,
+            "value": "@actor.system.modifiers.atkMultiplier/2",
             "predicate": [
-              "effect:major-affliction"
+              "effect:major-affliction",
+              {
+                "not": "effect:affliction:burn"
+              }
             ],
             "ignored": false,
+            "priority": 91,
             "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.atkMultiplier",
-            "value": 0.5,
+            "value": "2*@actor.system.modifiers.atkMultiplier",
             "predicate": [
               "effect:affliction:burn"
             ],
             "ignored": false,
+            "priority": 91,
             "method": 2
           }
         ],
@@ -83,7 +88,7 @@
         "units": "turns",
         "value": null
       },
-      "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a Major Status Affliction. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
+      "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -97,29 +102,7 @@
         "systemId": "ptr2e",
         "systemVersion": "1.4.4.beta",
         "lastModifiedBy": null
-      },
-      "changes": [
-        {
-          "type": "basic",
-          "key": "system.modifiers.atkMultiplier",
-          "value": 0.5,
-          "predicate": [
-            "effect:major-affliction"
-          ],
-          "mode": 2,
-          "ignored": false
-        },
-        {
-          "type": "basic",
-          "key": "system.modifiers.atkMultiplier",
-          "value": 0.5,
-          "predicate": [
-            "effect:affliction:burn"
-          ],
-          "mode": 2,
-          "ignored": false
-        }
-      ]
+      }
     }
   ]
 }
