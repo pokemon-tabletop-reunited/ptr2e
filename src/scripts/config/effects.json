@@ -668,7 +668,7 @@
         {
           "type": "ephemeral-effect",
           "key": "shadow-trait-attack",
-          "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga.ActiveEffect.4FLjKp9nBo2bfPia",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4FLjKp9nBo2bfPia",
           "predicate": [],
           "affects": "self",
           "alterations": [
@@ -1372,6 +1372,116 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.curled"
+  },
+  {
+    "id": "harden",
+    "name": "PTR2E.Effect.Statuses.Labels.harden",
+    "img": "icons/svg/tower.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "contact-attack-power",
+          "value": 30,
+          "predicate": [],
+          "label": "Harden (Power)",
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "stage-modifier",
+          "key": "dash-trait-attack-crit",
+          "value": 1,
+          "label": "Harden (Dash Crit)",
+          "predicate": [],
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "ephemeral-effect",
+          "key": "contact-trait-attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CekJx2L2a3x60g1b",
+          "predicate": [],
+          "affects": "defensive",
+          "alterations": [],
+          "phase": "initial",
+          "method": 2,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.harden"
+  },
+  {
+    "id": "sharpen",
+    "name": "PTR2E.Effect.Statuses.Labels.sharpen",
+    "img": "icons/svg/sword.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "alter-attack",
+          "value": "sharp",
+          "phase": "initial",
+          "predicate": [],
+          "key": "contact-trait-attack",
+          "property": "traits",
+          "definition": [],
+          "method": 2,
+          "ignored": false
+        },
+        {
+          "type": "stage-modifier",
+          "key": "sharp-trait-attack-crit",
+          "value": 1,
+          "label": "Sharpen (Crit)",
+          "predicate": [],
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "ephemeral-effect",
+          "key": "sharp-trait-attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+          "predicate": [],
+          "affects": "self",
+          "alterations": [],
+          "phase": "initial",
+          "method": 2,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.sharpen"
   },
   {
     "id": "chanted",
