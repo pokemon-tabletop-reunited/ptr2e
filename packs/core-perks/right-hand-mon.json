@@ -1,0 +1,137 @@
+{
+  "folder": "PAZ8zWUPw7Azm5V6",
+  "name": "Right Hand Mon",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Right Hand Mon",
+        "slug": "right-hand-mon",
+        "description": "<p>Trigger: The user's Muse clock is emptied.</p><p>Effect: The user may, as a @Trait[interrupt] action, advance an ally's next activation by 100%.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/svg/tower.svg",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Trigger: The user's Muse clock is emptied.</p><p>Effect: The user may, as a @Trait[interrupt] action, advance an ally's next activation by 100%.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:tactician",
+      "item:perk:muse"
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "tactician"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 145,
+        "y": 166,
+        "connected": [
+          "dance-partner",
+          "muse",
+          "minor-buff-15"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "0lN4f4vi2j5UGx72",
+  "img": "icons/svg/tower.svg",
+  "effects": [
+    {
+      "name": "Right Hand Mon",
+      "type": "passive",
+      "_id": "3CU8NSlGr2XhGfLe",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "phase": "initial",
+            "predicate": [],
+            "key": "right-hand-mon-generic",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 100
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778078004025,
+        "modifiedTime": 1778078004025,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {}
+}

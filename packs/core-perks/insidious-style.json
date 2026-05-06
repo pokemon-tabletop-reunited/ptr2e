@@ -1,0 +1,81 @@
+{
+  "folder": "JZrGRskscJOkkPWA",
+  "name": "Insidious Style",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Insidious Style",
+        "slug": "insidious-style",
+        "description": "<p>Effect: Grants the affected creature 30% EHR, but they also suffer @Affliction[delay 20].</p>",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "type": "generic",
+        "img": "icons/skills/toxins/poison-bottle-corked-fire-green.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: Grants the affected creature 30% EHR, but they also suffer @Affliction[delay 20].</p>",
+    "traits": [
+      "command",
+      "style"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          25
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "support"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 122,
+        "y": 123,
+        "connected": [
+          "type-style",
+          "rapid-fire-style",
+          "minor-buff-48"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "jdbskUc5XoD3vvlj",
+  "img": "icons/skills/toxins/poison-bottle-corked-fire-green.webp",
+  "effects": [],
+  "flags": {}
+}

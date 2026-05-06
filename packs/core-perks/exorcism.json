@@ -1,0 +1,100 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Exorcism",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Exorcism",
+        "slug": "exorcism",
+        "description": "<p>Exorcism allows the user to terminate the target summon.</p>",
+        "traits": [
+          "sage",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "icons/magic/holy/chalice-glowing-gold-water.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Exorcism (Mass)",
+        "slug": "exorcism-mass",
+        "description": "<p>Mass Exorcism reduces the duration of all summons on the field by 1.</p><p>Note: This will not function until Summons V2 is implemented.</p>",
+        "traits": [
+          "sage",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "icons/magic/holy/chalice-glowing-gold-water.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "variant": "exorcism",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>The user may use the @UUID[Item.eeIllJocCQpNQjQq.Actions.exorcism] and @UUID[Item.eeIllJocCQpNQjQq.Actions.exorcism-mass] actions.</p>",
+    "traits": [
+      "sage",
+      "summon"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          65
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "sage"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 130,
+        "y": 112,
+        "connected": [
+          "minor-buff-30",
+          "defer-destiny",
+          "screen-setter"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "eeIllJocCQpNQjQq",
+  "img": "icons/magic/holy/chalice-glowing-gold-water.webp",
+  "effects": [],
+  "flags": {}
+}

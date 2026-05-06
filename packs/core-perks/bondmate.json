@@ -1,0 +1,74 @@
+{
+  "name": "Bondmate",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Bondmate",
+        "slug": "bondmate",
+        "description": "<p>Effect: The user creates a bondmate summon. This summon is attached to an ally, and lasts for 3 activations. The summon has an AV of 90. On the summon's activation, it grants the target ally @Tick[3 shield].</p><p>You may only have one Bondmate summon active at a time.</p>",
+        "traits": [
+          "tank"
+        ],
+        "type": "generic",
+        "img": "icons/magic/defensive/armor-green-hex.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "summon": "Compendium.ptr2e.core-summons.Item.4LTYjzwsQde6lytE",
+        "range": {
+          "target": "ally",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: The user creates a bondmate summon. This summon is attached to an ally, and lasts for 3 activations. The summon has an AV of 90. On the summon's activation, it grants the target ally @Tick[3 shield].</p><p></p><p>You may only have one Bondmate summon active at a time.</p>",
+    "traits": [
+      "summon",
+      "ranger"
+    ],
+    "prerequisites": [
+      "trait:ranger"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "ranger"
+    },
+    "webs": [],
+    "traitWebs": [
+      "ranger"
+    ],
+    "nodes": [
+      {
+        "x": 23,
+        "y": 14,
+        "connected": [
+          "ranger-cadet"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "a1dXU7rnC3RUsbqq",
+  "img": "icons/magic/defensive/armor-green-hex.webp",
+  "effects": [],
+  "flags": {}
+}
