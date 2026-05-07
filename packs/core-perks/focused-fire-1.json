@@ -14,7 +14,7 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>Passive Effect: When making an @Trait[x-strike] roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br /><br />For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br /><br />This perk is disabled when the creature with it has the @UUID[Compendium.ptr2e.core-abilities.m3NkhaFegGTH5ZuK]{Skill Link} ability slotted.</p>",
+    "description": "<p>Effect: The user’s @Trait[x-strike] Attacks have +10% Accuracy and EHR, and +1 default CRIT, and afflict the user with @Affliction[delay 8].</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
@@ -102,7 +102,7 @@
       }
     ],
     "slug": "focused-fire-1",
-    "originSlug": null
+    "traitWebs": []
   },
   "img": "icons/equipment/head/goggles-leather-grey.webp",
   "effects": [
@@ -114,13 +114,66 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "strike-trait-attack-hits-flat",
-            "value": 1,
-            "predicate": [],
+            "type": "percentile-modifier",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "item:perk:focused-fire-4"
+              }
+            ],
+            "label": "Focused Fire (Acc)",
+            "key": "strike-trait-attack-accuracy",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [],
+            "key": "strike-trait-attack-crit",
+            "label": "Focused Fire (Crit)",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [],
+            "key": "strike-trait-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "item:perk:focused-fire-2"
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 8
+              }
+            ],
+            "dontMerge": false,
+            "key": "strike-trait-attack",
+            "label": "Focused Fire Delay",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -134,17 +187,33 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
-      "description": "<p>Passive Effect: When making an @Trait[x-strike] roll to determine number of hits, your number of guaranteed hits increases by 1 per tier of this perk.<br /><br />For example; 1+d4 hits becomes 2+d3 hits, which can later upgrade to 3+d2 hits.<br /><br />This perk is disabled when the creature with it has the @UUID[Compendium.ptr2e.core-abilities.m3NkhaFegGTH5ZuK]{Skill Link} ability slotted.</p>",
+      "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
-      "sort": 0
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778189287847,
+        "modifiedTime": 1778189549193,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "zrVtKATNxzLNxTUX",
-  "flags": {},
   "_id": "FcY3illt965ovD2J"
 }
