@@ -1,0 +1,75 @@
+{
+  "folder": "fDfAXQXXzkaqpYoa",
+  "name": "Projectile Entry",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Projectile Entry",
+        "slug": "projectile-entry",
+        "description": "<p>Trigger: The user would Fling a @Trait[ball] item.</p><p>Effect: The user instead Flings the specific @Trait[ball] item that is currently storing a creature on their Team or stores a creature on their Team currently in Combat.</p><p>The creature currently stored in the Ball enters Combat as per @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}, or the creature normally stored in the Ball leaves Combat as per @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} if they are within 3m of the target.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user would Fling a @Trait[ball] item."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "projectile-entry",
+    "description": "<p>Effect: The user can spend @PP[-2] when they would Fling a @Trait[ball] item to instead Fling the specific @Trait[ball] item that is currently storing a creature on their Team or stores a creature on their Team currently in Combat. This inflicts damage to the target with the Fling as normal (use a temporary stock of the specific @Trait[ball] item as needed for Fling).</p><p>Following this attack, the creature stored in the Ball enters Combat as per the Fling application of @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out}, or the creature normally stored in the Ball leaves Combat as per @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} if they are within 3m of the target of Fling.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:fast-pitch",
+      {
+        "gte": [
+          "{actor|skills.sleight-of-hand.mod}",
+          25
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "juggler"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 24,
+        "y": 123,
+        "connected": [
+          "emergency-retreat"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "jg52iqA7LNfvciDq",
+  "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+  "effects": [],
+  "flags": {}
+}
