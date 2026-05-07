@@ -18,7 +18,7 @@
       {
         "name": "Mourning Blade",
         "slug": "mourning-blade",
-        "description": "<p>Effect: The user establishes a Mourning Blade Clock with 6 Spans. Each time the user inflicts a hostile target with an affliction, tick the Mourning Blade clock by 1.</p><p>When the Mourning Blade clock is full, the user may unleash the Mourning Blade attack.</p>",
+        "description": "<p>Trigger: The user's Mourning Blade Clock is full.</p>",
         "traits": [
           "sharp",
           "pierce"
@@ -35,7 +35,8 @@
           "unit": "m"
         },
         "types": [
-          "electric"
+          "electric",
+          "poison"
         ],
         "category": "physical",
         "free": true,
@@ -44,7 +45,7 @@
         "accuracy": 100
       }
     ],
-    "description": "<p>Effect: The user establishes a Mourning Blade Clock with 6 Spans. Each time the user inflicts a hostile target with an affliction, tick the Mourning Blade clock by 1.</p><p>When the Mourning Blade clock is full, the user may unleash the Mourning Blade attack. Activating the clock results in the emptying of the clock.</p><p>The Mourning Blade clock resets at the end of every combat.</p>",
+    "description": "<p>Effect: The user maintains a Mourning Blade Clock, with a Size of 6 Spans. When the user inflicts a creature with a @Trait[major-affliction] or @Trait[minor-affliction], the Clock is incremented by +1.</p><p>When the Mourning Blade clock is full, the user may use Mourning Blade.</p><p>The Mourning Blade Clock is emptied when the user resolves Mourning Blade and at the end of combat.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],

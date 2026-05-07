@@ -18,25 +18,27 @@
       {
         "name": "The Quality of Quantity",
         "slug": "the-quality-of-quantity",
-        "description": "<p>Trigger: An allied creature becomes @Affliction[fainted].</p><p>Effect: You may advance 1 commanded creature with the @Affliction[fear] affliction by 100% and grant them @Affliction[argute] and @Affliction[boosted].</p>",
+        "description": "<p>Trigger: An allied creature becomes @Affliction[fainted].</p><p>Effect: The @Affliction[fear] target gains @Affliction[advance 60], @Affliction[argute 3] and @Affliction[boosted 3].</p>",
         "traits": [
           "taskmaster",
+          "interrupt",
+          "flinch-25",
           "command"
         ],
         "type": "generic",
         "img": "icons/environment/people/infantry-army.webp",
         "cost": {
           "activation": "free",
-          "powerPoints": 5
+          "powerPoints": 4
         },
         "range": {
-          "target": "creature",
+          "target": "ally",
           "distance": 10,
           "unit": "m"
         }
       }
     ],
-    "description": "<p>Trigger: An allied creature becomes @Affliction[fainted].</p><p>Effect: You may advance 1 commanded creature with the @Affliction[fear] affliction by 100% and grant them @Affliction[argute] and @Affliction[boosted].</p>",
+    "description": "<p>When an allied creature gains @Affliction[fainted], the user may spend @PP[-4] as a @Trait[flinch-25] @Trait[interrupt] Free Action to target an ally that has @Affliction[fear], granting them @Affliction[advance 60], @Affliction[argute 3] and @Affliction[boosted 3].</p>",
     "traits": [
       "taskmaster",
       "command"
@@ -87,7 +89,13 @@
             "predicate": [
               "target:effect:fear"
             ],
-            "alterations": [],
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
             "key": "the-quality-of-quantity-generic",
             "chance": 100,
             "isFixedChance": false,
@@ -103,7 +111,13 @@
             "predicate": [
               "target:effect:fear"
             ],
-            "alterations": [],
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
             "key": "the-quality-of-quantity-generic",
             "chance": 100,
             "isFixedChance": false,
@@ -123,7 +137,7 @@
               {
                 "method": 5,
                 "property": "system.amount",
-                "value": 100
+                "value": 60
               }
             ],
             "key": "the-quality-of-quantity-generic",

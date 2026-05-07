@@ -18,8 +18,10 @@
       {
         "name": "Right Hand Mon",
         "slug": "right-hand-mon",
-        "description": "<p>Trigger: The user's Muse clock is emptied.</p><p>Effect: The user may, as a @Trait[interrupt] action, advance an ally's next activation by 100%.</p>",
-        "traits": [],
+        "description": "<p>Trigger: The user's Muse clock is emptied.</p><p>Effect: The target creature gains @Affliction[advance 100].</p>",
+        "traits": [
+          "interrupt"
+        ],
         "type": "generic",
         "img": "icons/svg/tower.svg",
         "cost": {
@@ -27,13 +29,13 @@
           "powerPoints": 5
         },
         "range": {
-          "target": "creature",
+          "target": "ally",
           "distance": 5,
           "unit": "m"
         }
       }
     ],
-    "description": "<p>Trigger: The user's Muse clock is emptied.</p><p>Effect: The user may, as a @Trait[interrupt] action, advance an ally's next activation by 100%.</p>",
+    "description": "<p>Effect: When the user empties their Muse Clock, they may spend @PP[-5] as a Free Action @Trait[interrupt] to grant an Ally within 5m @Affliction[advance 100].</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:tactician",

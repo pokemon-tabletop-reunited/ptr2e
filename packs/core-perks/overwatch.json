@@ -16,10 +16,12 @@
     },
     "actions": [
       {
-        "name": "Overwatch Action",
+        "name": "Overwatch",
         "slug": "overwatch",
-        "description": "<p>Set a fixed 30 degree Overwatch cone with a range equal to the range increment of your chosen ranged weapon attack. Until your next activation, make a free action @Trait[interrupt] attack using your ranged weapon against anyone who moves through the overwatch area.</p>",
-        "traits": [],
+        "description": "<p>Effect: The user sets a 30-degree Overwatch Cone, size of 15m. Until the user's next Activation, creatures in the Overwatch Cone are considered to be within the user's Reach for the purposes of Attack of Opportunity, and the user may declare Attacks of Opportunity against those creatures using non-@Trait[contact] Attacks.</p>",
+        "traits": [
+          "flinch-40"
+        ],
         "type": "generic",
         "img": "icons/weapons/guns/rifle-sniper-tripod.webp",
         "cost": {
@@ -28,11 +30,12 @@
         },
         "range": {
           "target": "cone",
+          "distance": 15,
           "unit": "m"
         }
       }
     ],
-    "description": "<p>Set a fixed 30 degree Overwatch cone with a range equal to the range increment of your chosen ranged weapon attack. Until your next activation, make a free action @Trait[interrupt] attack using your ranged weapon against anyone who moves through the overwatch area.</p>",
+    "description": "<p>Effect: By spending @PP[-3] as a @Trait[flinch-40] Complex Action, the user may set a 30-degree Overwatch Cone, size of 15m. Until the user's next Activation, creatures in the Overwatch Cone are considered to be within the user's Reach for the purposes of Attack of Opportunity, and the user may declare Attacks of Opportunity against those creatures using non-@Trait[contact] Attacks.</p>",
     "traits": [],
     "prerequisites": [
       "trait:wielder"
