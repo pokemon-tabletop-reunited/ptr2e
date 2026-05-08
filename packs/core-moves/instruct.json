@@ -9,26 +9,30 @@
         "slug": "instruct",
         "name": "Instruct",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "drill",
+          "social",
+          "flinch-30"
+        ],
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "ally",
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "simple",
+          "powerPoints": 7
         },
         "category": "status",
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: The selected ally may make a extra Activation after this attack resolves.</p>",
+        "description": "<p>Effect: An ally within range gains +1 ACC and CRIT Stage for 5 Activations, @Affliction[boosted 2], @Affliction[argute 2], and @Affliction[advance 40].</p>",
         "img": "systems/ptr2e/img/svg/psychic_icon.svg",
         "predicate": []
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "traits": [],
     "_migration": {
       "version": null,
@@ -60,18 +64,93 @@
             "alterations": [
               {
                 "property": "system.amount",
-                "value": 100,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "100% Advanced",
+                "value": 40,
                 "method": 5
               }
             ],
             "priority": null,
             "ignored": false,
             "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.iv1l5qSwT9ykajV0",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "instruct-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "instruct-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.boostedcondition",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "instruct-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.argutecondition0",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "instruct-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
