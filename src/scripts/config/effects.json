@@ -1859,8 +1859,10 @@
           "type": "ephemeral-modifier",
           "key": "attack-accuracy-flat",
           "value": -40,
-          "predicate": [],
-          "label": "Attacking a Transient creature.",
+          "predicate": [
+            {"not": "effect:affliction:transient"}
+          ],
+          "label": "Transient (Accuracy)",
           "method": 2,
           "priority": null,
           "ignored": false,
@@ -1870,8 +1872,10 @@
           "type": "ephemeral-modifier",
           "key": "attack-damage-percentile",
           "value": -75,
-          "predicate": [],
-          "label": "Attacking a Transient creature.",
+          "predicate": [
+            {"not": "effect:affliction:transient"}
+          ],
+          "label": "Transient (Damage)",
           "method": 2,
           "priority": null,
           "ignored": false,
@@ -1881,10 +1885,50 @@
           "type": "percentile-modifier",
           "key": "attack-damage",
           "value": -75,
-          "predicate": [],
-          "label": "Attacking a non-Transient creature.",
+          "predicate": [
+            {"not": "target:effect:affliction:transient"}
+          ],
+          "label": "Transient (Damage)",
           "method": 2,
           "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "ephemeral-effect",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+          "phase": "initial",
+          "predicate": [
+            {"not": "target:effect:affliction:transient"}
+          ],
+          "affects": "self",
+          "alterations": [
+            {
+              "method": 5,
+              "property": "system.changes.0.value",
+              "value": -75
+            }
+          ],
+          "key": "attack",
+          "method": 2,
+          "ignored": false
+        },
+        {
+          "type": "ephemeral-effect",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+          "phase": "initial",
+          "predicate": [
+            {"not": "effect:affliction:transient"}
+          ],
+          "affects": "origin",
+          "alterations": [
+            {
+              "method": 5,
+              "property": "system.changes.0.value",
+              "value": -75
+            }
+          ],
+          "key": "attack",
+          "method": 2,
           "ignored": false
         }
       ],

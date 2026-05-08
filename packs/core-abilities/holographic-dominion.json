@@ -34,13 +34,13 @@
         "slug": "holographic-dominion-free",
         "type": "generic",
         "cost": {
-          "activation": "free",
+          "activation": "simple",
           "powerPoints": 1
         },
         "range": {
           "target": "self",
           "unit": "m",
-          "distance": 10
+          "distance": 0
         },
         "description": "<p>Effect: The user gains or loses @Affliction[transient].</p>",
         "img": "icons/svg/explosion.svg"
@@ -55,7 +55,7 @@
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: While @Affliction[transient], the user's Attacks have +40 Accuracy, +10 effect chance, and deal double damage against non @Affliction[transient] targets, and the user gains 2 PP at the start of each of its Activations.</p>",
+        "description": "<p>Passive: While @Affliction[transient], the user's Attacks have +25 Accuracy, +55% EHR, and deal 100% more damage against non-@Affliction[transient] targets, and the user gains @PP[2] at the start of each of its Activations.</p>",
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
@@ -64,7 +64,7 @@
         }
       }
     ],
-    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user may use a Simple Action using 1 PP to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks have +40 Accuracy, +10 effect chance, and deal double damage against non @Affliction[transient] targets, and the user gains 2 PP at the start of each of its Activations.</p>",
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user may use a Simple Action using 1 PP to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks have +25 Accuracy, +55% EHR, and deal 100% more damage against non-@Affliction[transient] targets, and the user gains @PP[2] at the start of each of its Activations.</p>",
     "traits": [
       "legendary",
       "connection",
