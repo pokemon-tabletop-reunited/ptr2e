@@ -9,12 +9,13 @@
       {
         "name": "Potent Afflictions",
         "slug": "potent-afflictions",
-        "description": "<p>When a creature takes effect damage from an Affliction you inflicted, they take an additional Tick of damage.</p>",
+        "description": "<p>When the user afflicts a creature with a @Trait[dot] Affliction, it increases the @Trait[dot] formula of that affliction by +(1/16).</p>",
         "traits": [],
         "type": "passive",
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "free"
@@ -23,7 +24,7 @@
       }
     ],
     "slug": "potent-afflictions",
-    "description": "<p>When a creature takes effect damage from an Affliction you inflicted, they take an additional Tick of damage.</p>",
+    "description": "<p>When the user afflicts a creature with a @Trait[dot] Affliction, it increases the @Trait[dot] formula of that affliction by +(1/16).</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -50,6 +51,10 @@
     },
     "nodes": [
       {
+        "x": 157,
+        "y": 70,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "acceptance",
           "hexcraft",
@@ -58,18 +63,11 @@
           "cultivate-weakness"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#808080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 157,
-        "y": 70,
         "tier": null
       }
     ],
@@ -87,7 +85,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -102,15 +101,16 @@
             "key": "dot-trait-applied",
             "alterations": [
               {
-                "property": "effects.0.system.amount",
-                "value": "+(1/16)",
-                "method": 2
+                "method": 7,
+                "property": "system.formula",
+                "value": "+(1/16)"
               }
             ],
             "value": 0,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -124,7 +124,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -137,13 +139,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1755164767858,
-        "modifiedTime": 1755165102176,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1778453222214,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

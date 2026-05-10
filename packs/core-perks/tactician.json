@@ -11,18 +11,18 @@
       }
     ],
     "cost": 1,
-    "description": "<p>Effect: The user may target creatures other than itself or its Team with @Trait[command] Actions, and the target(s) of the user's @Trait[command] Actions are @Affliction[advance 10].</p>",
+    "description": "<p>Effect: The user may target ally creatures other than itself or its Party with @Trait[command] Actions, and the target(s) of the user's @Trait[command] Actions are @Affliction[advance 10].</p>",
     "actions": [
       {
         "name": "Tactician",
         "slug": "tactician",
-        "description": "<p>You are able to issue Commands to allied creatures which you are not deemed to have ownership of.</p>",
+        "description": "<p>Effect: The user may target ally creatures other than itself or its Party with @Trait[command] Actions, and the target(s) of the user's @Trait[command] Actions are @Affliction[advance 10].</p>",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
         "range": {
           "target": "enemy",
           "unit": "m",
@@ -53,7 +53,8 @@
           "pack-mon-2",
           "minor-buff-35",
           "victory-march",
-          "your-targets-right-here"
+          "your-targets-right-here",
+          "micromanagement"
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -104,7 +105,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -119,7 +121,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -133,7 +136,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -145,13 +150,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
         "createdTime": 1764897157595,
         "modifiedTime": 1772123940611,
         "lastModifiedBy": "Bk6N5iKyebvEVXhL"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "PAZ8zWUPw7Azm5V6"
