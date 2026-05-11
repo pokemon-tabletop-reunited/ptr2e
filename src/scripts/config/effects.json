@@ -1254,6 +1254,65 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.braced"
   },
   {
+    "id": "protected",
+    "name": "PTR2E.Effect.Statuses.Labels.protected",
+    "img": "icons/svg/castle.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 1
+    },
+    "system": {
+      "changes": [
+      {
+        "type": "ephemeral-modifier",
+        "key": "damaging-attack-damage-percentile",
+        "label": "Protected (Dam)",
+        "value": -100000,
+        "predicate": [
+          {
+            "not": "origin:ally"
+          }
+        ],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "ephemeral-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+        "predicate": [
+          {
+            "not": "origin:ally"
+          }
+        ],
+        "label": "Protected (RES)",
+        "affects": "defensive",
+        "alterations": [
+          {
+            "property": "system.changes.0.value",
+            "value": 100,
+            "method": 5
+          }
+        ],
+        "ignored": false,
+        "method": 2
+      }
+    ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "shield"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.protected"
+  },
+  {
     "id": "duel",
     "name": "PTR2E.Effect.Statuses.Labels.duel",
     "img": "systems/ptr2e/img/conditions/tagged.svg",
