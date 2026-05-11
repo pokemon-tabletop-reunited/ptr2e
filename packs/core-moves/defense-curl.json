@@ -16,13 +16,13 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "category": "status",
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains @Affliction[curled 5].</p>",
+        "description": "<p>Effect: The user gains +1 DEF Stage for 5 Activation and @Affliction[curled 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -48,10 +48,24 @@
           {
             "type": "roll-effect",
             "key": "defense-curl-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "priority": null,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "defense-curl-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.curledcondition0",
             "predicate": [],
             "chance": 100,
-            "affects": "target",
+            "affects": "self",
             "priority": null,
             "ignored": false,
             "method": 2
