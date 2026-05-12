@@ -216,8 +216,7 @@
       "traits": [
         "sleep",
         "major-affliction",
-        "attention",
-        "control"
+        "attention"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.drowsy"
@@ -614,25 +613,6 @@
           }
         },
         {
-          "type": "grant-item",
-          "key": "",
-          "value": "Compendium.ptr2e.core-moves.Item.3RvYsD6CXrWCW0YS",
-          "predicate": [],
-          "replaceSelf": true,
-          "allowDuplicate": false,
-          "method": 2,
-          "priority": null,
-          "ignored": false,
-          "reevaluateOnUpdate": false,
-          "inMemoryOnly": false,
-          "alterations": [],
-          "track": false,
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          }
-        },
-        {
           "type": "ephemeral-modifier",
           "key": "attack-damage-percentile",
           "value": 15,
@@ -650,9 +630,8 @@
         {
           "type": "basic",
           "key": "system.modifiers.movement",
-          "value": 1.2,
+          "value": 4,
           "predicate": [],
-          "priority": 91,
           "ignored": false,
           "method": 5
         },
