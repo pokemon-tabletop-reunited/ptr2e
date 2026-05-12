@@ -1226,6 +1226,9 @@
         }
       ],
       "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "removeAfterAttacking": true,
+      "removeAfterAttacked": false,
       "traits": [
         "minor-affliction"
       ]
@@ -1272,7 +1275,7 @@
         "alterations": [
           {
             "property": "system.changes.0.value",
-            "value": 100,
+            "value": 10000,
             "method": 5
           }
         ],
@@ -1282,8 +1285,10 @@
     ],
       "formula": null,
       "type": null,
-      "removeOnRecall": false,
+      "removeOnRecall": true,
       "removeAfterCombat": true,
+      "removeAfterAttacking": true,
+      "removeAfterAttacked": false,
       "traits": [
         "minor-affliction",
         "shield"
