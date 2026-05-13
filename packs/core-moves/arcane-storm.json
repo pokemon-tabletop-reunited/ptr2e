@@ -52,7 +52,7 @@
   "effects": [
     {
       "name": "Arcane Storm",
-      "type": "affliction",
+      "type": "passive",
       "_id": "my7s5vSmFrpaH4NJ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -60,28 +60,28 @@
           {
             "type": "roll-effect",
             "key": "arcane-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "label": "Arcane Storm 1",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "arcane-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "label": "Arcane Storm 2",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -95,13 +95,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

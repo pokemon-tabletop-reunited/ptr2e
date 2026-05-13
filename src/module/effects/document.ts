@@ -2,7 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { GearPTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ChangeModel, Trait } from "@data";
-import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
+// import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
@@ -25,22 +25,6 @@ class ActiveEffectPTR2e<
     return this.system._source.slug ?? sluggify(this._name);
   }
 
-  static override get schema() {
-    if (this.hasOwnProperty("_schema")) return this._schema!;
-    const schema = new foundry.data.fields.SchemaField(Object.freeze(this.defineSchema()));
-    Object.defineProperty(this, "_schema", { value: schema, writable: false });
-    return schema;
-  }
-
-  static override defineSchema() {
-    const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
-      ActiveEffectSchema,
-      "changes"
-    >;
-    delete schema.changes;
-    return schema as ActiveEffectSchema;
-  }
-
   override get changes() {
     return this.system.changes ?? [];
   }
@@ -50,7 +34,7 @@ class ActiveEffectPTR2e<
   }
 
   get expired(): boolean {
-    if (this.duration.type !== "turns") return false;
+    if (this.duration.units !== "turns") return false;
     return this.duration.remaining === 0;
   }
 
@@ -83,9 +67,9 @@ class ActiveEffectPTR2e<
     this._name = this._source.name;
     Object.defineProperty(this, "name", {
       get: () =>
-        this.system.stacks > 1
+        this.system.stacks >= 1
           ? `${this._name} ${this.system.stacks}`
-          : this.duration.remaining !== null && this.duration.remaining !== undefined
+          : this.duration.remaining !== null && this.duration.remaining !== undefined && this.duration.remaining !== Infinity
             ? `${this._name} ${this.duration.remaining}`
             : this._name,
       set: (value: string) => {
@@ -109,11 +93,11 @@ class ActiveEffectPTR2e<
       }
     }
 
-    if(this.system.removeAfterAttacking && this.targetsActor() && this.parent.synthetics) {
+    if (this.system.removeAfterAttacking && this.targetsActor() && this.parent.synthetics) {
       this.parent.synthetics.effectsRemovedAfterAttacking ??= [];
       this.parent.synthetics.effectsRemovedAfterAttacking.push(this);
     }
-    if(this.system.removeAfterAttacked && this.targetsActor() && this.parent.synthetics) {
+    if (this.system.removeAfterAttacked && this.targetsActor() && this.parent.synthetics) {
       this.parent.synthetics.effectsRemovedAfterAttacked ??= [];
       this.parent.synthetics.effectsRemovedAfterAttacked.push(this);
     }
@@ -182,78 +166,62 @@ class ActiveEffectPTR2e<
     return this.modifiesActor;
   }
 
-  /**
-   * Override the implementation of ActiveEffect#_requiresDurationUpdate to support activation-based initiative.
-   * Duration is purely handled in terms of combat turns elapsed.
-   */
-  override _requiresDurationUpdate(): boolean {
-    const { _combatTime, type } = this.duration;
-    if (type === "turns" && game.combat) {
-      if(!this.targetsActor()) return false;
+  override get isTemporary(): boolean {
+    if(this.type === "passive") return false;
+    const value = this.duration.value ?? this._source.duration.value;
+    return !!value && Number.isFinite(value);
+  }
 
-      const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
-      return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
+  _prepareCombatBasedDuration(duration: ActiveEffectPTR2e["duration"], context: Record<string, unknown>): ActiveEffectPTR2e["duration"] {
+    //@ts-expect-error - Missing typings
+    if (duration.units !== "turns") return super._prepareCombatBasedDuration(duration, context);
+
+    const unitsSingular = duration.units.replace(/s$/, "");
+    //@ts-expect-error - Missing typings
+    const timeConversion = CONFIG.time[`${unitsSingular}Time`] || 0;
+    const seconds = timeConversion ? Math.trunc(duration.value! * timeConversion) : null;
+    //@ts-expect-error - Missing types
+    const combat: CombatPTR2e = game.combats.get(this.start!.combat?.id) ?? game.combat;
+    
+    const combatant = this.actor!.combatant;
+
+    // If no combat information is available, reframe the presented duration as time-based
+    if (!this.start || !combatant || !combat.started || !combat.turns.length) {
+      return (game._documentsReady && Number.isFinite(seconds))
+        //@ts-expect-error - Missing types
+        ? this._prepareTimeBasedDuration({ ...duration, units: "seconds", value: seconds })
+        : Object.assign(duration, { seconds, remaining: Infinity, label: game.i18n.localize("COMMON.None") });
     }
-    return false;
+
+    // Acquire the start round and turn number from the combatant if the current combat is not the same as the starting
+    // one.
+    const startTurn: number = combat === this.start.combat
+      ? this.start.turn ?? combatant.system.activations
+      : combatant.system.activations;
+
+    const currentTurn = combatant.system.activations;
+    const elapsed = Math.max(0, currentTurn - startTurn);
+    const remaining = duration.value! - elapsed;
+    //@ts-expect-error - Missing types
+    const pluralRule = game.i18n.pluralRules.select(Math.abs(remaining));
+    const locKey = remaining >= 0 ? "EFFECT.DURATION.TURNS" : "EFFECT.DURATION.TURNS_AGO";
+    return Object.assign(duration, {
+      seconds, remaining,
+      label: game.i18n.format(`${locKey}.${pluralRule}`, { turns: Math.abs(remaining) })
+    });
   }
 
   /**
-   * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
-   * Duration is purely handled in terms of combat turns elapsed.
+   * @override
    */
-  override _prepareDuration(): Partial<ActiveEffectPTR2e["duration"]> {
-    const d = this.duration;
+  isExpiryEvent(event: string, context: Record<string, unknown>): boolean {
+    //@ts-expect-error - Missing types
+    if (event !== "turnEnd") return super.isExpiryEvent(event, context);
 
-    // Turn-based duration
-    if (this.parent && (d.rounds || d.turns)) {
-      const cbt = game.combat as CombatPTR2e | undefined;
-      if (!cbt || !this.targetsActor())
-        return {
-          type: "turns",
-          _combatTime: undefined,
-        };
+    if (event !== this.duration.expiry) return false;
 
-      // Determine the current combat duration
-      const durationTurn = d.turns ?? 0;
-      const startTurn = d.startTurn ?? 0;
-
-      // Determine parent combatant's activation amount
-      const currentTurn = this.parent.combatant?.system.activations;
-      if (currentTurn === undefined)
-        return {
-          type: "turns",
-          _combatTime: undefined,
-        };
-
-      // If the effect has not started yet display the full duration
-      if (currentTurn <= startTurn) {
-        return {
-          type: "turns",
-          duration: durationTurn,
-          remaining: durationTurn,
-          label: this._getDurationLabel(0, d.turns),
-          _combatTime: currentTurn,
-        };
-      }
-
-      // Some number of remaining turns (possibly zero)
-      const remainingTurns = Math.max(startTurn + durationTurn - currentTurn, 0);
-      return {
-        type: "turns",
-        duration: durationTurn,
-        remaining: remainingTurns,
-        label: this._getDurationLabel(0, remainingTurns),
-        _combatTime: currentTurn,
-      };
-    }
-
-    // No duration
-    return {
-      type: "none",
-      duration: null,
-      remaining: null,
-      label: game.i18n.localize("None"),
-    };
+    //@ts-expect-error - Missing types
+    return (context.combat ?? game.combat)?.started;
   }
 
   toChat(): Promise<unknown> {
@@ -291,28 +259,30 @@ class ActiveEffectPTR2e<
     if (result === false) return false;
 
     if (this.targetsActor()) {
+      if(data.duration && data.duration.units !== "turns") this.updateSource({ duration: { units: "turns", expiry: "turnEnd" } });
+
       if (data.duration && data.system.stacks && data.system.stacks > 1) {
-        data.duration.turns = data.system.stacks;
+        data.duration.value = data.system.stacks;
         this.updateSource({
           duration: {
-            turns: data.system.stacks,
+            value: data.system.stacks,
           },
         });
       }
-      if (data.duration?.turns && !data.duration.startTurn) {
+      if (data.duration?.value && !data.start?.turn) {
         this.updateSource({
-          duration: {
-            startTurn: this.parent.combatant?.system.activations ?? 0,
+          start: {
+            turn: this.parent.combatant?.system.activations ?? 0,
           },
         });
       }
 
       if (this.target.isImmuneToEffect(this)) {
-        if(this.flags?.ptr2e?.itemGrants && typeof this.flags.ptr2e.itemGrants === "object" && Object.keys(this.flags.ptr2e.itemGrants).length > 0) {
+        if (this.flags?.ptr2e?.itemGrants && typeof this.flags.ptr2e.itemGrants === "object" && Object.keys(this.flags.ptr2e.itemGrants).length > 0) {
           const itemGrants = Object.values(this.flags.ptr2e.itemGrants);
           for (const itemGrant of itemGrants) {
             Hooks.once("preCreateActiveEffect", (effect: unknown) => {
-              if((effect as ActiveEffectPTR2e)._id === itemGrant.id) return false;
+              if ((effect as ActiveEffectPTR2e)._id === itemGrant.id) return false;
               return;
             });
           }
@@ -322,7 +292,7 @@ class ActiveEffectPTR2e<
       }
     }
 
-    if (data.description.startsWith("PTR2E.Effect.")) {
+    if (data.description?.startsWith("PTR2E.Effect.")) {
       this.updateSource({
         description: game.i18n.localize(data.description),
       });
@@ -430,12 +400,12 @@ class ActiveEffectPTR2e<
           const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
             (e) => e.slug === sluggify(source.name)
           );
-          if(existing?.slug === "duel") {
+          if (existing?.slug === "duel") {
             ui.notifications.warn("Only one Duel effect can be applied at a time.");
             return [];
           }
-          if(existing?.slug === "perish") {
-            existing.update({ "duration.turns": Math.clamp((existing.duration.turns ?? 0) - 1, 1, Infinity) });
+          if (existing?.slug === "perish") {
+            existing.update({ "duration.value": Math.clamp((existing.duration.value ?? 0) - 1, 1, Infinity) });
             return [];
           }
           if (existing?.system.stacks) {
@@ -445,8 +415,8 @@ class ActiveEffectPTR2e<
           if ((
             (source.system?.traits as string[])?.includes("major-affliction")
             || (source.system?.traits as string[])?.includes("minor-affliction")
-          ) && existing?.duration.turns) {
-            existing.update({ "duration.turns": existing.duration.turns + (source.duration?.turns || 1) });
+          ) && existing?.duration.value) {
+            existing.update({ "duration.value": existing.duration.value + (source.duration?.value || 1) });
             return [];
           }
         }
@@ -533,10 +503,66 @@ class ActiveEffectPTR2e<
     }
   }
 
-  override get isTemporary(): boolean {
-    if(this.flags.ptr2e.displayOnToken) return this.flags.ptr2e.displayOnToken === "always";
+  override get isSuppressed(): boolean {
+    return !!(this.system?.isSuppressed ?? this.duration?.expired);
+  }
 
-    return super.isTemporary;
+  static override shimData(source: ActiveEffectPTR2e["_source"], options: unknown) {
+    // 'Mode' to 'Method' migration
+    if (source.system?.changes) {
+      for (const change of source.system.changes) {
+        if ("mode" in change && !("method" in change)) {
+          //@ts-expect-error - Data Migration - Types won't match.
+          change.method = change.mode;
+          //@ts-expect-error - Data Migration - Types won't match.
+          delete change.mode;
+        }
+        //@ts-expect-error Some changes may have alterations
+        for (const alteration of change.alterations ?? []) {
+          if ("mode" in alteration && !("method" in alteration)) {
+            alteration.method = alteration.mode;
+            delete alteration.mode;
+          }
+        }
+      }
+    }
+    // displayOnToken flag migration
+    if (source.flags?.ptr2e?.displayOnToken) {
+      source.showIcon = source.flags.ptr2e.displayOnToken === "always"
+        ? 2
+        : source.flags.ptr2e.displayOnToken === "never"
+          ? 0
+          : 1;
+      delete source.flags.ptr2e.displayOnToken;
+    }
+
+    return super.shimData(source, options);
+  }
+
+  static override createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; types?: string[]; pack?: Collection<TDocument> | null; } & Partial<FormApplicationOptions>): Promise<TDocument | null>
+  static override async createDialog(
+    data: Record<string, unknown> = {},
+    createOptions: Record<string, unknown> = {},
+    {
+      folders,
+      types,
+      template,
+      context,
+      ...dialogOptions
+    }: {
+      folders?: { id: string, name: string }[];
+      types?: string[];
+      template?: string;
+    } & {
+      context?: { parent?: Actor; pack?: Collection<ActiveEffectPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions>;
+    } = {}
+  ) {
+    if (types?.length) types = types.filter(t => t !== "base");
+    else types = this.TYPES.filter(t => t !== "base");
+
+    return super.createDialog(data, createOptions, {
+      folders, types, template, context, ...dialogOptions
+    });
   }
 }
 
@@ -547,6 +573,8 @@ interface ActiveEffectPTR2e<
 > {
   constructor: typeof ActiveEffectPTR2e;
   readonly _source: foundry.documents.ActiveEffectSource<string, TSystem>;
+
+  get actor(): TParent extends ActorPTR2e ? ActorPTR2e : ActorPTR2e | null;
 
   flags: DocumentFlags & {
     ptr2e: {
@@ -563,7 +591,6 @@ interface ActiveEffectPTR2e<
         amount?: number;
       };
       traitEffect?: string;
-      displayOnToken?: "always" | "never" | null;
     };
   }
 

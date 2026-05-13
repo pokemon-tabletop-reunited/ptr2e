@@ -802,11 +802,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -819,12 +819,11 @@
             "reevaluateOnUpdate": true,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -833,7 +832,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "basic",
@@ -842,9 +842,9 @@
             ],
             "key": "system.movement.swim.value",
             "value": -2,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -853,9 +853,9 @@
             ],
             "key": "",
             "value": "Jet",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -864,9 +864,9 @@
             ],
             "key": "",
             "value": "Lumbering",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -875,9 +875,9 @@
             ],
             "key": "",
             "value": "Propulsion",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -892,9 +892,9 @@
             "spa": 50,
             "spd": 10,
             "spe": null,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -903,9 +903,9 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": -10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -914,9 +914,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -925,9 +925,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -936,9 +936,9 @@
             ],
             "key": "system.skills.listen.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -947,9 +947,9 @@
             ],
             "key": "system.skills.spot.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "token-alterations",
@@ -958,7 +958,6 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "texture": "modules/ptr2e-pkmn-sprites/sprites/009_MEGA.webp",
@@ -966,7 +965,8 @@
             "scale": null,
             "name": null,
             "light": null,
-            "alpha": null
+            "alpha": null,
+            "method": 2
           }
         ],
         "slug": null,

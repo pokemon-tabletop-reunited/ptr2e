@@ -50,7 +50,7 @@
   "effects": [
     {
       "name": "Poison Sting",
-      "type": "affliction",
+      "type": "passive",
       "_id": "2feTZNN9Cpdh9HaK",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -58,13 +58,13 @@
           {
             "type": "roll-effect",
             "key": "poison-sting-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -78,13 +78,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

@@ -49,13 +49,13 @@
         "type": "basic",
         "key": "system.modifiers.hpMultiplier",
         "value": "{trait|value}",
-        "mode": 5
+        "method": 5
       },
       {
         "type": "basic",
         "key": "system.modifiers.ppMultiplier",
         "value": "{trait|value}",
-        "mode": 5
+        "method": 5
       }
     ]
   },
@@ -163,7 +163,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "sharp"
       }
     ]
@@ -366,7 +366,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "sonic"
       }
     ]
@@ -922,7 +922,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "horn"
       }
     ]
@@ -1202,12 +1202,12 @@
         "predicate": [],
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.actions.0.free",
             "value": "true"
           }
         ],
-        "mode": 2,
+        "method": 2,
         "priority": null,
         "ignored": false,
         "reevaluateOnUpdate": false,
@@ -1574,7 +1574,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "jaw"
       }
     ]
@@ -1590,7 +1590,7 @@
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
         "property": "traits",
-        "mode": "2",
+        "method": "2",
         "value": "tailed"
       }
     ]
@@ -2829,7 +2829,7 @@
     "slug": "blast-12",
     "label": "Blast 12",
     "related": [],
-    "description": "Affects entities within a 1m radius circle/sphere, centered on a selected space."
+    "description": "Affects entities within a 13m radius circle/sphere, centered on a selected space."
   },
   {
     "slug": "bone",
@@ -3020,7 +3020,7 @@
         "predicate": [
           "target:effect:affliction:grounded"
         ],
-        "mode": 2,
+        "method": 2,
         "hideIfDisabled": true
       }
     ]
@@ -3066,16 +3066,10 @@
     "description": "These actions and attacks do not affect allied creatures in range."
   },
   {
-    "slug": "flinch",
-    "label": "Flinch",
-    "related": [],
-    "description": "A marker for moves that can afflict Flinch on others"
-  },
-  {
     "slug": "flinch-xy",
     "label": "Flinch XY",
     "related": [],
-    "description": "The creature that uses this action is Flinched, having their next Activation delayed by XY%.",
+    "description": "The creature that uses this action is flinched, having their next Activation delayed by XY%.",
     "placeholders": [
       {
         "keyPattern": "flinch-\\d\\d",
@@ -3095,12 +3089,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "-{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Delay {trait|value}%"
           }
@@ -3115,12 +3109,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "-{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Delay {trait|value}%"
           }
@@ -3154,52 +3148,10 @@
     "description": "Denotes if an attack or ability utilizes a horn or a similar prominent pointy appendage."
   },
   {
-    "slug": "interrupt-x",
-    "label": "Interrupt X",
+    "slug": "interrupt",
+    "label": "Interrupt",
     "related": [],
-    "description": "Denotes that an Action may be used as an Interrupt at hierachy tier \"X\", provided the conditions for using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-1",
-    "label": "Interrupt 1",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"1\", provided the conditions to using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-2",
-    "label": "Interrupt 2",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"2\", provided the conditions to using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-3",
-    "label": "Interrupt 3",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"3\", provided the conditions to using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-4",
-    "label": "Interrupt 4",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"4\", provided the conditions to using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-5",
-    "label": "Interrupt 5",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"5\", provided the conditions to using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-6",
-    "label": "Interrupt 6",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"6\", provided the conditions to using the Interrupt are met."
-  },
-  {
-    "slug": "interrupt-7",
-    "label": "Interrupt 7",
-    "related": [],
-    "description": "This Action may be used as an Interrupt at hierachy tier \"7\", provided the conditions to using the Interrupt are met."
+    "description": "Denotes that an Action may be used as an Interrupt, provided the conditions for using the Interrupt are met."
   },
   {
     "slug": "jaw",
@@ -3405,12 +3357,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Advance {trait|value}%"
           }
@@ -3425,12 +3377,12 @@
         "affects": "self",
         "alterations": [
           {
-            "mode": 5,
+            "method": 5,
             "property": "system.amount",
             "value": "{trait|value}"
           },
           {
-            "mode": 5,
+            "method": 5,
             "property": "name",
             "value": "Advance {trait|value}%"
           }
@@ -3664,6 +3616,12 @@
     "description": "Denotes if an attack or ability features social interaction."
   },
   {
+    "slug": "attention",
+    "label": "Attention",
+    "related": [],
+    "description": "Denotes if an effect affects a creature's ability to focus."
+  },
+  {
     "slug": "sonic",
     "label": "Sonic",
     "related": [],
@@ -3727,8 +3685,33 @@
     "slug": "zenith",
     "label": "Zenith",
     "related": [],
-    "description": "These attacks deal 1/4 of the damage they would deal if they are negated by a @Trait[shield] effect."
-  },
+    "description": "Gear, creatures, and Actions with this Attacks with this Trait are mechanically involved with the Z-Move @Trait[phenomenon]. Moves with this Trait also possess @Trait[pierce] and @Trait[danger-close].",
+    "type": "automated",
+    "changes": [
+      {
+          "type": "alter-attack",
+          "value": "pierce",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      },
+      {
+          "type": "alter-attack",
+          "value": "danger-close",
+          "phase": "initial",
+          "predicate": [],
+          "property": "traits",
+          "definition": [],
+          "key": "zenith-trait-attack",
+          "method": 2,
+          "ignored": false
+      }      
+    ]
+    },
   {
     "slug": "connection",
     "label": "Connection",
@@ -3814,6 +3797,18 @@
     "description": "An effect activates when the user's health is below 3/4 of their Max HP. The effect is usually listed in the source's effect descripion. For Gear, such as Berries, this means they can only be used when meeting the trigger conditions for [Desperation 3/4]."
   },
   {
+    "slug": "desperation-2-3",
+    "label": "Desperation 2/3",
+    "related": [],
+    "description": "An effect activates when the user's health is below 2/3 of their Max HP. The effect is usually listed in the source's effect descripion. For Gear, such as Berries, this means they can only be used when meeting the trigger conditions for [Desperation 2/3]."
+  },
+  {
+    "slug": "desperation-1-8",
+    "label": "Desperation 1/8",
+    "related": [],
+    "description": "An effect activates when the user's health is below 1/8 of their Max HP. The effect is usually listed in the source's effect descripion. For Gear, such as Berries, this means they can only be used when meeting the trigger conditions for [Desperation 1/8]."
+  },
+  {
     "slug": "intrepid-x",
     "label": "Intrepid X",
     "related": [],
@@ -3835,13 +3830,25 @@
     "slug": "intrepid-1-4",
     "label": "Intrepid 1/4",
     "related": [],
-    "description": "An effect activates when the user's health is above 1/4 of their Max 1/4 HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 1/4]."
+    "description": "An effect activates when the user's health is above 1/4 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 1/4]."
   },
   {
     "slug": "intrepid-3-4",
     "label": "Intrepid 3/4",
     "related": [],
     "description": "An effect activates when the user's health is above 3/4 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 3/4]."
+  },
+  {
+    "slug": "intrepid-2-3",
+    "label": "Intrepid 2/3",
+    "related": [],
+    "description": "An effect activates when the user's health is above 2/3 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 2/3]."
+  },
+  {
+    "slug": "intrepid-1-8",
+    "label": "Intrepid 1/8",
+    "related": [],
+    "description": "An effect activates when the user's health is above 1/8 of their Max HP. The effect is usually listed in the source's effect descripion. for Gear, such as Armor, this means they can only be used when meeting the trigger conditions for [Intrepid 1/8]."
   },
   {
     "slug": "bug",
@@ -4570,7 +4577,7 @@
     "slug": "pierce",
     "label": "Pierce",
     "related": [],
-    "description": "Denotes if an Action clears @Trait[shield] effects on affected target(s). This happens when the Action hits the target(s) and before damage and other on-hit effects from the Action occur.<br>Note that this Trait also removes any Summons the target(s) may have that have the @Trait[shield] Trait"
+    "description": "Denotes if an Action clears and ignores @Trait[shield] effects on affected target(s). The clear occurs when the Action hits the target(s) and before damage and other on-hit effects from the Action occur.<br>Note that this Trait also removes any Summons the target(s) may have that have the @Trait[shield] Trait"
   },
   {
     "slug": "phenomenon",
@@ -4652,9 +4659,9 @@
   },
   {
     "slug": "closed-heart",
-    "label": "Closed-Heart",
+    "label": "Closed Heart",
     "related": [],
-    "description": "Creatures with this Trait possess a heart that's been forcefully closed, gaining the following changes:\n1) +50% SPD\n2) The Extra Abilities \"Hyper Agressive\" and \"Coldhearted\"\n3) +1 Active List Slot\n4) Access to the [Shadow] %lt;Type&gt;Learnlist\n5) The Anguish Skill (100 by default) and its associated mechanics\n6) Are susceptible to the \"Hyper Mode\" Affliction\n7) Cannot undergo Evolution or other miscellaneous transformations\n8. Placed onto a slower EXP Track, based on their Species"
+    "description": "Creatures with this Trait possess a heart that's been forcefully closed."
   },
   {
     "slug": "ignore-immunity",

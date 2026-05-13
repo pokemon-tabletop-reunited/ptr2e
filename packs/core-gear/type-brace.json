@@ -59,13 +59,13 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "choices": "options.types",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": false,
-            "rollOption": "type-brace-type"
+            "rollOption": "type-brace-type",
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -74,48 +74,47 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 6,
                 "property": "system.traits",
-                "value": "type"
+                "value": "type",
+                "method": 6
               },
               {
-                "mode": 2,
                 "property": "system.traits",
-                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}"
+                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}",
+                "method": 2
               },
               {
-                "mode": 5,
                 "property": "name",
-                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})"
+                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.description",
-                "value": "<p>Effect: The user takes 33% reduced damage from @Trait[{effect|flags.ptr2e.choiceSelections.type-brace-type}]-Type attacks.</p>"
+                "value": "<p>Effect: The user takes 33% reduced damage from @Trait[{effect|flags.ptr2e.choiceSelections.type-brace-type}]-Type attacks.</p>",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "effects.0.name",
-                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})"
+                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "effects.0.system.changes.0.selection",
-                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}"
+                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "effects.0.system.changes.1.label",
-                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})"
+                "value": "Type Brace ({effect|flags.ptr2e.choiceSelections.type-brace-type|C})",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "effects.0.system.changes.1.key",
-                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}-attack-damage-percentile"
+                "value": "{effect|flags.ptr2e.choiceSelections.type-brace-type}-attack-damage-percentile",
+                "method": 5
               }
             ],
             "replaceSelf": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -125,17 +124,18 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
             "key": "attack-damage-percentile",
             "value": -33,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -146,13 +146,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

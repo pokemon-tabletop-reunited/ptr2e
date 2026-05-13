@@ -37,7 +37,7 @@
       "fling",
       "combat"
     ],
-    "description": "<p>Effect: This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user would take damage from a super effective attack, healing the user @Tick[4].</p>",
+    "description": "<p>Effect: This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user would take damage from a super effective attack, healing the user @Tick[4].</p>",
     "quantity": 1,
     "slug": "enigma-berry",
     "stack": 1,
@@ -56,7 +56,7 @@
       {
         "name": "Enigma Berry",
         "slug": "enigma-berry",
-        "description": "<p>Effect: This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user would take damage from a super effective attack, healing the user @Tick[4].</p>",
+        "description": "<p>Effect: This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user would take damage from a super effective attack, healing the user @Tick[4].</p>",
         "traits": [
           "restorative",
           "consumable",
@@ -90,21 +90,21 @@
           {
             "type": "roll-effect",
             "key": "enigma-berry-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 4
+                "value": 4,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -117,8 +117,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -126,11 +126,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

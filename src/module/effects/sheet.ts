@@ -242,7 +242,10 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       ),
       fields: this.document.schema.fields,
       system: this.document.system,
-      traits
+      traits,
+      showIconOptions: Object.entries(CONST.ACTIVE_EFFECT_SHOW_ICON).map(([k, value]) => ({
+        value, label: game.i18n.localize(`EFFECT.SHOW_ICON.${k.toLowerCase()}`)
+      })).reverse()
     };
   }
 
@@ -675,6 +678,27 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     event.stopPropagation();
     const submitData = this._prepareSubmitData(event as SubmitEvent, form, formData);
     if (fu.isEmpty(submitData)) return;
+
+    function testPredicate(data: Record<string, unknown>) {
+      if ('predicate' in data && typeof data.predicate == 'string') {
+        if (data.predicate.trim() === "") {
+          delete data.predicate;
+        } else {
+          try {
+            data.predicate = JSON.parse(data.predicate);
+          } catch (error) {
+            if (error instanceof Error) {
+              ui.notifications.error(
+                game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),
+              );
+              throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+            }
+          }
+        }
+      }
+    }
+    testPredicate(submitData)
+    testPredicate(submitData.system ?? {})
 
     await this.document.update(submitData);
   }

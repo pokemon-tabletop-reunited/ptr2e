@@ -22,8 +22,8 @@
             ],
             "hideIfDisabled": true,
             "label": "Non-Rock DMG Resistance",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -37,14 +37,14 @@
             "affects": "defensive",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 15
+                "value": 15,
+                "method": 5
               }
             ],
             "label": "Non-Rock RES",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -57,8 +57,8 @@
             ],
             "label": "Non-Rock DMG Mod",
             "hideIfDisabled": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -71,8 +71,8 @@
             ],
             "affects": "self",
             "alterations": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -85,8 +85,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Effect: The user takes 10% less damage from non-@Trait[rock] Type Physical- and Special-Category Attacks, and increases their RES by 15% against effects from non-Rock Type Attacks. Additionally, the user's non-@Trait[rock] Type Attacks deal 15% more damage and have their Base Chances (if any) increased by 5%.</p>",
       "origin": null,
@@ -94,11 +94,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Item.UH0Z3GpQNhoyv5I4.ActiveEffect.WuyH1tytCFObtFsF",
         "duplicateSource": null,

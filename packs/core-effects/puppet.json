@@ -15,7 +15,8 @@
     },
     "description": "<p>The afflicted creature's alliance changes to match that of the affliction's source.<br><br>NPC enemies become temporary Allies of the PCs, whilst afflicted PCs fall under the control of the GM.</p>",
     "traits": [
-      "major-affliction"
+      "minor-affliction",
+      "control"
     ],
     "slug": "puppet"
   },
@@ -30,7 +31,8 @@
         "changes": [],
         "slug": null,
         "traits": [
-          "major-affliction"
+          "minor-affliction",
+          "control"
         ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
@@ -43,10 +45,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": 3,
-        "startTurn": null
+        "units": "turns",
+        "value": 3,
+        "expiry": "turnEnd"
       },
       "description": "<p>The afflicted creature's alliance changes to match that of the affliction's source.<br /><br />NPC enemies become temporary Allies of the PCs, whilst afflicted PCs fall under the control of the GM.</p>",
       "origin": null,
@@ -54,11 +55,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -69,7 +65,8 @@
         "createdTime": 1766337202503,
         "modifiedTime": 1766337310189,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "showIcon": 2
     }
   ],
   "_id": "tks8Fa9ZmwYOSr4Z"

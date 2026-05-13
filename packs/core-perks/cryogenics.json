@@ -73,13 +73,13 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 30
+                "value": 30,
+                "method": 5
               }
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -92,8 +92,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Your @Trait[ice] moves gain +30% EHR.</p>",
       "origin": null,
@@ -101,11 +101,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Actor.wTGrvr3ClD8dax9L.Item.IC6CbBg5AiXck0j9.ActiveEffect.zypPt5eZHggpxzHG",
         "duplicateSource": null,

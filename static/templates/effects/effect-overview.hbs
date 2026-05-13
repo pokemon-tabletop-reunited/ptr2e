@@ -19,17 +19,7 @@
             {{formField fields.transfer value=data.transfer localize=true}}
         {{/if}}
 
-        <div class="form-group">
-            <label>Display on Token</label>
-            <div class="form-fields">
-              <select name="flags.ptr2e.displayOnToken">
-                  <option value="always" {{#if (eq document.flags.ptr2e.displayOnToken "always")}}selected{{/if}}>Always</option>
-                  <option value="never" {{#if (eq document.flags.ptr2e.displayOnToken "never")}}selected{{/if}}>Never</option>
-                  <option value="" {{#if (and (not (eq document.flags.ptr2e.displayOnToken "always")) (not (eq document.flags.ptr2e.displayOnToken "never")))}}selected{{/if}}>Default</option>
-              </select>
-            </div>
-            <p class="hint">Override default foundry logic on whether this effect should show on a token or not. <small>(Does the effect have a duration or any Status Condition?)</small></p>
-        </div>
+        {{formField fields.showIcon value=data.showIcon options=showIconOptions rootId=rootId label="Show Icon on Token"}}
 
         <div class="form-group">
             <label>Status Conditions</label>

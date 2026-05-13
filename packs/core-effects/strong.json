@@ -24,10 +24,9 @@
       "img": "icons/svg/statue.svg",
       "type": "affliction",
       "duration": {
-        "turns": null,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -38,38 +37,33 @@
             "predicate": [],
             "label": "Strong",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
             "chance": 100,
             "dontMerge": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
+                "value": -20,
+                "method": 5
               },
               {
-                "mode": 5,
-                "property": "name",
-                "value": "Delay 20% (Strong)"
-              },
-              {
-                "mode": 5,
                 "property": "system.removeAfterAttacking",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "predicate": [],
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "removeOnRecall": true,
@@ -104,11 +98,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      }
+      "showIcon": 2
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",

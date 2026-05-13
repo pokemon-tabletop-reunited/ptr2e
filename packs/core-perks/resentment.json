@@ -9,25 +9,28 @@
       {
         "name": "Resentment",
         "slug": "resentment",
-        "description": "<p>When your Shields are broken, you may spend 4PP to gain 2 ticks of Shields as a Complex Action at [Interrupt 2].</p>",
-        "traits": [],
+        "description": "<p>Effect: When the user's Shields are broken, they may spend @PP[-3] as a Complex Action @Trait[interrupt] at @Trait[priority-60] to gain @Tick[2 shield].</p>",
+        "traits": [
+          "interrupt",
+          "priority-60"
+        ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "cost": {
-          "activation": "simple"
+          "activation": "complex",
+          "powerPoints": 3
         },
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "self",
           "unit": "m"
         }
       }
     ],
     "slug": "resentment",
-    "description": "<p>When your Shields are broken, you may spend 4PP to gain 2 ticks of Shields as a Complex Action at @Trait[interrupt-2].</p>",
+    "description": "<p>Effect: When the user's Shields are broken, they may spend @PP[-3] as a Complex Action @Trait[interrupt] at @Trait[priority-60] to gain @Tick[2 shield].</p>",
     "traits": [],
     "prerequisites": [],
-    "cost": 2,
+    "cost": 3,
     "_migration": {
       "version": null,
       "previous": null
@@ -65,7 +68,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -78,21 +82,22 @@
           {
             "type": "roll-effect",
             "key": "resentment-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -105,8 +110,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -114,22 +121,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.1hbtcyVMpmrRmtVA.ActiveEffect.EWJRFhW6Yd9V3etk",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1764897004051,
         "modifiedTime": 1764897017677,
         "lastModifiedBy": "bDEGyOQfZwkb2ml2"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

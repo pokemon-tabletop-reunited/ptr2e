@@ -68,20 +68,20 @@
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.resolvedconditio",
             "predicate": [],
             "chance": 40,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [
               {
                 "nor": [
@@ -95,19 +95,19 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 1
+                "value": 1,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [
               {
                 "nor": [
@@ -121,19 +121,19 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 30
+                "value": 30,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [
               {
                 "or": [
@@ -147,19 +147,19 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [
               {
                 "or": [
@@ -173,14 +173,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 15
+                "value": 15,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -200,8 +200,8 @@
             "spa": null,
             "spd": 10,
             "spe": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -217,9 +217,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "onDeleteActions": {
@@ -228,11 +228,11 @@
             },
             "reevaluateOnUpdate": true,
             "allowDuplicate": false,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -245,8 +245,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -254,11 +254,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

@@ -54,23 +54,23 @@
             "key": "horn-trait-attack",
             "value": "drain-1-8",
             "predicate": [],
-            "mode": 2,
             "ignored": false,
             "property": "traits",
-            "definition": []
+            "definition": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "horn-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,8 +83,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -92,11 +92,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

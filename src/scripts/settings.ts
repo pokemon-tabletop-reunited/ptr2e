@@ -99,6 +99,15 @@ export function initializeSettings() {
     default: true,
   });
 
+  game.settings.register("ptr2e", "player-end-turn-permission", {
+    name: "PTR2E.Settings.PlayerEndTurnPermission.Name",
+    hint: "PTR2E.Settings.PlayerEndTurnPermission.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register("ptr2e", "worldSchemaVersion", {
     name: "PTR2E.Settings.WorldSchemaVersion.Name",
     hint: "PTR2E.Settings.WorldSchemaVersion.Hint",

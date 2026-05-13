@@ -1,0 +1,51 @@
+{
+  "name": "Vulnerable (Fairy)",
+  "type": "affliction",
+  "_id": "ShKXnWCV59pLsMUE",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "changes": [
+      {
+        "type": "ephemeral-modifier",
+        "key": "fairy-attack-effectiveness-stage",
+        "value": 1,
+        "predicate": [],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      }
+    ],
+    "slug": null,
+    "traits": [],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "removeAfterAttacking": false,
+    "removeAfterAttacked": false,
+    "stacks": 0,
+    "priority": 50,
+    "formula": "",
+    "type": "damage",
+    "description": "<p>This effect renders @Trait[fairy] attacks one stage more effective against the victim.</p>"
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": 3,
+    "expiry": "turnEnd"
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.350",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "lastModifiedBy": null
+  }
+}

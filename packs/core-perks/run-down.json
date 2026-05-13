@@ -9,7 +9,7 @@
       {
         "name": "Run Down",
         "slug": "run-down",
-        "description": "<p>Trigger: The user successfully hits an opponent with an attack.<br><br>Effect: The user may spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
+        "description": "<p>Trigger: The user successfully hits an opponent with an attack.<br><br>Effect: The user may spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action @Trait[interrupt].</p>",
         "traits": [],
         "type": "generic",
         "range": {
@@ -24,7 +24,7 @@
       }
     ],
     "slug": "run-down",
-    "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action at [Interrupt 2].</p>",
+    "description": "<p>Trigger: You successfully hit an opponent with an attack.<br><br>May spend 3 PP to gain +1 SPD stage for 5 activations as a Free Action @Trait[interrupt].</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -84,7 +84,7 @@
           {
             "type": "roll-effect",
             "key": "run-down-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
             "predicate": [],
             "chance": 100,
             "affects": "self",
@@ -92,8 +92,8 @@
             "alterations": [],
             "dontMerge": false,
             "isFixedChance": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -106,13 +106,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -120,11 +115,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

@@ -15,13 +15,12 @@
       </div>
       <p class="hint">{{localize "PTR2E.TypeMatrix.AddType.IconImg.Hint"}}</p>
     </div>
-    {{!-- <div class="form-group">
-      <label for="barImg">{{localize "PTR2E.TypeMatrix.AddType.BarImg.Name"}}</label>
+    <div class="form-group">
+      <label for="hide">{{localize "PTR2E.TypeMatrix.AddType.Hide.Name"}}</label>
       <div class="form-fields">
-        <file-picker name="barImg" value="{{barImg}}" type="image"></file-picker>
+        <input type="checkbox" name="hide" {{#if hide}}checked{{/if}} />
       </div>
-      <p class="hint">{{localize "PTR2E.TypeMatrix.AddType.BarImg.Hint"}}</p>
-    </div> --}}
+      <p class="hint">{{localize "PTR2E.TypeMatrix.AddType.Hide.Hint"}}</p></div>
   </main>
   <footer>
     <button type="submit">

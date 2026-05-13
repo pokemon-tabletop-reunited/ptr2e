@@ -112,6 +112,14 @@ declare global {
         Folder: {
             documentClass: typeof Folder;
             collection: typeof Folders;
+            sheetClasses: Record<string, {
+                        id: string;
+                        cls: typeof ItemSheet;
+                        default: boolean;
+                        label: string;
+                        canConfigure: boolean;
+                        canBeDefault: boolean;
+                    }>;
         };
 
         /** Configuration for the ChatMessage document */
@@ -127,6 +135,7 @@ declare global {
             sidebarIcon: string;
             template: string;
             dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
+            modes: Record<RollMode, {label: string; icon: string;}>;
         };
 
         /** Configuration for Item document */
@@ -533,7 +542,6 @@ declare global {
         /** Configuration for dice rolling behaviors in the Foundry VTT client */
         Dice: {
             types: (typeof Die | typeof DiceTerm)[];
-            rollModes: Record<RollMode, string>;
             rolls: ConstructorOf<Roll>[];
             termTypes: Record<string, ConstructorOf<RollTerm> & { fromData(data: object): RollTerm }>;
             terms: {

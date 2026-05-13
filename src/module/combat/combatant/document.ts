@@ -35,7 +35,7 @@ class CombatantPTR2e<
     if (result === false) return false;
 
     if (!this.type || this.type === 'base') {
-      this.updateSource({ type: 'character', "==system": this._source.system });
+      this.updateSource({ type: 'character', "system": new foundry.data.operators.ForcedReplacement(this._source.system) });
     }
     if (!data.initiative) this.updateSource({ initiative: this.baseAV || 150 });
 

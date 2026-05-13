@@ -29,7 +29,7 @@
           "dark",
           "fire"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 20% chance of being Flinched. This attack is considered to be both Dark- and Fire-Type.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of being @Affliction[delay 40].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -59,25 +59,20 @@
           {
             "type": "roll-effect",
             "key": "fiery-wrath-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 20,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -40
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 40%"
+                "value": -40,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -88,13 +83,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

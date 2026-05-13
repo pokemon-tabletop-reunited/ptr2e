@@ -806,11 +806,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -825,9 +825,9 @@
             "spa": 40,
             "spd": 20,
             "spe": 20,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -836,9 +836,9 @@
             ],
             "key": "",
             "value": "Sparkler",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -847,9 +847,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -858,9 +858,9 @@
             ],
             "key": "system.skills.psychic.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -869,9 +869,9 @@
             ],
             "key": "system.skills.fairy.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -882,12 +882,11 @@
             "value": "Compendium.ptr2e.core-abilities.Item.jSLTwgNAjpBnueKm",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -898,7 +897,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "basic",
@@ -907,9 +907,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,

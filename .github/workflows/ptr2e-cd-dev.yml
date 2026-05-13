@@ -29,6 +29,7 @@ jobs:
               run: |
                   SYSTEM_VERSION=$(grep -oP '(?<="version": ")[^"]+' dist/system.json | tr -d '\n')
                   perl -pi -E "s|latest/download/ptr2e\\.zip|download/$SYSTEM_VERSION/ptr2e.zip|" dist/system.json
+                  perl -pi -E 's|"manifest":\s*"[^"]*"|"manifest": "https://2e.ptr.wiki/foundry/download?repo=ptr2e&type=json&version=pre-release"|' dist/system.json
                   echo "systemVersion=$SYSTEM_VERSION" >> $GITHUB_ENV
 
             - name: Zip Files

@@ -34,13 +34,15 @@
             "key": "system.attributes.spa.stage",
             "value": 2,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
-        "traits": [],
+        "traits": [
+          "stage-change"
+        ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0,
@@ -52,13 +54,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 5,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -66,11 +64,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "never"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -81,7 +74,8 @@
         "modifiedTime": 1729530469211,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS",
         "exportSource": null
-      }
+      },
+      "showIcon": 0
     }
   ],
   "folder": "V4skAU6G3OH5fXgZ",

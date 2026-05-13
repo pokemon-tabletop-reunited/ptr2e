@@ -74,8 +74,8 @@
             "color": "#c2f55f",
             "private": false,
             "label": "Muse",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -83,9 +83,9 @@
             "value": "min(100,0+20*@actor.clocks.museClockUser000)",
             "predicate": [],
             "label": "Muse",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -93,8 +93,8 @@
             "value": "min(50,0+10*@actor.clocks.museClockUser000)",
             "predicate": [],
             "label": "Muse",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -107,8 +107,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -116,11 +116,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "never"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -131,7 +126,8 @@
         "createdTime": 1765585453387,
         "modifiedTime": 1766013643261,
         "lastModifiedBy": "5ImYyhOS2D6D7ypO"
-      }
+      },
+      "showIcon": 0
     }
   ],
   "_id": "OXVqgQQ78QUgRinK",

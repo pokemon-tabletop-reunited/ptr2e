@@ -11,7 +11,7 @@
         "slug": "i-get-knocked-down",
         "description": "<p>Trigger: The user takes damage and crosses the threshold to meet the @Trait[desperation-1-3] Condition.</p><p>Effect: The user gains @Tick[4 shield].</p>",
         "traits": [
-          "interrupt-2",
+          "interrupt",
           "desperation-1-3",
           "shield"
         ],
@@ -30,7 +30,7 @@
     ],
     "description": "<p>When the user takes damage and crosses the threshold to meet the @Trait[desperation-1-3] Condition from that damage, they may spend @PP[-3] as a Free Action @Trait[interrupt] to gain @Tick[4 shield].<br><br></p>",
     "traits": [
-      "interrupt-2",
+      "interrupt",
       "desperation-1-3",
       "shield"
     ],
@@ -90,21 +90,21 @@
           {
             "type": "roll-effect",
             "key": "i-get-knocked-down-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 4
+                "value": 4,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -117,8 +117,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -126,11 +126,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

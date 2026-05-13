@@ -64,7 +64,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
   static override validateJoint(source: SourceFromSchema<RollOptionSchema>): void {
     super.validateJoint(source);
 
-    if (source.suboptions.length > 0 && !source.toggleable) {
+    if (source.suboptions?.length > 0 && !source.toggleable) {
       throw Error("suboptions: must be omitted if not toggleable");
     }
 

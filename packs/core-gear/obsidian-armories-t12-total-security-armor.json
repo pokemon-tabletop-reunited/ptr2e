@@ -59,7 +59,7 @@
   "effects": [
     {
       "name": "T12 Total Security Armor",
-      "type": "affliction",
+      "type": "passive",
       "_id": "6YHy8UwGJfHVwcLr",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -69,8 +69,8 @@
             "key": "system.modifiers.speMultiplier",
             "value": -0.35,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -78,9 +78,9 @@
             "value": -10,
             "predicate": [],
             "label": "T12 Total Security Armor (Phys Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -88,9 +88,9 @@
             "value": -20,
             "predicate": [],
             "label": "T12 Total Security Armor (Phys Perc)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -98,9 +98,9 @@
             "value": -30,
             "predicate": [],
             "label": "T12 Total Security Armor (Missile)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -108,9 +108,9 @@
             "value": -15,
             "predicate": [],
             "label": "T12 Total Security Armor (Explode)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -118,9 +118,9 @@
             "value": -10,
             "predicate": [],
             "label": "T12 Total Security Armor (Energy Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -128,9 +128,9 @@
             "value": -10,
             "predicate": [],
             "label": "T12 Total Security Armor (Energy Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -138,9 +138,9 @@
             "value": -15,
             "predicate": [],
             "label": "T12 Total Security Armor (Energy Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -148,9 +148,9 @@
             "value": -15,
             "predicate": [],
             "label": "T12 Total Security Armor (Energy Flat)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -167,8 +167,8 @@
               }
             ],
             "label": "T12 Total Security Armor (Elemental)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-effect",
@@ -187,14 +187,14 @@
             "affects": "defensive",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 60
+                "value": 60,
+                "method": 5
               }
             ],
             "label": "T12 Total Security Armor (Elemental RES)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -210,10 +210,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -221,11 +220,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

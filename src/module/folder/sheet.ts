@@ -1,7 +1,6 @@
 import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 import FolderPTR2e from "./document.ts";
 import { ActorPTR2e } from "@actor";
-import { SocketRequestData } from "@scripts/hooks/socket.ts";
 import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 
 class FolderConfigPTR2e extends foundry.applications.sheets.FolderConfig {
@@ -41,7 +40,7 @@ class FolderConfigPTR2e extends foundry.applications.sheets.FolderConfig {
   private team: ActorPTR2e[] = [];
 
   override async _prepareContext(options?: DocumentSheetConfiguration<FolderPTR2e>) {
-    const context = await super._prepareContext(options) as Record<string, unknown> & {document: FolderPTR2e, team: {actor: ActorPTR2e, folder: FolderPTR2e}[]}
+    const context = await super._prepareContext(options) as Record<string, unknown> & { document: FolderPTR2e, team: { actor: ActorPTR2e, folder: FolderPTR2e }[] }
     const folder = context.document
 
     context.owner = this.owner ?? (folder.owner ? await fu.fromUuid<ActorPTR2e>(folder.owner) : null)
@@ -49,11 +48,11 @@ class FolderConfigPTR2e extends foundry.applications.sheets.FolderConfig {
     for (const memberUuid of folder.team) {
       const actor = await fu.fromUuid<ActorPTR2e>(memberUuid);
       if (actor && actor instanceof ActorPTR2e) {
-        context.team.push({ actor, folder: actor.folder as FolderPTR2e});
+        context.team.push({ actor, folder: actor.folder as FolderPTR2e });
       }
     }
-    for(const member of this.team) {
-      if(context.team.find(m => m.actor.id === member.id)) continue;
+    for (const member of this.team) {
+      if (context.team.find(m => m.actor.id === member.id)) continue;
       context.team.push({ actor: member, folder: member.folder as FolderPTR2e });
     }
 
@@ -152,50 +151,32 @@ class FolderConfigPTR2e extends foundry.applications.sheets.FolderConfig {
   ) {
     event.preventDefault();
     if (!game.user.isGM) {
-      if (!game.users.activeGM) {
-        ui.notifications.error("Oops! A GM must be online to process this request.");
-        // Throw error so that the form doesn't close
-        throw new Error("No GM is currently online.");
-      }
-      const id = fu.randomID();
+      const data = fu.mergeObject(formData.object, this.document.id ? { _id: this.document.id } : {
+        source: (() => {
+          const source = this.document.toObject()
+          const merged = fu.mergeObject(source, formData.object, { inplace: false });
+          if (!merged.name) merged.name = source.name;
+          return merged;
+        })(),
+        pack: this.document.pack
+      });
 
-      const timeout = setTimeout(() => {
-        ui.notifications.error("Request timed out. Please try again later.");
-        game.socket.off("system.ptr2e", listener);
-      }, 5000);
-
-      const listener = (data: SocketRequestData) => {
-        if (typeof data !== 'object' || !('request' in data)) return;
-        if (data.id !== id && ["acknowledge", "acknowledgeFailure"].includes(data.request)) return;
-
+      const notifId = ui.notifications.info("Sending request to GM...");
+      try {
+        const result = await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.folderCreateOrUpdate, data);
         ui.notifications.remove(notifId);
-        if (data.request === "acknowledgeFailure") ui.notifications.error(data.message || "GM failed to process request.");
-        else ui.notifications.info(data.message || "GM successfully processed request.");
-        game.socket.off("system.ptr2e", listener);
-        clearTimeout(timeout);
-
+        ui.notifications.info(result.message || "GM successfully processed request.");
         if ("resolve" in this.options && typeof this.options.resolve === "function") {
-          this.options.resolve(game.folders.get(data.documentId));
+          this.options.resolve(game.folders.get(result.documentId));
         }
       }
-
-      const data = {
-        request: "folderCreateOrUpdate",
-        data: fu.mergeObject(formData.object, this.document.id ? { _id: this.document.id } : {
-          source: (() => {
-            const source = this.document.toObject()
-            const merged = fu.mergeObject(source, formData.object, { inplace: false });
-            if (!merged.name) merged.name = source.name;
-            return merged;
-          })(),
-          pack: this.document.pack
-        }),
-        id
+      catch (error) {
+        ui.notifications.remove(notifId);
+        if(error instanceof Error && error.cause)
+          ui.notifications.error((error.cause + "") || "GM failed to process request.");
+        else
+          throw error;
       }
-
-      game.socket.on("system.ptr2e", listener);
-      game.socket.emit("system.ptr2e", data)
-      const notifId = ui.notifications.info("Sending request to GM...");
       return;
     }
 

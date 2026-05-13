@@ -39,8 +39,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "types": [
           "untyped"
@@ -50,7 +49,8 @@
         "accuracy": 85,
         "free": true,
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-        "predicate": []
+        "predicate": [],
+        "description": "<p>Ammo Use: 1</p>"
       }
     ],
     "description": "<p>The bow and arrow is a ranged weapon system consisting of an elastic launching device (bow) and long-shafted projectiles (arrows). Humans used bows and arrows for hunting and aggression long before recorded history, and the practice was common to many prehistoric cultures. They were important weapons of war from ancient history until the early modern period, when they were rendered increasingly obsolete by the development of the more powerful and accurate firearms. Today, bows and arrows are mostly used for hunting and sports. </p>",
@@ -64,7 +64,7 @@
       "handsHeld": 2,
       "slot": "held"
     },
-    "grade": "E",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": 25,
@@ -77,7 +77,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -93,7 +93,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "lvWIPtRom0SHwdMn",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -112,9 +113,10 @@
             "predicate": [],
             "label": "Bow",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -127,13 +129,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -141,22 +140,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1743879487195,
         "modifiedTime": 1764810776600,
         "lastModifiedBy": "r8rxDx9bzq5ASx3l",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-4"
+          "interrupt"
         ],
         "name": "Let's Roll",
         "slug": "lets-roll",
@@ -83,9 +83,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -95,11 +95,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -112,13 +112,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

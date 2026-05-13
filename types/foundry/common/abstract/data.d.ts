@@ -221,6 +221,8 @@ export default abstract class DataModel<
      */
     static migrateData<T extends DataModel>(this: ConstructorOf<T>, source: Record<string, unknown>): T["_source"];
 
+    static shimData<T extends DataModel>(this: ConstructorOf<T>, source: Record<string, unknown>, options?: unknown): T["_source"];
+
     /**
      * Wrap data migration in a try/catch which attempts it safely
      * @param source The candidate source data from which the model will be constructed

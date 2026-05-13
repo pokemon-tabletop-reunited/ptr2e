@@ -18,14 +18,14 @@
       "type": "steel",
       "power": 75,
       "accuracy": 80,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 2,
         "unit": "m"
       }
     },
-    "rarity": "uncommon",
+    "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 65,
         "accuracy": 95,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Bolt-Action Rifle",
         "slug": "bolt-action-rifle",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,19 +62,18 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 55,
         "accuracy": 85,
-        "free": true,
         "traits": [
           "double-strike",
           "missile",
@@ -82,7 +81,7 @@
         ],
         "name": "Bolt-Action Rifle (Snap Shot)",
         "slug": "bolt-action-rifle-snap-shot",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 2</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -91,20 +90,19 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 2
+          "activation": "complex"
         },
         "variant": "bolt-action-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 65,
         "accuracy": 75,
-        "free": true,
         "traits": [
           "dash",
           "missile",
@@ -112,7 +110,7 @@
         ],
         "name": "Bolt-Action Rifle (Hip Fire)",
         "slug": "bolt-action-rifle-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -121,11 +119,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "variant": "bolt-action-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -152,7 +150,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>Bolt action is a type of manual firearm action that is operated by directly manipulating the turn-bolt via a bolt handle, most commonly placed on the right-hand side of the firearm (as most users are right-handed). The majority of bolt-action firearms are rifles, and generally are chambered in fuller powered calibers.</p>"
+    "description": "<p>Bolt action is a type of manual firearm action that is operated by directly manipulating the turn-bolt via a bolt handle, most commonly placed on the right-hand side of the firearm (as most users are right-handed). The majority of bolt-action firearms are rifles, and generally are chambered in fuller powered calibers.</p>",
+    "ammoType": []
   },
   "_id": "7SB0KILKuBpiLVmr",
   "effects": [
@@ -170,9 +169,10 @@
             "predicate": [],
             "label": "Bolt-Action Rifle",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -185,13 +185,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -199,22 +196,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743901236922,
         "modifiedTime": 1757553621193,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "MKaFm5Pvt7tvgdAa"

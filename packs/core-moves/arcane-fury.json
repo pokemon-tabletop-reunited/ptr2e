@@ -12,7 +12,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: On hit, all valid targets lose -1 SPDEF stage for 5 activations, and have a 20% chance to be Flinched.</p>"
+      "notes": "<p>Effect: On hit, all valid targets lose -1 SPDEF stage for 5 activations, and have a 20% chance to be @Affliction[delay 30].</p>"
     },
     "traits": [],
     "actions": [
@@ -42,7 +42,7 @@
         "power": 30,
         "accuracy": 90,
         "predicate": [],
-        "description": "<p>Effect: On hit, all valid targets lose -1 SPDEF stage for 5 activations, and have a 20% chance to be Flinched.</p>"
+        "description": "<p>Effect: On hit, all valid targets lose -1 SPDEF stage for 5 activations, and have a 20% chance to be @Affliction[delay 30].</p>"
       }
     ],
     "grade": "C"
@@ -59,42 +59,32 @@
           {
             "type": "roll-effect",
             "key": "arcane-fury-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 20,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinched 30%"
-              },
-              {
-                "mode": 2,
-                "property": "",
-                "value": 0
+                "value": -30,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "arcane-fury-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -105,13 +95,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

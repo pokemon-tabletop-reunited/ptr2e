@@ -41,8 +41,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
@@ -289,8 +289,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
@@ -512,20 +512,21 @@ class CheckPTR2e {
         effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }), baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
         if (effectRoll.success) {
-          const item = await fu.fromUuid(effectRoll.effect);
-          if (!item || item.type !== "effect") {
+          const effect = await fu.fromUuid(effectRoll.effect);
+          if (!(effect instanceof ItemPTR2e && effect.type === "effect" || effect instanceof ActiveEffectPTR2e)) {
             console.error(`Failed to find effect item with uuid ${effectRoll.effect}`);
             continue;
           }
 
-          const grantedSource = item.toObject();
+          const grantedSource = effect.toObject();
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
               alteration.applyTo(grantedSource as ItemSourcePTR2e);
             }
 
-            effectsToApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
+            if(effect instanceof ItemPTR2e) effectsToApply.push(...(grantedSource as ItemSourcePTR2e).effects as ActiveEffectPTR2e['_source'][]);
+            else effectsToApply.push(grantedSource as ActiveEffectPTR2e['_source']);
           } catch (error) {
             if (error instanceof Error) console.warn(error);
           }
@@ -634,8 +635,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);

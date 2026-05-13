@@ -53,46 +53,46 @@
             "value": "{actor|link} enters combat and may spend {item|actions.contents.0.cost.powerPoints} PP to use {item|link}!",
             "predicate": [],
             "visibility": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "rapid-response-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAZ",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "rapid-response-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLZ",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -105,8 +105,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -114,11 +114,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

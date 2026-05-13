@@ -65,7 +65,7 @@
           {
             "type": "roll-effect",
             "key": "fighting-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.suppressedcondit",
             "predicate": [
               "origin:enemy"
             ],
@@ -75,8 +75,8 @@
             "alterations": [],
             "dontMerge": false,
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -89,13 +89,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Passive: Your @Trait[fighting] Type Moves gain a 20% chance to inflict @Affliction[suppressed 5]. If they already had a chance to inflict @Affliction[suppressed], that chance is increased by 20%.</p>",
       "origin": null,
@@ -103,11 +98,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

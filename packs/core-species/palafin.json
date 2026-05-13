@@ -337,7 +337,8 @@
       "wavesense-15",
       "fountain",
       "fully-evolved",
-      "jump-2"
+      "jump-2",
+      "underdog"
     ],
     "diet": [
       "carnivore"
@@ -541,18 +542,18 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "state": true,
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "state": false
+            "suboptions": []
           },
           {
             "type": "stats-alteration",
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": 0,
             "hp": null,
             "atk": 90,
@@ -560,95 +561,22 @@
             "spa": 53,
             "spd": 25,
             "spe": null,
-            "mode": 2,
             "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "suppress-ability",
-            "predicate": [
-              "forme:palafin-hero:active"
-            ],
-            "key": "water-veil",
-            "value": 0,
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "suppress-ability",
-            "predicate": [
-              "forme:palafin-hero:active"
-            ],
-            "key": "run-away",
-            "value": 0,
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "grant-item",
-            "predicate": [
-              "forme:palafin-hero:active"
-            ],
+            "phase": "initial",
             "key": "",
-            "value": "Compendium.ptr2e.core-abilities.Item.urMg5doRiuVtnIsi",
-            "allowDuplicate": false,
-            "reevaluateOnUpdate": true,
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.free",
-                "value": "true"
-              }
-            ],
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
-          },
-          {
-            "type": "grant-item",
-            "predicate": [
-              "forme:palafin-hero:active"
-            ],
-            "key": "",
-            "value": "Compendium.ptr2e.core-abilities.Item.Dh63Xai1qofF7Zo8",
-            "reevaluateOnUpdate": true,
-            "allowDuplicate": false,
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.free",
-                "value": "true"
-              }
-            ],
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "add-trait",
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": "propulsion",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -656,10 +584,11 @@
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": "well-built",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -667,10 +596,11 @@
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": "jump-2",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -678,10 +608,11 @@
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": "jump-5",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -691,8 +622,9 @@
             ],
             "key": "system.movement.overland.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -700,10 +632,11 @@
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": "pack-leader",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -711,10 +644,11 @@
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
-            "value": "ir-vision-15",
-            "mode": 2,
+            "value": "ir-vision-25",
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -722,10 +656,11 @@
             "predicate": [
               "forme:palafin-hero:active"
             ],
-            "key": "",
             "value": "deep-diver",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false
           },
           {
@@ -735,8 +670,9 @@
             ],
             "key": "system.skills.acrobatics.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -746,8 +682,9 @@
             ],
             "key": "system.skills.climb.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -757,8 +694,9 @@
             ],
             "key": "system.skills.conversation.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -768,8 +706,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 60,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -779,8 +718,9 @@
             ],
             "key": "system.skills.leadership.value",
             "value": 45,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -790,8 +730,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 45,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -801,8 +742,9 @@
             ],
             "key": "system.skills.listen.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -812,8 +754,9 @@
             ],
             "key": "system.skills.navigate.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -823,8 +766,9 @@
             ],
             "key": "system.skills.negotitation.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -834,8 +778,9 @@
             ],
             "key": "system.skills.psychology.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -845,8 +790,9 @@
             ],
             "key": "system.skills.spot.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -856,8 +802,9 @@
             ],
             "key": "system.skills.survival.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -867,8 +814,9 @@
             ],
             "key": "system.skills.swim.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -878,8 +826,9 @@
             ],
             "key": "system.skills.track.value",
             "value": 20,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
           },
           {
@@ -889,36 +838,10 @@
             ],
             "key": "system.skills.running.value",
             "value": 45,
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false
-          },
-          {
-            "type": "grant-item",
-            "predicate": [
-              "forme:palafin-hero:active"
-            ],
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.lyjLX6WIIrbdvqXS",
-            "reevaluateOnUpdate": true,
-            "allowDuplicate": false,
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.actions.0.free",
-                "value": "true"
-              }
-            ],
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
           }
         ],
         "slug": null,
@@ -927,17 +850,16 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -949,13 +871,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.2.beta",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1742824365123,
-        "modifiedTime": 1742828149316,
-        "lastModifiedBy": "pGrHtiBvIl79uG8D"
-      }
+        "modifiedTime": 1775567520715,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

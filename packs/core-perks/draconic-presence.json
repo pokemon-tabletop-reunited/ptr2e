@@ -71,7 +71,7 @@
           {
             "type": "roll-effect",
             "key": "dragon-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
             "predicate": [
               "origin:enemy"
             ],
@@ -81,8 +81,8 @@
             "alterations": [],
             "dontMerge": false,
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -95,13 +95,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Your @Trait[dragon] Type attacks gain a 20% chance to inflict @Affliction[fear 5], or +20% chance to inflict @Affliction[fear] if they would already do so.</p>",
       "origin": null,
@@ -109,11 +104,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

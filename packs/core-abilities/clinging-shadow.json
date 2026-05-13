@@ -21,15 +21,15 @@
           "distance": 13,
           "unit": "m"
         },
-        "description": "<p>The user gains @Affliction[transient 2] and @Affliction[invisible 2], and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
+        "description": "<p>The user gains @Affliction[transient 2] and @Affliction[invisible 2], and relocates itself to an open space within 2m of the target. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
         "img": "systems/ptr2e/img/svg/ghost_icon.svg"
       }
     ],
-    "description": "<p>Effect: Connection - Phantom Force. The user gains @Affliction[transient 2] and @Affliction[invisible 2], and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
+    "description": "<p>Effect: Connection - Phantom Force. The user gains @Affliction[transient 2] and @Affliction[invisible 2], and relocates itself to an open space within 2m of the target. The user is then @Affliction[delay 30]. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
     "traits": [
       "legendary",
       "connection",
-      "delay-2",
+      "flinch-20",
       "partial-automation"
     ],
     "slug": "clinging-shadow",
@@ -63,9 +63,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -75,49 +75,49 @@
               "granter": "cascade"
             },
             "allowDuplicate": false,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "clinging-shadow-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.transientconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.transientconditi",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "clinging-shadow-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.invisibleconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.invisibleconditi",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 2
+                "value": 2,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -130,13 +130,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

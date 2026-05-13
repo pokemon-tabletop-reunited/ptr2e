@@ -7,7 +7,7 @@
       {
         "traits": [
           "defensive",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Flame Body",
         "slug": "flame-body",
@@ -53,13 +53,13 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 30,
             "affects": "origin",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -70,13 +70,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

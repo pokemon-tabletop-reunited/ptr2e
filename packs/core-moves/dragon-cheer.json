@@ -49,7 +49,7 @@
   "effects": [
     {
       "name": "Dragon Cheer",
-      "type": "affliction",
+      "type": "passive",
       "_id": "Ea5z2W4QPwWu8M0b",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -57,20 +57,20 @@
           {
             "type": "roll-effect",
             "key": "dragon-cheer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "priority": null,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "dragon-cheer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
             "predicate": [
               "target:trait:dragon"
             ],
@@ -78,8 +78,8 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -93,13 +93,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 5,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "<p>Temporary status condition to apply the effect of Dragon Cheer</p>",
       "origin": null,

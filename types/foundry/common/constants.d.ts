@@ -29,6 +29,12 @@ export const ACTIVE_EFFECT_MODES: {
     OVERRIDE: 5;
 };
 
+export const ACTIVE_EFFECT_SHOW_ICON: {
+  NEVER: 0;
+  CONDITIONAL: 1;
+  ALWAYS: 2;
+}
+
 export const REGION_EVENTS: {
 
   /**
@@ -286,10 +292,11 @@ export const DOCUMENT_LINK_TYPES: [
 
 /** The supported dice roll visibility modes */
 export const DICE_ROLL_MODES: {
-    PUBLIC: "publicroll";
-    PRIVATE: "gmroll";
-    BLIND: "blindroll";
-    SELF: "selfroll";
+    PUBLIC: "public";
+    PRIVATE: "gm";
+    BLIND: "blind";
+    SELF: "self";
+    IC: "ic";
 };
 
 /**

@@ -7,7 +7,7 @@
       {
         "traits": [
           "defensive",
-          "interrupt-1"
+          "interrupt"
         ],
         "name": "Magma Armor",
         "slug": "magma-armor",
@@ -61,10 +61,10 @@
             "count": false,
             "state": false,
             "alwaysActive": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "suboptions": []
+            "suboptions": [],
+            "method": 2
           },
           {
             "type": "roll-option",
@@ -74,11 +74,11 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           }
         ],
         "slug": null,
@@ -92,13 +92,8 @@
       "description": "<p>Trigger: The user is hit by a [Contact] attack from a non Fire-Type creature. Effect: The triggering creature takes a Tick of HP damage. The user is immune to @Affliction[frostbite] and @Affliction[frozen].</p>",
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "origin": null,
       "tint": "#ffffff",

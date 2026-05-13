@@ -9,7 +9,7 @@
       {
         "name": "Metamove: Dirty Trick",
         "slug": "metamove-dirty-trick",
-        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be Flinched and they lose -1 EVA for 5 Activations.</p>",
+        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be @Affliction[delay 30] and lose -1 EVA Stage for 5 Activations.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 4,
@@ -28,7 +28,7 @@
       }
     ],
     "slug": "metamove-dirty-trick",
-    "description": "<p>When declaring an Attack, the user may spend 4PP to have that Attack inflict 20% Delay and cause affected creatures lose -1 EVA for 5 Activations if it hits.</p>",
+    "description": "<p>When declaring an Attack, the user may spend @PP[-4] to have that Attack inflict @Affliction[delay 20] and cause -1 EVA Stage for 5 Activations on hit hits.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 1,
@@ -87,34 +87,34 @@
           {
             "type": "roll-effect",
             "key": "metamove-dirty-trick-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
+                "value": -20,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "metamove-dirty-trick-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.hIE6W3Y5E9CyHiTy",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -127,8 +127,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -136,11 +136,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

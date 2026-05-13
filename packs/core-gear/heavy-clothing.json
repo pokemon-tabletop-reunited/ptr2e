@@ -73,9 +73,9 @@
             "value": -4,
             "predicate": [],
             "label": "Heavy Clothing (Contact/Sharp)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -83,9 +83,9 @@
             "value": -4,
             "predicate": [],
             "label": "Heavy Clothing (Contact/Sharp)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -93,9 +93,9 @@
             "value": -5,
             "predicate": [],
             "label": "Heavy Clothing (Missile)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -103,17 +103,17 @@
             "value": 5,
             "predicate": [],
             "label": "Heavy Clothing (RES)",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.attributes.spe.base",
             "value": 0.9,
             "predicate": [],
-            "mode": 1,
             "label": "Heavy Clothing",
-            "ignored": false
+            "ignored": false,
+            "method": 1
           }
         ],
         "slug": null,
@@ -126,8 +126,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -135,11 +135,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

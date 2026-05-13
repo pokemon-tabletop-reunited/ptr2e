@@ -74,6 +74,14 @@ export const CircumstanceModifierGroups = Object.freeze({
         value: 0.1
       },
       {
+        id: "capture-fainted",
+        label: "PTR2E.CircumstanceModifiers.Modifiers.CaptureFainted.label",
+        hint: "PTR2E.CircumstanceModifiers.Modifiers.CaptureFainted.hint",
+        name: "combat.capture-fainted",
+        amount: 0,
+        value: -0.5
+      },
+      {
         id: "destroyed-public-infrastructure",
         label: "PTR2E.CircumstanceModifiers.Modifiers.DestroyedPublicInfrastructure.label",
         hint: "PTR2E.CircumstanceModifiers.Modifiers.DestroyedPublicInfrastructure.hint",
@@ -187,6 +195,14 @@ export const CircumstanceModifierGroups = Object.freeze({
         value: 0.1
       },
       {
+        id: "capture-fainted",
+        label: "PTR2E.CircumstanceModifiers.Modifiers.CaptureFainted.label",
+        hint: "PTR2E.CircumstanceModifiers.Modifiers.CaptureFainted.hint",
+        name: "combat.capture-fainted",
+        amount: 0,
+        value: -0.5
+      },
+      {
         id: "offended-npc",
         label: "PTR2E.CircumstanceModifiers.Modifiers.OffendedNPC.label",
         hint: "PTR2E.CircumstanceModifiers.Modifiers.OffendedNPC.hint",
@@ -251,7 +267,15 @@ export const CircumstanceModifierGroups = Object.freeze({
         name: "exploration.capture-new-species",
         amount: 0,
         value: 0.1
-      }
+      },
+      {
+        id: "capture-fainted",
+        label: "PTR2E.CircumstanceModifiers.Modifiers.CaptureFainted.label",
+        hint: "PTR2E.CircumstanceModifiers.Modifiers.CaptureFainted.hint",
+        name: "combat.capture-fainted",
+        amount: 0,
+        value: -0.5
+      },
     ]
   },
   contests: {

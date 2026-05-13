@@ -34,7 +34,8 @@
           "adaptable",
           "crit-1",
           "flinch-10",
-          "contact"
+          "contact",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -61,11 +62,12 @@
         "description": "<p>Trigger: A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced].</p>",
         "traits": [
           "weapon",
-          "interrupt-2",
           "adaptable",
           "crit-1",
           "priority-20",
-          "contact"
+          "contact",
+          "horn",
+          "interrupt"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -95,7 +97,8 @@
           "weapon",
           "contact",
           "adaptable",
-          "grapple"
+          "grapple",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -140,7 +143,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -149,7 +152,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "D",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -166,9 +171,10 @@
             "value": 9,
             "predicate": [],
             "label": "Bayonet",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -176,9 +182,10 @@
             "value": -5,
             "predicate": [],
             "label": "Bayonet",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -191,8 +198,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -200,21 +209,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "lastModifiedBy": "r8rxDx9bzq5ASx3l",
-        "modifiedTime": 1762640448796
-      }
+        "modifiedTime": 1762640448796,
+        "createdTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "9CKlrqUYYOFyi5fV"

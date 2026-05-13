@@ -7,7 +7,7 @@
       {
         "traits": [
           "weather",
-          "interrupt-4"
+          "interrupt"
         ],
         "name": "Drizzle",
         "slug": "drizzle",
@@ -28,7 +28,7 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Drizzle (Extend)",
         "slug": "drizzle-extend",
@@ -84,9 +84,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.action.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -96,11 +96,11 @@
               "granter": "cascade"
             },
             "allowDuplicate": false,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -113,13 +113,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -36,7 +36,7 @@
       "desperation-1-3",
       "combat"
     ],
-    "description": "<p>The user gains +1 EVA Stage for 5 activations and @Affliction[advance 20]. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.</p>",
+    "description": "<p>The user gains +1 EVA Stage for 5 activations and @Affliction[advance 20]. This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user passes the Desperation threshold.</p>",
     "quantity": 1,
     "slug": "custap-berry",
     "stack": 1,
@@ -55,7 +55,7 @@
       {
         "name": "Custap Berry",
         "slug": "custap-berry",
-        "description": "<p>The user gains +1 EVA Stage for 5 activations and @Affliction[advance 20]. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.</p>",
+        "description": "<p>The user gains +1 EVA Stage for 5 activations and @Affliction[advance 20]. This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user passes the Desperation threshold.</p>",
         "traits": [
           "consumable",
           "natural",
@@ -88,34 +88,34 @@
           {
             "type": "roll-effect",
             "key": "custap-berry-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.OUBNweJOMjAEtAye",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.OUBNweJOMjAEtAye",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "custap-berry-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.advancecondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -128,8 +128,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -137,11 +137,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

@@ -49,7 +49,7 @@
   "effects": [
     {
       "name": "Supersonic",
-      "type": "affliction",
+      "type": "passive",
       "_id": "dPCibRe0DvrWhB8g",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -57,14 +57,14 @@
           {
             "type": "roll-effect",
             "key": "supersonic-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -78,13 +78,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

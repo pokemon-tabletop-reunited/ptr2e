@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-3"
+          "interrupt"
         ],
         "name": "Hypnotist",
         "slug": "hypnotist-active",
@@ -20,7 +20,7 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: A creature moves to a space within 5m of the user that was previously not within a 5m radius of the user.<br><br>Effect: The user may spend 3PP to use Hypnosis against the creature as a Free Action Interrupt.</p>",
+        "description": "<p>Trigger: A creature moves to a space within 5m of the user that was previously not within a 5m radius of the user.<br><br>Effect: The user may spend 3PP to use Hypnosis against the creature as a Free Action @Trait[interrupt].</p>",
         "img": "icons/magic/control/hypnosis-mesmerism-pendulum.webp"
       },
       {
@@ -40,7 +40,7 @@
         }
       }
     ],
-    "description": "<p>Effect: Connection - Hypnosis. <br><br>Interrupt Trigger: An enemy moves into range, allowing the user to activate Hypnosis as a Free Action Interrupt.<br><br>Passive: The user's Hypnosis gains Danger Close.</p>",
+    "description": "<p>Effect: Connection - Hypnosis. <br><br>@Trait[interrupt] Trigger: An enemy moves into range, allowing the user to activate Hypnosis as a Free Action @Trait[interrupt].<br><br>Passive: The user's Hypnosis gains Danger Close.</p>",
     "traits": [
       "partial-automation",
       "connection"
@@ -76,9 +76,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -88,11 +88,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -105,13 +105,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -6,25 +6,25 @@
     "actions": [
       {
         "traits": [
-          "interrupt-4"
+          "interrupt"
         ],
         "name": "Quick Charge",
         "slug": "quick-charge",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
-          "trigger": "<p>The user declares an Attack.</p>"
+          "powerPoints": 3,
+          "trigger": "<p>The user's current AV is less than 55.</p>"
         },
         "range": {
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: The triggering attack gains [Priority 3] for the rest of the user's Activation. If it already had [Priority X], it becomes [Priority X+3].</p>",
+        "description": "<p>Trigger: The user's current AV is less than 55.</p><p>Effect: The user freely uses Rush and gains @Affliction[advance 99]. This Ability is then @Trait[nullified 2].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: The triggering attack gains [Priority 3] for the rest of the user's Activation. If it already had [Priority X], it becomes [Priority X+3].</p>",
+    "description": "<p>Trigger: The user's current AV is less than 55.</p><p>Effect: The user freely uses Rush and gains @Affliction[advance 99]. This Ability is then @Trait[nullified 2].</p>",
     "traits": [],
     "slug": "quick-charge",
     "_migration": {

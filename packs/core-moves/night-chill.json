@@ -45,7 +45,7 @@
   "effects": [
     {
       "name": "Night Chill",
-      "type": "affliction",
+      "type": "passive",
       "_id": "4sCjnXlcJUILnbNu",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -53,13 +53,13 @@
           {
             "type": "roll-effect",
             "key": "night-chill-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -73,13 +73,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

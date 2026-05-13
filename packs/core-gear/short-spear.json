@@ -61,7 +61,7 @@
         "description": "<p>Trigger: A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced].</p>",
         "traits": [
           "weapon",
-          "interrupt-2",
+          "interrupt",
           "adaptable",
           "crit-1",
           "priority-30",
@@ -138,9 +138,9 @@
             "value": 6,
             "predicate": [],
             "label": "Short Spear",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -148,9 +148,9 @@
             "value": 6,
             "predicate": [],
             "label": "Short Spear (Fling)",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -163,8 +163,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -172,11 +172,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

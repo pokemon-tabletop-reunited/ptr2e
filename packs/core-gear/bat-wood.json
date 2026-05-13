@@ -89,7 +89,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "ZewWbLPYdCt2qPzv",
   "effects": [
@@ -103,10 +104,11 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 2,
+            "value": 4,
             "predicate": [],
             "label": "Bat (Wood)",
-            "mode": 2,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
           }
@@ -121,8 +123,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -130,22 +134,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1757541637710,
-        "modifiedTime": 1757553426726,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+        "modifiedTime": 1775572170797,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "PhrQtZzEwKPjfmK2"

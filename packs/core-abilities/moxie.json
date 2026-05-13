@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-1"
+          "interrupt"
         ],
         "name": "Moxie",
         "slug": "moxie",
@@ -50,15 +50,15 @@
           {
             "type": "roll-effect",
             "key": "moxie-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,8 +71,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -3,6 +3,8 @@ import { ChangeModel, ChangeSchema } from "@data";
 import { ItemPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
 import { ItemAlteration } from "../alterations/item.ts";
+import ActiveEffectPTR2e from "../document.ts";
+import { EffectUUID } from "types/foundry/common/documents/active-effect.js";
 
 export default class EffectRollChangeSystem extends ChangeModel {
   static override TYPE = "roll-effect";
@@ -31,7 +33,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
   static #validateUuid(
     value: unknown
   ): void | foundry.data.validation.DataModelValidationFailure {
-    if (!UUIDUtils.isItemUUID(value)) {
+    if (!UUIDUtils.isEffectUUID(value) && !UUIDUtils.isItemUUID(value)) {
       return new foundry.data.validation.DataModelValidationFailure({
         invalidValue: value,
         message: game.i18n.localize("PTR2E.Effect.FIELDS.ChangeUuid.invalid.notAnItemUuid"),
@@ -84,18 +86,18 @@ export default class EffectRollChangeSystem extends ChangeModel {
       if (!this.test(params.test ?? this.actor.getRollOptions())) return null;
 
       const uuid = this.resolveInjectedProperties(this.uuid);
-      if (!UUIDUtils.isItemUUID(uuid)) {
+      if (!(UUIDUtils.isItemUUID(uuid) || UUIDUtils.isEffectUUID(uuid))) {
         this.failValidation(`"${uuid}" does not look like a UUID`);
         return null;
       }
       const effect: Maybe<ClientDocument> = await this.getItem(uuid);
-      if (!(effect instanceof ItemPTR2e && effect.type === "effect")) {
+      if (!(effect instanceof ItemPTR2e && effect.type === "effect" || effect instanceof ActiveEffectPTR2e)) {
         this.failValidation(`unable to find effect item with uuid "${uuid}"`);
         return null;
       }
 
       return {
-        effect: effect.uuid,
+        effect: effect.uuid as ItemUUID | EffectUUID,
         slug: effect.slug,
         chance: this.chance,
         label: this.label,

@@ -30,10 +30,10 @@
             "key": "dragon-attack",
             "value": "danger-close",
             "predicate": [],
-            "mode": 2,
             "ignored": false,
             "property": "traits",
-            "definition": []
+            "definition": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -49,10 +49,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null,
-        "turns": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -60,11 +59,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": "always"
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
@@ -73,7 +67,8 @@
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "lastModifiedBy": null
-      }
+      },
+      "showIcon": 2
     }
   ],
   "flags": {},

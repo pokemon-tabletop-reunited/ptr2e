@@ -61,7 +61,7 @@
         "description": "<p>Trigger: A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced].</p>",
         "traits": [
           "weapon",
-          "interrupt-2",
+          "interrupt",
           "adaptable",
           "crit-1",
           "contact",
@@ -138,18 +138,18 @@
             "value": 14,
             "predicate": [],
             "label": "Long Spear",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
             "key": "fling-long-spear-attack-damage-flat",
             "value": 6,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -162,8 +162,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -171,11 +171,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

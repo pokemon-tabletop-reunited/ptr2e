@@ -28,7 +28,7 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[charmed 5], and a 10% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[charmed 5], and a 10% chance of being @Affliction[delay 40].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -58,37 +58,32 @@
           {
             "type": "roll-effect",
             "key": "lovely-bite-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.charmedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.charmedcondition",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "lovely-bite-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -40
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 40%"
+                "value": -40,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -99,13 +94,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

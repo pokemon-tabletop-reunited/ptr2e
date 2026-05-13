@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
-import { sluggify } from "@utils";
+import { getApplicableCompendiums, sluggify } from "@utils";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import { ChoiceSetPrompt } from "@module/effects/changes/choice-set/prompt.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -107,7 +107,10 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
   }
 
   override async _prepareContext() {
-    const data = Array.from(await game.packs.get("ptr2e.core-species")?.getIndex({ fields: ["system.slug", "system.number", "system.form"] }) ?? []).flatMap(i => {
+    const packs = getApplicableCompendiums("species");
+    const results = await Promise.all(packs.map(p => game.packs.get(p)!.getIndex({ fields: ["system.habitats", "system.slug", "system.number", "system.form"] })));
+
+    const data = results.flatMap(r => r.map(i => {
       const form = i.system.form;
       const slug = i.system.slug || sluggify(i.name)
       const fullSlug = slug + (form?.length ? `-${form}` : "");
@@ -132,7 +135,7 @@ export class DexApp extends foundry.applications.api.HandlebarsApplicationMixin(
         tooltip: `${i.name}<hr>${state}`,
         number: i.system.number
       }
-    }).sort((a, b) => a.number === b.number ? a.name.localeCompare(b.name) : a.number - b.number);
+    }).flat()).sort((a, b) => a.number === b.number ? a.name.localeCompare(b.name) : a.number - b.number);
 
     if (data.length === 0) {
       throw new Error("No species found in the compendium.");

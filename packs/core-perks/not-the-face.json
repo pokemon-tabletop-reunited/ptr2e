@@ -20,7 +20,7 @@
         "slug": "not-the-face",
         "description": "<p>Trigger: The user crosses the @Trait[desperation-1-2] or @Trait[desperation-1-3] threshold.<br><br>Effect: The targeted creature gains @Affliction[marked 4].</p>",
         "traits": [
-          "interrupt-4"
+          "interrupt"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
@@ -36,9 +36,9 @@
         }
       }
     ],
-    "description": "<p>Effect: When the user crosses the @Trait[desperation-1-2] or @Trait[desperation-1-3] threshold, the user may spend 3 PP as a Free Action at @Trait[interrupt-4] to apply @Affliction[marked 4] to an ally within 6m.</p>",
+    "description": "<p>Effect: When the user crosses the @Trait[desperation-1-2] or @Trait[desperation-1-3] threshold, the user may spend 3 PP as a Free Action @Trait[interrupt] to apply @Affliction[marked 4] to an ally within 6m.</p>",
     "traits": [
-      "interrupt-4"
+      "interrupt"
     ],
     "prerequisites": [
       {
@@ -93,22 +93,22 @@
           {
             "type": "roll-effect",
             "key": "not-the-face-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.markedcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.markedcondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "dontMerge": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 4
+                "value": 4,
+                "method": 5
               }
             ],
             "priority": null,
             "isFixedChance": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -121,13 +121,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -135,11 +130,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

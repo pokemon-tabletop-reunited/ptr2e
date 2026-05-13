@@ -12,7 +12,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>"
+      "notes": "<p>Effect: On hit, the target has a 30% chance of being @Affliction[delay 30].</p>"
     },
     "traits": [],
     "actions": [
@@ -41,7 +41,7 @@
         "power": 35,
         "accuracy": 95,
         "predicate": [],
-        "description": "<p><span style=\"font-family: Signika, sans-serif\">Effect: On hit, the target has a 30% chance of being Flinched.</span></p>"
+        "description": "<p><span style=\"font-family: Signika, sans-serif\">Effect: On hit, the target has a 30% chance of being @Affliction[delay 30].</span></p>"
       }
     ],
     "grade": "E"
@@ -59,26 +59,21 @@
           {
             "type": "roll-effect",
             "key": "creeping-feeling-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 30%"
+                "value": -30,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "dontMerge": false
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -89,13 +84,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

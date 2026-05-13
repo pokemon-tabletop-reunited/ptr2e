@@ -49,7 +49,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: When the user declares an Attack, they have a 20% chance of gaining @Affliction[advance 20] on that Attack (or increasing that Action's existing @Affliction[advance] value by +20% for that Attack's use).</p>",
+    "description": "<p>Effect: The user user has a 20% chance of gaining @Affliction[advance 20] when using an Attack, and a 5% chance of gaining @Affliction[advance 20] with Generic Actions.</p>",
     "slug": "quick-claw",
     "quantity": 1,
     "publication": {
@@ -85,27 +85,43 @@
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 20,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 20
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Quick Claw: Advance 20%"
+                "value": 20,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "isFixedChance": false
+            "isFixedChance": false,
+            "method": 2
+          },
+          
+          {
+            "type": "roll-effect",
+            "key": "generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [],
+            "chance": 5,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "priority": null,
+            "ignored": false,
+            "isFixedChance": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -118,15 +134,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": 0,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
-      "description": "<p>Effect: When the user declares an Attack, they have a 20% chance of gaining [Priority 2] on that Attack (or increasing that Action's existing Priority value by +2 for that Attack's use).</p>",
+      "description": "<p>Effect: The user user has a 20% chance of gaining @Affliction[advance 20] when using an Attack, and a 5% chance of gaining @Affliction[advance 20] with Generic Actions.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,

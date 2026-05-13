@@ -121,7 +121,7 @@
           "weapon",
           "adaptable",
           "crit-1",
-          "interrupt-2"
+          "interrupt"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -193,9 +193,9 @@
             "value": 17,
             "predicate": [],
             "label": "Halberd",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -203,46 +203,41 @@
             "value": 5,
             "predicate": [],
             "label": "Halberd Chop",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "halberd-chop-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Delay 30%"
+                "value": -30,
+                "method": 5
               }
             ],
             "dontMerge": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "halberd-chop-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
@@ -250,18 +245,18 @@
             "value": 2,
             "predicate": [],
             "label": "Halberd Spike",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "flat-modifier",
             "key": "fling-halberd-attack-damage-flat",
             "value": 12,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -274,8 +269,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -283,11 +278,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

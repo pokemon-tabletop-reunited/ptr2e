@@ -7,7 +7,7 @@
       {
         "traits": [
           "defensive",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Fortitude",
         "slug": "fortitude",
@@ -54,14 +54,14 @@
           {
             "type": "roll-effect",
             "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.jEX7s3GbbAtzgyS3",
             "predicate": [],
             "chance": 100,
             "affects": "defensive",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,13 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

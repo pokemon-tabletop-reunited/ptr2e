@@ -38,7 +38,7 @@
       "desperation-1-3",
       "combat"
     ],
-    "description": "<p>The target gains @Tick[8]. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.</p>",
+    "description": "<p>The target gains @Tick[8]. This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user passes the Desperation threshold.</p>",
     "quantity": 1,
     "slug": "mago-berry",
     "stack": 1,
@@ -57,7 +57,7 @@
       {
         "name": "Mago Berry",
         "slug": "mago-berry",
-        "description": "<p>The target gains @Tick[8]. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.</p>",
+        "description": "<p>The target gains @Tick[8]. This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user passes the Desperation threshold.</p>",
         "traits": [
           "restorative",
           "consumable",
@@ -92,21 +92,21 @@
           {
             "type": "roll-effect",
             "key": "mago-berry-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 8
+                "value": 8,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -119,8 +119,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -128,11 +128,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.UVxaQB25eP6KZMTz.ActiveEffect.ll30xJMa3t6M4gA4",
         "duplicateSource": null,

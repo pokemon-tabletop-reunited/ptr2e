@@ -52,9 +52,9 @@
             "predicate": [],
             "priority": null,
             "label": "Truant",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -62,29 +62,29 @@
             "value": -10,
             "predicate": [],
             "label": "Truant",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -25
+                "value": -25,
+                "method": 5
               }
             ],
             "dontMerge": false,
             "label": "Truant",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -97,13 +97,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -111,11 +106,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

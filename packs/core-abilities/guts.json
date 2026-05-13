@@ -56,8 +56,8 @@
             "predicate": [
               "effect:major-affliction"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -66,8 +66,8 @@
             "predicate": [
               "effect:affliction:burn"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -80,10 +80,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": 0,
-        "combat": null,
-        "startRound": 1,
-        "startTurn": 0
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Effect: The user's ATK stat increases by 50% if affected by a Major Status Affliction. If the user has @Affliction[burn], their ATK increases by 100% instead.</p>",
       "origin": null,
@@ -91,11 +89,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

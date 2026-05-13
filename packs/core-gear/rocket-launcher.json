@@ -53,7 +53,7 @@
         ],
         "name": "Rocket Launcher",
         "slug": "rocket-launcher",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. On resolution, the user is Flinched 2.</p>",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. On resolution, the user is @Affliction[delay 20].</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -110,9 +110,9 @@
             "predicate": [],
             "label": "Rocket Launcher",
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -125,13 +125,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -139,11 +134,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,

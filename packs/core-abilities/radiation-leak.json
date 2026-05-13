@@ -7,7 +7,7 @@
       {
         "traits": [
           "weather",
-          "interrupt-4"
+          "interrupt"
         ],
         "name": "Radiation Leak",
         "slug": "radiation-leak",
@@ -28,7 +28,7 @@
       {
         "traits": [
           "weather",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Radiation Leak (Extend)",
         "slug": "radiation-leak-extend",
@@ -89,11 +89,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -106,8 +106,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

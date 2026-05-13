@@ -7,12 +7,12 @@
       "item:move:reflect"
     ],
     "cost": 4,
-    "description": "<p>When using either @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen} or @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}, you may spend 3PP to also use the other one as a Free Action at @Trait[interrupt-2].<br><br>Connection: @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen}, @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}.</p>",
+    "description": "<p>When using either @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen} or @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}, you may spend 3PP to also use the other one as a Free Action @Trait[interrupt].<br><br>Connection: @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen}, @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}.</p>",
     "actions": [
       {
         "name": "Screen Setter",
         "slug": "screen-setter",
-        "description": "<p>When using either @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen} or @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}, you may spend 3PP to also use the other one as a Free Action at @Trait[interrupt-2].</p>",
+        "description": "<p>When using either @UUID[Compendium.ptr2e.core-moves.gSRNdRZt5vRCzqwM]{Light Screen} or @UUID[Compendium.ptr2e.core-moves.1Fj2tpYLzmm6bnIN]{Reflect}, you may spend 3PP to also use the other one as a Free Action @Trait[interrupt].</p>",
         "cost": {
           "activation": "complex",
           "powerPoints": 3
@@ -96,22 +96,22 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -120,22 +120,22 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -148,8 +148,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -157,11 +157,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

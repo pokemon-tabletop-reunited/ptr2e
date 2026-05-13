@@ -58,7 +58,7 @@
           {
             "type": "roll-effect",
             "key": "dire-claw-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 25,
             "affects": "target",
@@ -66,13 +66,13 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "dire-claw-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 25,
             "affects": "target",
@@ -80,13 +80,13 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "dire-claw-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 25,
             "affects": "target",
@@ -94,8 +94,8 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -108,13 +108,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -122,11 +117,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,

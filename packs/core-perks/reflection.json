@@ -9,8 +9,10 @@
       {
         "name": "Reflection",
         "slug": "reflection",
-        "description": "<p>Effect: When the user suffers damage that would cause them their Shield to break, the user may spend 2 PP at @Trait[interrupt-2] to inflict @Tick[-1] on the attacker, and give them @Affliction[delay 30].</p>",
-        "traits": [],
+        "description": "<p>Effect: When the user suffers damage that would cause them their Shield to break, the user may spend @PP[-2] as a Free Action @Trait[interrupt] to inflict @Tick[-1] and @Affliction[delay 30]. on the attacker.</p>",
+        "traits": [
+          "interrupt"
+        ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "cost": {
@@ -19,12 +21,13 @@
         },
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
     "slug": "reflection",
-    "description": "<p>Effect: When the user suffers damage that would cause them their Shield to break, the user may spend 2 PP at @Trait[interrupt-2] to inflict @Tick[-1] on the attacker, and give them @Affliction[delay 30].</p>",
+    "description": "<p>Effect: When the user suffers damage that would cause them their Shield to break, the user may spend @PP[-2] as a Free Action @Trait[interrupt] to inflict @Tick[-1] and @Affliction[delay 30]. on the attacker.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -65,7 +68,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -78,34 +82,36 @@
           {
             "type": "roll-effect",
             "key": "reflection-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
             "key": "reflection-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
+                "value": -30,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -118,8 +124,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -127,22 +135,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1764896883022,
-        "modifiedTime": 1764896934829,
-        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
-      }
+        "modifiedTime": 1776353960348,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

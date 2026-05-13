@@ -1,0 +1,124 @@
+{
+  "name": "Encouragement",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "encouragement",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "encouragement",
+        "name": "Encouragement",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The target gains @Affliction[argute 2] and @Affliction[hale 2].</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "D"
+  },
+  "_id": "NOcGQgz4eyWeo9Be",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "effects": [
+    {
+      "name": "Encouragement",
+      "type": "passive",
+      "_id": "ZeehHwgHo6kFkNf2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "encouragement-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.argutecondition0",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "encouragement-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.halecondition000",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "createdTime": 1776355198554,
+        "modifiedTime": 1776355198554,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
+    }
+  ],
+  "flags": {}
+}

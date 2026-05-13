@@ -7,9 +7,9 @@
       {
         "traits": [
           "legendary",
-          "interrupt-4",
+          "interrupt",
           "defensive",
-          "delay-4"
+          "flinch-40"
         ],
         "name": "Phylogeny (Reaction)",
         "slug": "phylogeny-reaction",
@@ -30,7 +30,7 @@
       {
         "traits": [
           "legendary",
-          "interrupt-3"
+          "interrupt"
         ],
         "name": "Phylogeny (Barrier)",
         "slug": "phylogeny-barrier",
@@ -62,7 +62,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: Connection – Barrier. When the user declares Barrier, they may spend 3 PP as a Free Action at @Trait[interrupt-3] to gain +1 SPDEF Stage for 5 Activations and @Tick[6 shield]. When the user would be targeted by an Attack, the user may spend 4 PP as a Free Action at @Trait[interrupt-4] to freely use Barrier, gain @Affliction[braced 3], and be Flinched 4.</p>",
+    "description": "<p>Effect: Connection – Barrier. When the user declares Barrier, they may spend @PP[-3] as a Free Action @Trait[interrupt] to gain +1 SPDEF Stage for 5 Activations and @Tick[6 shield]. When the user would be targeted by an Attack, the user may spend @PP[-3] as a Free Action @Trait[interrupt] to freely use Barrier, gain @Affliction[braced 3], and be @Affliction[delay 40].</p>",
     "traits": [
       "legendary"
     ],
@@ -97,9 +97,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": 0
+                "value": 0,
+                "method": 5
               }
             ],
             "priority": null,
@@ -109,19 +109,19 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.modifiers.slots",
             "value": 3,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -132,9 +132,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -144,11 +144,11 @@
             },
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -159,9 +159,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -171,11 +171,11 @@
             },
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -188,13 +188,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

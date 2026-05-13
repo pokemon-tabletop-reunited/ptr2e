@@ -20,7 +20,7 @@
         "slug": "berserkergang",
         "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user uses Rage, targeting itself, as a Free Action and gains @Affliction[delay 30].</p>",
         "traits": [
-          "interrupt-3"
+          "interrupt"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -85,23 +85,23 @@
           {
             "type": "roll-effect",
             "key": "berserkergang-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": 30
+                "value": 30,
+                "method": 5
               }
             ],
             "label": "Berserkergang",
             "priority": null,
             "dontMerge": false,
             "isFixedChance": true,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-note",
@@ -110,8 +110,8 @@
             "predicate": [],
             "visibility": null,
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -124,13 +124,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -138,11 +133,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-perks.Item.lAzKGhCaE28Nk7gP.ActiveEffect.K8myFiH8KtoNqkyD",
         "duplicateSource": null,

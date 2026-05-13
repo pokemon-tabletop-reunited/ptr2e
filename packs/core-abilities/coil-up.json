@@ -5,13 +5,15 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "flinch-20"
+        ],
         "name": "Coil Up",
         "slug": "coil-up",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
+          "powerPoints": 0,
           "trigger": "<p>The user enters combat.</p>"
         },
         "range": {
@@ -19,11 +21,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect:The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect:The user freely uses Coil.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Coil.The user freely uses Coil, and is @Affliction[delay 20].</p>",
     "traits": [
       "connection"
     ],
@@ -58,9 +60,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -70,11 +72,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -87,13 +89,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

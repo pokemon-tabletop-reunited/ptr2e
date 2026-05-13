@@ -73,22 +73,21 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "change system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "System.actions.0.category",
-                "value": "special"
+                "value": "special",
+                "method": 5
               },
               {
-                "mode": 2,
                 "property": "system.actions.0.trait",
-                "value": "weapon"
+                "value": "weapon",
+                "method": 2
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -99,7 +98,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -112,13 +112,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

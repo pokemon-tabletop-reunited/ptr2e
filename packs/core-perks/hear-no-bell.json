@@ -87,11 +87,11 @@
             "key": "damaging-attack-power",
             "value": "floor(min(33, 100 - @actor.system.health.percent)/33*50)",
             "predicate": [],
-            "mode": 1,
             "priority": null,
             "label": "Hear No Bell (Power)",
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 1
           }
         ],
         "slug": null,
@@ -104,13 +104,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>The Power of the user's Attacks is increased based on how much HP they have remaining, to a maximum of 50% at 33% HP remaining.</p>",
       "origin": null,
@@ -118,11 +113,6 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {
-        "ptr2e": {
-          "displayOnToken": ""
-        }
-      },
       "_stats": {
         "compendiumSource": "Actor.vBCspn4IjAKk8EBj.Item.uIfc2ExBTcZKEZTL.ActiveEffect.CVhM2lljJfTSq5Tz",
         "duplicateSource": null,

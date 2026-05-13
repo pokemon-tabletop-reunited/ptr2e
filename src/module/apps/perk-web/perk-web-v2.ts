@@ -203,115 +203,123 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         PerkWebApp.refresh.call(this);
       },
       "evolve": async function (this: PerkWebApp) {
+        if (this.evolving) return void ui.notifications.warn(game.i18n.localize("Please wait for current evolution to finish..."));
         if (!this.currentNode || !this.actor) return;
         if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
+        this.element.querySelector("button[data-action='evolve']")?.setAttribute("disabled", "disabled");
+        this.evolving = true;
 
-        const perk = this.currentNode.perk;
-        const species = await fu.fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
-        if (!species) return;
+        const result = await (async () => {
+          if (!this.currentNode || !this.actor) return;
+          const perk = this.currentNode.perk;
+          const species = await fu.fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
+          if (!species) return;
 
-        const current = this.actor.species;
-        if (!current) return;
+          const current = this.actor.species;
+          if (!current) return;
 
-        const level = this.actor.system.advancement.level;
-        const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
-        const newMoves = await (async () => {
-          const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
+          const level = this.actor.system.advancement.level;
+          const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
+          const newMoves = await (async () => {
+            const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
 
-          return (await Promise.all(
-            levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
-          )).flatMap((move) => move ? [move] : []);
-        })();
+            return (await Promise.all(
+              levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
+            )).flatMap((move) => move ? [move] : []);
+          })();
 
-        const { portrait: img, token: tokenImage } = await (async () => {
-          const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
-          if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
-          const resolver = await ImageResolver.createFromSpeciesData(
-            {
-              dexId: species.system.number,
-              shiny: this.actor!.system.shiny,
-              female: this.actor!.system.gender === "female",
-              forms: species.system.form ? species.system.form.split("-") : [],
-            },
-            config
-          );
-          if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+          const { portrait: img, token: tokenImage } = await (async () => {
+            const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
+            if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+            const resolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: species.system.number,
+                shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
+                forms: species.system.form ? species.system.form.split("-") : [],
+              },
+              config
+            );
+            if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
 
-          const tokenResolver = await ImageResolver.createFromSpeciesData(
-            {
-              dexId: species.system.number,
-              shiny: this.actor!.system.shiny,
-              female: this.actor!.system.gender === "female",
-              forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
-            },
-            config
-          );
-          return {
-            portrait: resolver.result,
-            token: tokenResolver?.result ?? resolver.result
-          }
-        })();
+            const tokenResolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: species.system.number,
+                shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
+                forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
+              },
+              config
+            );
+            return {
+              portrait: resolver.result,
+              token: tokenResolver?.result ?? resolver.result
+            }
+          })();
 
-        const flags = species.flags;
-        flags.core ??= {};
-        flags.core.sourceId = species.uuid;
+          const flags = species.flags;
+          flags.core ??= {};
+          flags.core.sourceId = species.uuid;
 
-        //Add evolution data
-        const evolutions = this.actor.flags?.ptr2e?.evolutionHistory ?? [];
-        const sourceUuid = (() => {
-          const sourceUuid = (current.parent.flags?.core?.sourceId || current.parent._stats?.compendiumSource) || (() => {
-            if (!current.evolutions) return undefined
-            if (current.evolutions.name === current.slug) return current.evolutions.uuid;
-            function recursiveFindCurrent(evolutions: EvolutionData[] | null): string | undefined {
-              if (!evolutions) return undefined;
-              for (const evolution of evolutions) {
-                if (evolution.name === current!.slug) return evolution.uuid;
-                const result = recursiveFindCurrent(evolution.evolutions);
-                if (result) return result;
+          //Add evolution data
+          const evolutions = this.actor.flags?.ptr2e?.evolutionHistory ?? [];
+          const sourceUuid = (() => {
+            const sourceUuid = (current.parent.flags?.core?.sourceId || current.parent._stats?.compendiumSource) || (() => {
+              if (!current.evolutions) return undefined
+              if (current.evolutions.name === current.slug) return current.evolutions.uuid;
+              function recursiveFindCurrent(evolutions: EvolutionData[] | null): string | undefined {
+                if (!evolutions) return undefined;
+                for (const evolution of evolutions) {
+                  if (evolution.name === current!.slug) return evolution.uuid;
+                  const result = recursiveFindCurrent(evolution.evolutions);
+                  if (result) return result;
+                }
+                return undefined;
               }
-              return undefined;
-            }
-            return recursiveFindCurrent(current.evolutions.evolutions);
-          })() || "";
-          if (sourceUuid.startsWith("Scene.") || sourceUuid.startsWith("Actor.")) return "";
-          return sourceUuid;
-        })()
-        if (sourceUuid && evolutions.at(-1)?.uuid !== sourceUuid) {
-          evolutions.push({ slug: current.slug, uuid: sourceUuid });
-        }
-        if (evolutions.length === 0) {
-          evolutions.push({ slug: current.slug, uuid: sourceUuid });
-        }
-        evolutions.push({ slug: species.slug, uuid: species.uuid });
-
-        await this.actor.update({
-          name: this.actor.name == current.name ? species.name : this.actor.name,
-          img: img,
-          prototypeToken: {
-            img: tokenImage,
-            texture: {
-              src: tokenImage,
-            }
-          },
-          "flags.ptr2e.evolutionHistory": evolutions
-        });
-
-        this.actor.updateEmbeddedDocuments("Item", [
-          {
-            flags,
-            name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
-            type: species.type ?? "species",
-            img: img,
-            system: species.system.toObject(),
-            _id: "actorspeciesitem",
-            effects: species.effects.map(e => e.toObject()),
-            "_stats.compendiumSource": species.uuid
+              return recursiveFindCurrent(current.evolutions.evolutions);
+            })() || "";
+            if (sourceUuid.startsWith("Scene.") || sourceUuid.startsWith("Actor.")) return "";
+            return sourceUuid;
+          })()
+          if (sourceUuid && evolutions.at(-1)?.uuid !== sourceUuid) {
+            evolutions.push({ slug: current.slug, uuid: sourceUuid });
           }
-        ]);
+          if (evolutions.length === 0) {
+            evolutions.push({ slug: current.slug, uuid: sourceUuid });
+          }
+          evolutions.push({ slug: species.slug, uuid: species.uuid });
 
-        await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
+          await this.actor.update({
+            name: this.actor.name == current.name ? species.name : this.actor.name,
+            img: img,
+            prototypeToken: {
+              img: tokenImage,
+              texture: {
+                src: tokenImage,
+              }
+            },
+            "flags.ptr2e.evolutionHistory": evolutions
+          });
 
-        return void PerkWebApp.refresh.call(this);
+          this.actor.updateEmbeddedDocuments("Item", [
+            {
+              flags,
+              name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
+              type: species.type ?? "species",
+              img: img,
+              system: species.system.toObject(),
+              _id: "actorspeciesitem",
+              effects: species.effects.map(e => e.toObject()),
+              "_stats.compendiumSource": species.uuid
+            }
+          ]);
+
+          await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
+
+          return void PerkWebApp.refresh.call(this);
+        }).bind(this)();
+        this.evolving = false;
+        return result;
       },
       "load-search": async function (this: PerkWebApp) {
         if (!this.perkTab) return;
@@ -1355,7 +1363,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             return "#ffffff";
           }
-          return "#898989";
+          return this.web.includes(".digimon-species.") ? "#0c0b16" : "#898989";
         })();
 
         line.setAttribute("x1", x1.toString());
@@ -1942,4 +1950,5 @@ export interface PerkWebApp {
   constructor: typeof PerkWebApp;
 
   _perkStore: PerkStore;
+  evolving: boolean
 }

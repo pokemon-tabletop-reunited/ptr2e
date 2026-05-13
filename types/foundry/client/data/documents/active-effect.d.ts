@@ -3,6 +3,7 @@ import type {
     ActiveEffectSchema,
     ActiveEffectSource,
     EffectDurationData,
+    EffectStartData,
 } from "../../../common/documents/active-effect.d.ts";
 import type { ClientBaseActiveEffect } from "./client-base-mixes.d.ts";
 
@@ -34,6 +35,10 @@ declare global {
          *            and if the status has implicit statuses but doesn't have a static _id.
          */
         static fromStatusEffect<TParent extends Actor | Item | null>(statusId: string, options?: DocumentModificationContext<TParent>): Promise<ActiveEffect<TParent>>;
+
+        static registry: {
+          refresh(event: EffectDurationData["expiry"], context: object): Promise<void>;
+        };
 
         /**
          * Determine whether the ActiveEffect requires a duration update.
@@ -180,18 +185,17 @@ declare global {
 
     interface ActiveEffect<TParent extends Actor | Item | null, TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseActiveEffect<TParent> {
         duration: PreparedEffectDurationData;
-
+        showIcon: 0 | 1 | 2;
         system: TSchema;
         _source: SourceFromSchema<ActiveEffectSchema<string, TSchema>>;
     }
 
     interface PreparedEffectDurationData extends EffectDurationData {
-        type: string;
-        duration: number | null
-        remaining: number | null;
-        label: string;
-        _worldTime?: number;
-        _combatTime?: number;
+       seconds: number | null;
+       remaining: number;
+       label: string;
+       _worldTime: number;
+       _combatTime: number;
     }
 
     interface TemporaryEffect extends ModelPropsFromSchema<ActiveEffectSchema> {
