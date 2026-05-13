@@ -96,11 +96,19 @@ class AttackRoll extends CheckRoll {
     // Status moves cannot crit
     if (attack.category === "status") return null;
 
-    options.critStages = options.targetUnaware ? 0 : Math.clamp(data.check.total?.crit?.stage ?? 0, 0, 4)
+    options.critStages = options.targetUnaware ? 0 : Math.clamp(data.check.total?.crit?.stage ?? 0, -4, 4)
 
     const formula = "1d100ms@dc";
-    const dc = ((stage: 0 | 1 | 2 | 3 | 4): number => {
+    const dc = ((stage: -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4): number => {
       switch (stage) {
+        case -4:
+          return 0;
+        case -3:
+          return 1;
+        case -2:
+          return 2;
+        case -1:
+          return 3;
         case 0:
           return Math.floor(100 * (1 / 24));
         case 1:
@@ -112,7 +120,7 @@ class AttackRoll extends CheckRoll {
         case 4:
           return 100;
       }
-    })(options.critStages as 0 | 1 | 2 | 3 | 4);
+    })(options.critStages as -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4);
 
     options.critDC = dc;
 
