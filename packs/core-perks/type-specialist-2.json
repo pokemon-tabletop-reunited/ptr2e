@@ -15,11 +15,11 @@
       "notes": ""
     },
     "actions": [],
-    "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. This perk may be purchased multiple times, each time selecting a new Type.</p>",
+    "description": "<p>The user selects a Type. The user gains +10 to Social Interaction Skill Tests when interacting with creatures of the preferred type. This Perk may be purchased multiple times, each time selecting a different Type.</p>",
     "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
-    "cost": 1,
+    "cost": 2,
     "design": {
       "arena": "social",
       "approach": "finesse",
@@ -32,7 +32,256 @@
     "nodes": []
   },
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Type Specialist 2",
+      "type": "passive",
+      "_id": "typeSpecialist02",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "ignored": false,
+            "choices": [
+              {
+                "label": "Normal",
+                "value": "spec-normal",
+                "predicate": [
+                  {
+                    "not": "trait:spec-normal"
+                  }
+                ]
+              },
+              {
+                "label": "Fighting",
+                "value": "spec-fighting",
+                "predicate": [
+                  {
+                    "not": "trait:spec-fighting"
+                  }
+                ]
+              },
+              {
+                "label": "Flying",
+                "value": "spec-flying",
+                "predicate": [
+                  {
+                    "not": "trait:spec-flying"
+                  }
+                ]
+              },
+              {
+                "label": "Poison",
+                "value": "spec-poison",
+                "predicate": [
+                  {
+                    "not": "trait:spec-poison"
+                  }
+                ]
+              },
+              {
+                "label": "Ground",
+                "value": "spec-ground",
+                "predicate": [
+                  {
+                    "not": "trait:spec-ground"
+                  }
+                ]
+              },
+              {
+                "label": "Rock",
+                "value": "spec-rock",
+                "predicate": [
+                  {
+                    "not": "trait:spec-rock"
+                  }
+                ]
+              },
+              {
+                "label": "Bug",
+                "value": "spec-bug",
+                "predicate": [
+                  {
+                    "not": "trait:spec-bug"
+                  }
+                ]
+              },
+              {
+                "label": "Ghost",
+                "value": "spec-ghost",
+                "predicate": [
+                  {
+                    "not": "trait:spec-ghost"
+                  }
+                ]
+              },
+              {
+                "label": "Steel",
+                "value": "spec-steel",
+                "predicate": [
+                  {
+                    "not": "trait:spec-steel"
+                  }
+                ]
+              },
+              {
+                "label": "Fire",
+                "value": "spec-fire",
+                "predicate": [
+                  {
+                    "not": "trait:spec-fire"
+                  }
+                ]
+              },
+              {
+                "label": "Water",
+                "value": "spec-water",
+                "predicate": [
+                  {
+                    "not": "trait:spec-water"
+                  }
+                ]
+              },
+              {
+                "label": "Grass",
+                "value": "spec-grass",
+                "predicate": [
+                  {
+                    "not": "trait:spec-grass"
+                  }
+                ]
+              },
+              {
+                "label": "Electric",
+                "value": "spec-electric",
+                "predicate": [
+                  {
+                    "not": "trait:spec-electric"
+                  }
+                ]
+              },
+              {
+                "label": "Psychic",
+                "value": "spec-psychic",
+                "predicate": [
+                  {
+                    "not": "trait:spec-psychic"
+                  }
+                ]
+              },
+              {
+                "label": "Ice",
+                "value": "spec-ice",
+                "predicate": [
+                  {
+                    "not": "trait:spec-ice"
+                  }
+                ]
+              },
+              {
+                "label": "Dragon",
+                "value": "spec-dragon",
+                "predicate": [
+                  {
+                    "not": "trait:spec-dragon"
+                  }
+                ]
+              },
+              {
+                "label": "Dark",
+                "value": "spec-dark",
+                "predicate": [
+                  {
+                    "not": "trait:spec-dark"
+                  }
+                ]
+              },
+              {
+                "label": "Fairy",
+                "value": "spec-fairy",
+                "predicate": [
+                  {
+                    "not": "trait:spec-fairy"
+                  }
+                ]
+              },
+              {
+                "label": "Nuclear",
+                "value": "spec-nuclear",
+                "predicate": [
+                  {
+                    "not": "trait:spec-nuclear"
+                  }
+                ]
+              },
+              {
+                "label": "Shadow",
+                "value": "spec-shadow",
+                "predicate": [
+                  {
+                    "not": "trait:spec-shadow"
+                  }
+                ]
+              }
+            ],
+            "prompt": "Select a Type Specialty:",
+            "adjustName": false,
+            "rollOption": "typeSpec2",
+            "flag": "typeSpec2",
+            "allowNoSelection": false,
+            "showDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "{effect|flags.ptr2e.choiceSelections.typeSpec2}",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765209663914,
+        "modifiedTime": 1765210442016,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "flags": {},
   "_id": "adEy4rh1el8Bqv0R"
 }
