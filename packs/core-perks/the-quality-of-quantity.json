@@ -21,6 +21,8 @@
         "description": "<p>Trigger: An allied creature becomes @Affliction[fainted].</p><p>Effect: You may advance 1 commanded creature with the @Affliction[fear] affliction by 100% and grant them @Affliction[argute] and @Affliction[boosted].</p>",
         "traits": [
           "taskmaster",
+          "interrupt",
+          "flinch-25",
           "command"
         ],
         "type": "generic",
@@ -30,7 +32,7 @@
           "powerPoints": 5
         },
         "range": {
-          "target": "creature",
+          "target": "ally",
           "distance": 10,
           "unit": "m"
         }

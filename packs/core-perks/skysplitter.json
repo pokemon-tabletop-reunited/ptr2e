@@ -18,7 +18,7 @@
       {
         "name": "Skysplitter (Vulnerable)",
         "slug": "skysplitter-vulnerable",
-        "description": "<p>Effect: The user maintains a Skysplitter clock of 12 spans. Each time the user or a member of their pack attacks an enemy target, they may tick the Skysplitter clock.</p><p>Once the Skysplitter clock is full, the user may, as a complex action, empty it to inflict @UUID[Compendium.ptr2e.core-effects.Item.o814z13dfeo0AqBW]{Vulnerable (Flying)} to a chosen target followed immediately by the Skysplitter Strike attack. After using Skysplitter Strike, or at the end of a given combat, the Skysplitter Clock resets to empty.</p><p>Skysplitter Strike uses Speed as the attacking stat.</p>",
+        "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.Item.o814z13dfeo0AqBW]{Vulnerable (Flying)}.</p>",
         "traits": [],
         "type": "generic",
         "img": "icons/skills/melee/sword-winged-holy-orange.webp",
@@ -35,10 +35,11 @@
       {
         "name": "Skysplitter Strike",
         "slug": "skysplitter-strike",
-        "description": "<p>Effect: The user maintains a Skysplitter clock of 12 spans. Each time the user or a member of their pack attacks an enemy target, they may tick the Skysplitter clock.</p><p>Once the Skysplitter clock is full, the user may, as a complex action, empty it to inflict @UUID[Compendium.ptr2e.core-effects.Item.o814z13dfeo0AqBW]{Vulnerable (Flying)} to a chosen target followed immediately by the Skysplitter Strike attack. After using Skysplitter Strike, or at the end of a given combat, the Skysplitter Clock resets to empty.</p><p>Skysplitter Strike uses Speed as the attacking stat.</p>",
+        "description": "<p>Trigger: The user resolved Skysplitter (Vulnerable).</p>",
         "traits": [
           "sharp",
           "pierce",
+          "interrupt",
           "contact"
         ],
         "type": "attack",

@@ -18,15 +18,15 @@
       {
         "name": "One of the Classic Blunders",
         "slug": "one-of-the-classic-blunders",
-        "description": "<p>Trigger: An enemy misses you with an attack.</p><p>Effect: You may use a [Social] status move against the target who missed you. This attack is considered a Free Action @Trait[interrupt].</p>",
+        "description": "<p>Trigger: An Attack misses the user.</p><p>Effect: The user uses a @Trait[social] Status-Category Attack as a Free Action against the triggering creature.</p>",
         "traits": [
-          "agitator"
+          "interrupt"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/item-icons/sunglasses.webp",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 2
         },
         "range": {
           "target": "self",
@@ -34,7 +34,7 @@
         }
       }
     ],
-    "description": "<p>Trigger: An enemy misses you with an attack.</p><p>Effect: You may use a [Social] status move against the target who missed you. This attack is considered a Free Action @Trait[interrupt].</p>",
+    "description": "<p>Effect: When an Attack misses the user, they may spend @PP[-2] as a Free Action @Trait[interrupt] to use a @Trait[social] Status-Category Attack as a Free Action against the source of the Attack.</p>",
     "traits": [
       "agitator"
     ],
