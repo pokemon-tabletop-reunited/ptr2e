@@ -14,7 +14,6 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit by an attack.</p>"
         },
         "range": {
@@ -26,7 +25,7 @@
         "img": "systems/ptr2e/img/icons/status_icon.png"
       }
     ],
-    "description": "<p>Trigger: The user is hit by an attack. </p><p>Effect: The triggering creature, and all other creatures within range, lose -1 SPD Stage for 5 Activations.</p>",
+    "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: The triggering creature, and all other creatures within range, lose -1 SPD Stage for 5 Activations.</p>",
     "traits": [
       "defensive",
       "powder"
@@ -63,8 +62,19 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "Hit by a @Trait[contact] attack? {actor|link} may be able to use {item|link}.",
+            "phase": "initial",
+            "predicate": [],
+            "key": "contact-trait-attack",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -78,7 +88,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -91,13 +103,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1753828899782,
-        "modifiedTime": 1753828923433,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1778684393068,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

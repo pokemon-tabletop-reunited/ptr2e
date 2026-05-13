@@ -14,16 +14,15 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "slug": "capoeira",
     "_migration": {
       "version": null,
@@ -33,7 +32,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ziFVuKuam7P7iQIP",
@@ -52,21 +52,37 @@
             "predicate": [],
             "label": "Capoeira",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "dance",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "key": "kick-trait-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -78,13 +94,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1722258477245,
-        "modifiedTime": 1722258506869,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778667741045,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

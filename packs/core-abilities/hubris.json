@@ -10,7 +10,7 @@
         ],
         "name": "Hubris",
         "slug": "hubris",
-        "type": "attack",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "trigger": "The user causes at least one creature to gain @Affliction[fainted]."
@@ -20,13 +20,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 Activations.</p>",
-        "img": "systems/ptr2e/img/icons/special_icon.png",
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "free": true,
-        "predicate": []
+        "img": "systems/ptr2e/img/icons/special_icon.png"
       }
     ],
     "description": "<p>Trigger: The user causes at least one creature to gain @Affliction[fainted].</p><p>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 Activations.</p>",
@@ -55,17 +49,18 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "hubris-attack",
+            "key": "hubris-generic",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
             "predicate": [],
             "chance": 100,
             "affects": "self",
             "priority": null,
-            "ignored": false,
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -79,7 +74,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -91,14 +88,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737563734209,
-        "modifiedTime": 1737563756918,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1778689315143,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
