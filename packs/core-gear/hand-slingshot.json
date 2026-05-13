@@ -9,8 +9,10 @@
     },
     "slug": "hand-slingshot",
     "publication": {
-      "source": "",
-      "authors": [],
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
       "notes": ""
     },
     "traits": [
@@ -35,8 +37,7 @@
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "range": {
           "target": "creature",
@@ -50,7 +51,8 @@
         "free": true,
         "predicate": [],
         "power": 60,
-        "accuracy": 95
+        "accuracy": 95,
+        "description": "<p>Ammo Use: 1</p>"
       },
       {
         "name": "Hand Slingshot Snapshot",
@@ -80,7 +82,8 @@
         "category": "physical",
         "predicate": [],
         "power": 30,
-        "accuracy": 80
+        "accuracy": 80,
+        "description": "<p>Ammo Use: 1</p>"
       }
     ],
     "description": "<p>A slingshot is a small hand-powered projectile weapon. The classic form consists of a Y-shaped frame, strung with elastic material and a pouch in the middle of the elastic string to hold a projectile. One hand holds the frame, while the other hand grasps the pocket and draws it back to the desired extent to provide power for the projectile. Most associated with children and hoodlums, higher-tensile bands and longer draw designs are surprisingly effective for hunting.</p>",
@@ -136,7 +139,8 @@
             "label": "Fire",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -145,7 +149,8 @@
             "predicate": [],
             "label": "Snapshot",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -159,7 +164,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -171,13 +178,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "datQlOPNAx8cCJgu"
 }
