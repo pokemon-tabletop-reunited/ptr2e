@@ -30,7 +30,8 @@
           "flinch-10",
           "adaptable",
           "crit-1",
-          "contact"
+          "contact",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -61,7 +62,8 @@
           "interrupt",
           "adaptable",
           "crit-1",
-          "contact"
+          "contact",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -95,7 +97,7 @@
       "handsHeld": 1,
       "slot": "held"
     },
-    "grade": "E",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": 90,
@@ -124,7 +126,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "FX8evEUsSSejSEI2",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -144,7 +147,8 @@
             "label": "Spear",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -153,7 +157,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -167,7 +172,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -179,13 +186,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1757543945278,
         "modifiedTime": 1758068541951,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

@@ -50,13 +50,14 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 35,
         "accuracy": 95,
         "free": true,
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "predicate": [],
-        "defensiveStat": "def"
+        "description": "<p>Ammo Use: 1</p>",
+        "offensiveStat": "spa"
       }
     ],
     "description": "<p>A crossbow is a ranged weapon using an elastic launching device consisting of a bow-like assembly mounted horizontally on a main frame, which is hand-held in a similar fashion to the stock of a long gun. Crossbows shoot arrow-like projectiles called bolts or quarrels. Crossbows can be cocked and readed to shoot, allowing the user to aim and shoot with the exertion of a normal bow.</p>",
@@ -82,7 +83,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -91,7 +92,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "C",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -110,7 +113,8 @@
             "label": "Light Crossbow",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -124,7 +128,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -136,11 +142,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "x7PDkq6rxPxOIRLf"

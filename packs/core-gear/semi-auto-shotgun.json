@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "steel",
       "power": 75,
@@ -43,8 +43,8 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 65,
+        "category": "physical",
+        "power": 75,
         "accuracy": 95,
         "free": true,
         "traits": [
@@ -53,7 +53,7 @@
         ],
         "name": "Semi-Auto Shotgun",
         "slug": "semi-auto-shotgun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,17 +62,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 145,
+        "power": 180,
         "accuracy": 75,
         "free": true,
         "traits": [
@@ -82,7 +82,7 @@
         ],
         "name": "Semi-Auto Shotgun (Breaching Shots)",
         "slug": "semi-auto-shotgun-breaching-shots",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -91,8 +91,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "complex"
         },
         "variant": "semi-auto-shotgun",
         "predicate": []
@@ -113,7 +112,7 @@
         ],
         "name": "Semi-Auto Shotgun (Hip Fire)",
         "slug": "semi-auto-shotgun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -123,8 +122,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "priority": 1
+          "powerPoints": 3
         },
         "variant": "semi-auto-shotgun",
         "predicate": []
@@ -155,7 +153,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "PGwWe0q5WpokJsq9",
   "effects": [
@@ -168,33 +167,37 @@
         "changes": [
           {
             "type": "flat-modifier",
-            "key": "{item|id}-attack-damage-flat",
+            "key": "{item|id}-attack-damage",
             "value": 32,
             "predicate": [],
             "label": "Semi-Auto Shotgun",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "flat-modifier",
-            "key": "semi-auto-shotgun-breaching-shots-attack-damage-flat",
+            "key": "semi-auto-shotgun-breaching-shots-attack-damage",
             "value": 64,
             "predicate": [],
             "label": "Breaching Shots",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
-            "type": "basic",
-            "key": "semi-auto-shotgun-hip-fire-attack-damage-flat",
+            "type": "flat-modifier",
+            "key": "semi-auto-shotgun-hip-fire-attack-damage",
             "value": 32,
             "predicate": [],
             "label": "Hip Fire",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -208,7 +211,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -219,14 +224,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1743972346372,
-        "modifiedTime": 1757633258502,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1777949235438,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"
