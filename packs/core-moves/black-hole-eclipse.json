@@ -29,7 +29,7 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 50% chance of being Flinched.</p><p>Requirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 50% chance of being @Affliction[delay 30].</p><p>Requirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.</p>",
         "free": true,
         "img": "icons/svg/explosion.svg",
         "predicate": []
@@ -61,7 +61,7 @@
           {
             "type": "roll-effect",
             "key": "black-hole-eclipse",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 50,
             "affects": "target",
@@ -69,11 +69,6 @@
               {
                 "property": "system.amount",
                 "value": -30,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Flinch 30%",
                 "method": 5
               }
             ],

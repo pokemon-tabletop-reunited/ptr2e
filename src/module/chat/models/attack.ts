@@ -16,6 +16,7 @@ import { ConsumablePTR2e, ItemPTR2e, ItemSourcePTR2e, ItemSystemsWithActions } f
 import ConsumableSystem from "@item/data/consumable.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { ItemAlteration } from "@module/effects/alterations/item.ts";
+import { EffectUUID } from "types/foundry/common/documents/active-effect.js";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -593,13 +594,12 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           if (!isCrit && effectRoll.critOnly) continue;
           if (!effectRoll.success) continue;
 
-
-          const item = await fu.fromUuid(effectRoll.effect);
+          const item = await fu.fromUuid(effectRoll.effect) as ItemPTR2e | ActiveEffectPTR2e;
           if (!item) {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             continue;
           };
-          if (item.type !== "effect") {
+          if (!(item.type === "effect" || item instanceof ActiveEffectPTR2e)) {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Item with uuid ${effectRoll.effect} is not an effect`), { log: "error" });
             continue;
           }
@@ -611,7 +611,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               alteration.applyTo(grantedSource as ItemSourcePTR2e, target, origin);
             }
 
-            toApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
+            if(item instanceof ItemPTR2e) toApply.push(...(grantedSource as ItemSourcePTR2e).effects as ActiveEffectPTR2e['_source'][]);
+            else toApply.push(grantedSource as ActiveEffectPTR2e['_source']);
           } catch (error) {
             if (error instanceof Error) console.warn(error);
           }
@@ -1297,7 +1298,7 @@ type SelfEffectRollsSchemaField = foundry.data.fields.SchemaField<
 
 interface EffectRollsSchema extends foundry.data.fields.DataSchema {
   chance: foundry.data.fields.NumberField<number, number, true, false, false>;
-  effect: foundry.data.fields.DocumentUUIDField<ItemUUID, true, false, false>;
+  effect: foundry.data.fields.DocumentUUIDField<ItemUUID | EffectUUID, true, false, false>;
   label: foundry.data.fields.StringField<string, string, true, false, true>;
   roll: foundry.data.fields.JSONField<Rolled<Roll>, true, true, true>;
   success: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;

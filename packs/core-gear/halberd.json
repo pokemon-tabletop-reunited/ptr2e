@@ -121,7 +121,7 @@
           "weapon",
           "adaptable",
           "crit-1",
-          "interrupt-2"
+          "interrupt"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -210,7 +210,7 @@
           {
             "type": "roll-effect",
             "key": "halberd-chop-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
@@ -219,11 +219,6 @@
               {
                 "property": "system.amount",
                 "value": -30,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Delay 30%",
                 "method": 5
               }
             ],

@@ -87,7 +87,7 @@
         "units": "turns",
         "value": null
       },
-      "description": "<p>Effect: On hit, the target becomes Flinched and gains @Affliction[confused 7].</p>",
+      "description": "<p>Effect: On hit, the target is @Affliction[delay 50] and gains @Affliction[confused 7].</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -115,7 +115,7 @@
           {
             "type": "roll-effect",
             "key": "atlas-crash-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
@@ -126,11 +126,6 @@
               {
                 "property": "system.amount",
                 "value": -50,
-                "method": 5
-              },
-              {
-                "property": "name",
-                "value": "Delay 50%",
                 "method": 5
               }
             ],
