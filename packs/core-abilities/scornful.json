@@ -11,10 +11,9 @@
         ],
         "name": "Scornful",
         "slug": "scornful",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user inflicts a negative [Stage Change] effect on another creature.</p>"
         },
         "range": {
@@ -22,11 +21,11 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user inflicts a negative [Stage Change] effect on another creature.</p><p>Effect: The intensity of the inflicted effects is doubled.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user inflicts a negative [Stage Change] effect on another creature.</p><p>Effect: The intensity of the inflicted effects is doubled.</p><p>Note; This does not update the effect's label.</p>",
+        "img": "systems/ptr2e/img/icons/status_icon.png"
       }
     ],
-    "description": "<p>Trigger: The user inflicts a negative [Stage Change] effect on another creature.</p><p>Effect: The intensity of the inflicted effects is doubled.</p>",
+    "description": "<p>Trigger: The user inflicts a negative [Stage Change] effect on another creature.</p><p>Effect: The intensity of the inflicted effects is doubled.</p><p>Note; This does not update the effect's label.</p>",
     "traits": [],
     "slug": "scornful",
     "_migration": {
@@ -37,9 +36,72 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "AMLGfCleKVW0XpMy",
-  "effects": []
+  "effects": [
+    {
+      "name": "Scornful",
+      "type": "passive",
+      "_id": "ULBOdPWzvxG7DWfI",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "negative-stage-change-trait-applied",
+            "alterations": [
+              {
+                "method": 2,
+                "property": "system.changes.0.value",
+                "value": 1
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778761476072,
+        "modifiedTime": 1778761712560,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }
