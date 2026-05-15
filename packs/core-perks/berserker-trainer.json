@@ -14,7 +14,7 @@
           {
             "type": "roll-effect",
             "key": "berserker-trainer-generic",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.enragedcondition",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
               "target:trait:berserker"
             ],
@@ -24,29 +24,7 @@
             "alterations": [
               {
                 "property": "effects.0.duration.turns",
-                "value": 2,
-                "method": 5
-              },
-              {
-                "property": "effects.0.system.changes",
-                "value": {
-                  "type": "roll-effect",
-                  "key": "damaging-attack",
-                  "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
-                  "predicate": [],
-                  "chance": 100,
-                  "affects": "defensive",
-                  "dontMerge": true
-                },
-                "method": 2
-              },
-              {
-                "property": "effects.0.system.changes",
-                "value": {
-                  "type": "roll-option",
-                  "domain": "all",
-                  "value": "enraged-from-rage"
-                },
+                "value": 3,
                 "method": 2
               }
             ],
@@ -104,9 +82,10 @@
       {
         "name": "Berserker Trainer",
         "slug": "berserker-trainer",
-        "description": "<p>Target: A Creature with the @Trait[berserker] Trait.<br><br>Effect: You've trained your Pokemon as a @Trait[berserker]. As a complex action costing 2PP, you may target one member of your Team (or another ally, if combined with @UUID[Compendium.ptr2e.core-perks.13JRGGWEpyfuZZuG]{Tactician}) and they gain the @Affliction[enraged] Affliction for 2 activations, as though the creature had used the Rage move. If used during a League Combat Rules scenario, this may be used as a @Trait[command] Action in the same way as Styles are.<br><br>If the target does not possess the @Trait[berserker] trait, then this action has no effect.</p>",
+        "description": "<p>Effect: The @Trait[berserker] target gains @Affliction[frenzy 2].</p>",
         "traits": [
-          "command"
+          "command",
+          "social"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
@@ -122,10 +101,8 @@
       }
     ],
     "slug": "berserker-trainer",
-    "description": "<p>Target: A Creature with the @Trait[berserker] Trait.<br><br>Effect: You've trained your Pokemon as a @Trait[berserker]. As a complex action costing 2PP, you may target one member of your Team (or another ally, if combined with @UUID[Compendium.ptr2e.core-perks.13JRGGWEpyfuZZuG]{Tactician}) and they gain the @Affliction[enraged] Affliction for 2 activations, as though the creature had used the Rage move. If used during a League Combat Rules scenario, this may be used as a @Trait[command] Action in the same way as Styles are.<br><br>If the target does not possess the @Trait[berserker] trait, then this action has no effect.</p>",
-    "traits": [
-      "command"
-    ],
+    "description": "<p>The user may spend @PP[-2] as a Complex Action to grant a @Trait[berserker] ally within 20m @Affliction[frenzy 3].</p>",
+    "traits": [],
     "prerequisites": [],
     "autoUnlock": [],
     "cost": 2,
