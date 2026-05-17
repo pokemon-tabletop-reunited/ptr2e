@@ -11,21 +11,21 @@
         ],
         "name": "Water Compaction",
         "slug": "water-compaction",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit by a Water-Type attack.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user is hit by a Water-Type attack. </p><p>Effect: The user gains +2 DEF Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user is hit by a Water-Type attack.</p><p>Effect: The user gains +2 DEF Stage for 5 Activations.</p>",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a Water-Type attack. </p><p>Effect: The user gains +2 DEF Stage for 5 Activations.</p>",
+    "description": "<p>Trigger: The user is hit by a Water-Type attack.</p><p>Effect: The user gains +2 DEF Stage for 5 Activations.</p>",
     "traits": [
       "defensive"
     ],
@@ -38,7 +38,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "DE9TQ5AuD39INK0Z",
@@ -59,19 +60,27 @@
             "affects": "defensive",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -83,13 +92,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.6",
         "createdTime": 1737565321781,
         "modifiedTime": 1737565366341,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

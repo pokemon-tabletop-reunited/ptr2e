@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user has +2 default SPD Stages in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
+        "description": "<p>Effect: The user's speed is doubled in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
         "img": "systems/ptr2e/img/svg/grass_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user has +2 default SPD Stages in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
+    "description": "<p>Effect: The user's speed is doubled in Sunny Weather. The user is treated as having the Grass Type for the effects of Sunny Weather.</p>",
     "traits": [
       "environ"
     ],
@@ -54,48 +55,55 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.stage",
-            "value": 2,
+            "key": "system.modifiers.speMultiplier",
+            "value": 1,
             "predicate": [
               "effect:summon:sunny-weather"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "add-trait",
-            "key": "",
             "value": "grass",
             "predicate": [
               "effect:summon:sunny-weather"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "add-trait",
-            "key": "",
             "value": "grass",
             "predicate": [
               "effect:summon:sunny-weather"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -107,13 +115,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.8RkpxP9VcH6mzSEM.ActiveEffect.f9fyv7wQDAApxsnp",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.1.beta",
-        "createdTime": null,
-        "modifiedTime": 1742079225675,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778977658677,
+        "modifiedTime": 1778977661984,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

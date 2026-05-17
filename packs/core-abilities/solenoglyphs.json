@@ -15,13 +15,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user declares a [Jaw] attack.</p><p>Effect: The triggering attack has a +30% chance to inflict @Affliction[poison 5]. Attacks that did not previously have a chance to inflict @Affliction[poison 5] have a 30% of causing @Affliction[poison 5].</p>",
+        "description": "<p>Trigger: The user declares a [Jaw] attack.</p><p>Effect: The triggering attack has a +30% chance to inflict @Affliction[poison 5].</p>",
         "img": "systems/ptr2e/img/conditions/poisoned.svg"
       }
     ],
-    "description": "<p>Trigger: The user declares a [Jaw] attack.</p><p>Effect: The triggering attack has a +30% chance to inflict @Affliction[poison 5]. Attacks that did not previously have a chance to inflict @Affliction[poison 5] have a 30% of causing @Affliction[poison 5].</p>",
+    "description": "<p>Trigger: The user declares a [Jaw] attack.</p><p>Effect: The triggering attack has a +30% chance to inflict @Affliction[poison 5].</p>",
     "traits": [],
     "slug": "solenoglyphs",
     "_migration": {
@@ -32,7 +33,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Xvihs0n8hpt9nyeo",
@@ -53,19 +55,27 @@
             "affects": "target",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -77,13 +87,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.Xvihs0n8hpt9nyeo.ActiveEffect.tASAFEsoQESYpRR3",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729495889842,
         "modifiedTime": 1729495922515,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

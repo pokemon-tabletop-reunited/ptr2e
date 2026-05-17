@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user has +2 default SPD Stages in Rainy Weather. The user is considered Water Type for the effects of Rainy Weather.</p>",
+        "description": "<p>Effect: The user has +100% Speed in Rainy Weather. The user is considered Water Type for the effects of Rainy Weather.</p>",
         "img": "icons/magic/air/weather-clouds-rain.webp"
       }
     ],
-    "description": "<p>Effect: The user has +2 default SPD Stages in Rainy Weather. The user is considered Water Type for the effects of Rainy Weather.</p>",
+    "description": "<p>Effect: The user has +100% Speed in Rainy Weather. The user is considered Water Type for the effects of Rainy Weather.</p>",
     "traits": [
       "environ"
     ],
@@ -50,37 +51,43 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.stage",
-            "value": 2,
+            "key": "system.modifiers.speMultiplier",
+            "value": 1,
             "predicate": [
               "effect:summon:rainy-weather"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "add-trait",
-            "key": "",
             "value": "water",
             "predicate": [
               "effect:summon:rainy-weather"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -92,13 +99,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1741609761601,
-        "modifiedTime": 1741609829063,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778980495582,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
