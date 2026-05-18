@@ -27,7 +27,7 @@
         "types": [
           "rock"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of being @Affliction[delay 30].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -42,7 +42,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "MqMBovlAYBOtthn3",
@@ -57,42 +58,39 @@
           {
             "type": "roll-effect",
             "key": "rock-slide-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 30%"
+                "value": -30,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -104,13 +102,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737744303358,
-        "modifiedTime": 1737744365757,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778796610795,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

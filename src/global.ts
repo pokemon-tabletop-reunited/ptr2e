@@ -25,6 +25,7 @@ import { type TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { GeneratorConfig, PerkWorkerConfig } from "@module/data/models/generator-config.ts";
 import { PerkGeneratorResult } from "./worker/types.js";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { SocketManagerPTR2e } from "@scripts/sockets/socket.ts";
 
 interface GamePTR2e
   extends Game<
@@ -67,6 +68,7 @@ interface GamePTR2e
         autoscale: boolean;
       }
     }
+    sockets: SocketManagerPTR2e;
   };
   workers: {
     get(name: string): {
@@ -154,6 +156,7 @@ declare global {
 
   interface ClientSettingsMap {
     get(key: "ptr2e.pokemonTypes"): {default: TypeEffectiveness}
+    get(key: "ptr2e.custom-art-map"): {type: foundry.data.fields.JSONField}
   }
 
   // eslint-disable-next-line @typescript-eslint/no-namespace

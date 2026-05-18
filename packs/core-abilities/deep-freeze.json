@@ -6,27 +6,26 @@
     "actions": [
       {
         "traits": [
-          "interrupt-1",
+          "interrupt",
           "defensive"
         ],
         "name": "Deep Freeze",
         "slug": "deep-freeze",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit with a [Contact] attack.</p>"
         },
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacking creature has a 10% chance of gaining @Affliction[frozen] 2.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacking creature has a 10% chance of gaining @Affliction[frozen 2].</p>",
+        "img": "systems/ptr2e/img/conditions/frozen.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacking creature has a 20% chance of gaining @Affliction[frozen] 2.</p>",
+    "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacking creature has a 20% chance of gaining @Affliction[frozen 2].</p>",
     "traits": [
       "defensive"
     ],
@@ -39,7 +38,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "IF6BAzszAVDQivLO",
@@ -54,12 +54,16 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frozencondition0",
             "predicate": [],
-            "chance": 30,
+            "chance": 20,
             "affects": "origin",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "isFixedChance": true,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
             "ignored": false
           }
         ],
@@ -67,17 +71,16 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -89,13 +92,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.5LF7Z8sWyuD05AFR.ActiveEffect.bsfoEvgKXZ4f0tSH",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.2",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1728599764055,
-        "modifiedTime": 1728635871606,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778684639202,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -7,14 +7,13 @@
       {
         "traits": [
           "defensive",
-          "interrupt-1"
+          "interrupt"
         ],
         "name": "Iron Barbs",
         "slug": "iron-barbs",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit by a [Contact] attack.</p>"
         },
         "range": {
@@ -39,9 +38,90 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Z2yp0hypRJpiKua1",
-  "effects": []
+  "effects": [
+    {
+      "name": "Iron Barbs",
+      "type": "passive",
+      "_id": "5sHjSMI2xXfFxbsk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "origin",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Rmp9cDtLcTuRuf9x.ActiveEffect.N0vLanHTvK1vmCcE",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1762714537361,
+        "modifiedTime": 1762714576814,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ]
 }

@@ -13,12 +13,17 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "steel",
       "power": 50,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -26,11 +31,14 @@
       "fling",
       "firearm",
       "autoload",
-      "two-handed",
       "shouldered",
       "steel",
       "reload-1",
-      "charge-pool-12"
+      "charge-pool-12",
+      "2-handed",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
@@ -42,11 +50,12 @@
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Marksman Rifle",
         "slug": "marksman-rifle",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -55,8 +64,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "predicate": []
       },
@@ -64,30 +72,58 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 125,
-        "accuracy": 100,
+        "category": "status",
         "free": true,
         "traits": [
-          "missile",
-          "crit-2"
+          "defensive",
+          "set-up",
+          "priority-25"
         ],
-        "name": "Marksman Rifle (Pinpoint Shot)",
-        "slug": "marksman-rifle-pinpoint-shot",
-        "description": "<p>Effect: Set-Up: The user gains +2 ACC Stages for 2 Activations, and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "name": "Marksman Rifle (Set-Up)",
+        "slug": "marksman-rifle-set-up",
+        "description": "<p>Effect: The user gains +2 ACC Stages for 2 Activations.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "variant": "marksman-rifle",
+        "predicate": []
+      },
+      {
+        "name": "Marksman Rifle (Resolution)",
+        "slug": "marksman-rifle-resolution",
+        "description": "<p>Trigger: The user used Marksman Rifle (Set-Up) on their previous Activation.</p><p>Ammo Use: 1</p>",
+        "traits": [
+          "weapon",
+          "missile",
+          "crit-2",
+          "firearm",
+          "set-up"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "trigger": "The user used Marksman Rifle (Set Up) on their previous Activation."
+        },
         "range": {
           "target": "creature",
           "distance": 60,
           "unit": "m"
         },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1
-        },
-        "variant": "marksman-rifle",
-        "predicate": []
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 130,
+        "accuracy": 100
       }
     ],
     "weaponType": "untyped",
@@ -114,7 +150,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A designated marksman rifle (DMR) is a modern scoped high-precision rifle used by infantry in the designated marksman (DM) role. DMRs are distinguished from sniper rifles in that they are semi-automatic to provide higher rates of fire and have larger magazine capacities to allow rapid engagement of multiple targets.</p>"
+    "description": "<p>A designated marksman rifle (DMR) is a modern scoped high-precision rifle used by infantry in the designated marksman (DM) role. DMRs are distinguished from sniper rifles in that they are semi-automatic to provide higher rates of fire and have larger magazine capacities to allow rapid engagement of multiple targets.</p>",
+    "ammoType": []
   },
   "_id": "pfBrCmn8zAAMmONO",
   "effects": [
@@ -128,30 +165,50 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 32,
+            "value": 33,
             "predicate": [],
             "label": "Marksman Rifle",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "marksman-rifle-set-up",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.Smwu5LWbBYgjUmPc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -159,17 +216,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1743904713324,
-        "modifiedTime": 1743906501513,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+        "modifiedTime": 1777947870252,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"

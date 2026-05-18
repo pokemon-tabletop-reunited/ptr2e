@@ -29,7 +29,7 @@
         "category": "physical",
         "power": 45,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[splinter] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[splinter 5].</p>",
         "predicate": []
       }
     ],
@@ -57,13 +57,13 @@
           {
             "type": "roll-effect",
             "key": "shrapnel-shot-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -74,13 +74,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -27,7 +27,7 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: If the target has received a [Stage Change] effect that has raised at least one of its Stages since the user's last Activation, the target is @Affliction[confused] 5.</p>",
+        "description": "<p>Effect: If the target has received a [Stage Change] effect that has raised at least one of its Stages since the user's last Activation, the target is @Affliction[confused 5].</p>",
         "img": "icons/svg/explosion.svg"
       },
       {
@@ -52,7 +52,7 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect:On hit, the target is @Affliction[confused] 5.  This attack may only be used if the target has received a [Stage Change] effect that has raised at least one of its Stages since the user's last Activation.</p>",
+        "description": "<p>Effect:On hit, the target is @Affliction[confused 5].  This attack may only be used if the target has received a [Stage Change] effect that has raised at least one of its Stages since the user's last Activation.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -80,13 +80,13 @@
           {
             "type": "roll-effect",
             "key": "alluring-voice-booster-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -97,13 +97,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

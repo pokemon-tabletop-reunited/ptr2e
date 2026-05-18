@@ -107,13 +107,12 @@
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -122,7 +121,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -133,13 +133,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

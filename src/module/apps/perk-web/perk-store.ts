@@ -35,7 +35,8 @@ class PerkStore extends Collection<PerkNode> {
   private _rootNodes: PerkNode[] | null = null;
   private _initialized = false;
   // UUID or 'global'
-  private web: "global" | ItemUUID = "global";
+  private web: "global" | ItemUUID | string = "global";
+  private traitWebs = new Set<string>();
 
   get initialized() {
     return this._initialized;
@@ -47,6 +48,10 @@ class PerkStore extends Collection<PerkNode> {
 
   get graph() {
     return this._graph;
+  }
+
+  get availableWebs() {
+    return new Set(this.traitWebs);
   }
 
   private static perkNodeToNode(perk: PerkPTR2e, node: PerkPTR2e['system']['nodes'][0] | null) {
@@ -64,16 +69,16 @@ class PerkStore extends Collection<PerkNode> {
     }]
   }
 
-  private static filterWebNode(node: PerkNode, web: "global" | ItemUUID): boolean {
+  private static filterWebNode(node: PerkNode, web: "global" | ItemUUID | string): boolean {
     return this.filterWeb(node.perk, web);
   }
 
-  private static filterWeb(perk: PerkPTR2e, web: "global" | ItemUUID): boolean {
+  private static filterWeb(perk: PerkPTR2e, web: "global" | ItemUUID | string): boolean {
     if (web === "global") return perk.system.global;
-    return perk.system.webs.has(web);
+    return perk.system.webs.has(web) || perk.system.traitWebs.has(web);
   }
 
-  constructor({ perks, nodes, web }: { perks?: PerkPTR2e[], nodes?: PerkNode[], web?: "global" | ItemUUID } = {}) {
+  constructor({ perks, nodes, web }: { perks?: PerkPTR2e[], nodes?: PerkNode[], web?: "global" | ItemUUID | string } = {}) {
     web ||= "global";
 
     // If nodes are provided, simply map them to the collection
@@ -101,9 +106,10 @@ class PerkStore extends Collection<PerkNode> {
 
     this._graph = new PerkGraph(this);
     this.web = web;
+    this.updateTraitWebAvailability();
   }
 
-  async reinitialize({ perks, nodes, actor, web }: { perks?: PerkPTR2e[], nodes?: PerkNode[], actor?: ActorPTR2e, web?: "global" | ItemUUID } = {}) {
+  async reinitialize({ perks, nodes, actor, web }: { perks?: PerkPTR2e[], nodes?: PerkNode[], actor?: ActorPTR2e, web?: "global" | ItemUUID | string } = {}) {
     this.clear();
     this._initialized = false;
     this._rootNodes = null;
@@ -139,15 +145,30 @@ class PerkStore extends Collection<PerkNode> {
     }
 
     if (actor) return this.updateState(actor);
+    else this.updateTraitWebAvailability();
+  }
+
+  updateTraitWebAvailability() {
+    this.traitWebs.clear();
+    for(const node of this.values()) {
+      for(const trait of node.perk.system.traitWebs) {
+        this.traitWebs.add(trait);
+      }
+    }
   }
 
   updateState(actor: Maybe<ActorPTR2e>) {
     const purchasedRoots: PerkNode[] = [];
     const purchasedNodes: PerkNode[] = [];
     let currentTier = 0;
+    this.traitWebs.clear();
 
     for (const node of this) {
+      for(const trait of node.perk.system.traitWebs) {
+        this.traitWebs.add(trait);
+      }
       if (node.node && node.node.x !== null && node.node.y !== null) {
+
         const isRoot = node.node.type === "root";
 
         if (node.perk.flags.ptr2e?.evolution) {
@@ -317,7 +338,7 @@ class PerkStore extends Collection<PerkNode> {
               connectedNode.perk.system.cost = 1;
             }
 
-            if (connectedNode.perk.flags.ptr2e?.evolution) {
+            if (connectedNode.perk.flags.ptr2e?.evolution && !isNaN(currentTier)) {
               const evolution = connectedNode.perk.flags.ptr2e.evolution as {
                 name: string;
                 uuid: string;

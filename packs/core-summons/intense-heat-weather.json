@@ -8,7 +8,8 @@
     },
     "traits": [
       "partial-automation",
-      "weather"
+      "weather",
+      "fire"
     ],
     "actions": [],
     "baseAV": 150,
@@ -20,7 +21,8 @@
       ],
       "notes": ""
     },
-    "slug": "intense-heat-weather"
+    "slug": "intense-heat-weather",
+    "description": "<p><strong>Intense Heat</strong> is the supercharged sunshine that causes droughts - withering plants and dehydrating all that are present. Fire-Types benefit the most, although the effects on all other Types are more pronounced.</p><p><strong><span style=\"text-decoration: underline;\">Effects:</span></strong></p><ul><li>For the purposes of Abilities, Attacks, Perks, and Traits, this Weather is considered to also be “Sunny”.</li><li>Fire-Type Attacks deal 60% more damage, and all Water-Type Attacks fail to activate.</li><li>Grass-Type creatures gain 60% to their Movement Allowances, and their SPD is increased 30%, but lose a Tick of HP at the end of their Activations.</li><li>Fire-Type Attacks are one step more effective on all Types, and are super effective against Water-Types.</li><li>Creatures cannot be Frozen, and Frozen creatures are cured of Frozen.</li><li>Non-Fire-, Grass-, Rock-, and Ground Types have -1 default DEF.</li><li>Fire-Type Moves and Physical-Category Steel-Type attacks have a 25% chance to inflict Burn 5. Attacks that would already cause Burn instead increase their chance to Burn by 25%.</li></ul>"
   },
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "effects": [
@@ -56,26 +58,22 @@
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
-            "value": 1.3,
-            "mode": 1,
+            "value": 0.3,
             "predicate": [
               "trait:grass"
             ],
             "label": "Grass Speed Boost",
             "priority": null,
+            "mode": 2,
             "ignored": false
           },
           {
             "type": "ephemeral-modifier",
-            "key": "fire-attack-damage-percentile",
-            "value": 100,
-            "predicate": [
-              {
-                "not": "target:trait:water"
-              }
-            ],
+            "key": "attack-effectiveness-stage",
+            "value": 1,
             "label": "Fire Effectiveness Boost",
             "priority": null,
+            "predicate": [],
             "mode": 2,
             "ignored": false,
             "hideIfDisabled": false
@@ -83,7 +81,7 @@
           {
             "type": "ephemeral-modifier",
             "key": "fire-attack-damage-percentile",
-            "value": 300,
+            "value": 1,
             "predicate": [
               "target:trait:water"
             ],
@@ -183,16 +181,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
+      "flags": {
+        "ptr2e": {
+          "displayOnToken": ""
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.8.beta",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
-        "exportSource": null
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "exportSource": null,
+        "modifiedTime": 1762905779569
       }
     }
   ],

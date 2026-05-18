@@ -10,14 +10,15 @@
         "name": "Battle Cry",
         "slug": "battle-cry",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
         "traits": [
-          "sonic",
-          "social"
+          "flinch-20",
+          "social",
+          "drill"
         ],
         "range": {
           "target": "emanation",
-          "distance": 3,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
@@ -41,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "effects": [
     {
@@ -55,41 +58,48 @@
           {
             "type": "roll-effect",
             "key": "battle-cry-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
             "key": "battle-cry-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.1TqcwIUNl32wJCAa",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -101,13 +111,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1737222940107,
         "modifiedTime": 1737222998230,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

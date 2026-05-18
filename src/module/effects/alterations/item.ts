@@ -13,9 +13,9 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   static override defineSchema() {
     const fields = foundry.data.fields;
     return {
-      mode: new fields.NumberField({
+      method: new fields.NumberField({
         required: true,
-        initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+        initial: 2,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
       }),
       property: new fields.StringField({
@@ -23,7 +23,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
         blank: true,
         initial: "",
       }),
-      value: new ResolvableValueField<true,false,true>({
+      value: new ResolvableValueField<true, false, true>({
         required: true,
         nullable: false,
         initial: "",
@@ -44,31 +44,33 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
   }
 
   private _actor: ActorPTR2e | null = null;
+  private origin: ActorPTR2e | null = null;
 
-  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e): void {
-    if(item instanceof ItemPTR2e) {
+  applyTo(item: ItemPTR2e | ItemSourcePTR2e, actor?: ActorPTR2e, origin?: Maybe<ActorPTR2e>): void {
+    if (item instanceof ItemPTR2e) {
       return this.applyToItem(item);
     }
-    if(actor) this._actor = actor;
+    if (actor) this._actor = actor;
+    if (origin) this.origin = origin;
 
-    const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
+    const property = this.shimProperty(item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property);
     const current = fu.getProperty(item, property) as JSONValue;
-    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, {evaluate: true} );
-    const change = BasicChangeSystem.getNewValue(this.mode, current, value, false)
+    const value = typeof this.value === "boolean" ? this.value : this.resolveValue(this.value, current, { evaluate: true, resolvables: { actor: this.actor, origin: this.origin } });
+    const change = BasicChangeSystem.getNewValue(this.method, current, value, false)
 
     const isArrayChange = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof value)
-    if(isArrayChange) {
-      switch(this.mode) {
-        case CONST.ACTIVE_EFFECT_MODES.ADD: {
-          if(Array.isArray(current)) {
+    if (isArrayChange) {
+      switch (this.method) {
+        case 2: {
+          if (Array.isArray(current)) {
             current.push(value);
           } else {
             current.add(value);
           }
           break;
         }
-        case CONST.ACTIVE_EFFECT_MODES.OVERRIDE: {
-          if(Array.isArray(current)) {
+        case 5: {
+          if (Array.isArray(current)) {
             current.splice(0, current.length, value);
           } else {
             current.clear();
@@ -77,18 +79,26 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           break;
         }
         case CHANGE_MODES.REMOVE: {
-          if(Array.isArray(current)) {
+          if (Array.isArray(current)) {
             current.splice(current.indexOf(value), 1);
           } else {
             current.delete(value);
           }
-          break; 
+          break;
         }
       }
     }
     else {
       fu.setProperty(item, property, change);
     }
+  }
+
+  shimProperty(property: string): string {
+    const replacements: ((prop: string) => string)[] = [];
+
+    if (property.endsWith("duration.turns")) replacements.push((prop: string) => prop.replace(/duration\.turns$/, "duration.value"));
+    
+    return replacements.reduce((prop, fn) => fn(prop), property);
   }
 
   applyToItem(item: ItemPTR2e): void {
@@ -99,21 +109,21 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 
     const property = item.type === "effect" && !this.property.startsWith("effects.") ? `effects.0.${this.property}` : this.property;
 
-    if(property.startsWith("system.")) {
-      if(item.system instanceof foundry.abstract.DataModel) {
+    if (property.startsWith("system.")) {
+      if (item.system instanceof foundry.abstract.DataModel) {
         field = item.system.schema.getField(property.slice(7));
       }
     } else field = item.schema.getField(property);
-    if(field) changes[property] = this.applyField(source, item, property, field);
-    
-    if(Object.keys(changes).length > 0) item.update(changes);
+    if (field) changes[property] = this.applyField(source, item, property, field);
+
+    if (Object.keys(changes).length > 0) item.update(changes);
   }
 
   applyField(source: ItemPTR2e['_source'], item: ItemPTR2e, property: string, field: ReturnType<foundry.abstract.DataModel["schema"]["getField"]>): unknown {
     field ??= item.schema.getField(property);
     const current = fu.getProperty(source, property);
     const value = typeof this.value === "boolean" ? this.value : this.resolveInjectedProperties(this.value);
-    const update = field?.applyChange(current, item, {key: property, mode: this.mode, value, priority: 0});
+    const update = field?.applyChange(current, item, { key: property, mode: this.method, value, priority: 0 });
     fu.setProperty(source, property, update);
     return update;
   }
@@ -191,13 +201,13 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
           const data =
             key === "change"
               ? this
-              : key === "actor" || key === "item" || key === "effect"
+              : key === "actor" || key === "item" || key === "effect" || key === "origin"
                 ? this[key]
                 : this.effect;
 
-          if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
-            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
-            if(value != undefined && !isNaN(value)) return String(value); 
+          if (key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
+            const value = this.actor?.system?.skills?.[prop.split(".")[1]]?.total;
+            if (value != undefined && !isNaN(value)) return String(value);
           }
 
           const value = fu.getProperty(data ?? {}, prop);
@@ -206,7 +216,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
             if (warn)
               this.failValidation(`Failed to resolve injected property "${source}"`);
           }
-          return modifier ? Handlebars.helpers.capitalize(String(value)) : typeof value === "object" ? "JSON::"+JSON.stringify(value) : String(value);
+          return modifier ? Handlebars.helpers.capitalize(String(value)) : typeof value === "object" ? "JSON::" + JSON.stringify(value) : String(value);
         }
       );
     }
@@ -245,7 +255,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
       : value;
     if (typeof resolvedFromBracket === "number") return resolvedFromBracket;
 
-    if(typeof resolvedFromBracket === "string" && resolvedFromBracket.startsWith("JSON::")) {
+    if (typeof resolvedFromBracket === "string" && resolvedFromBracket.startsWith("JSON::")) {
       try {
         return JSON.parse(resolvedFromBracket.slice(6));
       } catch (error) {
@@ -355,7 +365,7 @@ interface ItemAlteration extends foundry.abstract.DataModel<ChangeModel>, ModelP
 
 interface ItemAlterationSchema extends foundry.data.fields.DataSchema {
   /** AE Application Mode, valid values are 0-5. See `CONST.ACTIVE_EFFECT_MODES` */
-  mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+  method: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
   /** AE-Like `path` field. */
   property: StringField<string, string, true, false, true>;
   /** AE-Like `value` field. */

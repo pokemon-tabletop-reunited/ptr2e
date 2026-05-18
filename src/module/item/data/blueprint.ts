@@ -1,4 +1,4 @@
-import { AttackPTR2e, HasEmbed, HasMigrations } from "@data";
+import { AttackPTR2e, ChangeModelTypes, HasEmbed, HasMigrations } from "@data";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { BaseItemSourcePTR2e } from "./system.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
@@ -16,6 +16,7 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { getInitialSkillList, partialSkillToSkill } from "@scripts/config/skills.ts";
 import { SkillSchema } from "@module/data/models/skill.ts";
 import { GeneratorConfig } from "@module/data/models/generator-config.ts";
+import ActiveEffectPTR2e from "@module/effects/document.ts";
 
 export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
   /**
@@ -209,7 +210,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const progress = new Progress({ steps: (this.blueprints.size * 3) + 2 });
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix"));
 
-    const toBeCreated: Partial<ActorPTR2e['_source']>[] = [];
+    const toBeCreated: { data: Partial<ActorPTR2e['_source']>, items: Partial<ItemPTR2e['_source']>[] }[] = [];
     for (const blueprint of this.blueprints) {
       await blueprint.prepareAsyncData();
       progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.format("PTR2E.PokemonGeneration.Progress.Step", {
@@ -227,10 +228,11 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             teamMemberOf: options.team ? [options.folder.id] : [],
           }
         }
-        toBeCreated.push(actor);
+        toBeCreated.push({ data: actor, items: [] });
         continue;
       }
 
+      let speciesUuid = (blueprint._source.doc ?? "") + "";
       const speciesOrActor = await (async () => {
         // Get rolltable result or species data
         if (blueprint.doc instanceof ItemPTR2e) {
@@ -241,8 +243,11 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         for (const result of tableResult.results) {
           if (result.type === CONST.TABLE_RESULT_TYPES.TEXT) continue;
           const uuid = (result.type === CONST.TABLE_RESULT_TYPES.COMPENDIUM ? "Compendium." : "") + result.documentCollection + "." + result.documentId;
-          const doc = await fromUuid<ItemPTR2e | ActorPTR2e>(uuid);
-          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) return doc;
+          const doc = await fu.fromUuid<ItemPTR2e | ActorPTR2e>(uuid);
+          if (doc && doc instanceof ItemPTR2e && doc.system instanceof SpeciesSystemModel) {
+            speciesUuid = uuid;
+            return doc;
+          }
           if (doc && doc instanceof ActorPTR2e) return doc;
         }
         throw new Error("No valid species found in rolltable");
@@ -258,12 +263,15 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             teamMemberOf: options.team ? [options.folder.id] : [],
           }
         }
-        toBeCreated.push(actor);
+        toBeCreated.push({ data: actor, items: [] });
         continue;
       }
       const species = speciesOrActor.toObject() as SpeciesPTR2e['_source'] & {
         system: SpeciesSystemModel['_source'];
       };
+      //@ts-expect-error - Ignore incomplete data
+      species._stats ??= {};
+      species._stats.compendiumSource ||= speciesUuid; // Ensure it's a string
 
       const level = await (async () => {
         // Get level from rolltable result, or range
@@ -338,7 +346,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const shiny = this.randomInteger(1, 100) <= shinyChance;
 
-      const gender = blueprint.gender !== "random"
+      const gender = blueprint.gender && blueprint.gender !== "random"
         ? blueprint.gender
         : species.system.genderRatio === -1
           ? "genderless"
@@ -394,9 +402,16 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const evolution = getEvolution(species.system.evolutions as unknown as EvolutionData)
         if (!evolution?.uuid) return species;
 
-        return ((await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.toObject() as SpeciesPTR2e['_source'] & {
+        const speciesData = ((await fu.fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.toObject() as SpeciesPTR2e['_source'] & {
           system: SpeciesSystemModel['_source'];
-        } | undefined) ?? species;
+        } | undefined);
+        if (speciesData) {
+          //@ts-expect-error - Ignore incomplete data
+          speciesData._stats ??= {};
+          speciesData._stats.compendiumSource = evolution.uuid;
+        }
+
+        return speciesData ?? species;
       })();
 
       const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
@@ -578,11 +593,11 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       // Add species item
       items.push({
         name: evolution.system.slug ? Handlebars.helpers.formatSlug(evolution.system.slug) : evolution.name,
-        type: 'species',
+        type: species.type ?? "species",
         img: img,
         system: evolution.system,
         _id: "actorspeciesitem",
-        effects: evolution.effects
+        effects: evolution.effects,
       })
 
       // Generate Perks
@@ -614,7 +629,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             }
           }
         },
-        items
+        items,
       } as unknown as Partial<ActorPTR2e['_source']>;
       const temporaryActor = new ActorPTR2e(perkGenData);
 
@@ -644,7 +659,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         for (const step of perkGenResult) {
           for (const data of step.path.flatMap(path => ({ ...path.data.perk, system: { ...path.data.perk.system }, slug: path.id?.toString() }))) {
             if (owned.has(data.slug)) continue;
-            const perk = data as unknown as PerkPTR2e['_source'];
+            const perk = fu.duplicate(data) as unknown as PerkPTR2e['_source'];
             perk.system.originSlug = data.slug;
             //@ts-expect-error - Valid operation.
             delete perk._id
@@ -712,10 +727,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           }
         }
 
-        const skills = new Map(getInitialSkillList().map((skill) => [skill.slug, skill]));
+        const skills = getInitialSkillList();
 
         for (const skill of perkSkills) {
-          const existing = skills.get(skill.skill);
+          const existing = skills[skill.skill];
           if (existing) {
             existing.rvs = (existing.rvs ?? 0) + skill.value;
           } else {
@@ -726,12 +741,12 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         const calculateSkills = (points: number, weighted: boolean, speciesOnly: boolean) => {
           const bag = new WeightedBag<SourceFromSchema<SkillSchema>>();
 
-          const pool = speciesOnly ? evolution.system.skills : Array.from(skills.values());
+          const pool = speciesOnly ? evolution.system.skills : Object.values(skills);
 
           for (const skillData of pool) {
-            const skill = skills.get(skillData.slug) ?? (() => {
+            const skill = skills[skillData.slug] ?? (() => {
               const skill = (game.ptr.data.skills.get(skillData.slug) ?? partialSkillToSkill({ slug: skillData.slug })) as SourceFromSchema<SkillSchema>;
-              skills.set(skillData.slug, skill);
+              skills[skillData.slug] = skill;
               return skill;
             })();
             if (skill.hidden) continue;
@@ -771,7 +786,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         calculateSkills(randomPoints, false, false);
         calculateSkills(leftOverPoints - randomPoints, true, false);
 
-        return Array.from(skills.values());
+        return skills;
       })();
 
       const type = evolution.system.traits?.includes("humanoid") ? "humanoid" : "pokemon";
@@ -786,19 +801,20 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         bar2: { attribute: "powerPoints" },
       };
 
-      for(const [key, value] of Object.entries(override)) {
-        if(value === undefined || value === null) continue;
-        if(typeof value !== "object") {
+      for (const [key, value] of Object.entries(override)) {
+        if (value === undefined || value === null) continue;
+        if (typeof value !== "object") {
           foundryDefaultTokenSettings[key] = value;
         }
-        for(const [subKey, subValue] of Object.entries(value)) {
-          if(!subValue) continue;
+        for (const [subKey, subValue] of Object.entries(value)) {
+          if (!subValue) continue;
           foundryDefaultTokenSettings[key] ??= {};
           (foundryDefaultTokenSettings[key] as Record<string, unknown>)[subKey] = subValue;
         }
       }
 
       const data = {
+        _id: fu.randomID(),
         name: Handlebars.helpers.formatSlug(evolution.system.slug) || blueprint.name,
         img,
         type,
@@ -827,7 +843,6 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           },
           skills
         },
-        items,
         prototypeToken: fu.mergeObject(foundryDefaultTokenSettings, {
           actorLink: linkToken,
           displayBars: foundryDefaultTokenSettings.displayBars ?? CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
@@ -838,28 +853,86 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             src: tokenImage,
           },
         }, { inplace: false }),
+        flags: {
+          ptr2e: {
+            evolutionHistory: [
+              {
+                slug: evolution.system.slug || sluggify(evolution.name),
+                uuid: evolution._stats?.compendiumSource || speciesUuid
+              }
+            ]
+          }
+        }
       } as unknown as Partial<ActorPTR2e['_source']>;
       const actor = new ActorPTR2e(data);
       data.system!.health = { value: actor.system.health.max, max: actor.system.health.max };
       data.system!.powerPoints = { value: actor.system.powerPoints.max, max: actor.system.powerPoints.max };
 
-      toBeCreated.push(data);
+      toBeCreated.push({ data, items: items as ItemPTR2e["_source"][] });
     }
 
     if (dataOnly) {
       progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
-      return toBeCreated;
+      return toBeCreated.reduce((acc, cur) => {
+        //@ts-expect-error - Correctly typed
+        cur.data.items = cur.items;
+        acc.push(cur.data);
+        return acc;
+      }, [] as Partial<ActorPTR2e['_source']>[]);
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));
-    //@ts-expect-error - This is valid actor data
-    const actors = await ActorPTR2e.createDocuments(toBeCreated);
+    const itemMap: [string, unknown[]][] = [];
+    for (const actorData of toBeCreated) {
+      if (!actorData.items?.length) continue;
+      const speciesItemIndex = actorData.items.findIndex(i => i.type === "species" || i.type?.endsWith("Species"));
+      if (speciesItemIndex !== -1) {
+        const speciesItem = actorData.items[speciesItemIndex];
+        // Remove species item from actor creation data
+        actorData.items.splice(speciesItemIndex, 1);
+        actorData.data.items = [speciesItem as unknown as ItemPTR2e["_source"]];
+      }
+      // Remove any items with preCreate hook effects
+      for (let i = actorData.items.length - 1; i >= 0; i--) {
+        const item = actorData.items[i];
+        const effects = item.effects as ActiveEffectPTR2e["_source"][] | undefined;
+        let breaking = false;
+        if (effects?.length) {
+          for (const effect of effects) {
+            if (breaking) break;
+            for (const change of effect.system.changes) {
+              if (ChangeModelTypes()[change.type]?.prototype?.preCreate) {
+                breaking = true;
+                break;
+              }
+            }
+          }
+        }
+        // If no matching effect, it doesn't need to be deffered
+        if (!breaking) {
+          actorData.items.splice(i, 1);
+          actorData.data.items ||= [];
+          actorData.data.items.push(item as unknown as ItemPTR2e["_source"]);
+        }
+      }
+
+      itemMap.push([actorData.data._id!, actorData.items]);
+    }
+    const createdActors = await ActorPTR2e.createDocuments(toBeCreated.map(a => a.data as ActorPTR2e["_source"]), { temporary: false, keepId: true });
+    for (const [actorId, items] of itemMap) {
+      const actor = createdActors.find(a => a.id === actorId);
+      if (!actor) {
+        console.error(`PTR2e Blueprint Generator | Could not find created actor with id ${actorId} to add items to`);
+        continue;
+      }
+      await actor.createEmbeddedDocuments("Item", items as unknown as ItemPTR2e["_source"][]);
+    }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.TokenGenerationStep"));
 
     const { x, y } = options;
     const tokensToCreate: TokenDocumentPTR2e[] = [];
-    for (const actor of actors) {
+    for (const actor of createdActors) {
       // TODO: Spread out actors in case there's multiple
       const tokenData = await actor.getTokenDocument({ x, y });
       tokensToCreate.push(tokenData);

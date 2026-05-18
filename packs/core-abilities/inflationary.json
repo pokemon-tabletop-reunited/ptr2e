@@ -8,7 +8,7 @@
         "traits": [
           "defensive",
           "environ",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Inflationary",
         "slug": "inflationary",
@@ -20,7 +20,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user is hit by a Fire- or Flying-Type attack.</p><p>Effect: The user takes half damage from the triggering attack, and then gains +1 DEF and SPDEF for 3 Activations.</p>",
         "img": "icons/svg/explosion.svg"
@@ -54,9 +55,158 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Fo7dz96ut9bKc4e4",
-  "effects": []
+  "effects": [
+    {
+      "name": "Inflationary",
+      "type": "passive",
+      "_id": "uMEcvq9AEoKgmJL9",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "phase": "initial",
+            "predicate": [],
+            "key": "fire-attack",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.jEX7s3GbbAtzgyS3",
+            "phase": "initial",
+            "predicate": [],
+            "key": "fire-attack",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "phase": "initial",
+            "predicate": [],
+            "key": "flying-attack",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.jEX7s3GbbAtzgyS3",
+            "phase": "initial",
+            "predicate": [],
+            "key": "flying-attack",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "flying",
+            "phase": "initial",
+            "predicate": [
+              "effect:summon:windy-weather"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.flight.value",
+            "value": 5,
+            "phase": "initial",
+            "predicate": [
+              "effect:summon:windy-weather"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778690149224,
+        "modifiedTime": 1778690282136,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

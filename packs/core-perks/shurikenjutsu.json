@@ -1,0 +1,382 @@
+{
+  "name": "Shurikenjutsu",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "shurikenjutsu",
+    "description": "<p>The user’s @Trait[fling] or @Trait[missile] Attacks have +10% EHR and have a 10% chance of granting the user @Affliction[advance 20], with these amounts increasing by +5% if the attack has @Trait[weapon] and by +5% if it has @Trait[ninja].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ninja"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 188,
+        "y": 42,
+        "connected": [
+          "silence-is-golden",
+          "secret-ninja-tools",
+          "minor-buff-66",
+          "harass",
+          "kinjutsu-1",
+          "misdirect",
+          "pyrotechnical"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/weapons/thrown/shuriken-blue.webp",
+  "effects": [
+    {
+      "name": "Shurikenjutsu",
+      "type": "passive",
+      "_id": "9obG5K9NFVQXZm8g",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "key": "missile-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              {
+                "not": "attack:original:fling"
+              }
+            ],
+            "label": "Shurikenjutsu",
+            "affects": "self",
+            "alterations": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "missile-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "not": "attack:original:fling"
+                  },
+                  "self:action:trait:weapon"
+                ]
+              }
+            ],
+            "label": "Shurikenjutsu",
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 5,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "missile-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "not": "attack:original:fling"
+                  },
+                  "self:action:trait:ninja"
+                ]
+              }
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 5,
+                "method": 5
+              }
+            ],
+            "label": "Shurikenjutsu",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "fling-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "attack:original:fling"
+            ],
+            "label": "Shurikenjutsu",
+            "affects": "self",
+            "alterations": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "fling-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              {
+                "and": [
+                  "attack:original:fling",
+                  "self:action:trait:weapon"
+                ]
+              }
+            ],
+            "label": "Shurikenjutsu",
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 5,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "fling-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              {
+                "and": [
+                  "attack:original:fling",
+                  "self:action:trait:ninja"
+                ]
+              }
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 5,
+                "method": 5
+              }
+            ],
+            "label": "Shurikenjutsu",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "missile-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              {
+                "not": "attack:original:fling"
+              }
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Shurikenjutsu (Adv)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "missile-trait-attack-effect-chance",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "not": "attack:original:fling"
+                  },
+                  "self:action:trait:weapon"
+                ]
+              }
+            ],
+            "chance": 5,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Shurikenjutsu (Adv)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "missile-trait-attack-effect-chance",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              {
+                "and": [
+                  {
+                    "not": "attack:original:fling"
+                  },
+                  "self:action:trait:ninja"
+                ]
+              }
+            ],
+            "chance": 5,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Shurikenjutsu (Adv)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              "attack:original:fling"
+            ],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Shurikenjutsu (Adv)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-trait-attack-effect-chance",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              {
+                "and": [
+                  "attack:original:fling",
+                  "self:action:trait:weapon"
+                ]
+              }
+            ],
+            "chance": 5,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Shurikenjutsu (Adv)",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-trait-attack-effect-chance",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              {
+                "and": [
+                  "attack:original:fling",
+                  "self:action:trait:ninja"
+                ]
+              }
+            ],
+            "chance": 5,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Shurikenjutsu (Adv)",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "khKBbLQNt3gZsdjC"
+}

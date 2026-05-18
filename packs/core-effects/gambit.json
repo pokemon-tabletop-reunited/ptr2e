@@ -24,10 +24,9 @@
       "img": "icons/svg/d20.svg",
       "type": "affliction",
       "duration": {
-        "turns": null,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -35,17 +34,17 @@
             "type": "basic",
             "key": "system.battleStats.acc.stage",
             "value": -1,
-            "mode": 2,
             "predicate": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.battleStats.critRate.stage",
             "value": 2,
-            "mode": 2,
             "predicate": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "removeOnRecall": true,
@@ -65,11 +64,11 @@
       "statuses": [],
       "_id": "gambitcondition0",
       "_stats": {
-        "coreVersion": "13.346",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": 1754129335256,
+        "modifiedTime": 1756025618984,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -80,7 +79,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {}
+      "showIcon": 2
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",

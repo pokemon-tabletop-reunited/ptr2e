@@ -20,15 +20,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 5
         },
         "category": "special",
-        "power": 30,
+        "power": 35,
         "accuracy": 90,
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[burn] 5.</p>",
+        "description": "<p>Effect: On hit, the target has three 15% chances of gaining @Affliction[burn 3] (rolled separately).</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -58,14 +58,59 @@
           {
             "type": "roll-effect",
             "key": "third-degree-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
-            "predicate": [],
-            "chance": 10,
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "predicate": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "chance": 15,
             "affects": "target",
-            "mode": 2,
+            "dontMerge": true,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "third-degree-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "predicate": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "chance": 15,
+            "affects": "target",
+            "dontMerge": true,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "third-degree-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "predicate": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "chance": 15,
+            "affects": "target",
+            "dontMerge": true,
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,13 +121,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

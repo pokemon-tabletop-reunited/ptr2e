@@ -20,11 +20,11 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of gaining @Affliction[poison] 5.</p>",
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of gaining @Affliction[poison 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of gaining @Affliction[poison] 5.</p>",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of gaining @Affliction[poison 5].</p>",
     "traits": [
       "defensive"
     ],
@@ -52,14 +52,14 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 30,
             "affects": "origin",
             "label": "poison point",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -70,13 +70,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

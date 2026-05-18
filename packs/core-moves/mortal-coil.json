@@ -23,18 +23,13 @@
           "activation": "complex",
           "powerPoints": 2
         },
-        "variant": null,
         "types": [
           "ghost"
         ],
         "category": "physical",
         "power": 70,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "predicate": []
       },
       {
         "name": "Mortal Coil (Cursed)",
@@ -61,20 +56,23 @@
         "category": "physical",
         "power": 70,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null,
-        "description": "<p>Trigger: The target has @Affliction[cursed].</p><p>Effect: Effect: On resolution, the target is cured of @Affliction[crused] and is Delayed by 50%.</p>"
+        "description": "<p>Trigger: The target has @Affliction[cursed].</p><p>Effect: Effect: On resolution, the target is cured of @Affliction[crused] and is Delayed by 50%.</p>",
+        "predicate": []
       }
     ],
-    "container": null,
     "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "effects": [
@@ -88,50 +86,61 @@
           {
             "type": "roll-effect",
             "key": "mortal-coil-cursed-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -50
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Delay 50%"
+                "value": -50,
+                "method": 5
               }
-            ]
+            ],
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
-      }
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778709348967,
+        "modifiedTime": 1778709348967,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "disabled": false,
+      "start": null,
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {}
     }
-  ],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1720461611630,
-    "modifiedTime": 1720461695318,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  ]
 }

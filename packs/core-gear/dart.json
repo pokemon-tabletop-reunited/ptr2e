@@ -1,0 +1,180 @@
+{
+  "folder": "V4skAU6G3OH5fXae",
+  "name": "Dart",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Dart Thrust",
+        "slug": "dart-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "crit-1",
+          "grapple",
+          "horn"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 30,
+        "accuracy": 90
+      }
+    ],
+    "description": "<p>Darts are airborne ranged weapons, usually less than 1.3m long. They are designed to fly such that a sharp, often weighted point will strike first. They can be distinguished from short spears by the presence of fletching (feathers on the tail) and a shaft that is shorter or more flexible. Darts can be propelled by hand or with the aid of a handheld implement. In emergencies, they may be used like any other spear, but are not quite as effective.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 45,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
+    },
+    "quantity": 8,
+    "rarity": "uncommon",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "slug": "dart",
+    "traits": [
+      "weapon",
+      "fling",
+      "1-handed",
+      "medieval",
+      "ancient",
+      "fantasy",
+      "stack-8"
+    ],
+    "consumableType": "other",
+    "stack": 8,
+    "cost": 3,
+    "ammoType": []
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Dart",
+      "type": "passive",
+      "_id": "UbSjnpFad1jveyKU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 4,
+            "predicate": [],
+            "label": "Dart",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-dart-attack-damage-flat",
+            "value": 7,
+            "predicate": [],
+            "label": "Dart (Fling)",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "missile",
+            "phase": "initial",
+            "predicate": [],
+            "key": "fling-dart-attack",
+            "property": "traits",
+            "definition": [],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "adaptable",
+            "phase": "initial",
+            "predicate": [],
+            "key": "fling-dart-attack",
+            "property": "traits",
+            "definition": [],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.359",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.2.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1775701562458,
+        "modifiedTime": 1775701625272
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ],
+  "_id": "35sZHVUQMo1g7jTO"
+}

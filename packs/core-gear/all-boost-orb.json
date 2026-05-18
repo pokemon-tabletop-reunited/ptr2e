@@ -3,7 +3,7 @@
   "img": "systems/ptr2e/img/icons/consumable_icon.webp",
   "type": "consumable",
   "system": {
-    "cost": 7,
+    "cost": 5,
     "crafting": {
       "skill": "handiwork",
       "spans": null,
@@ -19,18 +19,21 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "The user and all allies gain @Affliction[boosted] 3.",
+    "description": "<p>The user and all allies gain @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage} and @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
     "quantity": 1,
     "slug": "all-boost-orb",
     "stack": 1,
@@ -42,10 +45,98 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "All-Boost Orb",
+        "slug": "all-boost-orb-action-1",
+        "description": "<p>The user and all allies gain @UUID[Compendium.ptr2e.core-effects.ZGwaMlzUwkSuCPyH]{+1 Attack Stage} and @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "ETmtGM9WrctnABPN",
-  "effects": [],
+  "effects": [
+    {
+      "name": "All-Boost Orb",
+      "type": "passive",
+      "_id": "9ObxLGg4sRdJPe3L",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "all-boost-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-boost-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758645737344,
+        "modifiedTime": 1758645770125,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

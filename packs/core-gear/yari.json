@@ -1,0 +1,192 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Yari",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "yari",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "polearm",
+      "2-handed",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Yari Thrust",
+        "slug": "yari-thrust",
+        "traits": [
+          "weapon",
+          "adaptable",
+          "contact",
+          "crit-2",
+          "flinch-15"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 75,
+        "accuracy": 60
+      },
+      {
+        "name": "Yari Thrust (Readied)",
+        "slug": "yari-thrust-readied",
+        "description": "<p>Trigger: A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user, while the user is @Affliction[braced].</p>",
+        "traits": [
+          "weapon",
+          "interrupt",
+          "adaptable",
+          "contact",
+          "priority-15",
+          "crit-2"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "A creature within range of this attack attempts to leave the range of this Attack, or that creature attempts to move adjacent to the user while the user is @Affliction[braced]."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 75,
+        "accuracy": 70,
+        "free": true
+      }
+    ],
+    "description": "<p>The yari is a traditionally-styled spear, often used in martial arts. These spears’ heads tend to be narrower, if not more-swordlike, than other examples throughout history, meaning that they are often lighter and have less overall force behind their strikes, but are more than capable of hurting opponents like any other spear. Though, of course, this makes them a bit more unusual to the common layperson, so they do require a bit more training to use than one might expect.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 2
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 90,
+      "accuracy": 80,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Yari",
+      "type": "passive",
+      "_id": "Cutxe8glfht1BMJn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 10,
+            "predicate": [],
+            "label": "Yari",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-yari-attack-damage-flat",
+            "value": 6,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "PAbzrx2uxfJW6kyz"
+}

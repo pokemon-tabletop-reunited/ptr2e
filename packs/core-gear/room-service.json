@@ -9,7 +9,7 @@
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,14 +18,18 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
       "combat",
-      "consumable",
       "environ",
-      "defensive"
+      "accessory"
     ],
     "actions": [
       {
@@ -52,7 +56,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user is affected by Trick Room.\nEffect: The user loses -1 default SPD Stage.",
+    "description": "<p>Passive Trigger: The user is affected by @UUID[Compendium.ptr2e.core-summons.R6JOV2LI9kcG8vSq]{Trick Room}.<br><br>Effect: The user loses -1 default SPD Stage.</p>",
     "slug": "room-service",
     "quantity": 1,
     "identification": {
@@ -92,8 +96,8 @@
             "predicate": [
               "effect:summon:trick-room"
             ],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -106,8 +110,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -120,7 +124,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "1.4.2.beta",
         "createdTime": 1754781149015,
@@ -129,5 +133,5 @@
       }
     }
   ],
-  "folder": "PGpYU7mfnRpzOZSm"
+  "folder": "6VDJBcrqVDh5bYtA"
 }

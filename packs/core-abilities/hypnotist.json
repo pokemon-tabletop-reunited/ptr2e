@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-3"
+          "interrupt"
         ],
         "name": "Hypnotist",
         "slug": "hypnotist-active",
@@ -20,7 +20,7 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: A creature moves to a space within 5m of the user that was previously not within a 5m radius of the user.<br><br>Effect: The user may spend 3PP to use Hypnosis against the creature as a Free Action Interrupt.</p>",
+        "description": "<p>Trigger: A creature moves to a space within 5m of the user that was previously not within a 5m radius of the user.<br><br>Effect: The user may spend 3PP to use Hypnosis against the creature as a Free Action @Trait[interrupt].</p>",
         "img": "icons/magic/control/hypnosis-mesmerism-pendulum.webp"
       },
       {
@@ -40,9 +40,8 @@
         }
       }
     ],
-    "description": "<p>Effect: Connection - Hypnosis. <br><br>Interrupt Trigger: An enemy moves into range, allowing the user to activate Hypnosis as a Free Action Interrupt.<br><br>Passive: The user's Hypnosis gains Danger Close.</p>",
+    "description": "<p>Effect: Connection - Hypnosis. <br><br>@Trait[interrupt] Trigger: An enemy moves into range, allowing the user to activate Hypnosis as a Free Action @Trait[interrupt].<br><br>Passive: The user's Hypnosis gains Danger Close.</p>",
     "traits": [
-      "partial-automation",
       "connection"
     ],
     "slug": "hypnotist",
@@ -69,14 +68,13 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.s4q86Yo0UJilvVI0",
             "predicate": [
               "ability:hypnotist:active"
             ],
             "alterations": [
               {
-                "mode": 5,
+                "method": 5,
                 "property": "system.actions.0.free",
                 "value": "true"
               }
@@ -88,11 +86,24 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "danger-close",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "key": "hypnosis-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -105,13 +116,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -123,14 +131,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737403414513,
-        "modifiedTime": 1754319221960,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778689424570,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -9,13 +9,11 @@
       {
         "name": "Metamove: Dirty Trick",
         "slug": "metamove-dirty-trick",
-        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be Flinched and they lose -1 EVA for 5 Activations.</p>",
+        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be @Affliction[delay 30] and lose -1 EVA Stage for 5 Activations.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "The user's declares an attack.",
-          "delay": null,
-          "priority": null
+          "trigger": "The user's declares an attack."
         },
         "type": "generic",
         "traits": [
@@ -25,15 +23,12 @@
         "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
           "target": "creature",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "metamove-dirty-trick",
-    "description": "<p>When declaring an Attack, the user may spend 4PP to have that Attack inflict Flinched 2 and cause affected creatures lose -1 EVA for 5 Activations if it hits.</p>",
+    "description": "<p>When declaring an Attack, the user may spend @PP[-4] to have that Attack inflict @Affliction[delay 20] and cause -1 EVA Stage for 5 Activations on hit hits.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 1,
@@ -43,6 +38,10 @@
     },
     "nodes": [
       {
+        "x": 122,
+        "y": 182,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "metamove-power-swap",
           "metamove-empower",
@@ -53,25 +52,15 @@
           "comingling-of-power"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#8000ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 122,
-        "y": 182,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -87,5 +76,77 @@
       "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Dirty Trick",
+      "type": "passive",
+      "_id": "Sr4X0MTZvT3I7sIf",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "metamove-dirty-trick-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "metamove-dirty-trick-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757861617379,
+        "modifiedTime": 1757861701447,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

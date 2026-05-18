@@ -30,7 +30,7 @@
         "types": [
           "rock"
         ],
-        "description": "<p>Effect: On hit, the target becomes Delayed by 50% and gains @Affliction[confused] 7.</p>",
+        "description": "<p>Effect: On hit, the target becomes Delayed by 50% and gains @Affliction[confused 7].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -60,20 +60,20 @@
           {
             "type": "roll-effect",
             "key": "atlas-crash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 7
+                "value": 7,
+                "method": 5
               }
-            ]
+            ],
+            "method": 2
           }
         ],
         "slug": null,
@@ -84,15 +84,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
-      "description": "<p>Effect: On hit, the target becomes Flinched and gains @Affliction[confused] 7.</p>",
+      "description": "<p>Effect: On hit, the target is @Affliction[delay 50] and gains @Affliction[confused 7].</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -120,26 +115,21 @@
           {
             "type": "roll-effect",
             "key": "atlas-crash-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -50
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Delay 50%"
+                "value": -50,
+                "method": 5
               }
-            ]
+            ],
+            "method": 2
           }
         ],
         "slug": null,
@@ -147,6 +137,10 @@
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0
+      },
+      "duration": {
+        "units": "turns",
+        "value": null
       }
     }
   ]

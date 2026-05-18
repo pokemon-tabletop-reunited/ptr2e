@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,11 +18,15 @@
       "type": "untyped",
       "power": 100,
       "accuracy": 70,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "unique",
     "traits": [
-      "held",
       "combat",
       "arceus",
       "plate",
@@ -43,7 +47,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -71,10 +76,62 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "a2pehRZ4W3l8nOpV",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Legend Plate",
+      "type": "passive",
+      "_id": "O0AMPiRJdiodauYp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "damaging-attack-damage-percentile",
+            "value": -30,
+            "predicate": [
+              "target:species:arceus"
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758375996905,
+        "modifiedTime": 1758376020808,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA"
 }

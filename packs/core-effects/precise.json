@@ -24,10 +24,9 @@
       "img": "icons/svg/sun.svg",
       "type": "affliction",
       "duration": {
-        "turns": null,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -36,8 +35,8 @@
             "key": "system.battleStats.accuracy.stage",
             "value": 1,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
@@ -49,14 +48,14 @@
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
+                "value": -20,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "removeOnRecall": true,
@@ -76,11 +75,11 @@
       "statuses": [],
       "_id": "precisecondition",
       "_stats": {
-        "coreVersion": "13.346",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": 1754127796067,
+        "modifiedTime": 1756025649581,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -91,7 +90,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {}
+      "showIcon": 2
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",

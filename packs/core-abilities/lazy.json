@@ -17,7 +17,7 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user gains @Affliction[drowsy] 5. While afflicted with @Affliction[drowsy], the user takes 30% less damage from all sources.</p>",
+        "description": "<p>Effect: The user gains @Affliction[drowsy 5]. While afflicted with @Affliction[drowsy], the user takes 30% less damage from all sources.</p>",
         "img": "systems/ptr2e/img/conditions/sleep.svg",
         "types": [
           "untyped"
@@ -27,7 +27,7 @@
         "predicate": []
       }
     ],
-    "description": "<p>Effect: The user gains @Affliction[drowsy] 5. While afflicted with @Affliction[drowsy], the user takes 30% less damage from all sources.</p>",
+    "description": "<p>Effect: The user gains @Affliction[drowsy 5]. While afflicted with @Affliction[drowsy], the user takes 30% less damage from all sources.</p>",
     "traits": [],
     "slug": "lazy",
     "_migration": {
@@ -54,7 +54,7 @@
           {
             "type": "roll-effect",
             "key": "lazy-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 100,
             "affects": "self",
@@ -62,8 +62,8 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -73,9 +73,9 @@
               "target:effect:affliction:drowsy"
             ],
             "priority": null,
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -88,13 +88,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

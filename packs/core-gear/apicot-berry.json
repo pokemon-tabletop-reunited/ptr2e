@@ -3,9 +3,9 @@
   "img": "systems/ptr2e/img/item-icons/apicot berry.webp",
   "type": "consumable",
   "system": {
-    "cost": 3,
+    "cost": 4,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -14,30 +14,30 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "common",
+    "rarity": "uncommon",
     "consumableType": "food",
     "traits": [
       "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
       "desperation-1-3",
-      "spicy-1",
-      "dry-5",
-      "sour-5",
       "combat"
     ],
-    "description": "The user gains +1 SPDEF Stage for 5 activations. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.",
+    "description": "<p>The user gains +1 DEF Stage for 5 Activations and @Affliction[advance 20]. This item can be consumed as a Free Action @Trait[interrupt] if the user passes the Desperation threshold and this item is stored in a Belt Slot.</p>",
     "quantity": 1,
     "slug": "apicot-berry",
     "stack": 1,
@@ -49,10 +49,109 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Apicot Berry",
+        "slug": "apicot-berry",
+        "description": "<p>The user gains +1 DEF Stage for 5 Activations and @Affliction[advance 20]. This item can be consumed as a Free Action @Trait[interrupt] if the user passes the Desperation threshold and this item is stored in a Belt Slot.</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "desperation-1-3",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/apicot berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "8u2icZ5YVJB4DFiA",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Apicot Berry",
+      "type": "passive",
+      "_id": "jeNOtDNxgxkiOJZE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "apicot-berry-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sMystTj3FBJ00AZp",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "apicot-berry-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 20,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758632443218,
+        "modifiedTime": 1758632533973,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }

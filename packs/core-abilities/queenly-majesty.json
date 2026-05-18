@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-6"
+          "interrupt"
         ],
         "name": "Queenly Majesty",
         "slug": "queenly-majesty",
@@ -14,21 +14,21 @@
         "cost": {
           "activation": "free",
           "powerPoints": 5,
-          "trigger": "<p>A creature in range declares a [Interrupt X] Action not targeting itself.</p>"
+          "trigger": "<p>A creature in range declares a @Trait[interrupt] Action not targeting itself.</p>"
         },
         "range": {
           "target": "creature",
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: A in range creature declares a [Interrupt X] Action not targeting itself.</p><p>Effect: The triggering Action fails and if it was an Attack, the triggering Action is @Affliction[disabled] 5.</p>",
+        "description": "<p>Trigger: A in range creature declares a @Trait[interrupt] Action not targeting itself.</p><p>Effect: The triggering Action fails and if it was an Attack, the triggering Action is @Affliction[disabled 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: A creature declares a [Interrupt X] Action not targeting itself.</p><p>Effect: The triggering Action fails and if it was an Attack, the triggering Action is @Affliction[disabled] 5.</p>",
+    "description": "<p>Trigger: A creature declares a @Trait[interrupt] Action not targeting itself.</p><p>Effect: The triggering Action fails and if it was an Attack, the triggering Action is @Affliction[disabled 5].</p>",
     "traits": [
       "connection",
-      "interrupt-6"
+      "interrupt"
     ],
     "slug": "queenly-majesty",
     "_migration": {
@@ -55,15 +55,15 @@
           {
             "type": "roll-effect",
             "key": "queenly-majesty-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
             "predicate": [],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,8 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

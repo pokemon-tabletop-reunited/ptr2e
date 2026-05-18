@@ -10,10 +10,12 @@
     "slug": "metal-alloy",
     "traits": [
       "evolution",
-      "steel"
+      "steel",
+      "accessory",
+      "consumable"
     ],
     "actions": [],
-    "description": "<p>A peculiar metal that can make certain species of Pokémon evolve. It is composed of many layers.</p>",
+    "description": "<p>Effect: The user takes 10% less damage from Special-Category Attacks. Effect doubled for @Trait[steel] creatures. @UUID[Compendium.ptr2e.core-species.8zwoJEr5uIUPtLr3]{Duraludon} and @UUID[Compendium.ptr2e.core-species.6NKbLnXSDTXsUC0M]{Archaludon} users are @Affliction[advance 10] after using an attack.<br><br>Duraludon can consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -22,14 +24,19 @@
     "equipped": {
       "carryType": "stowed",
       "handsHeld": null,
-      "slot": "backpack"
+      "slot": "accessory"
     },
     "grade": "A",
     "fling": {
       "type": "steel",
-      "power": 90,
-      "accuracy": 100,
-      "hide": false
+      "power": 140,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -46,11 +53,93 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/gear_icon.webp",
-  "effects": [],
-  "flags": {},
+  "img": "systems/ptr2e/img/item-icons/metal alloy.webp",
+  "effects": [
+    {
+      "name": "Metal Alloy",
+      "type": "passive",
+      "_id": "ki2y5XMyRq6dsK5u",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Metal Alloy (Base)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:steel"
+            ],
+            "label": "Metal Alloy (Steel)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:duraludon",
+                  "item:species:archaludon"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1758631244422,
+        "modifiedTime": 1766206118301,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "dWbuV8Fdg01vC4Ls"
 }

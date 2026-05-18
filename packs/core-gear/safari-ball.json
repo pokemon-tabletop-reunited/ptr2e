@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,17 +18,23 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 15,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
     "traits": [
       "stack-20",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "A ball given for use in specific catching contests. Gives no bonus on capture checks.",
-    "modifier": 1,
+    "description": "<p>A ball given for use in specific catching contests. 1.5x Capture Rate Modifier.</p>",
+    "modifier": 1.5,
     "quantity": 1,
     "slug": "safari-ball",
     "stack": 20,
@@ -40,8 +46,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "SfFSplgjlMMgZesh",
   "effects": [],

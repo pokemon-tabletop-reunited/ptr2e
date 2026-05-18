@@ -1,0 +1,275 @@
+{
+  "folder": "UUWElZA9w1KEqZS7",
+  "name": "SGRD-Ra3ap “Wrath” Powered Armor",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "wrath-powered-armor",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "armor",
+      "sci-fi",
+      "powered"
+    ],
+    "actions": [],
+    "description": "<p>The SGRD-Ra3ap “Wrath” Powered Armor is a fairly heavy and durable ceramoalloy-plated powered armor, with strength and Item Slots to spare. Equipped with some life support and environmental protection, similar to Pioneer Armor.<br><br>Grants resilience to all types of damage, particularly Physical and ranged weapon damage, grants +10 Base ATK, and +15 DEF and SPDEF, increases the Physical damage the user deals, reduces the user's SPD by -15%, provides +15% RES, and grants +2 Belt Slots.<br><br>As well, whenver the user is hit by a Critical Hit, they are @Affliction[delay 30], have a 20% chance of losing @Tick[-1], and have a 50% chance of losing -1 ATK and SPD Stages for 3 Activations.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "worn",
+      "handsHeld": null
+    },
+    "grade": "A",
+    "fling": {
+      "type": "untyped",
+      "power": 180,
+      "accuracy": 50,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 1,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Wrath Powered Armor",
+      "type": "passive",
+      "_id": "PpNmQnnPgZr4UbW9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.inventory.belt.max",
+            "value": 2,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "hp": null,
+            "atk": 10,
+            "def": 15,
+            "spa": null,
+            "spd": 15,
+            "spe": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -25,
+            "predicate": [],
+            "label": "Wrath Powered Armor (DMG Red)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": -25,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Phys Red)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "missile-trait-attack-damage-flat",
+            "value": -15,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Weapon)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "pulse-trait-attack-damage-flat",
+            "value": -15,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Weapon)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "ray-trait-attack-damage-flat",
+            "value": -15,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Weapon)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "explode-trait-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Explode)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "physical-attack-damage",
+            "value": 5,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Phys Flat)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 15,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Phys Perc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-crit-stage-flat",
+            "value": -1,
+            "predicate": [],
+            "label": "Wrath Powered Armor (Breakdown Res)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.15,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -30,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.xbipXPhCJKizKZlg",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "fQ5bLf3UBtvVTAqh"
+}

@@ -12,7 +12,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: On hit, the target has a 50% chance of losing -1 DEF and SPDEF for 5 Activations, and a 20% chance of gaining @Affliction[cursed] 5.</p>"
+      "notes": "<p>Effect: On hit, the target has a 50% chance of losing -1 DEF and SPDEF for 5 Activations, and a 20% chance of gaining @Affliction[cursed 5].</p>"
     },
     "traits": [],
     "actions": [
@@ -43,7 +43,7 @@
         "power": 25,
         "accuracy": 80,
         "predicate": [],
-        "description": "<p>Effect: On hit, the target has a 50% chance of losing -1 DEF and SPDEF for 5 Activations, and a 20% chance of gaining @Affliction[cursed] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 50% chance of losing -1 DEF and SPDEF for 5 Activations, and a 20% chance of gaining @Affliction[cursed 5].</p>"
       }
     ],
     "grade": "C"
@@ -60,38 +60,38 @@
           {
             "type": "roll-effect",
             "key": "imperil-curse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "imperil-curse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "imperil-curse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.cursedcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cursedcondition0",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -102,13 +102,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

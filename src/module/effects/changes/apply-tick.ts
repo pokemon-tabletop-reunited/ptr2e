@@ -1,4 +1,5 @@
-import { ChangeModel, ChangeSchema } from "@data";
+import { ChatMessagePTR2e } from "@chat";
+import { ChangeModel, ChangeSchema, PokemonType, PTRCONSTS } from "@data";
 import { ItemPTR2e } from "@item";
 
 export default class ApplyTickChangeSystem extends ChangeModel {
@@ -7,7 +8,7 @@ export default class ApplyTickChangeSystem extends ChangeModel {
   static override defineSchema() {
     return {
       ...super.defineSchema(),
-      method: new foundry.data.fields.StringField<"HP"|"PP"|"Shield", "HP"|"PP"|"Shield", true>({
+      target: new foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>({
         required: true,
         nullable: false,
         initial: "HP",
@@ -16,8 +17,25 @@ export default class ApplyTickChangeSystem extends ChangeModel {
           "PP": "PTR2E.Effect.FIELDS.ApplyTickMode.PP",
           "Shield": "PTR2E.Effect.FIELDS.ApplyTickMode.Shield",
         }
+      }),
+      types: new foundry.data.fields.SetField(
+        new foundry.data.fields.StringField<PokemonType, PokemonType, true>({
+          required: true,
+          initial: "untyped",
+          choices: Object.values(PTRCONSTS.Types)
+        }),
+        { required: true, initial: [] }
+      ),
+      isFlat: new foundry.data.fields.BooleanField({
+        required: true,
+        initial: false,
+        nullable: false,
       })
     }
+  }
+
+  override apply(): void {
+    // Does nothing during apply phase.
   }
 
   override async preCreate({ effectSource, pendingItems, pendingEffects, }: ChangeModel.PreCreateParams): Promise<void> {
@@ -27,12 +45,33 @@ export default class ApplyTickChangeSystem extends ChangeModel {
     const value = Number(this.resolveValue(this.value));
     if (isNaN(value)) return this.failValidation("Value field did not resolve to a number");
 
-    await this.actor.applyTickDamage({
-      ticks: value,
-      apply: true,
-      shield: this.method === "Shield",
-      pp: this.method === "PP",
-    })
+    if(this.isFlat) {
+      if(this.target === "PP") {
+        const current = this.actor.system.powerPoints.value;
+        const newValue = Math.clamp(this.actor.system.powerPoints.value + value, 0, this.actor.system.powerPoints.max);
+        await this.actor.update({ "system.powerPoints.value": newValue });
+        //@ts-expect-error - Outdated types
+        await ChatMessagePTR2e.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: current - newValue,
+            target: this.actor.uuid,
+            ppApplied: true
+          },
+        });
+      }
+      else {
+        await this.actor.applyDamage(value * -1, { healShield: this.target === "Shield" && value > 0, silent: false, flat: true, note: ""});
+      }
+    } else {
+      await this.actor.applyTickDamage({
+        ticks: value,
+        apply: true,
+        shield: this.target === "Shield",
+        pp: this.target === "PP",
+        types: this.types
+      })
+    }
 
     // If this is not the only change, we keep the effect
     if (this.effect?.changes?.length > 1) {
@@ -58,5 +97,7 @@ export default interface ApplyTickChangeSystem extends ChangeModel, ModelPropsFr
 
 interface ApplyTickChangeSchema extends ChangeSchema {
   /** The method to apply the tick damage */
-  method: foundry.data.fields.StringField<"HP"|"PP"|"Shield", "HP"|"PP"|"Shield", true>;
+  target: foundry.data.fields.StringField<"HP" | "PP" | "Shield", "HP" | "PP" | "Shield", true>;
+  types: foundry.data.fields.SetField<foundry.data.fields.StringField<PokemonType, PokemonType, true>>;
+  isFlat: foundry.data.fields.BooleanField;
 };

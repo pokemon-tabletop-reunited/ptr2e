@@ -40,9 +40,102 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "chAe8LcKj2vzT5lI",
-  "effects": []
+  "effects": [
+    {
+      "name": "Arena Trap",
+      "type": "passive",
+      "_id": "xNupdsddhzAMv5ZZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "arena-trap:active"
+            ],
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.mH3mrRSypE6N3USQ",
+                "affects": "enemies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": false,
+                "appliesSelfOnly": false,
+                "predicate": []
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#cd60be",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "#cd60be",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "arena-trap:active",
+            "predicate": [],
+            "domain": "all",
+            "label": "Arena Trap",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.iotInErMkWzaKpKP.ActiveEffect.ZpcUpVdnRuoUIMDr",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1765275704215,
+        "modifiedTime": 1772808782967,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ]
 }

@@ -10,7 +10,8 @@
         "name": "Stun Spore",
         "type": "attack",
         "traits": [
-          "powder"
+          "powder",
+          "basic"
         ],
         "range": {
           "target": "cone",
@@ -26,7 +27,7 @@
         "types": [
           "grass"
         ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[paralysis] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[paralysis 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -46,5 +47,58 @@
     }
   },
   "_id": "zA2Aie3gUYFwdRwh",
-  "effects": []
+  "effects": [
+    {
+      "name": "Stun Spore",
+      "type": "passive",
+      "_id": "Fy2Wj6MNpTSRhetg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "stun-spore-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1767562786182,
+        "modifiedTime": 1767562811663,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -16,34 +16,43 @@
     "grade": "B",
     "fling": {
       "type": "untyped",
-      "power": null,
-      "accuracy": 100,
-      "hide": null
+      "power": 60,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 6,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
-      "combat"
+      "combat",
+      "evolution",
+      "consumable",
+      "accessory"
     ],
     "actions": [
       {
         "name": "Razor Fang",
         "slug": "razor-fang",
         "type": "passive",
-        "description": "Effect: The user's Physical- and Special-Category Attacks gain [Flinch Chance 2], at a 10% chance to cause Flinch on hit. The user's attacks that already have [Flinch Chance X] have their chance to Flinch increase by +10%.",
+        "description": "Effect: The user's @Trait[contact] trait attacks have a +20% chance to inflict @Affliction[delay 40].",
         "img": "systems/ptr2e/img/item-icons/razor fang.webp",
         "traits": [
           "Combat"
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
         }
       }
     ],
-    "description": "Effect: The user's Physical- and Special-Category Attacks gain [Flinch Chance 2], at a 10% chance to cause Flinch on hit. The user's attacks that already have [Flinch Chance X] have their chance to Flinch increase by +10%.",
+    "description": "<p>Effect: The user's @Trait[contact] trait attacks have a +20% chance to inflict @Affliction[delay 40].<br><br>May be consumed by certain Species to trigger Evolution.</p>",
     "slug": "razor-fang",
     "quantity": 1,
     "identification": {
@@ -63,10 +72,71 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "7QtTkf6L4gdE1sMz",
-  "effects": [],
-  "folder": "6VDJBcrqVDh5bYtA"
+  "effects": [
+    {
+      "name": "Razor Fang",
+      "type": "passive",
+      "_id": "FoHDF2rVnWkJazzu",
+      "img": "systems/ptr2e/img/item-icons/razor fang.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 40,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "label": "Razor Fang",
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758623436728,
+        "modifiedTime": 1758623528040,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXae"
 }

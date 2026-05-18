@@ -8,8 +8,10 @@
     },
     "actions": [],
     "slug": "maestro-1",
-    "description": "<p>The user selects 2 Arts Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
-    "traits": [],
+    "description": "<p>The user gains a +5 increase to an Arts Group Skill a total of 5 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 60 or more with @Trait[skill-boost] Perks.</p>",
+    "traits": [
+      "skill-boost"
+    ],
     "prerequisites": [
       "item:perk:skill-refinement-5"
     ],
@@ -152,44 +154,110 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.arts",
+            "choices": "flags.ptr2e.skillOptions.arts60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ma11"
+            "rollOption": "ma11",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma11}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma11}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.arts",
+            "choices": "flags.ptr2e.skillOptions.arts60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ma12"
+            "rollOption": "ma12",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma12}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma12}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.arts60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma13",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma13}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.arts60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma14",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma14}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.arts60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ma15",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ma15}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -200,13 +268,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

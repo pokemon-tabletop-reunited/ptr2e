@@ -16,11 +16,16 @@
     "grade": "C",
     "fling": {
       "type": "steel",
-      "power": 50,
-      "accuracy": 100,
-      "hide": false
+      "power": 75,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 2,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "traits": [
       "weapon",
       "fling",
@@ -28,23 +33,27 @@
       "autoload",
       "steel",
       "reload-1",
-      "charge-pool-18"
+      "charge-pool-18",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 45,
+        "category": "physical",
+        "power": 70,
         "accuracy": 95,
         "free": true,
         "traits": [
-          "missile"
+          "missile",
+          "firearm"
         ],
         "name": "Semi-Auto Rifle",
         "slug": "semi-auto-rifle",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -53,27 +62,28 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 35,
+        "category": "physical",
+        "power": 40,
         "accuracy": 85,
         "free": true,
         "traits": [
           "missile",
-          "3-strike",
-          "priority-1"
+          "firearm",
+          "double-strike",
+          "flinch-10"
         ],
         "name": "Semi-Auto Rifle (Snap Shot)",
         "slug": "semi-auto-rifle-snap-shot",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -82,29 +92,29 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3,
-          "priority": 1
+          "activation": "complex"
         },
         "variant": "semi-auto-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 45,
+        "category": "physical",
+        "power": 55,
         "accuracy": 80,
         "free": true,
         "traits": [
           "dash",
           "missile",
-          "priority-1"
+          "firearm",
+          "priority-10"
         ],
         "name": "Semi-Auto Rifle (Hip Fire)",
         "slug": "semi-auto-rifle-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -113,12 +123,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "priority": 1
+          "activation": "complex"
         },
         "variant": "semi-auto-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -145,7 +154,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A semi-automatic rifle is a type of rifle that fires a single round each time the trigger is pulled while automatically loading the next cartridge. The actions of semi-automatic rifles use a portion of the fired cartridge's energy to eject the spent casing and load a new round into the chamber, readying the rifle to be fired again.</p>"
+    "description": "<p>A semi-automatic rifle is a type of rifle that fires a single round each time the trigger is pulled while automatically loading the next cartridge. The actions of semi-automatic rifles use a portion of the fired cartridge's energy to eject the spent casing and load a new round into the chamber, readying the rifle to be fired again.</p>",
+    "ammoType": []
   },
   "_id": "zdAxZicLlZ87xO4S",
   "effects": [
@@ -159,30 +169,39 @@
           {
             "type": "flat-modifier",
             "key": "{item|id}-attack-damage-flat",
-            "value": 22,
+            "value": 31,
             "predicate": [],
-            "label": "Assault Rifle",
-            "mode": 2,
+            "label": "Semi-Auto Rifle",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -190,17 +209,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1743972846415,
-        "modifiedTime": 1743972852461,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+        "modifiedTime": 1777948936383,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "MKaFm5Pvt7tvgdAa"

@@ -26,14 +26,14 @@
         "types": [
           "dark"
         ],
-        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bestow the item to an allied creature.</p>",
         "variant": "thief",
         "free": true,
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/icons/container_icon.webp",
         "predicate": []
       }
     ],
-    "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+    "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bestow the item to an allied creature.</p>",
     "traits": [
       "connection",
       "partial-automation"
@@ -69,9 +69,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -81,11 +81,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -98,13 +98,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -116,7 +111,6 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
         "systemId": "ptr2e",
         "systemVersion": "1.4.2.beta",
         "createdTime": 1737417843881,

@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,9 +35,9 @@
       "stack-5",
       "belt",
       "fling",
-      "hunting-ball"
+      "ball"
     ],
-    "description": "Catch Rate increases by 1x for every 5 levels the user is over the target, up to a maximum of 8x.",
+    "description": "<p>Catch Rate increases by 1x for every 5 levels the user is over the target.</p>",
     "modifier": 1,
     "quantity": 1,
     "slug": "level-ball",
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "6qpFM7IdGkJQTA5I",
   "effects": [],

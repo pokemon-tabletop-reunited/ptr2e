@@ -9,7 +9,9 @@
         "slug": "lick",
         "name": "Lick",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "basic"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -24,7 +26,7 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis 5].</p>",
         "img": "systems/ptr2e/img/svg/ghost_icon.svg"
       }
     ],
@@ -44,7 +46,7 @@
   "effects": [
     {
       "name": "Lick",
-      "type": "affliction",
+      "type": "passive",
       "_id": "WZ7fte9nL32Yr1Gw",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -52,13 +54,13 @@
           {
             "type": "roll-effect",
             "key": "lick-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,13 +74,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

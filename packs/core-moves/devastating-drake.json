@@ -12,7 +12,8 @@
         "traits": [
           "zenith",
           "blast-2",
-          "sky"
+          "sky",
+          "danger-close"
         ],
         "range": {
           "target": "blast",
@@ -29,9 +30,10 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 5.</p><p>Requirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.</p>",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter 5].</p><p>Requirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.</p>",
         "free": true,
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "_migration": {
@@ -43,8 +45,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "sY14kmyNGtCQGTrN",
   "effects": [
@@ -58,30 +62,30 @@
           {
             "type": "roll-effect",
             "key": "devastating-drake-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -93,12 +97,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729538802363,
         "modifiedTime": 1729538835467,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

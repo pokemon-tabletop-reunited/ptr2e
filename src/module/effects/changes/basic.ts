@@ -30,13 +30,13 @@ export default class BasicChangeSystem extends ChangeModel {
       change: change,
     }
     const changeValue = change.resolveValue(change.value, 0, { resolvables });
-    const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
+    const newValue = BasicChangeSystem.getNewValue(change.method, current, changeValue, change.merge);
     if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
       return change.failValidation(newValue.asError().message);
     }
 
     // Handle arrays
-    if (change.mode === CHANGE_MODES.ADD && (Array.isArray(current) || current instanceof Set)) {
+    if (change.method === CHANGE_MODES.ADD && (Array.isArray(current) || current instanceof Set)) {
       if (Array.isArray(current)) {
         if (!current.includes(newValue)) {
           current.push(newValue);
@@ -45,7 +45,7 @@ export default class BasicChangeSystem extends ChangeModel {
       else {
         current.add(newValue);
       }
-    } else if(change.mode === CHANGE_MODES.REMOVE && (Array.isArray(current) || current instanceof Set)) {
+    } else if(change.method === CHANGE_MODES.REMOVE && (Array.isArray(current) || current instanceof Set)) {
       if (Array.isArray(current)) {
         if (current.includes(newValue)) {
           current.splice(current.indexOf(newValue), 1);
@@ -141,9 +141,9 @@ export default class BasicChangeSystem extends ChangeModel {
   /**
    * Apply an ActiveEffect change to a target Actor.
    */
-  static getNewValue(mode: ActiveEffectChangeMode | 6, current: number, change: number, merge?: boolean): number;
-  static getNewValue<TCurrent>(mode: ActiveEffectChangeMode | 6, current: TCurrent, change: TCurrent extends (infer TValue)[] ? TValue : TCurrent, merge?: boolean): (TCurrent extends (infer TValue)[] ? TValue : TCurrent) | foundry.data.validation.DataModelValidationFailure;
-  static getNewValue(mode: ActiveEffectChangeMode | 6, current: unknown, change: unknown, merge?: boolean): unknown {
+  static getNewValue(mode: ActiveEffectChangeMode | 6 | 7, current: number, change: number, merge?: boolean): number;
+  static getNewValue<TCurrent>(mode: ActiveEffectChangeMode | 6 | 7, current: TCurrent, change: TCurrent extends (infer TValue)[] ? TValue : TCurrent, merge?: boolean): (TCurrent extends (infer TValue)[] ? TValue : TCurrent) | foundry.data.validation.DataModelValidationFailure;
+  static getNewValue(mode: ActiveEffectChangeMode | 6 | 7, current: unknown, change: unknown, merge?: boolean): unknown {
     const modes = CHANGE_MODES;
     switch (mode) {
       case modes.ADD:
@@ -158,6 +158,8 @@ export default class BasicChangeSystem extends ChangeModel {
         return this._applyUpgrade(change, current, false);
       case modes.REMOVE:
         return this._applyReduce(change, current);
+      case modes.CONCAT:
+        return this._applyConcat(change, current);
       default:
         return null;
     }
@@ -249,5 +251,19 @@ export default class BasicChangeSystem extends ChangeModel {
     }
 
     return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to Reduce \`${change}\` to \`${current}\`. This is likely due to an invalid Key.`, invalidValue: change, fallback: false });
+  }
+
+  /**
+   * Apply an ActiveEffect that uses a CONCAT application mode.
+   * This is string only.
+   */
+  static _applyConcat(change: unknown, current: unknown): string | foundry.data.validation.DataModelValidationFailure {
+    if (typeof change !== "string") {
+      return new foundry.data.validation.DataModelValidationFailure({ message: `Invalid value \`${change}\` for mode Concat, value must be a string.`, invalidValue: change, fallback: false });
+    }
+    if (!(typeof current === "string" || current === undefined || current === null)) {
+      return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode Concat on \`${current}\`. This is likely due to an invalid Key.`, invalidValue: current, fallback: false });
+    }
+    return (current ?? "") + change;
   }
 }

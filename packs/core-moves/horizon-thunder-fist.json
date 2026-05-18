@@ -1,0 +1,364 @@
+{
+  "name": "Horizon Thunder Fist",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.112,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.350",
+        "system": "1.4.7.beta"
+      }
+    },
+    "slug": "horizon-thunder-fist",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Core Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Horizon Thunder Fist (Set-Up)",
+        "slug": "horizon-thunder-fist-set-up",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "traits": [
+          "legendary",
+          "defensive",
+          "set-up",
+          "aura",
+          "priority-40"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>Effect: The user gains @Affliction[braced 2] and @Affliction[boosted 2].</p>",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Horizon Thunder Fist (x1 Charge)",
+        "slug": "horizon-thunder-fist-1-charge",
+        "description": "<p>Trigger: The user used Horizon Thunder Fist (Set-Up) on their last Activation.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use.</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "aura",
+          "pulse",
+          "ray",
+          "punch",
+          "kick",
+          "flinch-50",
+          "blast-1"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user used Horizon Thunder Fist (Set Up) on their last Activation."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 75,
+        "accuracy": 100
+      },
+      {
+        "name": "Horizon Thunder Fist (x2 Charge)",
+        "slug": "horizon-thunder-fist-2-charge",
+        "description": "<p>Trigger: The user used Horizon Thunder Fist (Set-Up) on their last two consecutive Activations.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use.</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "aura",
+          "pulse",
+          "ray",
+          "punch",
+          "kick",
+          "flinch-50",
+          "blast-2"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "Trigger: The user used Horizon Thunder Fist (Set Up) on their last two consecutive Activations."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 14,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 90,
+        "accuracy": 100
+      },
+      {
+        "name": "Horizon Thunder Fist (x3 Charge)",
+        "slug": "horizon-thunder-fist-3-charge",
+        "description": "<p>Trigger: The user used Horizon Thunder Fist (Set-Up) on their last three consecutive Activations.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use.</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "aura",
+          "pulse",
+          "ray",
+          "punch",
+          "kick",
+          "flinch-50"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user used Horizon Thunder Fist (Set Up) on their last three consecutive Activations."
+        },
+        "range": {
+          "target": "line",
+          "distance": 20,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 105,
+        "accuracy": 90
+      },
+      {
+        "name": "Horizon Thunder Fist (x4 Charge)",
+        "slug": "horizon-thunder-fist-4-charge",
+        "description": "<p>Trigger: The user used Horizon Thunder Fist (Set-Up) on their last four consecutive Activations.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use.</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "aura",
+          "pulse",
+          "ray",
+          "punch",
+          "kick",
+          "flinch-50"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user used Horizon Thunder Fist (Set Up) on their last four consecutive Activations."
+        },
+        "range": {
+          "target": "line",
+          "distance": 26,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 120,
+        "accuracy": 90
+      },
+      {
+        "name": "Horizon Thunder Fist (x5 Charge)",
+        "slug": "horizon-thunder-fist-5-charge",
+        "description": "<p>Trigger: The user used Horizon Thunder Fist (Set Up) on their last five consecutive Activations.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use.</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "aura",
+          "pulse",
+          "ray",
+          "punch",
+          "kick",
+          "flinch-50"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user used Horizon Thunder Fist (Set Up) on their last five consecutive Activations."
+        },
+        "range": {
+          "target": "wide-line",
+          "distance": 32,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 135,
+        "accuracy": 85
+      },
+      {
+        "name": "Horizon Thunder Fist (Full Charge)",
+        "slug": "horizon-thunder-fist-full-charge",
+        "description": "<p>Trigger: The user used Horizon Thunder Fist (Set Up) on their last six consecutive Activations.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use.</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "aura",
+          "pulse",
+          "ray",
+          "punch",
+          "kick",
+          "flinch-50"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "The user used Horizon Thunder Fist (Set Up) on their last six consecutive Activations."
+        },
+        "range": {
+          "target": "wide-line",
+          "distance": 40,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "physical",
+        "defensiveStat": "spd",
+        "predicate": [],
+        "power": 150,
+        "accuracy": 85
+      }
+    ],
+    "grade": "S"
+  },
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "effects": [
+    {
+      "name": "Horizon Thunder Fist",
+      "type": "passive",
+      "_id": "1mghACMv7zvbjxfB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "horizon-thunder-fist-set-up-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.boostedcondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "horizon-thunder-fist-set-up-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bracedcondition0",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "horizon-thunder-fist-set-up-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 40,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "73SZmunswdGOPw11"
+}

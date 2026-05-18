@@ -24,10 +24,9 @@
       "img": "icons/svg/upgrade.svg",
       "type": "affliction",
       "duration": {
-        "turns": null,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -36,8 +35,8 @@
             "key": "system.battleStats.evasion.stage",
             "value": 1,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -45,9 +44,9 @@
             "value": -20,
             "predicate": [],
             "label": "Evasive",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "removeOnRecall": true,
@@ -67,11 +66,11 @@
       "statuses": [],
       "_id": "evasivecondition",
       "_stats": {
-        "coreVersion": "13.346",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": 1754127655934,
+        "modifiedTime": 1756025601478,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -82,7 +81,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {}
+      "showIcon": 2
     }
   ],
   "folder": "V4skAU6G3OH5fXgE",

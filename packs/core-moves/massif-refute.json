@@ -1,0 +1,163 @@
+{
+  "name": "Massif Refute",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.112,
+      "previous": {
+        "schema": 0.111,
+        "foundry": "13.350",
+        "system": "1.4.7.beta"
+      }
+    },
+    "slug": "massif-refute",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Massif Refute",
+        "slug": "massif-refute",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "traits": [
+          "legendary",
+          "interrupt",
+          "flinch-30"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "The user is targeted by an Attack."
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering Attack fails to hit the user and all other creatures targeted by the Attack. Attacks failing to hit this way do not activate their secondary effects.</p><p>If the triggering Attack has @Trait[contact], the user may then freely use @UUID[Compendium.ptr2e.core-moves.Item.FmOD0al3Z9cH3B7h.Actions.massif-rebuke]{Massif Rebuke}, targeting the triggering creature. If the triggering Attack does not have @Trait[contact], the triggering creature is @Affliction[delay 40] while the user gains @UUID[Compendium.ptr2e.core-effects.XeiSuS3APUcN0MLM]{+1 SPD} and @UUID[Compendium.ptr2e.core-effects.OUBNweJOMjAEtAye]{EVA} Stage for 7 Activations and may freely move up to half of the Movement Allowance of their choice.</p><p>This Attack is then @Affliction[disabled 2].</p>",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Massif Rebuke",
+        "slug": "massif-rebuke",
+        "description": "<p>Trigger: Triggered by the effect of Massif Refute.</p><p>Effect: The user ignores any @Trait[defensive] and @Trait[stage-change] effects the target has for this attack’s use. On hit, the target gains @Affliction[frostbite 7] and @Affliction[splinter 7].</p>",
+        "traits": [
+          "legendary",
+          "crit-4",
+          "contact",
+          "crushing",
+          "grapple"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg",
+        "cost": {
+          "activation": "free",
+          "trigger": "Triggered by the effect of Massif Refute."
+        },
+        "variant": "massif-refute",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 100,
+        "accuracy": 100
+      }
+    ],
+    "grade": "A"
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Massif Rebuke",
+      "type": "passive",
+      "_id": "yytiiSrY0Cc2P0Co",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "massif-rebuke-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 7,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "massif-rebuke-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 7,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "FmOD0al3Z9cH3B7h"
+}

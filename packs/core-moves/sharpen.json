@@ -9,10 +9,13 @@
         "slug": "sharpen",
         "name": "Sharpen",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "basic"
+        ],
         "range": {
-          "target": "creature",
-          "unit": "m"
+          "target": "self",
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
@@ -22,8 +25,8 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains +1 ATK Stages for 5 Activations and @Affliction[sharpen] 5.</p>",
-        "img": "icons/svg/explosion.svg",
+        "description": "<p>Effect: The user gains +1 ATK Stages for 5 Activations and @UUID[Compendium.ptr2e.core-effects.sharpencondiitem]{Sharpen} for 5.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
     ],
@@ -36,8 +39,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "ZbfFVvq6rf5tyiUI",
   "effects": [
@@ -51,41 +56,44 @@
           {
             "type": "roll-effect",
             "key": "sharpen-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "sharpen-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.sharpencondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.sharpencondiitem",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -97,12 +105,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1736888218983,
         "modifiedTime": 1736888268127,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

@@ -1,6 +1,8 @@
 // Default Pattern
 // /@(?<type>Key)\[(?<slug>[-a-z]+)(\s+)?(?<options>[^\]]+)*](?:{(?<label>[^}]+)})?/gi
 
+import { ChatMessagePTR2e } from "@chat";
+import { PokemonType } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 export class TextEnricher {
   static init() {
@@ -118,6 +120,7 @@ export class TextEnricher {
 
     const isPPBased = !!options?.pp;
     const isShieldBased = !!options?.shield && !isPPBased;
+    const types = new Set(options?.types?.split(":") ?? []) as Set<PokemonType>;
 
     const span = document.createElement("span");
     span.classList.add("tick");
@@ -132,17 +135,23 @@ export class TextEnricher {
       : isShieldBased
         ? `${amount} Tick${biggerThanOne ? "s" : ""} of Shield${isDamage ? " Damage" : ""}`
         : `${amount} Tick${biggerThanOne ? "s" : ""} of ${isDamage ? "Damage" : "Healing"}`;
+
+    if (isDamage && types.size > 0) {
+      span.dataset.tooltip += ` (Typed: ${Array.from(types).map(t => Handlebars.helpers.formatSlug(t)).join(", ")})`;
+    }
+
     span.append((() => {
       const name = label || `${amount} Tick${biggerThanOne ? "s" : ""}`;
       return foundry.applications.ux.TextEditor.createAnchor({
-        classes: ["content-link"],
+        classes: ["content-link", ...Array.from(types).map(t => `type-${t}`)],
         attrs: { draggable: true as unknown as string },
         name,
-        dataset: {
+        dataset: {  
           type: "Tick",
           amount: amount.toString(),
           shield: isShieldBased.toString(),
           pp: isPPBased.toString(),
+          types: Array.from(types).join(":"),
         },
         icon: isPPBased
           ? isDamage
@@ -236,10 +245,11 @@ export class TextEnricher {
 
     const isShieldBased = a.dataset.shield === "true";
     const isPPBased = a.dataset.pp === "true";
+    const types = new Set(a.dataset.types?.split(":") ?? []) as Set<PokemonType>
 
     //TODO: This should probably be updated to allow for doing all updates in one, as well as merging all chat messages.
     for (const actor of targets) {
-      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased });
+      await actor.applyTickDamage({ ticks: amount, apply: true, shield: isShieldBased, pp: isPPBased, types});
     }
   }
 
@@ -261,10 +271,18 @@ export class TextEnricher {
         const current = actor.system.powerPoints.value;
         const newValue = Math.clamp(actor.system.powerPoints.value + amount, 0, actor.system.powerPoints.max);
         await actor.update({ "system.powerPoints.value": newValue });
-        ui.notifications.info(`Updated ${actor.name}'s Power Points from ${current} to ${newValue}.`);
+        //@ts-expect-error - Outdated types
+        await ChatMessagePTR2e.create({
+          type: "damage-applied",
+          system: {
+            damageApplied: current - newValue,
+            target: actor.uuid,
+            ppApplied: true
+          },
+        });
       }
       else {
-        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false })
+        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false, flat: true, note: ""})
       }
     }
   }

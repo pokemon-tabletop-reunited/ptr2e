@@ -19,18 +19,21 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "All foes gain @Affliction[nullified] 5. (The affected Ability is selected at random)",
+    "description": "<p>All foes gain @Affliction[nullified 5] (The affected Ability is selected at random, select another option if the ability cannot be nullified).</p>",
     "quantity": 1,
     "slug": "nullify-orb",
     "stack": 1,
@@ -42,10 +45,85 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Nullify Orb",
+        "slug": "nullify-orb",
+        "description": "<p>All foes gain @Affliction[nullified 5] (The affected Ability is selected at random, select another option if the ability cannot be nullified).</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "hGMpvSdKjZ0Zq7lj",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Nullify Orb",
+      "type": "passive",
+      "_id": "GJV7WCX6pdXmJcEm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "nullify-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758757514809,
+        "modifiedTime": 1758757535672,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

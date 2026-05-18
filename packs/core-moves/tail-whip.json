@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "tail"
+          "tail",
+          "basic"
         ],
         "range": {
           "target": "creature",
@@ -50,7 +51,7 @@
   "effects": [
     {
       "name": "Tail Whip",
-      "type": "affliction",
+      "type": "passive",
       "_id": "jT5gt6R3hrT52WWq",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -58,13 +59,13 @@
           {
             "type": "roll-effect",
             "key": "tail-whip-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -78,13 +79,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

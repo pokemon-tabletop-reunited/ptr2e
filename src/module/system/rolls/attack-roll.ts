@@ -16,7 +16,7 @@ class AttackRoll extends CheckRoll {
   static override createFromData(
     data: AttackRollCreationData,
     options: AttackRollDataPTR2e,
-    type: "accuracy" | "crit" | "damage" = "accuracy"
+    type: "accuracy" | "crit" | "damage" | "amount" = "accuracy"
   ): AttackRoll | null {
     options.attackType = type;
     switch (type) {
@@ -26,6 +26,8 @@ class AttackRoll extends CheckRoll {
         return AttackRoll.createCritRoll(data, options);
       case "damage":
         return AttackRoll.createDamageRoll(data, options);
+      case "amount":
+        return AttackRoll.createAmountRoll(options);
     }
   }
 
@@ -34,6 +36,13 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const attack = data.attack;
+    // If the attack has the Unreliable trait accuracy calc is different
+    if (options.unreliable) {
+      return new AttackRoll("1d100ms@dc", { 
+        dc: (30 + options.unreliable.user - options.unreliable.target)
+      }, options);
+    }
+
     // If the attack has no accuracy, it always hits
     if (attack.accuracy === null && !options.rip) return null;
 
@@ -115,7 +124,7 @@ class AttackRoll extends CheckRoll {
     options: AttackRollDataPTR2e
   ): AttackRoll | null {
     const basePower = data.attack.power;
-    if (basePower === null) {
+    if (basePower == null) {
       if(data.attack.traits.has("flat")) {
         options.isFlat = true;
         return new AttackRoll("0", {}, options);
@@ -130,6 +139,19 @@ class AttackRoll extends CheckRoll {
     options.damageMod = data.check.total?.damage?.percentile ?? 1;
 
     return new AttackRoll("2d8", { power }, options);
+  }
+
+  static createAmountRoll(
+    options: AttackRollDataPTR2e
+  ): AttackRoll | null {
+    const { strikes, hits } = options;
+    if (strikes == null || hits == null || strikes < 3) return null;
+    
+
+    options.strikes = strikes;
+    options.hits = Math.clamp(hits, 0, strikes-1);
+
+    return new AttackRoll(hits == 0 ? "1+1d(@strikes - 1)" : "1+@hits+1d(@strikes - @hits - 1)", { strikes, hits: options.hits }, options);
   }
 
   static successCategory(
@@ -204,6 +226,7 @@ class AttackRoll extends CheckRoll {
       type: typeEffectiveness,
       other: otherModifier,
       flatDamage: flatDamage,
+      ignoresShieldDuringDamage: origin.rollOptions.getFromDomain("item")["special:ignoresShieldDuringDamage"] ? 1 : 0
     };
     const roll = new Roll(
       this.options.isFlat 
@@ -253,7 +276,7 @@ class AttackRoll extends CheckRoll {
 
 interface AttackRoll extends CheckRoll {
   options: AttackRollDataPTR2e;
-  attackType: "accuracy" | "crit" | "damage";
+  attackType: "accuracy" | "crit" | "damage" | "amount";
 }
 
 interface AttackRollCreationData {
@@ -263,7 +286,7 @@ interface AttackRollCreationData {
 
 type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   rip: boolean;
-  attackType?: "accuracy" | "crit" | "damage";
+  attackType?: "accuracy" | "crit" | "damage" | "amount";
   power?: number;
   damageMod?: number;
   outOfRange: boolean;
@@ -274,6 +297,12 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   ignoreImmune: boolean;
   targetUnaware: boolean;
   originUnaware: boolean;
+  strikes?: number;
+  hits?: number;
+  unreliable?: {
+    user: number;
+    target: number;
+  }
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

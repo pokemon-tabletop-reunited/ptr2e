@@ -1,0 +1,131 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Pure Incense",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "pure-incense",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held"
+    ],
+    "actions": [],
+    "description": "<p>The user has +5% RES. @UUID[Compendium.ptr2e.core-species.y5lxdl8nq0TmWq9Y]{Chingling} and @UUID[Compendium.ptr2e.core-species.6THltAMaj0ldckUs]{Chimecho} users have a 10% chance to gain @UUID[Compendium.ptr2e.core-effects.rMNLqloV5nLmCLrZ]{Omniboost 5} when resolving a @Trait[sonic] Attack.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "C",
+    "fling": {
+      "type": "psychic",
+      "power": 100,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "Pw45UP5q40eNPtW3",
+  "img": "systems/ptr2e/img/item-icons/pure incense.webp",
+  "effects": [
+    {
+      "name": "Pure Incense",
+      "type": "passive",
+      "_id": "rzsVggRmXS5w5hK9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 5,
+            "predicate": [],
+            "label": "Pure Incense",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "sonic-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rMNLqloV5nLmCLrZ",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:chingling",
+                  "item:species:chimecho"
+                ]
+              }
+            ],
+            "label": "Pure Incense",
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766446062977,
+        "modifiedTime": 1766446585546,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
+}

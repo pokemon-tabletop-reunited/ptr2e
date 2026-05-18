@@ -10,17 +10,16 @@
         "name": "Smack Down",
         "type": "attack",
         "traits": [
-          "sky",
           "missile"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 12,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 50,
@@ -28,11 +27,9 @@
         "types": [
           "rock"
         ],
-        "description": "<p>Effect: On hit, the target becomes @Affliction[grounded] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target becomes @Affliction[grounded 5].</p>",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "B",
@@ -44,14 +41,16 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "Oe8RUc2NyOogqMD3",
   "effects": [
     {
       "name": "Smack Down",
-      "type": "affliction",
+      "type": "passive",
       "_id": "hkqCesdp5Xvf6oHB",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -59,13 +58,16 @@
           {
             "type": "roll-effect",
             "key": "smack-down-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.groundedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.groundedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -75,17 +77,15 @@
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -97,12 +97,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.2.1",
         "createdTime": 1726142644974,
         "modifiedTime": 1726142668138,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

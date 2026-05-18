@@ -4,7 +4,7 @@
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -35,7 +40,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -43,7 +49,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The Accuracy of the user's attacks is increased by +10.",
+    "description": "<p>Effect: The Accuracy of the user's attacks is increased by +10%.</p>",
     "slug": "wide-lens",
     "quantity": 1,
     "identification": {
@@ -63,10 +69,60 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "aM63jFzADkXmzA3U",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Wide Lens",
+      "type": "passive",
+      "_id": "B6paxFsxXGk5QIJa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-accuracy",
+            "value": 10,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758380073946,
+        "modifiedTime": 1758380087055,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "UUWElZA9w1KEqZS7"
 }

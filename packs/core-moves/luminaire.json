@@ -12,7 +12,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: Set-Up: The user gains +1 SPATK and EVA Stage for 5 Activations, and ends their Activation.</p><p>Resolution: On their next Activation, they attack with and resolve Luminaire. On hit, all valid targets have a 30% chance of losing -1 ACC for 5 Activations, and a 10% chance of gaining @Affliction[blinded] 5.</p>"
+      "notes": "<p>Effect: Set-Up: The user gains +1 SPATK and EVA Stage for 5 Activations, and ends their Activation.</p><p>Resolution: On their next Activation, they attack with and resolve Luminaire. On hit, all valid targets have a 30% chance of losing -1 ACC for 5 Activations, and a 10% chance of gaining @Affliction[blinded 5].</p>"
     },
     "traits": [
       "arcane",
@@ -96,26 +96,26 @@
           {
             "type": "roll-effect",
             "key": "luminaire-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.wA5oCsgHmZLcHHSn",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "luminaire-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.blindedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.blindedcondition",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -126,13 +126,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

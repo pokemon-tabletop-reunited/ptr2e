@@ -4,25 +4,26 @@
   "_id": "E6WCvGC3q0nlMrxu",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "fiery-rouse",
     "actions": [
       {
         "name": "Fiery Rouse",
         "slug": "fiery-rouse",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "traits": [
-          "sonic",
-          "social"
+          "flinch-20",
+          "social",
+          "drill"
         ],
         "range": {
           "target": "emanation",
-          "distance": 3,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 9
+          "powerPoints": 7
         },
         "types": [
           "fire"
@@ -32,13 +33,18 @@
         "predicate": []
       }
     ],
-    "container": null,
     "grade": "A",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "effects": [
@@ -52,41 +58,48 @@
           {
             "type": "roll-effect",
             "key": "fiery-rouse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
             "key": "fiery-rouse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -98,13 +111,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1737227900769,
         "modifiedTime": 1737227945203,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

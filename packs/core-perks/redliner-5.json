@@ -9,8 +9,10 @@
     },
     "actions": [],
     "slug": "redliner-5",
-    "description": "<p>The user selects 3 Pilot Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
-    "traits": [],
+    "description": "<p>The user gains a +5 increase to a Pilot Group Skill a total of 6 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 60 or more with @Trait[skill-boost] Perks.</p>",
+    "traits": [
+      "skill-boost"
+    ],
     "prerequisites": [],
     "autoUnlock": [],
     "cost": 1,
@@ -47,66 +49,132 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.pilot",
+            "choices": "flags.ptr2e.skillOptions.pilot60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "rl51"
+            "rollOption": "rl51",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl51}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl51}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.pilot",
+            "choices": "flags.ptr2e.skillOptions.pilot60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "rl52"
+            "rollOption": "rl52",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl52}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl52}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.pilot",
+            "choices": "flags.ptr2e.skillOptions.pilot60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "rl53"
+            "rollOption": "rl53",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl53}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl53}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl54",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl54}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl55",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl55}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.pilot60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "rl56",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rl56}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -117,13 +185,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

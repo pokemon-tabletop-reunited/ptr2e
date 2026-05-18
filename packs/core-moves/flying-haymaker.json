@@ -30,7 +30,7 @@
         "category": "physical",
         "power": 95,
         "accuracy": 85,
-        "description": "<p>Effect: The user is able to freely use up to half their Overland Score or their full Flight Score if available to jump towards their target upon declaring this attack. On hit, the target has a 10% chance of being Flinched.</p>",
+        "description": "<p>Effect: The user is able to freely use up to half their Overland Score or their full Flight Score if available to jump towards their target upon declaring this attack. On hit, the target has a 10% chance of being @Affliction[delay 50].</p>",
         "predicate": []
       }
     ],
@@ -58,25 +58,20 @@
           {
             "type": "roll-effect",
             "key": "flying-haymaker-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -50
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 50%"
+                "value": -50,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -87,13 +82,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

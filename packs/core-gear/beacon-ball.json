@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,10 +35,11 @@
       "stack-5",
       "belt",
       "fling",
-      "environ-ball"
+      "environ-ball",
+      "ball"
     ],
-    "description": "5x Catch Rate modifier with Foggy Weather present. 2.5x Catch Rate modifier if only natural fog is present. 1x Catch Rate modifier otherwise.",
-    "modifier": 2.5,
+    "description": "<p>3.5x Catch Rate during Foggy Weather. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 3.5,
     "quantity": 1,
     "slug": "beacon-ball",
     "stack": 5,
@@ -45,8 +51,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "JBPkoTh8GFAL1u3P",
   "effects": [],

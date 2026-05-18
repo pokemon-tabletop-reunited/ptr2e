@@ -11,7 +11,8 @@
       "authors": [],
       "notes": ""
     },
-    "traits": []
+    "traits": [],
+    "slug": "3-weight-class"
   },
   "img": "icons/tools/smithing/anvil.webp",
   "effects": [
@@ -27,29 +28,29 @@
             "key": "system.modifiers.weightClass",
             "value": 3,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
-        "traits": [],
+        "traits": [
+          "stage-change"
+        ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0,
         "priority": 50,
         "formula": "",
-        "type": "damage"
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 5,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,
@@ -57,19 +58,19 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "modifiedTime": 1756025786579,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      },
+      "showIcon": 0
     }
   ],
-  "flags": {},
   "_id": "4ZnJFjeKHiSG3Eby"
 }

@@ -12,7 +12,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "pulse"
+          "pulse",
+          "basic"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +30,7 @@
         "category": "special",
         "power": 40,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[drowsy] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[drowsy 5].</p>"
       }
     ],
     "grade": "E",
@@ -47,7 +48,7 @@
   "effects": [
     {
       "name": "Weary Wave",
-      "type": "affliction",
+      "type": "passive",
       "_id": "beiELWJW1AEv74so",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -55,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "weary-wave-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -75,13 +76,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

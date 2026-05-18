@@ -6,14 +6,13 @@
     "actions": [
       {
         "traits": [
-          "interrupt-5"
+          "interrupt"
         ],
         "name": "Liquid Voice",
         "slug": "liquid-voice",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
           "trigger": "<p>The declares a [Sonic] attack.</p>"
         },
         "range": {
@@ -21,11 +20,14 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The declares a [Sonic] attack.</p><p>Effect: The user increases the Power of the triggering attack by 30% and changes its Type to Water-Type until the end of their current Activation.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg"
       }
     ],
     "description": "<p>Trigger: The declares a [Sonic] attack.</p><p>Effect: The user increases the Power of the triggering attack by 30% and changes its Type to Water-Type until the end of their current Activation.</p>",
-    "traits": [],
+    "traits": [
+      "type-shift",
+      "water"
+    ],
     "slug": "liquid-voice",
     "_migration": {
       "version": null,
@@ -35,9 +37,77 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Ov7ZB62P2aCahDuu",
-  "effects": []
+  "effects": [
+    {
+      "name": "Liquid Voice",
+      "type": "passive",
+      "_id": "ryyV8Z8z7bCJrVp4",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "value": 30,
+            "phase": "initial",
+            "predicate": [],
+            "key": "sonic-trait-attack-power",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "water",
+            "phase": "initial",
+            "predicate": [],
+            "method": 5,
+            "property": "type",
+            "definition": [],
+            "key": "sonic-trait-attack",
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779011811414,
+        "modifiedTime": 1779011863053,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

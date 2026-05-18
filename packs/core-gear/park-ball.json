@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -17,18 +17,24 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "A ball given for use in specific catching contests. 5x Catch Rate modifier.",
-    "modifier": 5,
+    "description": "<p>A ball given for use in specific catching contests. 3x Catch Rate modifier.</p>",
+    "modifier": 3,
     "quantity": 1,
     "slug": "park-ball",
     "stack": 5,
@@ -40,8 +46,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "xDpeTsEsMN32Lf7S",
   "effects": [],

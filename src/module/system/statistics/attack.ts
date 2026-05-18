@@ -1,4 +1,4 @@
-import { AttackPTR2e, FlatModifierChangeSystem, SummonAttackPTR2e, Trait } from "@data";
+import { AttackPTR2e, FlatModifierChangeSystem, PTRCONSTS, SummonAttackPTR2e, Trait } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -72,7 +72,7 @@ class AttackStatistic extends Statistic {
         `${attack.category}-${attack.type}`,
         attack.traits.contents.flatMap((t) => {
           const trait = t as PlaceholderTrait;
-          if(!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
+          if (!(trait.value && trait.placeholders && Array.isArray(trait.placeholders) && trait.placeholders.length)) return `${t.slug}-trait-${attack.type}`
 
           return [
             `${trait.slug.replace(new RegExp(trait.placeholders.at(0)!.valuePattern), "").replace(/^-/, "").replace(/-$/, "")}-trait-${attack.type}`,
@@ -159,11 +159,35 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
     const extraDomains = new Set<string>();
+    const extraOptions = new Set<string>();
     if (this.attack.variant) {
       const original = this.attack.original as AttackPTR2e;
       if (original) {
+        const typeDomains = Object.values(PTRCONSTS.Types).map(t => `${t}-${original.type}`)
         for (const od of original.statistic?.domains ?? []) {
+          if(typeDomains.includes(od)) continue;
           extraDomains.add(od);
+        }
+      }
+    }
+    if(this.item.system.ammo) {
+      extraDomains.add("uses-ammo");
+      const ammoItem = (() => {
+        try {
+          return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+        }
+        catch {
+          return null;
+        }
+      })();
+      if(ammoItem) {
+        extraDomains.add(`ammo-${ammoItem.slug}`);
+        extraDomains.add(`ammo-${ammoItem.id}`);
+        for(const trait of ammoItem.traits ?? []) {
+          extraDomains.add(`ammo-trait-${trait.slug}`);
+        }
+        for(const option of ammoItem.getRollOptions("item", { includeActor: false})) {
+          extraOptions.add(`ammo:${option}`);
         }
       }
     }
@@ -171,7 +195,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
     this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
 
-    this.additionalOptions = new Set<string>();
+    this.additionalOptions = new Set<string>(extraOptions);
     if (this.attack.power && this.attack.stab > 1) {
       const options = [...this.attack.types.map(t => `stab-${t}`), `stab`];
       this.domains.push(...options);
@@ -266,22 +290,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         targets.splice(index, 1);
       }
 
-      const powerModifier = this.modifiers.find(m => m.type === "power" && m.method === "base");
-      if (!powerModifier) {
-        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
-        return null;
-      }
-      const actorLift = this.actor.skills["lift"]?.mod ?? 1;
-      const actorWC = this.actor.species?.size?.weightClass ?? 1
-      const targetWC = target.actor.species?.size?.weightClass ?? 1;
-      const actorCatMod = this.actor.size?.rank ?? 1;
-      const thrownCatMod = target.actor.size?.rank ?? 1;
-
-      const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
-
-      const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
-
-      const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+      const result = AttackCheck.calculateActorToss(this.modifiers, this.actor, target.actor);
+      if(!result) return null;
+      const {power, accuracy, range} = result;
 
       this.attack.power = power;
       this.attack.accuracy = accuracy;
@@ -297,6 +308,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     if (variants.length) args.skipDialog = false;
 
     const selfOptions = new Set([...options, "targets:self"]);
+    // Add own effectiveness to self options
+    const effectiveness = this.actor.getEffectiveness(this.attack.types, this.modifiers.filter(t => t.type === "effectiveness").reduce((sum, curr) => sum + curr.modifier, 0), options.has("self:action:trait:ignore-type-immunity"));
+    selfOptions.add(`effectiveness:${effectiveness}`);
+    if(effectiveness === 0) selfOptions.add(`effectiveness:immune`);
+    else if(effectiveness === 1) selfOptions.add(`effectiveness:normal`);
+    else if(effectiveness < 1) selfOptions.add(`effectiveness:resist`);
+    else if(effectiveness > 1) selfOptions.add(`effectiveness:super`);
 
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
@@ -332,6 +350,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
       hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false,
       effectAlterations: this.actor.synthetics.effectAlterations,
+      targetEffectAlterations: this.actor.synthetics.effectAlterations,
     });
 
     // const extraModifiers = args.modifiers ?? [];
@@ -340,6 +359,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     for (const target of targets) {
       const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
       const targetsSelf = target.actor === this.actor;
+
+      // Add effectiveness options
+      const effectiveness = target.actor?.getEffectiveness(this.attack.types, this.modifiers.filter(t => t.type === "effectiveness").reduce((sum, curr) => sum + curr.modifier, 0), options.has("self:action:trait:ignore-type-immunity"));
+      const effectivenessOptions = new Set([`effectiveness:${effectiveness}`]);
+      if(effectiveness === 0) effectivenessOptions.add(`effectiveness:immune`);
+      else if(effectiveness === 1) effectivenessOptions.add(`effectiveness:normal`);
+      else if(effectiveness < 1) effectivenessOptions.add(`effectiveness:resist`);
+      else if(effectiveness > 1) effectivenessOptions.add(`effectiveness:super`);
 
       const targetDomains = allyOrEnemy === "enemy"
         ? this.domains.map(d => `hostile-${d}`)
@@ -354,9 +381,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         domains: domains,
         statistic: this,
         target: target,
-        options: new Set([...options, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
+        options: new Set([...options, ...effectivenessOptions, `origin:${allyOrEnemy}`, ...(targetsSelf ? ["targets:self"] : [])]),
         traits: args.traits ?? this.item.traits,
         skipEffectRolls: args.skipEffectRolls,
+        // traitEffectRolls: args.skipEffectRolls ? [] : traitEffects.flatMap(effect => {
+        //   if(effect.system.changes?.some(c => c.type === "roll-effect" && c.affects !== "self")) return [effect];
+        //   return [];
+        // })
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
       if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
@@ -396,7 +427,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options));
 
-    //TODO: Apply just-in-time roll options from changes
+    const finalVariants = args.variants ?? (context.self.attack.getVariants() || []);
+    if (finalVariants.length) args.skipDialog = false;
 
     const checkContext: CheckRollContext & { contexts: Record<ActorUUID, CheckContext>, modifierDialog?: AttackModifierPopup } = {
       type: "attack-roll",
@@ -413,7 +445,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       domains: this.domains,
       damaging: args.damaging,
       createMessage: args.createMessage ?? true,
-      variants,
+      variants: finalVariants,
       modifierDialog: args.modifierDialog,
       skipDialog: args.skipDialog ?? targets.length === 0,
       omittedSubrolls: (() => {
@@ -448,6 +480,24 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
           }
         }
       }
+
+      if(this.item.system.ammo) {
+        const ammoItem = (() => {
+          try {
+            return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+          }
+          catch {
+            return null;
+          }
+        })();
+        if(ammoItem) {
+          const currentQuantity = ammoItem.system.quantity;
+          if(currentQuantity > 0) {
+            await ammoItem.update({ "system.quantity": currentQuantity - 1 });
+            ui.notifications.info(`Consumed 1 ${ammoItem.name}. ${currentQuantity - 1} remaining.`);
+          }
+        }
+      }
     }
 
     // Reset the fling actor toss attack data.
@@ -455,7 +505,46 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       this.actor.generateFlingAttack();
     }
 
+    if(finalVariants.length && !checkContext.isChangingVariant) {
+      for(const variant of finalVariants.filter(v => v.endsWith("-move-variant"))) {
+        const attack = checkContext.actor?.actions.attack.get(variant);
+        if(attack) {
+          checkContext.actor?.actions.attack.delete(variant);
+          checkContext.actor?.actions.delete(variant);
+          checkContext.item?.actions.delete(variant);
+          //@ts-expect-error - correct type
+          checkContext.item?.system.actions.delete(variant);
+          const actions = (attack.parent?.toObject() as {actions: AttackPTR2e["_source"][]}).actions?.filter(a => a.slug !== variant);
+          attack.parent?.updateSource({ "actions": actions });
+        }
+      }
+      this.attack.appliedVariantLabels.clear();
+    }
+    if(checkContext.isChangingVariant) {
+      checkContext.isChangingVariant = false;
+    }
+
     return rolls;
+  }
+
+  static calculateActorToss(modifiers: ModifierPTR2e[], actor: ActorPTR2e, target: ActorPTR2e) {
+    const powerModifier = modifiers.find(m => m.type === "power" && m.method === "base");
+    if (!powerModifier) {
+      ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
+      return null;
+    }
+    const actorLift = actor.skills["lift"]?.mod ?? 1;
+    const actorWC = actor.species?.size?.weightClass ?? 1
+    const targetWC = target.species?.size?.weightClass ?? 1;
+    const actorCatMod = actor.size?.rank ?? 1;
+    const thrownCatMod = target.size?.rank ?? 1;
+
+    const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
+
+    const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
+
+    const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+    return {power, accuracy, range};
   }
 
   get breakdown(): string {

@@ -1,15 +1,15 @@
 {
   "name": "Leek",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "accessory",
+      "slot": "held",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -18,14 +18,20 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
       "combat",
       "farfetchd",
       "garlarian-farfetchd",
-      "sirfetchd"
+      "sirfetchd",
+      "held"
     ],
     "actions": [
       {
@@ -41,7 +47,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -49,7 +56,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has +2 default CRIT Stages.",
+    "description": "<p>Passive: The user has @UUID[Compendium.ptr2e.core-effects.rvtuxXa3K37260Rb]{+2 Critical Stages} by default.</p>",
     "slug": "leek",
     "quantity": 1,
     "identification": {
@@ -69,10 +76,60 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ETJ2ZH8usSr4wRo8",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Leek",
+      "type": "passive",
+      "_id": "VqlkffSkeqJSeigl",
+      "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 2,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759315871859,
+        "modifiedTime": 1759315928681,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      },
+      "showIcon": 2
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA"
 }

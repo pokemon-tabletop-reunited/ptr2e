@@ -6,15 +6,13 @@
     "actions": [
       {
         "traits": [
-          "defensive",
-          "interrupt-2"
+          "defensive"
         ],
         "name": "Feedback",
         "slug": "feedback",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit by a Physical- or Special-Category Attack.</p>"
         },
         "range": {
@@ -22,11 +20,11 @@
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The attacking creature takes two Ticks of HP damage.</p>",
+        "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The user is @Affliction[delay 15], and the Attacking creatures loses @Tick[-2].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The attacking creature takes two Ticks of HP damage.</p>",
+    "description": "<p>Trigger: The user is hit by a Physical- or Special-Category Attack.</p><p>Effect: The user is @Affliction[delay 15], and the Attacking creatures loses @Tick[-2].</p>",
     "traits": [
       "defensive"
     ],
@@ -39,9 +37,96 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "6I3avjOnSCjM7LLh",
-  "effects": []
+  "effects": [
+    {
+      "name": "Feedback",
+      "type": "passive",
+      "_id": "2ilRhy8HdpOQ1wqp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -15,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1757875098876,
+        "modifiedTime": 1778709014780,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ]
 }

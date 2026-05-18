@@ -7,7 +7,7 @@
       {
         "traits": [
           "strategist",
-          "interrupt-3",
+          "interrupt",
           "ice"
         ],
         "name": "Sub-Zero",
@@ -22,11 +22,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Trigger: The user resolves an Ice-Type attack</p><p>Effect: The user gains @Affliction[resolved] 2.</p>",
+        "description": "<p>Trigger: The user resolves an Ice-Type attack</p><p>Effect: The user gains @Affliction[resolved 2].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user resolves an Ice-Type attack</p><p>Effect: The user gains @Affliction[resolved] 2.</p>",
+    "description": "<p>Trigger: The user resolves an Ice-Type attack</p><p>Effect: The user gains @Affliction[resolved 2].</p>",
     "traits": [
       "strategist",
       "ice"
@@ -55,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "ice-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
-            "mode": 5,
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.resolvedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "self",
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 5
           }
         ],
         "slug": null,
@@ -72,13 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

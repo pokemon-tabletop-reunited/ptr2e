@@ -1,0 +1,194 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Kunai (Poisoned)",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "actions": [],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "D",
+    "fling": {
+      "type": "poison",
+      "power": 75,
+      "accuracy": 65,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
+    },
+    "quantity": 3,
+    "rarity": "common",
+    "ammoType": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "kunai-poisoned",
+    "description": "<p>A kunai is a short, bladed weapon similar to a dagger, believed to be originally derived from the humble trowel. Kunai come in a number of shapes and sizes, frequently designed more like spearheads to be thrown more easily. Their size allows them to be modified more substantially, and can feature some of the nastier tricks up a ninja’s sleeve. These kunai are coated in a mild poison.</p><p>Fling Effect: On hit, the target has a 15% chance of gaining @Affliction[poison 5]. On a Critical Hit, the target has a 50% chance of gaining @Affliction[poison 3].</p><p></p>",
+    "traits": [
+      "weapon",
+      "consumable",
+      "fling",
+      "projectile",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "consumableType": "other",
+    "stack": 3,
+    "cost": 6
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Kunai (Poisoned)",
+      "type": "passive",
+      "_id": "AnI5eUBPjUjYT0vV",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-poisoned-attack",
+            "value": "missile",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-poisoned-attack",
+            "value": "sharp",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-poisoned-attack",
+            "value": "horn",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-poisoned-attack",
+            "value": "crit-1",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-poisoned-attack",
+            "value": "flinch-10",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-kunai-poisoned-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-poisoned-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
+            "predicate": [],
+            "chance": 15,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-poisoned-attack-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "KpXzVOaZJZrYhvTH"
+}

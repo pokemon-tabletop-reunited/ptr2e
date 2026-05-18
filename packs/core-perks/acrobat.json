@@ -18,20 +18,15 @@
         "slug": "acrobat",
         "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "acrobat",
@@ -81,9 +76,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "MDkJ0KhnAvqw0v3J",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
@@ -103,27 +96,24 @@
               "Manual"
             ],
             "label": "Running Start?",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -135,7 +125,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.3",
         "createdTime": 1729174484032,

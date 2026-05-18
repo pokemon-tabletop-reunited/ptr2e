@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,10 +35,10 @@
       "stack-5",
       "belt",
       "fling",
-      "type-ball"
+      "ball"
     ],
-    "description": "4x Catch Rate modifier if used on a Dragon- or Psychic-Type creature. 1x Catch Rate modifier otherwise.",
-    "modifier": 4,
+    "description": "<p>3x Catch Rate modifier if used on a Dragon- or Psychic-Type creature. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 3,
     "quantity": 1,
     "slug": "mystic-ball",
     "stack": 5,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "Tu549WwWKMNU8p88",
   "effects": [],

@@ -1,0 +1,106 @@
+{
+  "folder": "qrlUDsr0ZrNZAnR6",
+  "name": "Quantum Displacement",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Passive: The user's @Trait[steel]-type attacks gain a +20% chance to inflict @Affliction[desync 5].</p>",
+    "traits": [
+      "steel",
+      "dot"
+    ],
+    "prerequisites": [
+      "trait:steel"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "steel"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 96,
+        "y": 111,
+        "connected": [
+          "minor-buff-44",
+          "full-metal-body",
+          "minor-buff-43"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/svg/portal.svg",
+  "effects": [
+    {
+      "name": "Quantum Displacement",
+      "type": "passive",
+      "_id": "9ask071HpcPIU0J1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "steel-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.desynccondition0",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "IArd6vRz68VuU9Wb"
+}

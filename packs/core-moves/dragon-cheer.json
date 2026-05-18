@@ -10,17 +10,17 @@
         "name": "Dragon Cheer",
         "type": "attack",
         "traits": [
-          "sonic",
-          "partial-automation"
+          "social",
+          "drill"
         ],
         "range": {
           "target": "emanation",
-          "distance": 5,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8
+          "powerPoints": 6
         },
         "category": "status",
         "types": [
@@ -49,7 +49,7 @@
   "effects": [
     {
       "name": "Dragon Cheer",
-      "type": "affliction",
+      "type": "passive",
       "_id": "Ea5z2W4QPwWu8M0b",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -57,20 +57,26 @@
           {
             "type": "roll-effect",
             "key": "dragon-cheer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
-            "predicate": [],
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
+            "predicate": [
+              {
+                "not": "target:trait:dragon"
+              }
+            ],
             "chance": 100,
             "affects": "target",
             "priority": null,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "method": 2,
             "ignored": false
           },
           {
             "type": "roll-effect",
             "key": "dragon-cheer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CEdcrWbb1KDTNIKl",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rvtuxXa3K37260Rb",
             "predicate": [
               "target:trait:dragon"
             ],
@@ -78,7 +84,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "method": 2,
             "ignored": false
           }
         ],
@@ -87,19 +95,15 @@
         "removeAfterCombat": true,
         "removeOnRecall": true,
         "stacks": 0,
-        "priority": 50,
-        "formula": "",
-        "type": "damage"
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": 5,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "<p>Temporary status condition to apply the effect of Dragon Cheer</p>",
       "origin": null,
@@ -111,14 +115,17 @@
       "_stats": {
         "compendiumSource": "Actor.7Oya3WGVjs2Pgx2h.Item.lvapVW6S8cvvw0BW.ActiveEffect.Ea5z2W4QPwWu8M0b",
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.2.beta",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1717881627901,
-        "modifiedTime": 1747518610662,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1776435750676,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

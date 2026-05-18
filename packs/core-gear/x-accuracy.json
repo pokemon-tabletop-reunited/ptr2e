@@ -38,18 +38,94 @@
       ],
       "notes": ""
     },
-    "description": "<p>May be used as a Simple Action. Grants the target @UUID[Compendium.ptr2e.core-effects.Smwu5LWbBYgjUmPc]{+2 Accuracy Stages for 5 activations}.</p>",
+    "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.Smwu5LWbBYgjUmPc]{+2 Accuracy Stages for 5 activations}.</p>",
     "traits": [
       "consumable",
       "combat",
-      "belt"
+      "belt",
+      "x-booster"
     ],
     "consumableType": "boosters",
     "stack": 1,
-    "cost": 3
+    "cost": 3,
+    "slug": "x-accuracy",
+    "actions": [
+      {
+        "name": "X-Accuracy",
+        "slug": "x-accuracy",
+        "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.Smwu5LWbBYgjUmPc]{+2 Accuracy Stages for 5 activations}.</p>",
+        "traits": [
+          "consumable",
+          "combat",
+          "belt"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/x%20accuracy.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "img": "systems/ptr2e/img/item-icons/x%20accuracy.webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "X Accuracy",
+      "type": "passive",
+      "_id": "V7xeut4euj9YqTYp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "x-accuracy-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.Smwu5LWbBYgjUmPc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758583591468,
+        "modifiedTime": 1758583620092,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "vbajmG5TNdAwVrdz"
 }

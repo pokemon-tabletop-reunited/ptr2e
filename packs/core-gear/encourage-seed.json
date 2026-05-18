@@ -1,11 +1,11 @@
 {
   "name": "Encourage Seed",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
   "type": "consumable",
   "system": {
-    "cost": 3,
+    "cost": 2,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,19 +19,22 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 90,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "common",
     "consumableType": "other",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
       "seed",
-      "held",
       "stack-3"
     ],
-    "description": "The target gains +1 ACC and EVA Stages, and Hyped Up for 3 activations.",
+    "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.xhI2IzUDSXy4Y42z]{Amped}.</p>",
     "quantity": 1,
     "slug": "encourage-seed",
     "stack": 1,
@@ -43,10 +46,87 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Encourage Seed",
+        "slug": "encourage-seed",
+        "description": "<p>Effect: The target gains @UUID[Compendium.ptr2e.core-effects.xhI2IzUDSXy4Y42z]{Amped}.</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "seed",
+          "stack-3"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "Uff8YuWtp3r06elz",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Encourage Seed",
+      "type": "passive",
+      "_id": "4bH1wvgaDpIA22qH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "encourage-seed-generic",
+            "value": "Compendium.ptr2e.core-effects.Item.xhI2IzUDSXy4Y42z",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1759151211722,
+        "modifiedTime": 1759151256668,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

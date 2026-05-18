@@ -3,7 +3,7 @@
   "img": "systems/ptr2e/img/icons/consumable_icon.webp",
   "type": "consumable",
   "system": {
-    "cost": 6,
+    "cost": 3,
     "crafting": {
       "skill": "handiwork",
       "spans": null,
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -27,10 +32,10 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
-      "fling"
+      "fling",
+      "mystery-dungeon"
     ],
-    "description": "The user gains @Affliction[rebound] 5.",
+    "description": "<p>The user gains @Affliction[rebound 5].</p>",
     "quantity": 1,
     "slug": "rebound-orb",
     "stack": 1,
@@ -42,10 +47,88 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Rebound Orb",
+        "slug": "rebound-orb",
+        "description": "<p>The user gains @Affliction[rebound 5].</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb",
+          "held",
+          "fling"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "pKl3GrHyvtCndFFK",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rebound Orb",
+      "type": "passive",
+      "_id": "vte5swee90HqXAtA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rebound-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.reboundcondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758633361920,
+        "modifiedTime": 1758633386147,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

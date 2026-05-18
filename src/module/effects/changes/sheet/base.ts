@@ -136,13 +136,14 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
   async updateValidationErrors(validationFailures: foundry.data.validation.DataModelValidationFailure): Promise<void> {
     const failures = ((): string[] => {
       const sourceFailures = validationFailures?.asError().getAllFailures() ?? {};
+      if(!sourceFailures.length && validationFailures.message) sourceFailures["unknown"] = validationFailures
       const fieldFailures =
         this.change.validationFailures.fields?.asError().getAllFailures() ?? {};
       const jointFailures = this.change.validationFailures.joint
         ? { joint: this.change.validationFailures.joint }
         : {};
       return Object.entries({ ...sourceFailures, ...fieldFailures, ...jointFailures }).map(([key, failure]) =>
-        key === "joint"
+        key === "joint" || key.startsWith("unknown")
           ? failure.message.replace(/^.*Joint Validation Error:\s*/, "")
           : `${key}: ${failure.message}`
       )
@@ -324,7 +325,15 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
   // It may merge with the initial value to handle cases where the values where cleaned recursively
   const deleteIfInitial = (key: string, field: foundry.data.fields.DataField): boolean => {
     if (["type"].includes(key)) return false;
-    if (data[key] === undefined) return true;
+    if (data[key] === undefined) {
+      delete data[key];
+      return true;
+    }
+    //@ts-expect-error - Exists on StringField
+    if (data[key] === "" && field instanceof fields.StringField && !field.options.blank) {
+      delete data[key];
+      return true;
+    }
     if (field.options.required ?? ('element' in field ? (field as { element: foundry.data.fields.DataField })?.element?.options.required : false)) return false;
     const initialValue = typeof field.initial === "function" ? field.initial(data) : field.initial;
     const valueRaw = data[key];
@@ -358,7 +367,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
         // Recursively clean schema fields inside an array
         for (const data of value) {
           if (R.isPlainObject(data)) {
-            if (data.predicate) {
+            if (data.predicate || data.definition) {
               cleanPredicate(data);
             }
             cleanDataUsingSchema(field.element.fields, data);
@@ -378,7 +387,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
   }
 }
 
-function cleanPredicate(source: { predicate?: unknown }) {
+function cleanPredicate(source: { predicate?: unknown, definition?: unknown }): void {
   const predicateValue = source.predicate;
   if (typeof predicateValue === "string") {
     if (predicateValue.trim() === "") {
@@ -387,6 +396,24 @@ function cleanPredicate(source: { predicate?: unknown }) {
       try {
         source.predicate = JSON.parse(predicateValue);
       } catch (error) {
+        if (error instanceof Error) {
+          ui.notifications.error(
+            game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),
+          );
+          throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+        }
+      }
+    }
+  }
+  const definitionValue = source.definition;
+  if (typeof definitionValue === "string") {
+    if (definitionValue.trim() === "") {
+      delete source.definition;
+    } else {
+      try {
+        source.definition = JSON.parse(definitionValue);
+      }
+      catch (error) {
         if (error instanceof Error) {
           ui.notifications.error(
             game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),

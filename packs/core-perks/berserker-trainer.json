@@ -3,7 +3,91 @@
   "_id": "iSqul2V3zas0anNa",
   "type": "perk",
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Berserker Trainer",
+      "type": "passive",
+      "_id": "5l4n3L6iJzaHFiQM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "berserker-trainer-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.enragedcondition",
+            "predicate": [
+              "target:trait:berserker"
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 2,
+                "method": 5
+              },
+              {
+                "property": "effects.0.system.changes",
+                "value": {
+                  "type": "roll-effect",
+                  "key": "damaging-attack",
+                  "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
+                  "predicate": [],
+                  "chance": 100,
+                  "affects": "defensive",
+                  "dontMerge": true
+                },
+                "method": 2
+              },
+              {
+                "property": "effects.0.system.changes",
+                "value": {
+                  "type": "roll-option",
+                  "domain": "all",
+                  "value": "enraged-from-rage"
+                },
+                "method": 2
+              }
+            ],
+            "dontMerge": false,
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765216564127,
+        "modifiedTime": 1765216708105,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -16,9 +100,29 @@
       ],
       "notes": ""
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Berserker Trainer",
+        "slug": "berserker-trainer",
+        "description": "<p>Target: A Creature with the @Trait[berserker] Trait.<br><br>Effect: You've trained your Pokemon as a @Trait[berserker]. As a complex action costing 2PP, you may target one member of your Team (or another ally, if combined with @UUID[Compendium.ptr2e.core-perks.13JRGGWEpyfuZZuG]{Tactician}) and they gain the @Affliction[enraged] Affliction for 2 activations, as though the creature had used the Rage move. If used during a League Combat Rules scenario, this may be used as a @Trait[command] Action in the same way as Styles are.<br><br>If the target does not possess the @Trait[berserker] trait, then this action has no effect.</p>",
+        "traits": [
+          "command"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
     "slug": "berserker-trainer",
-    "description": "<p>Target: A Creature with the @Trait[berserker] Trait.<br><br>Effect: You've trained your Pokemon as a @Trait[berserker]. As a complex action costing 2PP, you may target one member of your Team (or another ally, if combined with @UUID[Compendium.ptr2e.core-perks.13JRGGWEpyfuZZuG]{Tactician}) and they gain the @Affliction[enraged] Affliction for 2 activations, as though the creature had used the Rage move. If used during a League Combat Rules scenario, this may be used as a @Trait[command] Action in the same way as Styles are.</p>",
+    "description": "<p>Target: A Creature with the @Trait[berserker] Trait.<br><br>Effect: You've trained your Pokemon as a @Trait[berserker]. As a complex action costing 2PP, you may target one member of your Team (or another ally, if combined with @UUID[Compendium.ptr2e.core-perks.13JRGGWEpyfuZZuG]{Tactician}) and they gain the @Affliction[enraged] Affliction for 2 activations, as though the creature had used the Rage move. If used during a League Combat Rules scenario, this may be used as a @Trait[command] Action in the same way as Styles are.<br><br>If the target does not possess the @Trait[berserker] trait, then this action has no effect.</p>",
     "traits": [
       "command"
     ],
@@ -36,13 +140,19 @@
       {
         "x": 123,
         "y": 140,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "resist-style",
           "minor-buff-9",
           "magic-armor-style"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]

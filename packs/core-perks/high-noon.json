@@ -74,9 +74,9 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -84,32 +84,32 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
-            "key": "high-noon-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.k1FukpHKnZGqjSNc",
+            "key": "stand-off-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 4
+                "value": 4,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -122,13 +122,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -136,16 +131,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.4.4.beta",
         "createdTime": 1737935167337,
-        "modifiedTime": 1755030306295,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1758403775868,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
         "exportSource": null
       }
     }

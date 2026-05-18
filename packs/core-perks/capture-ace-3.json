@@ -19,22 +19,15 @@
         "slug": "capture-ace-3",
         "description": "<p>Increases your Critical Capture rate by one stage.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "type": "passive",
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "hidden": false,
-        "ephemeralVariant": false
+          "unit": "m"
+        }
       }
     ],
     "slug": "capture-ace-3",
@@ -60,9 +53,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -80,5 +70,53 @@
   },
   "_id": "XyfO8yWckURxmLgF",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Capture Ace 3",
+      "type": "passive",
+      "_id": "v4rRqdIoMpMa6joG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.details.caught",
+            "value": 75,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.8.beta",
+        "createdTime": 1766436501138,
+        "modifiedTime": 1766436508159,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

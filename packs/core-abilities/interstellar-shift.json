@@ -26,7 +26,7 @@
       {
         "name": "Interstellar Virulence",
         "slug": "interstellar-virulence",
-        "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme. Depending on its Forme, it gains another Ability.</p><ul><li>Normal Forme: @UUID[Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5]{Pressure}</li><li>Attack Forme: @UUID[Compendium.ptr2e.core-abilities.Item.i2YkuytUf6z6fm34]{Mold Breaker}</li><li>Speed Forme: @UUID[Compendium.ptr2e.core-abilities.Item.LpovBWFJb0J2ggv1]{Speed Boost}</li><li>Defense Forme: @UUID[Compendium.ptr2e.core-abilities.Item.uOMBIIsKTRROmTBW]{Sturdy}</li></ul><p>While the user is @Affliction[fainted], they may spend 8 PP. They lose @Affliction[fainted], not accruing @Affliction[weary], heal @Tick[6] of HP, and gain @Affliction[resolved] 7 and @Affliction[braced].</p>",
+        "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme. Depending on its Forme, it gains another Ability.</p><ul><li>Normal Forme: @UUID[Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5]{Pressure}</li><li>Attack Forme: @UUID[Compendium.ptr2e.core-abilities.Item.i2YkuytUf6z6fm34]{Mold Breaker}</li><li>Speed Forme: @UUID[Compendium.ptr2e.core-abilities.Item.LpovBWFJb0J2ggv1]{Speed Boost}</li><li>Defense Forme: @UUID[Compendium.ptr2e.core-abilities.Item.uOMBIIsKTRROmTBW]{Sturdy}</li></ul><p>While the user is @Affliction[fainted], they may spend 8 PP. They lose @Affliction[fainted], not accruing @Affliction[weary], heal @Tick[6] of HP, and gain @Affliction[resolved 7] and @Affliction[braced].</p>",
         "traits": [
           "legendary",
           "forme-change",
@@ -43,7 +43,7 @@
         }
       }
     ],
-    "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme, healing @Tick[2] of HP. Depending on its Forme, it gains another Ability.</p><ul><li>Normal Forme: @UUID[Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5]{Pressure}</li><li>Attack Forme: @UUID[Compendium.ptr2e.core-abilities.Item.i2YkuytUf6z6fm34]{Mold Breaker}</li><li>Speed Forme: @UUID[Compendium.ptr2e.core-abilities.Item.LpovBWFJb0J2ggv1]{Speed Boost}</li><li>Defense Forme: @UUID[Compendium.ptr2e.core-abilities.Item.uOMBIIsKTRROmTBW]{Sturdy}</li></ul><p>While the user is @Affliction[fainted], they may spend 8 PP during their Activation. They lose @Affliction[fainted], not accruing @Affliction[weary], heal @Tick[6] of HP, and gain @Affliction[resolved] 7 and @Affliction[braced].</p>",
+    "description": "<p>Effect: The user freely Moves up to 6m of a Movement Type of its choice and change Forme, healing @Tick[2] of HP. Depending on its Forme, it gains another Ability.</p><ul><li>Normal Forme: @UUID[Compendium.ptr2e.core-abilities.Item.RmLYmSTJEvyBNTh5]{Pressure}</li><li>Attack Forme: @UUID[Compendium.ptr2e.core-abilities.Item.i2YkuytUf6z6fm34]{Mold Breaker}</li><li>Speed Forme: @UUID[Compendium.ptr2e.core-abilities.Item.LpovBWFJb0J2ggv1]{Speed Boost}</li><li>Defense Forme: @UUID[Compendium.ptr2e.core-abilities.Item.uOMBIIsKTRROmTBW]{Sturdy}</li></ul><p>While the user is @Affliction[fainted], they may spend 8 PP during their Activation. They lose @Affliction[fainted], not accruing @Affliction[weary], heal @Tick[6] of HP, and gain @Affliction[resolved 7] and @Affliction[braced].</p>",
     "traits": [
       "legendary",
       "forme-change"
@@ -79,14 +79,13 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -95,7 +94,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -106,13 +106,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

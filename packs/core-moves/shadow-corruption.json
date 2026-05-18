@@ -9,7 +9,10 @@
         "slug": "shadow-corruption",
         "name": "Shadow Corruption",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "aura",
+          "pulse"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -17,19 +20,20 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 3
         },
         "category": "special",
-        "power": 30,
-        "accuracy": 90,
+        "power": 60,
+        "accuracy": 85,
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5, and a 50% chance of gaining @Affliction[burn] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison 5] and @Affliction[burn 5].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
       }
     ],
-    "grade": "E",
+    "grade": "D",
     "_migration": {
       "version": null,
       "previous": null
@@ -38,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "NVPL4V25PvYi04If",
   "effects": [
@@ -53,41 +59,48 @@
           {
             "type": "roll-effect",
             "key": "shadow-corruption-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
             "key": "shadow-corruption-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -99,13 +112,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.NVPL4V25PvYi04If.ActiveEffect.2YY1tBzXaHb9aq1m",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.0",
         "createdTime": 1735910698847,
         "modifiedTime": 1735910762141,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

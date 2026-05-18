@@ -64,14 +64,15 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
   data: TypeEffectiveness[keyof TypeEffectiveness] | null = null;
   app: TypeMatrix;
 
-  promise: Promise<Maybe<Pick<TypeEffectiveness[keyof TypeEffectiveness], "images"> & { type: keyof TypeEffectiveness }>> | null = null;
-  resolve?: (value: Maybe<Pick<TypeEffectiveness[keyof TypeEffectiveness], "images"> & { type: keyof TypeEffectiveness }>) => void;
+  promise: Promise<Maybe<Pick<TypeEffectiveness[keyof TypeEffectiveness], "images" | "hide"> & { type: keyof TypeEffectiveness }>> | null = null;
+  resolve?: (value: Maybe<Pick<TypeEffectiveness[keyof TypeEffectiveness], "images" | "hide"> & { type: keyof TypeEffectiveness }>) => void;
 
   override async _prepareContext() {
     return {
       name: this.type || "",
       iconImg: this.data?.images.icon || "",
       barImg: this.data?.images.bar || "",
+      hide: this.data?.hide || false,
       exists: !!this.data,
     }
   }
@@ -107,6 +108,7 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
       name: string;
       iconImg: string;
       barImg: string;
+      hide: string;
     }
 
     this.resolve({
@@ -114,7 +116,8 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
       images: {
         icon: data.iconImg || this.data?.images.icon || "",
         bar: data.barImg || this.data?.images.bar || data.iconImg || this.data?.images.icon || "",
-      }
+      },
+      hide: data.hide === "on"
     })
   }
 
@@ -127,11 +130,13 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
 
     const typeData = {
       images: data.images,
-      effectiveness: defaultEffectiveness.untyped.effectiveness
+      effectiveness: defaultEffectiveness.untyped.effectiveness,
+      hide: data.hide
     }
 
     app.cache[data.type] = typeData;
     for (const key in app.cache) {
+      typeData.effectiveness[key as keyof TypeEffectiveness] = 1;
       app.cache[key as keyof TypeEffectiveness]!.effectiveness[data.type] = 1;
     }
 
@@ -149,7 +154,8 @@ export class TypeMatrixDialog extends foundry.applications.api.HandlebarsApplica
 
     const typeData = {
       images: data.images,
-      effectiveness: app.cache[data.type]?.effectiveness ?? defaultEffectiveness.untyped.effectiveness
+      effectiveness: app.cache[data.type]?.effectiveness ?? defaultEffectiveness.untyped.effectiveness,
+      hide: data.hide
     }
     app.cache[data.type] = typeData;
 

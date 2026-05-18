@@ -8,7 +8,6 @@ import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
 import { SummonPTR2e } from "@item";
 import { AttackPTR2e, Trait } from "@data";
-import { CombatantPTR2e } from "@combat";
 import Tagify, { BaseTagData } from "@yaireo/tagify";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
@@ -44,7 +43,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     }
     if (updated) {
       // this._source.rolls = rolls.map(r => JSON.stringify(r));
-      this.updateSource({ rolls: rolls.map((r) => JSON.stringify(r)) });
+      //this.updateSource({ rolls: rolls.map((r) => JSON.stringify(r)) });
     }
     return super.prepareDerivedData();
   }
@@ -231,19 +230,10 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
       if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
-      const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+      await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.createSummonCombatant, {
         name: summonItem.name,
-        type: "summon",
-        system: {
-          owner: action.actor?.uuid ?? null,
-          item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
-        }
-      }])
-
-      if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
-
-      ChatMessage.create({
-        content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+        owner: action.actor?.uuid ?? null,
+        item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
       });
     });
 
@@ -334,7 +324,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
           mapValueTo: "label",
         },
         templates: { //@ts-expect-error - Tagify types are not correct
-          tag: function (tagData: BaseTagData & {type: keyof typeof Trait.bgColors, label: string}): string {
+          tag: function (tagData: BaseTagData & { type: keyof typeof Trait.bgColors, label: string }): string {
             return `
                   <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                   <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
@@ -419,12 +409,13 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
 
     //@ts-expect-error - Chatmessages aren't typed properly yet
-    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({ //@ts-expect-error - Chatmessages aren't typed properly yet
       type,
       speaker,
       flavor,
       system: fu.duplicate(system),
-    }, { rollMode: context.rollMode });
+      rolls: [roll]
+    }, { messageMode: context.rollMode });
   }
 
   static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
@@ -460,12 +451,13 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     const flavor = context.title ?? "";
 
     //@ts-expect-error - Chatmessages aren't typed properly yet
-    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+    return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({ //@ts-expect-error - Chatmessages aren't typed properly yet
       type,
       speaker,
       flavor,
       system: fu.duplicate(system),
-    }, { rollMode: context.rollMode });
+      rolls: Object.values(system.rolls)
+    }, { messageMode: context.rollMode });
   }
 
   static async createFromResults(
@@ -532,6 +524,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         accuracy: r.rolls.accuracy?.toJSON() ?? null,
         crit: r.rolls.crit?.toJSON() ?? null,
         damage: r.rolls.damage?.toJSON() ?? null,
+        amount: r.rolls.amount?.toJSON() ?? null,
         context: {
           check: r.check,
           ...R.pick(r.context, ["action", "domains", "notes", "title", "type"]),
@@ -556,15 +549,22 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     };
     if (context.attack?.type === "summon") system.originItem = context.item?.toJSON();
 
+    const rollsData = results.map(r => {
+      const results = Object.values(r.rolls).filter((roll): roll is Rolled<CheckRoll> => roll !== null);
+      if (r.context.effectRolls?.origin?.length) results.push(...r.context.effectRolls.origin.map(er => er.roll).filter((roll): roll is Rolled<CheckRoll> => roll !== null));
+      if (r.context.effectRolls?.target?.length) results.push(...r.context.effectRolls.target.map(er => er.roll).filter((roll): roll is Rolled<CheckRoll> => roll !== null));
+      return results;
+    }).concat(context.selfEffectRolls?.map(er => er.roll).filter((roll): roll is Rolled<CheckRoll> => roll !== null) ?? []).filter((roll) => roll !== null).flat();
+
     // @ts-expect-error - Chatmessages aren't typed properly yet
-    return dataOnly ? { type: "attack", speaker, flavor, system, }
-      // @ts-expect-error - Chatmessages aren't typed properly yet
-      : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
+    return dataOnly ? { type: "attack", speaker, flavor, system, rolls: rollsData }
+      : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({ //@ts-expect-error - Chatmessages aren't typed properly yet
         type: "attack",
         speaker,
         flavor,
         system: fu.duplicate(system),
-      }, { rollMode: context.rollMode });
+        rolls: rollsData
+      }, { messageMode: context.rollMode }) as unknown as Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined>;
   }
 
   override get isRoll(): boolean {

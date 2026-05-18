@@ -58,10 +58,10 @@
             "toggleable": false,
             "count": false,
             "priority": null,
-            "mode": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           },
           {
             "type": "roll-option",
@@ -72,19 +72,19 @@
             "toggleable": false,
             "count": false,
             "priority": null,
-            "mode": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
             "key": "psychic-attack-effectiveness-stage",
             "value": -1,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -99,13 +99,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
       "origin": null,

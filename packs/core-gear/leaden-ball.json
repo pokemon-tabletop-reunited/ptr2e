@@ -20,22 +20,27 @@
     "grade": "D",
     "fling": {
       "type": "untyped",
-      "power": 45,
-      "accuracy": 85,
-      "hide": null
+      "power": 70,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
     "traits": [
-      "stack-3",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "3.5x Catch Rate modifier.",
-    "modifier": 3.5,
+    "description": "<p>2.5x Catch Rate modifier.</p>",
+    "modifier": 2.5,
     "quantity": 1,
     "slug": "leaden-ball",
-    "stack": 3,
+    "stack": 5,
     "_migration": {
       "version": null,
       "previous": null
@@ -44,8 +49,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "iWcPq9fyjji5ZUge",
   "effects": [],

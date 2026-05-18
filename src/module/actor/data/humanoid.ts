@@ -164,7 +164,7 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
                 sourceId: "Compendium.ptr2e.core-species.Item.humanoidspecies0"
               }
             },
-            type: 'species',
+            type: species.type ?? "species",
             img: data.img,
             _id: "actorspeciesitem",
             system: species.toObject(),

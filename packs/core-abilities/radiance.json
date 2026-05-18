@@ -32,9 +32,102 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "KPnwU3nXFHkpeBOz",
-  "effects": []
+  "effects": [
+    {
+      "name": "Radiance",
+      "type": "passive",
+      "_id": "tVbzwSEpGPjDhWQm",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.kdGYOBLwfWuVC71W",
+                "affects": "allies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "radiance"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "radiance",
+            "predicate": [],
+            "domain": "all",
+            "label": "Radiance Toggle",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.CzvgRhfvDuRjrtA1.ActiveEffect.WPH789V0rRrGKYvw",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765284273911,
+        "modifiedTime": 1765284329243,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

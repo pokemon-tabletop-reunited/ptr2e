@@ -38,18 +38,94 @@
       ],
       "notes": ""
     },
-    "description": "<p>May be used as a Simple Action. Grants the target @UUID[Compendium.ptr2e.core-effects.iFFY3BDzPF3mvg6r]{+2 Special Defense Stages for 5 activations}.</p>",
+    "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.iFFY3BDzPF3mvg6r]{+2 Special Defense Stages for 5 activations}.</p>",
     "traits": [
       "consumable",
       "combat",
-      "belt"
+      "belt",
+      "x-booster"
     ],
     "consumableType": "boosters",
     "stack": 1,
-    "cost": 3
+    "cost": 3,
+    "slug": "x-special-defense",
+    "actions": [
+      {
+        "name": "X-Special Defense",
+        "slug": "x-special-defense",
+        "description": "<p>Grants the target @UUID[Compendium.ptr2e.core-effects.iFFY3BDzPF3mvg6r]{+2 Special Defense Stages for 5 activations}.</p>",
+        "traits": [
+          "consumable",
+          "combat",
+          "belt"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/x%20sp.%20def..webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "img": "systems/ptr2e/img/item-icons/x%20sp.%20def..webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "X Special Defense",
+      "type": "passive",
+      "_id": "BwgdpRMALdCBLMX5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "x-special-defense-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.iFFY3BDzPF3mvg6r",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758584080041,
+        "modifiedTime": 1758584105339,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "5RqXfrKTNXkukxO5"
 }

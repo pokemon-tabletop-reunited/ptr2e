@@ -30,6 +30,12 @@
         "migration:18": "tsx ./build/manual-migrations/initiative-terms.ts",
         "migration:19": "tsx ./build/manual-migrations/update-perk-locations-pwv3.ts",
         "migration:20": "tsx ./build/manual-migrations/update-missing-ids.ts",
+        "migration:21": "tsx ./build/manual-migrations/move-digimon.ts",
+        "migration:22": "tsx ./build/manual-migrations/migrate-to-effect-compendium.ts",
+        "migration:23": "tsx ./build/manual-migrations/migrate-mode-to-method.ts",
+        "migration:24": "tsx ./build/manual-migrations/migrate-token-display-icon.ts",
+        "migration:25": "tsx ./build/manual-migrations/migrate-duration.ts",
+        "migration:26": "tsx ./build/manual-migrations/migrate-grant-effect.ts",
         "clean": "tsx ./build/clean.ts",
         "watch": "vite build --watch --mode development",
         "hot": "vite serve",
@@ -97,6 +103,7 @@
         "yargs": "^17.7.2"
     },
     "dependencies": {
+        "@actions/core": "^1.11.1",
         "@codemirror/autocomplete": "^6.16.0",
         "@codemirror/lang-json": "^6.0.1",
         "@yaireo/tagify": "4.16.4",

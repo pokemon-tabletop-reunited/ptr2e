@@ -29,7 +29,7 @@
         "category": "special",
         "power": 55,
         "accuracy": 90,
-        "description": "<p>Effect: All valid targets have a 50% chance of being  @Affliction[suppressed] 5 and a 50% chance of losing -1 ACC for 5 Activations.</p>"
+        "description": "<p>Effect: All valid targets have a 50% chance of being  @Affliction[suppressed 5] and a 50% chance of losing -1 ACC for 5 Activations.</p>"
       }
     ],
     "grade": "A",
@@ -55,24 +55,24 @@
           {
             "type": "roll-effect",
             "key": "crop-circle-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.suppressedcondit",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "crop-circle-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.wA5oCsgHmZLcHHSn",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +83,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

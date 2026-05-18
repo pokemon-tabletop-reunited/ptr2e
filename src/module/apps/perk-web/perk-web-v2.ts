@@ -6,7 +6,7 @@ import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
 import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.ts";
 import { ActiveEffectPTR2e } from "@effects";
-import { LevelUpMoveSchema } from "@item/data/species.ts";
+import { EvolutionData, LevelUpMoveSchema } from "@item/data/species.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, ImageResolver, isObject, objectHasKey, sluggify } from "@utils";
 import { CompendiumBrowserPerkTab } from "../compendium-browser/tabs/perk.ts";
 import { CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "../compendium-browser/tabs/data.ts";
@@ -32,7 +32,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!ui.perksTab?.popout || ui.perksTab?.popout.minimized) ui.perksTab?.renderPopout?.();
 
           if (game.settings.get("ptr2e", "dev-mode")) {
-            const pack = game.packs.get("ptr2e.core-perks");
+            const packId = this.web.includes(".digimon-species.") ? "ptr2e-digimon-expansion.digimon-species" : "ptr2e.core-perks";
+            const pack = game.packs.get(packId);
             if (pack) {
               pack.configure({ locked: false });
               pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 });
@@ -202,85 +203,123 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         PerkWebApp.refresh.call(this);
       },
       "evolve": async function (this: PerkWebApp) {
+        if (this.evolving) return void ui.notifications.warn(game.i18n.localize("Please wait for current evolution to finish..."));
         if (!this.currentNode || !this.actor) return;
         if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
+        this.element.querySelector("button[data-action='evolve']")?.setAttribute("disabled", "disabled");
+        this.evolving = true;
 
-        const perk = this.currentNode.perk;
-        const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
-        if (!species) return;
+        const result = await (async () => {
+          if (!this.currentNode || !this.actor) return;
+          const perk = this.currentNode.perk;
+          const species = await fu.fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as { uuid: string }).uuid);
+          if (!species) return;
 
-        const current = this.actor.species;
-        if (!current) return;
+          const current = this.actor.species;
+          if (!current) return;
 
-        const level = this.actor.system.advancement.level;
-        const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
-        const newMoves = await (async () => {
-          const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
+          const level = this.actor.system.advancement.level;
+          const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
+          const newMoves = await (async () => {
+            const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
 
-          return (await Promise.all(
-            levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
-          )).flatMap((move) => move ? [move] : []);
-        })();
+            return (await Promise.all(
+              levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
+            )).flatMap((move) => move ? [move] : []);
+          })();
 
-        const { portrait: img, token: tokenImage } = await (async () => {
-          const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
-          if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
-          const resolver = await ImageResolver.createFromSpeciesData(
-            {
-              dexId: species.system.number,
-              shiny: this.actor!.system.shiny,
-              female: this.actor!.system.gender === "female",
-              forms: species.system.form ? species.system.form.split("-") : [],
-            },
-            config
-          );
-          if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+          const { portrait: img, token: tokenImage } = await (async () => {
+            const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
+            if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+            const resolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: species.system.number,
+                shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
+                forms: species.system.form ? species.system.form.split("-") : [],
+              },
+              config
+            );
+            if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
 
-          const tokenResolver = await ImageResolver.createFromSpeciesData(
-            {
-              dexId: species.system.number,
-              shiny: this.actor!.system.shiny,
-              female: this.actor!.system.gender === "female",
-              forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
-            },
-            config
-          );
-          return {
-            portrait: resolver.result,
-            token: tokenResolver?.result ?? resolver.result
-          }
-        })();
-
-        const flags = species.flags;
-        flags.core ??= {};
-        flags.core.sourceId = species.uuid;
-
-        await this.actor.update({
-          name: this.actor.name == current.name ? species.name : this.actor.name,
-          img: img,
-          prototypeToken: {
-            img: tokenImage,
-            texture: {
-              src: tokenImage,
+            const tokenResolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: species.system.number,
+                shiny: this.actor!.system.shiny,
+                female: this.actor!.system.gender === "female",
+                forms: species.system.form ? [...species.system.form.split("-"), "token"] : ["token"],
+              },
+              config
+            );
+            return {
+              portrait: resolver.result,
+              token: tokenResolver?.result ?? resolver.result
             }
-          }
-        });
+          })();
 
-        this.actor.updateEmbeddedDocuments("Item", [
-          {
-            flags,
-            name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
-            type: 'species',
+          const flags = species.flags;
+          flags.core ??= {};
+          flags.core.sourceId = species.uuid;
+
+          //Add evolution data
+          const evolutions = this.actor.flags?.ptr2e?.evolutionHistory ?? [];
+          const sourceUuid = (() => {
+            const sourceUuid = (current.parent.flags?.core?.sourceId || current.parent._stats?.compendiumSource) || (() => {
+              if (!current.evolutions) return undefined
+              if (current.evolutions.name === current.slug) return current.evolutions.uuid;
+              function recursiveFindCurrent(evolutions: EvolutionData[] | null): string | undefined {
+                if (!evolutions) return undefined;
+                for (const evolution of evolutions) {
+                  if (evolution.name === current!.slug) return evolution.uuid;
+                  const result = recursiveFindCurrent(evolution.evolutions);
+                  if (result) return result;
+                }
+                return undefined;
+              }
+              return recursiveFindCurrent(current.evolutions.evolutions);
+            })() || "";
+            if (sourceUuid.startsWith("Scene.") || sourceUuid.startsWith("Actor.")) return "";
+            return sourceUuid;
+          })()
+          if (sourceUuid && evolutions.at(-1)?.uuid !== sourceUuid) {
+            evolutions.push({ slug: current.slug, uuid: sourceUuid });
+          }
+          if (evolutions.length === 0) {
+            evolutions.push({ slug: current.slug, uuid: sourceUuid });
+          }
+          evolutions.push({ slug: species.slug, uuid: species.uuid });
+
+          await this.actor.update({
+            name: this.actor.name == current.name ? species.name : this.actor.name,
             img: img,
-            system: species.system.toObject(),
-            _id: "actorspeciesitem",
-            effects: species.effects.map(e => e.toObject())
-          }
-        ]);
+            prototypeToken: {
+              img: tokenImage,
+              texture: {
+                src: tokenImage,
+              }
+            },
+            "flags.ptr2e.evolutionHistory": evolutions
+          });
 
-        await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
+          this.actor.updateEmbeddedDocuments("Item", [
+            {
+              flags,
+              name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
+              type: species.type ?? "species",
+              img: img,
+              system: species.system.toObject(),
+              _id: "actorspeciesitem",
+              effects: species.effects.map(e => e.toObject()),
+              "_stats.compendiumSource": species.uuid
+            }
+          ]);
 
-        return void PerkWebApp.refresh.call(this);
+          await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
+
+          return void PerkWebApp.refresh.call(this);
+        }).bind(this)();
+        this.evolving = false;
+        return result;
       },
       "load-search": async function (this: PerkWebApp) {
         if (!this.perkTab) return;
@@ -374,7 +413,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   _lineCache = new Map<string, SVGLineElement>();
   _zoomAmount: this['zoomLevels'][number] = 0.4;
 
-  web: "global" | ItemUUID = "global";
+  web: "global" | ItemUUID | string = "global";
   private speciesEvolutions: PerkPTR2e[] = [];
   private underdogPerks: PerkPTR2e[] = [];
   private perkTab: CompendiumBrowserPerkTab | null = null;
@@ -423,6 +462,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
     if (!this._perkStore.initialized) {
       this._perkStore.updateState(this.actor);
+    }
+
+    for (const web of this._perkStore.availableWebs) {
+      if (this.actor && this.actor.traits.has(web)) {
+        const trait = game.ptr.data.traits.get(web)
+        webOptions.push({
+          value: web,
+          label: trait ? `[${trait.label}] Perk Web` : `[${Handlebars.helpers.formatSlug(web)}] Perk Web`
+        })
+      }
     }
 
     const grid: GridEntry[] = [];
@@ -527,6 +576,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       zoom: this._zoomAmount,
       editMode: this.editMode,
       global: this.web === "global",
+      speciesWeb: this.web.includes("Item.") && this.actor?.species?.parent?.type !== "ptr2e-digimon-expansion.digimonSpecies",
       webOptions,
       web: this.web,
       filterData: this.perkTab.filterData,
@@ -566,7 +616,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         if (value === "global") {
           return this.setWeb(null);
         }
-        const species = await fromUuid<SpeciesPTR2e>(value);
+        if (this._perkStore.availableWebs.has(value)) {
+          return this.setWeb(value);
+        }
+        const species = await fu.fromUuid<SpeciesPTR2e>(value);
         this.setWeb(species ?? null);
       });
     }
@@ -625,6 +678,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
 
             if (this.connectionNode.perk.pack === node.perk.pack) {
+              const isDigimonPerkEdit = (this.connectionNode.perk?.flags?.ptr2e?.evolution as { uuid: string } | undefined)?.uuid?.includes(".digimon-species.");
               await ItemPTR2e.updateDocuments([
                 ...(
                   this.connectionNode.perk.id
@@ -638,7 +692,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
                         return nodes;
                       })()
                     }]
-                    : []
+                    : isDigimonPerkEdit ? [
+                      {
+                        _id: (() => {
+                          const parsed = fu.parseUuid((this.connectionNode.perk?.flags?.ptr2e?.evolution as { uuid: string } | undefined)?.uuid ?? "");
+                          return parsed?.id ?? "";
+                        })(),
+                        "system.node.connected": Array.from(new Set(updateCurrent))
+                      }
+                    ] : []
                 ),
                 ...(
                   node.perk.id
@@ -652,9 +714,35 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
                         return nodes;
                       })()
                     }]
-                    : []
+                    : isDigimonPerkEdit ? [
+                      {
+                        _id: (() => {
+                          const parsed = fu.parseUuid((node.perk?.flags?.ptr2e?.evolution as { uuid: string } | undefined)?.uuid ?? "");
+                          return parsed?.id ?? "";
+                        })(),
+                        "system.node.connected": Array.from(new Set(updateTarget))
+                      }
+                    ] : []
                 )
-              ], this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : {});
+              ], this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : isDigimonPerkEdit ? { pack: "ptr2e-digimon-expansion.digimon-species" } : {});
+              if (isDigimonPerkEdit) {
+                this.connectionNode.perk.updateSource({
+                  "system.nodes": [
+                    {
+                      ...this.connectionNode.node,
+                      connected: Array.from(new Set(updateCurrent))
+                    }
+                  ]
+                });
+                node.perk.updateSource({
+                  "system.nodes": [
+                    {
+                      ...node.node,
+                      connected: Array.from(new Set(updateTarget))
+                    }
+                  ]
+                })
+              }
             }
             else {
               if (this.connectionNode.perk.id) await this.connectionNode.perk.update({
@@ -1143,7 +1231,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const nameAnchor = liElement.querySelector<HTMLAnchorElement>("div.name > a");
       if (nameAnchor) {
         nameAnchor.addEventListener("click", async () => {
-          const document = await fromUuid<PerkPTR2e>(entryUuid);
+          const document = await fu.fromUuid<PerkPTR2e>(entryUuid);
           let node = this._perkStore.nodeFromSlug(document?.slug ?? "");
           if (!node) return;
 
@@ -1159,6 +1247,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const perkElement = this.element.querySelector(`div.perk[data-x="${node.position.x}"][data-y="${node.position.y}"]`)
           this.currentNode = node;
           perkElement?.scrollIntoView({ inline: 'center', block: 'center', behavior: 'smooth' });
+          perkElement?.classList.add("highlighted");
+          setTimeout(() => {
+            perkElement?.classList.remove("highlighted");
+          }, 10000);
           this.render({ parts: ["hudPerk"] });
         });
       }
@@ -1253,7 +1345,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const x2 = (((connectedRect.x + scroll.x) * zoom) + ((connectedRect.width * zoom) / 2) - (elementRect.x * zoom));
         const y2 = (((connectedRect.y + scroll.y) * zoom) + ((connectedRect.height * zoom) / 2) - (elementRect.y * zoom));
 
-        
+
         const unlockedPerkStates: PerkPurchaseState[] = [PerkState.purchased, PerkState.autoUnlocked];
 
         const color = (() => {
@@ -1262,16 +1354,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             return "#2ECFF5"; // Change to blue if both nodes are unlocked
           }
           if (unlockedPerkStates.includes(node.state) || !!node.tierInfo || unlockedPerkStates.includes(connectedNode.state) || !!connectedNode.tierInfo) {
-            if((node.state === PerkState.connected || connectedNode.state === PerkState.connected)) {
+            if ((node.state === PerkState.connected || connectedNode.state === PerkState.connected)) {
               return "#fba151"; // Change to orange to signify connected state
             }
-            else if(node.state === PerkState.available || connectedNode.state === PerkState.available) {
+            else if (node.state === PerkState.available || connectedNode.state === PerkState.available) {
               return "#208C4B"; // Change to green to signify available state
             }
-            
+
             return "#ffffff";
           }
-          return "#898989";
+          return this.web.includes(".digimon-species.") ? "#0c0b16" : "#898989";
         })();
 
         line.setAttribute("x1", x1.toString());
@@ -1379,8 +1471,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   async deletePerk() {
-    if(!this.rendered || !this.editMode || !this.currentNode) return;
-    const {perk: current, position} = this.currentNode;
+    if (!this.rendered || !this.editMode || !this.currentNode) return;
+    const { perk: current, position } = this.currentNode;
     foundry.applications.api.DialogV2.confirm({
       window: {
         title: "Delete Perk"
@@ -1529,15 +1621,21 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     element.scrollTo({ left: newLeft, top: newTop, behavior: "smooth" });
   }
 
-  async setWeb(species: SpeciesPTR2e | null) {
-    if (species === null) {
+  async setWeb(webOrSpecies: SpeciesPTR2e | string | null) {
+    if (webOrSpecies === null) {
       this.web = "global";
       this.speciesEvolutions = [];
       return await PerkWebApp.refresh.call(this);
     }
 
-    this.web = species.uuid;
-    this.speciesEvolutions = await species.system.getEvolutionPerks(!!this.actor?.system.shiny);
+    if (typeof webOrSpecies === "string") {
+      this.web = webOrSpecies;
+      this.speciesEvolutions = [];
+      return await PerkWebApp.refresh.call(this);
+    }
+
+    this.web = webOrSpecies.uuid;
+    this.speciesEvolutions = await webOrSpecies.system.getEvolutionPerks(!!this.actor?.system.shiny);
     this.underdogPerks = this.actor ? await this.actor.getUnderdogPerks() : [];
     await PerkWebApp.refresh.call(this);
 
@@ -1563,15 +1661,28 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       itemData?.length
         ? await Promise.all(
           itemData.map(async data => {
-            const item = await fromUuid(data.uuid);
+            const item = await fu.fromUuid(data.uuid);
             return { perk: item as PerkPTR2e, x: data.x, y: data.y };
           })
         )
         : await (async () => {
           const data = foundry.applications.ux.TextEditor.getDragEventData(event) as DropCanvasData
           if (!data) return [];
-          const perk = await fromUuid(data.uuid) as PerkPTR2e;
-          if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
+          const perk = await fu.fromUuid(data.uuid) as PerkPTR2e ?? data.data;
+          if (!(perk instanceof ItemPTR2e && perk.type === "perk")) {
+            if (perk.type === "ptr2e-digimon-expansion.digimonSpecies" || (perk?.flags?.ptr2e?.evolution as { uuid?: string })?.uuid?.includes(".digimon-species.")) {
+              const evoPerk = this.speciesEvolutions.find(p => p.slug === (perk.slug ?? perk?.system?.slug));
+              if (evoPerk) {
+                const _id = (() => {
+                  if (perk._id) return perk._id;
+                  const parsed = foundry.utils.parseUuid((perk?.flags?.ptr2e?.evolution as { uuid?: string })?.uuid ?? "");
+                  return parsed?.id;
+                })();
+                return [{ perk: evoPerk, x: (evoPerk.system?.node as { x: number })?.x, y: (evoPerk.system?.node as { y: number })?.y, _id }];
+              }
+            }
+            return []
+          };
           if (perk.system.variant === "multi") return [{ perk: perk, x: data.x, y: data.y }];
           return [{ perk: perk, x: perk.system.primaryNode?.x, y: perk.system.primaryNode?.y }];
         })()) as { perk: PerkPTR2e, x: number, y: number }[];
@@ -1608,52 +1719,69 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const currentlyOnWeb = this._perkStore.get(`${primaryEntry.x}-${primaryEntry.y}`);
 
     const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryEntry.perk ? [`${primaryEntry.x}-${primaryEntry.y}`] : []);
-    const toSet: [string, PerkPTR2e, PerkPTR2e['system']['nodes'][0] | null][] = [[`${i}-${j}`, primaryEntry.perk, currentlyOnWeb?.node ?? primaryEntry.perk.system.primaryNode]];
+    const toSet: [string, PerkPTR2e, PerkPTR2e['system']['nodes'][0] | null][] = [[`${i}-${j}`, primaryEntry.perk, currentlyOnWeb?.node ?? primaryEntry.perk.system.primaryNode ?? (primaryEntry.perk.system.node as PerkPTR2e['system']['nodes'][0])]];
     const updates: Record<string, Record<string, unknown>[]> = {
       world: [],
     };
 
-    const pack = primaryEntry.perk.pack || "world";
+    const isDigivolutionPerk = ((primaryEntry.perk?.flags?.ptr2e?.evolution as { uuid?: string })?.uuid?.includes(".digimon-species."));
+    const pack = isDigivolutionPerk ? "ptr2e-digimon-expansion.digimon-species" : (primaryEntry.perk.pack || "world");
     updates[pack] ??= [];
-    updates[pack].push({
-      _id: primaryEntry.perk._id,
-      "system.global": this.web === "global",
-      "system.nodes": (() => {
-        const nodes = primaryEntry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
-        if (!currentlyOnWeb) {
-          if (primaryEntry.perk.system.variant === "multi" || !nodes[0]) {
-            nodes.push({
-              x: i,
-              y: j,
-            })
+    updates[pack].push(
+      isDigivolutionPerk ? (() => {
+        primaryEntry.perk.updateSource({
+          "system.nodes": [{
+            ...primaryEntry.perk.toObject().system.nodes[0],
+            x: i,
+            y: j,
+          }]
+        })
+        return {
+          _id: (primaryEntry as unknown as { _id: string })?._id,
+          "system.node": {
+            x: i,
+            y: j,
           }
-          else {
-            nodes[0].x = i;
-            nodes[0].y = j;
-          }
-          return nodes;
         }
-        const index = primaryEntry.perk.system.nodes.indexOf(currentlyOnWeb.node);
-        if (index === -1) {
-          if (primaryEntry.perk.system.variant === "multi" || !nodes.length) {
-            nodes.push({
-              x: i,
-              y: j,
-            })
+      })() : {
+        _id: primaryEntry.perk._id,
+        "system.global": this.web === "global",
+        "system.nodes": (() => {
+          const nodes = primaryEntry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+          if (!currentlyOnWeb) {
+            if (primaryEntry.perk.system.variant === "multi" || !nodes[0]) {
+              nodes.push({
+                x: i,
+                y: j,
+              })
+            }
+            else {
+              nodes[0].x = i;
+              nodes[0].y = j;
+            }
+            return nodes;
           }
+          const index = primaryEntry.perk.system.nodes.indexOf(currentlyOnWeb.node);
+          if (index === -1) {
+            if (primaryEntry.perk.system.variant === "multi" || !nodes.length) {
+              nodes.push({
+                x: i,
+                y: j,
+              })
+            }
+            return nodes;
+          };
+          nodes[index].x = i;
+          nodes[index].y = j;
           return nodes;
-        };
-        nodes[index].x = i;
-        nodes[index].y = j;
-        return nodes;
-      })(),
-      "system.webs": (() => {
-        if (this.web === "global") return primaryEntry.perk.system.webs;
-        const web = new Set((primaryEntry.perk as PerkPTR2e).system.toObject().webs)
-        web.add(this.web);
-        return web;
-      })()
-    });
+        })(),
+        "system.webs": (() => {
+          if (this.web === "global") return primaryEntry.perk.system.webs;
+          const web = new Set((primaryEntry.perk as PerkPTR2e).system.toObject().webs)
+          web.add(this.web);
+          return web;
+        })()
+      });
 
     const delta = items.length > 1 ? { x: i - primaryEntry.x, y: j - primaryEntry.y } : null;
 
@@ -1772,7 +1900,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         connected: node.connected,
         position: { x: node.x!, y: node.y! },
         state: 0,
-        web: "global",
+        web: this.web,
         node: node,
         slug: index > 0 ? `${perk.slug}-${index}` : perk.slug
       });
@@ -1822,4 +1950,5 @@ export interface PerkWebApp {
   constructor: typeof PerkWebApp;
 
   _perkStore: PerkStore;
+  evolving: boolean
 }

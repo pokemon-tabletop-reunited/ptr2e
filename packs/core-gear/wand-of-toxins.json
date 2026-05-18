@@ -4,8 +4,12 @@
   "type": "weapon",
   "system": {
     "_migration": {
-      "version": 0.11,
-      "previous": null
+      "version": 0.111,
+      "previous": {
+        "schema": 0.11,
+        "foundry": "13.347",
+        "system": "1.4.3.beta"
+      }
     },
     "traits": [
       "fantasy",
@@ -30,7 +34,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -48,10 +57,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "img": "icons/weapons/wands/wand-gem-violet.webp",
   "effects": [
     {
       "name": "Wand of Toxins",
@@ -67,50 +77,47 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.actions.0.category",
-                "value": "special"
+                "value": "special",
+                "method": 5
               },
               {
-                "mode": 2,
                 "property": "system.actions.0.trait",
-                "value": "weapon"
+                "value": "weapon",
+                "method": 2
               }
             ],
-            "replaceSelf": true,
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -118,16 +125,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.0.beta-ready.2",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.3.beta",
+        "lastModifiedBy": "XNKN3zSF1KgrBp5u",
+        "modifiedTime": 1755850672487
       }
     }
   ],

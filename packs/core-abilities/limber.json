@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is immune to the @Affliction[paralysis] Affliction. The user auto-succeeds on an escape check for the @Affliction[grapple] Affliction.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to the @Affliction[paralysis] Affliction. The user auto-succeeds on an escape check for the @Affliction[grapple] Affliction.</p>",
+    "description": "<p>Effect: The user is immune to the @Affliction[paralysis] Affliction. The user auto-succeeds on an escape check for the @Affliction[grapple] Affliction. The user takes half damage from @Trait[recoil-x] and @Trait[crash-1-2] Attack effects.</p>",
     "traits": [
       "defensive"
     ],
@@ -35,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "GZkCcE2mzYiCloT4",
@@ -55,11 +57,11 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           }
         ],
         "slug": null,
@@ -68,17 +70,14 @@
         ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Effect: The user is immune to the @Affliction[paralysis] Affliction. The user auto-succeeds on an escape check for the @Affliction[grapple] Affliction.</p>",
       "origin": null,
@@ -90,12 +89,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.3.0",
         "createdTime": 1731340617865,
         "modifiedTime": 1731340647576,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ]

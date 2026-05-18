@@ -2,21 +2,14 @@
   "name": "Adrenaline Rush",
   "type": "perk",
   "system": {
-    "prerequisites": [
-      {
-        "gte": [
-          "{actor|level}",
-          30
-        ]
-      }
-    ],
+    "prerequisites": [],
     "cost": 3,
-    "description": "<p>Your fight or flight response is finely honed - able to get you out of the stickiest of situations. The user gains the Ability Adrenaline as a Tutored Ability, and once during battle, when the user crosses the [Desperation 1/2] threshold, they freely use either U-Turn or No Retreat, as if it was on their Active List.</p>",
+    "description": "<p>Your fight or flight response is finely honed - able to get you out of the stickiest of situations.</p><p>The user gains the @UUID[Compendium.ptr2e.core-abilities.kDYV4gKQkqKP04Mf]{Adrenaline} as a Tutored Ability, and once during a combat, when they cross the @Trait[desperation-1-2] threshold, they may spend @PP[-3] to freely use either @UUID[Compendium.ptr2e.core-moves.DTnhRJBYhTBapjIK]{U-Turn} or @UUID[Compendium.ptr2e.core-moves.Yl9mMjXxnNloKmMS]{No Retreat} as an @Trait[interrupt] as if the Move was on their Active List.</p>",
     "actions": [
       {
         "name": "Adrenaline Rush",
         "slug": "adrenaline-rush",
-        "description": "<p>Your fight or flight response is finely honed - able to get you out of the stickiest of situations. The user gains the Ability Adrenaline as a Tutored Ability, and once during battle, when the user crosses the [Desperation 1/2] threshold, they freely use either U-Turn or No Retreat, as if it was on their Active List.</p>",
+        "description": "<p>Trigger: The user crosses the @Trait[desperation-1-2] threshold, they freely use either @UUID[Compendium.ptr2e.core-moves.DTnhRJBYhTBapjIK]{U-Turn} or @UUID[Compendium.ptr2e.core-moves.Yl9mMjXxnNloKmMS]{No Retreat}, as if it was on their Active List.</p><p>Restriction: May only be used once per combat.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 3
@@ -24,16 +17,13 @@
         "type": "generic",
         "traits": [
           "desperation-1-2",
-          "interrupt-2"
+          "interrupt"
         ],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
     "slug": "adrenaline-rush",
@@ -44,24 +34,21 @@
     },
     "nodes": [
       {
+        "x": 71,
+        "y": 44,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hear-no-bell",
           "plus-ultra",
           "overbooster"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#008000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": "#000000",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 71,
-        "y": 44,
         "tier": null
       }
     ],
@@ -80,9 +67,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "1uzQwRPq1YMLDk8L",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -99,55 +84,33 @@
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.kDYV4gKQkqKP04Mf",
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
-            "alterations": [],
             "track": false,
             "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
-          },
-          {
-            "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.DTnhRJBYhTBapjIK",
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "alterations": [],
-            "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -155,16 +118,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.5.0.beta",
         "createdTime": 1737934506228,
-        "modifiedTime": 1737934530202,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1772812563162,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL",
         "exportSource": null
       }
     }

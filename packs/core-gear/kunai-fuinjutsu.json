@@ -1,0 +1,240 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Kunai (Fuinjutsu)",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "actions": [],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "B",
+    "fling": {
+      "type": "untyped",
+      "power": 75,
+      "accuracy": 60,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 5,
+        "unit": "m"
+      }
+    },
+    "quantity": 3,
+    "rarity": "rare",
+    "ammoType": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "kunai-fuinjutsu",
+    "description": "<p>A kunai is a short, bladed weapon similar to a dagger, believed to be originally derived from the humble trowel. Kunai come in a number of shapes and sizes, frequently designed more like spearheads to be thrown more easily. Their size allows them to be modified more substantially, and can feature some of the nastier tricks up a ninja’s sleeve. These kunai are affixed with an arcane symbol script and various hanging charm tags, which apply a web of sealing magic upon the target.</p><p>Effect: On hit, the target has a 60% chance to gain @Affliction[disabled 5] and a 30% chance to gain @Affliction[nullified 5] (both selected randomly). On a Critical Hit, the target gains @Affliction[disabled 5] and @Affliction[nullified 5] (applied separately from first two effects, both selected randomly). This Attack deals 30% more damage to @Trait[dark] and @Trait[fairy] creatures.</p>",
+    "traits": [
+      "weapon",
+      "consumable",
+      "fling",
+      "projectile",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "fantasy"
+    ],
+    "consumableType": "other",
+    "stack": 3,
+    "cost": 8
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Kunai (Fuinjutsu)",
+      "type": "passive",
+      "_id": "dFrd8OwpQArZD5AZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "missile",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "sharp",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "horn",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "arcane",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "crit-1",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "flinch-30",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-kunai-fuinjutsu-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "fling-kunai-fuinjutsu-attack-damage",
+            "value": 30,
+            "predicate": [
+              {
+                "or": [
+                  "target:trait:dark",
+                  "target:trait:fairy"
+                ]
+              }
+            ],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
+            "predicate": [],
+            "chance": 60,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-fuinjutsu-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-fuinjutsu-attack-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-kunai-fuinjutsu-attack-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "Zuy5qurXVAzr6oEU"
+}

@@ -5,7 +5,7 @@
     "prerequisites": [
       "trait:wielder"
     ],
-    "cost": 4,
+    "cost": 2,
     "description": "<p>Gain a second Held Item slot.</p>",
     "actions": [],
     "slug": "dual-wielder",
@@ -16,26 +16,24 @@
     },
     "nodes": [
       {
+        "x": 192,
+        "y": 55,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "backpacker-1",
           "belt-expansion-1",
           "dress-to-impress",
           "yeomanry",
-          "nock-shot"
+          "nock-shot",
+          "flexible-iron"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 192,
-        "y": 55,
         "tier": null
       }
     ],
@@ -53,7 +51,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "QioUEl6UBFclZvzG",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
@@ -70,9 +69,9 @@
             "key": "system.inventory.held.max",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -85,13 +84,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Gain a second Held Item slot.</p>",
       "origin": null,
@@ -103,7 +97,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.4.1.beta",
         "createdTime": 1737566059443,

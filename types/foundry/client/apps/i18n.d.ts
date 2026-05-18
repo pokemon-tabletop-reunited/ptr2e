@@ -65,7 +65,7 @@ declare class Localization {
      * @param stringId  The string ID to translate
      * @return          The translated string
      */
-    localize(stringId: string): string;
+    localize(stringId: string, data?: { [key: string]: string | number | boolean | null }): string;
 
     /**
      * Localize a string including variable formatting for input arguments.

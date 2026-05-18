@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -27,10 +32,9 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
-      "fling"
+      "mystery-dungeon"
     ],
-    "description": "For the next 3 rounds, once per round, the user may freely use the attack Snatch.",
+    "description": "<p>The user may consume this to use the move @UUID[Compendium.ptr2e.core-moves.8U5CdSY2okR90rh4]{Snatch} as if it were on their active moves list.</p>",
     "quantity": 1,
     "slug": "snatch-orb",
     "stack": 1,
@@ -42,8 +46,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "lFTEuvkjRDUkD0qP",
   "effects": [],

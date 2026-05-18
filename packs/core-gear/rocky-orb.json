@@ -19,18 +19,21 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "The target gains @Affliction[splinter] 5.",
+    "description": "<p>The target gains @Affliction[splinter 5].</p>",
     "quantity": 1,
     "slug": "rocky-orb",
     "stack": 1,
@@ -42,10 +45,93 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Rocky Orb Action",
+        "slug": "rocky-orb",
+        "description": "<p>The target gains @Affliction[splinter 5].</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "status",
+        "free": true,
+        "predicate": [],
+        "accuracy": 100
+      }
+    ]
   },
   "_id": "665IwJxoV31VfYXa",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rocky Orb",
+      "type": "passive",
+      "_id": "bfDBamRmvlDUitDh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rocky-orb-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758757842237,
+        "modifiedTime": 1758757858646,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

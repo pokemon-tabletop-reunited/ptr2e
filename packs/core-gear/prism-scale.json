@@ -1,5 +1,5 @@
 {
-  "folder": "6VDJBcrqVDh5bYtA",
+  "folder": "V4skAU6G3OH5fXae",
   "name": "Prism Scale",
   "type": "equipment",
   "system": {
@@ -10,14 +10,15 @@
     "slug": "prism-scale",
     "traits": [
       "combat",
-      "type",
       "water",
       "evolution",
       "feebas",
-      "milotic"
+      "milotic",
+      "consumable",
+      "accessory"
     ],
     "actions": [],
-    "description": "<p>A mysterious scale that causes a certain Pokémon to evolve. It shines in rainbow colors that boosts the power of Water-Type Moves.</p><p></p><p>Effect: Increases the Power and Accuracy of attacks by 10%.</p>",
+    "description": "<p>Effect: The user takes -10% less damage from Special-Category Attacks. @UUID[Compendium.ptr2e.core-species.kHGEJsEEgG6dxwrj]{Feebas} and @UUID[Compendium.ptr2e.core-species.6HyvBOqJ3hfbVojE]{Milotic} take 10% less damage from Physical-Category Attacks, and another 10% less from Special-Category Attacks.<br><br>Feebas may consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -31,9 +32,14 @@
     "grade": "C",
     "fling": {
       "type": "water",
-      "power": 70,
-      "accuracy": 100,
-      "hide": false
+      "power": 45,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 6,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -50,56 +56,76 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/prism%20scale.webp",
   "effects": [
     {
-      "name": "Type Booster (Water)",
+      "name": "Prism Scale",
       "type": "passive",
-      "_id": "9U95e4Y9D4XkQT5N",
+      "_id": "Yv41qOcilsYuiS4Q",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "water-attack-power",
-            "value": 10,
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
             "predicate": [],
-            "label": "Type Booster (Water) Power",
-            "mode": 2,
-            "priority": null,
+            "label": "Prism Scale",
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
-            "type": "percentile-modifier",
-            "key": "water-attack-accuracy",
-            "value": 10,
-            "predicate": [],
-            "label": "Type Booster (Water)",
-            "mode": 2,
-            "priority": null,
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:feebas",
+                  "target:species:milotic"
+                ]
+              }
+            ],
+            "label": "Prism Scale",
+            "hideIfDisabled": true,
             "ignored": false,
-            "hideIfDisabled": false
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              {
+                "or": [
+                  "target:species:feebas",
+                  "target:species:milotic"
+                ]
+              }
+            ],
+            "label": "Prism Scale (Feebas/Milotic)",
+            "hideIfDisabled": true,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -107,16 +133,16 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-gear.Item.JhU4x5wZQlVuqvfz.ActiveEffect.pMVRnjGSvrhLNVtr",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1758629437658,
+        "modifiedTime": 1766206692987,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
       }
     }
   ],

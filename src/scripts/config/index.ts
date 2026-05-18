@@ -42,6 +42,9 @@ import { TokenHUDPTR2e } from "@module/apps/token-hud.ts";
 import { HotbarPTR2e } from "@module/apps/hotbar.ts";
 import { TokenRulerPTR2e } from "@module/canvas/token-ruler.ts";
 import { PrototypeTokenConfigPTR2e, TokenConfigPTR2e } from "@module/canvas/token/sheet.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { ImageResolver } from "@utils";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -109,8 +112,16 @@ export const PTRCONFIG = {
   },
   Folder: {
     documentClass: FolderPTR2e,
+    sheetClass: FolderConfigPTR2e,
     sheetClasses: {
-      folder: FolderConfigPTR2e
+      "ptr2e.FolderConfig": {
+        cls: FolderConfigPTR2e,
+        label: "PTR 2e Folder Config",
+        canBeDefault: true,
+        canConfigure: true,
+        id: "ptr2e.FolderConfig",
+        themes: {}
+      }
     }
   },
   Grid: {
@@ -204,7 +215,10 @@ export const PTRCONFIG = {
     max: "PTR2E.ActorSize.Max"
   } as Record<Size, string>,
   utils: {
-    predicate: Predicate
+    predicate: Predicate,
+    SlugField,
+    PredicateField,
+    ImageResolver
   },
   options: {} as Record<string, PickableThing[]>,
   movementTypes: {

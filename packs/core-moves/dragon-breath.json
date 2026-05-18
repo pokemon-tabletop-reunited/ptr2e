@@ -25,7 +25,7 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis 5].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +48,7 @@
   "effects": [
     {
       "name": "Dragon Breath",
-      "type": "affliction",
+      "type": "passive",
       "_id": "S1C4n5O8hJ43m1Z9",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -56,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "dragon-breath-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,13 +76,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

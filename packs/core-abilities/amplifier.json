@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-5"
+          "interrupt"
         ],
         "name": "Amplifier",
         "slug": "amplifier",
@@ -16,16 +16,15 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's [Sonic] attacks have 30% more Power and have their Range increased by 50%.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: The user's [Sonic] attacks have 30% more Power and have their Range increased by 50%.</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "slug": "amplifier",
     "_migration": {
       "version": null,
@@ -35,13 +34,14 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "8GEZyBul46p9V0Fn",
   "effects": [
     {
-      "name": "Amplifier (Partial)",
+      "name": "Amplifier",
       "type": "passive",
       "_id": "CX3EyE55W72ME7gi",
       "img": "icons/magic/sonic/projectile-sound-rings-wave.webp",
@@ -53,27 +53,38 @@
             "value": 30,
             "predicate": [],
             "label": "Amplifier Power",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": 1.5,
+            "phase": "initial",
+            "predicate": [],
+            "property": "range",
+            "definition": [],
+            "method": 1,
+            "key": "sonic-trait-attack",
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,13 +96,17 @@
       "_stats": {
         "compendiumSource": "Actor.zshgfm9Ey2yqW8eS.Item.vdWAkG4TbIs3apAy.ActiveEffect.l6pjnn54jiTqHOwt",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1721934790549,
-        "modifiedTime": 1732924055746,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778665958772,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -26,7 +26,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -43,11 +48,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Yx30uqsUHq25S2Wq",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "icons/equipment/chest/breastplate-sculpted-grey.webp",
   "effects": [
     {
       "name": "Chitin Breastplate",
@@ -61,44 +67,41 @@
             "key": "system.attributes.def.base",
             "value": 20,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.attributes.spd.base",
             "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
             "key": "system.attributes.spe.base",
             "value": -5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -110,12 +113,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.1.6",
         "createdTime": 1724253302338,
         "modifiedTime": 1724253355814,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

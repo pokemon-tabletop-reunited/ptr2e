@@ -9,8 +9,10 @@
     },
     "actions": [],
     "slug": "mystery-scholar-5",
-    "description": "<p>The user selects 3 Occult Group Skills. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 60 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 60).</p>",
-    "traits": [],
+    "description": "<p>The user gains a +5 increase to an Occult Group Skill a total of 6 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 60 or more with @Trait[skill-boost] Perks.</p>",
+    "traits": [
+      "skill-boost"
+    ],
     "prerequisites": [],
     "autoUnlock": [],
     "cost": 1,
@@ -44,65 +46,117 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.occult",
+            "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ms51"
+            "rollOption": "ms51",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms51}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms51}.mod",
+            "value": 5,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.occult",
+            "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "ms52"
+            "rollOption": "ms52",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms52}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms52}.mod",
+            "value": 5,
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "ignored": false,
-            "choices": "flags.ptr2e.skillOptions.occult",
+            "choices": "flags.ptr2e.skillOptions.occult60",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "ms53",
-            "priority": null
+            "priority": null,
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms53}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms53}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms54}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms55",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms55}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "ignored": false,
+            "choices": "flags.ptr2e.skillOptions.occult60",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "ms56",
+            "priority": null,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.ms56}.mod",
+            "value": 5,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -115,13 +169,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

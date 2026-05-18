@@ -1,0 +1,73 @@
+{
+  "folder": "jLhPGZvYVjjs7D54",
+  "name": "One of the Classic Blunders",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "One of the Classic Blunders",
+        "slug": "one-of-the-classic-blunders",
+        "description": "<p>Trigger: An Attack misses the user.</p><p>Effect: The user uses a @Trait[social] Status-Category Attack as a Free Action against the triggering creature.</p>",
+        "traits": [
+          "interrupt"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/sunglasses.webp",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: When an Attack misses the user, they may spend @PP[-2] as a Free Action @Trait[interrupt] to use a @Trait[social] Status-Category Attack as a Free Action against the source of the Attack.</p>",
+    "traits": [
+      "agitator"
+    ],
+    "prerequisites": [
+      "trait:agitator"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "agitator"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 172,
+        "y": 147,
+        "connected": [
+          "condemn",
+          "agitator",
+          "inconceivable"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "WGzVbhlOGNloKCJT",
+  "img": "systems/ptr2e/img/item-icons/sunglasses.webp",
+  "effects": [],
+  "flags": {}
+}

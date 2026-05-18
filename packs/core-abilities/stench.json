@@ -15,13 +15,14 @@
         },
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be Flinched.</p>",
+        "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be @Affliction[delay 40].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be Flinched.</p>",
+    "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be @Affliction[delay 40].</p>",
     "traits": [],
     "slug": "stench",
     "_migration": {
@@ -32,7 +33,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "mNww18uHVxa0yoaz",
@@ -47,42 +49,39 @@
           {
             "type": "roll-effect",
             "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 10,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -40
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 40%"
+                "value": -40,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -94,13 +93,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.3.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1738250046138,
-        "modifiedTime": 1738250095556,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778709100549,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

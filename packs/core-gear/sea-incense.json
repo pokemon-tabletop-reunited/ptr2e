@@ -1,0 +1,143 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Sea Incense",
+  "type": "gear",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "sea-incense",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "accessory",
+      "held"
+    ],
+    "actions": [],
+    "description": "<p>Water-Type users deal/take 10% more/less Physical-Category damage. @UUID[Compendium.ptr2e.core-species.29yYVLazOLl7g8JZ]{Azurill}, @UUID[Compendium.ptr2e.core-species.u1PPmnUB3ZhhGYbd]{Marill}, and @UUID[Compendium.ptr2e.core-species.PpHWBVjN1fD1bRnn]{Azumarill} users deal +20% damage with their @Trait[contact] Attacks.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": 1
+    },
+    "grade": "D",
+    "fling": {
+      "type": "water",
+      "power": 100,
+      "accuracy": 80,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "xuki0iAA4r2r59Yl",
+  "img": "systems/ptr2e/img/item-icons/sea incense.webp",
+  "effects": [
+    {
+      "name": "Sea Incense",
+      "type": "passive",
+      "_id": "kyA0AcfazuD5oQoh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 10,
+            "predicate": [
+              "trait:rock"
+            ],
+            "label": "Sea Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "target:trait:rock"
+            ],
+            "label": "Sea Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "contact-trait-attack-damage",
+            "value": 20,
+            "predicate": [
+              {
+                "or": [
+                  "item:species:azurill",
+                  "item:species:marill",
+                  "item:species:azumarill"
+                ]
+              }
+            ],
+            "label": "Sea Incense",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766447822651,
+        "modifiedTime": 1766447932918,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
+}

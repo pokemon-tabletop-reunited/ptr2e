@@ -1,0 +1,81 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Unown Song: Bewitching Melody",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Bewitching Melody",
+        "slug": "unown-song-bewitching-melody",
+        "description": "<p>Effect: Summons Unown to perform a Bewitching Melody.</p><p>Bewitching Melody lasts for 3 rounds, and while it is active, grants all allied creatures 30% EHR.</p>",
+        "traits": [
+          "sage",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "summon": "Compendium.ptr2e.core-summons.UwUWMxacI00nX6aW",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: Summons Unown to perform a Bewitching Melody.</p><p>Bewitching Melody lasts for 3 rounds, and while it is active, grants all allied creatures 30% EHR.</p>",
+    "traits": [
+      "sage",
+      "summon"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "sage"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 147,
+        "y": 118,
+        "connected": [
+          "hasten-conjuration",
+          "unown-song-sanctuary-ward",
+          "neurolize"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "rkKf1W6HQazczQQl",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "flags": {}
+}

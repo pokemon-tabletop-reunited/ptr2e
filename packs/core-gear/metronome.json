@@ -10,7 +10,7 @@
       "accessory"
     ],
     "actions": [],
-    "description": "<p>Effect: While worn as an Accessory, the user maintains a Metronome Clock, 6 Spans in size. Each time the user resolves the same specific attack between consecutive Activations, tick the Clock 1 Span. For each each filled Span on the Clock, that attack's Power increased by 20%, up to a max increase of 100%. This boost this Item gives resets if the user is switched out, @Affliction[fainted], combat ends, or the user declares a different attack.</p>",
+    "description": "<p>Effect: While worn as an Accessory, the user maintains a Metronome Clock, 5 Spans in size. Each time the user resolves the same specific attack between consecutive Activations, tick the Clock 1 Span. For each each filled Span on the Clock, that attack's Power increased by 20%, up to a max increase of 100%. This boost this Item gives resets if the user is switched out, @Affliction[fainted], combat ends, or the user declares a different attack.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -26,7 +26,12 @@
       "type": "untyped",
       "power": 50,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -49,7 +54,70 @@
     }
   },
   "img": "systems/ptr2e/img/icons/container_icon.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Metronome (Gear)",
+      "type": "passive",
+      "_id": "0zFwPJ3WegylKfqI",
+      "img": "systems/ptr2e/img/icons/container_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "JoVrzljKRfSrxmCi",
+            "value": 0,
+            "predicate": [],
+            "max": 6,
+            "color": "#008000",
+            "private": false,
+            "label": "Metronome",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-damage",
+            "value": "20*(@actor.clocks.JoVrzljKRfSrxmCi)",
+            "predicate": [],
+            "label": "Metronome Clock",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758570434550,
+        "modifiedTime": 1758570579163,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      },
+      "showIcon": 2
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA",
   "_id": "PZFyt0DGaa8C6SCy"
 }

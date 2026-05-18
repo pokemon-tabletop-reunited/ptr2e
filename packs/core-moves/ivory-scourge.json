@@ -29,7 +29,7 @@
         "category": "special",
         "power": 100,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison]ed 5 and @Affliction[enraged] 5. If a creature cures the @Affliction[poison] Affliction before it naturally expires, it gains @Affliction[poison] 8.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison]ed 5 and @Affliction[enraged 5]. If a creature cures the @Affliction[poison] Affliction before it naturally expires, it gains @Affliction[poison 8].</p>"
       }
     ],
     "grade": "A",
@@ -55,24 +55,24 @@
           {
             "type": "roll-effect",
             "key": "ivory-scourge-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "ivory-scourge-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.enragedcondiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.enragedcondition",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -83,13 +83,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

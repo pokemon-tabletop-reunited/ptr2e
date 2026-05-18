@@ -14,7 +14,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user deals 20% more damage with super effective attacks, and the user's attacks gain [Danger Close] if they would be super effective against a target.</p>",
         "img": "icons/svg/explosion.svg"
@@ -31,9 +32,82 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "CYl70u7WNI7zx5w2",
-  "effects": []
+  "effects": [
+    {
+      "name": "Fatal Precision",
+      "type": "passive",
+      "_id": "HWgxZqbS1ZigTtOf",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "effectiveness:super"
+            ],
+            "key": "damaging-attack-damage",
+            "label": "Super-Effective DMG",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "danger-close",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [
+              "effectiveness:super"
+            ],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778687150819,
+        "modifiedTime": 1778687226485,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

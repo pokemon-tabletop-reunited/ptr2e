@@ -38,9 +38,9 @@ declare global {
     type ContextOptionCondition = (li: HTMLElement) => boolean;
 
     interface EntryContextOption {
-        name: string;
+        label: string;
         icon: string;
-        condition: ContextOptionCondition;
+        visible: ContextOptionCondition;
         callback: (li: HTMLElement) => void;
     }
 }

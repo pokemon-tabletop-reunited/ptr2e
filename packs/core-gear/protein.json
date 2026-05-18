@@ -13,18 +13,23 @@
       ]
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "slotless",
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "S",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "consumableType": "restorative",
     "traits": [
       "held",
@@ -33,10 +38,10 @@
       "natural",
       "empowering"
     ],
-    "description": "The target gains +1 ATK IV.",
-    "quantity": 1,
+    "description": "<p>Effect: The user gains +1 ATK IV (this item is treated as being Consumed while Equipped).</p><p>Restriction: Creatures can usually only have 30 ATK IVs.</p>",
+    "quantity": 3,
     "slug": "protein",
-    "stack": 1,
+    "stack": 3,
     "_migration": {
       "version": null,
       "previous": null
@@ -45,10 +50,61 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "O5w85gi0lyKOVWSJ",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Protein",
+      "type": "passive",
+      "_id": "R7XT7yE54xuYPspz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.ivs",
+            "value": "@item.system.quantity",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1771957526850,
+        "modifiedTime": 1771957565102,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "Y7AqrGYTyQ9I1vPu"
 }

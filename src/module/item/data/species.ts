@@ -196,7 +196,7 @@ class SpeciesSystem extends SpeciesExtension {
         }
       ),
       skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
-        initial: getInitialSkillList,
+        initial: () => Object.values(getInitialSkillList()),
       }),
       moves: new fields.SchemaField({
         levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
@@ -239,7 +239,7 @@ class SpeciesSystem extends SpeciesExtension {
   }
 
   static override migrateData(source: SpeciesSystem['_source']) {
-    if (source.abilities) {
+    if (source?.abilities) {
       for (const abGroup of Object.keys(source.abilities)) {
         source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
           if (typeof g == "object") return g;
@@ -248,7 +248,7 @@ class SpeciesSystem extends SpeciesExtension {
       }
     }
     //@ts-expect-error - Old typing
-    if (!Array.isArray(source.movement) && (source.movement.primary?.length || source.movement.secondary?.length)) {
+    if (!Array.isArray(source.movement) && (source.movement?.primary?.length || source.movement?.secondary?.length)) {
       //@ts-expect-error - Old typing
       source.movement = [...Array.from(source.movement.primary ?? []), ...Array.from(source.movement.secondary ?? [])].filter(m => !!m)
     }
@@ -445,10 +445,22 @@ class SpeciesSystem extends SpeciesExtension {
     return evolutions;
   }
 
+  async getSpeciesArt(isShiny = this.shiny): Promise<ImageFilePath> {
+    if (!["icons/svg/mystery-man.svg", "systems/ptr2e/img/icons/species_icon.webp"].includes(this.parent.img)) return this.parent.img as ImageFilePath;
+    const config = game.ptr.data.artMap.get(this.slug);
+    if(!config) return this.parent.img as ImageFilePath;
+    const resolver = await ImageResolver.createFromSpeciesData({
+      dexId: this.number,
+      shiny: isShiny,
+      forms: this.form ? this.form.split("-") : [],
+    }, config);
+    return (resolver?.result ?? this.parent.img) as ImageFilePath;
+  }
+
   private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<DeepPartial<PerkPTR2e['_source']>> {
 
     const img = await (async () => {
-      const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
+      const species = await fu.fromUuid<SpeciesPTR2e>(evolution.uuid);
       if (!species) return this.parent?.img ?? `systems/ptr2e/img/icons/species_icon.webp`;
 
       const config = game.ptr.data.artMap.get(species.slug);
@@ -517,7 +529,16 @@ class SpeciesSystem extends SpeciesExtension {
     } as EvolutionData;
     if (!evolutions.uuid) evolutions.uuid = (this.parent.flags?.core?.sourceId || this.parent._stats.compendiumSource) ?? this.parent.uuid;
 
+    const packs = game.settings.get("ptr2e", "compendiumBrowserPacks")?.species ?? {};
+    const sources = Object.values(game.settings.get("ptr2e", "compendiumBrowserSources")?.sources ?? {});
+
     for await (const [evolution, depth] of recursiveEvolution(evolutions)) {
+      // Check if Evolution should be loaded
+      const species = await fu.fromUuid<SpeciesPTR2e>(evolution.uuid);
+      if (!species) continue;
+      if(species.pack && packs[species.pack]?.load === false) continue;
+      if(species.system.publication?.source && sources.find(s => s && s.name === species.system.publication.source)?.load === false) continue;
+
       const data = await this.createEvolutionPerk(evolution, isShiny);
       (data.flags!.ptr2e!.evolution as Record<string, unknown>).tier = depth;
 

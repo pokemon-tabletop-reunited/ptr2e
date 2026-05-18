@@ -9,26 +9,22 @@
       {
         "name": "Quick And The Dead",
         "slug": "quick-and-the-dead",
-        "description": "<p>All of your Combat Actions gain @Trait[priority-1] or [Priority +1].</p>",
+        "description": "<p>The user's Attacks and Generic Actions cause the user to gain @Affliction[advance 10] on use.</p>",
         "traits": [],
         "type": "passive",
         "range": {
           "target": "self",
           "unit": "m",
-          "distance": 0
+          "distance": 10
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0
+          "activation": "free"
         },
-        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
-        "variant": null,
-        "ephemeralVariant": false,
-        "hidden": false
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg"
       }
     ],
     "slug": "quick-and-the-dead",
-    "description": "<p>All of your Combat Actions gain @Trait[priority-1] or [Priority +1].</p>",
+    "description": "<p>The user's Attacks and Generic Actions cause the user to gain @Affliction[advance 10] on use.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -38,6 +34,10 @@
     },
     "nodes": [
       {
+        "x": 70,
+        "y": 182,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "skirmish",
           "run-down",
@@ -46,18 +46,11 @@
           "lucky-duck"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#008000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 70,
-        "y": 182,
         "tier": null
       }
     ],
@@ -75,10 +68,7 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    }
   },
   "effects": [
     {
@@ -91,32 +81,43 @@
           {
             "type": "roll-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,
             "affects": "self",
-            "mode": 2,
             "priority": null,
+            "alterations": [],
+            "isFixedChance": true,
             "ignored": false,
-            "alterations": []
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -124,16 +125,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1737661825098,
-        "modifiedTime": 1737661874073,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1764893212423,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2",
         "exportSource": null
       }
     }

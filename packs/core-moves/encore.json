@@ -26,7 +26,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The target's last used attack is @Affliction[choice-locked] 4.</p>",
+        "description": "<p>Effect: The target's last used attack is @Affliction[choice-locked 4].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -56,20 +56,20 @@
           {
             "type": "roll-effect",
             "key": "encore-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.choicelockeditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.choicelockedcond",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 4
+                "value": 4,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -80,13 +80,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

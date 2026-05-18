@@ -12,7 +12,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "contact"
+          "contact",
+          "basic"
         ],
         "range": {
           "target": "creature",
@@ -28,7 +29,7 @@
         ],
         "category": "status",
         "accuracy": 90,
-        "description": "<p>Effect: On hit, the target gains @Affliction[poison] 5.</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[poison 5].</p>",
         "predicate": []
       },
       {
@@ -56,7 +57,7 @@
         "category": "status",
         "accuracy": 90,
         "free": true,
-        "description": "<p>Trigger: The target has @Affliction[poison].</p><p>Effect: On hit, the target gains @Affliction[paralysis] 5.</p>",
+        "description": "<p>Trigger: The target has @Affliction[poison].</p><p>Effect: On hit, the target gains @Affliction[paralysis 5].</p>",
         "predicate": []
       }
     ],
@@ -66,7 +67,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: On hit, the target gains @Affliction[poison] 5. If the target has @Affliction[poison], the target instead gains @Affliction[paralysis] 5.</p>"
+      "notes": "<p>Effect: On hit, the target gains @Affliction[poison 5]. If the target has @Affliction[poison], the target instead gains @Affliction[paralysis 5].</p>"
     },
     "traits": [],
     "_migration": {

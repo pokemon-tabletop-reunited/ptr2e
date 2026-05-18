@@ -17,16 +17,18 @@
         },
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
         "img": "systems/ptr2e/img/svg/water_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to @Affliction[burn]. Allied creatures in range have a 50% chance of being cured of @Affliction[burn] and a 10% chance to gain @Affliction[ringed] 5 at the end of their Activations.</p>",
+    "description": "<p>Effect: The user is immune to @Affliction[burn]. Allied creatures in range have a 50% chance of being cured of @Affliction[burn] and a 10% chance to gain @Affliction[regen 5] at the end of their Activations.</p>",
     "traits": [
       "defensive",
-      "aura"
+      "aura",
+      "partial-automation"
     ],
     "slug": "water-veil",
     "_migration": {
@@ -58,11 +60,11 @@
             "domain": "immunities",
             "toggleable": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,17 +74,14 @@
         ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Effect: The duration of @Affliction[burn] affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their Activations. Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
       "origin": null,
@@ -94,12 +93,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.Rd9wEjxJT1sSjly1.ActiveEffect.IydfTEubnrcEnJvk",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.3.0",
         "createdTime": 1731340457916,
         "modifiedTime": 1731340672549,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "exportSource": null
       }
     }
   ]

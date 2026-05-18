@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -27,10 +32,9 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
-      "fling"
+      "mystery-dungeon"
     ],
-    "description": "All foes in the Room gain @Affliction[fear] 3.",
+    "description": "<p>All foes in the Room gain @Affliction[fear 3].</p>",
     "quantity": 1,
     "slug": "foe-fear-orb",
     "stack": 1,
@@ -42,10 +46,95 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Foe-Fear Orb",
+        "slug": "foe-fear-orb",
+        "description": "<p>All foes in the Room gain @Affliction[fear 3].</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb",
+          "held",
+          "fling"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m",
+          "distance": 10
+        }
+      }
+    ],
+    "ammoType": []
   },
   "_id": "k9gR62byZczNuTYj",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Foe-Fear Orb",
+      "type": "passive",
+      "_id": "TquMpRFAdU3GTxRA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "foe-fear-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758756513648,
+        "modifiedTime": 1758756542135,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

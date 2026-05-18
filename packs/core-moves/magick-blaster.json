@@ -10,7 +10,7 @@
     "publication": {
       "source": "",
       "authors": [],
-      "notes": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>"
+      "notes": ""
     },
     "traits": [],
     "actions": [
@@ -24,7 +24,7 @@
           "adaptable",
           "pulse",
           "missile",
-          "2-strike"
+          "double-strike"
         ],
         "range": {
           "target": "creature",
@@ -33,7 +33,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "types": [
           "untyped"
@@ -42,7 +42,7 @@
         "power": 60,
         "accuracy": 85,
         "predicate": [],
-        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of being @Affliction[delay 20].</p>"
       }
     ],
     "grade": "B"
@@ -59,42 +59,39 @@
           {
             "type": "roll-effect",
             "key": "magick-blaster-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 50,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -20
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinched 20%"
+                "value": -20,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -106,15 +103,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.3KCZGRV9lMmb44FC.ActiveEffect.uM9lEbJS6Ee0AHd9",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.0.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778709223301,
+        "modifiedTime": 1778709223301,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
-  "flags": {},
   "_id": "0QldRXlb3HavAAW3"
 }

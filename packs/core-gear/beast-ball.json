@@ -20,18 +20,24 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "12x Catch Rate modifer if used on a [Ultra Beast] creature. 1x Catch Rate modifer otherwise.",
-    "modifier": 12,
+    "description": "<p>5x Catch Rate modifer if used on a [Ultra Beast] creature. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 5,
     "quantity": 1,
     "slug": "beast-ball",
     "stack": 5,
@@ -43,8 +49,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "iEBm80ZVOLR1CiKc",
   "effects": [],

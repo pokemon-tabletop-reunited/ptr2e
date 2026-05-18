@@ -43,7 +43,7 @@
         "power": 45,
         "accuracy": 90,
         "predicate": [],
-        "description": "<p>Effect: On hit, the target has a 30% chance of losing -2 SPD and CRIT Stages for 5 Activations, and a 50% of gaining @Affliction[slowed] 5 and @Affliction[suppressed] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 30% chance of losing -2 SPD and CRIT Stages for 5 Activations, and a 50% of gaining @Affliction[slowed 5] and @Affliction[suppressed 5].</p>"
       }
     ],
     "grade": "B"
@@ -60,50 +60,38 @@
           {
             "type": "roll-effect",
             "key": "stagnancy-curse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "stagnancy-curse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "stagnancy-curse-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.3BSugEZLheQIiDAk",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.3BSugEZLheQIiDAk",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
-          },
-          {
-            "type": "roll-effect",
-            "key": "stagnancy-curse-attack",
-            "value": 0,
-            "predicate": [],
-            "chance": 50,
-            "affects": "target",
-            "mode": 2,
-            "priority": null,
-            "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -114,13 +102,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

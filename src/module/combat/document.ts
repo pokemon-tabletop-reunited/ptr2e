@@ -33,6 +33,10 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     return this.turns.findIndex((c) => c.id === RoundCombatantSystem.id);
   }
 
+  override prepareDerivedData(): void {
+    if (game.ready && this.combatants.size && !this.turns?.length) this.setupTurns();
+  }
+
   override async rollInitiative(
     maybeIds: string | string[],
     { updateTurn = true }: RollInitiativeOptions = {}
@@ -112,10 +116,45 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       });
       await this.combatant?.onStartActivation();
     }
+    await ActiveEffect.registry.refresh("combatStart", { combat: this });
     return result as this;
   }
 
   override async nextTurn(): Promise<this> {
+    if (!game.user.isGM) {
+      if(!game.settings.get("ptr2e", "player-end-turn-permission")) {
+        ui.notifications.warn("Your GM has disabled the ability for players to end their turn. Please wait for them to end your turn or ask them to enable this setting.");
+        return this;
+      }
+      // if the user isn't a GM, confirm they mean to click end turn.
+      const dialog = game.keyboard.downKeys.has("ShiftLeft") ? true : await foundry.applications.api.DialogV2.prompt<boolean>({
+        window: {title: game.i18n.localize("PTR2E.Dialog.ConfirmEndTurn.Title")},
+        classes: ["center-text"],
+        content: game.i18n.localize("PTR2E.Dialog.ConfirmEndTurn.Content"),
+        ok: {
+          action: "ok",
+          label: "End Turn",
+          callback: () => {
+            return true;
+          }
+        },
+        buttons: [
+          {
+            action: "cancel",
+            label: "Cancel",
+            callback: () => {
+              return false;
+            }
+          }
+        ]
+      })
+      if(!dialog) return this;
+    }
+
+    return await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.nextTurn, { combatId: this.id, combatantId: this.combatant?.id }) as this;
+  }
+
+  public static async handleNextTurn(this: CombatPTR2e): Promise<CombatPTR2e> {
     try {
       const updateData = this._prepareTurnUpdateData();
 
@@ -125,9 +164,6 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         direction: 1,
       });
 
-      // if (!game.user.isGM) {
-      //     return this.update(updateData) as Promise<this>;
-      // } else {
       await this.updateEmbeddedDocuments(
         "Combatant",
         updateData.combatants as EmbeddedDocumentUpdateData[]
@@ -141,8 +177,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             type: "combat",
             flavor: game.i18n.format("PTR2E.Combat.Messages.Round", { round: updateData.round }),
           });
-          for(const combatant of this.combatants) {
-            if(combatant.token) {
+          for (const combatant of this.combatants) {
+            if (combatant.token) {
               combatant.token.registerSpentMovement(true);
             }
           }
@@ -150,8 +186,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         await oldCombatant?.onEndActivation();
         await this.combatant?.onStartActivation();
       }
-      return result as this;
-      // }
+      await ActiveEffect.registry.refresh("turnEnd", { combat: this });
+      return result as CombatPTR2e;
     } catch (error: unknown) {
       ui.notifications.error((error as Error).message);
     }
@@ -221,7 +257,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     }
 
     for (const combatant of this.turns) {
-      if(combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && !combatant.isDefeated) {
+      if (combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && !combatant.isDefeated) {
         combatantUpdateData[combatant._id] = {
           _id: combatant._id,
           initiative: 999,
@@ -300,21 +336,21 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       // Delayed summons go after X amount of other activations, instead of being based on AV.
       // Thus, insert the summon at the correct position in the turn order.
       const delay = (summon.system as SummonCombatantSystem).delay!;
-      if(delay === -2) continue;
+      if (delay === -2) continue;
 
       turns.splice(turns.indexOf(delaySummons[0]), 1);
 
-      if(delay === -1) {
+      if (delay === -1) {
         turns.unshift(summon);
         continue;
       }
 
       let i = 0;
       let validTurns = 0;
-      while(validTurns < delay) {
+      while (validTurns < delay) {
         i++;
 
-        if(i >= turns.length) {
+        if (i >= turns.length) {
           break;
         }
         const nextTurn = turns[i];
@@ -324,7 +360,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         }
         validTurns++;
       }
-      turns.splice(i+1, 0, summon);
+      turns.splice(i + 1, 0, summon);
     }
 
     // Update state tracking
@@ -422,7 +458,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
   protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void {
     super._onDelete(options, userId);
-    if(game.users.activeGM?.id !== game.user.id) return;
+    if (game.users.activeGM?.id !== game.user.id) return;
 
     const participants = this.system.participants;
     for (const uuid of participants) {
@@ -438,7 +474,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
   protected override _onUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<null>, userId: string): void {
     super._onUpdate(changed, options, userId);
-    if(game.users.activeGM?.id !== game.user.id) return;
+    if (game.users.activeGM?.id !== game.user.id) return;
 
     const toDelete = [];
     for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? []) as CombatantPTR2e<this, null, SummonCombatantSystem>[]) {

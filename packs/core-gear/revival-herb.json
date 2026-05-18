@@ -3,7 +3,7 @@
   "img": "systems/ptr2e/img/item-icons/revival herb.webp",
   "type": "consumable",
   "system": {
-    "cost": 10,
+    "cost": 5,
     "crafting": {
       "skill": "medicine",
       "spans": 4,
@@ -17,27 +17,30 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "restorative",
     "traits": [
-      "stack-3",
-      "held",
       "restorative",
       "consumable",
       "natural",
       "healing"
     ],
-    "description": "The target cured of @Affliction[fainted], not accruing @Affliction[weary]. HP is set to Max.",
+    "description": "<p>The target recovers @Tick[16] and reduces their @Affliction[weary] stacks by 1. May not be used in combat.</p>",
     "quantity": 1,
     "slug": "revival-herb",
-    "stack": 3,
+    "stack": 1,
     "_migration": {
       "version": null,
       "previous": null
@@ -46,8 +49,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "TFpBTVjfKyFSa1Uc",
   "effects": [],

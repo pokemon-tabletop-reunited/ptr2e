@@ -1,0 +1,119 @@
+{
+  "folder": "6VDJBcrqVDh5bYtA",
+  "name": "Microphone",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "microphone",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "conventional",
+      "modern",
+      "sci-fi",
+      "mystery-dungeon"
+    ],
+    "actions": [],
+    "description": "<p>The user’s @Trait[sonic] Attacks and Actions have +25% increased EHR.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "accessory",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "steel",
+      "power": 40,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Microphone",
+      "type": "passive",
+      "_id": "qZPtx6WxItaEVJia",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "key": "sonic-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "label": "Microphone",
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 25,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "tW336wGtf26cQcf1"
+}

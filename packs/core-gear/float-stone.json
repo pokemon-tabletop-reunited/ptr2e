@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -35,7 +40,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -43,7 +49,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: The user has its WC reduced by -4.",
+    "description": "<p>Effect: The user's Weight Class is halved.</p>",
     "slug": "float-stone",
     "quantity": 1,
     "identification": {
@@ -63,10 +69,59 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "WYbQdhfgYtndsK42",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Float Stone",
+      "type": "passive",
+      "_id": "fqFRX9kPYlyaM8kw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.weightClass",
+            "value": 0.5,
+            "predicate": [],
+            "ignored": false,
+            "method": 1
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758375057448,
+        "modifiedTime": 1758375130330,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA"
 }

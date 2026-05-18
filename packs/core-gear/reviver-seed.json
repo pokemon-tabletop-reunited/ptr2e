@@ -1,6 +1,6 @@
 {
   "name": "Reviver Seed",
-  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "img": "systems/ptr2e/img/item-icons/miracle%20seed.webp",
   "type": "consumable",
   "system": {
     "cost": 6,
@@ -14,12 +14,17 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "S",
     "fling": {
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "restorative",
@@ -28,10 +33,9 @@
       "consumable",
       "natural",
       "healing",
-      "seed",
-      "held"
+      "seed"
     ],
-    "description": "<p>When you would gain @Affliction[fainted] you may use @UUID[Compendium.ptr2e.core-moves.Item.NlcDvnyup6PzQIoK]{Use} as an Interrupt action to consume this item, when you do, instead of Fainting your HP is set to 50% of its Max. This means you do not gain @Affliction[weary].</p>",
+    "description": "<p>When you would gain @Affliction[fainted] you may @UUID[Compendium.ptr2e.core-moves.Item.NlcDvnyup6PzQIoK]{Use} this item from the Belt as an @Trait[interrupt] action to consume this item.<br><br>Effect: The user recovers @Tick[16] and @Tick[16 pp], and reduces their weary stacks by 1.</p>",
     "quantity": 1,
     "slug": "reviver-seed",
     "stack": 1,
@@ -43,8 +47,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "U9CsilfsbPKJooTy",
   "effects": [],

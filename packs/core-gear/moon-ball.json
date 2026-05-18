@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,10 +35,10 @@
       "stack-5",
       "belt",
       "fling",
-      "hunting-ball"
+      "ball"
     ],
-    "description": "6x Catch Rate modifer if the target's evolutionary line can utilize an Evolutionary Stone or Keepsake to evolve. 1x Catch Rate modifier otherwise.",
-    "modifier": 6,
+    "description": "<p>4x Catch Rate modifer if the target's evolutionary line can utilize an Evolutionary Stone or Keepsake to evolve. 1x Catch Rate modifier otherwise.</p>",
+    "modifier": 4,
     "quantity": 1,
     "slug": "moon-ball",
     "stack": 5,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "Lhsmwu7WE2CzIP7G",
   "effects": [],

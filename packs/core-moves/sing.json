@@ -10,7 +10,8 @@
         "name": "Sing",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "basic"
         ],
         "range": {
           "target": "emanation",
@@ -26,7 +27,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy 5].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -49,7 +50,7 @@
   "effects": [
     {
       "name": "Sing",
-      "type": "affliction",
+      "type": "passive",
       "_id": "pw2CewZ3FZLWQ97p",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -57,13 +58,13 @@
           {
             "type": "roll-effect",
             "key": "sing-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.drowsycondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.drowsycondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -77,13 +78,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

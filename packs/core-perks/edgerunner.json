@@ -7,18 +7,18 @@
   "system": {
     "actions": [],
     "slug": "edgerunner",
-    "description": "<p>For each 4% of Max PP you are missing, your non-@UUID[Compendium.ptr2e.core-moves.struggleattaitem]{Struggle} Attacks gain 1% Power.</p>",
+    "description": "<p>For each 1% of Max PP the user is missing below 50%, the user's non-@UUID[Compendium.ptr2e.core-moves.struggleattaitem]{Struggle} and non-@Trait[fling] Attacks gain +1% Power.</p>",
     "traits": [],
     "prerequisites": [],
-    "cost": 2,
+    "cost": 3,
     "_migration": {
       "version": null,
       "previous": null
     },
     "nodes": [
       {
-        "x": 182,
-        "y": 40,
+        "x": 175,
+        "y": 50,
         "hidden": false,
         "type": "normal",
         "connected": [
@@ -47,7 +47,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -60,18 +61,20 @@
           {
             "type": "percentile-modifier",
             "key": "attack-power",
-            "value": "floor((100-@actor.system.powerPoints.percent)/4)",
+            "value": "max(0,50-@actor.system.powerPoints.percent)",
             "predicate": [
               {
                 "nor": [
                   "attack:slug:struggle",
-                  "attack:original:struggle"
+                  "attack:original:struggle",
+                  "self:action:trait:fling"
                 ]
               }
             ],
-            "mode": 2,
-            "ignored": false,
-            "hideIfDisabled": true
+            "hideIfDisabled": true,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -84,10 +87,12 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
-      "description": "<p>For each 4% of Max PP you are missing, your non-@UUID[Compendium.ptr2e.core-moves.struggleattaitem]{Struggle} Attacks gain 1% Power.</p>",
+      "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -98,13 +103,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1754300144759,
-        "modifiedTime": 1754301768971,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-      }
+        "modifiedTime": 1778025244670,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

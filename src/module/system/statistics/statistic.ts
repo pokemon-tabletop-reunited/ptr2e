@@ -32,16 +32,16 @@ class Statistic extends BaseStatistic {
     data.domains ??= [];
 
     const skillModifier =
-      data.check?.type === "skill-check" && actor.system.skills.has(data.slug)
+      data.check?.type === "skill-check" && actor.system.skills[data.slug]
         ? new ModifierPTR2e({
           slug: data.slug,
           label: data.label,
-          modifier: actor.system.skills.get(data.slug)!.total,
+          modifier: actor.system.skills[data.slug]!.total,
           method: "flat",
         })
         : null;
 
-    if(skillModifier && actor.system.modifiers.skills !== 1 && actor.system.skills.has(data.slug)) {
+    if(skillModifier && actor.system.modifiers.skills !== 1 && actor.system.skills[data.slug]) {
       const value = Number(actor.system.modifiers.skills);
       if(!isNaN(value) && value !== 1) {
         skillModifier.adjustments.push({
@@ -376,7 +376,7 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
   /** The originating item of this attack, if any */
   item?: ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null;
   /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-  rollMode?: RollMode | "roll";
+  rollMode?: RollMode;
   /** Should the dialog be skipped */
   skipDialog?: boolean;
   // /** Should this roll be rolled twice? If so, should it keep highest or lowest? */

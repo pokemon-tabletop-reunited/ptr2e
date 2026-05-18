@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is immune to the negative effects of Sunny Weather and Dusty Weather. The user takes 25% less damage from Fire-Type attacks while in either Weather. The user takes 25% more damage from Water-Type attacks while in Rainy Weather.</p>",
         "img": "icons/svg/explosion.svg"
@@ -26,7 +27,8 @@
     "description": "<p>Effect: The user is immune to the negative effects of Sunny Weather and Dusty Weather. The user takes 25% less damage from Fire-Type attacks while in either Weather. The user takes 25% more damage from Water-Type attacks while in Rainy Weather.</p>",
     "traits": [
       "defensive",
-      "environ"
+      "environ",
+      "partial-automation"
     ],
     "slug": "arid-adaptation",
     "_migration": {
@@ -37,9 +39,86 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "TGkYRt7J9ntKDy2W",
-  "effects": []
+  "effects": [
+    {
+      "name": "Arid Adaptation",
+      "type": "passive",
+      "_id": "MDVvId3UpNiMn0zP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentile",
+            "value": -25,
+            "predicate": [
+              "effect:summon:sunny-weather"
+            ],
+            "label": "Arid Adaptation (Sun)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentile",
+            "value": -25,
+            "predicate": [
+              "effect:summon:dusty-weather"
+            ],
+            "label": "Arid Adaptation (Dusty)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "water-attack-damage-percentile",
+            "value": 25,
+            "predicate": [
+              "effect:summon:rainy-weather"
+            ],
+            "label": "Arid Adaptation (Rainy)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765240087545,
+        "modifiedTime": 1765240213742,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

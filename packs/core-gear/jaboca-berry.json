@@ -5,7 +5,7 @@
   "system": {
     "cost": 5,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,23 +19,23 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
     "traits": [
-      "restorative",
       "consumable",
       "natural",
-      "healing",
       "berry",
       "fling",
-      "held",
-      "bitter-7",
-      "sour-1",
       "combat"
     ],
-    "description": "Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2], causing the attacking creature to lose 3 Ticks of HP.",
+    "description": "<p>Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt], causing the attacking creature to lose @Tick[-3].</p>",
     "quantity": 1,
     "slug": "jaboca-berry",
     "stack": 1,
@@ -47,10 +47,94 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Jaboca Berry",
+        "slug": "jaboca-berry-action-1",
+        "description": "<p>Effect: When the user is damaged by a Physical-Category attack, this item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt], causing the attacking creature to lose @Tick[-3].</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "berry",
+          "fling",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/jaboca berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "GS4iA0Bz19Mab6Zg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Jaboca Berry",
+      "type": "passive",
+      "_id": "peq5CxgOAFZPlPDu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "jaboca-berry-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -3,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.Rmp9cDtLcTuRuf9x.ActiveEffect.N0vLanHTvK1vmCcE",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758641766193,
+        "modifiedTime": 1758641783739,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }

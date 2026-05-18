@@ -73,12 +73,11 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -89,7 +88,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -98,12 +98,11 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
@@ -114,7 +113,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -125,13 +125,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -27,10 +32,10 @@
       "combat",
       "consumable",
       "wonder-orb",
-      "held",
-      "fling"
+      "fling",
+      "pierce"
     ],
-    "description": "The user's next use of Fling has a range of \"Xm Line\", rather than \"Xm\".",
+    "description": "<p>The user's next use of Fling has a range of \"Xm Line\", rather than \"Xm\" and the @Trait[pierce] trait.</p>",
     "quantity": 1,
     "slug": "pierce-orb",
     "stack": 1,
@@ -42,8 +47,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "p5SQ39cJ4Wsd0KG9",
   "effects": [],

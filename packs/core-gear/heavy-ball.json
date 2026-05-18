@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,9 +35,9 @@
       "stack-5",
       "belt",
       "fling",
-      "hunting-ball"
+      "ball"
     ],
-    "description": "<p>0.75x Catch Rate modifier if used on a creature WC 7 or lower.c1x Catch Rate modifier on WC 8-9.<br>3x Catch Rate modifier on WC 9-11.<br>x5 Catch Rate modifier on WC 11-14.<br>x7 Catch Rate modifer on WC 15-16.</p>",
+    "description": "<p>-0.5x on WC 7 or lower<br>+1.25x on WC 9-11<br>+2.5x on WC 11-14<br>+4x on WC 15-16</p>",
     "modifier": 0.75,
     "quantity": 1,
     "slug": "heavy-ball",
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "Rjl9DyuksMUjeXkB",
   "effects": [],

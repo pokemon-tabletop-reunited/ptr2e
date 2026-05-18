@@ -249,12 +249,12 @@ export class ActorSheetV2Expanded<
 
     const effectData = effect.toObject();
     if ('amount' in data && !isNaN(Number(data.amount))) {
-      if(effect.type === "advancement") {
+      if (effect.type === "advancement") {
         effectData.system.amount = Number(data.amount);
       }
       else {
         if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-        effectData.duration.turns = Number(data.amount);
+        effectData.duration.value = Number(data.amount);
       }
     }
 
@@ -413,8 +413,12 @@ export class ItemSheetV2Expanded<
   DocumentSheetConfigurationExpanded
 > {
   static override DEFAULT_OPTIONS: Omit<Partial<DocumentSheetConfigurationExpanded>, "uniqueId"> = {
-      dragDrop: [],
-    };
+    dragDrop: [],
+  };
+
+  get _dragDrop() {
+    return (this._dragDropHandlers ??= this._createDragDropHandlers())[0];
+  }
 
   protected _dragDropHandlers: DragDrop[];
 
@@ -422,15 +426,10 @@ export class ItemSheetV2Expanded<
     return this.document;
   }
 
-  constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
-    super(options);
-
-    this._dragDropHandlers = this._createDragDropHandlers();
-  }
-
   override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
     super._onRender(context, options);
 
+    if(!this._dragDropHandlers) this._dragDropHandlers = this._createDragDropHandlers();
     // Attach drag-and-drop handlers
     this._dragDropHandlers.forEach((handler) => handler.bind(this.element));
 
@@ -613,12 +612,12 @@ export class ItemSheetV2Expanded<
 
     const effectData = effect.toObject();
     if ('amount' in data && !isNaN(Number(data.amount))) {
-      if(effect.type === "advancement") {
+      if (effect.type === "advancement") {
         effectData.system.amount = Number(data.amount);
       }
       else {
         if (effectData.system.stacks) effectData.system.stacks = Number(data.amount);
-        effectData.duration.turns = Number(data.amount);
+        effectData.duration.value = Number(data.amount);
       }
     }
 
@@ -634,7 +633,7 @@ export class ItemSheetV2Expanded<
     const source = effect.toObject();
     if (source.type === "summon") {
       // Attempt a best-effor conversion.
-      source.type = source.system.formula || source.duration.turns ? "affliction" : "passive";
+      source.type = source.system.formula || source.duration.value ? "affliction" : "passive";
     }
     return ActiveEffectPTR2e.create(source, { parent: this.document });
   }

@@ -1,0 +1,118 @@
+{
+  "name": "Clobbering",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "clobbering",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Clobbering",
+        "slug": "clobbering",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg",
+        "traits": [
+          "5-strike",
+          "hammer"
+        ],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target is @Affliction[delay 30].</p>",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "power": 25,
+        "accuracy": 95
+      }
+    ],
+    "grade": "C"
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Clobbering",
+      "type": "passive",
+      "_id": "xtwTcQxiq5oGIxrB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "clobbering-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -30,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "createdTime": 1778796538130,
+        "modifiedTime": 1778796538130
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ],
+  "_id": "IEOcinoKU5KhABiT"
+}

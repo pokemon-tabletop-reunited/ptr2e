@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,7 +35,7 @@
       "stack-5",
       "belt",
       "fling",
-      "hunting-ball"
+      "ball"
     ],
     "description": "4x Catch Rate modifier if the target's base speed is greater than 100. 1x Catch Rate modifier otherwise.",
     "modifier": 4,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "8YGA6mOsuB2s0pIz",
   "effects": [],

@@ -14,14 +14,17 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user's Base DEF and SPDEF are increased by 50%. The user's default EVA is decreased by -2.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's Base DEF and SPDEF are increased by 50%. The user's default EVA is decreased by -2.</p>",
-    "traits": [],
+    "description": "<p>Effect: The user takes -40% damage from Physical-Category Moves and -20% damage from Special-Category Moves, and has -20% SPD. Attacks targeting the user have +10 Accuracy.</p>",
+    "traits": [
+      "defensive"
+    ],
     "slug": "lead-jacket",
     "_migration": {
       "version": null,
@@ -45,48 +48,64 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.battleStats.evasion.stage",
-            "value": -2,
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -40,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -20,
+            "phase": "initial",
+            "predicate": [],
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           },
           {
             "type": "basic",
-            "key": "system.attributes.def.base",
-            "value": 1.5,
-            "mode": 1,
+            "key": "system.attributes.spe.base",
+            "value": 0.8,
             "predicate": [],
             "priority": null,
+            "method": 1,
+            "phase": "initial",
             "ignored": false
           },
           {
-            "type": "basic",
-            "key": "system.attributes.spd.base",
-            "value": 1.5,
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": 10,
             "predicate": [],
-            "mode": 1,
             "priority": null,
-            "ignored": false
+            "method": 1,
+            "phase": "initial",
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
-        "traits": [],
+        "traits": [
+          "defensive"
+        ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -98,13 +117,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1729468218737,
-        "modifiedTime": 1744317467355,
-        "lastModifiedBy": "0n86nYgSGphC6dEA"
-      }
+        "modifiedTime": 1778017885763,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

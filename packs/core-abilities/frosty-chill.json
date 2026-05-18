@@ -17,11 +17,11 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Effect: The user's [Contact] attacks have a 20% chance of inflicting @Affliction[frostbite] 5.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's [Contact] attacks have a 30% chance of inflicting @Affliction[frostbite 5].</p>",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user's [Contact] attacks have a 20% chance of inflicting @Affliction[frostbite] 5.</p>",
+    "description": "<p>Effect: The user's [Contact] attacks have a 30% chance of inflicting @Affliction[frostbite 5].</p>",
     "traits": [],
     "slug": "frosty-chill",
     "_migration": {
@@ -32,7 +32,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "c9pxwKHv7Ss9gZit",
@@ -47,13 +48,17 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
             "predicate": [],
             "label": "Frosty Chill",
-            "chance": 20,
+            "chance": 30,
             "affects": "target",
-            "mode": 2,
             "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
             "ignored": false
           }
         ],
@@ -61,17 +66,16 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -83,13 +87,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737570368956,
-        "modifiedTime": 1737570390236,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778687834640,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

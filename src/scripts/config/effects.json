@@ -29,7 +29,9 @@
     "img": "systems/ptr2e/img/conditions/burned.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -37,7 +39,7 @@
           "type": "basic",
           "key": "system.attributes.atk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -59,7 +61,9 @@
     "img": "systems/ptr2e/img/conditions/poisoned.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -67,7 +71,7 @@
           "type": "basic",
           "key": "system.attributes.spa.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -94,7 +98,7 @@
           "type": "basic",
           "key": "system.attributes.spa.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -117,7 +121,9 @@
     "img": "systems/ptr2e/img/conditions/paralysis.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -126,7 +132,7 @@
           "key": "system.attributes.spe.value",
           "value": 0.5,
           "predicate": [],
-          "mode": 1,
+          "method": 1,
           "priority": null,
           "ignored": false
         },
@@ -136,14 +142,14 @@
         },
         {
           "type": "roll-effect",
-          "label": "Paralysis Taze Check",
+          "label": "Paralysis Tased Check",
           "key": "attack",
           "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
           "chance": 25,
           "affects": "self",
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "effects.0.duration.turns",
               "value": 2
             }
@@ -168,7 +174,9 @@
     "img": "systems/ptr2e/img/conditions/sleep.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -181,7 +189,7 @@
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -191,6 +199,7 @@
       "traits": [
         "sleep",
         "major-affliction",
+        "attention",
         "control"
       ]
     },
@@ -202,7 +211,9 @@
     "img": "systems/ptr2e/img/conditions/bad-sleep.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -211,7 +222,7 @@
           "key": "damaging-attack-power",
           "value": -50,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "ignored": false,
           "hideIfDisabled": false
         },
@@ -220,7 +231,7 @@
           "key": "system.attributes.spd.stage",
           "value": -1,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "ignored": false
         },
         {
@@ -230,7 +241,7 @@
           "predicate": [],
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "duration.turns",
               "value": 10
             }
@@ -239,7 +250,7 @@
             "grantee": "detach",
             "granter": "cascade"
           },
-          "mode": 2,
+          "method": 2,
           "ignored": false,
           "reevaluateOnUpdate": false,
           "inMemoryOnly": false,
@@ -273,7 +284,9 @@
       }
     },
     "duration": {
-      "turns": 1
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 1
     },
     "system": {
       "changes": [
@@ -281,14 +294,14 @@
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spe.value",
           "value": 1.5,
           "predicate": [],
-          "mode": 1,
+          "method": 1,
           "priority": null,
           "ignored": false
         },
@@ -296,7 +309,7 @@
           "type": "basic",
           "key": "system.attributes.spe.stage",
           "value": 1,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -317,7 +330,9 @@
     "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -325,7 +340,7 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -342,52 +357,83 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
   },
   {
+    "id": "desync",
+    "name": "PTR2E.Effect.Statuses.Labels.desync",
+    "img": "icons/svg/portal.svg",
+    "type": "affliction",
+    "system": {
+      "changes": [
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects.Item.desynccondititem",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "dontMerge": false
+        }
+      ],
+      "priority": 30,
+      "formula": "(1/16 * @stacksToRemove)",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "major-affliction",
+        "dot"
+      ],
+      "stacks": 1
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.desync"
+  },
+  {
     "id": "splinter",
     "name": "PTR2E.Effect.Statuses.Labels.splinter",
     "img": "icons/svg/oak.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
-          {
-            "type": "grant-effect",
-            "value": "stunted",
-            "key": "",
-            "predicate": [],
-            "alterations": [],
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "mode": 2,
-            "ignored": false,
-            "reevaluateOnUpdate": false,
-            "inMemoryOnly": false,
-            "allowDuplicate": true,
-            "track": false,
-            "replaceSelf": false
-          },
-          {
-            "type": "roll-effect",
-            "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
-            "predicate": [],
-            "chance": 100,
-            "isFixedChance": true,
-            "affects": "defensive",
-            "alterations": [],
-            "dontMerge": false,
-            "mode": 2,
-            "ignored": false
-          }
-        ],
+        {
+          "type": "roll-effect",
+          "key": "damaging-attack",
+          "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+          "predicate": [],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "defensive",
+          "alterations": [],
+          "dontMerge": false,
+          "method": 2,
+          "ignored": false
+        },
+        {
+          "type": "roll-effect",
+          "label": "Splinter Bleed Check",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
+          "chance": 15,
+          "affects": "self",
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "effects.0.duration.turns",
+              "value": 2
+            }
+          ]
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
+        "rock",
         "major-affliction"
       ]
     },
@@ -399,7 +445,9 @@
     "img": "systems/ptr2e/img/conditions/slowed.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -420,7 +468,9 @@
     "img": "systems/ptr2e/img/conditions/blindness.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -428,7 +478,7 @@
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -448,14 +498,22 @@
     "img": "icons/svg/unconscious.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
         {
-          "type": "flat-modifier",
-          "key": "skill-check",
-          "value": -10
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": -15,
+          "predicate": [],
+          "label": "Hindered",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "formula": null,
@@ -474,7 +532,9 @@
     "img": "icons/svg/paralysis.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -495,16 +555,31 @@
     "img": "systems/ptr2e/img/conditions/confused.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": -10,
+          "predicate": [],
+          "label": "Confusion (RES)",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": [
-        "minor-affliction"
+        "minor-affliction",
+        "attention"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.confused"
@@ -523,7 +598,7 @@
           "predicate": [],
           "replaceSelf": true,
           "allowDuplicate": false,
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "reevaluateOnUpdate": false,
@@ -542,7 +617,7 @@
           "predicate": [],
           "replaceSelf": true,
           "allowDuplicate": false,
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "reevaluateOnUpdate": false,
@@ -559,19 +634,45 @@
           "key": "attack-damage-percentile",
           "value": 15,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
         },
         {
           "type": "percentile-modifier",
-          "key": "all-damage",
+          "key": "attack-damage",
           "value": 15
-        }
+        },
+        {
+          "type": "stage-modifier",
+          "key": "shadow-trait-attack-crit",
+          "value": 2,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-effect",
+          "key": "shadow-trait-attack",
+          "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga.ActiveEffect.4FLjKp9nBo2bfPia",
+          "predicate": [],
+          "affects": "self",
+          "alterations": [
+            {
+              "method": 5,
+              "property": "system.changes.0.value",
+              "value": 30
+            }
+          ],
+  "method": 2,
+  "ignored": false
+}
       ],
       "traits": [
-        "minor-affliction"
+        "minor-affliction",
+        "attention"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.hyper-mode"
@@ -588,17 +689,39 @@
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
-          "mode": 2
+          "method": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": "10-20*@effect.system.stacks",
+          "predicate": [],
+          "label": "Weary (EHR)",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "10-15*@effect.system.stacks",
+          "predicate": [],
+          "label": "Weary (RES)",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "traits": [
-        "pseudo-affliction"
+        "minor-affliction"
       ],
       "stacks": 1,
       "removeAfterCombat": false
@@ -611,7 +734,19 @@
     "img": "icons/svg/hazard.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "-15",
+          "predicate": [],
+          "label": "Exposed",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
       "traits": [
         "minor-affliction"
       ],
@@ -625,7 +760,9 @@
     "img": "systems/ptr2e/img/conditions/stuck.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -643,7 +780,7 @@
           "replaceSelf": true,
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "effects.0.duration.turns",
               "value": "{effect|duration.turns}"
             }
@@ -681,7 +818,9 @@
     "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -693,7 +832,7 @@
           "type": "basic",
           "key": "system.attributes.eva.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -715,7 +854,9 @@
     "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -727,7 +868,7 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -749,7 +890,9 @@
     "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -757,7 +900,7 @@
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -779,7 +922,9 @@
     "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -787,7 +932,7 @@
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -809,7 +954,9 @@
     "img": "systems/ptr2e/img/svg/shadow_icon.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -817,13 +964,13 @@
           "type": "basic",
           "key": "system.battleStats.atk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.spatk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         }
       ],
       "priority": 30,
@@ -834,6 +981,7 @@
       "traits": [
         "shadow",
         "major-affliction",
+        "attention",
         "dot"
       ]
     },
@@ -845,7 +993,9 @@
     "img": "systems/ptr2e/img/conditions/disabled.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -859,7 +1009,7 @@
           "type": "basic",
           "key": "flags.ptr2e.disableActionOptions.disabled",
           "value": "{effect|flags.ptr2e.choiceSelections.disabled}",
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -868,6 +1018,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -879,7 +1030,9 @@
     "img": "icons/svg/cancel.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -910,14 +1063,16 @@
     "img": "systems/ptr2e/img/conditions/suppressed.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
         {
           "type": "alter-attack",
           "value": 1.5,
-          "mode": 1,
+          "method": 1,
           "property": "pp-cost",
           "definition": []
         }
@@ -928,6 +1083,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -939,7 +1095,9 @@
     "img": "icons/svg/angel.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -955,7 +1113,7 @@
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": -6,
-          "mode": 2
+          "method": 2
         }
       ],
       "formula": null,
@@ -975,7 +1133,9 @@
     "img": "icons/svg/wing.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1001,7 +1161,9 @@
     "img": "icons/svg/daze.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1027,25 +1189,25 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": 2,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spd.stage",
           "value": 2,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.atk.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spa.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "roll-option",
@@ -1066,7 +1228,9 @@
     "img": "systems/ptr2e/img/conditions/tagged.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1079,7 +1243,7 @@
           "key": "all-crit",
           "value": 2,
           "label": "Duel - Duel Partner",
-          "mode": 2,
+          "method": 2,
           "predicate": [
             "target:mark:duel",
             "origin:mark:duel"
@@ -1121,7 +1285,9 @@
     "img": "icons/svg/mole.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1129,7 +1295,7 @@
           "type": "basic",
           "key": "system.attributes.def.stage",
           "value": 1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "percentile-modifier",
@@ -1153,7 +1319,9 @@
     "img": "icons/svg/mage-shield.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1179,7 +1347,9 @@
     "img": "icons/svg/stone-path.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1200,7 +1370,9 @@
     "img": "icons/svg/mountain.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1232,7 +1404,9 @@
     "img": "systems/ptr2e/img/conditions/cursed.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1254,7 +1428,9 @@
     "img": "icons/svg/eye.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1263,7 +1439,7 @@
           "key": "normal-attack",
           "value": "ignore-type-immunity",
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "property": "traits",
@@ -1276,7 +1452,7 @@
           "key": "fighting-attack",
           "value": "ignore-type-immunity",
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "property": "traits",
@@ -1289,7 +1465,7 @@
           "key": "ghost-attack",
           "value": "ignore-type-immunity",
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "property": "traits",
@@ -1314,7 +1490,9 @@
     "img": "icons/svg/target.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1335,10 +1513,35 @@
     "img": "icons/svg/card-hand.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": -20,
+          "predicate": [],
+          "label": "Unlucky (RES)",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": -30,
+          "predicate": [],
+          "label": "Unlucky (EHR)",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1356,7 +1559,9 @@
     "img": "icons/svg/skull.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1377,7 +1582,9 @@
     "img": "icons/svg/invisible.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1397,7 +1604,9 @@
     "img": "icons/svg/door-exit.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
@@ -1407,7 +1616,7 @@
           "value": -40,
           "predicate": [],
           "label": "Attacking a Transient creature.",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1418,7 +1627,7 @@
           "value": -75,
           "predicate": [],
           "label": "Attacking a Transient creature.",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1429,7 +1638,7 @@
           "value": -75,
           "predicate": [],
           "label": "Attacking a non-Transient creature.",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false
         }
@@ -1450,29 +1659,32 @@
     "img": "icons/svg/silenced.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
         {
           "type": "percentile-modifier",
           "key": "attack-power",
-          "value": -33,
+          "value": -25,
           "predicate": [],
-          "label": "Fear - targeting Source",
-          "mode": 2,
+          "label": "Fear",
+          "method": 2,
           "priority": null,
           "ignored": false
         },
         {
           "type": "basic",
-          "key": "system.battleStats.accuracy.stage",
-          "value": -1,
+          "key": "system.modifiers.effectResistance",
+          "value": -15,
           "predicate": [],
-          "label": "Fear - targeting Source",
-          "mode": 2,
+          "label": "Fear (RES)",
+          "method": 2,
           "priority": null,
-          "ignored": false
+          "ignored": false,
+          "hideIfDisabled": false
         }
       ],
       "formula": null,
@@ -1481,6 +1693,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1492,7 +1705,9 @@
     "img": "systems/ptr2e/img/conditions/seeded.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1514,7 +1729,9 @@
     "img": "icons/svg/holy-shield.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1529,12 +1746,14 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.rebound"
   },
   {
-    "id": "ringed",
-    "name": "PTR2E.Effect.Statuses.Labels.ringed",
-    "img": "systems/ptr2e/img/conditions/vortex.svg",
+    "id": "regen",
+    "name": "PTR2E.Effect.Statuses.Labels.regen",
+    "img": "icons/svg/regen.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1547,7 +1766,7 @@
         "minor-affliction"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.ringed"
+    "description": "PTR2E.Effect.Statuses.Descriptions.regen"
   },
   {
     "id": "bleed",
@@ -1555,7 +1774,9 @@
     "img": "icons/skills/wounds/blood-drip-droplet-red.webp",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1577,7 +1798,9 @@
     "img": "systems/ptr2e/img/conditions/rage.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1587,6 +1810,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1598,7 +1822,9 @@
     "img": "systems/ptr2e/img/conditions/infatuated.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [],
@@ -1608,6 +1834,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1619,17 +1846,19 @@
     "img": "icons/svg/terror.svg",
     "type": "affliction",
     "duration": {
-      "turns": 5
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
     },
     "system": {
       "changes": [
         {
           "type": "percentile-modifier",
           "key": "attack-power",
-          "value": -33,
+          "value": -40,
           "predicate": [],
           "label": "Taunt - not targeting Source",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false
         }
@@ -1640,6 +1869,7 @@
       "removeAfterCombat": true,
       "traits": [
         "minor-affliction",
+        "attention",
         "control"
       ]
     },
@@ -1656,13 +1886,13 @@
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
           "value": -1,
-          "mode": 2
+          "method": 2
         },
         {
           "type": "grant-item",
@@ -1715,7 +1945,9 @@
     "img": "icons/svg/fire-shield.svg",
     "type": "affliction",
     "duration": {
-      "turns": 2
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 2
     },
     "system": {
       "changes": [
@@ -1724,7 +1956,7 @@
           "key": "attack-damage-percentile",
           "value": -20,
           "predicate": [],
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1744,17 +1976,19 @@
     "img": "icons/svg/light.svg",
     "type": "affliction",
     "duration": {
-      "turns": 2
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 2
     },
     "system": {
       "changes": [
         {
           "type": "percentile-modifier",
           "key": "attack-damage-percentile",
-          "value": 20,
+          "value": 25,
           "predicate": [],
           "label": "Boosted",
-          "mode": 2,
+          "method": 2,
           "priority": null,
           "ignored": false,
           "hideIfDisabled": false
@@ -1767,6 +2001,70 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.boosted"
+  },
+  {
+    "id": "hale",
+    "name": "PTR2E.Effect.Statuses.Labels.hale",
+    "img": "icons/svg/ice-shield.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": 10,
+          "predicate": [],
+          "label": "Hale",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.hale"
+  },
+  {
+    "id": "argute",
+    "name": "PTR2E.Effect.Statuses.Labels.argute",
+    "img": "icons/svg/card-hand.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 2
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": 25,
+          "predicate": [],
+          "label": "Argute",
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.argute"
   },
   {
     "id": "loafing",
@@ -1785,19 +2083,19 @@
           "type": "basic",
           "key": "system.modifiers.skills",
           "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.attributes.spe.stage",
           "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "alter-attack",
           "key": "all",
           "value": "1+((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.30))",
-          "mode": 1,
+          "method": 1,
           "definition": [],
           "property": "pp-cost"
         },
@@ -1818,7 +2116,7 @@
           "type": "basic",
           "key": "system.modifiers.movement",
           "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
-          "mode": 2
+          "method": 2
         },
         {
           "type": "grant-effect",
@@ -1831,12 +2129,12 @@
           },
           "alterations": [
             {
-              "mode": 5,
+              "method": 5,
               "property": "type",
               "value": "passive"
             },
             {
-              "mode": 5,
+              "method": 5,
               "property": "duration.turns",
               "value": 0
             }

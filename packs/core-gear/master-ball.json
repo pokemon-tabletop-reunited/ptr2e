@@ -4,7 +4,7 @@
   "type": "consumable",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -18,13 +18,20 @@
       "type": "untyped",
       "power": 0,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "unique",
     "consumableType": "pokeball",
     "traits": [
       "belt",
-      "fling"
+      "fling",
+      "ball",
+      "danger-close"
     ],
     "description": "Will catch any Pokemon without fail. This item cannot miss.",
     "modifier": 999,
@@ -39,8 +46,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "mxks7lB2rkG3Uedl",
   "effects": [],

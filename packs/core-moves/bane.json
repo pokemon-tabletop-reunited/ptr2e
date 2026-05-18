@@ -12,7 +12,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[suppressed] 5 and @Affliction[splinter] 5.</p>"
+      "notes": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[suppressed 5] and @Affliction[splinter 5].</p>"
     },
     "traits": [],
     "actions": [
@@ -41,7 +41,7 @@
         "power": 35,
         "accuracy": 85,
         "predicate": [],
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[suppressed] 5 and @Affliction[splinter] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[suppressed 5] and @Affliction[splinter 5].</p>"
       }
     ],
     "grade": "C"
@@ -58,26 +58,26 @@
           {
             "type": "roll-effect",
             "key": "bane-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "bane-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.suppressedcondit",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -88,13 +88,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

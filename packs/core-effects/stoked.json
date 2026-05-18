@@ -25,10 +25,9 @@
       "img": "systems/ptr2e/img/svg/fire_icon.svg",
       "type": "affliction",
       "duration": {
-        "turns": 1,
-        "startTime": null,
-        "combat": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "system": {
         "changes": [
@@ -36,10 +35,10 @@
             "type": "percentile-modifier",
             "key": "fire-attack-power",
             "value": 100,
-            "mode": 2,
             "predicate": [],
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "removeOnRecall": true,
@@ -49,7 +48,7 @@
           "pseudo-affliction"
         ],
         "slug": null,
-        "removeAfterAttacking": false,
+        "removeAfterAttacking": true,
         "removeAfterAttacked": false,
         "stacks": 0,
         "priority": 50,
@@ -60,12 +59,12 @@
       "statuses": [],
       "_id": "stokedcondition0",
       "_stats": {
-        "coreVersion": "13.346",
-        "systemId": null,
-        "systemVersion": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
         "createdTime": null,
-        "modifiedTime": 1754225613568,
-        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "modifiedTime": 1765233439611,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
@@ -75,7 +74,7 @@
       "tint": "#ffffff",
       "transfer": true,
       "sort": 0,
-      "flags": {}
+      "showIcon": 2
     }
   ],
   "_id": "stokedcondititem"

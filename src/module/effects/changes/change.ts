@@ -17,7 +17,8 @@ export const CHANGE_MODES = Object.freeze({
   DOWNGRADE: 3,
   UPGRADE: 4,
   OVERRIDE: 5,
-  REMOVE: 6
+  REMOVE: 6,
+  CONCAT: 7
 })
 
 class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<
@@ -31,7 +32,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   get sourceIndex(): number | null {
-    return this.#sourceIndex ?? this.effect.changes.indexOf(this);
+    return this.#sourceIndex ?? this.effect?.changes.indexOf(this);
   }
 
   #sourceIndex: number | null = null;
@@ -56,7 +57,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         actor: this.actor?.name ?? null,
         item: this.item?.name ?? null,
       })
-      : this.effect.name;
+      : this.effect?.name;
   }
 
   static override defineSchema(): ChangeSchema {
@@ -76,7 +77,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         label: "PTR2E.Effect.FIELDS.ChangeValue.label",
         hint: "PTR2E.Effect.FIELDS.ChangeValue.hint",
       }),
-      mode: new fields.NumberField({
+      method: new fields.NumberField({
         integer: true,
         initial: CHANGE_MODES.ADD,
         choices: Object.fromEntries(Object.entries(CHANGE_MODES).map(([k, v]) => [v, k])),
@@ -84,6 +85,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
       }),
       priority: new fields.NumberField({}),
+      phase: new fields.StringField({required: true, blank: false, initial: "initial"}),
 
       // Type field
       type: new fields.StringField({
@@ -121,19 +123,19 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   get effect() {
-    return this.parent.parent;
+    return this.parent?.parent;
   }
   set effect(_) {
     return;
   }
 
   get actor() {
-    return (this.effect.parent && this.effect.targetsActor()) ? this.effect.target : null;
+    return (this.effect?.parent && this.effect?.targetsActor()) ? this.effect?.target : null;
   }
 
   get item() {
     const effect = this.effect;
-    return effect.parent instanceof ItemPTR2e ? effect.parent : null;
+    return effect?.parent instanceof ItemPTR2e ? effect.parent : null;
   }
 
   get slug() {
@@ -141,7 +143,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   protected getReducedLabel(label = this.label): string {
-    return label === this.effect.name ? reduceItemName(label) : label;
+    return label === this.effect?.name ? reduceItemName(label) : label;
   }
 
   /** Include parent effect name & UUID in `DataModel` validation error messages. */
@@ -152,7 +154,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       if (error instanceof foundry.data.validation.DataModelValidationError) {
         const message = error.message.replace(
           /validation errors|Joint Validation Error/,
-          `validation errors on effect ${this.effect.name} (${this.effect.uuid})`
+          `validation errors on effect ${this.effect?.name} (${this.effect?.uuid})`
         );
         console.warn(message);
         return false;
@@ -185,7 +187,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
     const fullMessage = message.join(" ");
     const { name, uuid } = this.effect;
     if (!this.suppressWarnings) {
-      const ruleName = game.i18n.localize(`PTR2E.RuleElement.${this.effect.type}`);
+      const ruleName = game.i18n.localize(`PTR2E.RuleElement.${this.effect?.type}`);
       this.actor?.synthetics.preparationWarnings.add(
         `PTR2e System | ${ruleName} rules element on effect ${name} (${uuid}) failed to validate: ${fullMessage}`
       );
@@ -260,7 +262,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
                 : resolvables[key] ?? this.effect;
 
           if(key === "actor" && prop.match(/skills\.(.*)\.mod/)) {
-            const value = this.actor?.system?.skills?.get(prop.split(".")[1])?.total;
+            const value = this.actor?.system?.skills?.[prop.split(".")[1]]?.total;
             if(value != undefined && !isNaN(value)) return String(value); 
           }
 
@@ -407,7 +409,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
   }
 
   getRollOptions(): string[] {
-    return this.effect.getRollOptions();
+    return this.effect?.getRollOptions();
   }
 }
 

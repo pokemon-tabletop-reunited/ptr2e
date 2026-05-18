@@ -48,7 +48,7 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Trigger: Dusty Weather is active.</p><p>Effect: Effect: The user recovers 11 Ticks of HP and gains @Affliction[resolved] 3</p>",
+        "description": "<p>Trigger: Dusty Weather is active.</p><p>Effect: Effect: The user recovers 11 Ticks of HP and gains @Affliction[resolved 3]</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -79,40 +79,40 @@
           {
             "type": "roll-effect",
             "key": "shore-up-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 11
+                "value": 11,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "shore-up-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.resolvedconditio",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "duration.turns",
-                "value": 3
+                "value": 3,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -125,8 +125,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

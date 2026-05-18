@@ -27,7 +27,7 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of becoming @Affliction[confused] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of becoming @Affliction[confused 5].</p>",
         "img": "systems/ptr2e/img/svg/psychic_icon.svg"
       }
     ],
@@ -47,7 +47,7 @@
   "effects": [
     {
       "name": "Psybeam",
-      "type": "affliction",
+      "type": "passive",
       "_id": "HgXyVpdRMd4vJt3Y",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -55,13 +55,13 @@
           {
             "type": "roll-effect",
             "key": "psybeam-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -75,13 +75,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

@@ -13,12 +13,17 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "steel",
       "power": 40,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "traits": [
@@ -28,14 +33,17 @@
       "autoload",
       "steel",
       "charge-pool-25",
-      "reload-1"
+      "reload-1",
+      "conventional",
+      "modern",
+      "sci-fi"
     ],
     "actions": [
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 35,
         "accuracy": 95,
         "free": true,
@@ -44,64 +52,67 @@
         ],
         "name": "Machine Pistol",
         "slug": "machine-pistol",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 6,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 22,
         "accuracy": 85,
         "free": true,
         "traits": [
           "missile",
-          "7-strike"
+          "7-strike",
+          "firearm"
         ],
         "name": "Machine Pistol (Auto)",
         "slug": "machine-pistol-auto",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 7</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 6,
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 7
+          "activation": "complex"
         },
         "variant": "machine-pistol",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 95,
         "accuracy": 75,
         "free": true,
         "traits": [
           "missile",
-          "dash"
+          "dash",
+          "firearm",
+          "priority-15"
         ],
         "name": "Machine Pistol (Hip Fire)",
         "slug": "machine-pistol-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 4</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -110,11 +121,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "complex"
         },
         "variant": "machine-pistol",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -141,7 +152,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A machine pistol is a handgun that is capable of fully automatic fire, including stockless handgun-style submachine guns.</p>"
+    "description": "<p>A machine pistol is a handgun that is capable of fully automatic fire, including stockless handgun-style submachine guns.</p>",
+    "ammoType": []
   },
   "_id": "f7hfwLFTRLq8Xdq0",
   "effects": [
@@ -158,27 +170,38 @@
             "value": 32,
             "predicate": [],
             "label": "Machine Pistol",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "machine-pistol-hip-fire-attack-damage-flat",
+            "value": 32,
+            "predicate": [],
+            "label": "Hip Fire",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": true,
+        "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -186,17 +209,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.1.3.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1743901856213,
-        "modifiedTime": 1743901915390,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+        "modifiedTime": 1757632077786,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"

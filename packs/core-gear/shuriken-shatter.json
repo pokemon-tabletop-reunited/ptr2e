@@ -1,0 +1,188 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Shuriken (Shatter)",
+  "type": "consumable",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "actions": [],
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "belt",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 35,
+      "accuracy": 60,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 6,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "slug": "shuriken-shatter",
+    "description": "<p>A shuriken is a concealed weapon used by ninja and in martial arts as a distraction tool. Shuriken are also known as throwing stars, or ninja stars, although they were originally constructed in many different shapes. Despite their size, they are capable of extraordinary harm, and were frequently used with modifications and additions for certain tasks. These shuriken are slightly bulkier, but are prone to flaking into sharp shards when hitting targets.</p><p>Fling Effect: On hit, the target has a 15% chance of gaining @Affliction[splinter 5]. On a Critical Hit, the target has a 30% chance of losing @Tick[-1] and a 50% chance of gaining @Affliction[splinter 3].</p>",
+    "traits": [
+      "weapon",
+      "consumable",
+      "fling",
+      "projectile",
+      "ninja",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
+    ],
+    "consumableType": "other",
+    "stack": 6,
+    "cost": 7
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Shuriken (Shatter)",
+      "type": "passive",
+      "_id": "k4IAEMeFp3RL4uSH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "fling-shuriken-shatter-attack",
+            "value": "missile",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-shuriken-shatter-attack",
+            "value": "sharp",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "fling-shuriken-shatter-attack",
+            "value": "priority-10",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-kunai-shatter-attack-damage",
+            "value": 4,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-shuriken-shatter-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
+            "predicate": [],
+            "chance": 15,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-shuriken-shatter-attack-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
+            "predicate": [],
+            "chance": 50,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "fling-shuriken-shatter-attack-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "QKUrFrbBXJtf7Eu9"
+}

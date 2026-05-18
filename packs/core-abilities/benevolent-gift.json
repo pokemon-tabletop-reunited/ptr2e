@@ -14,7 +14,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>",
         "img": "icons/svg/explosion.svg"
@@ -31,9 +32,65 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ne1QgdwhvAXeeaX8",
-  "effects": []
+  "effects": [
+    {
+      "name": "Benevolent Gift",
+      "type": "passive",
+      "_id": "xAQjsF1r1PT5Nf11",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "effect-applied",
+            "value": 0,
+            "predicate": [],
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 2,
+                "method": 2
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765238110436,
+        "modifiedTime": 1765238135402,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

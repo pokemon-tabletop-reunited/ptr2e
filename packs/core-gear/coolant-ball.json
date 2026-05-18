@@ -21,20 +21,24 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
-    "rarity": "rare",
+    "rarity": "uncommon",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
       "fling",
-      "environ-ball",
-      "type-ball"
+      "ball"
     ],
-    "description": "4x Catch Rate modifier on a Nuclear-Type creature, plus 5x Catch Rate with Glowy Weather present. 1x Catch Rate modifer otherwise.",
-    "modifier": 4,
+    "description": "<p>3.5x Catch Rate modifier on a Nuclear-Type creature or with Glowy Weather present. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 3.5,
     "quantity": 1,
     "slug": "coolant-ball",
     "stack": 5,
@@ -46,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "ilpg3PzmA3HCvVzq",
   "effects": [],

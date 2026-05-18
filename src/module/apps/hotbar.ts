@@ -1,10 +1,7 @@
 import { ActorPTR2e, Skill } from "@actor";
-import { SkillsComponent } from "@actor/components/skills-component.ts";
 import { ActionPTR2e, AttackPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { Statistic } from "@system/statistics/statistic.ts";
-import { formatSlug } from "@utils";
 import { ApplicationRenderOptions } from "types/foundry/common/applications/_types.js"
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api/handlebars-application.ts";
 
@@ -18,7 +15,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
       effects: HotbarPTR2e.#onToggleEffects,
       attacks: HotbarPTR2e.#onAttackTab,
       other: HotbarPTR2e.#onOtherTab,
-      skills: HotbarPTR2e.#onSkillsTab,
+      generic: HotbarPTR2e.#onGenericTab,
       "open-actor": async function (this: HotbarPTR2e) {
         if (this.token?.actor) {
           await this.token.actor.sheet.render(true);
@@ -29,7 +26,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
         if (entry?.sheet) {
           await entry.sheet.render(true);
         }
-        if(entry instanceof ActionPTR2e) {
+        if (entry instanceof ActionPTR2e) {
           await entry.item.sheet.render(true);
         }
       }
@@ -72,13 +69,13 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     },
     passives: {
       state: false,
-      active: { icon: "fa-star", tooltip: "PTR2E.TokenPanel.Tabs.passives.active" },
-      inactive: { icon: "fa-star", tooltip: "PTR2E.TokenPanel.Tabs.passives.inactive" }
+      active: { icon: ["fa-solid", "fa-star"], tooltip: "PTR2E.TokenPanel.Tabs.passives.active" },
+      inactive: { icon: ["fa-regular", "fa-star"], tooltip: "PTR2E.TokenPanel.Tabs.passives.inactive" }
     },
     effects: {
       state: false,
-      active: { icon: "fa-star", tooltip: "PTR2E.TokenPanel.Tabs.effects.active" },
-      inactive: { icon: "fa-unlock", tooltip: "PTR2E.TokenPanel.Tabs.effects.inactive" }
+      active: { icon: ["fa-solid", "fa-star"], tooltip: "PTR2E.TokenPanel.Tabs.effects.active" },
+      inactive: { icon: ["fa-regular", "fa-star"], tooltip: "PTR2E.TokenPanel.Tabs.effects.inactive" }
     }
   };
 
@@ -89,12 +86,12 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     if (this._token === value) return;
     this._token = value;
 
-    if(this.token?.actor && !this.token.actor.sheet?.rendered) {
+    if (this.token?.actor && !this.token.actor.sheet?.rendered) {
       this.token.actor.system.registerSpentMovement(this.token);
     }
 
     //@ts-expect-error - Incomplete types
-    this.debouncedRender({ parts: ["left", "hotbar"]});
+    this.debouncedRender({ parts: ["left", "hotbar"] });
   }
 
   debouncedRender = foundry.utils.debounce(this.render.bind(this), 100);
@@ -112,7 +109,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   //     this.element.insertAdjacentElement("beforebegin", currentState);
   //     this.oldState = currentState;
   //   }
-    
+
   //   this.render(options);
   // }
 
@@ -124,7 +121,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   get tab() {
     return this._tab;
   }
-  set tab(value: "slots" | "other" | "skills") {
+  set tab(value: "slots" | "other" | "generic") {
     if (this._tab === value) return;
     this._tab = value;
     // this.noFade = true;
@@ -132,7 +129,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     this.render({ parts: ["left", "hotbar"] });
   }
 
-  private _tab: "slots" | "other" | "skills" = "slots";
+  private _tab: "slots" | "other" | "generic" = "slots";
 
   override async _prepareContext(options: Partial<ApplicationRenderOptions>): Promise<Hotbar.HotbarContext> {
     const context = await super._prepareContext(options);
@@ -140,8 +137,14 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     if (this.token?.actor) {
       const actor = context.actor = this.token.actor;
       context.actions = {
-        passives: actor.actions.passive,
-        generic: [...actor.actions.generic, ...actor.actions.pokeball],
+        passives: actor.actions.passive.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        generic: [...actor.actions.generic, ...actor.actions.pokeball].map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
         slots: Object.values(actor.attacks.actions),
         other: actor.actions.attack.filter(a => a.free)
       };
@@ -167,7 +170,6 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     }
 
     if (partId === "hotbar") {
-      const skills = this.token?.actor ? SkillsComponent.prepareSkillsData(this.token.actor).skills.favourites.flatMap(s => s.skills) : [];
       context.slots = context.slots.map((slot: Hotbar.HotbarSlotData, i) => {
         const index = i + (this.page - 1) * 10;
         if (!this.token?.actor) return slot;
@@ -200,16 +202,16 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
             };
           }
         }
-        else if (this.tab === "skills") {
-          if (index < skills.length) {
-            const skill = skills[index];
+        else if (this.tab === "generic") {
+          if (index < context.actions.generic.length) {
+            const generic = context.actions.generic[index];
             return {
               key: index < 9 ? index + 1 : 0,
-              img: "icons/svg/d20.svg",
-              cssClass: "full skill",
-              tooltip: `Roll ${formatSlug(skill.slug)} (${skill.total > 0 ? `+${skill.total}` : skill.total})`,
-              ariaLabel: `Roll ${formatSlug(skill.slug)} (${skill.total > 0 ? `+${skill.total}` : skill.total})`,
-              skill,
+              img: generic.img ?? null,
+              cssClass: "full action",
+              tooltip: generic.name,
+              ariaLabel: generic.name,
+              action: generic,
               macro: null,
               slot: index + 1
             };
@@ -218,7 +220,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
         return slot;
       });
 
-      if(this.token?.actor) {
+      if (this.token?.actor) {
         context.movement = Object.values(this.token.actor.system.movement).map(m => ({
           css: `${m.available <= 0 ? "capped" : ""} ${m.method}`,
           icon: CONFIG.Token.movement.actions[m.method]?.icon,
@@ -226,7 +228,7 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
           label: CONFIG.Token.movement.actions[m.method]?.label,
           value: m.value,
         }))
-        if(context.movement.length > 4) {
+        if (context.movement.length > 4) {
           context.style = `--footer-width: ${context.movement.length == 5 ? "240" : "290"}px;`;
         }
       }
@@ -333,19 +335,19 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   // }
 
   async updateFooterMovement() {
-    if(!this.token?.actor) return;
+    if (!this.token?.actor) return;
     const element = this.element.querySelector<HTMLDivElement>(`.footer .movement`);
     if (!element) return;
 
-    const state = Flip.getState(element, {props: "color"});
+    const state = Flip.getState(element, { props: "color" });
 
     const context = await this._preparePartContext("hotbar", await this._prepareContext({}), {});
-    const html = await renderTemplate(HotbarPTR2e.PARTS.hotbar.template, context);
+    const html = await foundry.applications.handlebars.renderTemplate(HotbarPTR2e.PARTS.hotbar.template, context);
     const newElement = document.createElement("div");
     newElement.innerHTML = html;
     const newMovement = newElement.querySelector<HTMLDivElement>(`.footer .movement`);
     if (!newMovement) return;
-    
+
     element.innerHTML = newMovement.innerHTML;
 
     Flip.from(state, {
@@ -460,9 +462,9 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
       const attack = fu.fromUuidSync(element.dataset.uuid!) as unknown as AttackPTR2e;
       if (attack) return attack;
     }
-    if (this.tab === "skills" && this.token?.actor) {
-      const skill = this.token.actor.skills[element.dataset.skill!];
-      if (skill) return skill;
+    if (this.tab === "generic" && this.token?.actor) {
+      const generic = fu.fromUuidSync(element.dataset.uuid!) as unknown as ActionPTR2e;
+      if (generic) return generic;
     }
 
     const slot = element.dataset.slot;
@@ -494,10 +496,6 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     if (slot instanceof ActionPTR2e) {
       return void await slot.roll();
     }
-
-    if (slot instanceof Statistic) {
-      return void await slot.roll();
-    }
   }
 
   static async #onAttackTab(this: HotbarPTR2e) {
@@ -510,9 +508,9 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
     this.tab = "other";
   }
 
-  static async #onSkillsTab(this: HotbarPTR2e) {
-    if (this.tab === "skills") return;
-    this.tab = "skills";
+  static async #onGenericTab(this: HotbarPTR2e) {
+    if (this.tab === "generic") return;
+    this.tab = "generic";
   }
 
   /**
@@ -532,8 +530,9 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
       if (!button) continue;
       const remove = config.state ? config.inactive : config.active;
       const add = config.state ? config.active : config.inactive;
-      button.classList.remove(remove.icon);
-      button.classList.add(add.icon);
+      
+      button.classList.remove(...(Array.isArray(remove.icon) ? remove.icon : [remove.icon]));
+      button.classList.add(...(Array.isArray(add.icon) ? add.icon : [add.icon]));
       if (config.state) button.classList.add("active");
       else button.classList.remove("active");
       button.dataset.tooltip = add.tooltip;
@@ -562,15 +561,15 @@ export class HotbarPTR2e extends foundry.applications.ui.Hotbar {
   }
 
   async #onDragStart(event: DragEvent) {
-    const uuid =( event.target as HTMLElement)?.closest<HTMLElement>("[data-uuid]")?.dataset.uuid ?? (event.target as HTMLElement)?.dataset.uuid;
-    if(!uuid) return;
+    const uuid = (event.target as HTMLElement)?.closest<HTMLElement>("[data-uuid]")?.dataset.uuid ?? (event.target as HTMLElement)?.dataset.uuid;
+    if (!uuid) return;
 
     const doc = await fu.fromUuid(uuid);
     if (!doc || !('toDragData' in doc && typeof doc.toDragData === "function")) return;
 
     const dragData = doc.toDragData();
     if (!dragData) return;
-    
+
     event.dataTransfer?.setData("text/plain", JSON.stringify(dragData));
   }
 }
@@ -588,7 +587,7 @@ declare global {
       actor: ActorPTR2e;
 
       actions: {
-        passives: ActorPTR2e["actions"]["passive"];
+        passives: ActionPTR2e[];
         generic: ActionPTR2e[];
         slots: ActorPTR2e["attacks"]["actions"];
         other: AttackPTR2e[]
@@ -605,6 +604,7 @@ declare global {
 
     interface HotbarSlotData {
       attack?: AttackPTR2e | null;
+      action?: ActionPTR2e | null;
       skill?: Skill | null;
     }
   }

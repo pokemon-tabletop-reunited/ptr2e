@@ -6,7 +6,7 @@
     "number": 369,
     "size": {
       "category": "medium",
-      "type": "length",
+      "type": "quad",
       "height": 1,
       "weight": 23.4
     },
@@ -17,6 +17,10 @@
       {
         "type": "swim",
         "value": 8
+      },
+      {
+        "type": "overland",
+        "value": 3
       }
     ],
     "traits": [
@@ -27,7 +31,9 @@
       "deep-diver",
       "fountain",
       "fully-evolved",
-      "jump-1"
+      "jump-1",
+      "fossil",
+      "mouthy"
     ],
     "abilities": {
       "starting": [
@@ -35,23 +41,23 @@
           "slug": "rock-head"
         },
         {
-          "slug": "intimidate"
+          "slug": "swift-swim"
         }
       ],
       "basic": [
         {
-          "slug": "swift-swim"
+          "slug": "growing-tooth"
         },
         {
-          "slug": "growing-tooth"
+          "slug": "sturdy"
         }
       ],
       "advanced": [
         {
-          "slug": "sturdy"
+          "slug": "fossilized"
         },
         {
-          "slug": "fossilized"
+          "slug": "strong-jaw"
         }
       ],
       "master": [
@@ -59,7 +65,7 @@
           "slug": "sea-guardian"
         },
         {
-          "slug": "juggernaut"
+          "slug": "reckless"
         }
       ]
     },
@@ -74,7 +80,7 @@
       },
       {
         "slug": "intimidate",
-        "value": 50,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -115,6 +121,14 @@
       {
         "slug": "negotiation",
         "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychology",
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -532,5 +546,295 @@
     }
   },
   "_id": "8UOxV0dUEyAgwBw9",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Relicanth",
+      "type": "form",
+      "_id": "34P5M2R6X8oaOCa9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-relicanth:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Relicanth Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "ignored": false,
+            "suboptions": [],
+            "state": false,
+            "method": 2
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 55,
+            "def": null,
+            "spa": -10,
+            "spd": 25,
+            "spe": 30,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.movement.overland.value",
+            "value": 9,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.movement.swim.value",
+            "value": 4,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "",
+            "value": "Mud Runner",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "",
+            "value": "Quadrupedal",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "value": 30,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.climb.value",
+            "value": 40,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.conversation.value",
+            "value": 10,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 20,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.listen.value",
+            "value": 25,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.natural-world.value",
+            "value": 10,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.navigate.value",
+            "value": 15,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.negotiation.value",
+            "value": 5,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.psychology.value",
+            "value": 15,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.spot.value",
+            "value": 20,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.stealth.value",
+            "value": 15,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.running.value",
+            "value": 40,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.swim.value",
+            "value": 15,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "system.skills.track.value",
+            "value": 40,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-relicanth:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.f3n7PYbX40yiCnYD",
+            "alterations": [
+              {
+                "property": "system.free",
+                "value": "true",
+                "method": 5
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": true,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1761097571413,
+        "modifiedTime": 1761099380940,
+        "lastModifiedBy": "TbyIzuYafdod1OlX"
+      }
+    }
+  ]
 }

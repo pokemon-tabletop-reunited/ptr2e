@@ -57,7 +57,74 @@
     }
   },
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Tainted Blades",
+      "type": "passive",
+      "_id": "tIbnMrlmtcybWTBh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "tainted-blades",
+            "predicate": [],
+            "domain": "all",
+            "label": "Morgul Blade",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "weapon-trait-attack",
+            "value": "poison",
+            "predicate": [
+              "tainted-blades"
+            ],
+            "ignored": false,
+            "property": "type",
+            "definition": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.qzpbsWBCsiDZlcMD.ActiveEffect.S9NI6JHCCqM3iPYd",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765236904057,
+        "modifiedTime": 1765236930051,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "a2PlmoZ3TeH0i7eV",
   "folder": "8nTJNodaluw5G4Y6"
 }

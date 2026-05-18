@@ -29,7 +29,7 @@
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 60% chance of being Flinched.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 60% chance of being @Affliction[delay 35].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       },
@@ -60,7 +60,7 @@
         "types": [
           "flying"
         ],
-        "description": "<pTrigger: Snowy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 60% chance of being Flinched.</p>",
+        "description": "<pTrigger: Snowy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 60% chance of being @Affliction[delay 50].</p>",
         "variant": "bleakwind-storm",
         "img": "icons/svg/explosion.svg",
         "predicate": []
@@ -76,7 +76,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "4stUbCaYe9XkacsR",
@@ -91,42 +92,39 @@
           {
             "type": "roll-effect",
             "key": "bleakwind-storm-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 60,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -50
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 50%"
+                "value": -50,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -138,13 +136,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737718713006,
-        "modifiedTime": 1737718909961,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778796264931,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

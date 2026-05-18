@@ -31,13 +31,13 @@
         ],
         "category": "status",
         "accuracy": 85,
-        "description": "<p>Trigger: The user used Time Out (Set-Up) as their last Action.</p><p>Effect: On hit, all legal targets gain @Affliction[suppressed 7], @Affliction[hindered 7], @Affliction[unlucky 7], @Affliction[disabled 7] (decided randomly), and @Affliction[nullified 7] (decided randomly) and are Flinched 50%.</p>",
+        "description": "<p>Trigger: The user used Time Out (Set-Up) as their last Action.</p><p>Effect: On hit, all legal targets gain @Affliction[suppressed 7], @Affliction[hindered 7], @Affliction[unlucky 7], @Affliction[disabled 7] (decided randomly), and @Affliction[nullified 7] (decided randomly) and are @Affliction[delay 50].</p>",
         "predicate": []
       },
       {
         "name": "Time Out (Set-Up)",
         "slug": "time-out-set-up",
-        "description": "<p>Effect: The user gains @Affliction[braced 2]. If the user is hit by a Physical or Special-Category Attack before their next Activation, they may use Time Out (Resolution) as a Free Action at [Interrupt 5].</p>",
+        "description": "<p>Effect: The user gains @Affliction[braced 2]. If the user is hit by a Physical or Special-Category Attack before their next Activation, they may use Time Out (Resolution) as a Free Action @Trait[interrupt].</p>",
         "traits": [
           "legendary",
           "set-up",

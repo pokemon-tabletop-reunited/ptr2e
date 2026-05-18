@@ -12,7 +12,7 @@
         "traits": [
           "shield",
           "paradox",
-          "interrupt-6"
+          "interrupt"
         ],
         "range": {
           "target": "self",
@@ -21,13 +21,13 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "trigger": "<p>The user is targeted by a damaging attack that lacks[Interrupt X].</p>"
+          "trigger": "<p>The user is targeted by a damaging attack that lacks@Trait[interrupt].</p>"
         },
         "category": "status",
         "types": [
           "fire"
         ],
-        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the end of the user's next Activation. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has @Trait[contact], the attacker gains @Affliction[burn] 5.</p><p>On resolution, the user gains @Affliction[disabled] 3 on this Attack.</p>",
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the end of the user's next Activation. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has @Trait[contact], the attacker gains @Affliction[burn 5].</p><p>On resolution, the user gains @Affliction[disabled 3] on this Attack.</p>",
         "img": "systems/ptr2e/img/svg/fire_icon.svg",
         "predicate": []
       }

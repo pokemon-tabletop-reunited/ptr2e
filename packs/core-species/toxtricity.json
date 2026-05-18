@@ -641,11 +641,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -654,10 +654,10 @@
             ],
             "key": "electric-attack-power",
             "value": 20,
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "percentile-modifier",
@@ -666,10 +666,10 @@
             ],
             "key": "sonic-trait-attack-power",
             "value": 20,
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -682,12 +682,11 @@
             "reevaluateOnUpdate": true,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -696,7 +695,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,
@@ -752,11 +752,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -765,9 +765,9 @@
             ],
             "key": "system.battleStats.accuracy.stage",
             "value": 1,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -776,9 +776,9 @@
             ],
             "key": "system.battleStats.evasion.stage",
             "value": 1,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -791,12 +791,11 @@
             "reevaluateOnUpdate": true,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -805,7 +804,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "slug": null,

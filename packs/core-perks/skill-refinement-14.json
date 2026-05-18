@@ -8,8 +8,10 @@
     },
     "actions": [],
     "slug": "skill-refinement-14",
-    "description": "<p>The user selects 3 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +10. A Skill may only be increased 3 times with this Perk and cannot be increased past 40 (with the last increase needing to be manually reduced to prevent the Skill from exceeding 40).</p>",
-    "traits": [],
+    "description": "<p>The user gains a +5 increase to a Skill a total of 5 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 40 or more with @Trait[skill-boost] Perks.</p>",
+    "traits": [
+      "skill-boost"
+    ],
     "prerequisites": [],
     "autoUnlock": [],
     "cost": 1,
@@ -46,69 +48,113 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
             "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "sr141",
-            "flag": "skillRefinement"
+            "flag": "skillRefinement",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr141}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr141}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
             "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "sr142",
-            "flag": "skillRefinement"
+            "flag": "skillRefinement",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr142}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr142}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
             "choices": "flags.ptr2e.skillOptions.all",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
             "rollOption": "sr143",
-            "flag": "skillRefinement"
+            "flag": "skillRefinement",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr143}.value",
-            "value": 10,
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr143}.mod",
+            "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.all40",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "sr144",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr144}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "choice-set",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "priority": null,
+            "ignored": true,
+            "choices": "flags.ptr2e.skillOptions.all40",
+            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
+            "adjustName": true,
+            "rollOption": "sr145",
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.sr145}.mod",
+            "value": 5,
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -119,13 +165,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

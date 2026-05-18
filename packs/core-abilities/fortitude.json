@@ -7,14 +7,13 @@
       {
         "traits": [
           "defensive",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Fortitude",
         "slug": "fortitude",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit by a Physical or Special-Category attack.</p>"
         },
         "range": {
@@ -22,7 +21,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user is hit by a Physical or Special-Category attack.</p><p>Effect: The user's SPDEF Stage is increased by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/icons/special_icon.png"
       }
     ],
     "description": "<p>Trigger: The user is hit by a Physical or Special-Category attack.</p><p>Effect: The user's SPDEF Stage is increased by +1 for 5 Activations.</p>",
@@ -54,31 +53,33 @@
           {
             "type": "roll-effect",
             "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.jEX7s3GbbAtzgyS3",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.jEX7s3GbbAtzgyS3",
             "predicate": [],
             "chance": 100,
             "affects": "defensive",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -90,13 +91,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.1.0.beta",
         "createdTime": 1741599149875,
         "modifiedTime": 1741599223998,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

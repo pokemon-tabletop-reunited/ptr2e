@@ -19,11 +19,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user's attacks have a 30% chance to apply @Affliction[blight] 5.</p>",
+        "description": "<p>Effect: The user's attacks have a 30% chance to apply @Affliction[blight 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: Connection - Toxic. The user's attacks have a 30% chance to apply @Affliction[blight] 8.</p>",
+    "description": "<p>Effect: Connection - Toxic. The user's attacks have a 30% chance to apply @Affliction[blight 8].</p>",
     "traits": [
       "legendary",
       "connection"
@@ -59,14 +59,14 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               },
               {
-                "mode": 5,
                 "property": "system.actions.1.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -76,16 +76,16 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.blightcondition0",
             "predicate": [],
             "chance": 30,
             "affects": "target",
@@ -93,8 +93,8 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -107,13 +107,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

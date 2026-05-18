@@ -26,6 +26,7 @@ import { CaptureRoll, CaptureRollCreationData } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
 import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
+import { ActionCost } from "@data";
 
 class CheckPTR2e {
   static async rollPokeball(
@@ -40,8 +41,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
@@ -288,8 +289,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);
@@ -303,13 +304,39 @@ class CheckPTR2e {
       if (!dialog) {
         return null;
       }
+      if (dialog.variantSelected) {
+        context.isChangingVariant = true;
+        return null;
+      }
       context.rollMode = dialog.rollMode ?? context.rollMode;
     }
     else if (!context.skipDialog) {
+      if (game.combat?.started && game.combat.combatant?.actor !== context.actor) {
+        const baseCost = context.attack?.cost?.activation;
+        const actionCost = await foundry.applications.api.DialogV2.prompt<ActionCost>({
+          window: { title: game.i18n.localize("PTR2E.Dialog.OutOfTurnAction.Title") },
+          classes: ["center-text"],
+          content: `<p>${game.i18n.localize("PTR2E.Dialog.OutOfTurnAction.Content")}</p><select class="center-text" name="outofturn"><option value="complex" ${baseCost === "complex" ? "selected" : ""}>Complex Action</option><option value="simple" ${baseCost === "simple" ? "selected" : ""}>Simple Action</option><option value="free" ${baseCost === "free" ? "selected" : ""}>Free Action</option></select>`,
+          ok: {
+            action: "ok",
+            label: "Perform Action as Interrupt",
+            callback: (_event, _button, dialog) => {
+              return dialog?.element?.querySelector<HTMLSelectElement>("select[name='outofturn']")?.value
+            }
+          }
+        })
+        if (!actionCost) return null;
+        context.outOfTurnCost = actionCost;
+      }
+
       // Show dialog for adding/editing modifiers, unless skipped or flat check
       const dialog = await new AttackModifierPopup(check, sharedModifiers, context).wait();
 
       if (!dialog) {
+        return null;
+      }
+      if (dialog.variantSelected) {
+        context.isChangingVariant = true;
         return null;
       }
       context.rollMode = dialog.rollMode ?? context.rollMode;
@@ -359,25 +386,35 @@ class CheckPTR2e {
         ignoreImmune: !!targetContext.options.has("self:action:trait:ignore-type-immunity"),
         targetUnaware: !!targetContext.target?.actor.rollOptions.all["special:unaware"],
         originUnaware: !!targetContext.self.actor.rollOptions.all["special:unaware"],
+        strikes: targetCheck.total.strikes?.flat ?? 0,
+        hits: targetCheck.total.hits?.flat ?? 0,
+        unreliable: context.attack?.traits.has("unreliable") ? {
+          user: targetContext.self.actor.level,
+          target: targetContext.target?.actor.level ?? 0,
+        } : undefined
       };
 
       const rolls: {
         accuracy: Rolled<CheckRoll> | null;
         crit: Rolled<CheckRoll> | null;
         damage: Rolled<CheckRoll> | null;
+        amount: Rolled<CheckRoll> | null;
       } = await (async () => {
-        const [accuracy, crit, damage] = await Promise.all([
+        const [accuracy, crit, amount, damage] = await Promise.all([
           skippedRolls.has("accuracy")
             ? null
             : AttackRoll.createFromData(data, options, "accuracy")?.evaluate() ?? null,
           skippedRolls.has("crit")
             ? null
             : AttackRoll.createFromData(data, options, "crit")?.evaluate() ?? null,
+          skippedRolls.has("amount") || options.strikes == 0
+            ? null
+            : AttackRoll.createFromData(data, options, "amount")?.evaluate() ?? null,
           skippedRolls.has("damage")
             ? null
             : AttackRoll.createFromData(data, options, "damage")?.evaluate() ?? null,
         ]);
-        return { accuracy, crit, damage };
+        return { accuracy, crit, damage, amount };
       })();
 
       const degrees: {
@@ -415,7 +452,7 @@ class CheckPTR2e {
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.target) {
-        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor.system.modifiers.effectResistance }).roll();
+        effectRoll.roll = await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor?.uuid === targetContext.self.actor?.uuid ? 0 : targetContext.target?.actor.system.modifiers.effectResistance }), baseChance: effectRoll.chance, ehr: targetContext.self.actor.system.modifiers.effectHitRate, res: targetContext.target?.actor?.uuid === targetContext.self.actor?.uuid ? 0 : targetContext.target?.actor.system.modifiers.effectResistance }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
       }
       for (const effectRoll of targetContext.effectRolls.defensive) {
@@ -475,24 +512,35 @@ class CheckPTR2e {
         effectRoll.roll ??= await new Roll("1d100ms@dc", { dc: effectRoll.isFixedChance ? effectRoll.chance : this.calculateRealChance({ baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }), baseChance: effectRoll.chance, ehr: context.actor?.system.modifiers.effectHitRate }).roll();
         effectRoll.success = effectRoll.roll.total <= 0;
         if (effectRoll.success) {
-          const item = await fu.fromUuid(effectRoll.effect);
-          if (!item || item.type !== "effect") {
+          const effect = await fu.fromUuid(effectRoll.effect);
+          if (!(effect instanceof ItemPTR2e && effect.type === "effect" || effect instanceof ActiveEffectPTR2e)) {
             console.error(`Failed to find effect item with uuid ${effectRoll.effect}`);
             continue;
           }
 
-          const grantedSource = item.toObject();
+          const grantedSource = effect.toObject();
 
           try {
             for (const alteration of effectRoll.alterations ?? []) {
               alteration.applyTo(grantedSource as ItemSourcePTR2e);
             }
 
-            effectsToApply.push(...grantedSource.effects as ActiveEffectPTR2e['_source'][]);
+            if(effect instanceof ItemPTR2e) effectsToApply.push(...(grantedSource as ItemSourcePTR2e).effects as ActiveEffectPTR2e['_source'][]);
+            else effectsToApply.push(grantedSource as ActiveEffectPTR2e['_source']);
           } catch (error) {
             if (error instanceof Error) console.warn(error);
           }
         }
+      }
+    }
+    if (context.outOfTurnCost && context.outOfTurnCost !== "free") {
+      const effect = await fu.fromUuid<ActiveEffectPTR2e>(`Compendium.ptr2e.core-effects.outofteffectitem.ActiveEffect.outofturneffect0`);
+      if(effect) {
+        const source = effect.toObject();
+        source.name = `Out of Turn Action used (${context.outOfTurnCost === "complex" ? "Complex" : "Simple"})`;
+        source.description = `<p>This actor used an action as an interrupt during combat.</p><p>${context.attack ? `Action used: ${context.attack.link}` : ""}</p>`;
+        source.img = context.outOfTurnCost === "complex" ? "icons/svg/downgrade.svg" : "icons/svg/down.svg";
+        effectsToApply.push(source);
       }
     }
 
@@ -587,8 +635,8 @@ class CheckPTR2e {
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
-    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gmroll" : "blindroll";
-    context.rollMode ??= "roll";
+    if (rollOptions.has("secret")) context.rollMode ??= game.user.isGM ? "gm" : "blind";
+    context.rollMode ??= "public";
 
     if (rollOptions.size > 0 && !context.isReroll) {
       check.calculateTotal(rollOptions);

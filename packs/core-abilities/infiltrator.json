@@ -21,12 +21,16 @@
         "img": "systems/ptr2e/img/perk-icons/Ninja.svg"
       }
     ],
-    "description": "<p>Effect: The user's attacks ignore [Shield] effects.</p>",
+    "description": "<p>Effect: The user's attacks their Damage bypasses any @Trait[shield] effects.</p>",
     "traits": [],
     "slug": "infiltrator",
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.113,
+      "previous": {
+        "schema": null,
+        "foundry": "13.351",
+        "system": "1.5.0.beta"
+      }
     },
     "publication": {
       "source": "PTR 2e Core",
@@ -37,5 +41,58 @@
     }
   },
   "_id": "lwzM23P0sNChuCx6",
-  "effects": []
+  "effects": [
+    {
+      "name": "Infiltrator",
+      "type": "passive",
+      "_id": "LBQF2G59vSzmy9eT",
+      "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "special:ignoresShieldDuringDamage",
+            "predicate": [],
+            "domain": "item",
+            "toggleable": false,
+            "count": false,
+            "ignored": false,
+            "suboptions": [],
+            "state": true,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "<p>Effect: The user's attacks their Damage bypasses any @Trait[shield] effects.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1773828906880,
+        "modifiedTime": 1773829087997,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }

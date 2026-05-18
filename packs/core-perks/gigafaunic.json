@@ -1,0 +1,273 @@
+{
+  "name": "Gigafaunic",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "Neo"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "gigafaunic",
+    "description": "<p>The user’s Base HP increases by +30% (min 10, max 40), their SPD is cut by 15%, their other Stats increase by 10%, and Actions targeting the user have +9 Accuracy.</p><p>Attacks from non-allied creatures that are at least 2 Size Categories smaller than the user deal have -1 CRIT and -15% EHR. The user's Attacks targeting these creatures deal 10% more damage and their @Trait[contact] Attacks targeting these creatures gain @Trait[crushing].</p>",
+    "traits": [],
+    "prerequisites": [
+      "Size: Gigantic or larger"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 145,
+        "y": 31,
+        "connected": [
+          "powerlifter"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "img": "icons/creatures/reptiles/lizard-mouth-glowing-red.webp",
+  "effects": [
+    {
+      "name": "Gigafaunic",
+      "type": "passive",
+      "_id": "hsFxCImPjkxUTy8l",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.hp.base",
+            "value": "max(40,min(10,system.attributes.hp.base * 0.3))",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": 0.85,
+            "predicate": [],
+            "ignored": false,
+            "method": 1
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.1,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.1,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.1,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.1,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": 9,
+            "predicate": [],
+            "label": "Megafaunic (Acc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "generic-accuracy-flat",
+            "value": 9,
+            "predicate": [],
+            "label": "Megafaunic (Acc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "gigafaunic-sizes:active",
+            "predicate": [],
+            "domain": "all",
+            "label": "Attacked/Attacking Creature 2+ Sizes Smaller (Gigafaunic)",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-crit-stage-flat",
+            "value": -1,
+            "predicate": [
+              "gigafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "label": "Gigafaunic (CRIT)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 1
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 10,
+            "predicate": [
+              "gigafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "label": "Gigafaunic (Dmg)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "contact-attack",
+            "value": "crushing",
+            "predicate": [
+              "gigafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "property": "traits",
+            "definition": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "gigafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -15,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "generic",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "gigafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -15,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "RSC2IFEHDG4DWUt5"
+}

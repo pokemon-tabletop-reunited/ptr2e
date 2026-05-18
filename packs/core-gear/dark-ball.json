@@ -16,22 +16,28 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "pokeball",
     "traits": [
       "stack-5",
       "belt",
-      "fling"
+      "fling",
+      "ball"
     ],
-    "description": "8x Catch Rate modifer if used on a [Shadow Pokemon] creature. 1x Catch Rate modifer otherwise.",
-    "modifier": 8,
+    "description": "<p>5x Catch Rate modifer if used on a @Trait[closed-heart] creature. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 5,
     "quantity": 1,
     "slug": "dark-ball",
     "stack": 5,
@@ -43,8 +49,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "rLHED5VHbPkaEqrw",
   "effects": [],

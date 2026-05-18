@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: If the user is affected by the @Affliction[poison] or @Affliction[blight] Affliction, they recover a Tick of HP each turn instead of taking damage.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,9 +36,90 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "KADIorEjEffgkYiT",
-  "effects": []
+  "effects": [
+    {
+      "name": "Poison Heal",
+      "type": "passive",
+      "_id": "moqILxoV4HO2GzpC",
+      "img": "systems/ptr2e/img/conditions/poisoned.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "key": "poison-received",
+            "value": 0,
+            "predicate": [],
+            "alterations": [
+              {
+                "property": "system.formula",
+                "value": "1/16",
+                "method": 5
+              },
+              {
+                "property": "system.type",
+                "value": "healing",
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "effect-alteration",
+            "key": "blight-received",
+            "value": 0,
+            "predicate": [],
+            "alterations": [
+              {
+                "property": "system.formula",
+                "value": "1/16",
+                "method": 5
+              },
+              {
+                "property": "system.type",
+                "value": "healing",
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Scene.c0SiITYjIOu07LDv.Token.UwAREyMY6Jucz0sw.Actor.VOOmH989QaYwky5q.Item.g3hHp2XsuiEcd4Vi.ActiveEffect.pwEnpcGbcU7WgVOI",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1759917400117,
+        "modifiedTime": 1759917400117,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ]
 }

@@ -1,0 +1,156 @@
+{
+  "name": "Kinjutsu 1",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "slug": "kinjutsu-1",
+    "description": "<p>The user learns 2 Moves from the @Trait[ninja] Tutor List and gains an extra Active Move Slot.</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "trait:ninja",
+      {
+        "gte": [
+          "{actor|level}",
+          10
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.research.mod}",
+          50
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "variant": "tiered",
+    "mode": "coexist",
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 183,
+        "y": 42,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "shurikenjutsu",
+          "silence-is-golden"
+        ],
+        "tier": {
+          "rank": 1,
+          "uuid": null
+        },
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 2,
+          "uuid": "Item.8CztyY2bAb4zHSsg"
+        },
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        }
+      },
+      {
+        "x": null,
+        "y": null,
+        "hidden": false,
+        "type": "normal",
+        "connected": [],
+        "tier": {
+          "rank": 3,
+          "uuid": "Item.1nKJujeFmZjyfE53"
+        },
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        }
+      }
+    ]
+  },
+  "img": "icons/magic/unholy/hands-praying-fire-green.webp",
+  "effects": [
+    {
+      "name": "Kinjutsu 1",
+      "type": "passive",
+      "_id": "QGxn3P0KgD1dgWuS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.slots",
+            "value": 1,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "zUVFDmegvWwiOReI"
+}

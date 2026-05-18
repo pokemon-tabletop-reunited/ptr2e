@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-1"
+          "interrupt"
         ],
         "name": "Unburden",
         "slug": "unburden",
@@ -51,15 +51,15 @@
           {
             "type": "roll-effect",
             "key": "unburden-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLZ",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,8 +72,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

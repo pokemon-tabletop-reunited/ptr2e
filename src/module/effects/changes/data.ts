@@ -25,7 +25,7 @@ interface ChangeSchema extends foundry.data.fields.DataSchema {
   /** Value Field, different functionality for each Change Model */
   value: ResolvableValueField<true, false, true>
   /** AE Application Mode, valid values are 0-5. See `CONST.ACTIVE_EFFECT_MODES` */
-  mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+  method: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
   /** Unused Field */
   priority: foundry.data.fields.NumberField;
 
@@ -44,7 +44,7 @@ interface ChangeSchema extends foundry.data.fields.DataSchema {
 interface ChangeSource {
     key: string;
     value: RuleValue;
-    mode: number;
+    method: number;
     priority?: number | null;
     type: string;
     label?: string;

@@ -3,7 +3,65 @@
   "_id": "wC9JojPMQApXtn0X",
   "type": "perk",
   "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Thousand Folded",
+      "type": "passive",
+      "_id": "KBsCc7pG5udIonme",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.b0O4QQ7hMwau5ZcE",
+            "predicate": [],
+            "alterations": [],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1764897251436,
+        "modifiedTime": 1764897268032,
+        "lastModifiedBy": "bDEGyOQfZwkb2ml2"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -17,7 +75,7 @@
       "notes": ""
     },
     "actions": [],
-    "slug": null,
+    "slug": "thousand-folded",
     "description": "<p>The user gains @UUID[Compendium.ptr2e.core-abilities.b0O4QQ7hMwau5ZcE]{Sharpness} as a Tutored Ability.</p>",
     "traits": [
       "sharp",
@@ -30,14 +88,11 @@
       "item:ability:sharpness"
     ],
     "cost": 3,
-    "originSlug": null,
     "design": {
       "arena": "physical",
       "approach": "power",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [

@@ -9,34 +9,36 @@
     },
     "slug": "galarica-wreath",
     "traits": [
-      "galarian",
-      "slowpoke",
-      "slowking",
-      "evolution",
-      "psychic",
-      "worn"
+      "accessory",
+      "held",
+      "evolution"
     ],
     "actions": [],
-    "description": "<p>A wreath made from woven-together Galarica Twigs. Placing it on the head of a Galarian Slowpoke makes the Pokémon very happy.</p><p>Effect: none yet<br><br>Restriction: Only affects [Slowpoke] or [Slowking] Creatures</p>",
+    "description": "<p>Effect: @Trait[poison] creatures’ RES is increased by +15%.<br><br>@UUID[Compendium.ptr2e.core-species.qIlDyPzO4Ui5vqNX]{Slowpoke Galarian} can consume this item to trigger Evolution.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "carryType": "equipped",
-      "handsHeld": null,
-      "slot": "worn"
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "accessory"
     },
-    "grade": "A",
+    "grade": "B",
     "fling": {
-      "type": "grass",
-      "power": 65,
-      "accuracy": 65,
-      "hide": false
+      "type": "poison",
+      "power": 70,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -50,10 +52,65 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "effects": [],
+  "img": "systems/ptr2e/img/item-icons/galarica wreath.webp",
+  "effects": [
+    {
+      "name": "Galarica Wreath",
+      "type": "passive",
+      "_id": "emkRY2uVQhaeOpv4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "predicate": [
+              "trait:poison"
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.7.beta",
+        "createdTime": 1766200965398,
+        "modifiedTime": 1766200995555,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ],
   "_id": "AJTFcM299PV2ae4h"
 }

@@ -53,7 +53,7 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Trigger: The target has @Affliction[poison] or @Affliction[blight].</p><p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5.</p>",
+        "description": "<p>Trigger: The target has @Affliction[poison] or @Affliction[blight].</p><p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison 5].</p>",
         "variant": "barb-barrage",
         "free": true,
         "img": "icons/svg/explosion.svg",
@@ -85,26 +85,26 @@
           {
             "type": "roll-effect",
             "key": "barb-barrage-poisoned-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "barb-barrage-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 50,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -115,13 +115,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

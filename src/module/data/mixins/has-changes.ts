@@ -13,7 +13,6 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
 
       return {
         ...super.defineSchema(),
-
         changes: new fields.ArrayField<ChangesField, foundry.data.fields.SourcePropFromDataField<ChangeModel>[], foundry.data.fields.SourcePropFromDataField<ChangeModel>[], true, false, true>(
           new fields.TypedSchemaField<ModelPropsFromSchema<ChangeSchema>, ChangeModel, true, false, true>(ChangeModelTypes(), { required: true, nullable: false }),
           { required: true, nullable: false, initial: [] }

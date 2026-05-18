@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,10 +35,10 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "ball"
     ],
-    "description": "8x Catch Rate modifer if used on a Pokemon whose Species has already been registered by the user. 1x Catch Rate modifer otherwise.",
-    "modifier": 8,
+    "description": "<p>6x Catch Rate modifer if used on a Pokemon whose Species has already been registered by the user. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 6,
     "quantity": 1,
     "slug": "repeat-ball",
     "stack": 5,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "Cp3thGOpyzYOlDDI",
   "effects": [],

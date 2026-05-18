@@ -25,7 +25,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -43,11 +44,10 @@
         "type": "entry",
         "connected": [
           "root-2",
-          "aura-projection",
           "aura-empathy",
           "aura-haze",
           "sight-beyond-sight",
-          "out-of-options"
+          "aura-projection"
         ],
         "config": {
           "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
@@ -74,7 +74,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "ft8sIBRLOGVjp70g",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
@@ -92,8 +93,8 @@
             "value": "aura-user",
             "predicate": [],
             "priority": null,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -106,13 +107,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain the @Trait[aura-user] Trait.</p>",
       "origin": null,
@@ -124,7 +120,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.4.1.beta",
         "createdTime": 1732233165457,

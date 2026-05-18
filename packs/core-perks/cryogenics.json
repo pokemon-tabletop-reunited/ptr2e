@@ -42,9 +42,6 @@
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -60,5 +57,61 @@
       "notes": ""
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Cryogenics",
+      "type": "passive",
+      "_id": "Ant6Z0i9ZYQ9weu4",
+      "img": "systems/ptr2e/img/svg/ice_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "key": "ice-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [],
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 30,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "<p>Your @Trait[ice] moves gain +30% EHR.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Actor.wTGrvr3ClD8dax9L.Item.IC6CbBg5AiXck0j9.ActiveEffect.zypPt5eZHggpxzHG",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.8.beta",
+        "createdTime": 1766506616769,
+        "modifiedTime": 1766506616769,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }

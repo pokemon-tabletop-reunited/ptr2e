@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's [X-Strike] attacks with X<5 gain [Danger Close], and those that have X>=5 have their hit calculation changed to \"4+d(X-4)\".</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's @Trait[x-strike] attacks hit a number of times guaranteed, up to 5 guaranteed hits.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg"
       }
     ],
-    "description": "<p>Effect: The user's [X-Strike] attacks with X<5 gain [Danger Close], and those that have X>=5 have their hit calculation changed to \"4+d(X-4)\".</p>",
+    "description": "<p>Effect: The user's @Trait[x-strike] attacks hit a number of times guaranteed, up to 5 guaranteed hits.</p>",
     "traits": [],
     "slug": "skill-link",
     "_migration": {
@@ -31,9 +32,60 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "m3NkhaFegGTH5ZuK",
-  "effects": []
+  "effects": [
+    {
+      "name": "Skill Link",
+      "type": "passive",
+      "_id": "7fkhVUCkOVfU5n13",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "strike-trait-attack-hits-flat",
+            "value": 4,
+            "predicate": [],
+            "label": "Skill Link",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1761089867737,
+        "modifiedTime": 1770086186351,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

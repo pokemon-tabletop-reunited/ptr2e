@@ -65,16 +65,18 @@
           {
             "type": "roll-effect",
             "key": "poison-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
-            "predicate": [],
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
             "dontMerge": false,
-            "isFixedChance": false
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -87,13 +89,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Your @Trait[poison] Type Attacks gain +20% chance to inflict @Affliction[poison 5].</p>",
       "origin": null,
@@ -101,16 +98,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1732569045186,
-        "modifiedTime": 1754225441916,
-        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "modifiedTime": 1757798551760,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

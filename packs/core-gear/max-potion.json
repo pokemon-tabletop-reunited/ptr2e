@@ -56,13 +56,12 @@
     },
     "actions": [
       {
-        "name": "Max Potion Action",
+        "name": "Max Potion",
         "slug": "max-potion",
         "description": "<p>The target is healed by @Tick[16].</p>",
         "traits": [
           "stack-3",
           "combat",
-          "held",
           "restorative",
           "consumable",
           "healing"
@@ -74,7 +73,7 @@
         },
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 1,
           "unit": "m"
         }
       }
@@ -92,21 +91,21 @@
           {
             "type": "roll-effect",
             "key": "max-potion-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
             "predicate": [],
             "chance": 100,
             "isFixedChance": true,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.changes.0.value",
-                "value": 16
+                "value": 16,
+                "method": 5
               }
             ],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -119,8 +118,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -133,7 +132,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
         "systemVersion": "1.4.2.beta",
         "createdTime": 1755354545421,

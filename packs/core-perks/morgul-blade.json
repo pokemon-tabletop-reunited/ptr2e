@@ -3,7 +3,74 @@
   "_id": "B6lIBIEfDek67evS",
   "type": "perk",
   "img": "icons/skills/melee/strike-weapon-polearm-ice-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Morgul Blade",
+      "type": "passive",
+      "_id": "Cg0q7KFiw5ARMUGt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "morgul-blade",
+            "predicate": [],
+            "domain": "all",
+            "label": "Morgul Blade",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "alter-attack",
+            "key": "weapon-trait-attack",
+            "value": "ghost",
+            "predicate": [
+              "morgul-blade"
+            ],
+            "ignored": false,
+            "property": "type",
+            "definition": [],
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.qzpbsWBCsiDZlcMD.ActiveEffect.S9NI6JHCCqM3iPYd",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765235625415,
+        "modifiedTime": 1765235678087,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,

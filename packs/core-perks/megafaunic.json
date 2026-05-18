@@ -2,8 +2,233 @@
   "name": "Megafaunic",
   "_id": "IllH59o6IEXItGu1",
   "type": "perk",
-  "img": "icons/magic/control/silhouette-grow-shrink-tan.webp",
-  "effects": [],
+  "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
+  "effects": [
+    {
+      "name": "Megafaunic",
+      "type": "passive",
+      "_id": "63iSdcvFLF2XBot9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.hp.base",
+            "value": "max(25,min(5,system.attributes.hp.base * 0.2))",
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": 0.85,
+            "predicate": [],
+            "ignored": false,
+            "method": 1
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": 0.05,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": 0.05,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": 0.05,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.05,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-accuracy-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Megafaunic (Acc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "generic-accuracy-flat",
+            "value": 6,
+            "predicate": [],
+            "label": "Megafaunic (Acc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "megafaunic-sizes:active",
+            "predicate": [],
+            "domain": "all",
+            "label": "Attacked/Attacking Creature 2+ Sizes Smaller (Megafaunic)",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -10,
+            "predicate": [
+              "megafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "label": "Megafaunic (Dmg)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 1
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 15,
+            "predicate": [
+              "megafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "label": "Megafaunic (Dmg)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-accuracy",
+            "value": 15,
+            "predicate": [
+              "megafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "label": "Megafaunic (Acc)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "megafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -10,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-effect",
+            "key": "generic",
+            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "predicate": [
+              "megafaunic-sizes:active",
+              {
+                "or": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": -10,
+                "method": 5
+              }
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1772806907306,
+        "modifiedTime": 1772810820929,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -12,43 +237,48 @@
     "publication": {
       "source": "PTR2e Core",
       "authors": [
-        "Dragoon"
+        "Neo"
       ],
       "notes": ""
     },
     "actions": [],
-    "slug": null,
-    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;\">The user’s Base HP increases by +20% (min 5, max 20), and take 20% less damage from creatures two or more Size Categories smaller than the user.</span></p>",
+    "slug": "megafaunic",
+    "description": "<p>The user’s Base HP increases by +20% (min 5, max 25), their SPD is cut by 15%, their other Stats increase by 5%, and Actions targeting the user have +6 Accuracy.</p><p>Attacks from non-allied creatures that are at least 2 Size Categories smaller than the user deal 15% less damage and have -10% EHR. The user's Attacks targeting these creatures have +15% Accuracy and deal 15% more damage.</p>",
     "traits": [],
     "prerequisites": [
-      "Size: Large or Larger"
+      "Size: Large or larger"
     ],
     "autoUnlock": [],
-    "cost": 4,
-    "originSlug": null,
+    "cost": 3,
     "design": {
       "arena": "physical",
       "approach": "resilience",
       "archetype": null
     },
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "nodes": [
       {
         "x": 151,
         "y": 30,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "root-2",
           "sea-lungs",
           "lithic",
-          "minor-buff-26"
+          "minor-buff-26",
+          "gigafaunic"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }

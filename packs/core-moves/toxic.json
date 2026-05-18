@@ -24,8 +24,9 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: The target gains @Affliction[blight] 8. If Toxic is used by a Poison-Typed creature, this attack gains [Danger Close].</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The target gains @Affliction[blight 8]. If Toxic is used by a Poison-Typed creature, this attack gains [Danger Close].</p>",
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       },
       {
         "slug": "toxic-poison-type",
@@ -41,7 +42,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "trigger": "<p>The user has the Poison Type.</p>"
         },
         "category": "status",
@@ -49,10 +50,11 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight] 8.</p>",
+        "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight 8].</p>",
         "variant": "toxic",
         "free": true,
-        "img": "systems/ptr2e/img/svg/poison_icon.svg"
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "predicate": []
       }
     ],
     "grade": "B",
@@ -64,8 +66,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "oTSFbF32HX101PTb",
   "effects": [
@@ -79,41 +83,44 @@
           {
             "type": "roll-effect",
             "key": "toxic-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.blightcondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "toxic-poison-type-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.blightcondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -125,12 +132,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1733414094011,
         "modifiedTime": 1733414137714,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

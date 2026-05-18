@@ -71,7 +71,7 @@ declare global {
         /* -------------------------------------------- */
 
         /** Apply any transformations to the Actor data which are caused by ActiveEffects. */
-        applyActiveEffects(): void;
+        applyActiveEffects(phase: string): void;
 
         /**
          * Retrieve an Array of active tokens which represent this Actor in the current canvas Scene.
@@ -231,6 +231,8 @@ declare global {
         get uuid(): ActorUUID;
 
         get folder(): Folder<Actor<null>> | null;
+
+        _completedActiveEffectPhases: Set<string>;
 
         system: TSchema;
         _source: SourceFromSchema<ActorSchema<string, TSchema>>;

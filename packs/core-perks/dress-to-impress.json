@@ -47,7 +47,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "effects": [
@@ -63,9 +64,9 @@
             "key": "system.inventory.accessory.max",
             "value": 1,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -78,13 +79,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You gain an additional Accessory slot. You may not equip more than one instance of the same Accessory.</p>",
       "origin": null,
@@ -96,7 +92,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.4.1.beta",
         "createdTime": 1737934863150,

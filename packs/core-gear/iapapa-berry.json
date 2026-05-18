@@ -3,9 +3,9 @@
   "img": "systems/ptr2e/img/item-icons/iapapa berry.webp",
   "type": "consumable",
   "system": {
-    "cost": 2,
+    "cost": 3,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
@@ -30,12 +35,10 @@
       "healing",
       "berry",
       "fling",
-      "held",
       "desperation-1-3",
-      "sour-2",
       "combat"
     ],
-    "description": "The target gains 6 Ticks of HP. Confuses if the user dislikes Sour flavors. This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user passes the Desperation threshold.",
+    "description": "<p>The target gains @Tick[6].  This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user passes the Desperation threshold.</p>",
     "quantity": 1,
     "slug": "iapapa-berry",
     "stack": 1,
@@ -47,10 +50,97 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Iapapa Berry",
+        "slug": "iapapa-berry",
+        "description": "<p>The target gains @Tick[6]. This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user passes the Desperation threshold.</p>",
+        "traits": [
+          "restorative",
+          "consumable",
+          "natural",
+          "healing",
+          "berry",
+          "fling",
+          "desperation-1-3",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/iapapa berry.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "a82FfmY6QzBfO6Km",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Iapapa Berry",
+      "type": "passive",
+      "_id": "QK1iftYHRvT0qQme",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "iapapa-berry-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 8,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758641591178,
+        "modifiedTime": 1758641634972,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "yR1GFstYOCdI2jOz"
 }

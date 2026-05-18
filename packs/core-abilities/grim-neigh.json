@@ -7,7 +7,7 @@
       {
         "traits": [
           "legendary",
-          "interrupt-5"
+          "interrupt"
         ],
         "name": "Grim Neigh",
         "slug": "grim-neigh",
@@ -78,7 +78,6 @@
             ],
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "inMemoryOnly": false,
@@ -88,7 +87,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           },
           {
             "type": "ephemeral-modifier",
@@ -98,10 +98,10 @@
               "effect:passive:calyrex-rider"
             ],
             "label": "Calyrex Rider - Grim Neigh",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -112,13 +112,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -5,13 +5,14 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "flinch-20"
+        ],
         "name": "Coil Up",
         "slug": "coil-up",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
           "trigger": "<p>The user enters combat.</p>"
         },
         "range": {
@@ -19,11 +20,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect:The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect:The user freely uses Coil.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Coil.The user freely uses Coil, and is @Affliction[delay 20].</p>",
     "traits": [
       "connection"
     ],
@@ -51,14 +52,13 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.7r57DxIctmNSW2oV",
             "predicate": [
               "ability:coil-up:active"
             ],
             "alterations": [
               {
-                "mode": 5,
+                "method": 5,
                 "property": "system.actions.0.free",
                 "value": "true"
               }
@@ -70,11 +70,23 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} enters combat and may spend {item|actions.contents.0.cost.powerPoints} PP to use {item|link}!",
+            "phase": "initial",
+            "predicate": [],
+            "visibility": null,
+            "key": "combat-enter",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -87,13 +99,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -105,14 +114,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737395090460,
-        "modifiedTime": 1754317311793,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778668507477,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

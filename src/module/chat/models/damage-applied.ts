@@ -17,6 +17,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
       ppApplied: new fields.BooleanField({ required: true, initial: false }),
       undone: new fields.BooleanField({ required: true, initial: false }),
       notes: new fields.ArrayField(new fields.ArrayField(new fields.HTMLField({ blank: false, nullable: false })), { required: true, initial: [] }),
+      note: new fields.StringField({ required: false, blank: true, nullable: true, initial: "" }),
       rollNotes: new fields.ArrayField(new fields.StringField({ blank: false, nullable: false }), { required: true, initial: [] }),
       result: new fields.SchemaField({
         domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
@@ -83,7 +84,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
       })
     }
     else {
-      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied });
+      await this.target.applyDamage(-this.damageApplied, { silent: true, healShield: this.shieldApplied, flat: false, note: this.note || "" });
     }
   }
 
@@ -105,6 +106,7 @@ interface DamageAppliedMessageSchema extends foundry.data.fields.DataSchema {
   ppApplied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   undone: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   notes: foundry.data.fields.ArrayField<foundry.data.fields.ArrayField<foundry.data.fields.HTMLField>>;
+  note: foundry.data.fields.StringField<string, string, false, true, false>;
   result: foundry.data.fields.SchemaField<
     DamageAppliedResultSchema,
     foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<DamageAppliedResultSchema>>,

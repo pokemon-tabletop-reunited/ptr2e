@@ -18,7 +18,12 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "traits": [
@@ -29,13 +34,14 @@
         "name": "Choice Band",
         "slug": "choice-band",
         "type": "generic",
-        "description": "Trigger: The user uses an attack and is not @Affliction[choice-locked].\nEffect: The user gains @Affliction[choice-locked] 3. Passive: the user has +1 default ATK Stage.",
+        "description": "Trigger: The user uses an attack and is not @Affliction[choice-locked].\nEffect: The user gains @Affliction[choice-locked 3]. Passive: the user has +1 default ATK Stage.",
         "traits": [
           "Combat"
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex",
@@ -44,7 +50,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user uses an attack and is not @Affliction[choice-locked].\nEffect: The user gains @Affliction[choice-locked] 3. Passive: the user has +1 default ATK Stage.",
+    "description": "<p>Trigger: The user uses an attack and is not @Affliction[choice-locked]. <br><br>Effect: The user gains @Affliction[choice-locked 3].<br><br>Passive: the user has +1 default ATK Stage.</p>",
     "slug": "choice-band",
     "quantity": 1,
     "identification": {
@@ -64,10 +70,82 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "ujNmHR37G3FzfaQ6",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Choice Band",
+      "type": "passive",
+      "_id": "HpuuEgvBvHUxdDrd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 1,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.choicelockedcond",
+            "predicate": [
+              {
+                "not": "affliction:choice-locked"
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758373050869,
+        "modifiedTime": 1758373520415,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "6VDJBcrqVDh5bYtA"
 }

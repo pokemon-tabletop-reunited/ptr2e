@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-5",
+          "interrupt",
           "stage-change"
         ],
         "name": "Gemma Magna",
@@ -62,9 +62,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": 0
+                "value": 0,
+                "method": 5
               }
             ],
             "priority": null,
@@ -74,11 +74,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -89,9 +89,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -101,11 +101,11 @@
             },
             "reevaluateOnUpdate": true,
             "allowDuplicate": false,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -118,13 +118,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

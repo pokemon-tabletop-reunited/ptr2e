@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "pokeball",
@@ -30,10 +35,10 @@
       "stack-5",
       "belt",
       "fling",
-      "hunting-ball"
+      "ball"
     ],
-    "description": "8x Catch Rate modifer if used on a target that is @Affliction[charmed]. 1x Catch Rate modifer otherwise.",
-    "modifier": 8,
+    "description": "<p>5x Catch Rate modifer if used on a target that is @Affliction[charmed]. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 5,
     "quantity": 1,
     "slug": "love-ball",
     "stack": 5,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "yadrYEhvWoIn8xPb",
   "effects": [],

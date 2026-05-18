@@ -93,17 +93,17 @@
         "tier": null
       },
       {
-        "x": 107,
+        "x": 109,
         "y": 29,
         "hidden": false,
         "type": "normal",
         "connected": [
           "hardy-trekker",
           "improved-flight",
-          "cyclist",
-          "mankey-see-mankey-do",
           "adhesive-digits",
-          "hurried-operator"
+          "hurried-operator",
+          "cover-jumper",
+          "freeclimber"
         ],
         "config": {
           "texture": null,
@@ -273,7 +273,9 @@
           "minor-buff-25",
           "minor-buff-49",
           "minor-buff-37",
-          "wergild"
+          "wergild",
+          "infested",
+          "cover-jumper"
         ],
         "config": {
           "texture": null,
@@ -829,7 +831,8 @@
           "cyclist",
           "acrobat",
           "minor-buff-5",
-          "wingspan"
+          "wingspan",
+          "cover-jumper"
         ],
         "config": {
           "texture": null,
@@ -972,7 +975,9 @@
         "connected": [
           "snare",
           "stat-iv-booster-1",
-          "thermal-dynamics"
+          "thermal-dynamics",
+          "quantum-displacement",
+          "saprophyte"
         ],
         "config": {
           "texture": null,
@@ -993,7 +998,9 @@
           "minor-buff-8",
           "biting-cold",
           "ready-for-anything",
-          "dowsing-instinct"
+          "dowsing-instinct",
+          "refrigerate",
+          "quantum-displacement"
         ],
         "config": {
           "texture": null,
@@ -1318,7 +1325,8 @@
           "drifter",
           "guster",
           "hurried-operator",
-          "wingspan"
+          "wingspan",
+          "cyclist"
         ],
         "config": {
           "texture": null,
@@ -1472,8 +1480,46 @@
           "tint": null
         },
         "tier": null
+      },
+      {
+        "x": 180,
+        "y": 43,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "nothing-is-true",
+          "shurikenjutsu",
+          "whispering-wound",
+          "behind-every-blade-of-grass"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      },
+      {
+        "x": 185,
+        "y": 48,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "harass",
+          "pervasive-shadow",
+          "secret-ninja-tools"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "_id": "minorbuffperk000",
   "img": "icons/svg/chest.svg",
@@ -1498,6 +1544,7 @@
             "flag": "minorBuffChoice",
             "rollOption": "minorBuffChoice",
             "allowNoSelection": false,
+            "showDisabled": true,
             "choices": [
               {
                 "value": "Compendium.ptr2e.core-perks.Item.improvedmovement"
@@ -1524,15 +1571,7 @@
                 ]
               },
               {
-                "value": "Compendium.ptr2e.core-perks.Item.gH6z0NmKq0Suh7iZ",
-                "predicate": [
-                  {
-                    "gte": [
-                      "{actor|system.advancement.advancementPoints.available}",
-                      2
-                    ]
-                  }
-                ]
+                "value": "Compendium.ptr2e.core-perks.Item.gH6z0NmKq0Suh7iZ"
               },
               {
                 "value": "Compendium.ptr2e.core-perks.Item.g7RkEg1WRz28MU8R",
@@ -1580,9 +1619,9 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "predicate": [],
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -1590,15 +1629,14 @@
             "value": "{effect|flags.ptr2e.choiceSelections.minorBuffChoice}",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.originSlug",
-                "value": "{effect|parent.system.originSlug}"
+                "value": "{effect|parent.system.originSlug}",
+                "method": 5
               }
             ],
             "replaceSelf": true,
             "reevaluateOnUpdate": false,
             "allowDuplicate": true,
-            "mode": 2,
             "predicate": [],
             "ignored": false,
             "inMemoryOnly": false,
@@ -1606,7 +1644,8 @@
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
-            }
+            },
+            "method": 2
           }
         ],
         "removeAfterCombat": false,
@@ -1620,7 +1659,7 @@
       "disabled": false,
       "description": "<p>Offers a Choice Set to pick a @Trait[minor-buff] Perk.</p>",
       "_stats": {
-        "coreVersion": "13.346",
+        "coreVersion": "13.351",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -1631,8 +1670,8 @@
         "exportSource": null
       },
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "origin": null,
       "tint": "#ffffff",

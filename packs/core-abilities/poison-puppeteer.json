@@ -7,7 +7,7 @@
       {
         "traits": [
           "legendary",
-          "interrupt-2"
+          "interrupt"
         ],
         "name": "Poison Puppeteer",
         "slug": "poison-puppeteer",
@@ -22,11 +22,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: The affected creature is afflicted with @Affliction[confused] 5.</p>",
+        "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: The affected creature is afflicted with @Affliction[confused 5].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: Connection - Malignant Chain. The affected creature is afflicted with @Affliction[confused] 5.</p>",
+    "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: Connection - Malignant Chain. The affected creature is afflicted with @Affliction[confused 5].</p>",
     "traits": [
       "legendary",
       "connection",
@@ -63,9 +63,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
             "priority": null,
@@ -75,11 +75,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -92,13 +92,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

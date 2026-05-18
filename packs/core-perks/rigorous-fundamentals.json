@@ -8,13 +8,14 @@
     },
     "actions": [],
     "slug": "rigorous-fundamentals",
-    "description": "<p>The user selects 4 Skills, besides Resources. The user’s Species proficiency with the selected skills is increased by +5. A Skill may only be increased 3 times with this Perk and cannot be increased past 40.</p>",
+    "description": "<p>The user gains a +5 increase to a Skill a total of 2 times, with the user being allowed to select the same Skill(s) any number of times when selecting this Perk. A Skill cannot be selected with this Perk if it has been increased by 40 or more with @Trait[skill-boost] Perks.</p>",
     "traits": [
-      "minor-buff"
+      "minor-buff",
+      "skill-boost"
     ],
     "prerequisites": [],
     "autoUnlock": [],
-    "cost": 2,
+    "cost": 1,
     "variant": "multi",
     "mode": "individual",
     "global": false,
@@ -205,86 +206,41 @@
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.all",
+            "choices": "flags.ptr2e.skillOptions.all40",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "rf11"
+            "rollOption": "rf11",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf11}.value",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf11}.mod",
             "value": 5,
             "predicate": [],
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "choice-set",
             "key": "",
             "value": 0,
             "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.all",
+            "choices": "flags.ptr2e.skillOptions.all40",
             "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
             "adjustName": true,
-            "rollOption": "rf12"
+            "rollOption": "rf12",
+            "method": 2
           },
           {
             "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf12}.value",
+            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf12}.mod",
             "value": 5,
             "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "choice-set",
-            "key": "",
-            "value": 0,
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.all",
-            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
-            "adjustName": true,
-            "rollOption": "rf13"
-          },
-          {
-            "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf13}.value",
-            "value": 5,
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": false
-          },
-          {
-            "type": "choice-set",
-            "key": "",
-            "value": 0,
-            "predicate": [],
-            "mode": 2,
-            "priority": null,
-            "ignored": true,
-            "choices": "flags.ptr2e.skillOptions.all",
-            "prompt": "PTR2E.ChoiceSetPrompt.Prompt",
-            "adjustName": true,
-            "rollOption": "rf14"
-          },
-          {
-            "type": "basic",
-            "key": "system.skills.{effect|flags.ptr2e.choiceSelections.rf14}.value",
-            "value": 5,
-            "predicate": [],
-            "mode": 2,
             "priority": null,
             "ignored": false
           }
@@ -297,13 +253,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -24,7 +24,7 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -1 SPD Stage for 5 Activations and gain @Affliction[poison] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets lose -1 SPD Stage for 5 Activations and gain @Affliction[poison 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -54,24 +54,24 @@
           {
             "type": "roll-effect",
             "key": "toxic-thread-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "toxic-thread-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -82,13 +82,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

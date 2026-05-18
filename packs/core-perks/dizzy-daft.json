@@ -15,7 +15,7 @@
       {
         "name": "Dizzy Daft",
         "slug": "dizzy-daft",
-        "description": "<p>You inflict @Affliction[confused] 5 on yourself.</p>",
+        "description": "<p>You inflict @Affliction[confused 5] on yourself.</p>",
         "traits": [],
         "type": "attack",
         "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
@@ -105,27 +105,27 @@
           {
             "type": "roll-effect",
             "key": "dizzy-daft-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "method": 2
           },
           {
             "type": "roll-option",
             "value": "damage:affliction:confused",
             "domain": "immunities",
             "key": "",
-            "mode": 2,
             "priority": null,
             "predicate": [],
             "ignored": false,
             "suboptions": [],
-            "state": true
+            "state": true,
+            "method": 2
           }
         ],
         "slug": null,
@@ -136,13 +136,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
       "origin": null,

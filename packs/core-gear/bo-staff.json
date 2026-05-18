@@ -1,0 +1,478 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Bo Staff",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "bo-staff",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "weapon",
+      "fling",
+      "polearm",
+      "blunt",
+      "1-handed",
+      "switch-grip",
+      "ninja",
+      "martial",
+      "conventional",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
+    ],
+    "actions": [
+      {
+        "name": "Bo Staff Strike",
+        "slug": "bo-staff-strike",
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[delay 10].</p>",
+        "traits": [
+          "weapon",
+          "priority-30",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 30,
+        "accuracy": 75
+      },
+      {
+        "name": "Bo Staff Thrust",
+        "slug": "bo-staff-thrust",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[delay 20] and a 20% chance of losing -1 DEF Stage for 5 Activations.</p>",
+        "traits": [
+          "weapon",
+          "push-2",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 2,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 65,
+        "accuracy": 70
+      },
+      {
+        "name": "Bo Staff Flurry",
+        "slug": "bo-staff-flurry",
+        "description": "<p>Effect: On hit, the target gains @Affliction[delay 20] and has a 30% chance of gaining a further @Affliction[delay 20] and @Affliction[suppressed 5].</p>",
+        "traits": [
+          "weapon",
+          "7-strike",
+          "flinch-30",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 18,
+        "accuracy": 65
+      },
+      {
+        "name": "Bo Staff Spin",
+        "slug": "bo-staff-action-4",
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[delay 40] and @Affliction[confused 5].</p>",
+        "traits": [
+          "weapon",
+          "flinch-40",
+          "push-1",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 90,
+        "accuracy": 60
+      },
+      {
+        "name": "Bo Staff Sweep",
+        "slug": "bo-staff-action-5",
+        "description": "<p>Effect: On hit, the target gains @Affliction[delay 30] and has a 25% chance of losing -1 SPD and EVA Stage for 5 Activations.</p>",
+        "traits": [
+          "weapon",
+          "priority-10",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 20,
+        "accuracy": 55
+      }
+    ],
+    "description": "<p>A bo is a staff weapon that is utilized in a number of martial arts, usually made with unfinished hardwood or a flexible wood. Thrusting, swinging, and striking techniques often resemble empty-hand movements, following the philosophy that the bo staff is merely an \"extension of one’s limbs\", which makes it a common inclusion in many traditionally-weaponless martial arts. The bo’s design and intended use makes it a less useful implement in the hands of someone not trained in martial arts. </p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "D",
+    "fling": {
+      "type": "untyped",
+      "power": 50,
+      "accuracy": 85,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Bo Staff",
+      "type": "passive",
+      "_id": "1E5i0CYlIGF9oAHj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 1,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "bo-staff-thrust-attack-damage-flat",
+            "value": 4,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "bo-staff-flurry-attack-damage-flat",
+            "value": 2,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "bo-staff-spin-attack-damage-flat",
+            "value": 3,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-bo-staff-attack-damage-flat",
+            "value": 5,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-strike-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-thrust-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -20,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-thrust-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-flurry-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -20,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-flurry-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -20,
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-flurry-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.suppressedcondit",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-spin-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -40,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-spin-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
+            "predicate": [],
+            "chance": 10,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-sweep-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -30,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-sweep-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "bo-staff-sweep-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
+            "predicate": [],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "sxVB9DR6aewbRe3Z"
+}

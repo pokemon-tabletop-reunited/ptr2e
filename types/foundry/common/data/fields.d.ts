@@ -161,7 +161,7 @@ export abstract class DataField<
      * @param [options] Additional options for how the field is cleaned.
      * @returns The cleaned value.
      */
-    protected _cleanType(value: unknown, options?: CleanFieldOptions): unknown;
+    protected _cleanType(value: unknown, options?: CleanFieldOptions, _state?: unknown): unknown;
 
     /**
      * Cast a non-default value to ensure it is the correct type for the field
@@ -629,7 +629,7 @@ export class ArrayField<
 
     protected override _cast(value: unknown): unknown;
 
-    protected _cleanType(value: unknown, options?: CleanFieldOptions): unknown;
+    protected _cleanType(value: unknown, options?: CleanFieldOptions, _state?: unknown): unknown;
 
     protected override _validateType(value: unknown, options?: Record<string, unknown>): void;
 
@@ -1173,6 +1173,85 @@ export class TypeDataField<
     migrateSource(sourceData: Record<string, unknown>, fieldData: Record<string, unknown>): void;
 }
 
+export class TypedObjectField<
+    TField extends DataField,
+    TRequired extends boolean = true,
+    TNullable extends boolean = false,
+    THasInitial extends boolean = true,
+> extends ObjectField<
+    Record<string, SourceFromDataField<TField>>,
+    Record<string, ModelPropFromDataField<TField>>,
+    TRequired,
+    TNullable,
+    THasInitial
+> {
+    /**
+     * @param element The value type of each entry in this object.
+     * @param options Options which configure the behavior of the field.
+     * @param context Additional context which describes the field
+     */
+    constructor(
+        element: TField,
+        options?: ObjectFieldOptions<Record<string, SourceFromDataField<TField>>, TRequired, TNullable, THasInitial>,
+        context?: DataFieldContext,
+    );
+
+    /**
+     * The value type of each entry in this object.
+     */
+    element: TField;
+
+    static override recursive: true;
+
+    static override get _defaults(): ObjectFieldOptions<Record<string, SourceFromDataField<ObjectField<object>>>, boolean, boolean, boolean>;
+
+    protected override _cleanType(data: object, options: CleanFieldOptions): object;
+
+    protected override _validateType(data: object, options?: object): DataModelValidationFailure | void;
+
+    override _validateModel(
+        changes: Record<string, SourceFromDataField<TField>>,
+        options?: DataFieldValidationOptions,
+    ): void;
+
+    override initialize(
+        value: MaybeSchemaProp<Record<string, SourceFromDataField<TField>>, TRequired, TNullable, THasInitial>,
+        model?: ConstructorOf<abstract.DataModel>,
+        options?: ObjectFieldOptions<Record<string, SourceFromDataField<TField>>, TRequired, TNullable, THasInitial>,
+    ): MaybeSchemaProp<Record<string, ModelPropFromDataField<TField>>, TRequired, TNullable, THasInitial>;
+
+    _updateDiff(
+        source: object,
+        key: string,
+        value: unknown,
+        difference: object,
+        options: object,
+    ): void;
+
+    _updateCommit(source: object, key: string, value: unknown, diff: unknown, options: object): void;
+
+    override toObject(
+        value: Record<string, ModelPropFromDataField<TField>>,
+    ): MaybeSchemaProp<Record<string, SourceFromDataField<TField>>, TRequired, TNullable, THasInitial>;
+
+    override apply(
+        fn: string | ((field: this, value?: unknown, options?: Record<string, unknown>) => unknown),
+        data?: object,
+        options?: Record<string, unknown>,
+    ): unknown;
+
+    _addTypes(source: object, changes: object, options?: object): void;
+
+    override _getField(path: string[]): this | undefined;
+
+    /**
+     * Migrate this field's candidate source data.
+     * @param sourceData Candidate source data of the root model
+     * @param fieldData The value of this field within the source data
+     */
+    migrateSource(sourceData: object, fieldData: unknown): void;
+}
+
 /**
  * A subclass of [DataField]{@link DataField} which allows to typed schemas.
  */
@@ -1217,6 +1296,11 @@ export type ModelPropFromDataField<T> = T extends DataField<
     ? MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>
     : never;
 
+export type SourceFromDataField<T> =
+  T extends DataField<infer TSourceProp, unknown, infer TRequired, infer TNullable, infer THasInitial>
+      ? MaybeSchemaProp<TSourceProp, TRequired, TNullable, THasInitial>
+      : never;
+
 export type MaybeSchemaProp<
     TProp,
     TRequired extends boolean,
@@ -1233,6 +1317,13 @@ export type MaybeSchemaProp<
     : THasInitial extends true
     ? TProp
     : TProp | undefined;
+
+export interface DataFieldContext {
+  /** A field name to assign to the constructed field */
+  name?: string;
+  /** Another data field which is a hierarchical parent of this one */
+  parent?: DataField;
+}
 
 declare global {
     type ModelPropsFromSchema<TDataSchema extends DataSchema> = {

@@ -3,7 +3,60 @@
   "_id": "2D5zyGp1HRxMmDWx",
   "type": "perk",
   "img": "icons/creatures/abilities/wings-birdlike-blue.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Celerity Style",
+      "type": "passive",
+      "_id": "Yk3HtWqqnVXiIRZl",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "celerity-style-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.TgpY2rtJzKiCRPlr",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.347",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1756043733637,
+        "modifiedTime": 1756043766056,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "system": {
     "_migration": {
       "version": 0.111,
@@ -16,7 +69,29 @@
       ],
       "notes": ""
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Celerity Style",
+        "slug": "celerity-style",
+        "description": "<p>Target: A Commanded @Trait[flying] Creature<br><br>Effect: The effected creature is no longer able to be targeted with Attacks of Opportunity, and is immune to the @Affliction[grapple] Affliction. If they already have this Affliction, they are cured of it immediately and may Interrupt to freely move 1m. Additionally, their attacks suffer from @UUID[Compendium.ptr2e.core-effects.wA5oCsgHmZLcHHSn]{-1 Default Accuracy Stage} whilst the Style is active.</p>",
+        "traits": [
+          "command",
+          "style",
+          "flying"
+        ],
+        "type": "generic",
+        "img": "icons/creatures/abilities/wings-birdlike-blue.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        }
+      }
+    ],
     "slug": "celerity-style",
     "description": "<p>Target: A Commanded @Trait[flying] Creature<br><br>Effect: The effected creature is no longer able to be targeted with Attacks of Opportunity, and is immune to the @Affliction[grapple] Affliction. If they already have this Affliction, they are cured of it immediately and may Interrupt to freely move 1m. Additionally, their attacks suffer from @UUID[Compendium.ptr2e.core-effects.wA5oCsgHmZLcHHSn]{-1 Default Accuracy Stage} whilst the Style is active.</p>",
     "traits": [

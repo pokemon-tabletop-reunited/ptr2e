@@ -1,0 +1,137 @@
+{
+  "name": "Army of Phantoms",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Army of Phantoms",
+        "slug": "army-of-phantoms",
+        "description": "<p>Effect: The user can make themselves and all allies within range gain @Affliction[invisible 3].</p>",
+        "traits": [
+          "ninja"
+        ],
+        "type": "generic",
+        "img": "icons/svg/invisible.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: By spending 5 PP as a Complex Action, the user and all allies within a 3m Emanation gain @Affliction[invisible 3].</p>",
+    "traits": [
+      "ninja"
+    ],
+    "prerequisites": [
+      "item:perk:smokestep"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "ninja"
+    },
+    "global": true,
+    "webs": [],
+    "nodes": [
+      {
+        "x": 182,
+        "y": 35,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "one-with-the-shadows",
+          "aura-empathy",
+          "smokestep",
+          "monomi-no-ikki"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "army-of-phantoms",
+    "traitWebs": []
+  },
+  "img": "icons/svg/invisible.svg",
+  "effects": [
+    {
+      "name": "Army of Phantoms",
+      "type": "passive",
+      "_id": "0Ox73sr7cQBCQcdk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "army-of-phantoms-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.invisibleconditi",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "_id": "klID8J4yUuKFvW43"
+}

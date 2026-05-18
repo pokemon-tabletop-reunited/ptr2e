@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,7 +35,7 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "ball"
     ],
     "description": "Catch Rate modifier starts at 6x, and decreases by 1x after each of the user's turns.",
     "modifier": 6,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "mm2VA3udokrf30am",
   "effects": [],

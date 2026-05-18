@@ -24,7 +24,8 @@
       "bait",
       "bipedal",
       "fully-evolved",
-      "jump-1"
+      "jump-1",
+      "underdog"
     ],
     "abilities": {
       "starting": [
@@ -494,11 +495,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -507,9 +508,9 @@
             ],
             "key": "system.modifiers.atkMultiplier",
             "value": 1.5,
-            "mode": 1,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           },
           {
             "type": "basic",
@@ -518,9 +519,9 @@
             ],
             "key": "system.modifiers.spdMultiplier",
             "value": 1.5,
-            "mode": 1,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 1
           }
         ],
         "slug": null,
@@ -529,7 +530,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -551,12 +554,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1738146981069,
         "modifiedTime": 1738147034829,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
       }
     }
   ]

@@ -12,7 +12,8 @@
         "traits": [
           "zenith",
           "move-locked",
-          "sonic"
+          "sonic",
+          "danger-close"
         ],
         "range": {
           "target": "cone",
@@ -44,8 +45,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "8oRKjmSuk6rgXg7e",
   "effects": [
@@ -59,30 +62,30 @@
           {
             "type": "roll-effect",
             "key": "clangorous-soulblaze",
-            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rMNLqloV5nLmCLrZ",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -94,12 +97,13 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1737223395024,
         "modifiedTime": 1737223439628,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
       }
     }
   ]

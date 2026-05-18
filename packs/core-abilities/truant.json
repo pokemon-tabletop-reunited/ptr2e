@@ -14,16 +14,15 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's attacks gain @trait[flinch-10], or have that value increased by 10%. At the end of the Round, the user is Delayed 40%. The user's @Trait[flinch-XY] attacks have +30% Power. AUTOMATION NEEDS TO BE UPDATED.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user has +40% Power on their Attacks, takes 15% less damage from Attacks, and has +5% RES, but the user's Attacks gain @Trait[flinch-33].</p>",
+        "img": "systems/ptr2e/img/conditions/sleep.svg"
       }
     ],
-    "description": "<p>Effect: The user's attacks gain @trait[flinch-10], or have that value increased by 10%. At the end of the Round, the user is Delayed 40%. The user's @Trait[flinch-XY] attacks have +30% Power. AUTOMATION NEEDS TO BE UPDATED.</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "description": "<p>Effect: The user has +40% Power on their Attacks, takes 15% less damage from Attacks, and has +5% RES, but the user's Attacks gain @Trait[flinch-33].</p>",
+    "traits": [],
     "slug": "truant",
     "_migration": {
       "version": null,
@@ -33,7 +32,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "1fZMWi8thyYYl8Sz",
@@ -47,30 +47,62 @@
         "changes": [
           {
             "type": "percentile-modifier",
-            "key": "exhaust-trait-attack-power",
-            "value": 30,
+            "key": "attack-power",
+            "value": 40,
             "predicate": [],
-            "mode": 2,
             "priority": null,
+            "label": "Truant",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "attack-damage-percentile",
+            "value": -15,
+            "predicate": [],
+            "label": "Truant",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "value": 5,
+            "phase": "initial",
+            "predicate": [],
+            "key": "system.modifiers.effectResistance",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "flinch-33",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -78,17 +110,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737563805624,
-        "modifiedTime": 1737563824337,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778163373738,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

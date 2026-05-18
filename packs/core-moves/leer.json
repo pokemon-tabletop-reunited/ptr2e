@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "friendly"
+          "friendly",
+          "basic"
         ],
         "range": {
           "target": "cone",
@@ -19,15 +20,15 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "simple",
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: All valid targets lose -1 DEF Stages for 5 Activations and gain @Affliction[fear] 2.</p>",
+        "description": "<p>Effect: All valid targets lose -1 DEF Stages for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -57,32 +58,14 @@
           {
             "type": "roll-effect",
             "key": "leer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
-          },
-          {
-            "type": "roll-effect",
-            "key": "leer-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
-            "predicate": [],
-            "chance": 100,
-            "affects": "target",
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "duration.turns",
-                "value": 2
-              }
-            ],
-            "mode": 2,
-            "priority": null,
-            "ignored": false
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -93,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -29,12 +29,10 @@
     "consumableType": "restorative",
     "traits": [
       "combat",
-      "held",
       "restorative",
-      "consumable",
-      "healing"
+      "consumable"
     ],
-    "description": "<p>The target is healed  @PP[60] and loses 1 @Affliction[weary].</p>",
+    "description": "<p>The target recovers @Tick[16 pp].</p>",
     "quantity": 1,
     "slug": "max-elixir",
     "stack": 1,
@@ -48,9 +46,92 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "actions": [
+      {
+        "name": "Max Elixir",
+        "slug": "max-elixir",
+        "description": "<p>The target recovers @Tick[16 pp].</p>",
+        "traits": [
+          "combat",
+          "held",
+          "restorative",
+          "consumable",
+          "healing"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/max elixir.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "kWF6qoT1dfN5KSki",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Max Elixir",
+      "type": "passive",
+      "_id": "zSGUBpfuBZJU9MFp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "max-elixir-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.LHUTMAC0nCJWDRFt",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 16,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758620619604,
+        "modifiedTime": 1758620650725,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "srQci2ThhRKdmC6g"
 }

@@ -21,8 +21,13 @@
     "fling": {
       "type": "untyped",
       "power": 0,
-      "accuracy": 95,
-      "hide": null
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 8,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "pokeball",
@@ -30,10 +35,10 @@
       "stack-5",
       "belt",
       "fling",
-      "training-ball"
+      "ball"
     ],
-    "description": "6x Catch Rate modifer if used on a target that has @Affliction[drowsy], @Affliction[nightmares], or is sleeping. 1x Catch Rate modifer otherwise.",
-    "modifier": 6,
+    "description": "<p>4x Catch Rate modifer if used on a target that has @Affliction[drowsy], @Affliction[nightmares], or is sleeping. 1x Catch Rate modifer otherwise.</p>",
+    "modifier": 4,
     "quantity": 1,
     "slug": "dream-ball",
     "stack": 5,
@@ -45,8 +50,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "ECMaMJtCh6TyWCOl",
   "effects": [],

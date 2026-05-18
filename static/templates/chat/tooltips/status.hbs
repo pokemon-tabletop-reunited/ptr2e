@@ -1,4 +1,5 @@
 <content>
+  {{#if accuracy}}
     <header>
         <small>Accuracy Roll</small>
         {{#with accuracy.context}}
@@ -62,6 +63,18 @@
             {{#unless (is accuracy.category "miss")}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
         </footer>
     {{/if}}
+  {{else}}
+    <main>
+        <p>No accuracy roll - Auto hit!</p>
+    </main>
+    <footer>
+        {{#if (is hit "critical")}}
+            {{> control id="hit" label="PTR2E.Status.ChangeToHit"}}
+        {{else}}
+            {{> control id="critical" label="PTR2E.Status.ChangeToCritical"}}
+        {{/if}}
+    </footer>
+  {{/if}}
 </content>
 
 {{#*inline "control"}}

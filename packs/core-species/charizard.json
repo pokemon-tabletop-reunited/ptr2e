@@ -40,15 +40,15 @@
           "slug": "blaze"
         },
         {
-          "slug": "pure-blooded"
+          "slug": "solar-power"
         }
       ],
       "basic": [
         {
-          "slug": "solar-power"
+          "slug": "rivalry"
         },
         {
-          "slug": "rivalry"
+          "slug": "flaming-soul"
         }
       ],
       "advanced": [
@@ -61,10 +61,10 @@
       ],
       "master": [
         {
-          "slug": "flaming-soul"
+          "slug": "sheer-force"
         },
         {
-          "slug": "sheer-force"
+          "slug": "dragonfire"
         }
       ]
     },
@@ -860,11 +860,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -877,21 +877,21 @@
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -900,9 +900,9 @@
             ],
             "key": "",
             "value": "Drakelike",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -911,9 +911,9 @@
             ],
             "key": "",
             "value": "Jump 4",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -922,9 +922,9 @@
             ],
             "key": "",
             "value": "Jump 2",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -934,14 +934,14 @@
             "key": "",
             "value": 0,
             "hp": null,
-            "atk": 18,
-            "def": 40,
-            "spa": 22,
-            "spd": 20,
+            "atk": 50,
+            "def": 33,
+            "spa": 6,
+            "spd": 11,
             "spe": null,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -950,9 +950,9 @@
             ],
             "key": "system.skills.climb.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -961,9 +961,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -972,9 +972,9 @@
             ],
             "key": "system.skills.lift.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -983,9 +983,9 @@
             ],
             "key": "system.skills.dragon.value",
             "value": 30,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -994,9 +994,9 @@
             ],
             "key": "system.skills.running.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "token-alterations",
@@ -1005,7 +1005,6 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "texture": "modules/ptr2e-pkmn-sprites/sprites/006_MEGA_X.webp",
@@ -1013,7 +1012,8 @@
             "scale": null,
             "name": null,
             "light": null,
-            "alpha": null
+            "alpha": null,
+            "method": 2
           },
           {
             "type": "basic",
@@ -1022,9 +1022,9 @@
             ],
             "key": "system.type.types",
             "value": "dragon",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -1033,9 +1033,9 @@
             ],
             "key": "system.type.types",
             "value": "flying",
-            "mode": 6,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 6
           },
           {
             "type": "remove-trait",
@@ -1044,9 +1044,9 @@
             ],
             "key": "",
             "value": "flying",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -1055,7 +1055,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1077,12 +1079,13 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-species.Item.9PStsTvP0J3tLcER.ActiveEffect.s8mbXztpSNsvB9GV",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1736701896752,
-        "modifiedTime": 1737650694915,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1761088848721,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP",
+        "exportSource": null
       }
     },
     {
@@ -1102,11 +1105,11 @@
             "predicate": [],
             "alwaysActive": false,
             "count": false,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "suboptions": [],
-            "state": false
+            "state": false,
+            "method": 2
           },
           {
             "type": "grant-item",
@@ -1119,21 +1122,21 @@
             "allowDuplicate": false,
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "method": 2
           },
           {
             "type": "basic",
@@ -1142,9 +1145,9 @@
             ],
             "key": "system.movement.flight.value",
             "value": 10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -1153,9 +1156,9 @@
             ],
             "key": "",
             "value": "Jump 3",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "remove-trait",
@@ -1164,9 +1167,9 @@
             ],
             "key": "",
             "value": "Jump 2",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "add-trait",
@@ -1175,9 +1178,9 @@
             ],
             "key": "",
             "value": "Jet",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "stats-alteration",
@@ -1187,14 +1190,14 @@
             "key": "",
             "value": 0,
             "hp": null,
-            "atk": 20,
-            "def": null,
+            "atk": 10,
+            "def": 5,
             "spa": 50,
             "spd": 30,
-            "spe": null,
-            "mode": 2,
+            "spe": 5,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -1203,9 +1206,9 @@
             ],
             "key": "system.skills.climb.value",
             "value": -10,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -1214,9 +1217,9 @@
             ],
             "key": "system.skills.intimidate.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -1225,9 +1228,9 @@
             ],
             "key": "system.skills.flying.value",
             "value": 15,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "basic",
@@ -1236,9 +1239,9 @@
             ],
             "key": "system.skills.navigate.value",
             "value": 5,
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "token-alterations",
@@ -1247,7 +1250,6 @@
             ],
             "key": "",
             "value": 0,
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "texture": "modules/ptr2e-pkmn-sprites/sprites/006_MEGA_Y.webp",
@@ -1255,7 +1257,8 @@
             "scale": null,
             "name": null,
             "light": null,
-            "alpha": null
+            "alpha": null,
+            "method": 2
           }
         ],
         "slug": null,
@@ -1264,7 +1267,9 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
@@ -1284,14 +1289,15 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-species.Item.9PStsTvP0J3tLcER.ActiveEffect.2WhcBT8JATI6htcU",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "13.350",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1736701906472,
-        "modifiedTime": 1737650934030,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1761088902349,
+        "lastModifiedBy": "6zxE5EIsM9axXjpP",
+        "exportSource": null
       }
     }
   ]

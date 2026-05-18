@@ -5,7 +5,7 @@
   "system": {
     "cost": 2,
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 10,
       "accuracy": 95,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "food",
@@ -30,14 +35,9 @@
       "healing",
       "berry",
       "fling",
-      "held",
-      "spicy-1",
-      "dry-1",
-      "sweet-1",
-      "sour-1",
       "combat"
     ],
-    "description": "The target is cured of one @Trait[minor-affliction].  This item can be retrieved from the Belt and consumed as a Free Action at @Trait[interrupt-2] when the user gains a @Trait[minor-affliction].",
+    "description": "The target is cured of one @Trait[minor-affliction].  This item can be retrieved from the Belt and consumed as a Free Action @Trait[interrupt] when the user gains a @Trait[minor-affliction].",
     "quantity": 1,
     "slug": "persim-berry",
     "stack": 1,
@@ -49,8 +49,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "uI3C626Yaci1DrN1",
   "effects": [],

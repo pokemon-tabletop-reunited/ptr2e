@@ -11,7 +11,9 @@
         "slug": "abrasion",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "basic"
+        ],
         "range": {
           "target": "creature",
           "distance": 4,
@@ -26,7 +28,7 @@
         ],
         "category": "status",
         "accuracy": 85,
-        "description": "<p>Effect: On hit, the target gains @Affliction[splinter] 5.</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[splinter 5].</p>",
         "predicate": []
       }
     ],
@@ -55,14 +57,14 @@
           {
             "type": "roll-effect",
             "key": "abrasion-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -73,13 +75,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -8,20 +8,22 @@
     },
     "traits": [
       "laser",
-      "adaptable-ammunition",
       "firearm",
-      "autoload",
       "weapon",
       "energy-weapon",
-      "sci-fi"
+      "sci-fi",
+      "reload-2",
+      "charge-pool-12",
+      "1-handed"
     ],
     "actions": [
       {
-        "name": "SilphCo Defender",
-        "slug": "silphco-defender-sidearm-action-1",
+        "name": "Defender Shot",
+        "slug": "defender-shot",
         "description": "<p>The SilphCo Defender is a mass-produced sidearm, not known for it's power but certainly for it's reliability.</p>",
         "traits": [
-          "weapon"
+          "weapon",
+          "ray"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -38,7 +40,7 @@
           "untyped"
         ],
         "category": "special",
-        "power": 50,
+        "power": 60,
         "accuracy": 100,
         "free": true,
         "predicate": []
@@ -60,9 +62,14 @@
     "grade": "E",
     "fling": {
       "type": "untyped",
-      "power": 35,
-      "accuracy": 100,
-      "hide": null
+      "power": 45,
+      "accuracy": 90,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -83,11 +90,62 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "SilphCo Defender Sidearm",
+      "type": "passive",
+      "_id": "vRxJemdpdO30GTyW",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "defender-shot-attack-damage",
+            "value": 5,
+            "predicate": [],
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.fhfuptGmpadYy37I.ActiveEffect.QO0MYb3X5EGQF0Iv",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1758158102085,
+        "modifiedTime": 1767461586862,
+        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+      }
+    }
+  ],
   "folder": "PhrQtZzEwKPjfmK2",
   "_id": "a1H9kQkRPQNzY4mS"
 }

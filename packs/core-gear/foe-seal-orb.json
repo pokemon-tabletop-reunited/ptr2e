@@ -19,18 +19,21 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "field",
+        "distance": null,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
     "traits": [
       "combat",
       "consumable",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
-    "description": "All foes in Room gain @Affliction[disabled] 5 (the affected attack is selected at random).",
+    "description": "<p>All foes in Room gain @Affliction[disabled 5]  (the affected attack is selected at random).</p>",
     "quantity": 1,
     "slug": "foe-seal-orb",
     "stack": 1,
@@ -42,10 +45,86 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Foe-Seal Orb",
+        "slug": "foe-seal-orb",
+        "description": "<p>All foes in Room gain @Affliction[disabled 5] (the affected attack is selected at random).</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "wonder-orb"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ]
   },
   "_id": "HzwvMLZJ17RvBUrg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Foe-Seal Orb",
+      "type": "passive",
+      "_id": "dmYlwbcSdd409AAM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "foe-seal-orb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758756791277,
+        "modifiedTime": 1758756818213,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "4MbEHvhwmG5DYTkB"
 }

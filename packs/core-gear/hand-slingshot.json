@@ -1,0 +1,195 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Hand Slingshot",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "hand-slingshot",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "1-handed",
+      "projectile",
+      "adaptable",
+      "conventional",
+      "modern",
+      "charge-pool-20",
+      "weapon"
+    ],
+    "actions": [
+      {
+        "name": "Hand Slingshot Fire",
+        "slug": "hand-slingshot-fire",
+        "traits": [
+          "adaptable",
+          "missile",
+          "crit-1",
+          "priority-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 60,
+        "accuracy": 95,
+        "description": "<p>Ammo Use: 1</p>"
+      },
+      {
+        "name": "Hand Slingshot Snapshot",
+        "slug": "hand-slingshot-snapshot",
+        "traits": [
+          "adaptable",
+          "missile",
+          "crit-1",
+          "flinch-10",
+          "interrupt"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "variant": "hand-slingshot-fire",
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 30,
+        "accuracy": 80,
+        "description": "<p>Ammo Use: 1</p>"
+      }
+    ],
+    "description": "<p>A slingshot is a small hand-powered projectile weapon. The classic form consists of a Y-shaped frame, strung with elastic material and a pouch in the middle of the elastic string to hold a projectile. One hand holds the frame, while the other hand grasps the pocket and draws it back to the desired extent to provide power for the projectile. Most associated with children and hoodlums, higher-tensile bands and longer draw designs are surprisingly effective for hunting.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "held",
+      "handsHeld": 1
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 55,
+      "accuracy": 85,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 4,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Hand Slingshot",
+      "type": "passive",
+      "_id": "aKgwgx3YRAHQ4Dor",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "hand-slingshot-fire-attack-damage",
+            "value": 2,
+            "predicate": [],
+            "label": "Fire",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "basic",
+            "key": "hand-slingshot-snapshot-attack-damage",
+            "value": 2,
+            "predicate": [],
+            "label": "Snapshot",
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ],
+  "_id": "datQlOPNAx8cCJgu"
+}

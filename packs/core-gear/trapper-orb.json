@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "other",
@@ -28,9 +33,10 @@
       "consumable",
       "wonder-orb",
       "held",
-      "fling"
+      "fling",
+      "mystery-dungeon"
     ],
-    "description": "Creates a random Hazard on all squares within a 5m Burst.",
+    "description": "<p>Creates a random 2x2 trap tile within the room.</p>",
     "quantity": 1,
     "slug": "trapper-orb",
     "stack": 1,
@@ -42,8 +48,11 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "D8mMAuGKVbooHU2G",
   "effects": [],

@@ -76,6 +76,10 @@ export class AttackModifierPopup extends ModifierPopup {
             return method === "flat" ? "stat-flat" : "invalid";
           case "effectiveness":
             return method === "stage" ? "effectiveness-stage" : "invalid";
+          case "strikes": 
+            return method === "flat" ? "strikes-flat" : "invalid";
+          case "hits":
+            return method === "flat" ? "hits-flat" : "invalid";
           default:
             return "invalid";
         }
@@ -91,7 +95,9 @@ export class AttackModifierPopup extends ModifierPopup {
         "damage-percentile": 7,
         "damage-flat": 8,
         "effectiveness-stage": 9,
-        invalid: 10,
+        "strikes-flat": 10,
+        "hits-flat": 11,
+        invalid: 12,
       };
 
       const checkModifiers = this.check.modifiers.map((m) => {
@@ -257,10 +263,10 @@ export class AttackModifierPopup extends ModifierPopup {
 
     return {
       modifiers,
-      rollModes: CONFIG.Dice.rollModes,
+      rollModes: CONFIG.ChatMessage.modes,
       rollMode:
-        this.context.rollMode === "roll"
-          ? game.settings.get("core", "rollMode")
+        this.context.rollMode === "public"
+          ? game.settings.get("core", "messageMode")
           : this.context.rollMode,
       avatarScroll: this.targets.length > 9,
       consumePP,
@@ -390,7 +396,9 @@ export class AttackModifierPopup extends ModifierPopup {
           "damage-percent",
           "damage-flat",
           "stat-flat",
-          "effectiveness-stage"
+          "effectiveness-stage",
+          "strikes-flat",
+          "hits-flat",
         ].includes(modifierType)
       ) {
         errors.push("Invalid modifier type. Please select a valid modifier type.");
@@ -425,6 +433,10 @@ export class AttackModifierPopup extends ModifierPopup {
               return { method: "flat", type: "stat" };
             case "effectiveness-stage":
               return { method: "stage", type: "effectiveness" };
+            case "strikes-flat":
+              return { method: "flat", type: "strikes" };
+            case "hits-flat":
+              return { method: "flat", type: "hits" };
           }
           return {};
         })(modifierType);
@@ -436,10 +448,10 @@ export class AttackModifierPopup extends ModifierPopup {
     const rollModeInput = htmlQuery<HTMLSelectElement>(htmlElement, "select[name='rollmode']");
     rollModeInput?.addEventListener("change", () => {
       const rollMode = rollModeInput.value;
-      if (!tupleHasValue(Object.values(CONST.DICE_ROLL_MODES), rollMode)) {
+      if (!tupleHasValue(Object.keys(CONFIG.ChatMessage.modes), rollMode)) {
         throw Error("Unexpected roll mode");
       }
-      this.context.rollMode = rollMode;
+      this.context.rollMode = rollMode as RollMode;
     });
 
     const variantSelector = htmlQuery<HTMLSelectElement>(htmlElement, "select[name='variant']");
@@ -503,13 +515,13 @@ export class AttackModifierPopup extends ModifierPopup {
     const variantSlug = select.value;
 
     const uuid = this.context.actor?.uuid ?? this.context.attack?.actor?.uuid;
-    const origin = await fromUuid<ActorPTR2e>(uuid);
+    const origin = await fu.fromUuid<ActorPTR2e>(uuid);
     if (!origin) return;
 
     const variant = origin.actions.attack.get(variantSlug);
     if (!variant) return void ui.notifications.error(`Unable to find variant ${variantSlug}`);
 
-    this.resolve?.(null);
+    this.resolve?.({variantSelected: true});
     this.promise = null;
     this.resolve = undefined;
 

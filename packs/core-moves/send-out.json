@@ -12,37 +12,17 @@
         ],
         "name": "Send Out",
         "slug": "send-out",
-        "description": "<p>Effect: Using the method of their choosing, the user brings the targeted creature from their Team into combat.<br>Most commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.</p>",
+        "description": "<p>Using the method of their choosing, the user brings the targeted creature from their Team into combat (at the start of the combat, this may be done as a Free Action).<br><br>In @Trait[conventional] settings creatures are stored and released from @Trait[ball]s. Creatures can be sent out in the following ways:</p><ul><li>Released from the Ball within 6m of the user while the Ball is on the user.</li><li>Released from the Ball within 3m of a space the Ball is Flung at (this Fling is freely done as part of this Action)</li></ul>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "generic",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
         "cost": {
           "activation": "simple",
           "powerpoints": 0
-        }
-      },
-      {
-        "free": true,
-        "traits": [
-          "manipulate",
-          "basic"
-        ],
-        "name": "Send Out (Combat Start)",
-        "slug": "send-out-combat-start",
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: Using the method of their choosing, the user brings the targeted creature from their Team into combat.<br>Most commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.</p>",
-        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
-        "type": "generic",
-        "range": {
-          "target": "ally",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "free",
-          "powerpoints": 0,
-          "trigger": "<p>The user enters combat.</p>"
         }
       }
     ],
@@ -56,5 +36,6 @@
     }
   },
   "_id": "XJ6olVrexEHDTqTM",
+  "folder": "EpCOePz8omfXbp34",
   "effects": []
 }

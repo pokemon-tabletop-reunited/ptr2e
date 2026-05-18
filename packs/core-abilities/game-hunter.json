@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's Physical- and Special-Category attacks deal 33% more damage to creatures that possess 50% of their max HP or less.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's Physical- and Special-Category attacks deal 33% more damage to creatures that meet the @Trait[desperation-1-2] Condition.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Hunting.svg"
       }
     ],
-    "description": "<p>Effect: The user's Physical- and Special-Category attacks deal 33% more damage to creatures that possess 50% of their max HP or less.</p>",
+    "description": "<p>Effect: The user's Physical- and Special-Category attacks deal 33% more damage to creatures that meet the @Trait[desperation-1-2] Condition.</p>",
     "traits": [],
     "slug": "game-hunter",
     "_migration": {
@@ -31,7 +32,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "fRaVCVtd9pDR7YHl",
@@ -50,27 +52,27 @@
             "predicate": [
               "target:state:desperation-1-2"
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -82,13 +84,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.6",
         "createdTime": 1737571344650,
         "modifiedTime": 1737571379963,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

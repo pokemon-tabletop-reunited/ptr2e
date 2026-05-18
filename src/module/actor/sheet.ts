@@ -17,7 +17,6 @@ import {
   DocumentSheetConfigurationExpanded,
 } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
 import { AttackPTR2e, PTRCONSTS, Trait } from "@data";
@@ -175,7 +174,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         return new SkillsEditor(this.actor).render(true);
       },
       "luck-roll": async function (this: ActorSheetPTRV2) {
-        const skill = this.actor.system.skills.get("luck")!;
+        const skill = this.actor.system.skills["luck"]!;
         await skill.endOfDayLuckRoll();
       },
       "rest": function (this: ActorSheetPTRV2) {
@@ -196,9 +195,20 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         const type = ((event.target as HTMLElement).closest("[data-type]") as HTMLElement)?.dataset.type;
         if (!type) return;
 
+
         return void await this.document.createEmbeddedDocuments("Item", [{
-          name: ItemPTR2e.defaultName({ type, parent: this.document }),
-          type,
+          name: type === "ammo" ? "Ammo" : ItemPTR2e.defaultName({ type, parent: this.document }),
+          ...(() => {
+            if (type === "ammo") {
+              return {
+                type: "consumable",
+                system: {
+                  consumableType: "ammo",
+                }
+              }
+            }
+            return { type };
+          })(),
         }]);
       },
       "browse": async function (this: ActorSheetPTRV2, event: Event) {
@@ -268,7 +278,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     actions: {
       id: "actions",
       template: "systems/ptr2e/templates/actor/actor-actions.hbs",
-      scrollable: [".scroll"]
+      scrollable: ["[data-tab='actionsCombat']", ".scroll"]
     },
     inventory: {
       id: "inventory",
@@ -458,10 +468,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   _prepareEffectiveness(): Record<string, { value: number, name: string }[]> {
     const effectiveness = { effective: [], ineffective: [], immune: [] } as Record<string, { value: number, name: string }[]>;
+    const setting = game.settings.get("ptr2e", "pokemonTypes");
+    
     for (const [type, value] of Object.entries(this.actor.system.type.effectiveness)) {
-      //TODO: Make this a setting
-      if (type === "nuclear") continue;
-      if (type === "shadow") continue;
+      if(setting[type as keyof typeof setting]?.hide) continue;
 
       if (value === 1) continue;
       if (value === 0) {
@@ -483,6 +493,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         name: type
       });
     }
+
+    // Allow modules to manipulate data as needed
+    Hooks.callAll("ptr2e.displayEffectiveness", effectiveness, this.actor);
+
     return effectiveness;
   }
 
@@ -510,15 +524,17 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
 
     if (partId === "inventory") {
-      const inventory = (() => {
+      const { inventory, ammoOptions } = (() => {
+        const ammoOptions: Record<string, { label: string; value: string; selected: boolean }[]> = {};
         const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
         for (const item of this.actor.items) {
           const physicalItems = [
             "weapon",
             "equipment",
             "consumable",
+            "ammo",
             "gear",
-            "container",
+            "container"
           ];
           for (const type of physicalItems) {
             if (!inventory[type]) inventory[type] = [];
@@ -536,20 +552,62 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return physicalItems.includes(item.type);
           }
           if (isTypeOfPhysicalItem(item)) {
+            if (item.type === "consumable" && item.system.consumableType === "ammo") {
+              inventory["ammo"].push(item);
+              continue;
+            }
             const category = item.type;
             inventory[category].push(item);
           }
         }
         for (const key of Object.keys(inventory)) {
+          if (key !== "ammo") {
+            for (const item of inventory[key]) {
+              if ('ammoType' in item.system && item.system.ammoType instanceof Set && item.system.ammoType.size > 0) {
+                const options = [];
+                for (const ammo of inventory["ammo"].filter(i => i.system.traits && (i as ConsumablePTR2e).system.equipped.carryType !== "dropped" && i.system.traits.some(t => (item.system.ammoType as Set<string>).has(t.slug)))) {
+                  options.push({
+                    label: `${ammo.name} (${ammo.system.quantity}/${ammo.system.stack || 1})`,
+                    value: ammo.uuid,
+                    selected: item.system.ammo === ammo.uuid
+                  });
+                }
+                ammoOptions[item.id] = options;
+              }
+            }
+          }
           inventory[key].sort((a, b) => a.sort - b.sort);
         }
-        return inventory;
+        return { inventory, ammoOptions };
       })();
       context.inventory = inventory;
+      context.ammoOptions = ammoOptions;
     }
 
     if (partId === "actions") {
       context.subtabs = this._getSubTabs();
+      context.actions = {
+        generic: [...this.actor.actions.generic, ...this.actor.actions.pokeball].map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        passive: this.actor.actions.passive.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        camping: this.actor.actions.camping.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        downtime: this.actor.actions.downtime.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+        exploration: this.actor.actions.exploration.map(action => ({
+          action,
+          sort: action.item.sort
+        })).sort((a, b) => a.sort - b.sort).map(({ action }) => action),
+      }
     }
 
     if (partId === "effects") {
@@ -586,6 +644,36 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       const { perk: perks, ability: abilities } = this.actor.itemTypes;
       context.perks = perks.sort((a, b) => a.sort - b.sort);
       context.abilities = abilities.sort((a, b) => a.sort - b.sort);
+    }
+
+    if (partId === "biography") {
+      const history = this.actor.flags.ptr2e?.evolutionHistory ?? [];
+      const entries = [] as { img: string; name: string; uuid: string }[];
+
+      for(const entry of history) {
+        const species = await fu.fromUuid<SpeciesPTR2e>(entry.uuid)
+        if(!species) {
+          entries.push({
+            img: "icons/svg/mystery-man.svg",
+            name: Handlebars.helpers.formatSlug(entry.slug),
+            uuid: ""
+          })
+        } else {
+          entries.push({
+            img: await species.system.getSpeciesArt(this.actor.system.shiny),
+            name: species.name,
+            uuid: entry.uuid
+          })
+        }
+      }
+      if(!entries.length && this.actor.species) {
+        entries.push({
+          img: await this.actor.species.getSpeciesArt(),
+          name: this.actor.species.parent.name,
+          uuid: this.actor.species.parent.uuid
+        });
+      }
+      context.evolutionHistory = entries;
     }
 
     return context;
@@ -885,6 +973,22 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           }
         });
       }
+
+      for (const element of htmlQueryAll<HTMLSelectElement>(
+        htmlElement,
+        "select.ammo-select"
+      )) {
+        element.addEventListener("change", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const itemId = element.dataset.id;
+          const item = this.document.items.get(itemId!) as ItemPTR2e;
+          if (!item) return;
+
+          const ammoUuid = element.value || null;
+          await item.update({ "system.ammo": ammoUuid });
+        });
+      }
     }
 
     if (partId === "perks") {
@@ -967,7 +1071,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     event.preventDefault();
     const target = event.currentTarget as HTMLElement;
     const component = target.dataset.component as ActorComponentKey;
-    const sheet = new ComponentPopout({ actor: this.actor, component });
+    const sheet = new ComponentPopout({ document: this.actor, actor: this.actor, component });
     sheet.render(true);
   }
 
@@ -1162,13 +1266,26 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slug = skillDiv.dataset.slug;
     if (!slug) return;
 
-    const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
-    const index = skills.findIndex((s) => s.slug === slug);
-    if (index === -1) return;
+    const skills = this.actor.system.toObject().skills;
+    if (!skills[slug]) {
+      if(!this.document.system.skills[slug]) return;
+      // @ts-expect-error - Correct assignment
+      skills[slug] = {
+        ...this.document.system.skills[slug]
+      }
+    }
 
-    skills[index].favourite = !skills[index].favourite;
-    if (skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
-    this.actor.update({ "system.skills": skills });
+    skills[slug].favourite = !skills[slug].favourite;
+    if (skills[slug].favourite && skills[slug].hidden) skills[slug].hidden = false;
+    this.actor.update({
+      "system.skills": {
+        [slug]: {
+          ...this.document.system.skills[slug],
+          favourite: skills[slug].favourite,
+          hidden: skills[slug].hidden,
+        }
+      }
+    })
   }
 
   static async _onHideSkill(this: ActorSheetPTRV2, event: Event) {
@@ -1178,13 +1295,26 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     const slug = skillDiv.dataset.slug;
     if (!slug) return;
 
-    const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
-    const index = skills.findIndex((s) => s.slug === slug);
-    if (index === -1) return;
+    const skills = this.actor.system.toObject().skills;
+    if (!skills[slug]) {
+      if(!this.document.system.skills[slug]) return;
+      // @ts-expect-error - Correct assignment
+      skills[slug] = {
+        ...this.document.system.skills[slug]
+      }
+    }
 
-    skills[index].hidden = !skills[index].hidden;
-    if (skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
-    this.actor.update({ "system.skills": skills });
+    skills[slug].hidden = !skills[slug].hidden;
+    if (skills[slug].hidden && skills[slug].favourite) skills[slug].favourite = false;
+    this.actor.update({
+      "system.skills": {
+        [slug]: {
+          ...this.document.system.skills[slug],
+          favourite: skills[slug].favourite,
+          hidden: skills[slug].hidden,
+        }
+      }
+    });
   }
 
   protected async _onCreate(event: Event) {
@@ -1253,7 +1383,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   }
 
   override bringToFront(): void {
-    if(foundry.applications.instances.has(`stats-editor-${this.actor.id}`)) return;
+    if (foundry.applications.instances.has(`stats-editor-${this.actor.id}`)) return;
     return super.bringToFront();
   }
 }

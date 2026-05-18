@@ -1,16 +1,42 @@
 {
+  "folder": "V4skAU6G3OH5fXab",
   "name": "Absorb Bulb",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
-  "type": "equipment",
+  "type": "consumable",
   "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Absorb Bulb",
+        "slug": "absorb-bulb",
+        "description": "<p>Trigger: The user is hit by a @Trait[water]-type attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
+        "traits": [
+          "consumable",
+          "natural",
+          "combat"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
     "crafting": {
       "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
-      "slot": "belt",
       "carryType": "stowed",
+      "slot": "belt",
       "handsHeld": null
     },
     "grade": "D",
@@ -18,60 +44,85 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
-    "rarity": "uncommon",
+    "quantity": 1,
+    "rarity": "common",
+    "publication": {
+      "source": "PTR2e Core",
+      "authors": [
+        "PTR2e Team"
+      ],
+      "notes": ""
+    },
+    "description": "<p>Trigger: The user is hit by a @Trait[water]-type attack.<br><br>Effect: The user gains @UUID[Compendium.ptr2e.core-effects.1TqcwIUNl32wJCAa]{+1 Special Attack Stage} for 5 activations.</p>",
     "traits": [
       "consumable",
       "natural",
       "combat"
     ],
-    "actions": [
-      {
-        "name": "Absorb Bulb",
-        "slug": "absorb-bulb",
-        "type": "generic",
-        "description": "Trigger: The user is hit by a Water-type attack.\nEffect: The user gains +2 SPATK Stages for 10 activations.",
-        "traits": [
-          "Consumable",
-          "Natural",
-          "Combat"
-        ],
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "trigger": "The user is hit by a Water-type attack."
-        },
-        "img": "icons/svg/explosion.svg"
-      }
-    ],
-    "description": "Trigger: The user is hit by a Water-type attack.\nEffect: The user gains +2 SPATK Stages for 10 activations.",
-    "slug": "absorb-bulb",
-    "quantity": 1,
-    "identification": {
-      "misidentified": null,
-      "status": "identified",
-      "unidentified": {
-        "name": "Unidentified Item",
-        "img": "systems/ptu/css/images/icons/item_icon.png",
-        "description": "<p>Unidentified Item</p>"
-      }
-    },
-    "_migration": {
-      "version": null,
-      "previous": null
-    },
-    "publication": {
-      "source": "PTR 2e Core",
-      "authors": [
-        "PTR 2e Team"
-      ]
-    }
+    "consumableType": "other",
+    "stack": 1,
+    "cost": 3
   },
-  "_id": "ZoKQZxirBB1hvDxt",
-  "effects": [],
-  "folder": "ZJQbcaoYaa7A40WO"
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
+  "effects": [
+    {
+      "name": "Absorb Bulb",
+      "type": "passive",
+      "_id": "tGZJjQc4WLPhetLb",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "absorb-bulb-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.5.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "4Qf7JTewZGUoMtMQ"
 }

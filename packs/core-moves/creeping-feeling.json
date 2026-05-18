@@ -12,7 +12,7 @@
       "authors": [
         "PTR 2e Team"
       ],
-      "notes": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>"
+      "notes": "<p>Effect: On hit, the target has a 30% chance of being @Affliction[delay 30].</p>"
     },
     "traits": [],
     "actions": [
@@ -41,7 +41,7 @@
         "power": 35,
         "accuracy": 95,
         "predicate": [],
-        "description": "<p><span style=\"font-family: Signika, sans-serif\">Effect: On hit, the target has a 30% chance of being Flinched.</span></p>"
+        "description": "<p><span style=\"font-family: Signika, sans-serif\">Effect: On hit, the target has a 30% chance of being @Affliction[delay 30].</span></p>"
       }
     ],
     "grade": "E"
@@ -59,43 +59,39 @@
           {
             "type": "roll-effect",
             "key": "creeping-feeling-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.advanceffectitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 30,
             "affects": "target",
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.amount",
-                "value": -30
-              },
-              {
-                "mode": 5,
-                "property": "name",
-                "value": "Flinch 30%"
+                "value": -30,
+                "method": 5
               }
             ],
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "dontMerge": false
+            "dontMerge": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -107,13 +103,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.05gTyZzErLsW9RtE.ActiveEffect.dStoecgRLGTkIVx9",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.7.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1740927920269,
-        "modifiedTime": 1740927930662,
-        "lastModifiedBy": "01onCaJSVMVOgMDI"
-      }
+        "modifiedTime": 1778796635467,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

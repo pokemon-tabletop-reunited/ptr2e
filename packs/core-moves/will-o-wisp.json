@@ -24,7 +24,7 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: On hit, the target is @Affliction[burn] 5.</p>",
+        "description": "<p>Effect: On hit, the target is @Affliction[burn 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -47,7 +47,7 @@
   "effects": [
     {
       "name": "Will-O-Wisp",
-      "type": "affliction",
+      "type": "passive",
       "_id": "cypLsu1AhZKgy1mQ",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -55,14 +55,14 @@
           {
             "type": "roll-effect",
             "key": "will-o-wisp-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -76,13 +76,9 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
       },
       "description": "",
       "origin": null,

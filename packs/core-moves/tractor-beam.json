@@ -26,7 +26,7 @@
         ],
         "category": "status",
         "accuracy": 100,
-        "description": "<p>Effect: The target is @Affliction[lifted] 5.</p>",
+        "description": "<p>Effect: The target is @Affliction[lifted 5].</p>",
         "predicate": []
       }
     ],
@@ -54,13 +54,13 @@
           {
             "type": "roll-effect",
             "key": "tractor-beam-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.liftedcondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.liftedcondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -71,13 +71,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -1,0 +1,103 @@
+{
+  "name": "Down The Sights (Effect)",
+  "type": "affliction",
+  "_id": "GslkeZgUjwbZLKXm",
+  "img": "icons/skills/targeting/crosshair-ringed-gray.webp",
+  "system": {
+    "changes": [
+      {
+        "type": "stage-modifier",
+        "key": "attack-crit",
+        "value": 1,
+        "predicate": [
+          {
+            "nor": [
+              "self:action:trait:contact",
+              "attack:category:status"
+            ]
+          }
+        ],
+        "phase": "initial",
+        "label": "Down The Sights (CRIT)",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      },
+      {
+        "type": "flat-modifier",
+        "value": 20,
+        "phase": "initial",
+        "predicate": [
+          {
+            "nor": [
+              "self:action:trait:contact",
+              "attack:category:status"
+            ]
+          }
+        ],
+        "key": "attack-accuracy",
+        "label": "Down The Sights (Accuracy)",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [
+          {
+            "nor": [
+              "self:action:trait:contact",
+              "attack:category:status"
+            ]
+          }
+        ],
+        "label": "Down The Sights (CRIT)",
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 40
+          }
+        ],
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      }
+    ],
+    "slug": null,
+    "traits": [],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "removeAfterAttacking": true,
+    "removeAfterAttacked": false,
+    "stacks": 0,
+    "priority": 50,
+    "formula": "",
+    "type": "damage"
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": 5,
+    "expiry": "turnEnd"
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "lastModifiedBy": null
+  },
+  "showIcon": 2
+}

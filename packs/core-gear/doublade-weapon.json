@@ -1,0 +1,129 @@
+{
+  "name": "Doublade (Weapon)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.111,
+      "previous": null
+    },
+    "slug": "doublade-weapon",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "living-weapon",
+      "weapon",
+      "pokemon",
+      "ghost",
+      "steel",
+      "sharp"
+    ],
+    "actions": [
+      {
+        "name": "Twin Draining Slash",
+        "slug": "twin-draining-slash",
+        "description": "<p>Effect: Upon resolving this attack, the user loses @Tick[-2] of HP.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "pokemon",
+          "ghost",
+          "steel",
+          "sharp",
+          "double-strike",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "physical",
+        "power": 50,
+        "accuracy": 90,
+        "free": true,
+        "predicate": []
+      },
+      {
+        "name": "Unnerving Reverberation",
+        "slug": "unnerving-reverberation",
+        "description": "<p>Effect: All valid targets lose -2 DEF Stages for 5 Activations.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "pokemon",
+          "ghost",
+          "steel",
+          "friendly",
+          "sonic"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "steel"
+        ],
+        "category": "status",
+        "accuracy": 90,
+        "free": true,
+        "predicate": []
+      }
+    ],
+    "description": "<p>Wielding a Doublade as a weapon. These two twin swords are said to only be able to be wielded by the most accomplished swordsman.</p>",
+    "crafting": {
+      "skill": "N/A",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 2,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "steel",
+      "power": 40,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Living Weapon"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [],
+  "folder": "V4skAU6G3OH5fXaf",
+  "flags": {},
+  "_id": "wlVpj31R67LhPG3q"
+}

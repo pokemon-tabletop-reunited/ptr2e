@@ -21,7 +21,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -83,16 +84,18 @@
           {
             "type": "roll-effect",
             "key": "fire-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
-            "predicate": [],
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "predicate": [
+              "origin:enemy"
+            ],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false,
             "alterations": [],
             "dontMerge": false,
-            "isFixedChance": false
+            "isFixedChance": false,
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -105,13 +108,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "<p>Your @Trait[fire] Type moves gain a 20% chance to @Affliction[burn 5], or increase that chance by +20%.</p>",
       "origin": null,
@@ -119,16 +117,15 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.348",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.4.3.beta",
         "createdTime": 1729380480086,
-        "modifiedTime": 1754225518896,
-        "lastModifiedBy": "dCIq77b7AO2frs8Z",
+        "modifiedTime": 1757798296213,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
       }
     }

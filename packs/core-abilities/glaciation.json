@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: In Snowy Weather the user's SPDEF stat is increased by 50%. The user is considered Ice Type for the effects of Snowy Weather.</p>",
         "img": "icons/svg/explosion.svg"
@@ -37,9 +38,70 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "b4tgzpXZgfHjUX08",
-  "effects": []
+  "effects": [
+    {
+      "name": "Glaciation",
+      "type": "passive",
+      "_id": "MOgyXUa8p563ko3C",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.5,
+            "predicate": [
+              "effect:summon:snowy-weather"
+            ],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "ice",
+            "predicate": [
+              "effect:summon:snowy-weather"
+            ],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765278935078,
+        "modifiedTime": 1765278984081,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

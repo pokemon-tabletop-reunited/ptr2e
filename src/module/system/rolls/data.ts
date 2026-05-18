@@ -1,7 +1,7 @@
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckDC } from "./degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";
-import { AttackPTR2e, Trait } from "@data";
+import { ActionCost, AttackPTR2e, Trait } from "@data";
 import { ActorPTR2e, EffectRoll } from "@actor";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRoll, CheckType } from "./check-roll.ts";
@@ -53,7 +53,7 @@ interface BaseRollContext {
     /** Any notes which should be shown for the roll. */
     notes?: (RollNote | RollNoteSource)[];
     /** The roll mode (i.e., 'roll', 'blindroll', etc) to use when rendering this roll. */
-    rollMode?: RollMode | "roll";
+    rollMode?: RollMode;
     /** If this is an attack, the target of that attack */
     target?: RollTarget | null;
     /** Action traits associated with the roll */
@@ -96,7 +96,7 @@ interface CheckRollContext extends BaseRollContext {
     /** Is the roll a reroll? */
     isReroll?: boolean;
     /** Omitted Subrolls */
-    omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage'>;
+    omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage' | 'amount'>;
     /** PP Cost */
     ppCost?: number;
     /** Should PP be consumed */
@@ -112,6 +112,8 @@ interface CheckRollContext extends BaseRollContext {
     };
     /** Attack Variants' slugs */
     variants?: string[];
+    isChangingVariant?: boolean;
+    outOfTurnCost?: ActionCost;
 }
 
 interface CaptureCheckRollContext extends CheckRollContext {

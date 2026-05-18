@@ -9,10 +9,12 @@
     },
     "slug": "linking-cord",
     "traits": [
-      "evolution"
+      "evolution",
+      "accessory",
+      "consumable"
     ],
     "actions": [],
-    "description": "<p>This item catalyses evolution for a number of Trade Evolution Pokemon</p>",
+    "description": "<p>This item catalyses evolution for a number of Trade Evolution Pokemon.<br><br>Effect: The user's EHR is increased by 25%, and their RES is reduced by 20% (to a minimum of 0).</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -21,14 +23,19 @@
     "equipped": {
       "carryType": "stowed",
       "handsHeld": null,
-      "slot": "backpack"
+      "slot": "accessory"
     },
     "grade": "C",
     "fling": {
       "type": "steel",
       "power": 70,
       "accuracy": 100,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "rare",
@@ -45,10 +52,67 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
-  "img": "systems/ptr2e/img/icons/gear_icon.webp",
-  "effects": [],
+  "img": "systems/ptr2e/img/item-icons/linking cord.webp",
+  "effects": [
+    {
+      "name": "Linking Cord",
+      "type": "passive",
+      "_id": "8HXFbbB3Tznx8ymD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectHitRate",
+            "value": 25,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": -20,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "createdTime": 1758631115953,
+        "modifiedTime": 1758631140049,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "_id": "Q508t9NBg4Fa7KKS"
 }

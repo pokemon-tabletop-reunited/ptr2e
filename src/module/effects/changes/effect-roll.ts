@@ -3,6 +3,8 @@ import { ChangeModel, ChangeSchema } from "@data";
 import { ItemPTR2e } from "@item";
 import { UUIDUtils } from "src/util/uuid.ts";
 import { ItemAlteration } from "../alterations/item.ts";
+import ActiveEffectPTR2e from "../document.ts";
+import { EffectUUID } from "types/foundry/common/documents/active-effect.js";
 
 export default class EffectRollChangeSystem extends ChangeModel {
   static override TYPE = "roll-effect";
@@ -31,7 +33,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
   static #validateUuid(
     value: unknown
   ): void | foundry.data.validation.DataModelValidationFailure {
-    if (!UUIDUtils.isItemUUID(value)) {
+    if (!UUIDUtils.isEffectUUID(value) && !UUIDUtils.isItemUUID(value)) {
       return new foundry.data.validation.DataModelValidationFailure({
         invalidValue: value,
         message: game.i18n.localize("PTR2E.Effect.FIELDS.ChangeUuid.invalid.notAnItemUuid"),
@@ -60,7 +62,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
   override apply(actor: ActorPTR2e): void {
     if (!this.actor) return;
 
-    const {selector, isCrit} = (() => {
+    const { selector, isCrit } = (() => {
       const selector = this.resolveInjectedProperties(this.selector)
       const isCrit = selector.endsWith("-crit");
       return {
@@ -82,20 +84,20 @@ export default class EffectRollChangeSystem extends ChangeModel {
     return async (params: DeferredValueParams = {}): Promise<EffectRoll | null> => {
       if (!this.actor) return null;
       if (!this.test(params.test ?? this.actor.getRollOptions())) return null;
-      
+
       const uuid = this.resolveInjectedProperties(this.uuid);
-      if (!UUIDUtils.isItemUUID(uuid)) {
+      if (!(UUIDUtils.isItemUUID(uuid) || UUIDUtils.isEffectUUID(uuid))) {
         this.failValidation(`"${uuid}" does not look like a UUID`);
         return null;
       }
       const effect: Maybe<ClientDocument> = await this.getItem(uuid);
-      if (!(effect instanceof ItemPTR2e && effect.type === "effect")) {
+      if (!(effect instanceof ItemPTR2e && effect.type === "effect" || effect instanceof ActiveEffectPTR2e)) {
         this.failValidation(`unable to find effect item with uuid "${uuid}"`);
         return null;
       }
 
       return {
-        effect: effect.uuid,
+        effect: effect.uuid as ItemUUID | EffectUUID,
         slug: effect.slug,
         chance: this.chance,
         label: this.label,
@@ -107,9 +109,9 @@ export default class EffectRollChangeSystem extends ChangeModel {
     }
   }
 
-  protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
+  public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fu.fromUuid(key))?.clone({}, {keepId: true}) ?? null;
+      return (await fu.fromUuid(key))?.clone({}, { keepId: true }) ?? null;
     } catch (error) {
       console.error(error);
       return null;

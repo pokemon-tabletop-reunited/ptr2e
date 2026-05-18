@@ -139,7 +139,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
         condition: () => game.user.isGM && (this.viewed?.turns.length ?? 0) > 0,
         callback: () => this.viewed?.resetEncounter()
       },
-      ...options.filter(o => o.name !== "COMBAT.InitiativeReset"),
+      ...options.filter(o => o.label !== "COMBAT.InitiativeReset"),
     ]
   }
 
@@ -147,34 +147,34 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
     const base = super._getEntryContextOptions();
     const options: EntryContextOption[] = [];
     for (const option of base) {
-      if (option.name === "COMBAT.CombatantClear") continue;
-      if (option.name === "COMBAT.CombatantReroll") {
-        option.name = "PTR2E.Combat.ContextMenu.ResetAV";
+      if (option.label === "COMBATANT.ACTIONS.Clear") continue;
+      if (option.label === "COMBATANT.ACTIONS.Reroll") {
+        option.label = "PTR2E.Combat.ContextMenu.ResetAV";
         option.icon = '<i class="fas fa-undo"></i>'
       }
-      if (option.name === "COMBAT.CombatantRemove") {
-        option.condition = li => {
+      if (option.label === "COMBATANT.ACTIONS.Remove") {
+        option.visible = li => {
           const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
           return combatant?.type !== "round" && this.viewed?.combatant !== combatant;
         }
         options.push(option);
         continue;
       }
-      if (option.name === "COMBAT.CombatantClearMovementHistory") {
+      if (option.label === "COMBATANT.ACTIONS.ClearMovementHistory") {
         options.push(option);
         continue;
       }
 
-      option.condition = li => {
+      option.visible = li => {
         const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
         return this.viewed?.combatant?.id !== combatant?.id;
       }
       options.push(option);
     }
     options.push({
-      name: "PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.name",
+      label: "PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.name",
       icon: '<i class="fas fa-bolt"></i>',
-      condition: li => {
+      visible: li => {
         const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
         return combatant?.type !== "round" && this.viewed?.combatant !== combatant;
       },

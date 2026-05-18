@@ -46,29 +46,26 @@
   "effects": [
     {
       "name": "Content",
-      "type": "passive",
+      "type": "affliction",
       "_id": "bT8l1ApbMaLFjCHA",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
-            "key": "content-generic",
-            "value": "Compendium.ptr2e.core-effects.Item.4DlXFTVooz07YcDm",
+            "type": "roll-option",
+            "value": "content:ability",
+            "phase": "initial",
             "predicate": [],
-            "chance": 100,
-            "isFixedChance": true,
-            "affects": "target",
-            "alterations": [
-              {
-                "mode": 5,
-                "property": "system.changes.0.value",
-                "value": 2
-              }
-            ],
-            "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Content Ability",
+            "state": true,
+            "alwaysActive": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
           }
         ],
         "slug": null,
@@ -77,12 +74,20 @@
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
-        "stacks": 0
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/8",
+        "type": "healing",
+        "predicate": [
+          "content:ability"
+        ]
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "seconds",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -95,13 +100,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
-        "createdTime": 1753828119021,
-        "modifiedTime": 1753828469660,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778669991098,
+        "modifiedTime": 1778670015688,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

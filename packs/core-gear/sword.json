@@ -10,39 +10,79 @@
     "slug": "sword",
     "traits": [
       "weapon",
-      "blade"
+      "blade",
+      "fling",
+      "1-handed",
+      "switch-grip",
+      "modern",
+      "early-modern",
+      "medieval",
+      "ancient",
+      "fantasy"
     ],
     "actions": [
       {
-        "name": "Sword Strike",
-        "slug": "sword-action-1",
-        "description": "<p>This is a standard, one-handed and straight-edged blade, such as a Jian or a Longsword.</p>",
+        "name": "Sword Swing",
+        "slug": "sword-swing",
         "traits": [
           "weapon",
           "sharp",
-          "contact"
+          "contact",
+          "adaptable",
+          "pass-1",
+          "priority-10"
         ],
         "type": "attack",
-        "range": {
-          "target": "enemy",
-          "distance": 1,
-          "unit": "m"
-        },
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "cost": {
           "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
         },
         "types": [
           "untyped"
         ],
         "category": "physical",
-        "power": 60,
-        "accuracy": 100,
         "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "predicate": [],
+        "power": 50,
+        "accuracy": 100
+      },
+      {
+        "name": "Sword Thrust",
+        "slug": "sword-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "adaptable",
+          "crit-1",
+          "grapple",
+          "flinch-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 80,
+        "accuracy": 95,
+        "free": true
       }
     ],
-    "description": "<p>This is a standard, one-handed and straight-edged blade, such as a Jian or a Longsword.</p>",
+    "description": "<p>A sword is an edged, bladed weapon intended for manual cutting and thrusting. These are often straight, double-edged weapons with a one-and-a-half-handed hilt, crossguard, and a blade length between 0.7-1.1m.</p>",
     "crafting": {
       "skill": "Blacksmithing or Handiwork",
       "spans": 6,
@@ -55,10 +95,15 @@
     },
     "grade": "D",
     "fling": {
-      "type": "steel",
-      "power": 40,
-      "accuracy": 100,
-      "hide": null
+      "type": "untyped",
+      "power": 85,
+      "accuracy": 90,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -71,16 +116,86 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponType": "Melee",
-    "weaponRange": "1",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "_id": "2MoMKszqC3PlxHxN",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sword",
+      "type": "passive",
+      "_id": "yxvzqvjaJw3Mm08g",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "{item|id}-attack-damage-flat",
+            "value": 10,
+            "predicate": [],
+            "label": "Sword",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "sword-thrust-attack-damage-flat",
+            "value": 7,
+            "predicate": [],
+            "label": "Sword Thrust",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-sword-attack-damage-flat",
+            "value": 8,
+            "predicate": [],
+            "label": "Sword (Fling)",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757548541362,
+        "modifiedTime": 1757548614306,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

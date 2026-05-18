@@ -58,32 +58,30 @@
           {
             "type": "roll-effect",
             "key": "elixir-field-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.rMNLqloV5nLmCLrZ",
             "predicate": [],
             "chance": 10,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "dontMerge": false
+            "dontMerge": false,
+            "isFixedChance": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -95,7 +93,7 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.347",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.0.0",
         "createdTime": 1729541410440,

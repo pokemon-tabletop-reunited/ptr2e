@@ -10,7 +10,8 @@
         "name": "Poison Powder",
         "type": "attack",
         "traits": [
-          "powder"
+          "powder",
+          "basic"
         ],
         "range": {
           "target": "cone",
@@ -26,7 +27,7 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, all valid targets gain @Affliction[poison] 5.</p>",
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[poison 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -55,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "poison-powder-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,13 +73,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

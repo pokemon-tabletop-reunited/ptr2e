@@ -7,8 +7,8 @@
       {
         "traits": [
           "defensive",
-          "interrupt-4",
-          "delay-2"
+          "interrupt",
+          "flinch-20"
         ],
         "name": "Cold Rebound",
         "slug": "cold-rebound",
@@ -55,14 +55,13 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.YoLEpica6f4PLgWO",
             "predicate": [
               "ability:cold-rebound:active"
             ],
             "alterations": [
               {
-                "mode": 5,
+                "method": 5,
                 "property": "system.actions.0.free",
                 "value": "true"
               }
@@ -74,11 +73,23 @@
               "granter": "cascade"
             },
             "allowDuplicate": false,
-            "mode": 2,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false
+          },
+          {
+            "type": "roll-note",
+            "value": "Hit by a Contact Move? {actor|link} can use {item|link}.",
+            "phase": "initial",
+            "predicate": [],
+            "key": "contact-trait-attack",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -91,13 +102,10 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -109,14 +117,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737395182970,
-        "modifiedTime": 1754317340889,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778668599705,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

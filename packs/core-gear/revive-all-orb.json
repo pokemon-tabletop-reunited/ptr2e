@@ -19,7 +19,12 @@
       "type": "untyped",
       "power": 40,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "uncommon",
     "consumableType": "other",
@@ -27,9 +32,7 @@
       "combat",
       "consumable",
       "restorative",
-      "wonder-orb",
-      "held",
-      "fling"
+      "wonder-orb"
     ],
     "description": "All allies in the Room are healed of @Affliction[fainted], healing 1 Stack of @Affliction[weary] and have their HP set to 25%.",
     "quantity": 1,
@@ -43,8 +46,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": []
   },
   "_id": "xVGVi27Pi9iGuKLq",
   "effects": [],

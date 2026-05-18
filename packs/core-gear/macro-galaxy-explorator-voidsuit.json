@@ -1,0 +1,165 @@
+{
+  "folder": "UUWElZA9w1KEqZS7",
+  "name": "Macro-Galaxy Explorator Voidsuit",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "explorator-voidsuit",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "armor",
+      "sci-fi"
+    ],
+    "actions": [],
+    "description": "<p>The Macro-Galaxy Explorator Voidsuit is a feature-replete voidsuit, with integrated @UUID[Compendium.ptr2e.core-gear.Item.GY9OebUM3NM9MSqj]{Thrustpack} and robust life support, technological features, and hazard mitigation. It is necessarily cumbersome to accommodate long-term missions in the vacuum of space.</p><p>Grants the user +15 Base HP, +10 DEF, and +5 SPDEF, and reduces their SPD by -40%, while causing them to take -10% less Special-Category damage and gain +25% RES.</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "worn",
+      "handsHeld": null
+    },
+    "grade": "B",
+    "fling": {
+      "type": "untyped",
+      "power": 130,
+      "accuracy": 60,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 1,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "rare",
+    "ammoType": [],
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Explorator Voidsuit",
+      "type": "passive",
+      "_id": "lErmTr4awUCPtMUM",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "stats-alteration",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "hp": 15,
+            "atk": null,
+            "def": 10,
+            "spa": null,
+            "spd": 5,
+            "spe": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "special-attack-damage-percentile",
+            "value": -10,
+            "predicate": [],
+            "label": "Explorator Voidsuit",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 25,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": -0.4,
+            "predicate": [],
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-gear.Item.GY9OebUM3NM9MSqj",
+            "predicate": [],
+            "alterations": [
+              {
+                "property": "system.equipped.carryType",
+                "value": "equipped",
+                "method": 5
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "q4XON6wsQ8Rbi31l"
+}

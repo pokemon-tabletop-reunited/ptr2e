@@ -10,23 +10,24 @@
         "name": "Sweet Kiss",
         "type": "attack",
         "traits": [
-          "social"
+          "social",
+          "basic"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 1
         },
         "category": "status",
         "accuracy": 75,
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: On hit, the target becomes @Affliction[confused] 5.</p>",
+        "description": "<p>Effect: On hit, the target becomes @Affliction[confused 5].</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -57,14 +58,14 @@
           {
             "type": "roll-effect",
             "key": "sweet-kiss-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.confusedconditio",
             "predicate": [],
             "chance": 100,
             "affects": "target",
-            "mode": 2,
             "priority": null,
             "ignored": false,
-            "alterations": []
+            "alterations": [],
+            "method": 2
           }
         ],
         "slug": null,
@@ -75,13 +76,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

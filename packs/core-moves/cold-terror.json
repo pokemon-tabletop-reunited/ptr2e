@@ -29,7 +29,7 @@
         "category": "special",
         "power": 65,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite] 5 and a 20% chance of gaining @Affliction[fear] 5.</p>",
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite 5] and a 20% chance of gaining @Affliction[fear 5].</p>",
         "predicate": []
       }
     ],
@@ -58,7 +58,7 @@
           {
             "type": "roll-effect",
             "key": "cold-terror-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
             "predicate": [],
             "chance": 20,
             "affects": "target",
@@ -66,13 +66,13 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "cold-terror-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
             "predicate": [],
             "chance": 20,
             "affects": "target",
@@ -80,8 +80,8 @@
             "isFixedChance": false,
             "alterations": [],
             "dontMerge": false,
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -94,13 +94,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

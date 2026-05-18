@@ -13,16 +13,21 @@
       ]
     },
     "equipped": {
-      "slot": "belt",
+      "slot": "slotless",
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "S",
+    "grade": "D",
     "fling": {
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "rare",
     "consumableType": "restorative",
@@ -33,10 +38,10 @@
       "natural",
       "empowering"
     ],
-    "description": "The target gains +1 Max PP. (Max 20)",
-    "quantity": 1,
+    "description": "<p>Effect: The user gains +1 Max PP (this item is treated as being Consumed while Equipped).</p><p>Restriction: Creatures can usually only gain 20 additional PP from this item.</p>",
+    "quantity": 2,
     "slug": "pp-up",
-    "stack": 1,
+    "stack": 2,
     "_migration": {
       "version": null,
       "previous": null
@@ -47,7 +52,9 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "actions": [],
+    "ammoType": []
   },
   "_id": "75Ii95AzB4lsWRM6",
   "effects": [
@@ -61,22 +68,24 @@
           {
             "type": "basic",
             "key": "system.modifiers.powerPoints",
-            "value": 1,
+            "value": "@item.system.quantity",
             "predicate": [],
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -89,7 +98,7 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
         "systemVersion": "1.3.2.beta",
         "createdTime": 1747508856417,

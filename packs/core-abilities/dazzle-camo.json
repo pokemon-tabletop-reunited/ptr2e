@@ -40,9 +40,104 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "HKudkInf0tUeQvHe",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dazzle Camo",
+      "type": "passive",
+      "_id": "kRAzwod1qzbAO5gC",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "dazzle-camo:active",
+            "predicate": [],
+            "domain": "all",
+            "label": "Dazzle Camo",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "ignored": false,
+            "suboptions": [],
+            "method": 2
+          },
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "dazzle-camo:active"
+            ],
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.8fXX3s5sxxLXvGPv",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:flying"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "priority": null,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765239372320,
+        "modifiedTime": 1765239502340,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

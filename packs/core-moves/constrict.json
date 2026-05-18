@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "grapple"
+          "grapple",
+          "basic"
         ],
         "range": {
           "target": "creature",
@@ -55,13 +56,13 @@
           {
             "type": "roll-effect",
             "key": "constrict-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 20,
             "affects": "target",
-            "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -72,13 +73,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

@@ -1,6 +1,5 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
-import { CombatantPTR2e } from "@combat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e, PerkPTR2e, SummonPTR2e } from "@item";
@@ -12,9 +11,11 @@ export default class TooltipsPTR2e {
   #observer: MutationObserver | undefined;
   #timeout: number | null = null;
 
-  get tooltip(): HTMLElement {
-    return document.getElementById("tooltip") as HTMLElement;
+  get tooltip() {
+    return this.#tooltip!;
   }
+
+  #tooltip = document.getElementById("tooltip");
 
   /**
    * Initialize the tooltip observer
@@ -56,7 +57,7 @@ export default class TooltipsPTR2e {
 
   _clearAutoLock() {
     if (this.#timeout) {
-      window.clearTimeout(this.#timeout);
+      (this.tooltip.ownerDocument.defaultView ?? window).clearTimeout(this.#timeout);
       this.#timeout = null;
     }
   }
@@ -64,7 +65,7 @@ export default class TooltipsPTR2e {
   _autoLockTooltip(timeout = 2000) {
     if (this.#timeout) return;
 
-    this.#timeout = window.setTimeout(() => {
+    this.#timeout = (this.tooltip.ownerDocument.defaultView ?? window).setTimeout(() => {
       this.#timeout = null;
       if (this.tooltip.classList.contains("active")) {
         game.tooltip.lockTooltip();
@@ -130,19 +131,33 @@ export default class TooltipsPTR2e {
     const data = game.ptr.data.traits.getTrait(trait);
     if (!data) return false;
 
-    this.tooltip.innerHTML = `<h4 class="trait">[${data.label
-      }]</h4><content>${await foundry.applications.ux.TextEditor.enrichHTML(data.description)}</content>
-        <div class="progress-circle">
-            <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
-                <circle class="bg"></circle>
-                <circle class="fg"></circle>
-                <circle class="fgb"></circle>
-            </svg>
-        </div>`;
-    const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as
-      | TooltipDirections
-      | undefined;
-    requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+    await this._renderTooltip({
+      path: "systems/ptr2e/templates/partials/trait-tooltip.hbs",
+      data: {
+        label: data.label,
+        description: await foundry.applications.ux.TextEditor.enrichHTML(data.description),
+        related: await foundry.applications.ux.TextEditor.enrichHTML(data.related.map(r => `@Trait[${r}]`).join(", ")),
+        type: data.type,
+        colors: Trait.bgColors[data.type || "default"]
+      },
+      direction: game.tooltip.element?.dataset.tooltipDirection as
+        | TooltipDirections
+        | undefined,
+    });
+
+    // this.tooltip.innerHTML = `<h4 class="trait">[${data.label
+    //   }]</h4><content>${await foundry.applications.ux.TextEditor.enrichHTML(data.description)}</content>
+    //     <div class="progress-circle">
+    //         <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
+    //             <circle class="bg"></circle>
+    //             <circle class="fg"></circle>
+    //             <circle class="fgb"></circle>
+    //         </svg>
+    //     </div>`;
+    // const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as
+    //   | TooltipDirections
+    //   | undefined;
+    // requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
     return tooltipTrait ? 1 : 2000;
   }
 
@@ -190,7 +205,7 @@ export default class TooltipsPTR2e {
 
   async _onEffectTooltip() {
     const effect = await (async () => {
-      const effectId = game.tooltip.element?.dataset.id;
+      const effectId = game.tooltip.element?.dataset.id || game.tooltip.element?.dataset.effectId;
       if (!effectId) return null;
 
       const parent = await fu.fromUuid<ActorPTR2e>(
@@ -358,20 +373,11 @@ export default class TooltipsPTR2e {
           const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
-          const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+          await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.createSummonCombatant, { 
             name: summonItem.name,
-            type: "summon",
-            system: {
-              owner: action.actor?.uuid ?? null,
-              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
-            }
-          }])
-
-          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
-
-          ChatMessage.create({
-            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
-          });
+            owner: action.actor?.uuid ?? null,
+            item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
+           });
         });
       }
     }
@@ -503,21 +509,12 @@ export default class TooltipsPTR2e {
 
           const summonItem = await fu.fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
           if (!summonItem) return void ui.notifications.error("Summon not found on action.");
-
-          const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+          
+          await game.ptr.sockets.system.executeAsGM(game.ptr.sockets.systemEvents.createSummonCombatant, { 
             name: summonItem.name,
-            type: "summon",
-            system: {
-              owner: action.actor?.uuid ?? null,
-              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
-            }
-          }])
-
-          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
-
-          ChatMessage.create({
-            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
-          });
+            owner: action.actor?.uuid ?? null,
+            item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
+           });
         });
       }
     }
@@ -543,15 +540,11 @@ export default class TooltipsPTR2e {
     if (!target) return false;
 
     const accuracy = target.accuracyRoll;
-    if (!accuracy) {
-      this.tooltip.innerHTML = "No accuracy roll - Auto hit!";
-      return false;
-    };
 
     this.tooltip.classList.add("status");
     await this._renderTooltip({
       path: "systems/ptr2e/templates/chat/tooltips/status.hbs",
-      data: { target, accuracy },
+      data: { target, accuracy, hit: target.hit },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
@@ -782,19 +775,22 @@ export default class TooltipsPTR2e {
     return 500;
   }
 
-  async #createItemTooltip<TItem extends ItemPTR2e>(perk: TItem, type: string) {
-    const traits = [...(perk.traits?.values() ?? [])].map((t) => ({
+  async #createItemTooltip<TItem extends ItemPTR2e>(item: TItem, type: string) {
+    const traits = [...(item.traits?.values() ?? [])].map((t) => ({
       value: t.slug,
       label: t.label,
       type: t.type
     }));
 
-    const prerequisites = perk.type === "perk" ? (perk as PerkPTR2e).system.getPredicateStrings() : null
+    const prerequisites = item.type === "perk" ? (item as PerkPTR2e).system.getPredicateStrings() : null
+
+    const extraTypeIcons = {icons: new Set()};
+    if(type === "species") Hooks.callAll("ptr2e.getExtraTypeIcons", extraTypeIcons, item);
 
     this.tooltip.classList.add(type);
     await this._renderTooltip({
       path: `systems/ptr2e/templates/items/embeds/${type}.hbs`,
-      data: { fields: perk.system.schema.fields, document: perk, traits, prerequisites },
+      data: { fields: item.system.schema.fields, document: item, traits, prerequisites, extraTypeIcons: extraTypeIcons.icons },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
@@ -836,6 +832,22 @@ export default class TooltipsPTR2e {
     return 2000;
   }
 
+  async #createEffectTooltip(effect: EffectPTR2e) {
+    this.tooltip.classList.add("effect");
+    await this._renderTooltip({
+      path: `systems/ptr2e/templates/items/embeds/effect.hbs`,
+      data: {
+        document: effect,
+        fields: effect.schema.fields
+      },
+      direction: game.tooltip.element?.dataset.tooltipDirection as
+        | TooltipDirections
+        | undefined,
+    });
+
+    return 2000;
+  }
+
   async #createEffectItemTooltip(effect: EffectPTR2e) {
     this.tooltip.classList.add("effect");
     await this._renderTooltip({
@@ -861,7 +873,7 @@ export default class TooltipsPTR2e {
     if (!uuid) return false;
 
     const entityType = element.dataset.type;
-    if (entityType && entityType !== "Item") return false;
+    if (entityType && ["Item", "ActiveEffect"].includes(entityType) === false) return false;
 
     const embedFigure = element.closest("figure.content-embed") as HTMLElement | undefined;
     if (embedFigure?.classList.contains("no-tooltip") && embedFigure.dataset.uuid === uuid)
@@ -871,6 +883,10 @@ export default class TooltipsPTR2e {
     if (!entity) return false;
 
     switch (entity.type) {
+      case "passive":
+      case "affliction": {
+        return await this.#createEffectTooltip(entity as unknown as EffectPTR2e);
+      }
       case "move": {
         const move = entity as MovePTR2e;
         const attack = move.system.attack;
@@ -901,6 +917,7 @@ export default class TooltipsPTR2e {
       case "perk":
         if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
         return await this.#createItemTooltip(entity, "perk");
+      case "ptr2e-digimon-expansion.digimonSpecies":
       case "species":
         if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
         return await this.#createItemTooltip(entity, "species");
@@ -951,6 +968,7 @@ export default class TooltipsPTR2e {
       top?: number | null;
       bottom?: number | null;
     } = {};
+    const {innerHeight, innerWidth} = this.tooltip.ownerDocument.defaultView ?? window;
     switch (direction) {
       case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.DOWN:
         position = {
@@ -962,7 +980,7 @@ export default class TooltipsPTR2e {
       case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.LEFT:
         position = {
           textAlign: "left",
-          right: window.innerWidth - targetBox.left + padding,
+          right: innerWidth - targetBox.left + padding,
           top: targetBox.top + targetBox.height / 2 - this.tooltip.offsetHeight / 2,
         };
         break;
@@ -977,7 +995,7 @@ export default class TooltipsPTR2e {
         position = {
           textAlign: "center",
           left: targetBox.left - this.tooltip.offsetWidth / 2 + targetBox.width / 2,
-          bottom: window.innerHeight - targetBox.top + padding,
+          bottom: innerHeight - targetBox.top + padding,
         };
         break;
       case foundry.helpers.interaction.TooltipManager.TOOLTIP_DIRECTIONS.CENTER:
@@ -1001,12 +1019,12 @@ export default class TooltipsPTR2e {
     const style = this.tooltip.style;
 
     // Left or Right
-    const maxW = window.innerWidth - this.tooltip.offsetWidth;
+    const maxW = innerWidth - this.tooltip.offsetWidth;
     if (position.left) position.left = Math.clamp(position.left, padding, maxW - padding);
     if (position.right) position.right = Math.clamp(position.right, padding, maxW - padding);
 
     // Top or Bottom
-    const maxH = window.innerHeight - this.tooltip.offsetHeight;
+    const maxH = innerHeight - this.tooltip.offsetHeight;
     if (position.top) position.top = Math.clamp(position.top, padding, maxH - padding);
     if (position.bottom) position.bottom = Math.clamp(position.bottom, padding, maxH - padding);
 

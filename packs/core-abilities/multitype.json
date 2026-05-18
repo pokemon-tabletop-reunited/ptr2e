@@ -44,10 +44,10 @@
       {
         "name": "Multitype (Plate Change)",
         "slug": "multitype-plate-change",
-        "description": "<p>Effect: Once, on each of their Activations, as a Free Action at @Trait[interrupt-7] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p>",
+        "description": "<p>Effect: Once, on each of their Activations, as a Free Action @Trait[interrupt] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p>",
         "traits": [
           "legendary",
-          "interrupt-7"
+          "interrupt"
         ],
         "type": "generic",
         "img": "systems/ptr2e/img/perk-icons/Touched.svg",
@@ -61,7 +61,7 @@
         }
       }
     ],
-    "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: Connection - Judgment. The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation. Once, on each of their Activations, as a Free Action at @Trait[interrupt-7] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p><p>Passive: The user can equip Type Plate items without using their Accessory Slot, and have their effects' intensity doubled. If the user possesses the Legend Plate, the user's Judgment always receives STAB and deals damage as if it was one step super effective.</p>",
+    "description": "<p>Trigger: The user declares Judgment.</p><p>Effect: Connection - Judgment. The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their Activation. Once, on each of their Activations, as a Free Action @Trait[interrupt] the user can change their Type(s), to those of up to 3 of the Type Plates the user has equipped.</p><p>Passive: The user can equip Type Plate items without using their Accessory Slot, and have their effects' intensity doubled. If the user possesses the Legend Plate, the user's Judgment always receives STAB and deals damage as if it was one step super effective.</p>",
     "traits": [
       "legendary"
     ],
@@ -96,9 +96,9 @@
             ],
             "alterations": [
               {
-                "mode": 2,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 2
               }
             ],
             "reevaluateOnUpdate": true,
@@ -109,11 +109,11 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -126,13 +126,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

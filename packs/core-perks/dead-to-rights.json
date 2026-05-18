@@ -3,27 +3,26 @@
   "type": "perk",
   "system": {
     "prerequisites": [],
-    "cost": 3,
-    "description": "<p>The next time you declare a non-[Contact] Attack against a foe without Cover, you gain +3 ACC and +2 CRIT Stages for 1 Activation.</p>",
+    "cost": 4,
+    "description": "<p>The user may spend @PP[-5] as a @Trait[priority-35] Complex Action to use their next Attack with +3 ACC Stages, +2 CRIT Stages, +1 Effectiveness Stage and +10% Base Effect Chance, while granting the user @Affliction[delay 70] on use.</p>",
     "actions": [
       {
         "name": "Dead To Rights",
         "slug": "dead-to-rights",
-        "description": "<p>The next time you declare a non-[Contact] Attack against a foe without Cover, you gain +3 ACC and +2 CRIT Stages for 1 Activation.</p>",
+        "description": "<p>The user's next Attack has +3 ACC Stages, +2 CRIT Stages, +1 Effectiveness Stage and +10% Base Effect Chance, while granting the user @Affliction[delay 70] on use.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 10
+          "activation": "complex",
+          "powerPoints": 5
         },
         "type": "generic",
-        "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "priority-35"
+        ],
+        "img": "icons/svg/target.svg",
         "range": {
-          "target": "enemy",
-          "unit": "m",
-          "distance": 0
-        },
-        "variant": null,
-        "ephemeralVariant": false
+          "target": "self",
+          "unit": "m"
+        }
       }
     ],
     "slug": "dead-to-rights",
@@ -34,6 +33,10 @@
     },
     "nodes": [
       {
+        "x": 46,
+        "y": 181,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "type-hunter",
           "high-noon",
@@ -41,18 +44,11 @@
           "dead-eye"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff0080",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-          "tint": "#0f0f0f",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 46,
-        "y": 181,
         "tier": null
       }
     ],
@@ -71,12 +67,70 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "7Uhx4SiJFnFrbhB6",
-  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": [],
+  "img": "icons/svg/target.svg",
+  "effects": [
+    {
+      "name": "Dead To Rights",
+      "type": "passive",
+      "_id": "2OXyMwOf0umOHTgQ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "dead-to-rights-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.AFffBybHMtOMQoHV",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.3.beta",
+        "createdTime": 1757852529639,
+        "modifiedTime": 1757852548694,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ],
   "folder": "W85LoOCz3WlwbyhZ"
 }

@@ -64,18 +64,17 @@
             "label": "Dark Shroud",
             "state": true,
             "alwaysActive": false,
-            "mode": 2,
             "ignored": false,
-            "suboptions": []
+            "suboptions": [],
+            "method": 2
           },
           {
             "type": "aura",
             "key": "",
             "value": 0,
             "predicate": [
-              "graveyard:active"
+              "dark-shroud:active"
             ],
-            "mode": 2,
             "ignored": false,
             "radius": 5,
             "effects": [
@@ -105,7 +104,8 @@
               "texture": null
             },
             "mergeExisting": true,
-            "priority": null
+            "priority": null,
+            "method": 2
           }
         ],
         "slug": null,
@@ -118,8 +118,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,
@@ -132,11 +132,11 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "13.351",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.4.6.beta",
         "createdTime": 1753872022084,
-        "modifiedTime": 1753872314062,
+        "modifiedTime": 1765239519283,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
       }
     }

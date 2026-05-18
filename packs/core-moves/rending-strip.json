@@ -27,7 +27,7 @@
         "category": "physical",
         "power": 70,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[splinter] 5. This attack is super effective against the Steel Type.</p>",
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[splinter 5]. This attack is super effective against the Steel Type.</p>",
         "predicate": []
       }
     ],
@@ -61,14 +61,14 @@
               "target:trait:steel"
             ],
             "label": "Target: Steel",
-            "mode": 2,
             "ignored": false,
-            "hideIfDisabled": false
+            "hideIfDisabled": false,
+            "method": 2
           },
           {
             "type": "roll-effect",
             "key": "rending-strip-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 10,
             "isFixedChance": false,
@@ -76,8 +76,8 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Splinter Chance",
-            "mode": 2,
-            "ignored": false
+            "ignored": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -90,8 +90,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "combat": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

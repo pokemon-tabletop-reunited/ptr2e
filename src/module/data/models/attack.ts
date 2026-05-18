@@ -7,7 +7,7 @@ import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { ActorPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
 import { AttackRollResult } from "@system/rolls/check-roll.ts";
-import { ItemPTR2e, SummonPTR2e } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, SummonPTR2e } from "@item";
 import { CombatantPTR2e } from "@combat";
 import { ActorSizePTR2e } from "@actor/data/size.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
@@ -156,11 +156,11 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   getVariants(options: Iterable<string> | true = this.getFullRollOptions()): string[] {
     if(this.variant) return this.actor?.actions.attack.get(this.variant)?.getVariants(options) ?? [];
-    return this.actor?.actions.attack.filter(a => a.variant == this.slug).filter(a => {
+    return Array.from(new Set([...this.actor?.actions.attack ?? [], ...(this.parent as unknown as {actions: Collection<AttackPTR2e>}).actions].filter(a => a.variant == this.slug).filter(a => {
       if(options === true) return true;
       if(a.predicate.length === 0) return true;
       return a.predicate.test(options);
-    }).map(a => a.slug) ?? [];
+    }).map(a => a.slug) ?? []));
   }
 
   // TODO: This should add any relevant modifiers
@@ -186,6 +186,29 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   override async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
+    if(this.item?.system && 'ammoType' in this.item.system && this.item.system.ammoType instanceof Set && this.item.system.ammoType.size > 0) {
+      const ammoItem = (() => {
+        if(!this.item?.system.ammo) return null;
+        try {
+          return fromUuidSync(this.item.system.ammo as string) as ConsumablePTR2e | null;
+        }
+        catch {
+          return null;
+        }
+      })()
+      if(!ammoItem) {
+        ui.notifications.error(`${this.item.name} has no ammo selected, please select ammo to use this attack.`);
+        return false;
+      };
+      if(ammoItem.system.equipped.carryType === "dropped") {
+        ui.notifications.error(`You dropped your ${ammoItem.name} ammunition, please select usable ammo to use this attack.`);
+        return false;
+      }
+      if(ammoItem.system.quantity <= 0) {
+        ui.notifications.error(`You are out of ${ammoItem.name} ammunition, please select usable ammo to use this attack.`);
+        return false;
+      }
+    }
     if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
       const variant = this.actor?.actions.attack.get(this.defaultVariant);
       if(variant) return variant.roll(args);
@@ -195,10 +218,6 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
-
-    if(this.traits.has("adaptable") && !this.variant) {
-      this.generateAdaptableVariants();
-    }
 
     this.statistic = this.prepareStatistic();
   }
@@ -270,7 +289,7 @@ export default class AttackPTR2e extends ActionPTR2e {
       !["ally", "enemy", "creature", "object"].includes(this.range.target)
     )
       return null;
-    const dangerClose = !!this.traits.get("danger-close");
+    const dangerClose = !this.traits.has("unreliable") && !!this.traits.get("danger-close");
 
     const reach = ({
       0: 1,
@@ -298,7 +317,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     const isInteger = Number.isInteger(distance);
     const reachLimit = isInteger ? reach : Math.sqrt(2 * Math.pow(reach, 2));
 
-    if (this.range.distance <= 1) return distance > reachLimit ? Infinity : 0;
+    if (this.range.distance <= 1) return distance > reachLimit ? Infinity : dangerClose ? -Infinity : 0;
     const increment = this.range.distance * rangeMultiplier;
 
     const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
@@ -394,6 +413,10 @@ export default class AttackPTR2e extends ActionPTR2e {
       ...(this.types.map(type => `attack:type:${type}`)),
     ]).map(key => prefix ? `${prefix}:${key}` : key);
   }
+
+  get appliedVariantLabels() {
+    return (this.parent as unknown as {appliedVariantLabels: Map<string, string> })?.appliedVariantLabels
+  }
 }
 
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
@@ -409,6 +432,7 @@ export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<A
   statistic: Maybe<AttackStatistic>;
 
   _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
+
 }
 
 interface AttackSchema extends foundry.data.fields.DataSchema {

@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "interrupt-2",
+          "interrupt",
           "defensive"
         ],
         "name": "Olé",
@@ -22,11 +22,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The user is treated as having +4 EVA against the triggering Attack. If the triggering attack misses, the triggering creature gains @Affliction[taunted] 5 and the user freely Moves 1 space using the Movement Score of their choice.</p>",
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The user is treated as having +4 EVA against the triggering Attack. If the triggering attack misses, the triggering creature gains @Affliction[taunted 5] and the user freely Moves 1 space using the Movement Score of their choice.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: Connection - Taunt. The user is treated as having +4 EVA against the triggering Attack. If the triggering attack misses, the triggering creature gains @Affliction[taunted] 5 and the user freely Moves 1 space using the Movement Score of their choice.</p>",
+    "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: Connection - Taunt. The user is treated as having +4 EVA against the triggering Attack. If the triggering attack misses, the triggering creature gains @Affliction[taunted 5] and the user freely Moves 1 space using the Movement Score of their choice.</p>",
     "traits": [
       "connection"
     ],
@@ -61,9 +61,9 @@
             ],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "tier"
+                "value": "tier",
+                "method": 5
               }
             ],
             "priority": null,
@@ -73,11 +73,11 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
-            "mode": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false
+            "replaceSelf": false,
+            "method": 2
           }
         ],
         "slug": null,
@@ -90,13 +90,8 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null
       },
       "description": "",
       "origin": null,

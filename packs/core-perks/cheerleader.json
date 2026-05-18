@@ -17,27 +17,23 @@
       }
     ],
     "cost": 2,
-    "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",
+    "description": "<p>Effect: The user can choose to gain @Affliction[delay 15] as a Free Action, and can use an Attack with target \"Self\" and instead target an Ally within 10m with that Attack.</p><p>The user may spend @PP[-2] to increase the Range of this Perk to 20m, and @PP[-5] to increase it to 30m.</p>",
     "actions": [
       {
         "name": "Cheerleader",
         "slug": "cheerleader",
-        "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",
-        "type": "passive",
+        "description": "<p>Effect: The user may use an Attack that is normally target \"Self\" on the target.</p>",
+        "type": "generic",
         "traits": [],
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
         "range": {
-          "target": "enemy",
+          "target": "ally",
           "unit": "m",
-          "distance": 0
+          "distance": 10
         },
-        "variant": null,
-        "hidden": false,
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0
-        },
-        "ephemeralVariant": false
+          "activation": "free"
+        }
       }
     ],
     "slug": "cheerleader",
@@ -48,6 +44,10 @@
     },
     "nodes": [
       {
+        "x": 38,
+        "y": 56,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "mobilize",
           "tactician",
@@ -55,25 +55,15 @@
           "the-meaning-of-haste"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#ff80ff",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-          "tint": "#141414",
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 38,
-        "y": 56,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -87,10 +77,70 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "mVWaaMJ4l5KVO4IP",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Cheerleader",
+      "type": "passive",
+      "_id": "LfffO81a97AsuPwO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "cheerleader-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": -15,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1772122041989,
+        "modifiedTime": 1772122245839,
+        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
+      }
+    }
+  ],
   "folder": "PAZ8zWUPw7Azm5V6"
 }
