@@ -1,0 +1,75 @@
+{
+  "name": "Bondmate",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Bondmate",
+        "slug": "bondmate",
+        "description": "<p>Effect: The user creates a Bondmate Summon (AV 90, 3 Activations), attaching it to an Ally within range. On the Summon's Activation, the selected Ally gains @Tick[3 shield].</p><p>Restriction: The user may only have one Bondmate Summon active at any given time.</p>",
+
+        "traits": [
+          "tank"
+        ],
+        "type": "generic",
+        "img": "icons/magic/defensive/armor-green-hex.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "summon": "Compendium.ptr2e.core-summons.Item.4LTYjzwsQde6lytE",
+        "range": {
+          "target": "ally",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: The user creates a Bondmate Summon (AV 90, 3 Activations), attaching it to an Ally within 10m. On the Summon's Activation, the selected Ally gains @Tick[3 shield].</p><p>Restriction: The user may only have one Bondmate Summon active at any given time. at a time.</p>",
+    "traits": [
+      "summon",
+      "ranger"
+    ],
+    "prerequisites": [
+      "trait:ranger"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "ranger"
+    },
+    "webs": [],
+    "traitWebs": [
+      "ranger"
+    ],
+    "nodes": [
+      {
+        "x": 23,
+        "y": 14,
+        "connected": [
+          "ranger-cadet"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "a1dXU7rnC3RUsbqq",
+  "img": "icons/magic/defensive/armor-green-hex.webp",
+  "effects": [],
+  "flags": {}
+}

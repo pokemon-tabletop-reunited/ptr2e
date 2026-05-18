@@ -9,10 +9,14 @@
         "slug": "coaching",
         "name": "Coaching",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "flinch-20",
+          "social",
+          "drill"
+        ],
         "range": {
           "target": "emanation",
-          "distance": 3,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
@@ -24,7 +28,7 @@
           "fighting"
         ],
         "description": "<p>Effect: The user and all allies in range gain +1 ATK and DEF Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
         "predicate": []
       }
     ],
@@ -37,8 +41,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "F4GCikgU29LS0wu7",
   "effects": [
@@ -58,7 +64,11 @@
             "affects": "target",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -69,19 +79,27 @@
             "affects": "target",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -93,13 +111,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1737223893708,
         "modifiedTime": 1737223933863,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

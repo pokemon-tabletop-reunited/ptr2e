@@ -266,12 +266,6 @@
     "description": "TO BE DETERMINED"
   },
   {
-    "slug": "crab",
-    "label": "Crab",
-    "related": [],
-    "description": "TO BE DETERMINED"
-  },
-  {
     "slug": "creature",
     "label": "Creature",
     "related": [],
@@ -420,6 +414,12 @@
     "label": "Disaster Predictor",
     "related": [],
     "description": "This creature can predict when disasters are going to occur, providing a +10 Luck Bonus to reduce the Danger Clock by 1 Span at the cost of 10 PP. The Danger Clock is always visible to this creature. \nSUBJECT TO CHANGE"
+  },
+  {
+    "slug": "drill",
+    "label": "Drill",
+    "related": [],
+    "description": "This trait denotes creatures, moves, or abilities that focus on spurring others onward, or backward, as the case might be. Grants access to the [Drill] Tutor List."
   },
   {
     "slug": "em-sense-x",
@@ -2668,7 +2668,22 @@
     "slug": "ball",
     "label": "Ball",
     "related": [],
-    "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait."
+    "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait.",
+    "changes": [
+      {
+        "type": "roll-note",
+        "key": "ball-trait-attack",
+        "value": "If you are throwing a PokeBall, make sure to not apply damage!",
+        "predicate": [
+          {
+            "not": "actor:item:perk:curveball-technique"
+          }
+        ],
+        "visibility": null,
+        "ignored": false,
+        "method": 2
+      }
+    ]
   },
   {
     "slug": "concoction",
@@ -3765,6 +3780,18 @@
     "label": "Stage Change",
     "related": [],
     "description": "Denotes if an effect alters a creature's Stat Stages."
+  },
+  {
+    "slug": "positive-stage-change",
+    "label": "Positive Stage Change",
+    "related": [],
+    "description": "Denotes if an effect alters a creature's Stat Stages positively."
+  },
+  {
+    "slug": "negative-stage-change",
+    "label": "Negative Stage Change",
+    "related": [],
+    "description": "Denotes if an effect alters a creature's Stat Stages negatively."
   },
   {
     "slug": "desperation-x",

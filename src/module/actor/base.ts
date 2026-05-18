@@ -2038,7 +2038,7 @@ class ActorPTR2e<
     }
 
     for (const trait of effect.traits) {
-      if (immunities[`trait:${trait}`] && !effect.traits.has(`ignore-immunity-${trait}`)) return true;
+      if (immunities[`trait:${trait.slug}`] && !effect.traits.has(`ignore-immunity-${trait.slug}`)) return true;
     }
 
     return false;

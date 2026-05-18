@@ -25,7 +25,7 @@
         "unit": "m"
       }
     },
-    "rarity": "uncommon",
+    "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 40,
         "accuracy": 95,
         "free": true,
@@ -61,23 +61,25 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "description": "<p>Ammo Use: 1</p>",
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 28,
-        "accuracy": 85,
+        "accuracy": 90,
         "free": true,
         "traits": [
           "missile",
-          "3-strike",
-          "firearm"
+          "firearm",
+          "double-strike",
+          "flinch-10"
         ],
         "name": "Lever-Action Rifle (Snap Shot)",
         "slug": "lever-action-rifle-snap-shot",
@@ -89,23 +91,26 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "complex"
         },
         "variant": "lever-action-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa",
+        "description": "<p>Ammo Use: 1</p>"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 40,
         "accuracy": 80,
         "free": true,
         "traits": [
           "missile",
-          "firearm"
+          "firearm",
+          "dash",
+          "priority-15"
         ],
         "name": "Lever-Action Rifle (Hip Fire)",
         "slug": "lever-action-rifle-hip-fire",
@@ -113,15 +118,16 @@
         "type": "attack",
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "variant": "lever-action-rifle",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa",
+        "description": "<p>Ammo Use: 1</p>"
       }
     ],
     "description": "<p>A lever-action rifle is a firearm where the loading, firing, and unloading processes are all cycled by a lever located behind the trigger, which extracts and ejects the cartridge case and recocks the weapon. The contemporary version of these rifles utilize smaller calibres, primarily for small game-hunting.</p>",
@@ -149,7 +155,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "RWXsZNovxO0dstWt",
   "effects": [
@@ -169,7 +176,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -183,7 +191,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -195,14 +205,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.1.3.beta",
         "createdTime": 1743880813905,
         "modifiedTime": 1743883281938,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "folder": "GPebepuiQbZSuf35"

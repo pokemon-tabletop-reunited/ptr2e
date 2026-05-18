@@ -1,0 +1,109 @@
+{
+  "folder": "UZGN1glVNXLieg48",
+  "name": "Pack Hunger",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Passive: When the user applies @Affliction[marked] to an enemy, that enemy suffers from @Affliction[hindered] and @Affliction[unlucky] while marked.</p>",
+    "traits": [],
+    "prerequisites": [
+      "trait:pack-leader"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "pack-mon"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 143,
+        "y": 177,
+        "connected": [
+          "packmarked",
+          "wound-spring",
+          "dance-partner",
+          "skysplitter",
+          "vampire-field"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "5iIegRjf8eh42ITA",
+  "img": "icons/creatures/abilities/wolf-howl-moon-purple.webp",
+  "effects": [
+    {
+      "name": "Pack Hunger",
+      "type": "passive",
+      "_id": "KosgG0STFKnDAc3B",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "",
+            "value": 0,
+            "method": 2,
+            "phase": "initial",
+            "predicate": [],
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778077806872,
+        "modifiedTime": 1778077806872,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {}
+}

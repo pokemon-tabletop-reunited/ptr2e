@@ -10,12 +10,12 @@
         "name": "Howl",
         "type": "attack",
         "traits": [
-          "sonic",
-          "social"
+          "social",
+          "drill"
         ],
         "range": {
           "target": "emanation",
-          "distance": 5,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
@@ -27,17 +27,22 @@
           "normal"
         ],
         "description": "<p>Effect: The user and all allies in range increase their ATK Stage by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
     ],
-    "container": null,
     "grade": "B",
     "publication": {
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "GiLR7xemzKdrCnl3",
@@ -58,19 +63,27 @@
             "affects": "target",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -82,13 +95,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.1.2",
         "createdTime": 1737229080351,
         "modifiedTime": 1737229102134,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

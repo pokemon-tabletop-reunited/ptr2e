@@ -1,0 +1,74 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Defer Destiny",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Defer Destiny",
+        "slug": "defer-destiny",
+        "description": "<p>Effect: The user delays the targeted Summon's initiative by 30%.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/magic/time/hourglass-tilted-gray.webp",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "object",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: The user delays the targeted Summon's initiative by 30%.</p>",
+    "traits": [],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.spiritual.mod}",
+          30
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "sage"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 136,
+        "y": 114,
+        "connected": [
+          "minor-buff-30",
+          "hasten-conjuration",
+          "exorcism"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "fDLPpKtxkptVjjxb",
+  "img": "icons/magic/time/hourglass-tilted-gray.webp",
+  "effects": [],
+  "flags": {}
+}

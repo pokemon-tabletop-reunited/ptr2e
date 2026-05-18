@@ -8,8 +8,10 @@
     },
     "slug": "aegislash-weapon",
     "publication": {
-      "source": "",
-      "authors": [],
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
       "notes": ""
     },
     "traits": [
@@ -137,7 +139,12 @@
       "type": "steel",
       "power": 55,
       "accuracy": 70,
-      "hide": false
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "common",
@@ -150,7 +157,8 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponType": "Living Weapon"
+    "weaponType": "Living Weapon",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -168,7 +176,8 @@
             "predicate": [],
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -182,7 +191,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -195,14 +206,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.4.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "folder": "V4skAU6G3OH5fXaf",
-  "flags": {},
   "_id": "ZmJea43J6wpbgdXr"
 }

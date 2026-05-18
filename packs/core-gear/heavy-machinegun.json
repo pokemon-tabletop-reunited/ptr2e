@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "S",
     "fling": {
       "type": "steel",
       "power": 70,
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 70,
         "accuracy": 90,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Heavy Machinegun",
         "slug": "heavy-machinegun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,26 +62,27 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 160,
         "accuracy": 80,
         "free": true,
         "traits": [
           "missile",
-          "firearm"
+          "firearm",
+          "flinch-20"
         ],
         "name": "Heavy Machinegun (Burst)",
         "slug": "heavy-machinegun-burst",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -90,17 +91,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "complex"
         },
         "variant": "heavy-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 44,
         "accuracy": 75,
         "free": true,
@@ -112,7 +113,7 @@
         ],
         "name": "Heavy Machinegun (Salvo)",
         "slug": "heavy-machinegun-salvo",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 8</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -121,28 +122,29 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 8,
-          "delay": 3
+          "activation": "complex"
         },
         "variant": "heavy-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 110,
         "accuracy": 65,
         "free": true,
         "traits": [
           "missile",
-          "firearm"
+          "firearm",
+          "dash",
+          "flinch-30"
         ],
         "name": "Heavy Machinegun (Hip Fire)",
         "slug": "heavy-machinegun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 4</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -151,11 +153,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "complex"
         },
         "variant": "heavy-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -182,7 +184,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges. A heavy machine gun (HMG) is significantly larger than light, medium or general-purpose machine guns. HMGs are typically too heavy to be man-portable (carried by one person) and require mounting onto a weapons platform to be operably stable or tactically mobile, have more formidable firepower, and generally require a team of personnel for operation and maintenance.</p>"
+    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges. A heavy machine gun (HMG) is significantly larger than light, medium or general-purpose machine guns. HMGs are typically too heavy to be man-portable (carried by one person) and require mounting onto a weapons platform to be operably stable or tactically mobile, have more formidable firepower, and generally require a team of personnel for operation and maintenance.</p>",
+    "ammoType": []
   },
   "_id": "TJMOmuMwyLSuCWZD",
   "effects": [
@@ -202,7 +205,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -212,7 +216,8 @@
             "label": "Burst",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -222,7 +227,8 @@
             "label": "Hip Fire",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -236,7 +242,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -247,14 +255,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743893056846,
         "modifiedTime": 1757632068754,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"

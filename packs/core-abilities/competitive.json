@@ -8,15 +8,15 @@
         "traits": [],
         "name": "Competitive",
         "slug": "competitive",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>A negative [Stage Change] effect from another creature is applied to the user.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: A negative [Stage Change] effect from another creature is applied to the user.</p><p>Effect: The user's SPATK Stage increases by +2 for 5 Activations.</p>",
         "img": "systems/ptr2e/img/icons/special_icon.png"
@@ -48,17 +48,17 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "competetive-generic",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAZ",
+            "phase": "initial",
             "predicate": [],
             "chance": 100,
-            "affects": "self",
-            "priority": null,
             "isFixedChance": false,
+            "affects": "defensive",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "key": "negative-stage-change-trait-applied",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -72,7 +72,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -84,14 +86,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737564323163,
-        "modifiedTime": 1753828075507,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778669694707,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
