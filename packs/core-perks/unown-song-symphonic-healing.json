@@ -1,0 +1,83 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Unown Song: Symphonic Healing",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Symphonic Healing",
+        "slug": "unown-song-symphonic-healing",
+        "description": "<p>Effect: The user can summon a choir of Unown to perform Symphonic Healing. This summon lasts for 3 activations, with an AV of 100.</p><p>On the summon's activation, it heals all allies on the field for @Tick[4].</p>",
+        "traits": [
+          "sage",
+          "summon",
+          "healing"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "summon": "Compendium.ptr2e.core-summons.6e62CRYLP8gt9WeY",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: The user can summon a choir of Unown to perform Symphonic Healing. This summon lasts for 5 activations, with an AV of 100.</p><p>On the summon's activation, it heals all allies on the field for @Tick[4].</p>",
+    "traits": [
+      "sage",
+      "summon",
+      "healing"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          45
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "sage"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 153,
+        "y": 111,
+        "connected": [
+          "unown-song-fugue",
+          "type-embodiment-type",
+          "long-range-psychoportation"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "jnMbQC4cEhxVrEw6",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "flags": {}
+}
