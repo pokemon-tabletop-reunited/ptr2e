@@ -7,7 +7,25 @@
       "version": 0.109,
       "previous": null
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Unbending Steel (Shield)",
+        "slug": "unbending-steel-shield",
+        "description": "<p>When using Iron Defense, spend an additional 2PP to gain @Tick[2 shield].</p>",
+        "type": "generic",
+        "traits": [],
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m",
+          "distance": 10
+        },
+        "img": "systems/ptr2e/img/svg/steel_icon.svg"
+      }
+    ],
     "slug": "unbending-steel",
     "description": "<p>You gain Iron Defense as a Connected Move, and may spend an additional 2PP when using Iron Defense to gain @Tick[2 shield].</p>",
     "traits": [],
@@ -64,9 +82,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "Gxv0teWTcPT64AJu",
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
@@ -85,40 +101,39 @@
             "predicate": [],
             "alterations": [
               {
-                "mode": 5,
                 "property": "system.actions.0.free",
-                "value": "true"
+                "value": "true",
+                "method": 5
               }
             ],
-            "mode": 2,
-            "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2,
+            "phase": "initial",
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            }
+            "replaceSelf": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -130,12 +145,145 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737922877806,
-        "modifiedTime": 1737922913974,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779093940102,
+        "lastModifiedBy": "fMq56loHIOI9J0En",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
+    },
+    {
+      "name": "Unbending Steel (Shield)",
+      "type": "passive",
+      "img": "systems/ptr2e/img/svg/steel_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "unbending-steel-shield-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "affects": "origin",
+            "alterations": [
+              {
+                "property": "system.stacks",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "method": 2,
+            "phase": "initial",
+            "ignored": false,
+            "isFixedChance": false,
+            "dontMerge": false
+          }
+        ],
+        "slug": "unbending-steel-shield-effect",
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "transfer": true,
+      "_id": "GUotYZoK9HKNHttg",
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779094236053,
+        "modifiedTime": 1779094236053,
+        "lastModifiedBy": "fMq56loHIOI9J0En",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    },
+    {
+      "name": "Unbending Steel (Shield)",
+      "type": "passive",
+      "img": "systems/ptr2e/img/svg/steel_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "unbending-steel-shield-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.value",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "transfer": true,
+      "_id": "jwmkxkWZy27CVbUV",
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779094500973,
+        "modifiedTime": 1779094500973,
+        "lastModifiedBy": "fMq56loHIOI9J0En",
+        "compendiumSource": null,
+        "duplicateSource": null,
         "exportSource": null
       }
     }
