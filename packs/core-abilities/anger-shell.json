@@ -18,13 +18,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user gains +1 ATK, SPATK, and SPD Stages and loses -1 DEF and SPDEF Stages for 5 Activations.</p>",
+        "description": "<p>Trigger: The user enters the @Trait[desperation-1-2] state.</p><p>Effect: The user gains +1 ATK, SPATK, and SPD Stages and loses -1 DEF and SPDEF Stages for 5 Activations.</p>",
         "img": "icons/commodities/biological/shell-turtle-grey.webp"
       }
     ],
-    "description": "<p>Trigger: The user drops below 50% HP due to damage from a Physical- or Special-Category Attack.</p><p>Effect: The user gains +1 ATK, SPATK, and SPD Stages and loses -1 DEF and SPDEF Stages for 5 Activations.</p>",
+    "description": "<p>Trigger: The user enters the @Trait[desperation-1-2] state.</p><p>Effect: The user gains +1 ATK, SPATK, and SPD Stages and loses -1 DEF and SPDEF Stages for 5 Activations.</p>",
     "traits": [
       "desperation-1-2"
     ],
@@ -60,8 +61,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -73,8 +75,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -86,8 +89,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -99,8 +103,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -112,8 +117,19 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} can use {item|link}.",
+            "phase": "initial",
+            "predicate": [],
+            "key": "desperation-1-2",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -127,7 +143,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -140,13 +158,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1753709454653,
-        "modifiedTime": 1753710413472,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1778666141355,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
