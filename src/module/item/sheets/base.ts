@@ -225,14 +225,14 @@ export default class ItemSheetPTR2e<
 
     // Add send to chat button
     const toChatLabel = game.i18n.localize("PTR2E.ItemSheet.SendToChatLabel");
-    const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
+    const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square icon" data-action="toChat"
                                 data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
     this.window.controls.insertAdjacentHTML("afterend", toChat);
 
     if (game.settings.get("ptr2e", "dev-mode")) {
-      // Add send to chat button
+      // Add commit to github button
       const commitToGithubLabel = game.i18n.localize("PTR2E.UI.DevMode.CommitToGithub.Label");
-      const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload" data-action="toGithub"
+      const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload icon" data-action="toGithub"
                                     data-tooltip="${commitToGithubLabel}" aria-label="${commitToGithubLabel}"></button>`;
       this.window.controls.insertAdjacentHTML("afterend", commitToGithub);
     }

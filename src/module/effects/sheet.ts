@@ -10,6 +10,7 @@ import Sortable from "sortablejs";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Tagify from "@yaireo/tagify";
 import { DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
+import GithubManager from "@module/apps/github.ts";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
@@ -26,6 +27,8 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       submitOnChange: true,
     },
     actions: {
+      toChat: this.#toChat,
+      toGithub: GithubManager.commitItemToGithubSheet,
       "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
         event.preventDefault();
         const inspector = new DataInspector(this.document);
@@ -252,6 +255,26 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   override close(options?: foundry.applications.api.ApplicationClosingOptions) {
     this.#editingChangeIndex = null;
     return super.close(options);
+  }
+
+  override async _renderFrame(options: DocumentSheetConfiguration<ActiveEffectPTR2e>) {
+    const frame = await super._renderFrame(options);
+
+    // Add send to chat button
+    const toChatLabel = game.i18n.localize("PTR2E.ItemSheet.SendToChatLabel");
+    const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square icon" data-action="toChat"
+                                data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
+    this.window.controls.insertAdjacentHTML("afterend", toChat);
+
+    if (game.settings.get("ptr2e", "dev-mode")) {
+      // Add commit to GitHub button
+      const commitToGithubLabel = game.i18n.localize("PTR2E.UI.DevMode.CommitToGithub.Label");
+      const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload icon" data-action="toGithub"
+                                    data-tooltip="${commitToGithubLabel}" aria-label="${commitToGithubLabel}"></button>`;
+      this.window.controls.insertAdjacentHTML("afterend", commitToGithub);
+    }
+
+    return frame;
   }
 
   override _attachPartListeners(
@@ -666,6 +689,12 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
       return new processed.FormClass(processed.options);
     });
+  }
+
+  static async #toChat(
+    this: ActiveEffectConfig
+  ) {
+    return this.document.toChat();
   }
 
   static async #onSubmit(

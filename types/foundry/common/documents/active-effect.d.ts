@@ -1,5 +1,5 @@
 import type { Document, DocumentMetadata } from "../abstract/module.d.ts";
-import type { BaseActor, BaseCombat, BaseItem, BaseUser } from "./module.d.ts";
+import type { BaseActor, BaseCombat, BaseFolder, BaseItem, BaseUser } from "./module.d.ts";
 import type * as fields from "../data/fields.d.ts";
 
 /**
@@ -64,6 +64,7 @@ type ActiveEffectSchema<
     type: fields.StringField<TType, TType, true, false, false>;
     system: fields.TypeDataField<TSystemSource>;
     name: fields.StringField<string, string, true, false, false>;
+    folder: fields.ForeignDocumentField<BaseFolder>;
     changes: fields.ArrayField<
         fields.SchemaField<{
             key: fields.StringField<string, string, true, false, false>;
