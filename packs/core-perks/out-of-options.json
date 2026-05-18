@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "out-of-options",
-    "description": "<p>Effect: When the user has 10% or less of their PP remaining, their Struggle Attacks gain +20 Power.</p>",
+    "description": "<p>Effect: While the user has 12.5% or less of their PP remaining, their @Trait[basic] Attacks have +15 Base Power and Struggles have a further +10 Base Power.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -63,19 +63,37 @@
         "changes": [
           {
             "type": "flat-modifier",
-            "key": "struggle-attack-power-flat",
-            "value": 20,
+            "key": "basic-trait-attack-power-flat",
+            "value": 15,
             "predicate": [
               {
                 "lte": [
                   "{actor|system.powerPoints.percent}",
-                  10
+                  12.5
                 ]
               }
             ],
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.powerPoints.percent}",
+                  12.5
+                ]
+              }
+            ],
+            "key": "struggle-attack-power-flat",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -89,7 +107,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>Effect: When the user has 10% or less of their PP remaining, their Struggle Attacks gain +20 Power.</p>",
       "origin": null,
@@ -102,13 +122,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1754299744190,
-        "modifiedTime": 1754299990729,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-      }
+        "modifiedTime": 1778024840059,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
