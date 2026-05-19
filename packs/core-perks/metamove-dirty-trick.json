@@ -5,30 +5,9 @@
   "_id": "7jgu6qfPzvZDS5lZ",
   "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
   "system": {
-    "actions": [
-      {
-        "name": "Metamove: Dirty Trick",
-        "slug": "metamove-dirty-trick",
-        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be @Affliction[delay 30] and lose -1 EVA Stage for 5 Activations.</p>",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 4,
-          "trigger": "The user's declares an attack."
-        },
-        "type": "generic",
-        "traits": [
-          "social",
-          "flinch-3"
-        ],
-        "img": "systems/ptr2e/img/icons/feat_icon.webp",
-        "range": {
-          "target": "creature",
-          "unit": "m"
-        }
-      }
-    ],
+    "actions": [],
     "slug": "metamove-dirty-trick",
-    "description": "<p>When declaring an Attack, the user may spend @PP[-4] to have that Attack inflict @Affliction[delay 20] and cause -1 EVA Stage for 5 Activations on hit hits.</p>",
+    "description": "<p>When declaring an Attack, the user may spend @PP[-3] to have that Attack inflict @Affliction[delay 20] and cause -1 EVA Stage for 5 Activations on hit hits.<br></p><p><br></p><p>This setting can be changed using the Dirty Trick toggle on the effects tab of the character sheet.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 1,
@@ -74,7 +53,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -88,33 +68,67 @@
             "type": "roll-effect",
             "key": "metamove-dirty-trick-generic",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
-            "predicate": [],
+            "predicate": [
+              "dirty:trick"
+            ],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": -20,
-                "method": 5
+                "value": -20
               }
             ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
             "key": "metamove-dirty-trick-generic",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
-            "predicate": [],
+            "predicate": [
+              "dirty:trick"
+            ],
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "dirty:trick",
+            "phase": "initial",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "method": 2
+            "suboptions": []
+          },
+          {
+            "type": "alter-attack",
+            "value": 3,
+            "phase": "initial",
+            "predicate": [],
+            "property": "pp-cost",
+            "definition": [
+              "dirty:trick"
+            ],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -128,7 +142,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -140,13 +156,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1757861617379,
-        "modifiedTime": 1757861701447,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779227225065,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }
