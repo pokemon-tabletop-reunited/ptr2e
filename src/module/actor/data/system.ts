@@ -594,6 +594,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       speMultiplier: 1,
       skills: 1,
       movement: 0,
+      movementMultiplier: 1,
       powerPoints: 0,
       weightClass: 0,
       heightClass: 0,
@@ -952,7 +953,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     if (!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
       for (const movement of Object.values(this.movement)) {
-        movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
+        movement.value = Math.floor(Math.max(1, movement.value + Number(this.modifiers.movement)));
+      }
+    }
+    if (!isNaN(Number(this.modifiers.movementMultiplier)) && this.modifiers.movementMultiplier !== 1) {
+      for (const movement of Object.values(this.movement)) {
+        movement.value = Math.floor(Math.max(1, movement.value * Number(this.modifiers.movementMultiplier)));
       }
     }
 
