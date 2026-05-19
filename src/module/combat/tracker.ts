@@ -154,6 +154,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
       }
       if (option.label === "COMBATANT.ACTIONS.Remove") {
         option.visible = li => {
+          if(!game.user.isGM) return false;
           const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
           return combatant?.type !== "round" && this.viewed?.combatant !== combatant;
         }
@@ -166,17 +167,19 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
       }
 
       option.visible = li => {
+        if(!game.user.isGM) return false;
         const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
         return this.viewed?.combatant?.id !== combatant?.id;
       }
       options.push(option);
     }
+    // Add delay/advancement option
     options.push({
       label: "PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.name",
       icon: '<i class="fas fa-bolt"></i>',
       visible: li => {
         const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
-        return combatant?.type !== "round" && this.viewed?.combatant !== combatant;
+        return combatant?.type !== "round" && this.viewed?.combatant !== combatant && !!combatant?.canUserModify(game.user, "update");
       },
       callback: li => {
         const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
@@ -202,6 +205,74 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends foundry.
               if (isNaN(newValue)) return;
 
               await combatant.system.applyAdvancementDelay(Math.clamp(newValue / 100, -3, 1));
+            }
+          }
+        })
+      }
+    })
+    // Add Ad-hoc Movement option
+    options.push({
+      label: "PTR2E.Combat.ContextMenu.ApplyAdHocMovement.name",
+      icon: '<i class="fa-regular fa-shoe-prints fa-fw"></i>',
+      visible: li => {
+        const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
+        return combatant?.type !== "round" && !!combatant?.canUserModify(game.user, "update");
+      },
+      callback: li => {
+        const combatant = this.viewed?.combatants.get(li.dataset.combatantId!);
+        if (!combatant) return;
+
+        const movementOptions = combatant.actor?.system.movement ? Object.values(combatant.actor.system.movement).map(m => ({
+          icon: CONFIG.Token.movement.actions[m.method]?.icon,
+          label: game.i18n.localize(CONFIG.Token.movement.actions[m.method]?.label),
+          value: m.method
+        })) : [];
+        const currentChanges = Object.entries(combatant.token?.flags.ptr2e?.temporaryMovement as Record<string, number> | undefined ?? {}).filter(([, value]) => value !== 0).map(([movement, value]) => ({
+          movement, 
+          value,
+          icon: CONFIG.Token.movement.actions[movement as keyof typeof CONFIG.Token.movement.actions]?.icon,
+          label: game.i18n.localize(CONFIG.Token.movement.actions[movement as keyof typeof CONFIG.Token.movement.actions]?.label)
+        }));
+
+        foundry.applications.api.DialogV2.prompt({
+          window: {
+            title: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyAdHocMovement.title", { name: combatant.name }),
+          },
+          content: `<div class="form-group stacked">
+            <label>${game.i18n.localize("PTR2E.Combat.ContextMenu.ApplyAdHocMovement.content")}</label>
+            <div class="form-fields">
+              <div class="form-field">
+                <select name="movement">
+                  ${movementOptions.map(m => `<option value="${m.value}">${m.icon ? `<i class="${m.icon}"></i>` : ""} ${m.label}</option>`).join("")}
+                </select>
+              </div>
+              <div class="form-field fb-30">
+                <input class="center-text" type="number" name="value" min="-100" max="100" step="1" value="1"/>
+              </div>
+            </div>
+            <div class="current changes">
+              <ul>
+                ${currentChanges.map(c => {
+                  return `<li>${c.icon ? `<i class="${c.icon}"></i>` : ""} ${c.label}: ${c.value > 0 ? "+" : ""}${c.value}</li>`
+                }).join("")}
+              </ul>
+            </div>
+          </div>`,
+          ok: {
+            label: game.i18n.localize("PTR2E.Combat.ContextMenu.ApplyAdHocMovement.ok"),
+            action: 'ok',
+            callback: async (_event, target, element) => {
+              const html = (element?.element) ?? target;
+              const value = htmlQuery<HTMLInputElement>(html, 'input[name="value"]')?.value;
+              if (!value) return;
+              const movement = htmlQuery<HTMLSelectElement>(html, 'select[name="movement"]')?.value;
+              if (!movement) return;
+
+              const newValue = parseInt(value);
+              if (isNaN(newValue)) return;
+              if (!combatant.actor?.hasMovementType(movement)) return;
+              
+              await combatant.token?.setFlag("ptr2e", "temporaryMovement", fu.mergeObject((combatant.token?.flags.ptr2e.temporaryMovement as Record<string, number>) ?? {}, { [movement]: ((combatant.token?.flags.ptr2e.temporaryMovement as Record<string, number>)?.[movement] ?? 0) + newValue }, { overwrite: true }));
             }
           }
         })

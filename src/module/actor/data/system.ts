@@ -991,7 +991,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           highest.push(this.movement[movement]);
         }
       }
-      this.movement[movement].available = this.movement[movement].value;
+      this.movement[movement].available = this.movement[movement].value + ((token.document?.flags?.ptr2e?.temporaryMovement as Record<string, number>)?.[movement] ?? 0);
     }
     for (const waypoint of token.document.movementHistory) {
       if (waypoint.forced) continue;
