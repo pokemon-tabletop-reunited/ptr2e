@@ -8,9 +8,13 @@
     },
     "traits": [
       "weapon",
-      "bow",
+      "fairy",
+      "charge-pool-12",
+      "reload-2",
       "fantasy",
-      "fairy"
+      "2-handed",
+      "projectile",
+      "arcane"
     ],
     "actions": [
       {
@@ -70,9 +74,74 @@
         "defensiveStat": "spd",
         "predicate": [],
         "free": true
+      },
+      {
+        "name": "Xernean Longbow Shot",
+        "slug": "xernean-shot",
+        "traits": [
+          "weapon",
+          "missile",
+          "adaptable",
+          "readied",
+          "flinch-10"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 150,
+        "accuracy": 85,
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "description": "<p>Ammo Use: 1</p>"
+      },
+      {
+        "name": "Xernean Light Arrow",
+        "slug": "xernean-light-arrow",
+        "traits": [
+          "weapon",
+          "missile",
+          "ray",
+          "arcane",
+          "readied",
+          "flinch-35"
+        ],
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 45,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "power": 195,
+        "accuracy": 90,
+        "free": true,
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "predicate": [],
+        "description": "<p>Effect: On hit, the target loses @Tick[-3 shield].</p><p>Ammo Use: 1</p>",
+        "variant": "xernean-shot",
+        "offensiveStat": "spa",
+        "defensiveStat": "spd"
       }
     ],
-    "description": "<p>A bow crafted from the shedding of the Horns of Xerneas. It has a faint pearl sheen that becomes a soft glow in the light of the moon.</p>",
+    "description": "<p>A longbow crafted from the sheddings of the Xerneas's antlers. It has a faint pearl sheen that becomes a soft glow in the light of the moon. The longbow possesses numerous magical properties, and enchants the arrows it fires.</p>",
     "crafting": {
       "skill": "",
       "spans": null,
@@ -80,18 +149,23 @@
     },
     "equipped": {
       "carryType": "equipped",
-      "handsHeld": null,
+      "handsHeld": 2,
       "slot": "held"
     },
     "grade": "A",
     "fling": {
       "type": "fairy",
       "power": 60,
-      "accuracy": 100,
-      "hide": false
+      "accuracy": 80,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "unique",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -106,38 +180,166 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
     {
       "name": "Xernean Longbow",
       "type": "passive",
-      "_id": "TqpfXm3BqL5WpcUW",
+      "_id": "QJMubwOeMMbZ38LO",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.attributes.atk.value",
-            "value": 25,
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
             "predicate": [],
-            "priority": null,
+            "hp": null,
+            "atk": 10,
+            "def": 5,
+            "spa": 10,
+            "spd": 5,
+            "spe": null,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "xernean-shot-attack-damage-flat",
+            "value": "23+ceil(@actor.system.advancement.level/10)",
+            "predicate": [],
+            "label": "Xernean Longbow Shot",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [],
+            "key": "xernean-shot-attack",
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 15
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": "31+ceil(@actor.system.advancement.level/5)",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Light Arrow",
+            "key": "xernean-light-arrow-attack-damage",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [],
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 40
+              }
+            ],
+            "key": "xernean-light-arrow-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stage-modifier",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [
+              "target:trait:dark"
+            ],
+            "key": "xernean-light-arrow-attack-effectiveness-stage",
+            "label": "Light Arrow (Evil-Slaying)",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [
+              "target:trait:dragon"
+            ],
+            "key": "xernean-light-arrow-attack-effectiveness-stage",
+            "label": "Light Arrow (Wyrm-Slaying)",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [
+              "target:trait:fighting"
+            ],
+            "key": "xernean-light-arrow-attack-effectiveness-stage",
+            "label": "Light Arrow (Hero-Slaying)",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "phase": "initial",
+            "predicate": [],
+            "key": "xernean-light-arrow-attack",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": -3
+              }
+            ],
+            "dontMerge": true,
+            "label": "Light Arrow (Barrier-Rending)",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "stacks": 0
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -145,17 +347,21 @@
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.kcONNhYYQmn2dEKX.ActiveEffect.6wnrC0ZO9DLyoep9",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "exportSource": null,
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.5",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.5.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "modifiedTime": 1778683856721,
+        "createdTime": 1778682480219
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT",
