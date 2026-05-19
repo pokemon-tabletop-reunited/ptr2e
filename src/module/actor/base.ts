@@ -2414,12 +2414,7 @@ class ActorPTR2e<
             }
           }
         }
-      } else {
-        const loafingEffect = this.effects.get("loafingcondition") as ActiveEffectPTR2e | undefined;
-        if (loafingEffect) {
-          await loafingEffect.delete();
-        }
-      }
+      } 
     }
 
     if (changed.ownership && !game.user.isGM) {
