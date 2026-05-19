@@ -9,12 +9,11 @@
         "slug": "iron-defense",
         "name": "Iron Defense",
         "type": "attack",
-        "traits": [
-          "partial-automation"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex",
@@ -63,7 +62,9 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false
           },
           {
             "type": "roll-effect",
@@ -76,19 +77,25 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -100,13 +107,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": 1736888535213,
         "modifiedTime": 1744468869120,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
