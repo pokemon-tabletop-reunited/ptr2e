@@ -924,7 +924,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   }
 
   public async spendLuck({ entry, choice }: { entry: TargetData, choice: { type: string; amount: number; name?: string; index?: number } }) {
-    const actor = ["origin-effect", "defensive-effect"].includes(choice.type) ? await fromUuid<ActorPTR2e>(entry.uuid) : await this.currentOrigin;
+    const actor = ["origin-effect", "defensive-effect"].includes(choice.type) ? await fu.fromUuid<ActorPTR2e>(entry.uuid) : await this.currentOrigin;
     if (!actor) return;
 
     const luck = actor.system.skills["luck"]!.total;
