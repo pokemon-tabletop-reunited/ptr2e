@@ -2757,79 +2757,16 @@
     "slug": "blast-x",
     "label": "Blast X",
     "related": [],
-    "description": "Utilized with ranged attacks and effects. Affects entities within a X+1m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-1",
-    "label": "Blast 1",
-    "related": [],
-    "description": "Affects entities within a 2m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-2",
-    "label": "Blast 2",
-    "related": [],
-    "description": "Affects entities within a 3m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-3",
-    "label": "Blast 3",
-    "related": [],
-    "description": "Affects entities within a 4m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-4",
-    "label": "Blast 4",
-    "related": [],
-    "description": "Affects entities within a 5m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-5",
-    "label": "Blast 5",
-    "related": [],
-    "description": "Affects entities within a 6m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-6",
-    "label": "Blast 6",
-    "related": [],
-    "description": "Affects entities within a 7m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-7",
-    "label": "Blast 7",
-    "related": [],
-    "description": "Affects entities within a 8m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-8",
-    "label": "Blast 8",
-    "related": [],
-    "description": "Affects entities within a 9m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-9",
-    "label": "Blast 9",
-    "related": [],
-    "description": "Affects entities within a 10m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-10",
-    "label": "Blast 10",
-    "related": [],
-    "description": "Affects entities within a 11m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-11",
-    "label": "Blast 11",
-    "related": [],
-    "description": "Affects entities within a 12m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-12",
-    "label": "Blast 12",
-    "related": [],
-    "description": "Affects entities within a 13m radius circle/sphere, centered on a selected space."
+    "description": "Utilized with ranged attacks and effects. Affects entities within a Xm radius circle/sphere, centered on a selected space.",
+    "placeholders": [
+      {
+        "keyPattern": "\\blast-d+",
+        "labelPattern": "X",
+        "valuePattern": "\\d+",
+        "descriptionPattern": "Utilized with ranged attacks and effects. Affects entities within a Xm radius circle/sphere, centered on a selected space.",
+        "descriptionReplacement": "Utilized with ranged attacks and effects. Affects entities within a {{x}}m radius circle/sphere, centered on a selected space."
+      }
+    ]
   },
   {
     "slug": "bone",
