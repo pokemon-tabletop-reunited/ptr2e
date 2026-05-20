@@ -1103,7 +1103,7 @@
         {
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
-          "value": -6,
+          "value": -4,
           "method": 2
         }
       ],
@@ -1180,6 +1180,29 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.destined"
+  },
+   {
+    "id": "disguised",
+    "name": "PTR2E.Effect.Statuses.Labels.disguised",
+    "img": "icons/svg/mystery-man.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.disguised"
   },
   {
     "id": "braced",
