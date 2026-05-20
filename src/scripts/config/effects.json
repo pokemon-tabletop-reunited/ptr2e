@@ -2191,7 +2191,11 @@
           "key": "attack",
           "label": "ATK Up on Hit",
           "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
-          "predicate": [],
+          "predicate": [
+            {
+              "not": "targets:self"
+            }
+          ],
           "chance": 100,
           "isFixedChance": false,
           "affects": "defensive",

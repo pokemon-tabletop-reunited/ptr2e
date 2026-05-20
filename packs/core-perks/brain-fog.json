@@ -16,7 +16,10 @@
             "key": "damaging-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
             "predicate": [
-              "effect:affliction:frenzy"
+              "effect:affliction:frenzy",
+              {
+                "not": "targets:self"
+              }
             ],
             "chance": 100,
             "affects": "defensive",
