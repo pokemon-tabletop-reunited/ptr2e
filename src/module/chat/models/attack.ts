@@ -321,7 +321,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
   async getHTMLContent() {
     const renderRolls = async (data: ResultData, isPrivate: boolean) => {
-      const result = this.overrides.get(data.target.uuid)?.value || AttackRoll.successCategory(data.accuracy, data.crit);
+      const result = this.overrides.get(data.target.uuid)?.value || AttackRoll.successCategory(data.accuracy, data.crit, data.context.options.includes("target:crit-immune"));
 
       const rolls = {
         accuracy: await foundry.applications.handlebars.renderTemplate(
@@ -362,7 +362,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       };
       if (data.effectRolls) {
         async function handleRoll(effectRoll: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>, target: "origin" | "target" | "defensive") {
-          const item = await fromUuid(effectRoll.effect);
+          const item = await fu.fromUuid(effectRoll.effect);
           if (!item) {
             Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             return;
@@ -418,7 +418,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                 rolls: await renderRolls(result, false),
                 hit:
                   this.overrides.get(result.target.uuid)?.value ||
-                  AttackRoll.successCategory(result.accuracy, result.crit),
+                  AttackRoll.successCategory(result.accuracy, result.crit, result.context.options.includes("target:crit-immune")),
                 notes: RollNote.notesToHTML(result.context.notes.map(n => new RollNote(n)))?.outerHTML,
                 effect: result.effectRolls ? {
                   some: true,
@@ -1027,6 +1027,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total = 0;
     if (result) result.success = true;
+
+    // If the target is crit immune and this luck was spent on a crit, make sure to add a rollnote for this.
+    if(choice.type === "crit" && currentResult.context.options.includes("target:crit-immune")) {
+      const note = new RollNote({
+        text: `${currentResult.target?.link ?? currentResult.target?.name ?? "Target"} is immune to critical hits, turning this attack into a regular hit.`,
+        selector: "crit",
+      });
+      currentResult.context.notes.push(note.toObject() as ModelPropsFromSchema<CheckContextRollNoteSchema>);
+    }
 
     await this.parent.update({ "system.results": results });
 

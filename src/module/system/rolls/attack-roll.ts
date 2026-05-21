@@ -156,11 +156,12 @@ class AttackRoll extends CheckRoll {
 
   static successCategory(
     accuracy: Maybe<AttackRoll>,
-    crit: Maybe<AttackRoll>
+    crit: Maybe<AttackRoll>,
+    critImmune = false
   ): AccuracySuccessCategory {
     if (accuracy?.dice[0].values[0] === 100) return "fumble";
     const isHit = (accuracy?.total ?? 0) <= 0;
-    const isCrit = (crit?.total ?? 1) <= 0;
+    const isCrit = !critImmune && (crit?.total ?? 1) <= 0;
     return isHit ? (isCrit ? "critical" : "hit") : "miss";
   }
 
