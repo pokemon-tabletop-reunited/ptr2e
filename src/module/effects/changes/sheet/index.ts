@@ -39,6 +39,8 @@ import EphemeralEffectForm from "./ephemeral-effect.ts";
 import MoveVariantChangeSystem from "../move-variant.ts";
 import AlterAttackChangeSystem from "../alter-attack.ts";
 import AlterAttackForm from "./alter-attack.ts";
+import RemoveEffectChangeSystem from "../remove-effect.ts";
+import RemoveEffectForm from "./remove-effect.ts";
 
 const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
@@ -61,7 +63,8 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [ApplyTickChangeSystem.TYPE]: ApplyTickForm,
     [EphemeralEffectChangeSystem.TYPE]: EphemeralEffectForm,
     [AlterAttackChangeSystem.TYPE]: AlterAttackForm,
-    [MoveVariantChangeSystem.TYPE]: AlterAttackForm
+    [MoveVariantChangeSystem.TYPE]: AlterAttackForm,
+    [RemoveEffectChangeSystem.TYPE]: RemoveEffectForm,
 };
 
 export { CHANGE_FORMS, ChangeForm}

@@ -727,7 +727,8 @@
           "increment-clock": "Increment Clock",
           "apply-tick": "Apply Tick",
           "effect-alteration": "Effect Alteration",
-          "move-variant": "Move Variant"
+          "move-variant": "Move Variant",
+          "remove-effect": "Remove Effect"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -937,6 +938,12 @@
           "HP": "HP",
           "PP": "PP",
           "Shield": "Shield"
+        },
+        "RemoveEffect": {
+          "label": "Removal Mode",
+          "hint": "Should all matching effects be removed or only one?",
+          "All": "All",
+          "Oldest": "Oldest"
         }
       },
       "TurnIntoAffliction": "This effect doesn't have a duration since it's a Passive Effect.<br>Would you like to turn it into an Affliction?",
@@ -2685,6 +2692,9 @@
       "Warnings": {
         "GrantItem": {
           "RemovalPrevented": "Removal of {item} is prevented by {preventer}."
+        },
+        "RemoveEffect": {
+          "NoEffectsToRemove": "There are no effects to remove that match the selector."
         }
       },
       "TokenTagPrompt": {
