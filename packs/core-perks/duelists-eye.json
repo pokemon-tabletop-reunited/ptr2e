@@ -51,9 +51,7 @@
       }
     ],
     "slug": "duelists-eye",
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "icons/svg/target.svg",
   "effects": [
@@ -69,24 +67,30 @@
             "key": "system.battleStats.accuracy.stage",
             "value": 2,
             "predicate": [
-              "effect:affliction:duel"
+              "target:mark:duel",
+              "origin:mark:duel"
             ],
             "label": "Duelist's Eye - Duel Partner?",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -98,16 +102,18 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779316146270,
+        "modifiedTime": 1779316146270,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
-  "flags": {},
   "_id": "hqLlxrNgq2V9zDSL"
 }
