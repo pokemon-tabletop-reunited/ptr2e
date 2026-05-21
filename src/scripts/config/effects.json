@@ -2081,6 +2081,46 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.fear"
   },
   {
+    "id": "tormented",
+    "name": "PTR2E.Effect.Statuses.Labels.tormented",
+    "img": "icons/svg/terror.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "roll-effect",
+          "label": "Tormented",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.disabledconditio",
+          "chance": 100,
+          "affects": "self",
+          "alterations": [
+            {
+              "method": 5,
+              "property": "effects.0.duration.turns",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "attention",
+        "control"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.tormented"
+  },
+  {
     "id": "leech",
     "name": "PTR2E.Effect.Statuses.Labels.leech",
     "img": "systems/ptr2e/img/conditions/seeded.svg",
@@ -2212,7 +2252,7 @@
         {
           "type": "roll-effect",
           "key": "attack",
-          "label": "ATK Up on Hit",
+          "label": "Frenzy (ATK Up)",
           "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
           "predicate": [
             {
