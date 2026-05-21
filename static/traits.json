@@ -1897,7 +1897,29 @@
     "slug": "teleporter",
     "label": "Teleporter",
     "related": [],
-    "description": "This creature gains Teleporting movement equal to their highest movement score. The creature gains the Teleport attack as a Learned Attack."
+    "description": "This creature gains Teleporting movement equal to their highest movement score. The creature gains the Teleport attack as a Learned Attack.",
+    "changes": [
+      {
+        "type": "grant-item",
+        "key": "teleport",
+        "value": "Compendium.ptr2e.core-moves.Item.D70apP7vVf1aEVVr",
+        "predicate": [],
+        "allowDuplicate": false,
+        "replaceSelf": false,
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        },
+        "priority": null,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "alterations": [],
+        "track": false,
+        "method": 2
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "therian",
