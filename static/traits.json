@@ -60,6 +60,20 @@
     ]
   },
   {
+    "slug": "sponge",
+    "label": "Sponge",
+    "related": ["boss-xy"],
+    "description":"A creature with this trait permanently has the effects of @UUID[Compendium.ptr2e.core-abilities.k9ghBGh02kBjShMp]{Magic Guard} applied to them, making them immune to indirect damage. This trait is generally meant exclusively for Sponge Bosses.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "damage:indirect"
+      }
+    ]
+  },
+  {
     "slug": "trainer",
     "label": "Trainer",
     "related": [],
