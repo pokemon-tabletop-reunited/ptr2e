@@ -9,20 +9,53 @@
           "social",
           "friendly"
         ],
-        "name": "Psych Out",
+        "name": "Psych Out (Entry)",
         "slug": "psych-out",
-        "type": "passive",
-        "cost": {},
+        "type": "attack",
+        "cost": {
+          "activation": "free"
+        },
         "range": {
-          "target": "enemy-aura",
+          "target": "emanation",
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Effect: All valid creatures in range have -1 default SPATK Stage. When an affected creature leaves the range of this effect, they lose -1 SPATK Stage for 3 Activations. The user's Psychology Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: All valid creatures in range suffer -1 Special Attack for 5 activations.</p>",
+        "img": "icons/svg/unconscious.svg",
+        "types": [
+          "psychic"
+        ],
+        "category": "status",
+        "predicate": []
+      },
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Psych Out (Active)",
+        "slug": "psych-out-active",
+        "type": "attack",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "description": "<p>Effect: All valid creatures in range suffer -1 Special Attack for 5 activations.</p>",
+        "img": "icons/svg/unconscious.svg",
+        "variant": "psych-out",
+        "types": [
+          "psychic"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "description": "<p>Effect: All valid creatures in range have -1 default SPATK Stage. When an affected creature leaves the range of this effect, they lose -1 SPATK Stage for 3 Activations. The user's Psychology Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.dkF6bzhBEOHd3fCO.Actions.psych-out] and @UUID[Compendium.ptr2e.core-abilities.Item.dkF6bzhBEOHd3fCO.Actions.psych-out-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -36,40 +69,60 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "dkF6bzhBEOHd3fCO",
   "effects": [
     {
-      "name": "Psych Out Skill Bonus",
+      "name": "Psych Out",
       "type": "passive",
       "_id": "TT9Fz1LA6RYQWBOO",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "psychology-check",
-            "value": 10,
+            "type": "roll-effect",
+            "key": "psych-out-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
             "predicate": [],
             "label": "Psych Out",
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use {item|link}!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -81,13 +134,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1722257222958,
-        "modifiedTime": 1722257247825,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1779372846864,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

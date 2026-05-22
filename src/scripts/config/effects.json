@@ -537,7 +537,56 @@
       "value": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+  "type": "effect-alteration",
+  "value": 0,
+  "method": 3,
+  "phase": "initial",
+  "predicate": [],
+  "key": "hp-tick-effect-received",
+  "alterations": [
+    {
+      "method": 3,
+      "property": "system.changes.0.value",
+      "value": 0
+    }
+  ],
+  "ignored": false
+  },
+    {
+  "type": "effect-alteration",
+  "value": 0,
+  "method": 3,
+  "phase": "initial",
+  "predicate": [],
+  "key": "pp-tick-effect-received",
+  "alterations": [
+    {
+      "method": 3,
+      "property": "system.changes.0.value",
+      "value": 0
+    }
+  ],
+  "ignored": false
+},
+{
+  "type": "effect-alteration",
+  "value": 0,
+  "method": 3,
+  "phase": "initial",
+  "predicate": [],
+  "key": "shield-tick-effect-received",
+  "alterations": [
+    {
+      "method": 3,
+      "property": "system.changes.0.value",
+      "value": 0
+    }
+  ],
+  "ignored": false
+}
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -656,7 +705,7 @@
         {
           "type": "ephemeral-effect",
           "key": "shadow-trait-attack",
-          "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga.ActiveEffect.4FLjKp9nBo2bfPia",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
           "predicate": [],
           "affects": "self",
           "alterations": [
@@ -1166,7 +1215,21 @@
       "value": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "token-tag",
+          "key": "destined"
+        },
+        {
+          "type": "flat-modifier",
+          "value": 1,
+          "phase": "initial",
+          "predicate": ["origin:mark:destined"],
+          "key": "damaging-attack-recoil-flat",
+          "method": 2,
+          "ignored": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,

@@ -17,11 +17,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user's Attacks have +30% Power and the user takes 10% less damage from Attacks, but each time the user resolves an attack, they gain @Affliction[delay 25].</p>",
+        "description": "<p>Effect: The user has +40% Power on their Attacks, takes 15% less damage from Attacks, and has +5% RES, but the user's Attacks gain @Trait[flinch-33].</p>",
         "img": "systems/ptr2e/img/conditions/sleep.svg"
       }
     ],
-    "description": "<p>Effect: The user's Attacks have +30% Power and the user takes 10% less damage from Attacks, but each time the user resolves an attack, they gain @Affliction[delay 25].</p>",
+    "description": "<p>Effect: The user has +40% Power on their Attacks, takes 15% less damage from Attacks, and has +5% RES, but the user's Attacks gain @Trait[flinch-33].</p>",
     "traits": [],
     "slug": "truant",
     "_migration": {
@@ -48,43 +48,45 @@
           {
             "type": "percentile-modifier",
             "key": "attack-power",
-            "value": 30,
+            "value": 40,
             "predicate": [],
             "priority": null,
             "label": "Truant",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "ephemeral-modifier",
             "key": "attack-damage-percentile",
-            "value": -10,
+            "value": -15,
             "predicate": [],
             "label": "Truant",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
-            "type": "roll-effect",
-            "key": "attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "type": "basic",
+            "value": 5,
+            "phase": "initial",
             "predicate": [],
-            "chance": 100,
-            "isFixedChance": false,
-            "affects": "self",
-            "alterations": [
-              {
-                "property": "system.amount",
-                "value": -25,
-                "method": 5
-              }
-            ],
-            "dontMerge": false,
-            "label": "Truant",
-            "ignored": false,
-            "method": 2
+            "key": "system.modifiers.effectResistance",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "flinch-33",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -98,7 +100,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -109,14 +113,18 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737563805624,
-        "modifiedTime": 1769233748786,
-        "lastModifiedBy": "xh6Pq7RQCtnsVX8n",
+        "modifiedTime": 1778163373738,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

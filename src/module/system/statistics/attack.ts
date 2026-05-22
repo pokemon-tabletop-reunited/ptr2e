@@ -193,7 +193,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     }
 
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
-    this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
+    data.check.domains = this.domains = R.unique(R.filter([data.domains, data.check.domains, ...extraDomains].flat(), R.isTruthy));
 
     this.additionalOptions = new Set<string>(extraOptions);
     if (this.attack.power && this.attack.stab > 1) {
@@ -210,14 +210,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const parentModifiers = parent.modifiers.map((modifier) => modifier.clone());
     const checkOnlyModifiers = [
       data.check?.modifiers ?? [],
-      extractModifiers(parent.actor.synthetics, data.check?.domains ?? [], { resolvables: { target: targetData } }),
+      extractModifiers(parent.actor.synthetics, data.check?.domains ?? parent.domains ?? [], { resolvables: { target: targetData } }),
     ]
       .flat()
       .map((modifier) => {
         modifier.adjustments.push(
           ...extractModifierAdjustments(
             parent.actor.synthetics.modifierAdjustments,
-            parent.domains,
+            data.check?.domains ?? parent.domains ?? [],
             this.parent.slug
           )
         );

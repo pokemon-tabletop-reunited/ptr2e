@@ -9,20 +9,54 @@
           "social",
           "friendly"
         ],
-        "name": "Intimidate",
+        "name": "Intimidate (Entry)",
         "slug": "intimidate",
-        "type": "passive",
-        "cost": {},
+        "type": "attack",
+        "cost": {
+          "activation": "free"
+        },
         "range": {
-          "target": "enemy-aura",
+          "target": "emanation",
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Effect: All valid creatures in range have -1 default ATK Stage. When an affected creature leaves the range of this effect, they lose -1 ATK Stage for 3 Activations. The user's Intimidate Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: All valid creatures in range suffer -1 Attack Stage for 5 Activations.</p>",
+        "img": "icons/svg/silenced.svg",
+        "types": [
+          "dragon"
+        ],
+        "category": "status",
+        "predicate": []
+      },
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Intimidate (Active)",
+        "slug": "intimidate-active",
+        "type": "attack",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "description": "<p>Effect: All valid creatures in range suffer -1 Attack Stage for 5 Activations.</p>",
+        "img": "icons/svg/silenced.svg",
+        "variant": "intimidate",
+        "types": [
+          "dragon"
+        ],
+        "category": "status",
+        "predicate": [],
+        "accuracy": 100
       }
     ],
-    "description": "<p>Effect: All valid creatures in range have -1 default ATK Stage. When an affected creature leaves the range of this effect, they lose -1 ATK Stage for 3 Activations. The user's Intimidate Skill checks have an additional +10 bonus. NEEDS REAUTOMATED.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.8kQ7BwXp1rUCnwkL.Actions.intimidate] and @UUID[Compendium.ptr2e.core-abilities.Item.8kQ7BwXp1rUCnwkL.Actions.intimidate-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -36,7 +70,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "8kQ7BwXp1rUCnwkL",
@@ -49,27 +84,46 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "intimidate",
-            "value": 10,
+            "type": "roll-effect",
+            "key": "intimidate-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
             "predicate": [],
             "label": "Intimidate",
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use {item|link}!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -81,13 +135,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.1.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1717951545219,
-        "modifiedTime": 1717951815687,
-        "lastModifiedBy": "AvKKI5MO51DPYICj"
-      }
+        "modifiedTime": 1779367304659,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

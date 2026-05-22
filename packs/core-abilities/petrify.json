@@ -9,26 +9,54 @@
           "social",
           "friendly"
         ],
-        "name": "Petrify",
+        "name": "Petrify (Entry)",
         "slug": "petrify",
-        "type": "passive",
-        "cost": {},
+        "type": "attack",
+        "cost": {
+          "activation": "free"
+        },
         "range": {
-          "target": "enemy-aura",
+          "target": "emanation",
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Effect: All valid creatures in range have -2 default SPD Stages. When an affected creature leaves the range of this effect, they lose -2 SPD Stages for 5 Activations. NEEDS REAUTOMATED.</p>",
+        "description": "<p>Effect: All valid targets suffer -1 Speed Stage.</p>",
         "img": "icons/svg/terror.svg",
         "types": [
-          "untyped"
+          "rock"
         ],
         "category": "status",
-        "free": true,
         "predicate": []
+      },
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Petrify (Active)",
+        "slug": "petrify-active",
+        "type": "attack",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "description": "<p>Effect: All valid targets suffer -1 Speed Stage.</p>",
+        "img": "icons/svg/terror.svg",
+        "variant": "petrify",
+        "types": [
+          "rock"
+        ],
+        "category": "status",
+        "predicate": [],
+        "accuracy": 100
       }
     ],
-    "description": "<p>Effect: All valid creatures in range have -2 default SPD Stages. When an affected creature leaves the range of this effect, they lose -2 SPD Stages for 5 Activations. NEEDS REAUTOMATED.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.13JbJwxpMrrdRTMm.Actions.petrify] and @UUID[Compendium.ptr2e.core-abilities.Item.13JbJwxpMrrdRTMm.Actions.petrify-active] actions.</p>",
     "traits": [
       "social",
       "friendly",
@@ -43,7 +71,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "13JbJwxpMrrdRTMm",
@@ -56,17 +85,6 @@
       "system": {
         "changes": [
           {
-            "type": "flat-modifier",
-            "key": "intimidate-check",
-            "value": 10,
-            "predicate": [],
-            "label": "Petrify Ability",
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          },
-          {
             "type": "roll-effect",
             "key": "petrify-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
@@ -74,20 +92,38 @@
             "chance": 100,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use {item|link}!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -99,13 +135,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737563571394,
-        "modifiedTime": 1737563659468,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1779371174238,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -18,68 +18,70 @@
       "sci-fi",
       "modern",
       "weapon",
-      "bludgeon",
-      "electric",
-      "contact"
+      "bludgeon"
     ],
     "actions": [
       {
-        "name": "Volt Jolt",
-        "slug": "volt-jolt",
-        "description": "<p>This attack can cause sporadic muscle twitches. It has a 30% chance to inflict @Affliction[tased 5]</p>",
+        "name": "Taser Club Strike",
+        "slug": "taser-club-strike",
+        "description": "<p>Effect: On hit, the target has a 60% chance to gain @Affliction[paralysis 4] and @Affliction[tased 2], and a 30% chance to gain @Affliction[fear 4].</p>",
         "traits": [
           "weapon",
-          "electric",
-          "contact"
+          "contact",
+          "hammer",
+          "flinch-15"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-        "range": {
-          "target": "enemy",
-          "distance": 1,
-          "unit": "m"
-        },
         "cost": {
           "activation": "complex",
           "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
         },
         "types": [
           "electric"
         ],
         "category": "physical",
-        "power": 80,
-        "accuracy": 90,
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "power": 80,
+        "accuracy": 93
       },
       {
-        "name": "Capture Prod",
-        "slug": "capture-prod",
-        "description": "<p>The Capture Prod attack has a 30% chance to inflict Paralysis, and cannot reduce the target's HP below 1.</p>",
+        "name": "Taser Club Bash",
+        "slug": "taser-club-strikenqtwp-b8s-qquqk-cvl",
+        "description": "<p>Effect: On hit, the target has a 40% chance to gain @Affliction[paralysis 3] and @Affliction[tased 1], and a 20% chance to gain @Affliction[fear 3].</p>",
         "traits": [
           "weapon",
-          "electric",
-          "contact"
+          "contact",
+          "hammer",
+          "flinch-10",
+          "double-strike"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-        "range": {
-          "target": "enemy",
-          "distance": 1,
-          "unit": "m"
-        },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 1
+        },
+        "variant": "taser-club-strike",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
         },
         "types": [
           "electric"
         ],
         "category": "physical",
-        "power": 100,
-        "accuracy": 80,
         "free": true,
-        "predicate": []
+        "predicate": [],
+        "power": 30,
+        "accuracy": 88
       }
     ],
     "description": "<p>Taser Clubs tend to be used for violent but nonlethal suppression by law enforcement units.</p>",
@@ -98,7 +100,12 @@
       "type": "electric",
       "power": null,
       "accuracy": 100,
-      "hide": false
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "quantity": 1,
     "rarity": "uncommon",
@@ -110,10 +117,205 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "taser-club",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "Taser Club",
+      "type": "passive",
+      "_id": "aUbsR9wOffFonosM",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [],
+            "key": "taser-club-strike-attack-damage",
+            "label": "Club Strike",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "taser-club-bash-attack-damage",
+            "value": 4,
+            "phase": "initial",
+            "predicate": [],
+            "label": "Club Bash",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 60,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 4
+              }
+            ],
+            "dontMerge": false,
+            "key": "taser-club-strike-attack",
+            "label": "Taser Club (Paralysis)",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.paralysisconditi",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 40,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "key": "taser-club-bash",
+            "label": "Taser Club (Paralysis)",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.tasedcondition00",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 60,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "taser-club-strike-attack",
+            "label": "Taser Club (Tased)",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.tasedcondition00",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 40,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "dontMerge": false,
+            "key": "taser-club-bash-attack",
+            "label": "Taser Club (Tased)",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 4
+              }
+            ],
+            "dontMerge": false,
+            "key": "taser-club-strike-attack",
+            "label": "Taser Club (Fear)",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "key": "taser-club-bash-attack",
+            "label": "Taser Club (Fear)",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778624725963,
+        "modifiedTime": 1778625368658,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
   "_id": "LSbokvEI2j3nTdO1"
 }

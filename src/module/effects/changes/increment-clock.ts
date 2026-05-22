@@ -60,7 +60,7 @@ export default class IncrementClockChangeSystem extends ChangeModel {
       if (!clock) return this.failValidation("Clock not found");
       sourceClocks.push({
         ...clock,
-        value: clock.value <= 0 ? clock.max : clock.value - 1,
+        value: newValue
       });
     }
     else sourceClocks[index].value = newValue;

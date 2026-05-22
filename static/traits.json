@@ -60,6 +60,20 @@
     ]
   },
   {
+    "slug": "sponge",
+    "label": "Sponge",
+    "related": ["boss-xy"],
+    "description":"A creature with this trait permanently has the effects of @UUID[Compendium.ptr2e.core-abilities.k9ghBGh02kBjShMp]{Magic Guard} applied to them, making them immune to indirect damage. This trait is generally meant exclusively for Sponge Bosses.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "damage:indirect"
+      }
+    ]
+  },
+  {
     "slug": "trainer",
     "label": "Trainer",
     "related": [],
@@ -266,12 +280,6 @@
     "description": "TO BE DETERMINED"
   },
   {
-    "slug": "crab",
-    "label": "Crab",
-    "related": [],
-    "description": "TO BE DETERMINED"
-  },
-  {
     "slug": "creature",
     "label": "Creature",
     "related": [],
@@ -420,6 +428,12 @@
     "label": "Disaster Predictor",
     "related": [],
     "description": "This creature can predict when disasters are going to occur, providing a +10 Luck Bonus to reduce the Danger Clock by 1 Span at the cost of 10 PP. The Danger Clock is always visible to this creature. \nSUBJECT TO CHANGE"
+  },
+  {
+    "slug": "drill",
+    "label": "Drill",
+    "related": [],
+    "description": "This trait denotes creatures, moves, or abilities that focus on spurring others onward, or backward, as the case might be. Grants access to the [Drill] Tutor List."
   },
   {
     "slug": "em-sense-x",
@@ -1897,7 +1911,29 @@
     "slug": "teleporter",
     "label": "Teleporter",
     "related": [],
-    "description": "This creature gains Teleporting movement equal to their highest movement score. The creature gains the Teleport attack as a Learned Attack."
+    "description": "This creature gains Teleporting movement equal to their highest movement score. The creature gains the Teleport attack as a Learned Attack.",
+    "changes": [
+      {
+        "type": "grant-item",
+        "key": "teleport",
+        "value": "Compendium.ptr2e.core-moves.Item.D70apP7vVf1aEVVr",
+        "predicate": [],
+        "allowDuplicate": false,
+        "replaceSelf": false,
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        },
+        "priority": null,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "alterations": [],
+        "track": false,
+        "method": 2
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "therian",
@@ -2668,7 +2704,22 @@
     "slug": "ball",
     "label": "Ball",
     "related": [],
-    "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait."
+    "description": "Items with this trait are spherical and perfectly sized to be thrown. Gear with self-compression and miniaturization technology, such as Poke Balls and Pester Balls, usually possess this trait.",
+    "changes": [
+      {
+        "type": "roll-note",
+        "key": "ball-trait-attack",
+        "value": "If you are throwing a PokeBall, make sure to not apply damage!",
+        "predicate": [
+          {
+            "not": "actor:item:perk:curveball-technique"
+          }
+        ],
+        "visibility": null,
+        "ignored": false,
+        "method": 2
+      }
+    ]
   },
   {
     "slug": "concoction",
@@ -2757,79 +2808,16 @@
     "slug": "blast-x",
     "label": "Blast X",
     "related": [],
-    "description": "Utilized with ranged attacks and effects. Affects entities within a X+1m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-1",
-    "label": "Blast 1",
-    "related": [],
-    "description": "Affects entities within a 2m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-2",
-    "label": "Blast 2",
-    "related": [],
-    "description": "Affects entities within a 3m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-3",
-    "label": "Blast 3",
-    "related": [],
-    "description": "Affects entities within a 4m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-4",
-    "label": "Blast 4",
-    "related": [],
-    "description": "Affects entities within a 5m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-5",
-    "label": "Blast 5",
-    "related": [],
-    "description": "Affects entities within a 6m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-6",
-    "label": "Blast 6",
-    "related": [],
-    "description": "Affects entities within a 7m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-7",
-    "label": "Blast 7",
-    "related": [],
-    "description": "Affects entities within a 8m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-8",
-    "label": "Blast 8",
-    "related": [],
-    "description": "Affects entities within a 9m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-9",
-    "label": "Blast 9",
-    "related": [],
-    "description": "Affects entities within a 10m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-10",
-    "label": "Blast 10",
-    "related": [],
-    "description": "Affects entities within a 11m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-11",
-    "label": "Blast 11",
-    "related": [],
-    "description": "Affects entities within a 12m radius circle/sphere, centered on a selected space."
-  },
-  {
-    "slug": "blast-12",
-    "label": "Blast 12",
-    "related": [],
-    "description": "Affects entities within a 13m radius circle/sphere, centered on a selected space."
+    "description": "Utilized with ranged attacks and effects. Affects entities within a Xm radius circle/sphere, centered on a selected space.",
+    "placeholders": [
+      {
+        "keyPattern": "\\blast-d+",
+        "labelPattern": "X",
+        "valuePattern": "\\d+",
+        "descriptionPattern": "Utilized with ranged attacks and effects. Affects entities within a Xm radius circle/sphere, centered on a selected space.",
+        "descriptionReplacement": "Utilized with ranged attacks and effects. Affects entities within a {{x}}m radius circle/sphere, centered on a selected space."
+      }
+    ]
   },
   {
     "slug": "bone",
@@ -2969,7 +2957,45 @@
     "slug": "defrost",
     "label": "Defrost",
     "related": [],
-    "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>"
+    "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "defrost-trait-attack",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+        "predicate": [
+          "self:effect:affliction:frozen"
+        ],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "property": "system.changes.0.key",
+            "value": "frozen",
+            "method": 5
+          }
+        ]
+      },
+      {
+        "type": "roll-effect",
+        "key": "defrost-trait-attack",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+        "predicate": [
+          "target:effect:affliction:frozen"
+        ],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "property": "system.changes.0.key",
+            "value": "frozen",
+            "method": 5
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "drain-x-y",
@@ -3767,6 +3793,18 @@
     "description": "Denotes if an effect alters a creature's Stat Stages."
   },
   {
+    "slug": "positive-stage-change",
+    "label": "Positive Stage Change",
+    "related": [],
+    "description": "Denotes if an effect alters a creature's Stat Stages positively."
+  },
+  {
+    "slug": "negative-stage-change",
+    "label": "Negative Stage Change",
+    "related": [],
+    "description": "Denotes if an effect alters a creature's Stat Stages negatively."
+  },
+  {
     "slug": "desperation-x",
     "label": "Desperation X",
     "related": [],
@@ -3998,34 +4036,50 @@
     "type": "automated"
   },
   {
+    "slug": "spec-x",
+    "label": "Spec. X",
+    "related": [],
+    "description": "A creature with this Trait showcases an affinity toward the X Type and creatures that possess it - academic, emotional, personal, and all other sorts of familiarity!",
+    "placeholders": [
+      {
+        "keyPattern": "spec-[a-z]+",
+        "labelPattern": "X",
+        "valuePattern": "[a-z]+",
+        "descriptionPattern": "X Type",
+        "descriptionReplacement": "@Trait[{{x}}] Type"
+      }
+    ],
+    "type": "narrative"
+  },
+  {
     "slug": "type-shift",
     "label": "Type Shift",
     "related": [],
-    "description": "Denotes if an Ability can change Attack's Type to the %lt;Type&gt;Trait the Ability possesses."
+    "description": "Denotes if an Ability can change Attack's Type to the @Trait[type] Trait the Ability possesses."
   },
   {
     "slug": "domain",
     "label": "Domain",
     "related": [],
-    "description": "Denotes if an Ability provides an Offensive or Allied Aura, based on the Ability's %lt;Type&gt;Trait."
+    "description": "Denotes if an Ability provides an Offensive or Allied Aura, based on the Ability's @Trait[type] Trait."
   },
   {
     "slug": "hunter",
     "label": "Hunter",
     "related": [],
-    "description": "Denotes if an Ability provides the user with the capability of doing extra damage to creatures of the %lt;Type&gt;Trait this Ability possesses."
+    "description": "Denotes if an Ability provides the user with the capability of doing extra damage to creatures of the @Trait[type] Trait this Ability possesses."
   },
   {
     "slug": "stab",
     "label": "STAB",
     "related": [],
-    "description": "Denotes if an Ability provides a 50% boost to Attacks of a given %lt;Type&gt;Trait, akin to the Same Type Attack Bonus."
+    "description": "Denotes if an Ability provides a 50% boost to Attacks of a given @Trait[type], akin to the Same Type Attack Bonus."
   },
   {
     "slug": "strategist",
     "label": "Strategist",
     "related": [],
-    "description": "Denotes if an Ability provides a unique effect to Attacks and Actions that share the %lt;Type&gt; Trait this Ability possesses."
+    "description": "Denotes if an Ability provides a unique effect to Attacks and Actions that share the @Trait[type] Trait this Ability possesses."
   },
   {
     "slug": "charge-pool-x",

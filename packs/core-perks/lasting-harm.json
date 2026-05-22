@@ -8,21 +8,22 @@
       {
         "name": "Lasting Harm",
         "slug": "lasting-harm",
-        "description": "<p>Whenever you apply a @Trait[major-affliction] or @Trait[minor-affliction], their Duration (or Stack amount) is increased by 2 turns.</p>",
+        "description": "<p>Whenever the user applies a @Trait[dot] effect, the Duration (or Stack amount) is increased by 2.</p>",
         "traits": [],
         "type": "passive",
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "free"
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
       }
     ],
     "slug": "lasting-harm",
-    "description": "<p>Whenever you apply a @Trait[major-affliction] or @Trait[minor-affliction], their Duration (or Stack amount) is increased by 2 turns.</p>",
+    "description": "<p>Whenever the user applies a @Trait[dot] effect, the Duration (or Stack amount) is increased by 2.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 4,
@@ -68,7 +69,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "effects": [
     {
@@ -91,7 +93,8 @@
             "value": 0,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -105,7 +108,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -118,13 +123,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.2.beta",
         "createdTime": 1755162831765,
         "modifiedTime": 1755162888196,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "folder": "a1w2zpzavg6qtJFn"

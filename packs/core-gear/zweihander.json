@@ -175,12 +175,12 @@
       "handsHeld": 2,
       "slot": "held"
     },
-    "grade": "D",
+    "grade": "B",
     "fling": {
       "type": "untyped",
       "power": 100,
       "accuracy": 65,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 2,
@@ -188,7 +188,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -205,7 +205,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>The zweihander is a large two-handed sword and is considered the final stage in the trend of making very large swords, offering many of the benefits of polearms in the process.</p>"
+    "description": "<p>The zweihander is a large two-handed sword and is considered the final stage in the trend of making very large swords, offering many of the benefits of polearms in the process.</p>",
+    "ammoType": []
   },
   "_id": "MXMKNrLaYJsoTetc",
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -225,7 +226,8 @@
             "label": "Zweihander",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -235,7 +237,8 @@
             "label": "Thrust",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -245,7 +248,8 @@
             "label": "Cleave",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -255,7 +259,8 @@
             "label": "Half-Swing",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -265,7 +270,8 @@
             "label": "Half-Thrust",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -275,12 +281,13 @@
             "label": "Zweihander (Fling)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
             "key": "zweihander-cleave-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
             "predicate": [],
             "chance": 30,
             "isFixedChance": false,
@@ -294,7 +301,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -308,7 +316,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -320,13 +330,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1757549013437,
         "modifiedTime": 1757549551240,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

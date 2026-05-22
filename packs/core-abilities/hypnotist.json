@@ -42,7 +42,6 @@
     ],
     "description": "<p>Effect: Connection - Hypnosis. <br><br>@Trait[interrupt] Trigger: An enemy moves into range, allowing the user to activate Hypnosis as a Free Action @Trait[interrupt].<br><br>Passive: The user's Hypnosis gains Danger Close.</p>",
     "traits": [
-      "partial-automation",
       "connection"
     ],
     "slug": "hypnotist",
@@ -69,16 +68,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.s4q86Yo0UJilvVI0",
             "predicate": [
               "ability:hypnotist:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -88,11 +86,24 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "danger-close",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "key": "hypnosis-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -106,7 +117,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -118,14 +131,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737403414513,
-        "modifiedTime": 1754319221960,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778689424570,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

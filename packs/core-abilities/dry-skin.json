@@ -19,19 +19,17 @@
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
         "description": "<p>Effect: The user recovers 4 Ticks of HP when hit by a Water-Type attack, and recovers a tick of HP at the end of their turn in Rainy Weather. The user takes 25% more damage from Fire-Type attacks, and loses a Tick of HP at the end of their turn in Sunny Weather.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/magic/air/weather-clouds-sunlight.webp"
       }
     ],
     "description": "<p>Effect: The user recovers 4 Ticks of HP when hit by a Water-Type attack, and recovers a tick of HP at the end of their turn in Rainy Weather. The user takes 25% more damage from Fire-Type attacks, and loses a Tick of HP at the end of their turn in Sunny Weather.</p>",
     "traits": [
       "healing",
       "defensive",
-      "environ",
-      "partial-automation"
+      "environ"
     ],
     "slug": "dry-skin",
     "_migration": {
@@ -72,7 +70,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -82,7 +81,8 @@
             "label": "Dry Skin",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -96,7 +96,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -108,12 +110,116 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765240592996,
         "modifiedTime": 1765240652037,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    },
+    {
+      "name": "Rain Regen",
+      "type": "affliction",
+      "_id": "LXaRrGfzEhNGD7zc",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/16",
+        "type": "healing",
+        "predicate": [
+          "effect:summon:rainy-weather"
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778685165800,
+        "modifiedTime": 1778685179604,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    },
+    {
+      "name": "Sun Tick",
+      "type": "affliction",
+      "_id": "qZL9FRZFOhFmXBHR",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/16",
+        "type": "damage",
+        "predicate": [
+          "effect:summon:sunny-weather"
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778685196316,
+        "modifiedTime": 1778685218066,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
       }
     }
   ]

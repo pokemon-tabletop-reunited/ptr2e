@@ -38,7 +38,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -55,7 +55,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
   "effects": [
@@ -94,7 +95,8 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -108,7 +110,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -120,14 +124,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.0.0.beta-ready.2",
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null,
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "_id": "bkp1jRCIRz4Pw2G3"

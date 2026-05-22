@@ -1,0 +1,26 @@
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeSelector.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.key" value="{{change.key}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.RemoveEffect.label"}}</label>
+    <div class="form-fields">
+      <div>
+        <input type="radio" name="{{basePath}}.remove" value="All" {{#if (is change.remove 'All')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.RemoveEffect.All"}}</label>
+      </div>
+      <div>
+        <input type="radio" name="{{basePath}}.remove" value="Oldest" {{#if (is change.remove 'Oldest')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.RemoveEffect.Oldest"}}</label>
+      </div>
+    </div>
+    <p class="hint">{{localize "PTR2E.Effect.FIELDS.RemoveEffect.hint"}}</p>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>

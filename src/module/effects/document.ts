@@ -181,9 +181,9 @@ class ActiveEffectPTR2e<
     const timeConversion = CONFIG.time[`${unitsSingular}Time`] || 0;
     const seconds = timeConversion ? Math.trunc(duration.value! * timeConversion) : null;
     //@ts-expect-error - Missing types
-    const combat: CombatPTR2e = game.combats.get(this.start!.combat?.id) ?? game.combat;
+    const combat: CombatPTR2e = game.combats.get(this.start?.combat?.id) ?? game.combat;
     
-    const combatant = this.actor!.combatant;
+    const combatant = this.actor?.combatant;
 
     // If no combat information is available, reframe the presented duration as time-based
     if (!this.start || !combatant || !combat.started || !combat.turns.length) {

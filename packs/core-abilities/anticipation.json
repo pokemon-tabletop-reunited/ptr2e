@@ -19,11 +19,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: Attacks originating from non-allied creatures targeting the user have -15 Accuracy and -20% EHR, and @Affliction[delay 15] the user on hit.</p>",
+        "description": "<p>Effect: Attacks originating from non-allied creatures targeting the user have -15 Accuracy and -20% EHR, and the user gains @Affliction[delay 15] when hit by a Physical- or Special-Category Attack.</p>",
         "img": "icons/magic/time/clock-spinning-gold-pink.webp"
       }
     ],
-    "description": "<p>Effect: Attacks originating from non-allied creatures targeting the user have -15 Accuracy and -20% EHR, and @Affliction[delay 15] the user on hit.</p>",
+    "description": "<p>Effect: Attacks originating from non-allied creatures targeting the user have -15 Accuracy and -20% EHR, and the user gains @Affliction[delay 15] when hit by a Physical- or Special-Category Attack.</p>",
     "traits": [],
     "slug": "anticipation",
     "_migration": {
@@ -49,7 +49,7 @@
         "changes": [
           {
             "type": "ephemeral-modifier",
-            "value": 15,
+            "value": -15,
             "phase": "initial",
             "predicate": [
               {
@@ -64,7 +64,7 @@
           },
           {
             "type": "ephemeral-effect",
-            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
             "phase": "initial",
             "predicate": [
               {
@@ -103,7 +103,7 @@
               }
             ],
             "dontMerge": false,
-            "key": "attack",
+            "key": "damaging-attack",
             "method": 2,
             "ignored": false
           }

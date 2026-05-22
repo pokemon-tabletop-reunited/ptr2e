@@ -8,20 +8,20 @@
         "traits": [],
         "name": "Plus",
         "slug": "plus",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free"
         },
         "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 10
+          "target": "field",
+          "unit": "m"
         },
-        "description": "<p>Effect: If there is at least one other allied creature with the Minus, Cationic or Anionic Ability on the field, the user's ATK stat is increased by 50%. If the user is within 5m of an ally with the Minus, Cationic, or Anionic Ability, they gain the effect of that Ability.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: If there is at least one other allied creature with the Plus, Cationic or Minus Ability on the field, the user can deploy a @UUID[Compendium.ptr2e.core-summons.Item.5y5OrxRPW3Qb3yJi]{Plus Summon}, which grants +50% Attack to all allies with one of the corresponding abilities.</p><p>The Plus Summon is terminated if the user is @Affliction[fainted] or removed from the field.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.5y5OrxRPW3Qb3yJi"
       }
     ],
-    "description": "<p>Effect: If there is at least one other allied creature with the Minus, Cationic or Anionic Ability on the field, the user's ATK stat is increased by 50%. If the user is within 5m of an ally with the Minus, Cationic, or Anionic Ability, they gain the effect of that Ability.</p>",
+    "description": "<p>Effect: If there is at least one other allied creature with the Plus, Cationic or Minus Ability on the field, the user can deploy a @UUID[Compendium.ptr2e.core-summons.Item.5y5OrxRPW3Qb3yJi]{Plus Summon}, which grants +50% Attack to all allies with one of the corresponding abilities.</p><p>The Plus Summon is terminated if the user is @Affliction[fainted] or removed from the field.</p>",
     "traits": [],
     "slug": "plus",
     "_migration": {
@@ -58,7 +58,8 @@
             "label": "Anionic",
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -68,7 +69,8 @@
               "anionic:active"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -82,7 +84,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -94,13 +98,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765274857645,
         "modifiedTime": 1765274857645,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     },
     {
       "name": "Cationic",
@@ -121,7 +129,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -131,7 +140,8 @@
               "cationic:active"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -145,7 +155,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -157,13 +169,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765274863876,
         "modifiedTime": 1765274863876,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     },
     {
       "name": "Minus",
@@ -184,7 +200,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -194,7 +211,8 @@
               "minus:active"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -208,7 +226,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -220,13 +240,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765274868926,
         "modifiedTime": 1765274868926,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     },
     {
       "name": "Plus",
@@ -247,7 +271,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -257,7 +282,8 @@
               "plus:active"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -271,7 +297,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -284,13 +312,16 @@
         "compendiumSource": "Item.J2ekYuogY58G0EFZ.ActiveEffect.JTFKaBfQ9bPTy5P3",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765274874666,
         "modifiedTime": 1765274874666,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

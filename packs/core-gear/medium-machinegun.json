@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "A",
     "fling": {
       "type": "steel",
       "power": 85,
@@ -44,7 +44,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 50,
         "accuracy": 90,
         "free": true,
@@ -54,7 +54,7 @@
         ],
         "name": "Medium Machinegun",
         "slug": "medium-machinegun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -63,26 +63,27 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 125,
         "accuracy": 85,
         "free": true,
         "traits": [
           "missile",
-          "firearm"
+          "firearm",
+          "flinch-15"
         ],
         "name": "Medium Machinegun (Burst)",
         "slug": "medium-machinegun-burst",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -91,29 +92,29 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "complex"
         },
         "variant": "medium-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 32,
         "accuracy": 80,
         "free": true,
         "traits": [
           "missile",
           "10-strike",
-          "flinch-30",
-          "firearm"
+          "firearm",
+          "flinch-35"
         ],
         "name": "Medium Machinegun (Salvo)",
         "slug": "medium-machinegun-salvo",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 10</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -122,29 +123,29 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 10,
-          "delay": 3
+          "activation": "complex"
         },
         "variant": "medium-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 105,
         "accuracy": 60,
         "free": true,
         "traits": [
           "missile",
           "dash",
-          "firearm"
+          "firearm",
+          "flinch-25"
         ],
         "name": "Medium Machinegun (Hip Fire)",
         "slug": "medium-machinegun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 4</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -153,11 +154,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "complex"
         },
         "variant": "medium-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -184,7 +185,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges.  Medium machine guns use full-sized rifle rounds and are designed to be used from fixed positions mounted on a tripod.</p>"
+    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges.  Medium machine guns use full-sized rifle rounds and are designed to be used from fixed positions mounted on a tripod.</p>",
+    "ammoType": []
   },
   "_id": "XtRwBNGmJN12N2z9",
   "effects": [
@@ -204,7 +206,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -213,7 +216,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -222,7 +226,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -236,7 +241,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -247,14 +254,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743892843449,
         "modifiedTime": 1757631998546,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "fwBg1GB1fMcgPklo"

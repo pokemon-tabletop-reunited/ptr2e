@@ -29,15 +29,14 @@
       {
         "name": "Whip Strike",
         "slug": "whip-strike",
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[delay 30]. On a Critical Hit, the target gains @Affliction[bleed 5].</p>",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[delay 30] and @Affliction[fear 2]. On a Critical Hit, the target gains @Affliction[bleed 5] and @Affliction[fear 3].</p>",
         "traits": [
           "weapon",
           "adaptable",
           "contact",
           "missile",
           "crit-1",
-          "flinch-10",
-          "impel"
+          "flinch-10"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -61,15 +60,14 @@
       {
         "name": "Whip Lash",
         "slug": "whip-lash",
-        "description": "<p>Effect: On hit, the target gains @Affliction[delay 30] and has a 30% chance of gaining @Affliction[bleed 5] and a further @Affliction[delay 30]. On a Critical Hit, the target loses -1 random Stat Stage for 5 Activations, and has a 30% chance of gaining @Affliction[splinter 5].</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[delay 20] and @Affliction[fear 1], and has a 30% chance of gaining @Affliction[bleed 5] and a further @Affliction[delay 30] and @Affliction[fear 2]. On a Critical Hit, the target gains @Affliction[fear 3] and has a 30% chance of gaining @Affliction[splinter 5].</p>",
         "traits": [
           "weapon",
           "adaptable",
           "contact",
           "missile",
           "crit-1",
-          "flinch-30",
-          "impel"
+          "flinch-25"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -94,14 +92,13 @@
       {
         "name": "Whip Bind",
         "slug": "whip-bind",
-        "description": "<p>Effect: On hit, the target is @Affliction[bound], and the user automatically succeeds with a @Affliction[grapple] against the target. The target is @Affliction[hindered] and has -1 default ACC while @Affliction[bound], and can only be cured of @Affliction[bound] as a Free Action while this item is not Held or the target escapes the Grapple.</p>",
+        "description": "<p>Effect: On hit, the target is @Affliction[grapple] and @Affliction[bound]. The target is @Affliction[hindered] while @Affliction[bound], and can be cured of @Affliction[bound] as a Free Action @Trait[interrupt] while this item is not Held by the user, or if the target escapes the Grapple.</p>",
         "traits": [
           "weapon",
           "adaptable",
           "contact",
           "missile",
-          "flinch-10",
-          "impel"
+          "flinch-20"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -146,7 +143,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -155,7 +152,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "D",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -172,9 +171,10 @@
             "value": 3,
             "predicate": [],
             "label": "Whip",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "roll-effect",
@@ -186,15 +186,37 @@
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": -20,
-                "method": 5
+                "value": -20
               }
             ],
             "dontMerge": false,
             "label": "Delay",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Fear",
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "whip-strike-attack",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -207,8 +229,30 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Fear",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "key": "whip-strike-attack-crit",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "flat-modifier",
@@ -216,9 +260,10 @@
             "value": 5,
             "predicate": [],
             "label": "Lash",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "roll-effect",
@@ -230,15 +275,37 @@
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": -30,
-                "method": 5
+                "value": -20
               }
             ],
             "dontMerge": false,
             "label": "Auto Delay",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Auto Fear",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "dontMerge": true,
+            "key": "whip-lash-attack",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -250,15 +317,16 @@
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": -30,
-                "method": 5
+                "value": -30
               }
             ],
             "dontMerge": false,
             "label": "Delay",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -270,13 +338,35 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "label": "Lash Bleed",
-            "ignored": false,
-            "method": 2
+            "label": "Bleed",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "whip-lash-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Fear",
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "key": "whip-lash-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "whip-lash-attack-crit",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.splinterconditio",
             "predicate": [],
             "chance": 30,
@@ -285,8 +375,30 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Lash Splinter",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Fear",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": true,
+            "key": "whip-lash-attack-crit",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -299,8 +411,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -313,8 +426,9 @@
             "affects": "target",
             "alterations": [],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -328,7 +442,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -340,13 +456,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.5.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1778679579227,
+        "modifiedTime": 1778680345979
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "WmEtmDZ28GjmyFNW"
 }

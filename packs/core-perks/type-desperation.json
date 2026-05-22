@@ -1,5 +1,5 @@
 {
-  "name": "<Type> Desperation",
+  "name": "Type Desperation",
   "type": "perk",
   "folder": "kWG8zov1UnSKOvEQ",
   "system": {
@@ -9,9 +9,9 @@
     },
     "actions": [
       {
-        "name": "<Type> Desperation - Tutoring",
-        "slug": "type-desperation-action-1",
-        "description": "<p>You are able to tutor the [Desperation] Ability of your chosen Type to yourself and any Pokemon you are responsible for of the chosen Type. This may be taken multiple times, each time selecting a different type for which you have a corresponding Type Specialty.</p>",
+        "name": "Type Desperation - Tutoring",
+        "slug": "type-desperation",
+        "description": "<p>The user gains one @Trait[desperation] Ability corresponding to one of their Type Specialties, and may Tutor it to owned creatures of that Type..</p>",
         "traits": [],
         "type": "camping",
         "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
@@ -24,10 +24,8 @@
         }
       }
     ],
-    "description": "<p>You are able to tutor the [Desperation] Ability of your chosen Type to yourself and any Pokemon you are responsible for of the chosen Type. This may be taken multiple times, each time selecting a different type for which you have a corresponding Type Specialty.</p>",
-    "traits": [
-      "desperation-1-3"
-    ],
+    "description": "<p>The user gains one @Trait[strategist] Ability corresponding to one of their Type Specialties, and may Tutor it to owned creatures of that Type.</p>",
+    "traits": [],
     "prerequisites": [
       {
         "gte": [
@@ -37,7 +35,7 @@
       },
       "item:perk:type-specialist"
     ],
-    "cost": 2,
+    "cost": 3,
     "slug": "type-desperation",
     "nodes": [
       {
@@ -92,97 +90,423 @@
       "system": {
         "changes": [
           {
-            "type": "choice-set",
-            "prompt": "Select An Ability",
-            "adjustName": false,
-            "flag": "typeDesperation",
-            "rollOption": "typeDesperation",
-            "allowNoSelection": false,
-            "showDisabled": true,
-            "choices": [
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.QiqP5Xrw4RONT2Rj"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.fOrAmM8cSQtNoklE"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.ts89BEcu1e0tA3w6"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.ANRnD2QDxKgRnPFi"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.6qwLdkY871AxKJmM"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.5OvNzjB2nSBLZbBk"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.GvXhEEV30BsWL4B0"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.6V4E7dWDnaDedpRP"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.3cr8lV0ES23zlwNo"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.BfjkYPHIhVLY8pbd"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.EYh4PzU86n4q5gZK"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.zWRHuzQE5hpreLwy"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.f1xjUtaJUH9qOIuE"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.656qoQVsc8ss9dfx"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.Xw364tg2OaSLqoWj"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.rMkEkomv6IeiTHgd"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.J0kHDuw62VBEv7hS"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.Kp7XFh8O1Yy68ozS"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.i0xkZPn7CXuwdPE3"
-              },
-              {
-                "value": "Compendium.ptr2e.core-abilities.Item.syY6AXnJyG1ed4E8"
-              }
-            ],
+            "type": "grant-item",
             "key": "",
-            "value": 0,
-            "predicate": [],
+            "value": "Compendium.ptr2e.core-abilities.Item.fOrAmM8cSQtNoklE",
+            "predicate": [
+                "trait:spec-fire"
+            ],
+            "priority": null,
             "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "method": 2
           },
           {
             "type": "grant-item",
             "key": "",
-            "value": "{effect|flags.ptr2e.choiceSelections.typeDesperation}",
-            "predicate": [],
-            "alterations": [],
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
+            "value": "Compendium.ptr2e.core-abilities.Item.rMkEkomv6IeiTHgd",
+            "predicate": [
+                "trait:spec-dark"
+            ],
+            "priority": null,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
+            "alterations": [],
             "track": false,
             "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.ts89BEcu1e0tA3w6",
+            "predicate": [
+                "trait:spec-fighting"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.6qwLdkY871AxKJmM",
+            "predicate": [
+                "trait:spec-flying"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.zWRHuzQE5hpreLwy",
+            "predicate": [
+                "trait:spec-ice"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.Xw364tg2OaSLqoWj",
+            "predicate": [
+                "trait:spec-ghost"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.3cr8lV0ES23zlwNo",
+            "predicate": [
+                "trait:spec-ground"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.QiqP5Xrw4RONT2Rj",
+            "predicate": [
+                "trait:spec-normal"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.syY6AXnJyG1ed4E8",
+            "predicate": [
+                "trait:spec-nuclear"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.BfjkYPHIhVLY8pbd",
+            "predicate": [
+                "trait:spec-psychic"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.Kp7XFh8O1Yy68ozS",
+            "predicate": [
+                "trait:spec-fairy"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.EYh4PzU86n4q5gZK",
+            "predicate": [
+                "trait:spec-rock"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.5OvNzjB2nSBLZbBk",
+            "predicate": [
+                "trait:spec-grass"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.656qoQVsc8ss9dfx",
+            "predicate": [
+                "trait:spec-dragon"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.f1xjUtaJUH9qOIuE",
+            "predicate": [
+                "trait:spec-bug"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.ANRnD2QDxKgRnPFi",
+            "predicate": [
+                "trait:spec-water"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.6V4E7dWDnaDedpRP",
+            "predicate": [
+                "trait:spec-electric"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.J0kHDuw62VBEv7hS",
+            "predicate": [
+                "trait:spec-steel"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.i0xkZPn7CXuwdPE3",
+            "predicate": [
+                "trait:spec-shadow"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "method": 2
+          },
+          {
+            "type": "grant-item",
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.GvXhEEV30BsWL4B0",
+            "predicate": [
+                "trait:spec-poison"
+            ],
+            "priority": null,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
             "method": 2
           }
         ],

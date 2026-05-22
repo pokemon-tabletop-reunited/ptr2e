@@ -14,19 +14,17 @@
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit by a Fire-Type attack.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a Fire-Type attack.</p><p>Effect: The user takes no damage from the triggering attack and is not affected by the triggering attack's effect. Then, the user freely uses Stoke.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user is hit by a Fire-Type attack.</p><p>Effect: Connection - Stoke. The user takes no damage from the triggering attack and is not affected by the triggering attack's effect. Then, the user gains @UUID[Compendium.ptr2e.core-effects-new.ActiveEffect.stokedcondititem]{Stoked} and +1 Speed Stage for 5 activations.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a Fire-Type attack.</p><p>Effect: Connection - Stoke. The user takes no damage from the triggering attack and is not affected by the triggering attack's effect. Then, the user freely uses Stoke.</p>",
+    "description": "<p>Trigger: The user is hit by a Fire-Type attack.</p><p>Effect: Connection - Stoke. The user takes no damage from the triggering attack and is not affected by the triggering attack's effect. Then, the user gains @UUID[Compendium.ptr2e.core-effects-new.ActiveEffect.stokedcondititem]{Stoked} and +1 Speed Stage for 5 activations.</p>",
     "traits": [
       "connection",
       "defensive"
@@ -55,16 +53,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.51bKgpaPceb1kg5n",
             "predicate": [
               "ability:flash-fire:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -74,11 +71,52 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "value": -100000,
+            "phase": "initial",
+            "predicate": [],
+            "key": "fire-attack-damage-percentile",
+            "label": "Flash Fire",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.stokedcondititem",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "fire-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "fire-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -92,7 +130,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -104,14 +144,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737398204591,
-        "modifiedTime": 1754318218273,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778687760280,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

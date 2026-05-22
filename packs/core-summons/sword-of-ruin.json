@@ -1,0 +1,90 @@
+{
+  "name": "Sword of Ruin",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "summon",
+      "legendary"
+    ],
+    "actions": [],
+    "duration": 1
+  },
+  "_id": "D1t6ZNBrU0El0M4k",
+  "img": "icons/svg/ruins.svg",
+  "effects": [
+    {
+      "name": "Sword of Ruin",
+      "type": "summon",
+      "_id": "Vw34amzGcgWOB03I",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": -0.25,
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "trait:treasure-of-ruin"
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "predicate": [],
+        "targetType": "all",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779359769098,
+        "modifiedTime": 1779359769098,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {}
+}

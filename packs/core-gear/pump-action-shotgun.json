@@ -55,35 +55,36 @@
         ],
         "name": "Pump-Action Shotgun",
         "slug": "pump-action-shotgun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
           "target": "wide-line",
-          "distance": 8,
+          "distance": 9,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "power": 180,
+        "category": "physical",
+        "power": 190,
         "accuracy": 85,
         "free": true,
         "traits": [
           "missile",
-          "firearm"
+          "firearm",
+          "flinch-15"
         ],
         "name": "Pump-Action Shotgun (Slam Trigger)",
         "slug": "pump-action-shotgun-slam-trigger",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -92,17 +93,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 3
+          "activation": "complex"
         },
         "variant": "pump-action-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 85,
         "accuracy": 80,
         "free": true,
@@ -113,7 +114,7 @@
         ],
         "name": "Pump-Action Shotgun (Hip Fire)",
         "slug": "pump-action-shotgun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -122,9 +123,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1,
-          "priority": 1
+          "activation": "complex"
         },
         "variant": "pump-action-shotgun",
         "predicate": []
@@ -154,7 +153,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A pump-action shotgun is a shotgun with a manual firearm action that is operated by moving a sliding handguard on the gun's forestock, typically using the slide to eject spent casings, chamber a new round, and prime the weapon. These weapons are typically fed from a tubular magazine underneath the barrel, though some more modern designs utilize detachable box magazines.</p>"
+    "description": "<p>A pump-action shotgun is a shotgun with a manual firearm action that is operated by moving a sliding handguard on the gun's forestock, typically using the slide to eject spent casings, chamber a new round, and prime the weapon. These weapons are typically fed from a tubular magazine underneath the barrel, though some more modern designs utilize detachable box magazines.</p>",
+    "ammoType": []
   },
   "_id": "cKsYET7mSIuV0Qhw",
   "effects": [
@@ -174,7 +174,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -183,7 +184,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -197,7 +199,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -208,14 +212,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743970446605,
         "modifiedTime": 1757631979494,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "fwBg1GB1fMcgPklo"

@@ -18,7 +18,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user misses with an attack.</p><p>Effect: The user does not spend PP on the missed attack, and gains +2 ACC Stages for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,9 +36,70 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "VM76lMqpqLmOyVpu",
-  "effects": []
+  "effects": [
+    {
+      "name": "Discretion",
+      "type": "passive",
+      "_id": "FeaIqnLfYbeZQedi",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.Smwu5LWbBYgjUmPc",
+            "phase": "initial",
+            "predicate": [],
+            "alterations": [],
+            "key": "discretion-generic",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778684988467,
+        "modifiedTime": 1778685017762,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

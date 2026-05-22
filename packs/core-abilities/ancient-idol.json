@@ -21,10 +21,9 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: Connection - Cosmic Power. The user uses DEF and SPDEF in place of ATK and SPATK respectively when attacking.</p>",
+    "description": "<p>Effect: The user's Physical-and Special Category Attacks use 30% of the user's DEF and SPDEF respectively in damage calculation in addition to the original attacking stat. The user has +20% EHR and +10% RES.</p>",
     "traits": [
-      "connection",
-      "partial-automation"
+      "innate"
     ],
     "slug": "ancient-idol",
     "_migration": {
@@ -49,31 +48,94 @@
       "system": {
         "changes": [
           {
-            "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.yF0XYtBJKJJstJDD",
+            "type": "flat-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.def.value * ((2 + @actor.system.attributes.def.stage) / 2)) * 0.3)",
             "predicate": [
-              "ability:ancient-idol:active"
-            ],
-            "alterations": [
               {
-                "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "gte": [
+                  "{actor|system.attributes.def.stage}",
+                  0
+                ]
               }
             ],
             "priority": null,
-            "reevaluateOnUpdate": true,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "allowDuplicate": false,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "physical-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.def.value * (2 / (2 + abs(@actor.system.attributes.def.stage)))) * 0.3)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.def.stage}",
+                  0
+                ]
+              }
+            ],
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "special-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spd.value * ((2 + @actor.system.attributes.spd.stage) / 2)) * 0.3)",
+            "predicate": [
+              {
+                "gte": [
+                  "{actor|system.attributes.spd.stage}",
+                  0
+                ]
+              }
+            ],
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "special-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.spd.value * (2 / (2 + abs(@actor.system.attributes.spd.stage)))) * 0.3)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.spd.stage}",
+                  0
+                ]
+              }
+            ],
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [],
+            "key": "system.modifiers.effectHitRate",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [],
+            "key": "system.modifiers.effectResistance",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -87,7 +149,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -99,14 +163,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737392717182,
-        "modifiedTime": 1754316757497,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778019046095,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
