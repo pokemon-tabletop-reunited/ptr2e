@@ -49,30 +49,40 @@
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.poisoncondition0",
+            "type": "effect-alteration",
+            "value": 0,
             "phase": "initial",
             "predicate": [],
             "key": "burn-applied",
-            "chance": 100,
-            "isFixedChance": false,
-            "affects": "target",
-            "alterations": [],
-            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "poison"
+                },
+                "method": 2
+              }
+            ],
             "method": 2,
             "ignored": false
           },
           {
-            "type": "roll-effect",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "type": "effect-alteration",
+            "value": 0,
             "phase": "initial",
             "predicate": [],
             "key": "poison-applied",
-            "chance": 100,
-            "isFixedChance": false,
-            "affects": "target",
-            "alterations": [],
-            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "burn"
+                },
+                "method": 2
+              }
+            ],
             "method": 2,
             "ignored": false
           }
@@ -107,7 +117,7 @@
         "systemId": "ptr2e",
         "systemVersion": "1.7.5.beta",
         "createdTime": 1778667935062,
-        "modifiedTime": 1778668006706,
+        "modifiedTime": 1779369277884,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,

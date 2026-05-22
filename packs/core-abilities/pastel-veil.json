@@ -24,7 +24,7 @@
         "img": "systems/ptr2e/img/svg/fairy_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Allied creatures in range have a 50% chance of being cured of @Affliction[poison] and @Affliction[blight] at the end of their Activations.</p>",
+    "description": "<p>Effect: The user and all allies within range are immune to the @Affliction[poison] and @Affliction[blight] Afflictions.</p>",
     "traits": [
       "defensive",
       "aura",
@@ -64,7 +64,8 @@
             "ignored": false,
             "suboptions": [],
             "state": true,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-option",
@@ -78,19 +79,24 @@
             "ignored": false,
             "suboptions": [],
             "state": true,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -102,13 +108,17 @@
       "_stats": {
         "compendiumSource": "Actor.1e5Mp4QgdlNuEFFZ.Item.4r7cKBlAskl6BKGH.ActiveEffect.rkpaii85X6efwPcl",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1731719151810,
         "modifiedTime": 1731719151810,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -9,20 +9,53 @@
           "social",
           "friendly"
         ],
-        "name": "Guard Down",
+        "name": "Guard Down (Entry)",
         "slug": "guard-down",
-        "type": "passive",
-        "cost": {},
+        "type": "attack",
+        "cost": {
+          "activation": "free"
+        },
         "range": {
-          "target": "enemy-aura",
+          "target": "emanation",
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Effect: All valid creatures in range have -1 default DEF Stage. When an affected creature leaves the range of this effect, they lose -1 DEF Stage for 3 Activations. The user's Attacks have a 10% chance to inflict @Affliction[delay 20]. NEEDS REAUTOMATED.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: All valid creatures in range suffer -1 Defense Stage for 5 activations.</p>",
+        "img": "systems/ptr2e/img/icons/physical_icon.png",
+        "types": [
+          "dark"
+        ],
+        "category": "status",
+        "predicate": []
+      },
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Guard Down (Active)",
+        "slug": "guard-down-active",
+        "type": "attack",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "description": "<p>Effect: All valid creatures in range suffer -1 Defense Stage for 5 activations.</p>",
+        "img": "systems/ptr2e/img/icons/physical_icon.png",
+        "variant": "guard-down",
+        "types": [
+          "dark"
+        ],
+        "category": "status",
+        "predicate": []
       }
     ],
-    "description": "<p>Effect: All valid creatures in range have -1 default DEF Stage. When an affected creature leaves the range of this effect, they lose -1 DEF Stage for 3 Activations. The user's Attacks have a 10% chance to inflict @Affliction[delay 20]. NEEDS REAUTOMATED.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down] and @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -36,9 +69,80 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "WTCc949kqybFx9TU",
-  "effects": []
+  "effects": [
+    {
+      "name": "Guard Down",
+      "type": "passive",
+      "_id": "uod41j9xRdlMmaP6",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
+            "phase": "initial",
+            "predicate": [],
+            "alterations": [],
+            "key": "guard-down-attack",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down]!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779365985197,
+        "modifiedTime": 1779366049443,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

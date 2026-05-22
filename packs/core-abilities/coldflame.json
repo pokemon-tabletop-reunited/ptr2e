@@ -47,30 +47,40 @@
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frostbiteconditi",
+            "type": "effect-alteration",
+            "value": 0,
             "phase": "initial",
             "predicate": [],
-            "chance": 100,
-            "isFixedChance": false,
-            "affects": "target",
-            "alterations": [],
-            "dontMerge": false,
             "key": "burn-applied",
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "frostbite"
+                },
+                "method": 2
+              }
+            ],
             "method": 2,
             "ignored": false
           },
           {
-            "type": "roll-effect",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "type": "effect-alteration",
+            "value": 0,
             "phase": "initial",
             "predicate": [],
             "key": "frostbite-applied",
-            "chance": 100,
-            "isFixedChance": false,
-            "affects": "target",
-            "alterations": [],
-            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "burn"
+                },
+                "method": 2
+              }
+            ],
             "method": 2,
             "ignored": false
           }
@@ -105,7 +115,7 @@
         "systemId": "ptr2e",
         "systemVersion": "1.7.5.beta",
         "createdTime": 1778669406056,
-        "modifiedTime": 1778669464744,
+        "modifiedTime": 1779369725759,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,
