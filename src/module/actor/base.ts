@@ -2057,7 +2057,7 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        if (!["advancement"].includes(effect.type) && effect.changes.every(c => !["apply-tick", "increment-clock"].includes(c.type))) acc.notApplied.push(effect);
+        if (!["advancement"].includes(effect.type) && effect.changes.every(c => !["apply-tick", "increment-clock", "remove-effect"].includes(c.type))) acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });

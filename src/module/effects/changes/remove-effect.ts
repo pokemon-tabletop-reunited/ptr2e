@@ -54,7 +54,7 @@ export default class RemoveEffectChangeSystem extends ChangeModel {
           action: "create",
           documentName: "ChatMessage",
           data: [{
-            content: `Removed effect${sorted.length > 1 ? "s" : ""}: ${sorted.map(e => e.link).join(", ")}`,
+            content: `Removed effect${sorted.length > 1 ? "s" : ""} from ${this.actor.link}: ${sorted.map(e => e.link).join(", ")}`,
           }]
         }
       ])

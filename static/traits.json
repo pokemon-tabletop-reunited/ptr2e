@@ -2998,7 +2998,45 @@
     "slug": "defrost",
     "label": "Defrost",
     "related": [],
-    "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>"
+    "description": "<p>The user may declare Actions with this Trait while they have the @Affliction[frozen] Affliction, curing themselves of the Affliction on declaration.</p><p>Whenever you use an Action with this Trait while suffering from @Affliction[frostbite], you may cure up to 5 stacks of Frostbite on yourself.</p><p>Targets hit by Actions with this Trait are cured of @Affliction[frozen] and up to 5 stacks of @Affliction[frostbite] after the action resolves, any damage dealt ignores the 33% damage reduction from the @Affliction[frozen] Affliction.</p>",
+    "changes": [
+      {
+        "type": "roll-effect",
+        "key": "defrost-trait-attack",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+        "predicate": [
+          "self:effect:affliction:frozen"
+        ],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "property": "system.changes.0.key",
+            "value": "frozen",
+            "method": 5
+          }
+        ]
+      },
+      {
+        "type": "roll-effect",
+        "key": "defrost-trait-attack",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+        "predicate": [
+          "target:effect:affliction:frozen"
+        ],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "property": "system.changes.0.key",
+            "value": "frozen",
+            "method": 5
+          }
+        ]
+      }
+    ]
   },
   {
     "slug": "drain-x-y",
