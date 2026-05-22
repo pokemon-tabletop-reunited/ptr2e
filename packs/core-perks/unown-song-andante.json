@@ -1,0 +1,85 @@
+{
+  "name": "Unown Song: Andante",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Andante",
+        "slug": "unown-song-andante",
+        "description": "<p>Effect: The user creates an Andante summon. This summon has 150AV and lasts for 3 activations. While the Andante summon is active all Teleport Movement is disabled. Additionally, this summon cleanses the @Affliction[transient] affliction on creation and disables the @Trait[phasing] trait while active.</p>",
+        "traits": [
+          "sage",
+          "partial-automation",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "summon": "Compendium.ptr2e.core-summons.Item.bCnh6SKOLrutRMRl",
+        "range": {
+          "target": "field",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: The user creates an Andante summon. This summon has 150AV and lasts for 3 activations. While the Andante summon is active all Teleport Movement is disabled. Additionally, this summon cleanses the @Affliction[transient] affliction on creation and disables the @Trait[phasing] trait while active.</p>",
+    "traits": [
+      "sage",
+      "partial-automation",
+      "summon"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          35
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "sage"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 132,
+        "y": 108,
+        "connected": [
+          "exorcism",
+          "type-domain",
+          "defer-destiny",
+          "unown-song-fugue"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "QV4bwv7iUzzPlUJG",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "folder": "KcpEanpX82Cu6Dqh",
+  "flags": {}
+}

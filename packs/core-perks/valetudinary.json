@@ -18,8 +18,9 @@
             "predicate": [
               "self:state:desperation-1-2"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
@@ -28,8 +29,9 @@
             "predicate": [
               "self:state:desperation-1-2"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
@@ -38,8 +40,9 @@
             "predicate": [
               "self:state:desperation-1-2"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
@@ -48,8 +51,9 @@
             "predicate": [
               "self:state:desperation-1-2"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
@@ -58,8 +62,9 @@
             "predicate": [
               "self:state:desperation-1-2"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
@@ -68,8 +73,18 @@
             "predicate": [
               "self:state:desperation-1-2"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.movement",
+            "value": 2,
+            "phase": "initial",
+            "predicate": [],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -83,7 +98,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -95,13 +112,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.3.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1757810214501,
-        "modifiedTime": 1757810458996,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779315953649,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "system": {
@@ -118,11 +139,10 @@
     },
     "actions": [],
     "slug": "valetudinary",
-    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Noto Sans&#x27;, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;\">While the user meets the [Desperation 1/2] condition, they gain +2 default EVA and SPD Stages. lose -1 ATK. DEF, SPATK, SPDEF Stages, and gain +2 to all of their Movement Scores.</span></p>",
+    "description": "<p>While the user meets the [Desperation 1/2] condition, they gain +2 default EVA and SPD Stages. lose -1 ATK. DEF, SPATK, SPDEF Stages, and gain +2 to all of their Movement Scores.</p>",
     "traits": [
       "healer",
-      "desperation-1-2",
-      "partial-automation"
+      "desperation-1-2"
     ],
     "prerequisites": [],
     "autoUnlock": [],
@@ -151,7 +171,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "folder": "4UhJK1LInml07WJf"
 }

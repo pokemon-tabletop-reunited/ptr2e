@@ -54,18 +54,16 @@
       {
         "name": "Taser Pulse",
         "slug": "taser-pulse",
-        "description": "<p>Trigger: The target has this item's Taser Barbs embedded in them.</p><p>Effect: The target gains @Affliction[paralysis 2] and @Affliction[tased 2], and has a 20% chance to lose -1 ATK, SPATK, and/or EVA Stage.</p>",
+        "description": "<p>Trigger: The target has this item's Taser Barbs embedded in them.</p><p>Effect: The target gains @Affliction[paralysis 2] and @Affliction[tased 2], and has a 20% chance to lose -1 ATK, SPATK, and/or EVA Stage for 5 Activations and gain @Affliction[fear 5].</p><p>Ammo Use: 1</p>",
         "traits": [
           "weapon",
           "pulse",
-          "flinch-10",
-          "impel"
+          "flinch-10"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "cost": {
-          "activation": "simple",
-          "powerPoints": 1
+          "activation": "simple"
         },
         "variant": "taser-barb",
         "range": {
@@ -95,7 +93,7 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 10,
@@ -103,7 +101,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -112,7 +110,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "C",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -133,15 +133,16 @@
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "duration.turns",
-                "value": 2,
-                "method": 5
+                "value": 2
               }
             ],
             "dontMerge": false,
             "label": "Taser (Para)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -153,15 +154,16 @@
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "duration.turns",
-                "value": 2,
-                "method": 5
+                "value": 2
               }
             ],
             "dontMerge": false,
             "label": "Taser (Tased)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -174,8 +176,9 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Taser (ATK)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -188,8 +191,9 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Taser (SPATK)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -202,8 +206,24 @@
             "alterations": [],
             "dontMerge": false,
             "label": "Taser (EVA)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "taser-pulse-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "label": "Taser (Fear)",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -217,7 +237,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -229,13 +251,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.5.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1778624395704,
+        "modifiedTime": 1778624509606
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "ZMsKEVb8ZafBwjAE"
 }

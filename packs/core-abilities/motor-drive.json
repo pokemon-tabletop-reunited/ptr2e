@@ -10,10 +10,9 @@
         ],
         "name": "Motor Drive",
         "slug": "motor-drive",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit by an Electric-Type attack.</p>"
         },
         "range": {
@@ -21,7 +20,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user is hit by an Electric-Type attack.</p><p>Effect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect. Then the user raises their SPD Stage by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/electric_icon.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by an Electric-Type attack.</p><p>Effect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect. Then the user raises their SPD Stage by +1 for 5 Activations.</p>",
@@ -37,9 +36,80 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Q9eDxavx46UPn5Q5",
-  "effects": []
+  "effects": [
+    {
+      "name": "Motor Drive",
+      "type": "passive",
+      "_id": "dJVljVl1MeGuaT3K",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "value": -10000,
+            "phase": "initial",
+            "predicate": [],
+            "key": "electric-attack-damage-percentile",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "electric-attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778692916015,
+        "modifiedTime": 1778692956531,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

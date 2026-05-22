@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "C",
+    "grade": "B",
     "fling": {
       "type": "steel",
       "power": 75,
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 30,
         "accuracy": 95,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Light Machinegun",
         "slug": "light-machinegun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,26 +62,27 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 110,
         "accuracy": 90,
         "free": true,
         "traits": [
           "missile",
-          "firearm"
+          "firearm",
+          "flinch-10"
         ],
         "name": "Light Machinegun (Burst)",
         "slug": "light-machinegun-burst",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 4</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -90,17 +91,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "complex"
         },
         "variant": "light-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 24,
         "accuracy": 80,
         "free": true,
@@ -108,11 +109,11 @@
           "missile",
           "12-strike",
           "firearm",
-          "flinch-20"
+          "flinch-30"
         ],
         "name": "Light Machinegun (Salvo)",
         "slug": "light-machinegun-salvo",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 12</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -121,29 +122,29 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 12,
-          "delay": 3
+          "activation": "complex"
         },
         "variant": "light-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 125,
         "accuracy": 70,
         "free": true,
         "traits": [
           "missile",
           "dash",
-          "firearm"
+          "firearm",
+          "flinch-20"
         ],
         "name": "Light Machinegun (Hip Fire)",
         "slug": "light-machinegun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 5</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -152,11 +153,11 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 5
+          "activation": "complex"
         },
         "variant": "light-machinegun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -183,7 +184,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges. Light machine guns are designed to provide mobile fire support to a squad and are typically air-cooled weapons fitted with a box magazine or drum and a bipod; they may use full-size rifle rounds, but modern examples often use intermediate rounds.</p>"
+    "description": "<p>A machine gun (MG) is a fully automatic and rifled firearm designed for sustained direct fire with rifle cartridges. Light machine guns are designed to provide mobile fire support to a squad and are typically air-cooled weapons fitted with a box magazine or drum and a bipod; they may use full-size rifle rounds, but modern examples often use intermediate rounds.</p>",
+    "ammoType": []
   },
   "_id": "8cJ2IWNrP813g8ca",
   "effects": [
@@ -203,7 +205,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -213,7 +216,8 @@
             "label": "Burst",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -222,7 +226,8 @@
             "predicate": [],
             "label": "Hip Fire",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -236,7 +241,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -247,14 +254,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743891318943,
         "modifiedTime": 1757635969022,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "MKaFm5Pvt7tvgdAa"

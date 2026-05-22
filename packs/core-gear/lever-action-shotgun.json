@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "D",
+    "grade": "C",
     "fling": {
       "type": "steel",
       "power": 75,
@@ -25,7 +25,7 @@
         "unit": "m"
       }
     },
-    "rarity": "uncommon",
+    "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
@@ -43,7 +43,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 70,
         "accuracy": 90,
         "free": true,
@@ -53,7 +53,7 @@
         ],
         "name": "Lever-Action Shotgun",
         "slug": "lever-action-shotgun",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,16 +62,16 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 140,
         "accuracy": 75,
         "free": true,
@@ -82,7 +82,7 @@
         ],
         "name": "Lever-Action Shotgun (Quick Shots)",
         "slug": "lever-action-shotgun-quick-shot",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 3</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -92,17 +92,17 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
           "priority": 1
         },
         "variant": "lever-action-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       },
       {
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 70,
         "accuracy": 80,
         "free": true,
@@ -114,7 +114,7 @@
         ],
         "name": "Lever-Action Shotgun (Hip Fire)",
         "slug": "lever-action-shotgun-hip-fire",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -124,11 +124,11 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
           "priority": 1
         },
         "variant": "lever-action-shotgun",
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -155,7 +155,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A lever-action shotgun is a shotgun where the loading, firing, and unloading processes are all cycled by a lever located behind the trigger, which extracts and ejects the cartridge case and recocks the weapon. Contemporary lever-action shotguns are generally smaller gauge, for hunting small game and personal defense.</p>"
+    "description": "<p>A lever-action shotgun is a shotgun where the loading, firing, and unloading processes are all cycled by a lever located behind the trigger, which extracts and ejects the cartridge case and recocks the weapon. Contemporary lever-action shotguns are generally smaller gauge, for hunting small game and personal defense.</p>",
+    "ammoType": []
   },
   "_id": "OqtyemHRq5CXKLyF",
   "effects": [
@@ -175,7 +176,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -184,7 +186,8 @@
             "predicate": [],
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -198,7 +201,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -209,14 +214,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743883292416,
         "modifiedTime": 1757631557056,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "GPebepuiQbZSuf35"

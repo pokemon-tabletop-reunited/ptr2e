@@ -9,7 +9,7 @@
       "materials": []
     },
     "equipped": {
-      "slot": "held",
+      "slot": "accessory",
       "carryType": "stowed",
       "handsHeld": null
     },
@@ -29,34 +29,32 @@
     "traits": [
       "combat",
       "farfetchd",
-      "garlarian-farfetchd",
       "sirfetchd",
-      "held"
+      "accessory"
     ],
     "actions": [
       {
         "name": "Leek",
         "slug": "leek",
-        "type": "generic",
-        "description": "Effect: The user has +2 default CRIT Stages.",
+        "type": "passive",
+        "description": "<p>Effect: The user has +10% EHR and deals +5% more damage with @Trait[contact] Attacks. Farfetch'd and Sirfetch'd users have +2 default CRIT Stages and their @Trait[sharp] Attacks have +15% Base Power.</p>",
         "traits": [
-          "Combat",
-          "Farfetch'd",
-          "Garlarian Farfetch'd",
-          "Sirfetch'd"
+          "combat",
+          "farfetchd",
+          "sirfetchd",
+          "natural"
         ],
         "range": {
-          "target": "creature",
-          "unit": "m",
-          "distance": 10
+          "target": "self",
+          "unit": "m"
         },
         "cost": {
-          "activation": "complex"
+          "activation": "free"
         },
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/item-icons/rare%20leek.webp"
       }
     ],
-    "description": "<p>Passive: The user has @UUID[Compendium.ptr2e.core-effects.rvtuxXa3K37260Rb]{+2 Critical Stages} by default.</p>",
+    "description": "<p>Effect: The user has +10% EHR and deals +5% more damage with @Trait[contact] Attacks. Farfetch'd and Sirfetch'd users have +2 default CRIT Stages and their @Trait[sharp] Attacks have +15% Base Power.</p>",
     "slug": "leek",
     "quantity": 1,
     "identification": {
@@ -78,7 +76,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "ETJ2ZH8usSr4wRo8",
   "effects": [
@@ -90,12 +89,59 @@
       "system": {
         "changes": [
           {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [],
+            "key": "contact-trait-attack",
+            "affects": "self",
+            "alterations": [],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "percentile-modifier",
+            "value": 5,
+            "phase": "initial",
+            "predicate": [],
+            "key": "contact-trait-attack-damage",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
             "type": "basic",
             "key": "system.battleStats.critRate.stage",
             "value": 2,
-            "predicate": [],
-            "ignored": false,
-            "method": 2
+            "predicate": [
+              {
+                "or": [
+                  "item:species:farfetchd",
+                  "item:species:sirfetchd"
+                ]
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": 1.15,
+            "phase": "initial",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:farfetchd",
+                  "item:species:sirfetchd"
+                ]
+              }
+            ],
+            "property": "power",
+            "definition": [],
+            "key": "sharp-trait-attack",
+            "method": 1,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -109,7 +155,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -121,14 +169,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.4.beta",
+        "systemVersion": "1.7.2.beta",
         "createdTime": 1759315871859,
-        "modifiedTime": 1759315928681,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+        "modifiedTime": 1775578615573,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
       },
-      "showIcon": 2
+      "showIcon": 2,
+      "start": null,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "6VDJBcrqVDh5bYtA"

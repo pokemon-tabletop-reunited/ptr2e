@@ -1,0 +1,77 @@
+{
+  "folder": "c29hnIAtXgwB7FeY",
+  "name": "Equivalent Exchange",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Equivalent Exchange",
+        "slug": "equivalent-exchange",
+        "description": "<p>The user may choose to consume an amount of their own Shields in order to restore an equal amount of HP.</p>",
+        "traits": [
+          "tank"
+        ],
+        "type": "generic",
+        "img": "icons/skills/social/trading-justice-scale-gold.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>The user may choose to consume an amount of their own Shields in order to restore an equal amount of HP.</p>",
+    "traits": [
+      "tank"
+    ],
+    "prerequisites": [
+      "item:perk:improved-shielding"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "tank"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 83,
+        "y": 107,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "improved-shielding",
+          "minor-buff-43"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "_id": "srvoq0G5Olx6UUSF",
+  "img": "icons/skills/social/trading-justice-scale-gold.webp",
+  "effects": [],
+  "flags": {}
+}

@@ -11,20 +11,24 @@
         "slug": "heroic-rally",
         "type": "attack",
         "img": "systems/ptr2e/img/svg/fighting_icon.svg",
-        "traits": [],
+        "traits": [
+          "drill",
+          "social"
+        ],
         "range": {
-          "target": "self",
+          "target": "emanation",
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 12
         },
         "types": [
           "fighting"
         ],
         "category": "status",
-        "description": "<p>Effect: The user gains @Affliction[boosted] X and @Affliction[resolved] X, where X equals the number of allied creatures that have @Affliction[fainted] during this battle.</p>",
+        "description": "<p>Effect: The user and allied creatures in range are Advanced 15+3×X%, and gain Omniboost 1+X/3 and Alphaboost 1+X/3, where X equals the number of allied creatures that have @Affliction[fainted] during this combat.</p>",
         "predicate": []
       }
     ],

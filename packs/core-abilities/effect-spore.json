@@ -12,10 +12,9 @@
         ],
         "name": "Effect Spore",
         "slug": "effect-spore",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user is hit by a [Contact] attack.</p>"
         },
         "range": {
@@ -23,8 +22,8 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of either gaining @Affliction[paralysis 5], gaining @Affliction[drowsy 5], or gaining @Affliction[poison 5].</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 10% chance of gaining @Affliction[paralysis 5], a 10% chance of gaining @Affliction[drowsy 5], and a 10% chance of gaining @Affliction[poison 5].</p>",
+        "img": "systems/ptr2e/img/svg/grass_icon.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 10% chance of gaining @Affliction[paralysis 5], a 10% chance of gaining @Affliction[drowsy 5], and a 10% chance of gaining @Affliction[poison 5].</p>",
@@ -65,7 +64,10 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -78,7 +80,10 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -91,19 +96,26 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -115,13 +127,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.1",
         "createdTime": 1727997025623,
         "modifiedTime": 1741894094610,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
