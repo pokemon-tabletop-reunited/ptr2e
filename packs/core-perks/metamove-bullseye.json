@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "metamove-bullseye",
-    "description": "<p>You may gain +X ACC stages on the triggering attack, spending 3*X PP as a Free Action.</p>",
+    "description": "<p>When making an attack, the user may spend XPP, up to a maximum of 3. For each PP spent in this manner, that specific attack gains +1 Accuracy Stage.</p><p><br>This is managed using the embedded Bullseye Clock.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 2,
@@ -17,6 +17,10 @@
     },
     "nodes": [
       {
+        "x": 115,
+        "y": 179,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "metamove-guarded-strike",
           "metamove-power-swap",
@@ -26,25 +30,15 @@
           "improved-swim-3"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#008000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 115,
-        "y": 179,
         "tier": null
       }
     ],
     "autoUnlock": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null,
     "global": true,
     "webs": [],
     "design": {
@@ -58,7 +52,87 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Metamove Bullseye",
+      "type": "passive",
+      "_id": "sudujOcqUR7M0IGo",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "metamovebullseye",
+            "max": 3,
+            "private": false,
+            "color": "#400040",
+            "label": "Bullseye Clock",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": "@actor.clocks.metamovebullseye",
+            "phase": "initial",
+            "predicate": [],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "@actor.clocks.metamovebullseye",
+            "phase": "initial",
+            "predicate": [],
+            "property": "pp-cost",
+            "definition": [],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779226414334,
+        "modifiedTime": 1779226546322,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

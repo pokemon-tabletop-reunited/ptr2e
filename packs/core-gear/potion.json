@@ -36,7 +36,8 @@
       "combat",
       "held",
       "restorative",
-      "consumable"
+      "consumable",
+      "healing"
     ],
     "description": "<p>The target is healed @HP[30].</p>",
     "quantity": 1,
@@ -77,7 +78,8 @@
           "unit": "m"
         }
       }
-    ]
+    ],
+    "ammoType": []
   },
   "_id": "YuNyZ1fm5ALuQIVf",
   "effects": [
@@ -110,7 +112,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -124,7 +127,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -136,13 +141,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.4.beta",
         "createdTime": 1758364341903,
         "modifiedTime": 1758364517459,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "srQci2ThhRKdmC6g"

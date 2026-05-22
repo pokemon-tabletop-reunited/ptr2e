@@ -22,9 +22,7 @@
       }
     ],
     "description": "<p>Effect: The user is immune to negative ACC [Stage Change] effects, and the user has +1 default ACC Stage. ACC [Stage Change] effects the user gains have their duration increased by +2.</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "slug": "keen-eye",
     "_migration": {
       "version": null,
@@ -53,9 +51,39 @@
             "value": 1,
             "predicate": [],
             "priority": null,
-            "ignored": false,
+            "phase": "initial",
             "method": 2,
-            "phase": "initial"
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "value": "trait:negative-accuracy",
+            "phase": "initial",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "positive-accuracy-received",
+            "alterations": [
+              {
+                "method": 2,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -63,9 +91,6 @@
         "removeAfterCombat": true,
         "removeOnRecall": false,
         "stacks": 0,
-        "priority": 50,
-        "formula": "",
-        "type": "damage",
         "removeAfterAttacking": false,
         "removeAfterAttacked": false
       },
@@ -84,11 +109,11 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "coreVersion": "14.358",
-        "systemId": null,
-        "systemVersion": null,
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1774860475243,
-        "modifiedTime": 1774860477018,
+        "modifiedTime": 1779322653371,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,

@@ -1,7 +1,7 @@
 {
   "name": "Tablets of Ruin",
   "type": "ability",
-  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "img": "icons/svg/ruins.svg",
   "system": {
     "actions": [
       {
@@ -11,25 +11,25 @@
         ],
         "name": "Tablets of Ruin",
         "slug": "tablets-of-ruin",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free"
         },
         "range": {
           "target": "field",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Effect: All other creatures have their ATK stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: Connection - Ruination. The user may deploy the @UUID[Compendium.ptr2e.core-summons.Item.qPHSAqKVyGB4L549]{Tablets of Ruin} summon, reducing the Attack of all non-@Trait[treasure-of-ruin] creatures by 25%. This summon persists until the user is @Affliction[fainted] or removed from the field.</p>",
+        "img": "icons/svg/ruins.svg",
+        "summon": "Compendium.ptr2e.core-summons.Item.qPHSAqKVyGB4L549"
       }
     ],
-    "description": "<p>Effect: Connection - Ruination. All other creatures have their ATK stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
+    "description": "<p>Effect: Connection - Ruination. The user may deploy the @UUID[Compendium.ptr2e.core-summons.Item.qPHSAqKVyGB4L549]{Tablets of Ruin} summon, reducing the Attack of all non-@Trait[treasure-of-ruin] creatures by 25%. This summon persists until the user is @Affliction[fainted] or removed from the field.</p>",
     "traits": [
       "legendary",
       "aura",
       "connection",
-      "partial-automation"
+      "summon"
     ],
     "slug": "tablets-of-ruin",
     "_migration": {
@@ -55,16 +55,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.6MiHI8QGhMknDms5",
             "predicate": [
               "trait:treasure-of-ruin"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -74,11 +73,23 @@
               "granter": "cascade"
             },
             "allowDuplicate": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} enters combat and may use {item|link}!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -92,7 +103,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -104,14 +117,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.sWdQIvH00vsGkCYB.ActiveEffect.J2mZCtyIjIqYFGrQ",
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737392939156,
-        "modifiedTime": 1754322086436,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779360563846,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

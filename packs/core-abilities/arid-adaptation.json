@@ -20,15 +20,14 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user is immune to the negative effects of Sunny Weather and Dusty Weather. The user takes 25% less damage from Fire-Type attacks while in either Weather. The user takes 25% more damage from Water-Type attacks while in Rainy Weather.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user is treated as being Grass-Type and Ground-Type for Sunny Weather and Dusty Weather respectively. The user takes 20% less damage and has +15% RES while in either Weather, and takes 20% more damage and has -15% RES in Rainy Weather and Snowy Weather.</p>",
+        "img": "icons/magic/air/weather-sunlight-sky.webp"
       }
     ],
-    "description": "<p>Effect: The user is immune to the negative effects of Sunny Weather and Dusty Weather. The user takes 25% less damage from Fire-Type attacks while in either Weather. The user takes 25% more damage from Water-Type attacks while in Rainy Weather.</p>",
+    "description": "<p>Effect: The user is treated as being Grass-Type and Ground-Type for Sunny Weather and Dusty Weather respectively. The user takes 20% less damage and has +15% RES while in either Weather, and takes 20% more damage and has -15% RES in Rainy Weather and Snowy Weather.</p>",
     "traits": [
       "defensive",
-      "environ",
-      "partial-automation"
+      "environ"
     ],
     "slug": "arid-adaptation",
     "_migration": {
@@ -53,40 +52,94 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "fire-attack-damage-percentile",
-            "value": -25,
+            "type": "add-trait",
+            "value": "grass",
+            "phase": "initial",
             "predicate": [
               "effect:summon:sunny-weather"
             ],
-            "label": "Arid Adaptation (Sun)",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "key": "",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "ephemeral-modifier",
-            "key": "fire-attack-damage-percentile",
-            "value": -25,
+            "type": "add-trait",
+            "value": "ground",
+            "phase": "initial",
             "predicate": [
               "effect:summon:dusty-weather"
             ],
-            "label": "Arid Adaptation (Dusty)",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "key": "",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-modifier",
-            "key": "water-attack-damage-percentile",
-            "value": 25,
+            "value": -20,
+            "phase": "initial",
             "predicate": [
-              "effect:summon:rainy-weather"
+              {
+                "or": [
+                  "effect:summon:dusty-weather",
+                  "effect:summon:sunny-weather"
+                ]
+              }
             ],
-            "label": "Arid Adaptation (Rainy)",
+            "key": "damaging-attack-damage-percentile",
+            "label": "Arid Adaptation (DR)",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              {
+                "or": [
+                  "effect:summon:dusty-weather",
+                  "effect:summon:sunny-weather"
+                ]
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              {
+                "or": [
+                  "effect:summon:rainy-weather",
+                  "effect:summon:snowy-weather"
+                ]
+              }
+            ],
+            "key": "damaging-attack-damage-percentile",
+            "label": "Arid Adaptation (Weak)",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": -15,
+            "phase": "initial",
+            "predicate": [
+              {
+                "or": [
+                  "effect:summon:rainy-weather",
+                  "effect:summon:snowy-weather"
+                ]
+              }
+            ],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -100,7 +153,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -112,13 +167,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1765240087545,
-        "modifiedTime": 1765240213742,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779352272691,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

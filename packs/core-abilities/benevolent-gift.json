@@ -21,7 +21,7 @@
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>",
+    "description": "<p>Effect: The duration of @Trait[buff] and @Trait[positive-stage-change] effects applied by the user gain +2 Duration.</p>",
     "traits": [],
     "slug": "benevolent-gift",
     "_migration": {
@@ -47,18 +47,35 @@
         "changes": [
           {
             "type": "effect-alteration",
-            "key": "effect-applied",
+            "key": "buff-trait-applied",
             "value": 0,
             "predicate": [],
             "alterations": [
               {
+                "method": 2,
                 "property": "effects.0.duration.turns",
-                "value": 2,
-                "method": 2
+                "value": 2
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "effect-alteration",
+            "key": "positive-stage-change-trait-applied",
+            "value": 0,
+            "predicate": [],
+            "alterations": [
+              {
+                "method": 2,
+                "property": "effects.0.duration.turns",
+                "value": 2
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -72,7 +89,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -84,13 +103,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1765238110436,
-        "modifiedTime": 1765238135402,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779406540084,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

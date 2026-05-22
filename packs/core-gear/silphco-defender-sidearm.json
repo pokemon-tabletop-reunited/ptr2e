@@ -20,33 +20,33 @@
       {
         "name": "Defender Shot",
         "slug": "defender-shot",
-        "description": "<p>The SilphCo Defender is a mass-produced sidearm, not known for it's power but certainly for it's reliability.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "traits": [
           "weapon",
-          "ray"
+          "ray",
+          "flinch-10"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "range": {
-          "target": "enemy",
-          "distance": 10,
+          "target": "creature",
+          "distance": 9,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "types": [
           "untyped"
         ],
         "category": "special",
-        "power": 60,
-        "accuracy": 100,
+        "power": 70,
+        "accuracy": 92,
         "free": true,
         "predicate": []
       }
     ],
-    "description": "<p>The SilphCo Defender is a mass-produced sidearm, not known for it's power but certainly for it's reliability.</p>",
+    "description": "<p>The SilphCo Defender is a mass-produced laser sidearm, not particularly known for its output or precision, but is easy to repair and rugged.</p>",
     "crafting": {
       "skill": "Electronics",
       "spans": 8,
@@ -64,7 +64,7 @@
       "type": "untyped",
       "power": 45,
       "accuracy": 90,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 3,
@@ -82,9 +82,6 @@
         "description": "<p>Unidentified Item</p>"
       }
     },
-    "weaponType": "Handgun (Laser)",
-    "weaponPp": 15,
-    "weaponRange": "15",
     "slug": "silphco-defender-sidearm",
     "publication": {
       "source": "PTR 2e Core",
@@ -107,11 +104,12 @@
           {
             "type": "flat-modifier",
             "key": "defender-shot-attack-damage",
-            "value": 5,
+            "value": 9,
             "predicate": [],
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -125,7 +123,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -137,13 +137,17 @@
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.fhfuptGmpadYy37I.ActiveEffect.QO0MYb3X5EGQF0Iv",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1758158102085,
-        "modifiedTime": 1767461586862,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
-      }
+        "modifiedTime": 1778622842370,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "PhrQtZzEwKPjfmK2",

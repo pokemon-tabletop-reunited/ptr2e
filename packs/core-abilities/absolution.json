@@ -25,8 +25,7 @@
     ],
     "description": "<p>Effect: While Gloomy Weather is active, the user's SPATK stat is increased by 50% and the user loses a Tick of HP at the end of each of their Activations. The user is treated as having the Dark Type for the effects of Gloomy Weather.</p>",
     "traits": [
-      "environ",
-      "partial-automation"
+      "environ"
     ],
     "slug": "absolution",
     "_migration": {
@@ -45,7 +44,7 @@
   "effects": [
     {
       "name": "Absolution",
-      "type": "passive",
+      "type": "affliction",
       "_id": "tBeWqzRIwGvTT5nO",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -58,7 +57,8 @@
               "summon:effect:gloomy-weather"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "add-trait",
@@ -68,7 +68,8 @@
               "summon:effect:gloomy-weather"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -77,12 +78,20 @@
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
-        "stacks": 0
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/16",
+        "type": "damage",
+        "predicate": [
+          "summon:effect:gloomy-weather"
+        ]
       },
       "disabled": false,
       "duration": {
-        "units": "turns",
-        "value": null
+        "units": "seconds",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -94,13 +103,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "createdTime": 1765237554503,
-        "modifiedTime": 1765237621181,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779322763349,
+        "modifiedTime": 1779322777883,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

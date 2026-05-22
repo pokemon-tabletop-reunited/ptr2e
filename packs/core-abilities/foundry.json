@@ -19,7 +19,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares a Rock-Type attack.</p><p>Effect: The triggering attack has its Type changed to Fire until the end of the user's Activation.</p>",
         "img": "icons/svg/explosion.svg"
@@ -36,7 +37,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -51,7 +53,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "olGAnaAhIck8JvQh",
@@ -69,21 +72,47 @@
             "value": 30,
             "predicate": [],
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "value": 30,
+            "phase": "initial",
+            "predicate": [],
+            "key": "rock-attack-power",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "fire",
+            "phase": "initial",
+            "predicate": [],
+            "property": "type",
+            "definition": [],
+            "method": 5,
+            "key": "rock-attack",
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -95,13 +124,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1722253925790,
-        "modifiedTime": 1722253949070,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1779363331632,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

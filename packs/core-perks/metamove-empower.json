@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "metamove-empower",
-    "description": "<p>Spend X PP, up to 10. The triggering Attack gains +5*X Power until it is resolved. This cannot be used with the @Trait[x-strike] trait.</p>",
+    "description": "<p>When making an attack, you may spend X PP, up to 5. The Attack gains +10*X Power until it is resolved. This cannot be used with the @Trait[x-strike] trait.</p><blockquote>This is managed via the embedded Empower Clock.</blockquote>",
     "traits": [],
     "prerequisites": [],
     "cost": 3,
@@ -17,6 +17,10 @@
     },
     "nodes": [
       {
+        "x": 125,
+        "y": 179,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "metamove-dirty-trick",
           "metamove-target-split",
@@ -26,21 +30,15 @@
           "minor-buff-33",
           "minor-buff-15",
           "minor-buff-57",
-          "isolated-study"
+          "isolated-study",
+          "vampire-field"
         ],
         "config": {
-          "alpha": null,
-          "backgroundColor": "#000000",
-          "borderColor": null,
-          "borderWidth": null,
           "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-          "tint": null,
-          "scale": null
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 125,
-        "y": 179,
         "tier": null
       }
     ],
@@ -59,9 +57,96 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Metamove Empower",
+      "type": "passive",
+      "_id": "Bsnq1ASyj7L3HtZb",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "empowerclock1234",
+            "max": 5,
+            "private": false,
+            "color": "#ff0000",
+            "label": "Empower Clock",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": "10*@actor.clocks.empowerclock1234",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "item:trait:x-strike"
+              }
+            ],
+            "key": "damaging-attack-power",
+            "label": "Metamove: Empower",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "@actor.clocks.empowerclock1234",
+            "phase": "initial",
+            "predicate": [],
+            "key": "damaging-attack",
+            "property": "pp-cost",
+            "definition": [
+              {
+                "not": "item:trait:x-strike"
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779222473831,
+        "modifiedTime": 1779225478671,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

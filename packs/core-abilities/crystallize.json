@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares a Rock-Type attack.</p><p>Effect: The triggering attack has its Type changed to Ice until the end of the user's Activation.</p>",
         "img": "icons/svg/explosion.svg"
@@ -34,7 +35,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -49,13 +51,14 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "9TjeBgl7oxV65Vgx",
   "effects": [
     {
-      "name": "Crystallize Power",
+      "name": "Crystallize",
       "type": "passive",
       "_id": "5IgHAhlyGWc9ipqe",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
@@ -68,21 +71,49 @@
             "predicate": [],
             "label": "Crystallize",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "rock-attack-power",
+            "value": 30,
+            "predicate": [],
+            "label": "Crystallize",
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "ice",
+            "phase": "initial",
+            "predicate": [],
+            "property": "type",
+            "definition": [],
+            "method": 5,
+            "key": "rock-attack",
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -94,13 +125,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1722251310663,
-        "modifiedTime": 1722251328243,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1779324924968,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

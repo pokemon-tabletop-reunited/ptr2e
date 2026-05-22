@@ -9,20 +9,54 @@
           "social",
           "friendly"
         ],
-        "name": "Frighten",
+        "name": "Frighten (Entry)",
         "slug": "frighten",
-        "type": "passive",
-        "cost": {},
+        "type": "attack",
+        "cost": {
+          "activation": "free"
+        },
         "range": {
-          "target": "enemy-aura",
+          "target": "emanation",
           "distance": 8,
           "unit": "m"
         },
-        "description": "<p>Effect: All valid creatures in range have -1 default SPDEF Stages. When an affected creature leaves the range of this effect, they lose -1 SPDEF Stage for 3 Activations. The user's Attacks have a 20% chance to inflict @Affliction[fear 5]. NEEDS REAUTOMATED.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: All valid targets gain -1 SPDEF Stage for 5 activations.</p>",
+        "img": "icons/svg/terror.svg",
+        "types": [
+          "ghost"
+        ],
+        "category": "status",
+        "predicate": []
+      },
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Frighten (Active)",
+        "slug": "frighten-active",
+        "type": "attack",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "description": "<p>Effect: All valid targets gain -1 SPDEF Stage for 5 activations.</p>",
+        "img": "icons/svg/terror.svg",
+        "variant": "frighten",
+        "types": [
+          "ghost"
+        ],
+        "category": "status",
+        "predicate": [],
+        "accuracy": 100
       }
     ],
-    "description": "<p>Effect: All valid creatures in range have -1 default SPDEF Stages. When an affected creature leaves the range of this effect, they lose -1 SPDEF Stage for 3 Activations. The user's Attacks have a 20% chance to inflict @Affliction[fear 2]. NEEDS REAUTOMATED.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten] and @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -36,7 +70,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "GlVWzzuSC6kJIil4",
@@ -51,36 +86,43 @@
           {
             "type": "roll-effect",
             "key": "frighten-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "roll-effect",
-            "key": "frighten-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten]",
+            "phase": "initial",
             "predicate": [],
-            "chance": 100,
-            "affects": "target",
-            "priority": null,
-            "ignored": false,
-            "method": 2
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -92,13 +134,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737566382529,
-        "modifiedTime": 1737566420900,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1779364810000,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
