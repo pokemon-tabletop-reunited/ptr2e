@@ -1727,7 +1727,7 @@ class ActorPTR2e<
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
     const actionOptions = selfAttack?.getRollOptions() ?? [];
-    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
+    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor), ...(params.options ?? [])]));
 
     if (selfAttack) {
       for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
@@ -1756,6 +1756,7 @@ class ActorPTR2e<
         for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
+        selfAttack.prepareDerivedData();
       }
 
       return R.unique(traits).sort();

@@ -1166,7 +1166,22 @@
       "value": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "token-tag",
+          "key": "destined"
+        },
+        {
+          "type": "flat-modifier",
+          "value": 1,
+          "phase": "initial",
+          "predicate": ["origin:mark:destined"],
+          "property": "traits",
+          "key": "damaging-attack-recoil-flat",
+          "method": 2,
+          "ignored": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
