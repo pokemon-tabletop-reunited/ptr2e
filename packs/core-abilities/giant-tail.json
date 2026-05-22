@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's [Tail] attacks have 30% increased Power.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's [Tail] attacks have 50% increased Power.</p>",
+        "img": "icons/creatures/abilities/stinger-poison-scorpion-brown.webp"
       }
     ],
-    "description": "<p>Effect: The user's [Tail] attacks have 30% increased Power.</p>",
+    "description": "<p>Effect: The user's [Tail] attacks have 50% increased Power.</p>",
     "traits": [],
     "slug": "giant-tail",
     "_migration": {
@@ -31,7 +32,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "au2tgFrFeiz0ZM84",
@@ -46,25 +48,30 @@
           {
             "type": "percentile-modifier",
             "key": "tail-trait-attack-power",
-            "value": 30,
+            "value": 50,
             "predicate": [],
             "label": "Giant Tail",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -76,13 +83,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1722259424335,
-        "modifiedTime": 1722259442272,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1779364875066,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

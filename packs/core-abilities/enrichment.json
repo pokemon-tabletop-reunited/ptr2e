@@ -8,19 +8,21 @@
         "traits": [],
         "name": "Enrichment",
         "slug": "enrichment",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: While at least one Nuclear-Type creature (other than the user) is within 10m of the user, the user's ATK and SPATK stats are increased by 20%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: While there is a @Trait[nuclear]-type ally on the field that is not the user, the user may deploy the @UUID[Compendium.ptr2e.core-summons.Item.VopgGzj9Rws23Gyz]{Enrichment Summon}. This summon being present increases the summoner's ATK and SPA by 20%. In the event the summoner no longer has any @Trait[nuclear]-type allies, the summon terminates.</p>",
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.VopgGzj9Rws23Gyz"
       }
     ],
-    "description": "<p>Effect: While at least one Nuclear-Type creature (other than the user) is within 10m of the user, the user's ATK and SPATK stats are increased by 20%.</p>",
+    "description": "<p>Effect: While there is a @Trait[nuclear]-type ally on the field that is not the user, the user may deploy the @UUID[Compendium.ptr2e.core-summons.Item.VopgGzj9Rws23Gyz]{Enrichment Summon}. This summon being present increases the summoner's ATK and SPA by 20%. In the event the summoner no longer has any @Trait[nuclear]-type allies, the summon terminates.</p>",
     "traits": [],
     "slug": "enrichment",
     "publication": {

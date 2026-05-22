@@ -10,10 +10,9 @@
         ],
         "name": "Toxic Shock",
         "slug": "toxic-shock",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature after hitting with a damaging Poison or Electric-Type attack.</p>"
         },
         "range": {
@@ -21,11 +20,11 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature after hitting with a damaging Poison or Electric-Type attack.</p><p>Effect: The user applies both @Affliction[poison] and @Affliction[paralysis] for an equal number of Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature.</p><p></p><p>Effect: The user applies both @Affliction[poison] and @Affliction[paralysis] for an equal number of Activations.</p>",
+        "img": "systems/ptr2e/img/conditions/poisoned.svg"
       }
     ],
-    "description": "<p>Trigger: The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature after hitting with a damaging Poison or Electric-Type attack.</p><p>Effect: The user applies both @Affliction[poison] and @Affliction[paralysis] for an equal number of Activations.</p>",
+    "description": "<p>Trigger: The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature.</p><p></p><p>Effect: The user applies both @Affliction[poison] and @Affliction[paralysis] for an equal number of Activations.</p>",
     "traits": [],
     "slug": "toxic-shock",
     "_migration": {
@@ -36,9 +35,94 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "653wUPJV1IcZufi1",
-  "effects": []
+  "effects": [
+    {
+      "name": "Toxic Shock",
+      "type": "passive",
+      "_id": "cDKlih5DqzebI9Mk",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "poison-applied",
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "paralysis"
+                },
+                "method": 2
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "paralysis-applied",
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "poison"
+                },
+                "method": 2
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779374277039,
+        "modifiedTime": 1779374322516,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

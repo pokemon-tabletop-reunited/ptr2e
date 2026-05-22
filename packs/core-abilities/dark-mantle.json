@@ -11,18 +11,18 @@
         ],
         "name": "Dark Mantle",
         "slug": "dark-mantle",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
           "trigger": "<p>The user is hit by a Dark-Type attack.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user is hit by a Dark-Type attack.</p><p>Effect: The user takes no damage from the triggering attack, and the triggering attack's effects are not applied. Then the user's SPATK Stage is raised by +1 for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/svg/dark_icon.svg"
       }
     ],
     "description": "<p>Trigger: The user is hit by a Dark-Type attack.</p><p>Effect: The user takes no damage from the triggering attack, and the triggering attack's effects are not applied. Then the user's SPATK Stage is raised by +1 for 5 Activations.</p>",
@@ -38,9 +38,84 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Nuaq1ociB1AVSOJL",
-  "effects": []
+  "effects": [
+    {
+      "name": "Dark Mantle",
+      "type": "passive",
+      "_id": "iIJG2r8BRuhno2oy",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "value": "trait:dark",
+            "phase": "initial",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1TqcwIUNl32wJCAa",
+            "phase": "initial",
+            "predicate": [],
+            "alterations": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "defensive",
+            "dontMerge": false,
+            "key": "dark-attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779362267104,
+        "modifiedTime": 1779362531857,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }
