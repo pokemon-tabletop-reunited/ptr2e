@@ -7,7 +7,28 @@
       "version": 0.111,
       "previous": null
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Ice Gem",
+        "slug": "ice-gem",
+        "description": "<p>Trigger: The user declares a @Trait[ice]-type attack.<br><br>Effect: The user consumes this item and gains +50% Power to the triggering attack.</p>",
+        "traits": [
+          "consumable",
+          "belt",
+          "combat",
+          "ice"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/ice%20gem.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
     "crafting": {
       "skill": "",
       "spans": null,
@@ -48,10 +69,82 @@
     ],
     "consumableType": "other",
     "stack": 1,
-    "cost": 1
+    "cost": 1,
+    "slug": "ice-gem",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/item-icons/ice%20gem.webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "Ice Gem",
+      "type": "passive",
+      "_id": "4zcVUXzMxxCjwcFW",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.lLZHfiWrVoczqczu",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "ice-attack-power"
+              },
+              {
+                "method": 5,
+                "property": "name",
+                "value": "Ice Gem"
+              }
+            ],
+            "dontMerge": false,
+            "key": "ice-gem-generic",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779556691388,
+        "modifiedTime": 1779556712252,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
   "_id": "A4qSdIvTF6UySmXD"
 }
