@@ -1,0 +1,69 @@
+{
+  "folder": "6XbjR9qPWzZw4vEd",
+  "name": "Commissar",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [],
+    "description": "<p>Passive Effect: Creatures under the user's command gain +50% Power to their damaging attacks, +25% EHR, 10% Damage Reduction and immunity to @Trait[push-x], while under the effects of @Affliction[fear].</p><p></p><p>@UUID[Compendium.ptr2e.core-effects-new.ActiveEffect.qxQxRHRShDEUuVSS]</p>",
+    "traits": [
+      "taskmaster"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          60
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "taskmaster"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 40,
+        "y": 109,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "beastmaster",
+          "unreasonable",
+          "minor-buff-28",
+          "assert-dominance",
+          "conscription",
+          "job-done-right",
+          "war-drums"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ],
+    "slug": "commissar"
+  },
+  "_id": "wmX0ocGG3aiRXbpf",
+  "img": "icons/equipment/head/hat-furred-white.webp",
+  "effects": []
+}

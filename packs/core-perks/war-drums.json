@@ -1,0 +1,77 @@
+{
+  "folder": "6XbjR9qPWzZw4vEd",
+  "name": "War Drums",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "War Drums",
+        "slug": "war-drums",
+        "description": "<p>Effect: The user set a War Drums Summon (AV 88), lasting 3 Activations. On the Summon's activation, allied creatures that have @Affliction[fear] gain @Affliction[advance 20].</p>",
+        "traits": [
+          "taskmaster",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "icons/tools/instruments/drum-snare-red.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "field",
+          "unit": "m",
+          "distance": 10
+        },
+        "summon": "Compendium.ptr2e.core-summons.XlDXxNiSlATtu3xk"
+      }
+    ],
+    "description": "<p>Effect: The user set a War Drums Summon (AV 88), lasting 3 Activations. On the Summon's activation, allied creatures that have @Affliction[fear] gain @Affliction[advance 20].</p>",
+    "traits": [
+      "taskmaster",
+      "summon"
+    ],
+    "prerequisites": [
+      "item:perk:commissar"
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "taskmaster"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 38,
+        "y": 101,
+        "connected": [
+          "commissar",
+          "the-quality-of-quantity",
+          "forensic-accountant"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "slug": "war-drums"
+  },
+  "_id": "Dx8QtwhmAVm4U25t",
+  "img": "icons/tools/instruments/drum-snare-red.webp",
+  "effects": []
+}
