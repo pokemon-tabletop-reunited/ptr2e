@@ -3,7 +3,7 @@ import { BasicChangeSystem, ChangeModel, ChangeSchema, PTRCONSTS, RangePTR2e } f
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { CHANGE_MODES } from "./change.ts";
 
-type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat";
+type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat" | "category";
 
 export default class AlterAttackChangeSystem extends ChangeModel {
   static override TYPE = "alter-attack";
@@ -17,7 +17,8 @@ export default class AlterAttackChangeSystem extends ChangeModel {
     "range",
     "rip",
     "offensiveStat",
-    "defensiveStat"
+    "defensiveStat",
+    "category"
   ] as const);
 
   static override defineSchema() {
@@ -291,6 +292,22 @@ export default class AlterAttackChangeSystem extends ChangeModel {
 
               attack.defensiveStat = change as PTRCONSTS.Stat;
               attack.updateSource({ defensiveStat: attack.defensiveStat });
+            }
+          }
+        }
+        case "category": {
+          return {
+            adjustAttack: (attack, options) => {
+              if (!change || typeof change !== "string" || !Object.values(PTRCONSTS.Categories).includes(change as PTRCONSTS.PokemonCategory)) {
+                return this.failValidation("An attack alteration of type 'category' must have a supported 'Attack Category' text value.");
+              }
+
+              if (!definition.test(options)) {
+                return;
+              }
+
+              attack.category = change as PTRCONSTS.PokemonCategory;
+              attack.updateSource({ category: attack.category });
             }
           }
         }

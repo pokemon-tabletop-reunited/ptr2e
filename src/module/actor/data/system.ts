@@ -471,7 +471,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       Object.defineProperty(this.attributes[key], "final", {
-        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], false, false),
+        get: () => key === "hp" ? this.attributes[key].value : this.parent.calcStatTotal(this.attributes[key], {offensive: false, defensive: false}, false),
       });
     }
 
@@ -594,6 +594,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       speMultiplier: 1,
       skills: 1,
       movement: 0,
+      movementMultiplier: 1,
       powerPoints: 0,
       weightClass: 0,
       heightClass: 0,
@@ -952,7 +953,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     if (!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
       for (const movement of Object.values(this.movement)) {
-        movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
+        movement.value = Math.floor(Math.max(1, movement.value + Number(this.modifiers.movement)));
+      }
+    }
+    if (!isNaN(Number(this.modifiers.movementMultiplier)) && this.modifiers.movementMultiplier !== 1) {
+      for (const movement of Object.values(this.movement)) {
+        movement.value = Math.floor(Math.max(1, movement.value * Number(this.modifiers.movementMultiplier)));
       }
     }
 
@@ -985,7 +991,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           highest.push(this.movement[movement]);
         }
       }
-      this.movement[movement].available = this.movement[movement].value;
+      this.movement[movement].available = this.movement[movement].value + ((token.document?.flags?.ptr2e?.temporaryMovement as Record<string, number>)?.[movement] ?? 0);
     }
     for (const waypoint of token.document.movementHistory) {
       if (waypoint.forced) continue;

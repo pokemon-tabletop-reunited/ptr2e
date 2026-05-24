@@ -486,6 +486,38 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       this.deleteEmbeddedDocuments("Combatant", toDelete);
     }
   }
+
+  /**
+   * Clear the movement history of all Tokens within this Combat.
+   * @overload
+   * @returns {Promise<void>}
+   */
+  /**
+   * Clear the movement history of the Combatants' Tokens.
+   * @overload
+   * @param {Iterable<Combatant>} combatants    The combatants whose movement history is cleared
+   * @returns {Promise<void>}
+   */
+  override async clearMovementHistories(combatants: Iterable<Combatant<this, TokenDocument<Scene | null> | null>> | undefined = undefined): Promise<void> {
+    combatants ??= this.combatants;
+    const tokensByScene = new Map<Scene, Set<TokenDocument<Scene | null>>>();
+    for ( const combatant of combatants ) {
+      if ( combatant.parent !== this ) throw Error("Combatant must be in this Combat");
+      const token = combatant.token;
+      //@ts-expect-error - Incomplete types
+      if ( !token || (token._source._movementHistory.length === 0) ) continue;
+      const scene = token.parent!;
+      let tokens = tokensByScene.get(scene);
+      if ( !tokens ) tokensByScene.set(scene, tokens = new Set());
+      tokens.add(token);
+    }
+    const promises = [];
+    for ( const [scene, tokens] of tokensByScene.entries() ) {
+      promises.push(scene.updateEmbeddedDocuments("Token", Array.from(tokens, t => ({_id: t.id, flags: { ptr2e: { temporaryMovement: null } } })),
+        {diff: false, noHook: true, _clearMovementHistory: true}));
+    }
+    await Promise.all(promises);
+  }
 }
 
 interface CombatPTR2e extends Combat<CombatSystemPTR2e> {
