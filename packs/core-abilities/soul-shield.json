@@ -21,11 +21,11 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all Dragon-Type creatures within Range take 20% less damage from all sources.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user and allied @Trait[dragon]-Type creatures within Range take 20% less damage from all sources. This applies multiplicatively with other sources of damage reduction, and also applies to flat damage sources like DoT effects.</p>",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user and all Dragon-Type creatures within Range take 20% less damage from all sources.</p>",
+    "description": "<p>Effect: The user and allied @Trait[dragon]-Type creatures within Range take 20% less damage from all sources. This applies multiplicatively with other sources of damage reduction, and also applies to flat damage sources like DoT effects.</p>",
     "traits": [
       "domain",
       "aura",
@@ -40,9 +40,112 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "9C8om8ES6BwwABX2",
-  "effects": []
+  "effects": [
+    {
+      "name": "Soul Shield",
+      "type": "passive",
+      "_id": "OlNT7jX6fAUndZT1",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "value": "soul-shield:active",
+            "phase": "initial",
+            "predicate": [],
+            "domain": "all",
+            "state": true,
+            "toggleable": true,
+            "count": false,
+            "alwaysActive": false,
+            "label": "Soul Shield",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "soul-shield:active"
+            ],
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.UTUgWLa3WZh3DAZW",
+                "affects": "allies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:dragon"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "priority": null,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779577433330,
+        "modifiedTime": 1779577517417,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

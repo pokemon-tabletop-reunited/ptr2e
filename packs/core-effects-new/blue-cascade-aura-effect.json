@@ -12,40 +12,45 @@
         "predicate": [],
         "label": "Blue Cascade",
         "priority": null,
-        "ignored": false,
-        "method": 2
+        "phase": "initial",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [],
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 20
+          }
+        ],
+        "key": "water-attack",
+        "method": 2,
+        "ignored": false
       }
     ],
-    "slug": null,
+    "slug": "blue-cascade-aura-effect",
     "traits": [],
-    "removeAfterCombat": true,
-    "removeOnRecall": false,
-    "stacks": 0,
-    "removeAfterAttacking": false,
-    "removeAfterAttacked": false
+    "removeAfterCombat": true
   },
   "disabled": false,
   "duration": {
     "units": "turns",
-    "value": null
+    "value": null,
+    "expiry": null,
+    "expired": false
   },
   "description": "",
   "origin": null,
   "tint": "#ffffff",
   "transfer": true,
   "statuses": [],
-  "sort": 0,
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "13.350",
-    "systemId": "ptr2e",
-    "systemVersion": "1.4.3.beta",
-    "createdTime": 1741610060223,
-    "modifiedTime": 1755991741255,
-    "lastModifiedBy": "mK35yvCqCgiTUvKf",
-    "exportSource": null
-  },
   "folder": "sP8yfpABdpdAz4aV",
-  "showIcon": 2
+  "showIcon": 2,
+  "start": null
 }
