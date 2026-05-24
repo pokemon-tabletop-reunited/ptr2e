@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "A",
+    "grade": "S",
     "fling": {
       "type": "steel",
       "power": 80,
@@ -25,7 +25,7 @@
         "unit": "m"
       }
     },
-    "rarity": "uncommon",
+    "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
@@ -49,11 +49,12 @@
         "traits": [
           "explode",
           "blast-1",
-          "firearm"
+          "firearm",
+          "flinch-25"
         ],
         "name": "Rocket Launcher",
         "slug": "rocket-launcher",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. On resolution, the user is @Affliction[delay 20].</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -62,8 +63,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "predicate": []
       }
@@ -92,7 +92,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A rocket launcher is a weapon that launches an unguided, rocket-propelled projectile. Modern rocket launchers includes shoulder-fired weapons, any weapon that fires a rocket-propelled projectile at a target yet is small enough to be carried by a single person and fired while held on one's shoulder.</p>"
+    "description": "<p>A rocket launcher is a weapon that launches an unguided, rocket-propelled projectile. Modern rocket launchers includes shoulder-fired weapons, any weapon that fires a rocket-propelled projectile at a target yet is small enough to be carried by a single person and fired while held on one's shoulder.</p>",
+    "ammoType": []
   },
   "_id": "K3a5ILims233TLsp",
   "effects": [
@@ -112,7 +113,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -126,7 +128,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -137,14 +141,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743904735453,
         "modifiedTime": 1757632918983,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "Tn65RZTafVbxqEXT"

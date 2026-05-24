@@ -1,0 +1,322 @@
+{
+  "folder": "fwBg1GB1fMcgPklo",
+  "name": "Highland Thistle",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.11,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.5.1"
+      }
+    },
+    "traits": [
+      "weapon",
+      "grass",
+      "fantasy",
+      "blade",
+      "fling",
+      "1-handed",
+      "switch-grip"
+    ],
+    "actions": [
+      {
+        "name": "Thistle Swing",
+        "slug": "thistle-swing",
+        "traits": [
+          "weapon",
+          "sharp",
+          "contact",
+          "adaptable",
+          "double-strike",
+          "priority-10"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "power": 45,
+        "accuracy": 100
+      },
+      {
+        "name": "Thistle Thrust",
+        "slug": "thistle-thrust",
+        "traits": [
+          "weapon",
+          "contact",
+          "adaptable",
+          "crit-1",
+          "grapple",
+          "pass-1"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "types": [
+          "untyped"
+        ],
+        "category": "physical",
+        "predicate": [],
+        "power": 90,
+        "accuracy": 95,
+        "free": true
+      }
+    ],
+    "description": "<p>Highland Thistle is a magical sword crafted by Wood Elves in times of old. While a mastercrafted sword in its own right, it also boosts the wearer's own capabilities and grants them some special powers to boot!</p>",
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "held"
+    },
+    "grade": "B",
+    "fling": {
+      "type": "grass",
+      "power": 95,
+      "accuracy": 90,
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 3,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "unique",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "slug": "highland-thistle",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "ammoType": []
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [
+    {
+      "name": "Highland Thistle",
+      "type": "passive",
+      "_id": "8DawitkSuILm96oa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "thistle-swing-attack-damage-flat",
+            "value": "12+ceil(@actor.system.advancement.level/9)",
+            "predicate": [],
+            "label": "Swing",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "thistle-thrust-attack-damage-flat",
+            "value": "20+ceil(@actor.system.advancement.level/8)",
+            "predicate": [],
+            "label": "Thrust",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "fling-highland-thistle-attack-damage-flat",
+            "value": 19,
+            "predicate": [],
+            "label": "Highland Thistle (Fling)",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "hp": null,
+            "atk": 15,
+            "def": null,
+            "spa": null,
+            "spd": null,
+            "spe": 10,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-moves.Item.AO8ABcakgLIp4Fuz",
+            "phase": "initial",
+            "predicate": [],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.actions.0.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "replaceSelf": true,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-moves.Item.D0WZXNV3LxJsHpnp",
+            "phase": "initial",
+            "predicate": [],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.actions.1.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "replaceSelf": true,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": "8+ceil(@actor.system.advancement.level/6)",
+            "phase": "initial",
+            "predicate": [],
+            "label": "Highland Thistle Enhancement",
+            "key": "leaf-blade-attack-damage",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": "24+ceil(@actor.system.advancement.level/4)",
+            "phase": "initial",
+            "predicate": [],
+            "key": "solar-blade-resolution-attack-damage",
+            "label": "Highland Thistle Enhancement",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "weapon",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [],
+            "key": "leaf-blade-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "weapon",
+            "phase": "initial",
+            "predicate": [],
+            "key": "solar-blade-resolution-attack",
+            "property": "traits",
+            "definition": [],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-gear.Item.2MoMKszqC3PlxHxN.ActiveEffect.yxvzqvjaJw3Mm08g",
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778681018927,
+        "modifiedTime": 1778681917918,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
+    }
+  ],
+  "_id": "bUNUTCwtpWtLID6P"
+}

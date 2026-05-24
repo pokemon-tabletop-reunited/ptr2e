@@ -1,0 +1,71 @@
+{
+  "folder": "E5JYWji5073kTXhD",
+  "name": "Twist",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Twist",
+        "slug": "twist",
+        "description": "<p>Effect: If the user has used @UUID[Compendium.ptr2e.core-gear.Item.PZFyt0DGaa8C6SCy]{Metronome} this Activation, they may discard up to 3 Metronome Cards and draw again for an equal number of cards.</p>",
+        "type": "generic",
+        "img": "icons/sundries/gaming/game-playing-cards-deck.webp",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: If the user has used @UUID[Compendium.ptr2e.core-gear.Item.PZFyt0DGaa8C6SCy]{Metronome} this Activation, they may discard up to 3 Metronome Cards and draw again for an equal number of cards.</p>",
+    "traits": [
+      "gambler"
+    ],
+    "prerequisites": [
+      "item:move:metronome"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "gambler"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 96,
+        "y": 188,
+        "connected": [
+          "the-devil-does-bargain",
+          "ace-up-my-sleeve",
+          "minor-buff-65",
+          "card-captor-1"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "23tGrqFsV5A8DBAi",
+  "img": "icons/sundries/gaming/game-playing-cards-deck.webp",
+  "effects": [],
+  "flags": {}
+}

@@ -25,7 +25,7 @@
         "img": "icons/svg/biohazard.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish 7].</p>",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish 3].</p>",
     "traits": [
       "defensive"
     ],
@@ -61,14 +61,15 @@
             "affects": "origin",
             "alterations": [
               {
+                "method": 5,
                 "property": "duration.turns",
-                "value": 7,
-                "method": 5
+                "value": 3
               }
             ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
@@ -80,14 +81,15 @@
             "affects": "defensive",
             "alterations": [
               {
+                "method": 5,
                 "property": "duration.turns",
-                "value": 7,
-                "method": 5
+                "value": 3
               }
             ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -101,7 +103,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -114,13 +118,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.8.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1753363957053,
-        "modifiedTime": 1753364040216,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778694034119,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

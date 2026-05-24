@@ -14,7 +14,6 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p>"
         },
         "range": {
@@ -23,7 +22,7 @@
           "distance": 10
         },
         "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user freely Moves up to half of a Movement Score of their choice, and freely attacks a valid target with U-Turn.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg"
       }
     ],
     "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: Connection - U-Turn. The user freely Moves up to half of a Movement Score of their choice, and freely attacks a valid target with U-Turn.</p>",
@@ -56,16 +55,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.DTnhRJBYhTBapjIK",
             "predicate": [
               "ability:emergency-exit:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -75,11 +73,23 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} can use {item|link}.",
+            "phase": "initial",
+            "predicate": [],
+            "key": "desperation-1-2",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -93,7 +103,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -105,14 +117,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737397810021,
-        "modifiedTime": 1754318123245,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778686478685,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

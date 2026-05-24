@@ -21,11 +21,11 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Effect: The target heals two Ticks of HP at the end of their Activations, for the next 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The target gains @Affliction[regen 5] (Upgraded to 2 Ticks).</p>",
+        "img": "icons/magic/life/cross-area-circle-green-white.webp"
       }
     ],
-    "description": "<p>Effect: The target heals two Ticks of HP at the end of their Activations, for the next 5 Activations.</p>",
+    "description": "<p>Effect: The target gains @Affliction[regen 5] (Upgraded to 2 Ticks).</p>",
     "traits": [
       "healing",
       "aura"
@@ -69,7 +69,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -83,7 +84,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -96,13 +99,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.1.beta",
         "createdTime": 1753714386137,
         "modifiedTime": 1753714433186,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

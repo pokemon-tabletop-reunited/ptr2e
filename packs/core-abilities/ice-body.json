@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: While Snowy Weather is active, the user recovers a tick of HP at the end of each of their Activations. The user is considered Ice Type for the effects of Snowy Weather.</p>",
         "img": "icons/svg/explosion.svg"
@@ -37,9 +38,61 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "GElvTZmOzC5mappR",
-  "effects": []
+  "effects": [
+    {
+      "name": "Ice Body",
+      "type": "affliction",
+      "_id": "KnLK92c4sBNFt9TU",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/16",
+        "type": "healing",
+        "predicate": [
+          "effect:summon:snowy-weather"
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778689476324,
+        "modifiedTime": 1778689493384,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

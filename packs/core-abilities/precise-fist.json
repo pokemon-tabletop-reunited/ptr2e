@@ -10,21 +10,21 @@
         ],
         "name": "Precise Fist",
         "slug": "precise-fist",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user declares a [Punch] attack.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user declares a [Punch] attack.</p><p>Effect: The triggering attack gains [Crit 1] or [Crit X+1] and and has its effect chance double.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/skills/melee/unarmed-punch-fist-blue.webp"
       }
     ],
-    "description": "<p>Trigger: The user declares a [Punch] attack.</p><p>Effect: The triggering attack gains [Crit 1] or [Crit X+1] and and has its effect chance double.</p",
+    "description": "<p>Trigger: The user declares a [Punch] attack.</p><p>Effect: The triggering attack gains [Crit 1] or [Crit X+1] and and has its effect chance double.</p>",
     "traits": [],
     "slug": "precise-fist",
     "_migration": {
@@ -35,9 +35,84 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "wPNYlQoyCUuUE2l9",
-  "effects": []
+  "effects": [
+    {
+      "name": "Precise Fist",
+      "type": "passive",
+      "_id": "fpdLsqRxDMW1w1N6",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
+            "phase": "initial",
+            "predicate": [],
+            "key": "punch-trait-attack",
+            "affects": "self",
+            "alterations": [],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [],
+            "key": "punch-trait-attack",
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 100
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778979550742,
+        "modifiedTime": 1778979610381,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

@@ -8,10 +8,9 @@
         "traits": [],
         "name": "Sonic Break",
         "slug": "sonic-break",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
           "trigger": "<p>The user declares a [Sonic] attack.</p>"
         },
         "range": {
@@ -19,11 +18,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: The user declares a [Sonic] attack.</p><p>Effect: On hit with the triggering attack, the affected creature(s) lose 3 Ticks of HP.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user declares a [Sonic] attack.</p><p>Effect: On hit with the triggering attack, the affected creature(s) lose @Tick[-2].</p>",
+        "img": "icons/magic/sonic/explosion-shock-wave-teal.webp"
       }
     ],
-    "description": "<p>Trigger: The user declares a [Sonic] attack.</p><p>Effect: On hit with the triggering attack, the affected creature(s) lose 3 Ticks of HP.</p>",
+    "description": "<p>Trigger: The user declares a [Sonic] attack.</p><p>Effect: On hit with the triggering attack, the affected creature(s) lose @Tick[-2].</p>",
     "traits": [],
     "slug": "sonic-break",
     "_migration": {
@@ -57,14 +56,15 @@
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": -3,
-                "method": 2
+                "value": -2
               }
             ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -78,7 +78,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -91,13 +93,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1754247080194,
-        "modifiedTime": 1754247182443,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779373251073,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

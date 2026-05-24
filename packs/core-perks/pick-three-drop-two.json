@@ -14,9 +14,26 @@
       ],
       "notes": ""
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Pick Three Drop Two",
+        "slug": "pick-three-drop-two",
+        "description": "<p>Effect: The user can spend 4 Luck at [Delay 4] @Trait[interrupt] when a member of their Team declares Metronome. The GM draws three moves from the Metronome Deck, and the user selects one Move to be added to the target's Metronome Hand.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "icons/sundries/gaming/playing-cards-black.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "ally",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
     "slug": "pick-three-drop-two",
-    "description": "<p>Effect: The user can spend 4 Luck at [Delay 4] @Trait[interrupt] when they or a member of their Team declares Metronome. The GM draws three moves from the Metronome Deck, and the user selects one Move to be resolved through the Triggering Metronome. This can affect a non-Team Ally by spending another 3 Luck.</p>",
+    "description": "<p>Effect: The user can spend 4 Luck at [Delay 4] @Trait[interrupt] when a member of their Team declares Metronome. The GM draws three moves from the Metronome Deck, and the user selects one Move to be added to the target's Metronome Hand.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:cant-break-my-winning-streak"
@@ -30,13 +47,23 @@
     },
     "global": true,
     "webs": [],
-    "nodes": [],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "nodes": [
+      {
+        "x": 91,
+        "y": 185,
+        "connected": [
+          "cant-break-my-winning-streak",
+          "twist",
+          "minor-buff-13"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ],
+    "traitWebs": []
   },
   "img": "icons/sundries/gaming/playing-cards-black.webp",
   "effects": [],
-  "flags": {},
   "_id": "tfeg7bOfGE8RL1iO"
 }

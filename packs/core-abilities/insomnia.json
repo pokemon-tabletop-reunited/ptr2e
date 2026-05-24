@@ -19,11 +19,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists @Trait[ghost]-Type damage from attacks.</p>",
+        "img": "systems/ptr2e/img/conditions/bad-sleep.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
+    "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists @Trait[ghost]-Type damage from attacks.</p>",
     "traits": [
       "defensive"
     ],
@@ -51,40 +51,43 @@
         "changes": [
           {
             "type": "roll-option",
-            "key": "",
             "value": "affliction:drowsy",
             "predicate": [],
             "domain": "immunities",
             "toggleable": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true,
-            "method": 2
+            "state": true
           },
           {
             "type": "roll-option",
-            "key": "",
             "value": "affliction:nightmares",
             "predicate": [],
             "domain": "immunities",
             "toggleable": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true,
-            "method": 2
+            "state": true
           },
           {
             "type": "ephemeral-modifier",
-            "key": "psychic-attack-effectiveness-stage",
+            "key": "ghost-attack-effectiveness-stage",
             "value": -1,
             "predicate": [],
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -100,7 +103,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
       "origin": null,
@@ -112,14 +117,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.8.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1731340872448,
-        "modifiedTime": 1753364762113,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1779366772866,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

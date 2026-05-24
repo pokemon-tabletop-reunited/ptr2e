@@ -19,11 +19,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user has +2 default SPD Stages in Smoggy Weather. The user is treated as having the Poison Type for the effects of Smoggy Weather.</p>",
+        "description": "<p>Effect: The user's speed stat is doubled in Smoggy Weather. The user is treated as having the Poison Type for the effects of Smoggy Weather.</p>",
         "img": "systems/ptr2e/img/svg/poison_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user has +2 default SPD Stages in Smoggy Weather. The user is treated as having the Poison Type for the effects of Smoggy Weather.</p>",
+    "description": "<p>Effect: The user's speed stat is doubled in Smoggy Weather. The user is treated as having the Poison Type for the effects of Smoggy Weather.</p>",
     "traits": [
       "environ"
     ],
@@ -51,23 +51,25 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.stage",
-            "value": 2,
+            "key": "system.modifiers.speMultiplier",
+            "value": 1,
             "predicate": [
               "effect:summon:smoggy-weather"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "add-trait",
-            "key": "",
             "value": "poison",
             "predicate": [
               "effect:summon:smoggy-weather"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -81,7 +83,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -94,13 +98,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1753747173803,
-        "modifiedTime": 1753747224742,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1778977535536,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

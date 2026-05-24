@@ -39,16 +39,19 @@
             "color": "#800080",
             "private": false,
             "label": "Pendulum",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "basic",
+            "type": "percentile-modifier",
             "key": "attack-power",
             "value": "20*@actor.clocks.wimtccLuzsW1PLXl",
             "predicate": [],
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -62,7 +65,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -74,13 +79,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1765281750852,
-        "modifiedTime": 1765281826657,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779225071306,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

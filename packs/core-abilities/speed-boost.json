@@ -26,7 +26,7 @@
       {
         "name": "Speed Boost Summon",
         "slug": "speed-boost-action-2",
-        "description": "<p>Effect: At the end of the Round, the user gains +1 SPD Stage for 5 Activations. As a Simple Action for 3 PP, the user can gain +1 SPD Stage for 5 Activations.</p>",
+        "description": "<p>At combat entry, the user creates a @UUID[Compendium.ptr2e.core-summons.Item.LGwvbkltOQFXoI5W]{Speed Boost Summon} which automatically applies +1 Speed Stage to the user on it's activations.</p>",
         "traits": [
           "stage-change"
         ],
@@ -37,7 +37,8 @@
         },
         "range": {
           "target": "field",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "types": [
           "untyped"
@@ -48,7 +49,7 @@
         "predicate": []
       }
     ],
-    "description": "<p>Effect: At the end of the Round, the user gains +1 SPD Stage for 5 Activations. As a Simple Action for 3 PP, the user can gain +1 SPD Stage for 5 Activations.</p>",
+    "description": "<p>Effect: At combat entry, the user creates a @UUID[Compendium.ptr2e.core-summons.Item.LGwvbkltOQFXoI5W]{Speed Boost Summon} which automatically applies +1 Speed Stage to the user on it's activations.</p><p></p><p>The user also gains the @UUID[Compendium.ptr2e.core-abilities.Item.LpovBWFJb0J2ggv1.Actions.speed-boost-active] action.</p>",
     "traits": [
       "stage-change"
     ],
@@ -85,7 +86,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-note",
@@ -94,7 +96,8 @@
             "predicate": [],
             "visibility": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -108,7 +111,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -121,13 +126,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.3.8.beta",
         "createdTime": 1752177469352,
         "modifiedTime": 1752177646015,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

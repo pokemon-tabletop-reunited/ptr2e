@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, all of the user's Flying-Type attacks gain [Priority 1], or have their [Priority X] increased by 1. This only works on attacks whose type is originally Flying-Type.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: While the user meets the @Trait[intrepid-3-4] Condition, all of the user's @Trait[flying]-Type attacks gain @Trait[priority-15], or have their @Trait[priority-xy] increased by 15.</p>",
+        "img": "systems/ptr2e/img/svg/flying_icon.svg"
       }
     ],
-    "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, all of the user's Flying-Type attacks gain [Priority 1], or have their [Priority X] increased by 1. This only works on attacks whose type is originally Flying-Type",
+    "description": "<p>Effect: While the user meets the @Trait[intrepid-3-4] Condition, all of the user's @Trait[flying]-Type attacks gain @Trait[priority-15], or have their @Trait[priority-xy] increased by 15.</p>",
     "traits": [
       "intrepid-3-4"
     ],
@@ -35,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "iGIYnwgMOLWLUVAs",
@@ -57,21 +59,34 @@
             "chance": 100,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "alterations": [],
-            "method": 2
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 15
+              }
+            ],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -83,13 +98,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1738232736303,
-        "modifiedTime": 1738232815937,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1779377985488,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

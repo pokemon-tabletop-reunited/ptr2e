@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is immune to the [Push] effect and cannot be affected by any forced movement. The user's Climb skill checks have one more degree of success.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to the [Push] effect and cannot be affected by any forced movement. The user's Climb skill checks have one more degree of success.</p>",
+    "description": "<p>Effect: The user is immune to the [Push] effect and cannot be affected by any forced movement. The user gains the @Trait[wallclimber] trait.</p>",
     "traits": [
       "defensive"
     ],
@@ -35,9 +36,65 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "PjK80NecltXOa2aS",
-  "effects": []
+  "effects": [
+    {
+      "name": "Suction Cups",
+      "type": "passive",
+      "_id": "tt6ESuYHGjrlXabW",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "value": "wallclimber",
+            "phase": "initial",
+            "predicate": [],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779323855252,
+        "modifiedTime": 1779323863281,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

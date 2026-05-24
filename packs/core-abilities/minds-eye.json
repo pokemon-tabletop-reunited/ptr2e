@@ -26,8 +26,7 @@
     "description": "<p>Effect: Connection - Foresight. While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks deal Super Effective damage to Ghost-Type creatures, and gain [Danger Close].</p>",
     "traits": [
       "aura",
-      "connection",
-      "partial-automation"
+      "connection"
     ],
     "slug": "minds-eye",
     "_migration": {
@@ -53,16 +52,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.B5u8TLbX10kgSB9d",
             "predicate": [
               "ability:minds-eye:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "allowDuplicate": false,
@@ -72,11 +70,67 @@
               "grantee": "detach",
               "granter": "cascade"
             },
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [
+              "target:trait:ghost",
+              "effect:true-sight"
+            ],
+            "key": "normal-attack-effectiveness-stage",
+            "label": "Normal Vs Ghost",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "flat-modifier",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [
+              "target:trait:ghost",
+              "effect:true-sight"
+            ],
+            "key": "fighting-attack-effectiveness-stage",
+            "label": "Fighting Vs Ghost",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "danger-close",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [
+              "effect:true-sight"
+            ],
+            "key": "normal-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "danger-close",
+            "phase": "initial",
+            "predicate": [],
+            "property": "traits",
+            "definition": [
+              "effect:true-sight"
+            ],
+            "key": "fighting-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -90,7 +144,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -102,14 +158,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737404815783,
-        "modifiedTime": 1754319587597,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778979190059,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

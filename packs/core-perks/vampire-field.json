@@ -1,0 +1,76 @@
+{
+  "folder": "UZGN1glVNXLieg48",
+  "name": "Vampire Field",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Vampire Field",
+        "slug": "vampire-field",
+        "description": "<p>Effect: The user summons a Vampire Field, giving all allied attacks the @Trait[drain-1-10] trait.</p><p>This summon lasts for 3 rounds.</p>",
+        "traits": [
+          "healer",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "icons/creatures/abilities/fang-tooth-blood-red.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "summon": "Compendium.ptr2e.core-summons.Item.ZoHWcYyAXl3Nw98Y",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>Effect: The user summons a Vampire Field, giving all allied attacks the @Trait[drain-1-10] trait.</p><p>This summon has an AV of 150 and lasts for 3 activations.</p>",
+    "traits": [
+      "healer",
+      "summon"
+    ],
+    "prerequisites": [
+      "trait:pack-leader"
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "pack-mon"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 142,
+        "y": 181,
+        "connected": [
+          "pack-hunger",
+          "pile-on",
+          "metamove-empower"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "2VzEwPMzgNmQlAmI",
+  "img": "icons/creatures/abilities/fang-tooth-blood-red.webp",
+  "effects": [],
+  "flags": {}
+}

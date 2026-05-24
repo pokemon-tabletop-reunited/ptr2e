@@ -282,7 +282,7 @@ export class TextEnricher {
         });
       }
       else {
-        await actor.applyDamage(amount * -1, { healShield: isShieldBased && amount > 0, silent: false, flat: true, note: ""})
+        await actor.applyDamage(amount * -1, { healShield: isShieldBased, silent: false, flat: true, note: ""})
       }
     }
   }

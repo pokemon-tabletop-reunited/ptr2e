@@ -24,7 +24,7 @@
         "img": "systems/ptr2e/img/svg/water_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to @Affliction[burn]. Allied creatures in range have a 50% chance of being cured of @Affliction[burn] and a 10% chance to gain @Affliction[regen 5] at the end of their Activations.</p>",
+    "description": "<p>Effect: The user and allied creatures within range are immune to @Affliction[burn].</p>",
     "traits": [
       "defensive",
       "aura",
@@ -54,17 +54,18 @@
         "changes": [
           {
             "type": "roll-option",
-            "key": "",
-            "value": "affliction:burned",
+            "value": "affliction:burn",
             "predicate": [],
             "domain": "immunities",
             "toggleable": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true,
-            "method": 2
+            "state": true
           }
         ],
         "slug": null,
@@ -81,7 +82,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>Effect: The duration of @Affliction[burn] affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their Activations. Passive: The user is immune to the @Affliction[burn] Affliction.</p>",
       "origin": null,
@@ -93,14 +96,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.Rd9wEjxJT1sSjly1.ActiveEffect.IydfTEubnrcEnJvk",
         "duplicateSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.3.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1731340457916,
-        "modifiedTime": 1731340672549,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+        "modifiedTime": 1779374672017,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

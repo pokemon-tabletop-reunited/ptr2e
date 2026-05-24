@@ -153,7 +153,7 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     this.actor.system.movementType = this.movementAction
     if (reset === true) {
       for (const movement in this.actor.system.movement) {
-        this.actor.system.movement[movement].available = this.actor.system.movement[movement].value;
+        this.actor.system.movement[movement].available = this.actor.system.movement[movement].value + ((this.flags.ptr2e.temporaryMovement as Record<string, number>)?.[movement] ?? 0);
       }
     }
     else {
@@ -355,9 +355,14 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
       }
     }
 
-
-
     return super._preDelete(options, user);
+  }
+
+  //@ts-expect-error - Incomplete types
+  override async clearMovementHistory(): Promise<void> {
+    //@ts-expect-error - Incomplete types
+    if ( this._source._movementHistory.length === 0 ) return;
+    await this.update({flags: { ptr2e: { temporaryMovement: null } }}, {diff: false, noHook: true, _clearMovementHistory: true});
   }
 }
 

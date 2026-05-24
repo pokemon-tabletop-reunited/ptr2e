@@ -11,7 +11,8 @@
         "type": "attack",
         "traits": [
           "social",
-          "friendly"
+          "friendly",
+          "basic"
         ],
         "range": {
           "target": "cone",
@@ -19,15 +20,15 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4
+          "activation": "simple",
+          "powerPoints": 3
         },
         "category": "status",
         "accuracy": 100,
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: All valid targets lose -1 DEF Stages for 5 Activations and gain @Affliction[fear 2].</p>",
+        "description": "<p>Effect: All valid targets lose -1 DEF Stages for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg",
         "predicate": []
       }
@@ -64,24 +65,6 @@
             "priority": null,
             "ignored": false,
             "alterations": [],
-            "method": 2
-          },
-          {
-            "type": "roll-effect",
-            "key": "leer-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
-            "predicate": [],
-            "chance": 100,
-            "affects": "target",
-            "alterations": [
-              {
-                "property": "duration.turns",
-                "value": 2,
-                "method": 5
-              }
-            ],
-            "priority": null,
-            "ignored": false,
             "method": 2
           }
         ],

@@ -29,8 +29,7 @@
     "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: Connection - Malignant Chain. The affected creature is afflicted with @Affliction[confused 5].</p>",
     "traits": [
       "legendary",
-      "connection",
-      "partial-automation"
+      "connection"
     ],
     "slug": "poison-puppeteer",
     "_migration": {
@@ -56,16 +55,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.fFKx2U3ztyLCAuRH",
             "predicate": [
               "ability:poison-puppeteer:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -75,11 +73,51 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "poison-applied",
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "confused"
+                },
+                "method": 2
+              }
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "blight-applied",
+            "alterations": [
+              {
+                "property": "system.changes",
+                "value": {
+                  "type": "grant-effect",
+                  "value": "confused"
+                },
+                "method": 2
+              }
+            ],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -93,7 +131,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -105,14 +145,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737417932578,
-        "modifiedTime": 1754320419726,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779370943728,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

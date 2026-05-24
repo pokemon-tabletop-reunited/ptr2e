@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's Physical- and Special-Category attacks attacks without [X-Strike] and those with @Trait[double-strike], [3-Strike], or [4-Strike], gain +10% Power for each head the user has (from [X-Headed]). [5-Strike] and above attacks hit an additional number of times for each head the user has (from [X-Headed]).</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's Physical- and Special-Category attacks without @Trait[x-strike] gain +10% Power for each head the user has (from @Trait[x-Headed]). @Trait[x-strike] attacks hit an additional number of times for each head the user has (from @Trait[x-headed]), and increases the @Trait[x-strike] trait by the value of @Trait[x-headed].</p>",
+        "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp"
       }
     ],
-    "description": "<p>Effect: The user's Physical- and Special-Category attacks without [X-Strike] and those with @Trait[double-strike], [3-Strike], or [4-Strike], gain +10% Power for each head the user has (from [X-Headed]). [5-Strike] and above attacks hit an additional number of times for each head the user has (from [X-Headed])</p>",
+    "description": "<p>Effect: The user's Physical- and Special-Category attacks without @Trait[x-strike] gain +10% Power for each head the user has (from @Trait[x-Headed]). @Trait[x-strike] attacks hit an additional number of times for each head the user has (from @Trait[x-headed]), and increases the @Trait[x-strike] trait by the value of @Trait[x-headed].</p>",
     "traits": [],
     "slug": "multi-headed",
     "_migration": {
@@ -31,7 +32,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "xbfOSAxhffJmiYKu",

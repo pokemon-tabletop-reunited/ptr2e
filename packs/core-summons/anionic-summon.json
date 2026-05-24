@@ -1,0 +1,96 @@
+{
+  "name": "Anionic Summon",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "summon",
+      "defensive"
+    ],
+    "actions": [],
+    "baseAV": 150,
+    "duration": 999
+  },
+  "_id": "98IfIAKlpnNIdpHC",
+  "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+  "effects": [
+    {
+      "name": "Anionic",
+      "type": "summon",
+      "_id": "hjHey3Oktzf5fSp2",
+      "img": "icons/magic/symbols/chevron-elipse-circle-blue.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": 0.5,
+            "predicate": [
+              {
+                "or": [
+                  "item:ability:anionic",
+                  "item:ability:cationic",
+                  "item:ability:plus",
+                  "item:ability:minus"
+                ]
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "predicate": [],
+        "targetType": "ally",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779355528455,
+        "modifiedTime": 1779355830487,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {}
+}

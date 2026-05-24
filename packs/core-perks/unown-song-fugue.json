@@ -1,0 +1,100 @@
+{
+  "folder": "KcpEanpX82Cu6Dqh",
+  "name": "Unown Song: Fugue",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Unown Song: Fugue",
+        "slug": "unown-song-fugue",
+        "description": "<p>This perk summons an Unown Choir to perform the Unown Song: Fugue.</p><p>Effect: While this summon is active, no other summons can be created. Summons with the @Trait[legendary] trait are not subject to this restriction.</p>",
+        "traits": [
+          "sage",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "summon": "Compendium.ptr2e.core-summons.9nlG6rQxSuggQOcp",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Fugue Cooldown",
+        "slug": "unown-song-fugue-cooldown",
+        "description": "<p>This perk summons an Unown Choir to perform the Unown Song: Fugue.</p><p>Only 1 Fugue summon may exist at any given time. This Summon has 150AV and lasts for 3 Activations.</p><p>Effect: While this summon is active, no other summons can be created. Summons with the @Trait[legendary] traits are not subject to this restriction.</p><p>After the Fugue summon expires, the user must summon the Fugue Cooldown Summon. This last for 2 Activations and has AV100. While the Fugue Cooldown Summon is active, the Fugue summon may not be re-summoned.</p>",
+        "traits": [
+          "sage",
+          "summon"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "cost": {
+          "activation": "free"
+        },
+        "summon": "Compendium.ptr2e.core-summons.Item.HuBU8nD7KMTpShwj",
+        "range": {
+          "target": "field",
+          "unit": "m"
+        }
+      }
+    ],
+    "description": "<p>This perk summons an Unown Choir to perform the Unown Song: Fugue.</p><p>Only 1 Fugue summon may exist at any given time. This Summon has 150AV and lasts for 3 Activations.</p><p>Effect: While this summon is active, no other summons can be created. Summons with the @Trait[legendary] traits are not subject to this restriction.</p><p>After the Fugue summon expires, the user must summon the Fugue Cooldown Summon. This last for 2 Activations and has AV100. While the Fugue Cooldown Summon is active, the Fugue summon may not be re-summoned.</p>",
+    "traits": [
+      "sage",
+      "summon"
+    ],
+    "prerequisites": [
+      {
+        "gte": [
+          "{actor|skills.thaumaturgy.mod}",
+          60
+        ]
+      }
+    ],
+    "autoUnlock": [],
+    "cost": 4,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "sage"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 146,
+        "y": 111,
+        "connected": [
+          "unown-song-sanctuary-ward",
+          "screen-setter",
+          "unown-song-symphonic-healing"
+        ],
+        "hidden": false,
+        "type": "normal",
+        "tier": null
+      }
+    ]
+  },
+  "_id": "Jd3KdybuKfwlv2px",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "effects": [],
+  "flags": {}
+}

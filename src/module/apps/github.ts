@@ -4,6 +4,7 @@ import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
+import ActiveEffectPTR2e from "@module/effects/document.ts";
 
 class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = {
@@ -79,13 +80,12 @@ class GithubSheet extends foundry.applications.api.HandlebarsApplicationMixin(Ap
 }
 
 class GithubManager {
-  static VALID_DOCUMENT_TYPES: Record<string, string> = {
+  static VALID_ITEM_TYPES: Record<string, string> = {
     move: "ptr2e.core-moves",
     species: "ptr2e.core-species",
     "ptr2e-digimon-expansion.digimonSpecies": "ptr2e-digimon-expansion.digimon-species",
     ability: "ptr2e.core-abilities",
     perk: "ptr2e.core-perks",
-    effect: "ptr2e.core-effects",
     consumable: "ptr2e.core-gear",
     container: "ptr2e.core-gear",
     equipment: "ptr2e.core-gear",
@@ -94,22 +94,37 @@ class GithubManager {
     summon: "ptr2e.core-summons"
   } as const;
 
-  static async getExistingItem<TDocument extends ItemPTR2e>(
-    item: TDocument,
+  static VALID_EFFECT_TYPES: Record<string, string> = {
+    affliction: "ptr2e.core-effects-new",
+    passive: "ptr2e.core-effects-new",
+    advancement: "ptr2e.core-effects-new",
+    summon: "ptr2e.core-effects-new",
+  } as const;
+
+  static getPackForDocument(document: ItemPTR2e | ActiveEffectPTR2e) {
+    return document instanceof ItemPTR2e
+      ? GithubManager.VALID_ITEM_TYPES[document.type]
+      : document instanceof ActiveEffectPTR2e
+        ? GithubManager.VALID_EFFECT_TYPES[document.type]
+        : null;
+  }
+
+  static async getExistingItem<TDocument extends ItemPTR2e | ActiveEffectPTR2e>(
+    document: TDocument,
     pack: CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>
-  ): Promise<ItemPTR2e<ItemSystemPTR, null> | null> {
-    const existing = await (async (): Promise<Maybe<ItemPTR2e<ItemSystemPTR, null>>> => {
-      const sourceId = item.flags?.core?.sourceId || item._stats?.compendiumSource;
+  ): Promise<ItemPTR2e<ItemSystemPTR, null> | ActiveEffectPTR2e | null> {
+    const existing = await (async (): Promise<Maybe<ItemPTR2e<ItemSystemPTR, null> | ActiveEffectPTR2e>> => {
+      const sourceId = (document.flags?.core?.sourceId || document._stats?.compendiumSource) as Maybe<string>;
       if (sourceId) {
-        if(!sourceId.startsWith(pack.metadata.packageName)) {
-          return (await fu.fromUuid<ItemPTR2e<ItemSystemPTR, null>>(sourceId) ?? null) as ItemPTR2e<ItemSystemPTR, null> | null;
+        if (!sourceId.startsWith(pack.metadata.packageName)) {
+          return (await fu.fromUuid<ItemPTR2e<ItemSystemPTR, null>>(sourceId) ?? null) as ItemPTR2e<ItemSystemPTR, null> | ActiveEffectPTR2e | null;
         }
         const existing = await pack.getDocument(sourceId.split(".").at(-1)!);
         if (existing) return existing;
       }
       const index = await pack.getIndex({ fields: ["system.slug"] });
       const existing = index.find(
-        (i) => item.slug === (i.system?.slug || game.ptr.util.sluggify(i.name))
+        (i) => document.slug === (i.system?.slug || game.ptr.util.sluggify(i.name))
       );
       if (existing) return pack.getDocument(existing._id);
       return null;
@@ -117,7 +132,7 @@ class GithubManager {
     return existing ?? null;
   }
 
-  static getDiffableItem<TDocument extends ItemPTR2e>(
+  static getDiffableItem<TDocument extends ItemPTR2e | ActiveEffectPTR2e>(
     item: TDocument["_source"],
     packItem: TDocument["_source"]
   ) {
@@ -178,9 +193,10 @@ class GithubManager {
     return diff;
   }
 
-  static prepareUpdateData<TDocument extends ItemPTR2e>(
+  static prepareUpdateData<TDocument extends ItemPTR2e | ActiveEffectPTR2e>(
     diff: Record<string, any>,
-    packItem: TDocument["_source"]
+    packItem: TDocument["_source"],
+    isItem = true,
   ) {
     const data: Record<string, any> = fu.mergeObject(packItem, diff, { inplace: false });
     if ('actions' in packItem.system && diff.system?.actions !== undefined) {
@@ -253,8 +269,8 @@ class GithubManager {
 
     // Check if valid document
     try {
-      const tempItem = new ItemPTR2e(fu.deepClone(data), { keepId: true });
-      tempItem.validate();
+      const tempDoc = isItem ? new ItemPTR2e(fu.deepClone(data), { keepId: true }) : new ActiveEffectPTR2e(fu.deepClone(data) as ActiveEffectPTR2e["_source"], { keepId: true });
+      tempDoc.validate();
     } catch (error) {
       ui.notifications.error(
         "Unable to validate document, please check console for more information."
@@ -269,20 +285,20 @@ class GithubManager {
     return data;
   }
 
-  static async commitItemToGithubSheet<TDocument extends ItemPTR2e>(this: DocumentSheetV2<TDocument>) {
+  static async commitItemToGithubSheet<TDocument extends ItemPTR2e | ActiveEffectPTR2e>(this: DocumentSheetV2<TDocument>) {
     return GithubManager.commitItemToGithub(this.document);
   }
 
-  static async commitItemToGithub<TDocument extends ItemPTR2e>(
+  static async commitItemToGithub<TDocument extends ItemPTR2e | ActiveEffectPTR2e>(
     document: TDocument,
   ) {
-    if (!GithubManager.VALID_DOCUMENT_TYPES[document.type]) {
+    if (!GithubManager.getPackForDocument(document)) {
       ui.notifications.error(`Cannot commit ${document.type} to Github`);
       return;
     }
 
     const pack = game.packs.get(
-      GithubManager.VALID_DOCUMENT_TYPES[document.type]
+      GithubManager.getPackForDocument(document)
     ) as CompendiumCollection<ItemPTR2e<ItemSystemPTR, null>>;
     if (!pack) {
       ui.notifications.error(`Cannot find pack for ${document.type}`);
@@ -293,7 +309,7 @@ class GithubManager {
     if (!existing) {
       try {
         const source = document.pack ? game.packs.get(document.pack)?.metadata.packageName || "core" : "core";
-        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"], source);
+        return GithubManager.saveBlobToGithub(document.toObject() as ItemPTR2e["_source"], source, document instanceof ActiveEffectPTR2e);
       }
       catch {
         ui.notifications.error("An unexpected error occured.");
@@ -318,14 +334,14 @@ class GithubManager {
       return;
     }
 
-    const realDiff = GithubManager.prepareUpdateData(diff, existingData);
+    const realDiff = GithubManager.prepareUpdateData(diff, existingData, document instanceof ItemPTR2e);
     if (!realDiff) return;
 
     if (diff.name) {
       diff["old_name"] = existingData.name;
     }
     try {
-      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], source, diff);
+      await GithubManager.saveBlobToGithub(realDiff as ItemPTR2e["_source"], source, document instanceof ActiveEffectPTR2e, diff);
     }
     catch (error) {
       ui.notifications.error("An unexpected error occured.");
@@ -377,9 +393,10 @@ class GithubManager {
     return null;
   }
 
-  static async saveBlobToGithub<TDocument extends ItemPTR2e>(
+  static async saveBlobToGithub<TDocument extends ItemPTR2e | ActiveEffectPTR2e>(
     realDiff: TDocument["_source"],
     source: string,
+    isEffect = false,
     diff?: Record<string, any>,
   ) {
     const identity = await GithubManager.getIdentity();
@@ -401,7 +418,8 @@ class GithubManager {
           diff: diff || {},
           flags: {
             new: true,
-            source
+            source,
+            effect: isEffect,
           }
         }),
       });

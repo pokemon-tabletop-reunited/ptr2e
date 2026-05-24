@@ -27,8 +27,7 @@
     "description": "<p>Effect: While Smoggy Weather is active, the user recovers a Tick of HP at the end of each of their Activations. The user is treated as having the Poison Type for the effects of Smoggy Weather.</p>",
     "traits": [
       "healing",
-      "environ",
-      "partial-automation"
+      "environ"
     ],
     "slug": "acid-reservoir",
     "_migration": {
@@ -47,7 +46,7 @@
   "effects": [
     {
       "name": "Acid Reservoir",
-      "type": "passive",
+      "type": "affliction",
       "_id": "6UJN401NIwORT1Hh",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
@@ -60,7 +59,8 @@
               "effect:summon:smoggy-weather"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -69,12 +69,20 @@
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
-        "stacks": 0
+        "stacks": 0,
+        "priority": 50,
+        "formula": "1/16",
+        "type": "healing",
+        "predicate": [
+          "effect:summon:smoggy-weather"
+        ]
       },
       "disabled": false,
       "duration": {
-        "units": "turns",
-        "value": null
+        "units": "seconds",
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -86,13 +94,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
-        "createdTime": 1765239976042,
-        "modifiedTime": 1765240003370,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779322499776,
+        "modifiedTime": 1779322516291,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

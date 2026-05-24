@@ -66,7 +66,8 @@
           "adaptable",
           "crit-1",
           "grapple",
-          "flinch-10"
+          "flinch-10",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -96,13 +97,13 @@
           "adaptable",
           "pass-3",
           "dash",
-          "flinch-25"
+          "flinch-30"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "cost": {
           "activation": "complex",
-          "powerPoints": 1
+          "powerPoints": 6
         },
         "range": {
           "target": "creature",
@@ -115,7 +116,7 @@
         "category": "physical",
         "free": true,
         "predicate": [],
-        "power": 110,
+        "power": 125,
         "accuracy": 90
       }
     ],
@@ -142,7 +143,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -151,7 +152,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "C",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -170,7 +173,8 @@
             "label": "Saber",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -180,7 +184,8 @@
             "label": "Saber Thrust",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -190,7 +195,8 @@
             "label": "Saber Charge",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -200,7 +206,8 @@
             "label": "Saber (Fling)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -214,7 +221,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -226,12 +235,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "lastModifiedBy": "r8rxDx9bzq5ASx3l",
-        "modifiedTime": 1762640671454
-      }
+        "modifiedTime": 1762640671454,
+        "createdTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "KCghcBlfNSfb2ZEk"

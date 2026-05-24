@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's @Trait[sonic] attacks have a 30% chance of inflicting @Affliction[confused] 5.</p><p>When the user would inflict a @Trait[stage-change] effect on a creature, the intensity of that effect is increased by +1 (so a +1 becomes +2, -2 becomes -3, etc.).</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's @Trait[sonic] attacks have a 30% chance of inflicting @Affliction[confused] 5.</p><p>When the user would inflict a @Trait[stage-change] effect on a creature, the intensity of that effect is increased by +1 (so a +1 becomes +2, -2 becomes -3, etc.).</p><p>Note: The label on the effect will not change.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg"
       }
     ],
-    "description": "<p>Effect: The user's @Trait[sonic] attacks have a 30% chance of inflicting @Affliction[confused] 5.</p><p>When the user would inflict a @Trait[stage-change] effect on a creature, the intensity of that effect is increased by +1 (so a +1 becomes +2, -2 becomes -3, etc.).</p>",
+    "description": "<p>Effect: The user's @Trait[sonic] attacks have a 30% chance of inflicting @Affliction[confused] 5.</p><p>When the user would inflict a @Trait[stage-change] effect on a creature, the intensity of that effect is increased by +1 (so a +1 becomes +2, -2 becomes -3, etc.).</p><p>Note: The label on the effect will not change.</p>",
     "traits": [
       "partial-automation"
     ],
@@ -33,7 +34,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "dXiivzK1BguxyL5K",
@@ -53,20 +55,44 @@
             "chance": 30,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "effect-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [],
+            "key": "stage-change-trait-applied",
+            "alterations": [
+              {
+                "method": 2,
+                "property": "system.changes.0.value",
+                "value": 1
+              }
+            ],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -78,13 +104,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1729469347936,
-        "modifiedTime": 1729469370920,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1779005780412,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

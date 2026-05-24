@@ -3,19 +3,21 @@
   "type": "perk",
   "system": {
     "prerequisites": [],
-    "cost": 3,
-    "description": "<p>Your next non-@Trait[contact] attack gains +3 ACC Stages and +2 Crit Stages. This effect expires after any attack is made.</p>",
+    "cost": 4,
+    "description": "<p>The user may spend @PP[-5] as a @Trait[priority-35] Complex Action to use their next Attack with +3 ACC Stages, +2 CRIT Stages, +1 Effectiveness Stage and +10% Base Effect Chance, while granting the user @Affliction[delay 70] on use.</p>",
     "actions": [
       {
         "name": "Dead To Rights",
         "slug": "dead-to-rights",
-        "description": "<p>Your next non-@Trait[contact] attack gains +3 ACC Stages and +2 Crit Stages. This effect expires after any attack is made.</p>",
+        "description": "<p>The user's next Attack has +3 ACC Stages, +2 CRIT Stages, +1 Effectiveness Stage and +10% Base Effect Chance, while granting the user @Affliction[delay 70] on use.</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 10
+          "activation": "complex",
+          "powerPoints": 5
         },
         "type": "generic",
-        "traits": [],
+        "traits": [
+          "priority-35"
+        ],
         "img": "icons/svg/target.svg",
         "range": {
           "target": "self",
@@ -64,7 +66,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "7Uhx4SiJFnFrbhB6",
   "img": "icons/svg/target.svg",
@@ -87,7 +90,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -101,7 +105,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -113,13 +119,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1757852529639,
         "modifiedTime": 1757852548694,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "W85LoOCz3WlwbyhZ"

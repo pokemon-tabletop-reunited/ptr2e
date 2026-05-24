@@ -11,22 +11,21 @@
         ],
         "name": "Shell Shield",
         "slug": "shell-shield",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
           "trigger": "<p>An adjacent ally creature is hit with a Physical or Special-Category Attack.</p>"
         },
         "range": {
-          "target": "ally",
+          "target": "self",
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: An adjacent ally creature targeted with a Physical or Special-Category Attack.</p><p>Effect: The user freely uses Withdraw and then Intercept, designating the triggering ally as their target.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user declares Intercept.<br><br>Effect: Connection - Withdraw. The user freely uses Withdraw and then resolves Intercept.</p>",
+        "img": "icons/creatures/reptiles/turtle-shell-glowing-green.webp"
       }
     ],
-    "description": "<p>Trigger: An adjacent ally creature targeted with a Physical or Special-Category Attack.</p><p>Effect: Connection - Withdraw. The user freely uses Withdraw and then Intercept, designating the triggering ally as their target.</p>",
+    "description": "<p>Trigger: The user declares Intercept.<br><br>Effect: Connection - Withdraw. The user freely uses Withdraw and then resolves Intercept.</p>",
     "traits": [
       "connection",
       "defensive"
@@ -78,7 +77,8 @@
             "inMemoryOnly": false,
             "track": false,
             "replaceSelf": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -92,7 +92,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -104,14 +106,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.2.beta",
         "createdTime": 1737420450840,
         "modifiedTime": 1754321526830,
         "lastModifiedBy": "mK35yvCqCgiTUvKf",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

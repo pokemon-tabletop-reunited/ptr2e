@@ -1,0 +1,78 @@
+{
+  "folder": "fDfAXQXXzkaqpYoa",
+  "name": "Round Trip",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Round Trip",
+        "slug": "round-trip",
+        "description": "<p>Trigger: A creature on the user's Team is targeted by an Attack which does not have the @Trait[danger-close] trait.</p><p>Effect: The user freely targets the triggering creature with @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} and then freely uses @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out} with another creature in their Team, who takes the place of the triggering creature and made the target of the triggering Attack, as per Intercept.</p>",
+        "traits": [
+          "interrupt",
+          "priority-30"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "round-trip",
+    "description": "<p>Effect: When a creature on the user's Team is targeted by an Attack that lacks the @Trait[danger-close] trait, the user may, as a Complex Action @Trait[interrupt] at @Trait[priority-30], freely target that creature with @UUID[Compendium.ptr2e.core-moves.MXPyYtoPDsZ4ByPh]{Recall} and then freely use @UUID[Compendium.ptr2e.core-moves.XJ6olVrexEHDTqTM]{Send Out} with another creature in their Team, who takes take place of the triggering creature and is made the target of the triggering Attack, as per Intercept.</p>",
+    "traits": [],
+    "prerequisites": [
+      "item:perk:quick-switch"
+    ],
+    "autoUnlock": [],
+    "cost": 3,
+    "design": {
+      "arena": null,
+      "approach": null,
+      "archetype": null
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 16,
+        "y": 128,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "quick-switch",
+          "emergency-retreat"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "_id": "x4FjT0gpWEpCTQu1",
+  "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+  "effects": [],
+  "flags": {}
+}

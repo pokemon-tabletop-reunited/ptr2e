@@ -22,9 +22,7 @@
       }
     ],
     "description": "<p>Effect: The user's SPD stat is increased by 50%. Whenever the user uses an attack, that attack is @Affliction[choice-locked 5] (this effect does not stack).</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "slug": "serpent-trick",
     "_migration": {
       "version": null,
@@ -53,8 +51,27 @@
             "value": 0.5,
             "predicate": [],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.choicelockedcond",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "effect:choice-locked"
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -68,7 +85,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -79,14 +98,18 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1729470571391,
-        "modifiedTime": 1762903820398,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO",
+        "modifiedTime": 1778975237432,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }
