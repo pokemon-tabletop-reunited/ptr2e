@@ -16,9 +16,23 @@
         <input type="radio" name="{{basePath}}.remove" value="Oldest" {{#if (is change.remove 'Oldest')}}checked{{/if}} />
         <label>{{localize "PTR2E.Effect.FIELDS.RemoveEffect.Oldest"}}</label>
       </div>
+      <div>
+        <input type="radio" name="{{basePath}}.remove" value="Stacks" {{#if (is change.remove 'Stacks')}}checked{{/if}} />
+        <label>{{localize "PTR2E.Effect.FIELDS.RemoveEffect.Stacks"}}</label>
+      </div>
     </div>
     <p class="hint">{{localize "PTR2E.Effect.FIELDS.RemoveEffect.hint"}}</p>
 </div>
+
+{{#if (is change.remove 'Stacks')}}
+  <div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.Stacks.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.value" value="{{change.value}}" />
+    </div>
+    <p class="hint">{{localize "PTR2E.Effect.FIELDS.Stacks.hint"}}</p>
+  </div>
+{{/if}}
 
 <div class="form-group">
     <label class="short">{{localize fields.predicate.label}}</label>
