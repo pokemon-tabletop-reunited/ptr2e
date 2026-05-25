@@ -61,7 +61,7 @@
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.8GlD03CzKP8ofSE4",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.8GlD03CzKP8ofSE4",
                 "affects": "enemies",
                 "events": [
                   "enter"
@@ -84,7 +84,8 @@
               "texture": null
             },
             "mergeExisting": true,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-option",
@@ -99,7 +100,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -113,7 +115,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -124,8 +128,18 @@
       "flags": {},
       "_stats": {
         "compendiumSource": null,
-        "duplicateSource": null
-      }
+        "duplicateSource": null,
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779617173674,
+        "modifiedTime": 1779617173674,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

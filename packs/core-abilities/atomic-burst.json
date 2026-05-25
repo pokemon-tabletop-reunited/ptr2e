@@ -21,40 +21,13 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>The user is hit by a super effective Attack or by a Critical Hit.</p><p>Effect: The user freely uses Gamma Ray.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "gamma-ray",
-        "name": "Gamma Ray",
-        "type": "attack",
-        "traits": [
-          "ray"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 5,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 1
-        },
-        "category": "special",
-        "power": 35,
-        "accuracy": 100,
-        "types": [
-          "nuclear"
-        ],
-        "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
+        "description": "<p>Trigger: The user is hit by a @Trait[contact] attack.</p><p>Effect: The attacker suffers @Tick[-2] and -1 Special Attack for 5 activations, unless shielded.</p>",
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg"
       }
     ],
-    "description": "<p>The user is hit by a super effective Attack or by a Critical Hit.</p><p>Effect: Connection - Gamma Ray. The user freely uses Gamma Ray.</p>",
+    "description": "<p>Trigger: The user is hit by a @Trait[contact] attack.</p><p>Effect: The attacker suffers @Tick[-2] and -1 Special Attack for 5 activations, unless shielded.</p>",
     "traits": [
-      "defensive",
-      "connection"
+      "defensive"
     ],
     "slug": "atomic-burst",
     "_migration": {
@@ -75,28 +48,22 @@
       "name": "Atomic Burst",
       "type": "passive",
       "_id": "m92XAt5vEzXdM8AF",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
       "system": {
         "changes": [
           {
-            "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.WVPzbqV4kQo9e29K",
-            "predicate": [
-              "ability:atomic-burst:active"
-            ],
-            "allowDuplicate": false,
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.7lE4m5eWaezOeW1q",
+            "phase": "initial",
+            "predicate": [],
+            "key": "contact-trait-attack",
+            "affects": "origin",
             "alterations": [],
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "reevaluateOnUpdate": true,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "chance": 100,
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -110,7 +77,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -123,13 +92,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1754316775050,
-        "modifiedTime": 1754316808266,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779630540255,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "folder": "0nG9TRDSwrmcTFwO"

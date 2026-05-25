@@ -61,7 +61,7 @@
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.AUlSkFUziUM3nxww",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.AUlSkFUziUM3nxww",
                 "affects": "allies",
                 "events": [
                   "enter"
@@ -86,7 +86,8 @@
               "texture": null
             },
             "mergeExisting": true,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-option",
@@ -101,7 +102,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -115,7 +117,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -127,14 +131,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.CzvgRhfvDuRjrtA1.ActiveEffect.WPH789V0rRrGKYvw",
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.3.8.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1741605625285,
-        "modifiedTime": 1752340875722,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1779616907295,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
