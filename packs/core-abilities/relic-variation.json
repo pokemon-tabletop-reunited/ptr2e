@@ -6,41 +6,39 @@
     "actions": [
       {
         "traits": [
-          "legendary"
+          "legendary",
+          "flinch-40"
         ],
         "name": "Relic Variation",
         "slug": "relic-variation",
         "type": "generic",
         "cost": {
-          "activation": "free",
-          "trigger": "<p>The user resolves Relic Dance.</p>"
+          "activation": "simple"
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Trigger: The user resolves Relic Dance.</p><p>Effect: The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user changes to Aria Forme.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Coordinator.svg"
       },
       {
         "traits": [
           "legendary"
         ],
-        "name": "Relic Variation (Active)",
-        "slug": "relic-variation-active",
+        "name": "Relic Variation (Relic Dance)",
+        "slug": "relic-variation-relic-dance",
         "type": "generic",
         "cost": {
-          "activation": "simple",
-          "powerPoints": 4
+          "activation": "free",
+          "trigger": "The user resolves Relic Dance."
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Effect: The user transforms into its Aria Forme.",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user resolves Relic Dance.</p><p>Effect: The user changes to Aria Forme.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Coordinator.svg"
       },
       {
         "traits": [
@@ -54,14 +52,13 @@
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Effect: The user transforms into its Aria Forme.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user changes to Aria Forme.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Coordinator.svg"
       }
     ],
-    "description": "<p>Trigger: The user resolves Relic Dance</p><p>Effect: Connection - Relic Dance. The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Capoeira and Benevolent Gift",
+    "description": "<p>Connection - @UUID[Compendium.ptr2e.core-moves.1XrF5LK5RjlKyxAf]{Relic Dance}. When the user resolves Relic Dance, they may change to Aria Forme. The user may also change to Aria Forme as either a Simple Action at @Trait[flinch-40], or as a Downtime Action.</p><p>Connected Abilities - @UUID[Compendium.ptr2e.core-abilities.ziFVuKuam7P7iQIP]{Capoeira} and @UUID[Compendium.ptr2e.core-abilities.nd13aGOF1kCz8BdM]{Sidestep}.</p>",
     "traits": [
       "legendary",
       "connection"
@@ -90,16 +87,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.1XrF5LK5RjlKyxAf",
             "predicate": [
               "ability:relic-variation:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -109,24 +105,25 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
           },
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.ziFVuKuam7P7iQIP",
             "predicate": [
               "ability:relic-variation:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -136,24 +133,25 @@
             },
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
           },
           {
             "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-abilities.Item.ne1QgdwhvAXeeaX8",
+            "value": "Compendium.ptr2e.core-abilities.Item.nd13aGOF1kCz8BdM",
             "predicate": [
               "ability:relic-variation:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -163,11 +161,13 @@
             },
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
           }
         ],
         "slug": null,
@@ -181,7 +181,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -193,14 +195,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1737419769520,
-        "modifiedTime": 1754321113240,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779898848951,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

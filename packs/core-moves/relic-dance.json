@@ -10,10 +10,10 @@
         "name": "Relic Dance",
         "type": "attack",
         "traits": [
-          "legendary",
           "dance",
-          "pass-6",
-          "push-2"
+          "pass-4",
+          "dash",
+          "legendary"
         ],
         "range": {
           "target": "creature",
@@ -22,7 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 75,
@@ -31,7 +31,7 @@
           "fighting"
         ],
         "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter 7] and @Affliction[confused 7].</p>",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
         "predicate": []
       }
     ],
@@ -45,7 +45,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "1XrF5LK5RjlKyxAf",
@@ -73,7 +74,10 @@
             ],
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -91,19 +95,26 @@
             ],
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -115,13 +126,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737743840886,
         "modifiedTime": 1737743905417,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
