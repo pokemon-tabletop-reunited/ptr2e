@@ -7,7 +7,48 @@
       "version": 0.111,
       "previous": null
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Mirror Herb (Combat)",
+        "slug": "mirror-herb-action-1",
+        "description": "<p>Trigger: An enemy creature in range gains a @Trait[stage-change] effect.<br><br>Effect: The user gains the same @Trait[stage-change] effect.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "interrupt"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      },
+      {
+        "name": "Mirror Herb (Camp)",
+        "slug": "mirror-herb-camp",
+        "description": "<p>Camp: The user may consume this item to immediately learn 1 move for which they are eligible for tutoring from a valid source creature.</p>",
+        "traits": [
+          "combat",
+          "consumable",
+          "camp"
+        ],
+        "type": "downtime",
+        "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
     "crafting": {
       "skill": "",
       "spans": null,
@@ -47,10 +88,11 @@
     ],
     "consumableType": "other",
     "stack": 1,
-    "cost": 5
+    "cost": 5,
+    "slug": "mirror-herb",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
   "effects": [],
-  "flags": {},
   "_id": "c0C3c9bEXwiWXplC"
 }
