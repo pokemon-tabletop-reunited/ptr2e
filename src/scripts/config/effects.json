@@ -304,25 +304,34 @@
         },
         {
           "type": "ephemeral-modifier",
-          "key": "attack-damage-percentile",
-          "value": -33.33,
+          "key": "action-accuracy-percentile",
+          "value": 30,
           "predicate": [],
           "method": 2,
           "ignored": false,
           "hideIfDisabled": false
         },
         {
-            "type": "basic",
-            "key": "system.modifiers.effectResistance",
-            "value": 33,
-            "predicate": [],
-            "ignored": false,
-            "method": 2
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": -33,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": 33,
+          "predicate": [],
+          "ignored": false,
+          "method": 2
         },
         {
           "type": "basic",
           "key": "system.modifiers.speMultiplier",
-          "value": "@actor.system.modifiers.speMultiplier*0.7",
+          "value": "@actor.system.modifiers.speMultiplier*0.6",
           "phase": "initial",
           "predicate": [],
           "method": 2,
