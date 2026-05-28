@@ -1,0 +1,57 @@
+{
+  "name": "Angry Buzz (Aura Effect)",
+  "type": "passive",
+  "_id": "KvzgWgu9aZP1P2uQ",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "system": {
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "bug-attack-power",
+        "value": 20,
+        "predicate": [],
+        "label": "Angry Buzz",
+        "priority": null,
+        "phase": "initial",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [],
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 20
+          }
+        ],
+        "key": "bug-attack",
+        "method": 2,
+        "ignored": false
+      }
+    ],
+    "traits": [],
+    "removeAfterCombat": true
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": null,
+    "expiry": null,
+    "expired": false
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": false,
+  "statuses": [],
+  "flags": {},
+  "start": null,
+  "showIcon": 1,
+  "folder": "sP8yfpABdpdAz4aV"
+}

@@ -72,7 +72,7 @@
         "predicate": []
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever the user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever the user uses Haze, they can spend @PP[-2] to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>",
     "traits": [
       "connection"
     ],
@@ -100,16 +100,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.eaBKFWmCB4ZeKP2k",
             "predicate": [
               "ability:curious-medicine:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -119,11 +118,63 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} enters combat and may use {item|link}!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "key": "haze-allies",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "stage-change-trait"
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "key": "haze-foes",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "stage-change-trait"
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -137,7 +188,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -149,14 +202,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1737395811820,
-        "modifiedTime": 1754317466692,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779558845560,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
