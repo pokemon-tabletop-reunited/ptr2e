@@ -76,16 +76,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.jKO1iK8Z81n7LQXt",
             "predicate": [
               "ability:lets-roll:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -95,11 +94,57 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.curledcondition0",
+            "phase": "initial",
+            "predicate": [],
+            "key": "defense-curl-rolled",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 9
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "defense-curl-rolled",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.NKwlORX98U7JMiNa.Actions.defense-curl-rolled] or @UUID[Compendium.ptr2e.core-moves.Item.jKO1iK8Z81n7LQXt]",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -113,7 +158,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -125,14 +172,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737403995872,
-        "modifiedTime": 1754319347544,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779381570273,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

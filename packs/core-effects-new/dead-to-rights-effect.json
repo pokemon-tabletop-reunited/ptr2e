@@ -9,28 +9,72 @@
         "type": "stage-modifier",
         "key": "attack-accuracy",
         "value": 3,
-        "predicate": [
-          {
-            "not": "trait:contact"
-          }
-        ],
-        "label": "Dead To Rights (Acc)",
+        "predicate": [],
+        "label": "Dead To Rights (Accuracy)",
+        "phase": "initial",
+        "method": 2,
         "ignored": false,
-        "hideIfDisabled": false,
-        "method": 2
+        "hideIfDisabled": false
       },
       {
         "type": "stage-modifier",
         "key": "attack-crit",
         "value": 2,
-        "predicate": [
+        "predicate": [],
+        "phase": "initial",
+        "label": "Dead To Rights (CRIT)",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      },
+      {
+        "type": "stage-modifier",
+        "value": 1,
+        "phase": "initial",
+        "predicate": [],
+        "key": "attack-effectiveness",
+        "label": "Dead To Rights (Effectiveness)",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.dVXsQ55hDouadYkE",
+        "phase": "initial",
+        "predicate": [],
+        "affects": "self",
+        "alterations": [
           {
-            "not": "trait:contact"
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 10
           }
         ],
-        "ignored": false,
-        "hideIfDisabled": false,
-        "method": 2
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+        "phase": "initial",
+        "predicate": [],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.amount",
+            "value": -70
+          }
+        ],
+        "dontMerge": true,
+        "key": "attack",
+        "label": "Dead To Rights (Delay)",
+        "method": 2,
+        "ignored": false
       }
     ],
     "slug": null,

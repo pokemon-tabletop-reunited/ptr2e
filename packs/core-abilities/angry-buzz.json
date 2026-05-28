@@ -21,16 +21,15 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all creatures within Range increase the Power of their Bug-Type attacks by 20%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user and all allies within Range increase the Power & EHR of their @Trait[bug]-Type attacks by 20%.</p>",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user and all creatures within Range increase the Power of their Bug-Type attacks by 20%.</p>",
+    "description": "<p>Effect: The user and all allies within Range increase the Power & EHR of their @Trait[bug]-Type attacks by 20%.</p>",
     "traits": [
       "domain",
       "aura",
-      "bug",
-      "partial-automation"
+      "bug"
     ],
     "slug": "angry-buzz",
     "_migration": {
@@ -41,59 +40,12 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "1JEBnsWeesg69281",
   "effects": [
-    {
-      "name": "Angry Buzz",
-      "type": "passive",
-      "_id": "KvzgWgu9aZP1P2uQ",
-      "img": "systems/ptr2e/img/svg/bug_icon.svg",
-      "system": {
-        "changes": [
-          {
-            "type": "percentile-modifier",
-            "key": "bug-attack-power",
-            "value": 20,
-            "predicate": [],
-            "label": "Angry Buzz",
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          }
-        ],
-        "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "stacks": 0
-      },
-      "disabled": false,
-      "duration": {
-        "units": "turns",
-        "value": null
-      },
-      "description": "",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.1JEBnsWeesg69281.ActiveEffect.KvzgWgu9aZP1P2uQ",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
-        "createdTime": 1722257775308,
-        "modifiedTime": 1732924515855,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
-    },
     {
       "name": "Angry Buzz (Aura)",
       "type": "passive",
@@ -105,23 +57,23 @@
             "type": "aura",
             "key": "",
             "value": 0,
-            "predicate": [],
+            "predicate": [
+              "angry:buzz"
+            ],
             "priority": null,
             "ignored": false,
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.aK2o7uxDcLpIfTib",
-                "affects": "all",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.KvzgWgu9aZP1P2uQ",
+                "affects": "allies",
                 "events": [
                   "enter"
                 ],
                 "removeOnExit": true,
-                "includesSelf": false,
+                "includesSelf": true,
                 "appliesSelfOnly": false,
-                "predicate": [
-                  "target:trait:bug"
-                ]
+                "predicate": []
               }
             ],
             "appearance": {
@@ -136,19 +88,40 @@
               "texture": null
             },
             "mergeExisting": true,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "roll-option",
+            "value": "angry:buzz",
+            "phase": "initial",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "label": "Angry Buzz",
+            "state": true,
+            "alwaysActive": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -160,13 +133,17 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.6o74KpM7eBLJij3Z.ActiveEffect.lckjHwpi6p660QfP",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.0",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1736370258125,
-        "modifiedTime": 1736370294501,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1779572194369,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

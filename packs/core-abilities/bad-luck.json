@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user cannot be hit with Critical Hits. Luck cannot be spent on Actions targeting the user, and attacks targeting the user have -5 Accuracy.</p>",
+        "description": "<p>Effect: The user is immune to Critical Hits. Luck cannot be spent on Actions targeting the user, and attacks targeting the user have -5 Accuracy.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user cannot be hit with Critical Hits. Luck cannot be spent on Actions targeting the user, and attacks targeting the user have -5 Accuracy.</p>",
+    "description": "<p>Effect: The user is immune to Critical Hits. Luck cannot be spent on Actions targeting the user, and attacks targeting the user have -5 Accuracy.</p>",
     "traits": [
       "defensive",
       "partial-automation"
@@ -48,6 +48,20 @@
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "crit-immune",
+            "predicate": [],
+            "domain": "self",
+            "toggleable": false,
+            "count": false,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true,
+            "method": 2
+          },
           {
             "type": "ephemeral-modifier",
             "key": "attack-accuracy",

@@ -11,21 +11,21 @@
         ],
         "name": "Fungal Infection",
         "slug": "fungal-infection",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
           "trigger": "<p>The user hits at least one creature with a [Contact] attack.</p>"
         },
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Trigger: The user hits at least one creature with a [Contact] attack.</p><p>Effect: On hit, all valid targets have a 10% chance to be afflicted with @Affliction[leech 5].</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "systems/ptr2e/img/item-icons/big%20mushroom.webp"
       }
     ],
-    "description": "<p>Trigger: The user hits at least one creature with a [Contact] attack.</p><p>Effect: On hit, all valid targets have a 10% chance to be afflicted with @Affliction[leech 5].</p>",
+    "description": "<p>Trigger: The user hits a creature with a [Contact] attack.</p><p>Effect: The targeted creature has a 20% chance to be afflicted with @Affliction[leech 5].</p>",
     "traits": [],
     "slug": "fungal-infection",
     "_migration": {
@@ -36,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "FpiBFeiGByzPYTwM",
@@ -53,23 +54,31 @@
             "key": "contact-trait-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.leechcondition00",
             "predicate": [],
-            "chance": 10,
+            "chance": 20,
             "affects": "target",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -81,13 +90,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1729418239903,
-        "modifiedTime": 1729418269493,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778978465724,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

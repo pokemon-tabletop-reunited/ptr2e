@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "contingency-hex",
-    "description": "<p>Effect: The user gains Cursed Body as a Tutored Ability.</p>",
+    "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-abilities.Item.rIKiInEzes5D9bVC]{Cursed Body} as a Tutored Ability.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:hexcraft",
@@ -40,18 +40,22 @@
       {
         "x": 168,
         "y": 58,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "hexcraft",
           "dimensional-scream"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Occultism.svg",
   "effects": [
@@ -79,19 +83,24 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -103,16 +112,18 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null,
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
-  "flags": {},
   "_id": "KqftmY17o4LtStCs"
 }

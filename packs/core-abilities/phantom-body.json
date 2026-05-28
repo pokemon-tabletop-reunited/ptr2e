@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: Increases the Damage of the user's Ghost-Type attacks by 50%.</p>",
         "img": "icons/svg/explosion.svg"
@@ -37,7 +38,8 @@
         "img": "icons/svg/explosion.svg",
         "range": {
           "target": "enemy",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
@@ -55,7 +57,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "vXvFp7PqPkhPr0zX",
@@ -74,50 +77,66 @@
             "predicate": [],
             "label": "Phantom Body",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
-            "type": "ephemeral-modifier",
+            "type": "roll-option",
             "key": "fighting-attack-damage-percent",
-            "value": -100,
+            "value": "trait:normal",
             "predicate": [],
             "priority": null,
+            "phase": "initial",
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "suboptions": [],
+            "state": true
           },
           {
-            "type": "ephemeral-modifier",
+            "type": "roll-option",
             "key": "normal-attack-damage-percent",
-            "value": -100,
+            "value": "trait:fighting",
             "predicate": [],
             "priority": null,
+            "phase": "initial",
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "suboptions": [],
+            "state": true
           },
           {
             "type": "add-trait",
-            "key": "",
             "value": "Ghost",
             "predicate": [],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -129,13 +148,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.0.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1722260902553,
-        "modifiedTime": 1732573141329,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778979428781,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

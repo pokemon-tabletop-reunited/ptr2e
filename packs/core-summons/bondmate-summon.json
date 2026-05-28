@@ -1,0 +1,122 @@
+{
+  "name": "Bondmate (Summon)",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Fox"
+      ],
+      "notes": ""
+    },
+    "traits": [
+      "summon",
+      "ranger"
+    ],
+    "actions": [
+      {
+        "name": "Bondmate",
+        "slug": "bondmate",
+        "traits": [
+          "tank",
+          "summon",
+          "ranger"
+        ],
+        "type": "summon",
+        "img": "icons/magic/defensive/armor-green-hex.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "types": [
+          "dragon"
+        ],
+        "category": "status",
+        "predicate": [],
+        "targetType": "target",
+        "damageType": "power",
+        "attackStat": "owner"
+      }
+    ],
+    "baseAV": 90,
+    "duration": 3
+  },
+  "_id": "4LTYjzwsQde6lytE",
+  "img": "icons/magic/defensive/armor-green-hex.webp",
+  "effects": [
+    {
+      "name": "Bondmate",
+      "type": "passive",
+      "_id": "H9tcWCnn88zd83cp",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "key": "bondmate-summon",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778073003077,
+        "modifiedTime": 1778073003077,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {}
+}

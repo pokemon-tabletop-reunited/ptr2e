@@ -6,10 +6,12 @@
     "slug": "sand-attack",
     "actions": [
       {
-        "slug": "sand-attack",
+        "slug": "sand-atk",
         "name": "Sand Attack",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "basic"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -29,7 +31,7 @@
         "predicate": []
       },
       {
-        "slug": "sand-attack-dusty",
+        "slug": "sand-a-dusty",
         "name": "Sand Attack (Dusty)",
         "type": "attack",
         "traits": [
@@ -82,7 +84,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "sand-attack-attack",
+            "key": "sand-atk-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.wA5oCsgHmZLcHHSn",
             "predicate": [],
             "chance": 100,
@@ -94,7 +96,7 @@
           },
           {
             "type": "roll-effect",
-            "key": "sand-attack-dusty-attack",
+            "key": "sand-a-dusty-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.RVIdzfbF4xwy2qLq",
             "predicate": [],
             "chance": 100,

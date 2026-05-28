@@ -445,6 +445,17 @@ class CheckPTR2e {
             // Always show the note if the check has no DC or no outcome is specified
             return true;
           }) ?? [];
+
+      // Add crit immunity note if applicable
+      if((degrees.crit?.value ?? 0) > 0 && targetContext.options.has("target:crit-immune")) {
+        const note = new RollNote({
+          text: `${targetContext.target?.actor?.link ?? targetContext.target?.actor?.name ?? targetContext.target?.token?.name ?? "Target"} is immune to critical hits, turning this attack into a regular hit.`,
+          selector: "crit",
+        });
+        notes.push(note);
+        targetContext.notes?.push(note);
+      }
+
       const notesList = RollNote.notesToHTML(notes);
 
       for (const effectRoll of targetContext.effectRolls.origin) {

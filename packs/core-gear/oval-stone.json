@@ -54,7 +54,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/item-icons/oval%20stone.webp",
   "effects": [
@@ -67,7 +68,6 @@
         "changes": [
           {
             "type": "stats-alteration",
-            "key": "",
             "value": 0,
             "predicate": [
               {
@@ -84,12 +84,14 @@
             "spa": null,
             "spd": null,
             "spe": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "lift-check",
+            "type": "basic",
+            "key": "system.skills.lift.value",
             "value": 30,
             "predicate": [
               {
@@ -101,9 +103,9 @@
               }
             ],
             "label": "Oval Stone",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -117,7 +119,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -129,13 +133,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.7.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1766206210402,
-        "modifiedTime": 1766206370220,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+        "modifiedTime": 1778164146549,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "7Z3vDgjEyOCWlrlX"

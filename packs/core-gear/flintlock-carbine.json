@@ -35,8 +35,7 @@
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "range": {
           "target": "creature",
@@ -46,11 +45,13 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
-        "defensiveStat": "def",
+        "category": "physical",
         "predicate": [],
         "power": 90,
-        "accuracy": 80
+        "accuracy": 80,
+        "description": "<p>Ammo Use: 1</p>",
+        "free": true,
+        "offensiveStat": "spa"
       }
     ],
     "description": "<p>Flintlock is a general term for any firearm that uses a flint-striking ignition mechanism, replacing earlier firearm-ignition technologies, such as the matchlock and the wheellock. Flintlock weapons were commonly used until they were superceded by percussion lock systems. A carbine is merely a shortened musket, designed for cavalry use, though most cavalry of the era find them a poor substitute for a saber or lance, and infantry (mounted or no) would prefer a musket.</p>",
@@ -76,7 +77,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "uncommon",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -85,7 +86,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "B",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -104,7 +107,8 @@
             "label": "Shot",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -118,7 +122,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -130,13 +136,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "S0tnoLhWJSEXG9ua"
 }

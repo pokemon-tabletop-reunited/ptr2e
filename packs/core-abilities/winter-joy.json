@@ -19,11 +19,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: In Snowy Weather, or \"winter months\" in-game, the user's ATK and SPATK stats are increased by 50%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: In Snowy Weather, the user's ATK and SPATK stats are increased by 50%.</p>",
+        "img": "icons/magic/air/weather-clouds-rainbow.webp"
       }
     ],
-    "description": "<p>Effect: In Snowy Weather, or \"winter months\" in-game, the user's ATK and SPATK stats are increased by 50%.</p>",
+    "description": "<p>Effect: In Snowy Weather,  the user's ATK and SPATK stats are increased by 50%.</p>",
     "traits": [
       "environ"
     ],
@@ -57,7 +57,8 @@
               "effect:summon:snowy-weather"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -67,7 +68,8 @@
               "effect:summon:snowy-weather"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -81,7 +83,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -93,13 +97,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1748106028013,
         "modifiedTime": 1762904062648,
         "lastModifiedBy": "5ImYyhOS2D6D7ypO"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

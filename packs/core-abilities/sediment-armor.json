@@ -12,21 +12,21 @@
         ],
         "name": "Sediment Armor",
         "slug": "sediment-armor",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
           "trigger": "<p>The user resolves a Ground-Type attack.</p>"
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Trigger: The user resolves a Ground-Type attack</p><p>Effect: The user gains @Affliction[resolved 2].</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user resolves a Ground-Type attack</p><p>Effect: The user gains @Affliction[resolved 2] & @Affliction[hale 2].</p>",
+        "img": "systems/ptr2e/img/svg/ground_icon.svg"
       }
     ],
-    "description": "<p>Trigger: The user resolves a Ground-Type attack</p><p>Effect: The user gains @Affliction[resolved 2].</p>",
+    "description": "<p>Trigger: The user resolves a Ground-Type attack</p><p>Effect: The user gains @Affliction[resolved 2] & @Affliction[hale 2].</p>",
     "traits": [
       "strategist",
       "ground"
@@ -40,7 +40,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "oBJ0un1HW7fVupi4",
@@ -60,20 +61,43 @@
             "chance": 100,
             "affects": "self",
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "ground-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.halecondition000",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,13 +109,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1729470492774,
-        "modifiedTime": 1729470514731,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1779375648618,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

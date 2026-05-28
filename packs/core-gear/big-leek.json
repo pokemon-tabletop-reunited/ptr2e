@@ -17,17 +17,18 @@
     "traits": [
       "weapon",
       "farfetchd",
-      "set-up"
+      "sirfetchd",
+      "natural"
     ],
     "actions": [
       {
-        "name": "Leeky Iajitsu (Set-Up)",
-        "slug": "leeky-iajitsu-set-up",
-        "description": "<p>The user gains @UUID[Compendium.ptr2e.core-effects.iv1l5qSwT9ykajV0]{+1 Accuracy Stage} for 5 activations and becomes @UUID[Compendium.ptr2e.core-effects.xhI2IzUDSXy4Y42z]{Amped}.</p>",
+        "name": "Leeky Iai (Set-Up)",
+        "slug": "leeky-iai-set-up",
+        "description": "<p>Effect: The user gains @UUID[Compendium.ptr2e.core-effects-new.ActiveEffect.Smwu5LWbBYgjUmPc]{+2 ACC Stages} for 2 Activations and @Affliction[braced 2].</p>",
         "traits": [
           "weapon",
-          "farfetchd",
-          "priority-20"
+          "defensive",
+          "flinch-60"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
@@ -40,43 +41,84 @@
           "unit": "m"
         },
         "types": [
-          "untyped"
+          "fighting",
+          "flying"
         ],
         "category": "status",
         "free": true,
         "predicate": []
       },
       {
-        "name": "Leeky Iajitsu (Resolution)",
-        "slug": "leeky-iajitsu-resolution",
-        "description": "<p>Trigger: This action may be activated early if the user is attacked after Setting Up.<br><br>Effect: The user may move up to half their Overland Movement Allowance freely and attack a nearby target. If used as an interrupt, must attack the creature attacking you.<br><br>If the target gains @Affliction[fainted] due to damage from this Attack, the triggering attack fails.</p>",
+        "name": "Leeky Iai (Interrupt)",
+        "slug": "leeky-iai-interrupt",
+        "description": "<p>Trigger: The user used Leeky Iai (Set-Up) as their last Action, and is targeted by an Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the triggering target and then attacks with this Attack. If the target gains @Affliction[fainted] due to damage from this Attack, the triggering attack fails. On a Critical Hit, the target gains @Affliction[delay 30] and gains @Affliction[suppressed 3].</p>",
         "traits": [
           "weapon",
-          "farfetchd",
           "set-up",
-          "interrupt",
-          "crit-2",
           "contact",
-          "flinch-30"
+          "sharp",
+          "interrupt",
+          "pass-0",
+          "crit-1",
+          "dash"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3
+          "powerPoints": 3,
+          "trigger": "The user used Leeky Iai (Set-Up) as their last Action, and  is targeted by an Attack."
         },
         "range": {
           "target": "creature",
-          "distance": 1,
-          "unit": "m"
+          "unit": "m",
+          "distance": 1
         },
         "types": [
           "fighting",
-          "grass"
+          "flying"
         ],
         "category": "physical",
         "predicate": [],
-        "power": 125,
+        "variant": "leeky-iai-set-up",
+        "power": 100,
+        "accuracy": 85
+      },
+      {
+        "name": "Leeky Iai (Resolution)",
+        "slug": "leeky-iai-set-upb9ezgld3u-ntgs-g5g",
+        "description": "<p>Trigger: The user used Leeky Iai (Set-Up) as their last Action.</p><p>Effect: The user can freely move up to the Movement Score of their choice and attacks with this Attack. On a Critical Hit, the target gains @Affliction[delay 40], @Affliction[fear 3], @Affliction[hindered 3], and has a 25% chance of losing @Tick[-3].</p>",
+        "traits": [
+          "weapon",
+          "set-up",
+          "contact",
+          "sharp",
+          "pass-2",
+          "priority-30",
+          "dash",
+          "crit-1"
+        ],
+        "type": "attack",
+        "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "The user used Leeky Iai (Set-Up) as their last Action."
+        },
+        "range": {
+          "target": "creature",
+          "unit": "m",
+          "distance": 1
+        },
+        "types": [
+          "fighting",
+          "flying"
+        ],
+        "category": "physical",
+        "free": true,
+        "predicate": [],
+        "variant": "leeky-iai-set-up",
+        "power": 160,
         "accuracy": 100
       }
     ],
@@ -113,7 +155,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "slug": "big-leek",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/item-icons/rare%20leek.webp",
   "effects": [
@@ -126,37 +170,72 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "leeky-iajitsu-set-up",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.iv1l5qSwT9ykajV0",
-            "predicate": [],
+            "key": "leeky-iai-set-up-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.Smwu5LWbBYgjUmPc",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:farfetchd",
+                  "item:species:sirfetchd"
+                ]
+              }
+            ],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
-            "alterations": [],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "leeky-iajitsu-set-up",
-            "value": "Compendium.ptr2e.core-effects.Item.xhI2IzUDSXy4Y42z",
-            "predicate": [],
+            "key": "leeky-iai-set-up-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bracedcondition0",
+            "predicate": [
+              {
+                "or": [
+                  "item:species:farfetchd",
+                  "item:species:sirfetchd"
+                ]
+              }
+            ],
             "chance": 100,
             "isFixedChance": true,
             "affects": "self",
-            "alterations": [],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 2
+              }
+            ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.lAcCSoZ34eDzVLmb",
-            "predicate": [],
+            "predicate": [
+              {
+                "or": [
+                  "item:species:farfetchd",
+                  "item:species:sirfetchd"
+                ]
+              }
+            ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
                 "value": "true",
                 "method": 5
@@ -166,13 +245,135 @@
               "grantee": "detach",
               "granter": "cascade"
             },
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "phase": "initial",
+            "predicate": [],
+            "key": "leeky-iai-interrupt-attack-crit",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": -30
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.suppressedcondit",
+            "phase": "initial",
+            "predicate": [],
+            "key": "leeky-iai-interrupt-attack-crit",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "phase": "initial",
+            "predicate": [],
+            "key": "leeky-iai-resolution-attack-crit",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": -40
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.fearcondition000",
+            "phase": "initial",
+            "predicate": [],
+            "key": "leeky-iai-resolution-attack-crit",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hinderedconditio",
+            "phase": "initial",
+            "predicate": [],
+            "key": "leeky-iai-resolution-attack-crit",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hinderedconditio",
+            "phase": "initial",
+            "predicate": [],
+            "key": "leeky-iai-resolution-attack-crit",
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": -3
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -186,7 +387,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -198,15 +401,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.348",
+        "coreVersion": "14.359",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.4.beta",
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
-        "modifiedTime": 1759315941267
+        "systemVersion": "1.7.2.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "modifiedTime": 1775578294842,
+        "createdTime": 1775572256802
       },
-      "showIcon": 2
+      "showIcon": 0,
+      "start": null,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "555g9lcczf4liTbC"
 }

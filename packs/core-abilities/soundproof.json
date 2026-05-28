@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is immune to the damage and effects of [Sonic] Actions and Attacks.</p>",
         "img": "icons/svg/explosion.svg"
@@ -24,8 +25,7 @@
     ],
     "description": "<p>Effect: The user is immune to the damage and effects of [Sonic] Actions and Attacks.</p>",
     "traits": [
-      "defensive",
-      "partial-automation"
+      "defensive"
     ],
     "slug": "soundproof",
     "_migration": {
@@ -36,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "Rvu4BklCGJmPB6cf",
@@ -49,26 +50,34 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "sonic-trait-attack-damage-percentile",
-            "value": -100,
+            "type": "roll-option",
+            "value": "trait:sonic",
+            "phase": "initial",
             "predicate": [],
-            "priority": null,
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -80,13 +89,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737568944899,
-        "modifiedTime": 1737568974700,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778976724640,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

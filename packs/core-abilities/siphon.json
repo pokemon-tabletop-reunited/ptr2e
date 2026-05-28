@@ -13,7 +13,6 @@
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
           "trigger": "<p>The user hits with a [Contact] attack.</p>"
         },
         "range": {
@@ -68,7 +67,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -82,7 +82,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -94,13 +96,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765285634047,
         "modifiedTime": 1765285670220,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

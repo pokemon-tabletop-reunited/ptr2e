@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: The user's @Trait[missile] attacks gain @Trait[priority-2] or [Priority X+2].</p>",
+        "description": "<p>Effect: The user's @Trait[missile] attacks gain @Trait[priority-20] or have their @Trait[priority-xy] trait increase by 20.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's @Trait[missile] attacks gain @Trait[priority-2] or [Priority X+2].</p>",
+    "description": "<p>Effect: The user's @Trait[missile] attacks gain @Trait[priority-20] or have their @Trait[priority-xy] trait increase by 20.</p>",
     "traits": [],
     "slug": "quick-draw",
     "_migration": {
@@ -61,19 +62,25 @@
             ],
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,14 +92,17 @@
       "_stats": {
         "compendiumSource": "Actor.XMvKhKU2wT1KaqEG.Item.JLLXjz8iXmJXERiZ.ActiveEffect.GoqKyTjXpVMAzHXR",
         "duplicateSource": null,
-        "coreVersion": "13.344",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.2.1",
         "createdTime": 1737665297412,
         "modifiedTime": 1737665297412,
         "lastModifiedBy": "IcBpMqhFuTck9VpX",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

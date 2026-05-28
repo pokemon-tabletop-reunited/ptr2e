@@ -10,10 +10,9 @@
         ],
         "name": "Rattled",
         "slug": "rattled",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
           "trigger": "<p>The user is hit by a Dark-Type, Bug-Type, or Ghost-Type attack.</p>"
         },
         "range": {
@@ -21,7 +20,7 @@
           "unit": "m"
         },
         "description": "<p>Trigger: The user is hit by a Dark-Type, Bug-Type, or Ghost-Type attack.</p><p>Effect: The user gain +1 SPD Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/skills/movement/figure-running-gray.webp"
       }
     ],
     "description": "<p>Trigger: The user is hit by a Dark-Type, Bug-Type, or Ghost-Type attack.</p><p>Effect: The user gain +1 SPD Stage for 5 Activations.</p>",
@@ -35,7 +34,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "zuogwFD4AGYLMifq",
@@ -56,7 +56,11 @@
             "affects": "self",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -67,7 +71,11 @@
             "affects": "self",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           },
           {
             "type": "roll-effect",
@@ -78,19 +86,27 @@
             "affects": "self",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": true,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -102,13 +118,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.1",
         "createdTime": 1728047925555,
         "modifiedTime": 1728048014347,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

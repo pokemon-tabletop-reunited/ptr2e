@@ -6,8 +6,7 @@
     "actions": [],
     "description": "<p>Effect: Whenever the user consumes a @Trait[food] item, they recover @Tick[5] in addition to the @Trait[food] item's effect.</p><p>Passive: The user possesses an additional @Trait[belt], which can only be filled by a @Trait[food] item.<br><br>Connection: Stuff Cheeks.</p>",
     "traits": [
-      "healing",
-      "partial-automation"
+      "healing"
     ],
     "slug": "cheek-pouch",
     "_migration": {
@@ -33,7 +32,6 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.QJjxOISEcfO0vgmP",
             "predicate": [
               "ability:cheek-pouch:active"
@@ -41,9 +39,9 @@
             "allowDuplicate": false,
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -52,11 +50,42 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "basic",
+            "key": "system.inventory.belt.max",
+            "value": 2,
+            "phase": "initial",
+            "predicate": [],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 5
+              }
+            ],
+            "dontMerge": false,
+            "key": "food-trait-generic",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -70,7 +99,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -82,14 +113,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1739566976681,
-        "modifiedTime": 1754317052231,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1778668310167,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

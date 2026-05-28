@@ -13,7 +13,7 @@
       "carryType": "stowed",
       "handsHeld": null
     },
-    "grade": "B",
+    "grade": "A",
     "fling": {
       "type": "steel",
       "power": 60,
@@ -25,7 +25,7 @@
         "unit": "m"
       }
     },
-    "rarity": "uncommon",
+    "rarity": "rare",
     "traits": [
       "weapon",
       "fling",
@@ -42,7 +42,7 @@
         "types": [
           "untyped"
         ],
-        "category": "special",
+        "category": "physical",
         "power": 145,
         "accuracy": 85,
         "free": true,
@@ -54,7 +54,7 @@
         ],
         "name": "RPG",
         "slug": "rpg",
-        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "description": "<p>Ammo Use: 1</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
         "range": {
@@ -63,11 +63,10 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "delay": 1
+          "activation": "complex"
         },
-        "predicate": []
+        "predicate": [],
+        "offensiveStat": "spa"
       }
     ],
     "weaponType": "untyped",
@@ -94,7 +93,8 @@
       ],
       "notes": ""
     },
-    "description": "<p>A a rocket-propelled grenade (RPG) is a shoulder-fired anti-tank weapon that launches rockets equipped with a shaped-charge explosive warhead. Most RPGs can be carried by an individual soldier, and are frequently used as anti-tank weapons.</p>"
+    "description": "<p>A a rocket-propelled grenade (RPG) is a shoulder-fired anti-tank weapon that launches rockets equipped with a shaped-charge explosive warhead. Most RPGs can be carried by an individual soldier, and are frequently used as anti-tank weapons.</p>",
+    "ammoType": []
   },
   "_id": "24x8eUACHx1is6Lj",
   "effects": [
@@ -114,7 +114,8 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -128,7 +129,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -139,14 +142,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-gear.Item.Ba3EyqpUePgGrfQk.ActiveEffect.uOxpw5kHcRtpv4pa",
         "duplicateSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
         "createdTime": 1743905710613,
         "modifiedTime": 1757631988382,
         "lastModifiedBy": "UTlFSVhgfIUeTsoW",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "folder": "fwBg1GB1fMcgPklo"

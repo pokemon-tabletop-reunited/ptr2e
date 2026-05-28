@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user is immune to Critical Hits, and attacks with secondary effects that target the user deal reduced 30% damage.</p>",
+        "description": "<p>Effect: The user is immune to Critical Hits, and Critical Hits they would take are changed into normal hits instead. Attacks with secondary effects that target the user deal reduced 30% damage.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user is immune to Critical Hits, and attacks with secondary effects that target the user deal reduced 30% damage.</p>",
+    "description": "<p>Effect: The user is immune to Critical Hits, and Critical Hits they would take are changed into normal hits instead. Attacks with secondary effects that target the user deal reduced 30% damage.</p>",
     "traits": [
       "defensive"
     ],
@@ -47,6 +47,20 @@
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "crit-immune",
+            "predicate": [],
+            "domain": "self",
+            "toggleable": false,
+            "count": false,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true,
+            "method": 2
+          },
           {
             "type": "ephemeral-modifier",
             "key": "damaging-attack-damage-percentile",

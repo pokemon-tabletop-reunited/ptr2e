@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user has +2 EVA against Status-Category attacks.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "cXj1icDbj82Ie8ux",
@@ -48,27 +50,33 @@
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "status-attack-evasion-stage",
-            "value": 2,
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.QdbBH4Zmewj1ZB9q",
             "predicate": [],
             "label": "Wonder Skin Ability",
             "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "affects": "defensive",
+            "alterations": [],
+            "key": "status-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -80,13 +88,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737570443586,
-        "modifiedTime": 1737570483866,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1779005440626,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

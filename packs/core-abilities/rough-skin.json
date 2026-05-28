@@ -21,11 +21,11 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a @Trait[contact] attack.</p><p>Effect: The source of the triggering attack takes @Tick[-1].</p>",
+        "description": "<p>Trigger: The user is hit by a @Trait[contact] attack.</p><p>Effect: The source of the triggering attack takes @Tick[-2].</p>",
         "img": "icons/commodities/leather/scales-white.webp"
       }
     ],
-    "description": "<p>Trigger: The user is hit by a @Trait[contact] attack.</p><p>Effect: The source of the triggering attack takes @Tick[-1]</p>",
+    "description": "<p>Trigger: The user is hit by a @Trait[contact] attack.</p><p>Effect: The source of the triggering attack takes @Tick[-2]</p>",
     "traits": [
       "defensive"
     ],
@@ -59,10 +59,17 @@
             "chance": 100,
             "isFixedChance": false,
             "affects": "origin",
-            "alterations": [],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": -2
+              }
+            ],
             "dontMerge": false,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -76,7 +83,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -88,13 +97,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1752171178173,
-        "modifiedTime": 1760819435225,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1778761336818,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

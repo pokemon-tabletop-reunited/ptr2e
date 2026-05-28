@@ -11,7 +11,7 @@
         ],
         "name": "Justified",
         "slug": "justified",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
           "trigger": "<p>The user is hit by a Dark-Type attack or is hit by an @Trait[interrupt] Action.</p>"
@@ -26,8 +26,7 @@
     ],
     "description": "<p>Trigger: The user is hit by a; Dark-Type attack, a Physical- or Special-Category Attack from a Dark-Type creature, or is hit by an @Trait[interrupt] Action.</p><p>Effect: The user's ATK Stage is increased by +1 for 5 Activations.</p>",
     "traits": [
-      "defensive",
-      "partial-automation"
+      "defensive"
     ],
     "slug": "justified",
     "_migration": {
@@ -59,21 +58,58 @@
             "chance": 100,
             "affects": "defensive",
             "priority": null,
-            "ignored": false,
             "alterations": [],
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "interrupt-trait-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "affects": "defensive",
+            "priority": null,
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "interrupt-trait-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
+            "predicate": [],
+            "chance": 100,
+            "affects": "defensive",
+            "priority": null,
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,13 +121,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.6",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737564981189,
-        "modifiedTime": 1737565010622,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1778690802816,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -41,7 +41,7 @@ export class TokenRulerPTR2e extends foundry.canvas.placeables.tokens.TokenRuler
       } else if (movements[movement].value === highest[0].value) {
         highest.push(movements[movement]);
       }
-      movements[movement].available = movements[movement].value;
+      movements[movement].available = movements[movement].value + ((this.token.document?.flags?.ptr2e?.temporaryMovement as Record<string, number>)?.[movement] ?? 0);
     }
 
     let exceededTotal = false;

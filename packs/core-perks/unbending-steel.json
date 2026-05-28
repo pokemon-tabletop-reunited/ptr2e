@@ -9,7 +9,7 @@
     },
     "actions": [],
     "slug": "unbending-steel",
-    "description": "<p>You gain Iron Defense as a Connected Move, and may spend an additional 2PP when using Iron Defense to gain @Tick[2 shield].</p>",
+    "description": "<p>Connection: @UUID[Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw]{Iron Defense}</p><p>Passive: The cost of the user's Iron Defense move increases by 2PP. The user gains @Tick[2 shield] when they resolve Iron Defense.</p>",
     "traits": [],
     "prerequisites": [
       "trait:steel"
@@ -17,6 +17,10 @@
     "cost": 2,
     "nodes": [
       {
+        "x": 97,
+        "y": 101,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "guard-up",
           "stat-iv-booster-1",
@@ -34,18 +38,11 @@
           "active-ground"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/svg/steel_icon.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/svg/steel_icon.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 97,
-        "y": 101,
         "tier": null
       }
     ],
@@ -64,9 +61,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "_id": "Gxv0teWTcPT64AJu",
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
@@ -80,40 +75,65 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw",
             "predicate": [],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "reevaluateOnUpdate": false,
             "inMemoryOnly": false,
             "allowDuplicate": true,
             "track": false,
-            "replaceSelf": false,
-            "onDeleteActions": {
-              "grantee": "detach",
-              "granter": "cascade"
-            },
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.k1FukpHKnZGqjSNc",
+            "phase": "initial",
+            "predicate": [],
+            "key": "iron-defense-attack",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 2
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -125,14 +145,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.2.1",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737922877806,
-        "modifiedTime": 1737922913974,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779112836033,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

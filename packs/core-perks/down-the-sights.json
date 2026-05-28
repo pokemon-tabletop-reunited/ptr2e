@@ -4,19 +4,21 @@
   "folder": "W85LoOCz3WlwbyhZ",
   "system": {
     "prerequisites": [],
-    "cost": 1,
-    "description": "<p>Your next non-@Trait[contact] Attack gains @Trait[crit-x] or [Crit X+1] until it resolves.</p>",
+    "cost": 3,
+    "description": "<p>By spending @PP[-3] as a @Trait[flinch-35] Free Action, the user's next non-@Trait[contact] Physical- or Special-Category Attack has +1 CRIT Stage, +20 Accuracy, and +40% EHR.</p>",
     "actions": [
       {
         "name": "Down The Sights",
         "slug": "down-the-sights",
-        "description": "<p>Your next non-[Contact] gains [Crit 1] or [Crit X+1] until it resolves.</p>",
+        "description": "<p>The user's next non-@Trait[contact] Physical- or Special-Category Attack has +1 CRIT Stage, +20 Accuracy, and +40% EHR.</p>",
         "cost": {
-          "activation": "simple",
-          "powerPoints": 2
+          "activation": "free",
+          "powerPoints": 3
         },
         "type": "generic",
-        "traits": [],
+        "traits": [
+          "flinch-35"
+        ],
         "img": "systems/ptr2e/img/perk-icons/Combat.svg",
         "range": {
           "target": "self",
@@ -67,7 +69,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "_id": "eHdFNdcyllxflfNA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
@@ -90,7 +93,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -104,7 +108,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -116,13 +122,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765226024095,
         "modifiedTime": 1765226047880,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

@@ -21,11 +21,11 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all Rock-Type creatures within Range take 20% less damage from all sources.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user and allied @Trait[rock]-Type creatures within Range take 20% less damage from all sources. This applies multiplicatively with other sources of damage reduction, and also applies to flat damage sources like DoT effects.</p>",
+        "img": "systems/ptr2e/img/svg/rock_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user and all Rock-Type creatures within Range take 20% less damage from all sources.</p>",
+    "description": "<p>Effect: The user and allied @Trait[rock]-Type creatures within Range take 20% less damage from all sources. This applies multiplicatively with other sources of damage reduction, and also applies to flat damage sources like DoT effects.</p>",
     "traits": [
       "domain",
       "aura",
@@ -55,7 +55,6 @@
         "changes": [
           {
             "type": "roll-option",
-            "key": "",
             "value": "bedrock:active",
             "predicate": [],
             "domain": "all",
@@ -64,9 +63,11 @@
             "state": true,
             "label": "Bedrock",
             "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "method": 2
+            "suboptions": []
           },
           {
             "type": "aura",
@@ -79,8 +80,8 @@
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.Y8GBj2n6aAO3QkzV",
-                "affects": "all",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.Y8GBj2n6aAO3QkzV",
+                "affects": "allies",
                 "events": [
                   "enter"
                 ],
@@ -105,7 +106,8 @@
             },
             "mergeExisting": true,
             "priority": null,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -119,7 +121,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -132,13 +136,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1753713349072,
-        "modifiedTime": 1753713431560,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779575694269,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

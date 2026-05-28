@@ -37,7 +37,8 @@
           "adaptable",
           "contact",
           "flinch-10",
-          "crit-1"
+          "crit-1",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -99,7 +100,9 @@
           "adaptable",
           "contact",
           "crit-2",
-          "flinch-40"
+          "flinch-40",
+          "hammer",
+          "horn"
         ],
         "type": "attack",
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
@@ -145,7 +148,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -154,7 +157,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "D",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -173,7 +178,8 @@
             "label": "Pickaxe",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -183,7 +189,8 @@
             "label": "Swing",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -197,7 +204,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -217,7 +225,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -227,7 +236,8 @@
             "label": "Smash",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -241,7 +251,8 @@
             "dontMerge": false,
             "label": "Smash Defense",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -254,7 +265,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -267,7 +279,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -280,7 +293,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -294,7 +308,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -306,15 +322,18 @@
         "compendiumSource": "Item.CKKHxTGLWFlK7jxe.ActiveEffect.dRMRrs9MBQAuqTjh",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1764809995472,
         "modifiedTime": 1764809995472,
         "lastModifiedBy": "r8rxDx9bzq5ASx3l"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "csSm3lt6nLmOZxn5"
 }

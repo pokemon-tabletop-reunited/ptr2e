@@ -56,7 +56,7 @@
         "free": true,
         "predicate": [],
         "power": 40,
-        "accuracy": 100
+        "accuracy": 95
       },
       {
         "name": "Spadroon Thrust",
@@ -103,7 +103,7 @@
       "type": "steel",
       "power": 80,
       "accuracy": 90,
-      "hide": false,
+      "hide": true,
       "range": {
         "target": "creature",
         "distance": 3,
@@ -111,7 +111,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -120,7 +120,9 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "grade": "B",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -139,7 +141,8 @@
             "label": "Spadroon",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "flat-modifier",
@@ -149,7 +152,8 @@
             "label": "Spadroon Thrust",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -158,7 +162,8 @@
             "predicate": [],
             "label": "Spadroon (Fling)",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -172,7 +177,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -184,13 +191,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.347",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.3.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "VeARUVttJ2hHxFn7"
 }

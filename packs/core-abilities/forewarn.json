@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is considered to have +2 EVA Stages against attacks that would deal super effective damage to the user.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,9 +36,69 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "fdSqi7p3udiBTvsj",
-  "effects": []
+  "effects": [
+    {
+      "name": "Forewarn",
+      "type": "passive",
+      "_id": "2TA17bgBOeK9Ucw2",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.QdbBH4Zmewj1ZB9q",
+            "phase": "initial",
+            "predicate": [
+              "effectiveness:super"
+            ],
+            "key": "damaging-attack",
+            "affects": "defensive",
+            "alterations": [],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1778978332296,
+        "modifiedTime": 1778978370458,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

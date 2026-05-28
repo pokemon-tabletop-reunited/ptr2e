@@ -1,0 +1,90 @@
+{
+  "name": "Flooded Terrain Summon",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "summon",
+      "terrain",
+      "water"
+    ],
+    "description": "<p>Halves the damage taken from Fire-Type attacks and effects. Creatures must use their Swim movement in place of Overland.</p>",
+    "actions": [],
+    "baseAV": 150,
+    "duration": 3
+  },
+  "_id": "uIRcnbUtBCbwPVQm",
+  "img": "icons/svg/whale.svg",
+  "effects": [
+    {
+      "name": "Flooded Terrain",
+      "type": "summon",
+      "_id": "YvsN6j2rbPDewU1r",
+      "img": "icons/svg/whale.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "value": -50,
+            "phase": "initial",
+            "predicate": [],
+            "key": "fire-attack-damage-percentile",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "predicate": [],
+        "targetType": "all",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.361",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.5.beta",
+        "createdTime": 1779359312622,
+        "modifiedTime": 1779359312622,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "flags": {}
+}

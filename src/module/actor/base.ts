@@ -858,21 +858,21 @@ class ActorPTR2e<
 
   getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean, ignoreStages: boolean) {
     const stat: PTRCONSTS.Stat = attack.defensiveStat ?? (attack.category === "physical" ? "def" : "spd");
-    return this.calcStatTotal(this.system.attributes[stat], isCrit, ignoreStages ?? false);
+    return this.calcStatTotal(this.system.attributes[stat], {offensive: false, defensive: isCrit}, ignoreStages ?? false);
   }
 
-  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }, ignoreStages: boolean) {
+  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean, ignoreStages: boolean) {
     const stat: PTRCONSTS.Stat = attack.offensiveStat ?? (attack.category === "physical" ? "atk" : "spa");
-    return this.calcStatTotal(this.system.attributes[stat], false, ignoreStages ?? false);
+    return this.calcStatTotal(this.system.attributes[stat], {offensive: isCrit, defensive: false}, ignoreStages ?? false);
   }
 
-  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean, ignoreStages: boolean): number {
+  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: {offensive: boolean, defensive: boolean}, ignoreStages: boolean): number {
     function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
       return attribute.slug !== "hp";
     }
     if (!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
-      const stage = ignoreStages ? 0 : Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
+      const stage = ignoreStages ? 0 : Math.clamp(stat.stage, isCrit.offensive ? 0 : -6, isCrit.defensive ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
     };
     return stat.value * stageModifier();
@@ -1727,7 +1727,7 @@ class ActorPTR2e<
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
     const actionOptions = selfAttack?.getRollOptions() ?? [];
-    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
+    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor), ...(params.options ?? [])]));
 
     if (selfAttack) {
       for (const adjustment of extractAttackAdjustments(selfActor.synthetics.attackAdjustments, params.domains)) {
@@ -1756,6 +1756,7 @@ class ActorPTR2e<
         for (const adjustment of extractAttackAdjustments(selfActor.synthetics.moveVariants, params.domains)) {
           adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
+        selfAttack.prepareDerivedData();
       }
 
       return R.unique(traits).sort();
@@ -2038,7 +2039,7 @@ class ActorPTR2e<
     }
 
     for (const trait of effect.traits) {
-      if (immunities[`trait:${trait}`] && !effect.traits.has(`ignore-immunity-${trait}`)) return true;
+      if (immunities[`trait:${trait.slug}`] && !effect.traits.has(`ignore-immunity-${trait.slug}`)) return true;
     }
 
     return false;
@@ -2057,7 +2058,7 @@ class ActorPTR2e<
       if (oldEffect) {
         acc.stacksUpdated.push(oldEffect.uuid);
       } else {
-        if (!["advancement"].includes(effect.type) && effect.changes.every(c => !["apply-tick"].includes(c.type))) acc.notApplied.push(effect);
+        if (!["advancement"].includes(effect.type) && effect.changes.every(c => !["apply-tick", "increment-clock", "remove-effect"].includes(c.type))) acc.notApplied.push(effect);
       }
       return acc;
     }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
@@ -2414,12 +2415,7 @@ class ActorPTR2e<
             }
           }
         }
-      } else {
-        const loafingEffect = this.effects.get("loafingcondition") as ActiveEffectPTR2e | undefined;
-        if (loafingEffect) {
-          await loafingEffect.delete();
-        }
-      }
+      } 
     }
 
     if (changed.ownership && !game.user.isGM) {
@@ -2486,7 +2482,6 @@ class ActorPTR2e<
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
     if (game.users.activeGM?.id !== game.user.id) return;
-    if (!this.unconnectedRoots.length) return;
 
     function isEffect(
       collection: "effects" | "items",
@@ -2526,8 +2521,7 @@ class ActorPTR2e<
       }
     }
 
-    const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
-    if (!perks.length) return;
+
 
   }
 

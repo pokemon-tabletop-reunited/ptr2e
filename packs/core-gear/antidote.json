@@ -22,18 +22,23 @@
       "type": "untyped",
       "power": null,
       "accuracy": 100,
-      "hide": null
+      "hide": true,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
     },
     "rarity": "common",
     "consumableType": "restorative",
     "traits": [
       "stack-3",
       "combat",
-      "held-restorative",
       "consumable",
-      "healing"
+      "healing",
+      "restorative"
     ],
-    "description": "The target is healed of the @Affliction[poison] and @Affliction[blight] Afflictions.",
+    "description": "<p>The target is healed of the @Affliction[poison] and @Affliction[blight] Afflictions.</p>",
     "quantity": 1,
     "slug": "antidote",
     "stack": 3,
@@ -45,10 +50,122 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Antidote",
+        "slug": "antidote",
+        "description": "<p>The target is healed of the @Affliction[poison] and @Affliction[blight] Afflictions.</p>",
+        "traits": [
+          "stack-3",
+          "combat",
+          "consumable",
+          "healing",
+          "restorative"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/antidote.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        }
+      }
+    ],
+    "ammoType": []
   },
   "_id": "KHnOfbcAg06oUUOK",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Antidote",
+      "type": "passive",
+      "_id": "gRuhgLn8ptfXWEzq",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "poison"
+              }
+            ],
+            "dontMerge": false,
+            "key": "antidote-generic",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "blight"
+              }
+            ],
+            "dontMerge": false,
+            "key": "antidote-generic",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779522333940,
+        "modifiedTime": 1779522382314,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
   "folder": "srQci2ThhRKdmC6g"
 }

@@ -43,8 +43,7 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 1
+          "activation": "complex"
         },
         "types": [
           "untyped"
@@ -54,7 +53,8 @@
         "accuracy": 80,
         "free": true,
         "img": "systems/ptr2e/img/icons/weapon_icon.webp",
-        "predicate": []
+        "predicate": [],
+        "description": "<p>Ammo Use: 1</p>"
       }
     ],
     "description": "<p>A longbow is a type of tall bow that makes a fairly long draw possible. The historical longbow was a simple bow made of a single piece of wood, but modern longbows may also be made from modern materials or by gluing different timbers together. </p>",
@@ -68,7 +68,7 @@
       "slot": "held",
       "handsHeld": 2
     },
-    "grade": "E",
+    "grade": "C",
     "fling": {
       "type": "untyped",
       "power": 40,
@@ -81,7 +81,7 @@
       }
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -90,7 +90,8 @@
         "img": "systems/ptu/css/images/icons/gear_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
-    }
+    },
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/icons/weapon_icon.webp",
   "effects": [
@@ -109,7 +110,8 @@
             "label": "Longbow",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -123,7 +125,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -135,12 +139,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.360",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "lastModifiedBy": "r8rxDx9bzq5ASx3l",
-        "modifiedTime": 1764810904149
-      }
+        "modifiedTime": 1764810904149,
+        "createdTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "kcONNhYYQmn2dEKX"

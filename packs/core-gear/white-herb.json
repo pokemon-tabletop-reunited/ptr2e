@@ -7,7 +7,26 @@
       "version": 0.111,
       "previous": null
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "White Herb",
+        "slug": "white-herb",
+        "description": "<p>Trigger: The user receives a @Trait[negative-stage-change] effect.<br><br>Effect: The user is immediately cured of the @Trait[negative-stage-change] effect.</p>",
+        "traits": [
+          "combat",
+          "consumable"
+        ],
+        "type": "generic",
+        "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
     "crafting": {
       "skill": "",
       "spans": null,
@@ -39,17 +58,93 @@
       ],
       "notes": ""
     },
-    "description": "<p>Trigger: The user receives a negative @Trait[stage-change] effect.<br><br>Effect: The user is immediately cured of the negative @Trait[stage-change] effect.</p>",
+    "description": "<p>Trigger: The user receives a @Trait[negative-stage-change] effect.<br><br>Effect: The user is immediately cured of the @Trait[negative-stage-change] effect.</p>",
     "traits": [
-      "combat",
-      "consumable"
+      "combat"
     ],
     "consumableType": "other",
     "stack": 1,
-    "cost": 3
+    "cost": 3,
+    "slug": "white-herb",
+    "ammoType": []
   },
   "img": "systems/ptr2e/img/item-icons/revival%20herb.webp",
-  "effects": [],
-  "flags": {},
+  "effects": [
+    {
+      "name": "White Herb",
+      "type": "passive",
+      "_id": "A6Oi9sTdEmbFgIt9",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has been afflicted with a @Trait[negative-stage-change]. {actor|link} may use their {item|link} as an @Trait[interrupt]!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "negative-stage-change-trait-received",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "negative-stage-change-trait"
+              }
+            ],
+            "dontMerge": false,
+            "key": "white-herb-generic",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779551471804,
+        "modifiedTime": 1779551607083,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
   "_id": "zgmbOuKp31sTrtOQ"
 }

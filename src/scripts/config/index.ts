@@ -198,7 +198,7 @@ export const PTRCONFIG = {
   specialStatusEffects: {
     "DEFEATED": "dead",
     "INVISIBLE": "invisible",
-    "BLIND": "blind",
+    "BLIND": "blinded",
     "BURROW": "burrow",
     "HOVER": "raised",
     "FLY": "fly"

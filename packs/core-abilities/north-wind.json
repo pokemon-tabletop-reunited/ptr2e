@@ -21,8 +21,8 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: The user freely uses Aurora Veil.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Aurora Veil. The user freely uses Aurora Veil without being subject to Weather Restrictions.</p>",
+        "img": "icons/magic/air/weather-clouds-snow.webp"
       },
       {
         "traits": [
@@ -39,14 +39,13 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Passive: The user is immune to negative effects from Snowy Weather.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Passive: The user is gains the @Trait[ice] trait during Snowy Weather.</p>",
+        "img": "icons/magic/air/weather-clouds-snow.webp"
       }
     ],
-    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Aurora Veil. The user freely uses Aurora Veil. </p><p>Passive: The user is immune to negative effects from Snowy Weather.</p>",
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Aurora Veil. The user freely uses Aurora Veil without being subject to Weather Restrictions.</p><p>Passive: The user is gains the @Trait[ice] trait during Snowy Weather.</p>",
     "traits": [
-      "environ",
-      "partial-automation"
+      "environ"
     ],
     "slug": "north-wind",
     "_migration": {
@@ -72,16 +71,15 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.XNNeBcOamkYG9YRY",
             "predicate": [
               "ability:north-wind:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -91,11 +89,34 @@
               "granter": "cascade"
             },
             "allowDuplicate": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "value": "ice",
+            "phase": "initial",
+            "predicate": [
+              "effect:summon:snowy-weather"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-note",
+            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-moves.Item.XNNeBcOamkYG9YRY] without Weather Restrictions!",
+            "phase": "initial",
+            "predicate": [],
+            "key": "combat-enter",
+            "visibility": null,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -109,7 +130,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -121,14 +144,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1737405383574,
-        "modifiedTime": 1754319802788,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779368615010,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

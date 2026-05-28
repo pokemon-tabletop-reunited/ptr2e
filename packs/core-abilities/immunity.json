@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is immune to the @Affliction[poison] and @Affliction[blight]. The user also resists Poison-Type damage.</p>",
         "img": "icons/svg/explosion.svg"
@@ -24,8 +25,7 @@
     ],
     "description": "<p>Effect: The user is immune to the @Affliction[poison] and @Affliction[blight]. The user also resists Poison-Type damage.</p>",
     "traits": [
-      "defensive",
-      "partial-automation"
+      "defensive"
     ],
     "slug": "immunity",
     "_migration": {
@@ -36,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "yiNqcB30VYaNgEvC",
@@ -50,31 +51,44 @@
         "changes": [
           {
             "type": "roll-option",
-            "key": "",
             "value": "affliction:poison",
             "predicate": [],
             "domain": "immunities",
             "toggleable": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true,
-            "method": 2
+            "state": true
           },
           {
             "type": "roll-option",
-            "key": "",
             "value": "affliction:blight",
             "predicate": [],
             "domain": "immunities",
             "toggleable": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "suboptions": [],
-            "state": true,
-            "method": 2
+            "state": true
+          },
+          {
+            "type": "ephemeral-modifier",
+            "value": -1,
+            "phase": "initial",
+            "predicate": [],
+            "key": "poison-attack-effectiveness-stage",
+            "label": "Immunity",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -83,12 +97,16 @@
         ],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "<p>Effect: The user is immune to the @Affliction[poison] and @Affliction[blight]. The user also resists Poison-Type damage.</p>",
       "origin": null,
@@ -100,13 +118,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.3.0",
+        "systemVersion": "1.7.5.beta",
         "createdTime": 1731340789942,
-        "modifiedTime": 1731340816322,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-      }
+        "modifiedTime": 1778689864570,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
