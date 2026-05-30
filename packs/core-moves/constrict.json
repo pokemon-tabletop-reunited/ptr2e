@@ -28,7 +28,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: On hit, the target has a 20% chance of losing -1 SPD Stages for 5 Activations. If the Target is @Affliction[grapple] by the user, Constrict may be used as a Simple Action instead, and gains [Danger Close].</p>",
+        "description": "<p>Effect: On hit, the target has a 20% chance of losing -1 SPD Stage for 5 Activations. If the user is Dominant in a Grapple, the target has a 40% chance to lose -1 ATK and EVA Stage for 5 Activations.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
@@ -59,6 +59,32 @@
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 20,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "constrict-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
+            "predicate": [
+              "grapple:dominant"
+            ],
+            "chance": 40,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "constrict-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.OUBNweJOMjAEtAye",
+            "predicate": [
+              "grapple:dominant"
+            ],
+            "chance": 40,
             "affects": "target",
             "priority": null,
             "ignored": false,

@@ -3583,7 +3583,7 @@
     "related": [
       "grapple"
     ],
-    "description": "The action has a two-step activation and resolution, split across two activations (Set-Up and Resolution) and consumes Complex Actions on both Activations, but PP only once. It may have separate effects on both the set up activation and resolution activation, though usually the attack's accuracy and damage roll occur on the resolution activation. Set-up moves temporarily gain @Trait[grapple] during the resolution phase."
+    "description": "The action has a two-step activation and resolution, split across two Activations (Set-Up and Resolution) and consumes Complex Actions on both Activations."
   },
   {
     "slug": "sharp",
@@ -4569,7 +4569,178 @@
     "slug": "grapple",
     "label": "Grapple",
     "related": [],
-    "description": "Actions with this trait are well-utilized while Grappling. They are considered to have +2 default ACC Stages while their user is affected by @Affliction[grapple]."
+    "description": "<p>Actions with this trait are especially suited to use while Grappling. These Actions have +10% Accuracy, +20% Power, and +15% EHR while their user and target are affected by @Affliction[grapple], and are doubled if the user is Dominant in the Grapple.</p>",
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "grapple-trait-attack-power",
+        "value": 20,
+        "predicate": [
+          "effect:affliction:grapple",
+          {
+            "not": "grapple:dominant"
+          }
+        ],
+        "label": "Grapple (Power)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": true,
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "grapple-trait-attack-accuracy",
+        "value": 10,
+        "predicate": [
+          "effect:affliction:grapple",
+          {
+            "not": "grapple:dominant"
+          }
+        ],
+        "label": "Grapple (Acc)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": true,
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "grapple-trait-action-accuracy",
+        "value": 10,
+        "predicate": [
+          "effect:affliction:grapple",
+          {
+            "not": "grapple:dominant"
+          }
+        ],
+        "label": "Grapple (Acc)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": true,
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "grapple-trait-attack-power",
+        "value": 40,
+        "predicate": [
+          "effect:affliction:grapple",
+          "grapple:dominant"
+        ],
+        "label": "Dominant Grapple (Power)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": true,
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "grapple-trait-attack-accuracy",
+        "value": 20,
+        "predicate": [
+          "effect:affliction:grapple",
+          "grapple:dominant"
+        ],
+        "label": "Dominant Grapple (Acc)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": true,
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "grapple-trait-action-accuracy",
+        "value": 20,
+        "predicate": [
+          "effect:affliction:grapple",
+          "grapple:dominant"
+        ],
+        "label": "Dominant Grapple (Acc)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": true,
+        "method": 2
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:grapple"
+        ],
+        "key": "grapple-trait-attack",
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 15
+          }
+        ],
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:grapple",
+          "grapple:dominant"
+        ],
+        "key": "grapple-trait-attack",
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 15
+          }
+        ],
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:grapple"
+        ],
+        "key": "grapple-trait-action",
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 15
+          }
+        ],
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:grapple",
+          "grapple:dominant"
+        ],
+        "key": "grapple-trait-action",
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 15
+          }
+        ],
+        "method": 2,
+        "ignored": false
+      }
+    ],
+    "type": "automated"
   },
   {
     "slug": "pierce",

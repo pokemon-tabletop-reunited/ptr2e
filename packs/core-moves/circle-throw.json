@@ -10,8 +10,7 @@
         "name": "Circle Throw",
         "type": "attack",
         "traits": [
-          "push-x",
-          "flinch-10",
+          "flinch-20",
           "contact",
           "grapple"
         ],
@@ -22,8 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": 1
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 60,
@@ -31,7 +29,7 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: On hit, the target loses the @Affliction[grapple] if applicable and is Pushed 10m minus their WC (minimum 1m). If the target is an owned Pokémon, they are immediately Recalled.</p>",
+        "description": "<p>Effect: On hit, user may freely use Fling - Actor Toss and throw the target. If the target is an owned creature, they are immediately Recalled upon the user resolving Fling - Actor Toss.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
