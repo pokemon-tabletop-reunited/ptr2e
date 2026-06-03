@@ -75,7 +75,8 @@
         "type": "normal",
         "tier": null
       }
-    ]
+    ],
+    "slug": "siren-song"
   },
   "_id": "HKpdD0gKEEIjQyN1",
   "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp",
@@ -95,7 +96,13 @@
             "chance": 50,
             "isFixedChance": false,
             "affects": "target",
-            "alterations": [],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
             "dontMerge": false,
             "key": "siren-song-attack",
             "method": 2,
@@ -128,17 +135,16 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1778077957154,
-        "modifiedTime": 1778077957154,
+        "modifiedTime": 1780264433613,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       }
     }
-  ],
-  "flags": {}
+  ]
 }
