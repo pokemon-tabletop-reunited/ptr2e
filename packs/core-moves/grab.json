@@ -53,6 +53,30 @@
       "system": {
         "changes": [
           {
+            "type": "roll-effect",
+            "key": "grab-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "leer-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "method": 2
+          },
+          {
             "type": "flat-modifier",
             "key": "grab-attack-accuracy",
             "value": "ceil((@actor.system.details.size.heightClass+2)*10+(@actor.system.details.size.weightClass+3)*4+log(@actor.system.skills.acrobatics.rvs+@actor.system.skills.acrobatics.value+@actor.system.skills.acrobatics.mod)*12+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*20)",
