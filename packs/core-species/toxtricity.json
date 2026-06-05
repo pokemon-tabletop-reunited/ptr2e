@@ -465,26 +465,26 @@
       ],
       "basic": [
         {
-          "slug": "rattled"
+          "slug": "punk-rock"
         },
         {
-          "slug": "static"
+          "slug": "technician"
         }
       ],
       "advanced": [
         {
-          "slug": "klutz"
+          "slug": "amplifier"
         },
         {
-          "slug": "punk-rock"
+          "slug": "water-absorb"
         }
       ],
       "master": [
         {
-          "slug": "amplifier"
+          "slug": "sonic-break"
         },
         {
-          "slug": "boom-box"
+          "slug": "volt-rush"
         }
       ]
     },
@@ -642,61 +642,141 @@
             "alwaysActive": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "state": true,
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "state": false,
-            "method": 2
-          },
-          {
-            "type": "percentile-modifier",
-            "predicate": [
-              "forme:amped-up:active"
-            ],
-            "key": "electric-attack-power",
-            "value": 20,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          },
-          {
-            "type": "percentile-modifier",
-            "predicate": [
-              "forme:amped-up:active"
-            ],
-            "key": "sonic-trait-attack-power",
-            "value": 20,
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "suboptions": []
           },
           {
             "type": "grant-item",
             "predicate": [
               "forme:amped-up:active"
             ],
-            "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.N4iNQzyU492WWozy",
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "percentile-modifier",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "electric-attack-damage",
+            "value": 30,
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "sonic-trait-attack-damage",
+            "value": 30,
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "value": -5,
+            "phase": "initial",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "electric-attack-accuracy",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "value": -5,
+            "phase": "initial",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "key": "sonic-trait-attack-accuracy",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "recoil-1-12",
+            "phase": "initial",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "property": "traits",
+            "definition": [],
+            "key": "electric-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "recoil-1-12",
+            "phase": "initial",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "property": "traits",
+            "definition": [],
+            "key": "sonic-trait-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "priority-10",
+            "phase": "initial",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "property": "power",
+            "definition": [],
+            "key": "electric-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "priority-10",
+            "phase": "initial",
+            "predicate": [
+              "forme:amped-up:active"
+            ],
+            "property": "traits",
+            "definition": [],
+            "key": "sonic-trait-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -705,17 +785,16 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -727,13 +806,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1739641276275,
-        "modifiedTime": 1739641464424,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1780683626626,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     },
     {
       "name": "Low Key",
@@ -753,59 +836,108 @@
             "alwaysActive": false,
             "count": false,
             "priority": null,
+            "phase": "initial",
+            "state": true,
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "state": false,
-            "method": 2
-          },
-          {
-            "type": "basic",
-            "predicate": [
-              "forme:low-key:active"
-            ],
-            "key": "system.battleStats.accuracy.stage",
-            "value": 1,
-            "priority": null,
-            "ignored": false,
-            "method": 2
-          },
-          {
-            "type": "basic",
-            "predicate": [
-              "forme:low-key:active"
-            ],
-            "key": "system.battleStats.evasion.stage",
-            "value": 1,
-            "priority": null,
-            "ignored": false,
-            "method": 2
+            "suboptions": []
           },
           {
             "type": "grant-item",
             "predicate": [
               "forme:low-key:active"
             ],
-            "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.jsFFHr4t5qwwCzMt",
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
-            "ignored": false,
-            "inMemoryOnly": false,
-            "track": false,
-            "replaceSelf": false,
             "onDeleteActions": {
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "percentile-modifier",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "key": "attack-accuracy",
+            "value": 15,
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "stage-modifier",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "key": "attack-crit",
+            "value": 1,
+            "priority": null,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 30
+              }
+            ],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "value": "flinch-15",
+            "phase": "initial",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "property": "traits",
+            "definition": [],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.effectResistance",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:low-key:active"
+            ],
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -814,17 +946,16 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -836,13 +967,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.0.3.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1739641493096,
-        "modifiedTime": 1739641633239,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1780684034921,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
