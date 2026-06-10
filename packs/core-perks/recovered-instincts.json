@@ -110,6 +110,48 @@
             "ignored": false
           },
           {
+            "type": "roll-effect",
+            "key": "negative-stage-change-trait-applied",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": false,
+            "phase": "initial",
+            "label": "Recovered Instincts (Neg. Stage)",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "major-affliction-trait-applied",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "predicate": [],
+            "chance": 30,
+            "isFixedChance": false,
+            "affects": "defensive",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": false,
+            "phase": "initial",
+            "label": "Recovered Instincts (Mjr Aff)",
+            "method": 2,
+            "ignored": false
+          },
+          {
             "type": "percentile-modifier",
             "value": 15,
             "phase": "initial",
