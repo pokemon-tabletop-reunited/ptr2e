@@ -16,13 +16,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "ffect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.</p>",
+    "description": "<p>Effect: While the user is in the @Trait[desperation-1-2] State, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.</p>",
     "traits": [],
     "slug": "defeatist",
     "_migration": {
@@ -33,7 +34,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "UEoQx5XPkgzgPFtU",
@@ -53,8 +55,9 @@
               "self:state:desperation-1-2"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
           },
           {
             "type": "basic",
@@ -64,53 +67,61 @@
               "self:state:desperation-1-2"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.attributes.def.base",
-            "value": 0.5,
+            "value": 1.5,
             "predicate": [
               "self:state:desperation-1-2"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.attributes.spd.base",
-            "value": 0.5,
+            "value": 1.5,
             "predicate": [
               "self:state:desperation-1-2"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.attributes.spe.base",
-            "value": 0.5,
+            "value": 1.5,
             "predicate": [
               "self:state:desperation-1-2"
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -122,13 +133,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.2",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1728600798829,
-        "modifiedTime": 1728635895627,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1781129858098,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
