@@ -6,14 +6,17 @@
   "system": {
     "changes": [],
     "slug": null,
-    "traits": [],
+    "traits": [
+      "minor-affliction",
+      "dot"
+    ],
     "removeAfterCombat": true,
     "removeOnRecall": false,
     "stacks": 0,
     "priority": 50,
     "formula": "1/16",
     "type": "damage",
-    "description": "<p>Until full automation implemented, will need to be manually adjusted to 1/8 in the damage formula when applied to steel and water types.</p>"
+    "description": "<p>When the afflicted creature concludes an Activation, they lose @Tick[-1]. Water- and Steel-Type creatures lose an additional @Tick[-1].</p>"
   },
   "disabled": false,
   "duration": {

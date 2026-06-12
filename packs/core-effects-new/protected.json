@@ -8,24 +8,52 @@
       {
         "type": "ephemeral-modifier",
         "key": "damaging-attack-damage-percentile",
+        "label": "Protected (Dam)",
         "value": -100000,
-        "predicate": [],
+        "predicate": [
+          {
+            "not": "origin:ally"
+          }
+        ],
         "ignored": false,
         "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "ephemeral-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+        "predicate": [
+          {
+            "not": "origin:ally"
+          }
+        ],
+        "label": "Protected (RES)",
+        "affects": "defensive",
+        "alterations": [
+          {
+            "property": "system.changes.0.value",
+            "value": 10000,
+            "method": 5
+          }
+        ],
+        "ignored": false,
         "method": 2
       }
     ],
     "slug": null,
-    "traits": [],
+    "traits": [
+      "shield"
+    ],
     "removeAfterCombat": true,
-    "removeOnRecall": false,
-    "removeAfterAttacking": false,
+    "removeOnRecall": true,
+    "removeAfterAttacking": true,
     "removeAfterAttacked": false,
-    "stacks": 0,
+    "stacks": 2,
     "priority": 50,
     "formula": "",
     "type": "damage",
-    "description": "<p>While Protected, the creature cannot be affected by any attacks which lack the @Trait[pierce] trait. @Trait[pierce] effects remove this effect.<br><br>If the action that granted this effect was used Proactively by the affected Creature instead of Reactively or being set by an ally, make sure to increase the duration to 2 to prevent it from expiring when your activation ends.</p>"
+    "description": "<p>The afflicted creature cannot be affected by any Attacks (this is usually a @Trait[shield] effect).</p>"
   },
   "disabled": false,
   "duration": {

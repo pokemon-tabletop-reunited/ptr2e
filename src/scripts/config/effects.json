@@ -450,7 +450,16 @@
       "value": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.movementMultiplier",
+          "value": -0.5,
+          "predicate": [],
+          "ignored": false,
+          "method": 2
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -539,53 +548,53 @@
     "system": {
       "changes": [
         {
-  "type": "effect-alteration",
-  "value": 0,
-  "method": 3,
-  "phase": "initial",
-  "predicate": [],
-  "key": "hp-tick-effect-received",
-  "alterations": [
-    {
-      "method": 3,
-      "property": "system.changes.0.value",
-      "value": 0
-    }
-  ],
-  "ignored": false
-  },
-    {
-  "type": "effect-alteration",
-  "value": 0,
-  "method": 3,
-  "phase": "initial",
-  "predicate": [],
-  "key": "pp-tick-effect-received",
-  "alterations": [
-    {
-      "method": 3,
-      "property": "system.changes.0.value",
-      "value": 0
-    }
-  ],
-  "ignored": false
-},
-{
-  "type": "effect-alteration",
-  "value": 0,
-  "method": 3,
-  "phase": "initial",
-  "predicate": [],
-  "key": "shield-tick-effect-received",
-  "alterations": [
-    {
-      "method": 3,
-      "property": "system.changes.0.value",
-      "value": 0
-    }
-  ],
-  "ignored": false
-}
+          "type": "effect-alteration",
+          "value": 0,
+          "method": 3,
+          "phase": "initial",
+          "predicate": [],
+          "key": "hp-tick-effect-received",
+          "alterations": [
+            {
+              "method": 3,
+              "property": "system.changes.0.value",
+              "value": 0
+            }
+          ],
+          "ignored": false
+        },
+        {
+          "type": "effect-alteration",
+          "value": 0,
+          "method": 3,
+          "phase": "initial",
+          "predicate": [],
+          "key": "pp-tick-effect-received",
+          "alterations": [
+            {
+              "method": 3,
+              "property": "system.changes.0.value",
+              "value": 0
+            }
+          ],
+          "ignored": false
+        },
+        {
+          "type": "effect-alteration",
+          "value": 0,
+          "method": 3,
+          "phase": "initial",
+          "predicate": [],
+          "key": "shield-tick-effect-received",
+          "alterations": [
+            {
+              "method": 3,
+              "property": "system.changes.0.value",
+              "value": 0
+            }
+          ],
+          "ignored": false
+        }
       ],
       "formula": null,
       "type": null,
@@ -660,23 +669,12 @@
           }
         },
         {
-          "type": "grant-item",
-          "key": "",
-          "value": "Compendium.ptr2e.core-moves.Item.3RvYsD6CXrWCW0YS",
+          "type": "basic",
+          "key": "system.modifiers.movement",
+          "value": 4,
           "predicate": [],
-          "replaceSelf": true,
-          "allowDuplicate": false,
-          "method": 2,
-          "priority": null,
           "ignored": false,
-          "reevaluateOnUpdate": false,
-          "inMemoryOnly": false,
-          "alterations": [],
-          "track": false,
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          }
+          "method": 2
         },
         {
           "type": "ephemeral-modifier",
@@ -715,9 +713,9 @@
               "value": 30
             }
           ],
-  "method": 2,
-  "ignored": false
-}
+          "method": 2,
+          "ignored": false
+        }
       ],
       "traits": [
         "minor-affliction",
@@ -1242,6 +1240,29 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.destined"
   },
   {
+    "id": "disguised",
+    "name": "PTR2E.Effect.Statuses.Labels.disguised",
+    "img": "icons/svg/mystery-man.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.disguised"
+  },
+  {
     "id": "braced",
     "name": "PTR2E.Effect.Statuses.Labels.braced",
     "img": "icons/svg/shield.svg",
@@ -1250,32 +1271,39 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": 2,
-          "method": 2
+          "key": "system.modifiers.defMultiplier",
+          "value": "@actor.system.modifiers.defMultiplier",
+          "method": 2,
+          "priority": 89
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": 2,
-          "method": 2
+          "key": "system.modifiers.spdMultiplier",
+          "value": "@actor.system.modifiers.spdMultiplier",
+          "method": 2,
+          "priority": 89
         },
         {
           "type": "basic",
-          "key": "system.attributes.atk.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.atkMultiplier",
+          "value": "-@actor.system.modifiers.atkMultiplier/2",
+          "method": 2,
+          "priority": 89
         },
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spaMultiplier",
+          "value": "-@actor.system.modifiers.spaMultiplier/2",
+          "method": 2,
+          "priority": 89
         },
         {
-          "type": "roll-option",
-          "key": "immunity",
-          "value": "crit"
+          "type": "ephemeral-modifier",
+          "key": "attack-crit-stage",
+          "value": -2,
+          "label": "Braced (Crit)",
+          "method": 2,
+          "predicate": []
         }
       ],
       "removeOnRecall": true,
@@ -1284,6 +1312,67 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.braced"
+  },
+  {
+    "id": "protected",
+    "name": "PTR2E.Effect.Statuses.Labels.protected",
+    "img": "icons/svg/castle.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 2
+    },
+    "system": {
+      "changes": [
+      {
+        "type": "ephemeral-modifier",
+        "key": "damaging-attack-damage-percentile",
+        "label": "Protected (Dam)",
+        "value": -100000,
+        "predicate": [
+          {
+            "not": "origin:ally"
+          }
+        ],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "ephemeral-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+        "predicate": [
+          {
+            "not": "origin:ally"
+          }
+        ],
+        "label": "Protected (RES)",
+        "affects": "defensive",
+        "alterations": [
+          {
+            "property": "system.changes.0.value",
+            "value": 10000,
+            "method": 5
+          }
+        ],
+        "ignored": false,
+        "method": 2
+      }
+    ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "removeAfterAttacking": true,
+      "removeAfterAttacked": false,
+      "traits": [
+        "minor-affliction",
+        "shield"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.protected"
   },
   {
     "id": "duel",
@@ -1314,15 +1403,31 @@
         },
         {
           "type": "percentile-modifier",
-          "key": "all-damage",
+          "key": "attack-damage",
           "label": "Duel - non-Duel Partner",
-          "value": -33.33,
+          "value": -40,
           "predicate": [
             {
-              "not": "target:mark:duel"
-            },
+              "nand":
+              [
+                "target:mark:duel",
+                "origin:mark:duel"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "label": "Duel - non-Duel Partner",
+          "value": -40,
+          "predicate": [
             {
-              "not": "origin:mark:duel"
+              "nand":
+              [
+                "target:mark:duel",
+                "origin:mark:duel"
+              ]
             }
           ]
         },
@@ -1343,6 +1448,30 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.duel"
   },
   {
+    "id": "puppet",
+    "name": "PTR2E.Effect.Statuses.Labels.puppet",
+    "img": "icons/magic/control/control-influence-puppet.webp",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 3
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control",
+        "attention"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.puppet"
+  },
+  {
     "id": "curled",
     "name": "PTR2E.Effect.Statuses.Labels.curled",
     "img": "icons/svg/mole.svg",
@@ -1355,10 +1484,24 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": 1,
-          "method": 2
+          "type": "ephemeral-modifier",
+          "key": "physical-attack-damage-percentile",
+          "value": -30,
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "special-attack-damage-percentile",
+          "value": -10,
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "percentile-modifier",
@@ -1375,6 +1518,116 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.curled"
+  },
+  {
+    "id": "harden",
+    "name": "PTR2E.Effect.Statuses.Labels.harden",
+    "img": "icons/svg/tower.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "contact-attack-power",
+          "value": 30,
+          "predicate": [],
+          "label": "Harden (Power)",
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "stage-modifier",
+          "key": "dash-trait-attack-crit",
+          "value": 1,
+          "label": "Harden (Dash Crit)",
+          "predicate": [],
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "ephemeral-effect",
+          "key": "contact-trait-attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CekJx2L2a3x60g1b",
+          "predicate": [],
+          "affects": "defensive",
+          "alterations": [],
+          "phase": "initial",
+          "method": 2,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.harden"
+  },
+  {
+    "id": "sharpen",
+    "name": "PTR2E.Effect.Statuses.Labels.sharpen",
+    "img": "icons/svg/sword.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "alter-attack",
+          "value": "sharp",
+          "phase": "initial",
+          "predicate": [],
+          "key": "contact-trait-attack",
+          "property": "traits",
+          "definition": [],
+          "method": 2,
+          "ignored": false
+        },
+        {
+          "type": "stage-modifier",
+          "key": "sharp-trait-attack-crit",
+          "value": 1,
+          "label": "Sharpen (Crit)",
+          "predicate": [],
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "ephemeral-effect",
+          "key": "sharp-trait-attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+          "predicate": [],
+          "affects": "self",
+          "alterations": [],
+          "phase": "initial",
+          "method": 2,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.sharpen"
   },
   {
     "id": "chanted",
@@ -1548,6 +1801,50 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.true-sight"
   },
   {
+    "id": "gagged",
+    "name": "PTR2E.Effect.Statuses.Labels.gagged",
+    "img": "icons/svg/silenced.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.gagged"
+  },
+  {
+    "id": "muzzled",
+    "name": "PTR2E.Effect.Statuses.Labels.muzzled",
+    "img": "icons/svg/silenced.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 5
+    },
+    "system": {
+      "changes": [],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.muzzled"
+  },
+  {
     "id": "marked",
     "name": "PTR2E.Effect.Statuses.Labels.marked",
     "img": "icons/svg/target.svg",
@@ -1677,8 +1974,10 @@
           "type": "ephemeral-modifier",
           "key": "attack-accuracy-flat",
           "value": -40,
-          "predicate": [],
-          "label": "Attacking a Transient creature.",
+          "predicate": [
+            {"not": "effect:affliction:transient"}
+          ],
+          "label": "Transient (Accuracy)",
           "method": 2,
           "priority": null,
           "ignored": false,
@@ -1688,8 +1987,10 @@
           "type": "ephemeral-modifier",
           "key": "attack-damage-percentile",
           "value": -75,
-          "predicate": [],
-          "label": "Attacking a Transient creature.",
+          "predicate": [
+            {"not": "effect:affliction:transient"}
+          ],
+          "label": "Transient (Damage)",
           "method": 2,
           "priority": null,
           "ignored": false,
@@ -1699,10 +2000,50 @@
           "type": "percentile-modifier",
           "key": "attack-damage",
           "value": -75,
-          "predicate": [],
-          "label": "Attacking a non-Transient creature.",
+          "predicate": [
+            {"not": "target:effect:affliction:transient"}
+          ],
+          "label": "Transient (Damage)",
           "method": 2,
           "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "ephemeral-effect",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+          "phase": "initial",
+          "predicate": [
+            {"not": "target:effect:affliction:transient"}
+          ],
+          "affects": "self",
+          "alterations": [
+            {
+              "method": 5,
+              "property": "system.changes.0.value",
+              "value": -75
+            }
+          ],
+          "key": "attack",
+          "method": 2,
+          "ignored": false
+        },
+        {
+          "type": "ephemeral-effect",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+          "phase": "initial",
+          "predicate": [
+            {"not": "effect:affliction:transient"}
+          ],
+          "affects": "origin",
+          "alterations": [
+            {
+              "method": 5,
+              "property": "system.changes.0.value",
+              "value": -75
+            }
+          ],
+          "key": "attack",
+          "method": 2,
           "ignored": false
         }
       ],
