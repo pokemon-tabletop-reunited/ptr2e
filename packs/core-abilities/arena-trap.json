@@ -65,7 +65,7 @@
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.mH3mrRSypE6N3USQ",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.mH3mrRSypE6N3USQ",
                 "affects": "enemies",
                 "events": [
                   "enter"
@@ -88,11 +88,11 @@
               "texture": null
             },
             "mergeExisting": true,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-option",
-            "key": "",
             "value": "arena-trap:active",
             "predicate": [],
             "domain": "all",
@@ -101,9 +101,11 @@
             "count": false,
             "state": true,
             "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "method": 2
+            "suboptions": []
           }
         ],
         "slug": null,
@@ -117,7 +119,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -129,13 +133,17 @@
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.iotInErMkWzaKpKP.ActiveEffect.ZpcUpVdnRuoUIMDr",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1765275704215,
-        "modifiedTime": 1772808782967,
-        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
-      }
+        "modifiedTime": 1779617019495,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }
