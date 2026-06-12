@@ -1,0 +1,53 @@
+{
+  "name": "Charged (Fairy)",
+  "type": "affliction",
+  "_id": "chargedFairy0000",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "key": "fairy-attack-power",
+        "value": 100,
+        "predicate": [],
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      }
+    ],
+    "slug": null,
+    "traits": [
+      "pseudo-affliction"
+    ],
+    "removeAfterCombat": true,
+    "removeOnRecall": false,
+    "removeAfterAttacking": true,
+    "removeAfterAttacked": false,
+    "stacks": 0,
+    "priority": 50,
+    "formula": "",
+    "type": "damage",
+    "description": "<p>An afflicted creature's next damaging @Trait[fairy] Attack has +100% Power.</p>"
+  },
+  "disabled": false,
+  "duration": {
+    "units": "turns",
+    "value": 5,
+    "expiry": "turnEnd"
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": true,
+  "statuses": [],
+  "sort": 0,
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.350",
+    "systemId": "ptr2e",
+    "systemVersion": "1.4.6.beta",
+    "lastModifiedBy": null
+  }
+}
