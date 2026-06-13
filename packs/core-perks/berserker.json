@@ -7,7 +7,7 @@
   "system": {
     "actions": [],
     "slug": "berserker",
-    "description": "<p>Gain the [Berserker] trait and gain access to the [Berserker] Tutor List. The user learns Rage, Work Up, and Frenzy Rush.</p>",
+    "description": "<p>The user gains @Trait[berserker] and they learn Rage, Work Up, and Thrash.</p><p>The user gains @Affliction[frenzy 2] when they use Rage.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -116,7 +116,7 @@
           {
             "type": "grant-item",
             "key": "",
-            "value": "Compendium.ptr2e.core-moves.Item.ZNl94X4B6JuegB6H",
+            "value": "Compendium.ptr2e.core-moves.Item.V0gKOUVQKOneScn0",
             "predicate": [],
             "priority": null,
             "ignored": false,
@@ -149,6 +149,24 @@
               "grantee": "detach",
               "granter": "cascade"
             },
+            "method": 2
+          },{
+            "type": "roll-effect",
+            "key": "rage-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
             "method": 2
           }
         ],

@@ -3,13 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [],
-    "cost": 2,
-    "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
+    "cost": 3,
+    "description": "<p>While affected by @Affliction[enraged] the user has +10% Power on their Attacks that have each of @Trait[dash], @Trait[recoil], @Trait[crash], or @Trait[flinch]. While @Affliction[frenzy], these bonuses increase by +5%, and the user has a 5% chance to gain @Affliction[frenzy 1] when using an Attack for each of these Traits.</p>",
     "actions": [
       {
         "name": "Berserk",
         "slug": "berserk",
-        "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
+        "description": "<p>While affected by @Affliction[enraged] the user has +10% Power on their Attacks that have each of @Trait[dash], @Trait[recoil], @Trait[crash], or @Trait[flinch]. While @Affliction[frenzy], these bonuses increase by +5%, and the user has a 5% chance to gain @Affliction[frenzy 1] when using an Attack for each of these Traits.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
@@ -88,26 +88,272 @@
       "system": {
         "changes": [
           {
-            "type": "basic",
-            "key": "system.attributes.atk.stage",
-            "value": 1,
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 40,
             "predicate": [
-              "effect:affliction:enraged"
+              "effect:affliction:enraged",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 4
+              }
             ],
+            "label": "Berserk (Damage)",
             "priority": null,
             "ignored": false,
+            "hideIfDisabled": false,
             "method": 2
           },
           {
-            "type": "basic",
-            "key": "system.attributes.spa.stage",
-            "value": 1,
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 30,
             "predicate": [
-              "effect:affliction:enraged"
+              "effect:affliction:enraged",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 3
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 20,
+            "predicate": [
+              "effect:affliction:enraged",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 2
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 10,
+            "predicate": [
+              "effect:affliction:enraged",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 1
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 60,
+            "predicate": [
+              "effect:affliction:frenzy",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 4
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 45,
+            "predicate": [
+              "effect:affliction:frenzy",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 3
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 30,
+            "predicate": [
+              "effect:affliction:frenzy",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 2
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "damaging-attack-power",
+            "value": 15,
+            "predicate": [
+              "effect:affliction:frenzy",
+              {
+                "xof": [
+                  "self:action:trait:dash",
+                  "self:action:trait:recoil",
+                  "self:action:trait:crash",
+                  "self:action:trait:flinch"
+                ],
+                "x": 1
+              }
+            ],
+            "label": "Berserk (Damage)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },          
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy",
+              "self:action:trait:dash"
+            ],
+            "chance": 5,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 1,
+                "method": 5
+              }
             ],
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "label": "Berserker Frenzy"
+          },          
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy",
+              "self:action:trait:recoil"
+            ],
+            "chance": 5,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 1,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "label": "Berserker Frenzy"
+          },          
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy",
+              "self:action:trait:crash"
+            ],
+            "chance": 5,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 1,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "label": "Berserker Frenzy"
+          },          
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy",
+              "self:action:trait:flinch"
+            ],
+            "chance": 5,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 1,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "label": "Berserker Frenzy"
           }
         ],
         "slug": null,
@@ -121,7 +367,7 @@
         "units": "turns",
         "value": null
       },
-      "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
+      "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,

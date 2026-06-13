@@ -1880,6 +1880,48 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.enraged"
   },
   {
+    "id": "frenzy",
+    "name": "PTR2E.Effect.Statuses.Labels.frenzy",
+    "img": "icons/weapons/axes/axe-broad-chipped-glow-yellow.webp",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 3
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "label": "Frenzy (ATK Up)",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ZGwaMlzUwkSuCPyH",
+          "predicate": [
+            {
+              "not": "targets:self"
+            }
+          ],
+          "chance": 100,
+          "isFixedChance": false,
+          "affects": "defensive",
+          "alterations": [],
+          "dontMerge": false,
+          "ignored": false,
+          "method": 2
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "attention"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.frenzy"
+  },
+  {
     "id": "charmed",
     "name": "PTR2E.Effect.Statuses.Labels.charmed",
     "img": "systems/ptr2e/img/conditions/infatuated.svg",

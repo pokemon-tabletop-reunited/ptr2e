@@ -7,12 +7,12 @@
   "system": {
     "actions": [],
     "slug": "seeing-red",
-    "description": "<p>When you would gain @Affliction[enraged], the set duration increases by +3 Stacks.<br><br>Connection: Rage</p>",
+    "description": "<p>Connection - Rage. When the user is hit by a Physical- or Special-Category Attack while @Affliction[frenzy], they have a 20% chance to gain @Affliction[frenzy 1]. If the user is hit by a Critical Hit while they have @Affliction[frenzy], they gain @Affliction[frenzy 2].</p>",
     "traits": [],
     "prerequisites": [
       "trait:berserker"
     ],
-    "cost": 2,
+    "cost": 4,
     "_migration": {
       "version": null,
       "previous": null
@@ -90,19 +90,48 @@
             "method": 2
           },
           {
-            "type": "effect-alteration",
-            "key": "enraged-received",
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "chance": 20,
+            "affects": "defensive",
+            "dontMerge": false,
             "alterations": [
               {
                 "property": "effects.0.duration.turns",
-                "value": 3,
-                "method": 2
+                "value": 1,
+                "method": 5
               }
             ],
-            "value": 0,
-            "predicate": [],
+            "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "label": "Seeing Red"
+          },
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "chance": 100,
+            "affects": "defensive",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "effects.0.duration.turns",
+                "value": 2,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "label": "Seeing Red"
           }
         ],
         "slug": null,

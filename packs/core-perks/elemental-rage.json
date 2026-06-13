@@ -9,8 +9,8 @@
     "actions": [
       {
         "name": "Elemental Rage",
-        "slug": "elemental-rage-action-1",
-        "description": "<p>This perk confers the [Adaptable] trait to your Rage move.</p>",
+        "slug": "elemental-rage",
+        "description": "<p>The user’s Rage gains @Trait[adaptable]. The user’s @Trait[adaptable] Attacks deal +30% damage while affected by @Affliction[enraged] or @Affliction[frenzy].</p>",
         "traits": [],
         "type": "passive",
         "img": "systems/ptr2e/img/icons/physical_icon.png",
@@ -24,12 +24,12 @@
         "hidden": true
       }
     ],
-    "description": "<p>This perk confers the [Adaptable] trait to your Rage move.</p>",
+    "description": "<p>The user’s Rage gains @Trait[adaptable]. The user’s @Trait[adaptable] Attacks deal +30% damage while affected by @Affliction[enraged] or @Affliction[frenzy].",
     "traits": [],
     "prerequisites": [
       "item:move:rage"
     ],
-    "cost": 1,
+    "cost": 2,
     "slug": "elemental-rage",
     "nodes": [
       {
@@ -74,6 +74,73 @@
   },
   "_id": "JuIFxWj59MwTL1Og",
   "img": "systems/ptr2e/img/icons/physical_icon.png",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Elemental Rage",
+      "type": "passive",
+      "_id": "tCvZas4IwGvTT5nO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "alter-attack",
+            "key": "rage-attack",
+            "value": "adaptable",
+            "predicate": [],
+            "ignored": false,
+            "property": "traits",
+            "definition": [],
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "adaptable-trait-attack-damage",
+            "value": 30,
+            "predicate": [
+              {
+                "or":[
+                  "effect:affliction:enraged",
+                  "effect:affliction:frenzy"
+                ]
+              }
+            ],
+            "label": "Elemental Rage",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765237554503,
+        "modifiedTime": 1765237621181,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
   "folder": "zrVtKATNxzLNxTUa"
 }
