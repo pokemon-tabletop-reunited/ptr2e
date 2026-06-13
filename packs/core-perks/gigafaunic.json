@@ -18,7 +18,12 @@
     "description": "<p>The user’s Base HP increases by +30% (min 10, max 40), their SPD is cut by 15%, their other Stats increase by 10%, and Actions targeting the user have +9 Accuracy.</p><p>Attacks from non-allied creatures that are at least 2 Size Categories smaller than the user deal have -1 CRIT and -15% EHR. The user's Attacks targeting these creatures deal 10% more damage and their @Trait[contact] Attacks targeting these creatures gain @Trait[crushing].</p>",
     "traits": [],
     "prerequisites": [
-      "Size: Gigantic or larger"
+      {
+        "gte": [
+          "{actor|system.details.size.heightClass}",
+          6
+        ]
+      }
     ],
     "autoUnlock": [],
     "cost": 3,
@@ -34,11 +39,17 @@
       {
         "x": 145,
         "y": 31,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "powerlifter"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]
@@ -58,7 +69,8 @@
             "value": "max(40,min(10,system.attributes.hp.base * 0.3))",
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -66,7 +78,8 @@
             "value": 0.85,
             "predicate": [],
             "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -74,7 +87,8 @@
             "value": 0.1,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -82,7 +96,8 @@
             "value": 0.1,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -90,7 +105,8 @@
             "value": 0.1,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -98,7 +114,8 @@
             "value": 0.1,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -108,7 +125,8 @@
             "label": "Megafaunic (Acc)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -118,7 +136,8 @@
             "label": "Megafaunic (Acc)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-option",
@@ -133,7 +152,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -151,7 +171,8 @@
             "label": "Gigafaunic (CRIT)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial"
           },
           {
             "type": "percentile-modifier",
@@ -169,7 +190,8 @@
             "label": "Gigafaunic (Dmg)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "alter-attack",
@@ -187,7 +209,8 @@
             "property": "traits",
             "definition": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-effect",
@@ -211,7 +234,8 @@
               }
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-effect",
@@ -235,7 +259,8 @@
               }
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -249,7 +274,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -261,13 +288,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "RSC2IFEHDG4DWUt5"
 }

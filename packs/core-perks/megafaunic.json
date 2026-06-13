@@ -17,7 +17,8 @@
             "value": "max(25,min(5,system.attributes.hp.base * 0.2))",
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -25,7 +26,8 @@
             "value": 0.85,
             "predicate": [],
             "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -33,7 +35,8 @@
             "value": 0.05,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -41,7 +44,8 @@
             "value": 0.05,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -49,7 +53,8 @@
             "value": 0.05,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -57,7 +62,8 @@
             "value": 0.05,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -67,7 +73,8 @@
             "label": "Megafaunic (Acc)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -77,7 +84,8 @@
             "label": "Megafaunic (Acc)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-option",
@@ -92,7 +100,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -110,7 +119,8 @@
             "label": "Megafaunic (Dmg)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial"
           },
           {
             "type": "percentile-modifier",
@@ -128,7 +138,8 @@
             "label": "Megafaunic (Dmg)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "percentile-modifier",
@@ -146,7 +157,8 @@
             "label": "Megafaunic (Acc)",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-effect",
@@ -170,7 +182,8 @@
               }
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-effect",
@@ -194,7 +207,8 @@
               }
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -208,7 +222,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -220,13 +236,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
         "createdTime": 1772806907306,
         "modifiedTime": 1772810820929,
         "lastModifiedBy": "Bk6N5iKyebvEVXhL"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "system": {
@@ -246,7 +266,12 @@
     "description": "<p>The user’s Base HP increases by +20% (min 5, max 25), their SPD is cut by 15%, their other Stats increase by 5%, and Actions targeting the user have +6 Accuracy.</p><p>Attacks from non-allied creatures that are at least 2 Size Categories smaller than the user deal 15% less damage and have -10% EHR. The user's Attacks targeting these creatures have +15% Accuracy and deal 15% more damage.</p>",
     "traits": [],
     "prerequisites": [
-      "Size: Large or larger"
+      {
+        "gte": [
+          "{actor|system.details.size.heightClass}",
+          4
+        ]
+      }
     ],
     "autoUnlock": [],
     "cost": 3,
