@@ -749,7 +749,7 @@
         {
           "type": "basic",
           "key": "system.modifiers.effectHitRate",
-          "value": "10-20*@effect.system.stacks",
+          "value": "15-25*@effect.system.stacks",
           "predicate": [],
           "label": "Weary (EHR)",
           "method": 2,
@@ -760,7 +760,7 @@
         {
           "type": "basic",
           "key": "system.modifiers.effectResistance",
-          "value": "10-15*@effect.system.stacks",
+          "value": "15-20*@effect.system.stacks",
           "predicate": [],
           "label": "Weary (RES)",
           "method": 2,
@@ -2140,19 +2140,43 @@
         {
           "type": "flat-modifier",
           "key": "attack-damage-percentile",
-          "value": "-((@effect.system.stacks * 15) + (max(0, (@effect.system.stacks - 2)) * 5) + (max(0, (@effect.system.stacks - 3)) * 10))"
+          "value": "max(-90,-10-20*@effect.system.stacks)"
         },
         {
           "type": "basic",
           "key": "system.modifiers.skills",
-          "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
+          "value": "max(-0.6,-0.15*@effect.system.stacks)",
           "method": 2
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
-          "method": 2
+          "key": "system.modifiers.speMultiplier",
+          "value": "min(@effect.system.stacks,4)*@actor.system.modifiers.speMultiplier*-0.2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 99,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "max(-30,-10-5*@effect.system.stacks)",
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectHitRate",
+          "value": "max(-70,-10-15*@effect.system.stacks)",
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "alter-attack",
@@ -2180,36 +2204,6 @@
           "key": "system.modifiers.movement",
           "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
           "method": 2
-        },
-        {
-          "type": "grant-effect",
-          "value": "unlucky",
-          "reevaluateOnUpdate": true,
-          "allowDuplicate": false,
-          "onDeleteActions": {
-            "grantee": "restrict",
-            "granter": "cascade"
-          },
-          "alterations": [
-            {
-              "method": 5,
-              "property": "type",
-              "value": "passive"
-            },
-            {
-              "method": 5,
-              "property": "duration.turns",
-              "value": 0
-            }
-          ],
-          "predicate": [
-            {
-              "gt": [
-                "{effect|system.stacks}",
-                1
-              ]
-            }
-          ]
         }
       ],
       "traits": [
