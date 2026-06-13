@@ -10,7 +10,7 @@
           "friendly"
         ],
         "name": "Guard Down (Entry)",
-        "slug": "guard-down",
+        "slug": "guard-down-entry",
         "type": "attack",
         "cost": {
           "activation": "free"
@@ -26,7 +26,8 @@
           "dark"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       },
       {
         "traits": [
@@ -52,10 +53,11 @@
           "dark"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       }
     ],
-    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down] and @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down-active] actions.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down-active].</p>",
     "traits": [
       "social",
       "friendly"
@@ -88,7 +90,7 @@
             "phase": "initial",
             "predicate": [],
             "alterations": [],
-            "key": "guard-down-attack",
+            "key": "guard-down-entry-attack",
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
@@ -98,11 +100,25 @@
           },
           {
             "type": "roll-note",
-            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down]!",
+            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.WTCc949kqybFx9TU.Actions.guard-down]{Guard Down}!",
             "phase": "initial",
             "predicate": [],
             "key": "combat-enter",
             "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
+            "phase": "initial",
+            "predicate": [],
+            "alterations": [],
+            "key": "guard-down-active-attack",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "dontMerge": false,
             "method": 2,
             "ignored": false
           }
@@ -133,11 +149,11 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1779365985197,
-        "modifiedTime": 1779366049443,
+        "modifiedTime": 1781364483216,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,
