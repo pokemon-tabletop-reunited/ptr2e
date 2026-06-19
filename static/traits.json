@@ -1588,6 +1588,23 @@
     "description": "This creature can glimpse the future. The creature can spend 4 PP, providing a +20 Occult or Navigate Bonus to reduce the Danger Clock by 1 Span. The Danger Clock is always visible to this creature. \nSUBJECT TO CHANGE"
   },
   {
+    "slug": "prodigious",
+    "label": "Prodigious",
+    "related": [],
+    "description": "This creature possesses exceptionally massive or hard appendages or torso.  The user can access the [Prodigious] Tutor List and may add the @Trait[hammer] trait to its @Trait[adaptable] @Trait[contact] attacks.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
+        "property": "traits",
+        "method": "2",
+        "value": "hammer"
+      }
+    ]
+  },
+  {
     "slug": "propulsion",
     "label": "Propulsion",
     "related": [],
