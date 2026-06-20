@@ -1,0 +1,143 @@
+{
+  "name": "Sparrowmon (Backpack)",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "sparrowmon-backpack",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [
+      "digimon",
+      "ufo"
+    ],
+    "actions": [],
+    "description": "<p>It's not Jogress! Sparrowmon has affixed itself to your back as a wing pack, and lent you some of its firepower.</p><p>Sparrowmon confers the [UFO] trait and a Flight Movement Allowance of 15m to a creature when equipped in the Backpack item slot. A single Sparrowmon may be equipped as a Backpack and Held item by a single [Wielder] user.</p>",
+    "container": null,
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "slot": "backpack",
+      "handsHeld": null
+    },
+    "grade": null,
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false,
+      "range": {
+        "target": "creature",
+        "distance": 10,
+        "unit": "m"
+      }
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "ammoType": [],
+    "ammo": null,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "c6mddzVDMPd7czDp",
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Sparrowmon (Backpack)",
+      "type": "passive",
+      "_id": "USC98kOfyZD5itoc",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "value": "UFO",
+            "phase": "initial",
+            "predicate": [],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.flight.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [],
+            "method": 4,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1781911022134,
+        "modifiedTime": 1781911066131,
+        "lastModifiedBy": "ni8iNXQ1Z3n0mtG9",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "ni8iNXQ1Z3n0mtG9": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.363",
+    "systemId": "ptr2e",
+    "systemVersion": "1.7.6.beta",
+    "createdTime": 1781836886531,
+    "modifiedTime": 1781917400057,
+    "lastModifiedBy": "ni8iNXQ1Z3n0mtG9",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  }
+}
