@@ -539,11 +539,43 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const actorCatMod = actor.size?.rank ?? 1;
     const thrownCatMod = target.size?.rank ?? 1;
 
-    const power = powerModifier.modifier = Math.max(25, Math.floor(17 + (Math.pow(actorLift + 10, 0.5) / 5) * (3 + targetWC / 6) * (2 + thrownCatMod / 6) * (1.5 + actorWC / 18) * (1.25 + actorCatMod / 18)));
+    const power = powerModifier.modifier = Math.max(25, 
+      Math.floor
+      (
+        10 + 
+        7.5 * 
+        (0.15 + actorLift / 75) * 
+        (2 + targetWC / 2) * 
+        (1 + thrownCatMod / 4) * 
+        (0.5 + actorWC / 16) *
+        (0.5 + actorCatMod / 8)
+      )
+    );
 
-    const accuracy = Math.min(100, Math.floor(10 + 50 * ((1 + actorWC / 18) * (1 + actorCatMod / 6) * (1 + actorLift / 200) / ((1 + targetWC / 9) * (1 + thrownCatMod / 3)))));
+    const accuracy = Math.min(100,
+      Math.floor(
+        25 + 
+        75 * 
+        (
+          (1 + actorWC / 32) * 
+          (1 + actorCatMod / 8) * 
+          (0.45 + actorLift / 150)  / 
+          (1 + targetWC / 9) * 
+          (1 + thrownCatMod / 3)
+        )
+      )
+    );
 
-    const range = Math.max(1, Math.floor(((Math.pow(actorLift + 10, 2 / 3) / 3) - 0.5) * Math.pow(((1.05 * actorWC) + (1.35 * actorCatMod)) / ((1.35 * targetWC) + (1.7 * thrownCatMod)), 0.5) * ((3 + (actorCatMod / 3)) / 10)));
+    const range = Math.max(1, 
+      Math.floor
+      (
+        (2 + (actorLift/20)) * 
+        (1 + 0.075 * actorWC) * 
+        (1 + 0.375 * actorCatMod) /
+        (1 + 0.25 * targetWC) /
+        (1 + 0.5 * thrownCatMod)
+      )
+    );
     return {power, accuracy, range};
   }
 
