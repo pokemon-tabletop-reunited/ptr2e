@@ -543,25 +543,25 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       Math.floor
       (
         10 + 
-        7.5 * 
-        (0.15 + actorLift / 75) * 
-        (2 + targetWC / 2) * 
-        (1 + thrownCatMod / 4) * 
-        (0.5 + actorWC / 16) *
-        (0.5 + actorCatMod / 8)
+        5 * 
+        (1 + actorLift / 300) * 
+        (3 + targetWC / 4) * 
+        (1 + thrownCatMod / 16) * 
+        (1 + actorWC / 32) *
+        (1 + actorCatMod / 16)
       )
     );
 
     const accuracy = Math.min(100,
       Math.floor(
-        25 + 
-        75 * 
+        20 + 
+        20 * 
         (
           (1 + actorWC / 32) * 
           (1 + actorCatMod / 8) * 
-          (0.45 + actorLift / 150)  / 
-          (1 + targetWC / 9) * 
-          (1 + thrownCatMod / 3)
+          (1 + actorLift / 60)  / 
+          (1 + targetWC / 8) * 
+          (1 + thrownCatMod / 12)
         )
       )
     );
@@ -569,12 +569,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const range = Math.max(1, 
       Math.floor
       (
-        (2 + (actorLift/20)) * 
-        (1 + 0.075 * actorWC) * 
-        (1 + 0.375 * actorCatMod) /
-        (1 + 0.25 * targetWC) /
-        (1 + 0.5 * thrownCatMod)
-      )
+        100 * 
+        (1 + (actorLift/40)) * 
+        (1 + 0.1 * actorWC) * 
+        (1 + 0.5 * actorCatMod) /
+        (1 + 0.125 * targetWC) /
+        (1 + 0.4 * thrownCatMod)
+      ) / 100
     );
     return {power, accuracy, range};
   }
