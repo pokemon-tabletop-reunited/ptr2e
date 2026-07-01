@@ -18,7 +18,12 @@
     "description": "<p>The user’s Base HP increases by +30% (min 10, max 40), their SPD is cut by 15%, their other Stats increase by 10%, and Actions targeting the user have +9 Accuracy.</p><p>Attacks from non-allied creatures that are at least 2 Size Categories smaller than the user deal have -1 CRIT and -15% EHR. The user's Attacks targeting these creatures deal 10% more damage and their @Trait[contact] Attacks targeting these creatures gain @Trait[crushing].</p>",
     "traits": [],
     "prerequisites": [
-      "Size: Gigantic or larger"
+      {
+        "gte": [
+          "{actor|system.details.size.heightClass}",
+          6
+        ]
+      }
     ],
     "autoUnlock": [],
     "cost": 3,
@@ -34,11 +39,17 @@
       {
         "x": 145,
         "y": 31,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "powerlifter"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ]
@@ -55,50 +66,56 @@
           {
             "type": "basic",
             "key": "system.attributes.hp.base",
-            "value": "max(40,min(10,system.attributes.hp.base * 0.3))",
+            "value": "max(40,min(10,@actor.system.attributes.hp.base * 0.3))",
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
             "value": 0.85,
             "predicate": [],
-            "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.atkMultiplier",
             "value": 0.1,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.defMultiplier",
             "value": 0.1,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.spaMultiplier",
             "value": 0.1,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.spdMultiplier",
             "value": 0.1,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-modifier",
@@ -106,9 +123,10 @@
             "value": 9,
             "predicate": [],
             "label": "Megafaunic (Acc)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "ephemeral-modifier",
@@ -116,13 +134,13 @@
             "value": 9,
             "predicate": [],
             "label": "Megafaunic (Acc)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "roll-option",
-            "key": "",
             "value": "gigafaunic-sizes:active",
             "predicate": [],
             "domain": "all",
@@ -131,9 +149,11 @@
             "count": false,
             "state": true,
             "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "method": 2
+            "suboptions": []
           },
           {
             "type": "ephemeral-modifier",
@@ -149,9 +169,10 @@
               }
             ],
             "label": "Gigafaunic (CRIT)",
+            "method": 1,
+            "phase": "initial",
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 1
+            "hideIfDisabled": false
           },
           {
             "type": "percentile-modifier",
@@ -167,9 +188,10 @@
               }
             ],
             "label": "Gigafaunic (Dmg)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "alter-attack",
@@ -186,13 +208,14 @@
             ],
             "property": "traits",
             "definition": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
             "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
             "predicate": [
               "gigafaunic-sizes:active",
               {
@@ -205,18 +228,19 @@
             "affects": "origin",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": -15,
-                "method": 5
+                "value": -15
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
             "key": "generic",
-            "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
             "predicate": [
               "gigafaunic-sizes:active",
               {
@@ -229,13 +253,14 @@
             "affects": "origin",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": -15,
-                "method": 5
+                "value": -15
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -249,7 +274,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -261,13 +288,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.6.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1782868099141,
+        "modifiedTime": 1782868110902
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "RSC2IFEHDG4DWUt5"
 }
