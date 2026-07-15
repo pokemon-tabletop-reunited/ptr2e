@@ -4,12 +4,12 @@
   "system": {
     "prerequisites": [],
     "cost": 3,
-    "description": "<p>While affected by @Affliction[enraged] the user has +10% Power on their Attacks that have each of @Trait[dash], @Trait[recoil], @Trait[crash], or @Trait[flinch]. While @Affliction[frenzy], these bonuses increase by +5%, and the user has a 5% chance to gain @Affliction[frenzy 1] when using an Attack for each of these Traits.</p>",
+    "description": "<p>While affected by @Affliction[enraged] the user has +10% Power on their Attacks that have each of @Trait[dash], @Trait[recoil], @Trait[crash], or @Trait[flinch]. While @Affliction[frenzy], these bonuses increase by +5%, and the user's chance to gain @Affliction[frenzy 1] when using a Physical- or Special-Category Attack is increased by +5% for each of these Traits.</p>",
     "actions": [
       {
         "name": "Berserk",
         "slug": "berserk",
-        "description": "<p>While affected by @Affliction[enraged] the user has +10% Power on their Attacks that have each of @Trait[dash], @Trait[recoil], @Trait[crash], or @Trait[flinch]. While @Affliction[frenzy], these bonuses increase by +5%, and the user has a 5% chance to gain @Affliction[frenzy 1] when using an Attack for each of these Traits.</p>",
+        "description": "<p>While affected by @Affliction[enraged] the user has +10% Power on their Attacks that have each of @Trait[dash], @Trait[recoil], @Trait[crash], or @Trait[flinch]. While @Affliction[frenzy], these bonuses increase by +5%, and the user's chance to gain @Affliction[frenzy 1] when using a Physical- or Special-Category Attack is increased by +5% for each of these Traits.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
@@ -265,7 +265,7 @@
           },          
           {
             "type": "roll-effect",
-            "key": "damaging-attack",
+            "key": "damaging-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
               "effect:affliction:frenzy",
@@ -288,7 +288,7 @@
           },          
           {
             "type": "roll-effect",
-            "key": "damaging-attack",
+            "key": "damaging-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
               "effect:affliction:frenzy",
@@ -311,7 +311,7 @@
           },          
           {
             "type": "roll-effect",
-            "key": "damaging-attack",
+            "key": "damaging-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
               "effect:affliction:frenzy",
@@ -334,7 +334,7 @@
           },          
           {
             "type": "roll-effect",
-            "key": "damaging-attack",
+            "key": "damaging-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
               "effect:affliction:frenzy",
