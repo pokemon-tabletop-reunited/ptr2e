@@ -542,13 +542,12 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const power = powerModifier.modifier = Math.max(25, 
       Math.floor
       (
-        10 + 
         5 * 
-        (1 + actorLift / 300) * 
+        (1 + actorLift / 50) * 
         (3 + targetWC / 4) * 
-        (1 + thrownCatMod / 16) * 
-        (1 + actorWC / 32) *
-        (1 + actorCatMod / 16)
+        (1.25 - thrownCatMod / 24) * 
+        (0.875 + actorWC / 32) *
+        (0.75 + actorCatMod / 24)
       )
     );
 
@@ -557,24 +556,23 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         20 + 
         20 * 
         (
-          (1 + actorWC / 32) * 
-          (1 + actorCatMod / 8) * 
-          (1 + actorLift / 60)  / 
-          (1 + targetWC / 8) * 
+          (1 + actorWC / 48) * 
+          (1 + actorCatMod / 36) * 
+          (actorLift / 50)  *
+          (1.5 - targetWC / 12) * 
           (1 + thrownCatMod / 12)
         )
       )
     );
 
     const range = Math.max(1, 
-      Math.floor
-      (
+      Math.floor(
         100 * 
-        (1 + (actorLift/40)) * 
-        (1 + 0.1 * actorWC) * 
-        (1 + 0.5 * actorCatMod) /
-        (1 + 0.125 * targetWC) /
-        (1 + 0.4 * thrownCatMod)
+        (0.25 + actorLift/50) * 
+        (1 + actorWC/48) * 
+        (1 + actorCatMod/16) *
+        (1 - targetWC / 24) *
+        (2 - thrownCatMod / 6)
       ) / 100
     );
     return {power, accuracy, range};
