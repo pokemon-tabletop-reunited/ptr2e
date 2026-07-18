@@ -108,6 +108,23 @@
             "ignored": false,
             "hideIfDisabled": false,
             "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "rage-attack-damage",
+            "value": 30,
+            "predicate": [
+              {
+                "or":[
+                  "effect:affliction:enraged",
+                  "effect:affliction:frenzy"
+                ]
+              }
+            ],
+            "label": "Elemental Rage",
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
           }
         ],
         "slug": null,

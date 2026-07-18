@@ -89,87 +89,12 @@
         "changes": [
           {
             "type": "percentile-modifier",
-            "key": "damaging-attack-power",
-            "value": 40,
-            "predicate": [
-              "effect:affliction:enraged",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 4
-              }
-            ],
-            "label": "Berserk (Damage)",
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          },
-          {
-            "type": "percentile-modifier",
-            "key": "damaging-attack-power",
-            "value": 30,
-            "predicate": [
-              "effect:affliction:enraged",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 3
-              }
-            ],
-            "label": "Berserk (Damage)",
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          },
-          {
-            "type": "percentile-modifier",
-            "key": "damaging-attack-power",
-            "value": 20,
-            "predicate": [
-              "effect:affliction:enraged",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 2
-              }
-            ],
-            "label": "Berserk (Damage)",
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          },
-          {
-            "type": "percentile-modifier",
-            "key": "damaging-attack-power",
+            "key": "dash-trait-attack-power",
             "value": 10,
             "predicate": [
-              "effect:affliction:enraged",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 1
-              }
+              "effect:affliction:enraged"
             ],
-            "label": "Berserk (Damage)",
+            "label": "Berserk (Dash)",
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
@@ -177,21 +102,12 @@
           },
           {
             "type": "percentile-modifier",
-            "key": "damaging-attack-power",
-            "value": 60,
+            "key": "crash-trait-attack-power",
+            "value": 10,
             "predicate": [
-              "effect:affliction:frenzy",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 4
-              }
+              "effect:affliction:enraged"
             ],
-            "label": "Berserk (Damage)",
+            "label": "Berserk (Crash)",
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
@@ -199,21 +115,12 @@
           },
           {
             "type": "percentile-modifier",
-            "key": "damaging-attack-power",
-            "value": 45,
+            "key": "recoil-trait-attack-power",
+            "value": 10,
             "predicate": [
-              "effect:affliction:frenzy",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 3
-              }
+              "effect:affliction:enraged"
             ],
-            "label": "Berserk (Damage)",
+            "label": "Berserk (Recoil)",
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
@@ -221,21 +128,12 @@
           },
           {
             "type": "percentile-modifier",
-            "key": "damaging-attack-power",
-            "value": 30,
+            "key": "flinch-trait-attack-power",
+            "value": 10,
             "predicate": [
-              "effect:affliction:frenzy",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 2
-              }
+              "effect:affliction:enraged"
             ],
-            "label": "Berserk (Damage)",
+            "label": "Berserk (Flinch)",
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
@@ -243,40 +141,83 @@
           },
           {
             "type": "percentile-modifier",
-            "key": "damaging-attack-power",
+            "key": "dash-trait-attack-power",
+            "value": 15,
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "label": "Berserk (Dash)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "crash-trait-attack-power",
+            "value": 15,
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "label": "Berserk (Crash)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "recoil-trait-attack-power",
+            "value": 15,
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "label": "Berserk (Recoil)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "flinch-trait-attack-power",
+            "value": 15,
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "label": "Berserk (Flinch)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "attack-power",
             "value": 15,
             "predicate": [
               "effect:affliction:frenzy",
-              {
-                "xof": [
-                  "self:action:trait:dash",
-                  "self:action:trait:recoil",
-                  "self:action:trait:crash",
-                  "self:action:trait:flinch"
-                ],
-                "x": 1
-              }
+              "item:ability:truant:active"
             ],
-            "label": "Berserk (Damage)",
+            "label": "Berserk (Flinch)",
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false,
             "method": 2
-          },          
+          },   
           {
             "type": "roll-effect",
-            "key": "damaging-attack-effect-chance",
+            "key": "dash-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
-              "effect:affliction:frenzy",
-              "self:action:trait:dash"
+              "effect:affliction:frenzy"
             ],
             "chance": 5,
             "affects": "self",
             "dontMerge": false,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
+                "property": "duration.turns",
                 "value": 1,
                 "method": 5
               }
@@ -288,18 +229,17 @@
           },          
           {
             "type": "roll-effect",
-            "key": "damaging-attack-effect-chance",
+            "key": "crash-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
-              "effect:affliction:frenzy",
-              "self:action:trait:recoil"
+              "effect:affliction:frenzy"
             ],
             "chance": 5,
             "affects": "self",
             "dontMerge": false,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
+                "property": "duration.turns",
                 "value": 1,
                 "method": 5
               }
@@ -311,18 +251,17 @@
           },          
           {
             "type": "roll-effect",
-            "key": "damaging-attack-effect-chance",
+            "key": "recoil-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
-              "effect:affliction:frenzy",
-              "self:action:trait:crash"
+              "effect:affliction:frenzy"
             ],
             "chance": 5,
             "affects": "self",
             "dontMerge": false,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
+                "property": "duration.turns",
                 "value": 1,
                 "method": 5
               }
@@ -331,21 +270,43 @@
             "ignored": false,
             "method": 2,
             "label": "Berserker Frenzy"
-          },          
+          },
           {
             "type": "roll-effect",
-            "key": "damaging-attack-effect-chance",
+            "key": "flinch-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [
-              "effect:affliction:frenzy",
-              "self:action:trait:flinch"
+              "effect:affliction:frenzy"
             ],
             "chance": 5,
             "affects": "self",
             "dontMerge": false,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
+                "property": "duration.turns",
+                "value": 1,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "label": "Berserker Frenzy"
+          },
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack-effect-chance",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy",
+              "item:ability:truant:active"
+            ],
+            "chance": 5,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "duration.turns",
                 "value": 1,
                 "method": 5
               }

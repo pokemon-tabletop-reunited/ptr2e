@@ -150,17 +150,18 @@
               "granter": "cascade"
             },
             "method": 2
-          },{
+          },
+          {
             "type": "roll-effect",
             "key": "rage-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [],
             "chance": 100,
             "affects": "self",
-            "dontMerge": false,
+            "dontMerge": true,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
+                "property": "duration.turns",
                 "value": 2,
                 "method": 5
               }
