@@ -104,7 +104,8 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       worn: "PTR2E.FIELDS.gear.equipped.slot.worn",
       accessory: "PTR2E.FIELDS.gear.equipped.slot.accessory",
       belt: "PTR2E.FIELDS.gear.equipped.slot.belt",
-      backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack"
+      backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack",
+      slotless: "PTR2E.FIELDS.gear.equipped.slot.slotless"
     });
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(traits.reduce((acc, trait) => {
       const traitData = game.ptr.data.traits.getTrait(trait);
@@ -163,6 +164,9 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
     else {
       if(!(entry.fling?.accuracy >= sliders.accuracy.values.min && entry.fling?.accuracy <= sliders.accuracy.values.max)) return false;
     }
+
+    // Carry Slot
+    if(checkboxes.carrySlot.selected.length && !checkboxes.carrySlot.selected.includes(entry.slot)) return false;
 
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
