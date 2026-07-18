@@ -62,55 +62,51 @@
         "changes": [
           {
             "type": "ephemeral-effect",
-            "key": "missile-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [
-              {
-                "not": "attack:original:fling"
-              }
+              "self:action:trait:missile"
             ],
-            "label": "Shurikenjutsu",
             "affects": "self",
             "alterations": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
-            "key": "missile-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [
+              "self:action:trait:missile",
               {
-                "and": [
-                  {
-                    "not": "attack:original:fling"
-                  },
+                "or": [
+                  "item:trait:weapon",
                   "self:action:trait:weapon"
                 ]
               }
             ],
-            "label": "Shurikenjutsu",
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": 5,
-                "method": 5
+                "value": 5
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
-            "key": "missile-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [
+              "self:action:trait:missile",
               {
-                "and": [
-                  {
-                    "not": "attack:original:fling"
-                  },
+                "or": [
+                  "item:trait:ninja",
                   "self:action:trait:ninja"
                 ]
               }
@@ -118,18 +114,19 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": 5,
-                "method": 5
+                "value": 5
               }
             ],
             "label": "Shurikenjutsu",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
-            "key": "fling-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [
               "attack:original:fling"
@@ -137,17 +134,19 @@
             "label": "Shurikenjutsu",
             "affects": "self",
             "alterations": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
-            "key": "fling-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [
+              "attack:original:fling",
               {
-                "and": [
-                  "attack:original:fling",
+                "or": [
+                  "item:trait:weapon",
                   "self:action:trait:weapon"
                 ]
               }
@@ -156,22 +155,24 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": 5,
-                "method": 5
+                "value": 5
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
-            "key": "fling-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
             "predicate": [
+              "attack:original:fling",
               {
-                "and": [
-                  "attack:original:fling",
+                "or": [
+                  "item:trait:ninja",
                   "self:action:trait:ninja"
                 ]
               }
@@ -179,49 +180,48 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": 5,
-                "method": 5
+                "value": 5
               }
             ],
             "label": "Shurikenjutsu",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "missile-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
-              {
-                "not": "attack:original:fling"
-              }
+              "self:action:trait:missile"
             ],
             "chance": 10,
             "isFixedChance": false,
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 20,
-                "method": 5
+                "value": 20
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
             "key": "missile-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
+              "self:action:trait:missile",
               {
-                "and": [
-                  {
-                    "not": "attack:original:fling"
-                  },
+                "or": [
+                  "item:trait:weapon",
                   "self:action:trait:weapon"
                 ]
               }
@@ -231,26 +231,26 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 20,
-                "method": 5
+                "value": 20
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "missile-trait-attack-effect-chance",
+            "key": "attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
+              "self:action:trait:missile",
               {
-                "and": [
-                  {
-                    "not": "attack:original:fling"
-                  },
+                "or": [
+                  "item:trait:ninja",
                   "self:action:trait:ninja"
                 ]
               }
@@ -260,19 +260,20 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 20,
-                "method": 5
+                "value": 20
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
-            "key": "fling-trait-attack",
+            "key": "attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
               "attack:original:fling"
@@ -282,24 +283,26 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 20,
-                "method": 5
+                "value": 20
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
             "key": "fling-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
+              "attack:original:fling",
               {
-                "and": [
-                  "attack:original:fling",
+                "or": [
+                  "item:trait:weapon",
                   "self:action:trait:weapon"
                 ]
               }
@@ -309,24 +312,26 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 20,
-                "method": 5
+                "value": 20
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "roll-effect",
             "key": "fling-trait-attack-effect-chance",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
+              "attack:original:fling",
               {
-                "and": [
-                  "attack:original:fling",
+                "or": [
+                  "item:trait:ninja",
                   "self:action:trait:ninja"
                 ]
               }
@@ -336,15 +341,16 @@
             "affects": "self",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 20,
-                "method": 5
+                "value": 20
               }
             ],
             "dontMerge": false,
             "label": "Shurikenjutsu (Adv)",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -358,7 +364,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -370,13 +378,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.6.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1784402119038,
+        "modifiedTime": 1784402744660
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "khKBbLQNt3gZsdjC"
 }
