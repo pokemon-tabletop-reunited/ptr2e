@@ -11,33 +11,16 @@
         "slug": "the-meaning-of-haste",
         "description": "<p>All allied creatures gain +2 SPD stages for 5 Activations.</p>",
         "traits": [],
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "field",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 6
         },
-        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "predicate": [],
-        "free": true,
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "the-meaning-of-haste",
@@ -94,9 +77,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -108,28 +89,34 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "the-meaning-of-haste-attack",
+            "key": "the-meaning-of-haste-generic",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLZ",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "priority": null,
-            "ignored": false,
             "alterations": [],
             "dontMerge": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -141,14 +128,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.5.1.2",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1736877838885,
-        "modifiedTime": 1736877883752,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX",
+        "modifiedTime": 1784210540583,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
