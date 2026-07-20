@@ -26,11 +26,12 @@
           "fairy"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       },
       {
         "name": "Alluring (Active)",
-        "slug": "alluring-action-active",
+        "slug": "alluring-active",
         "description": "<p>Effect: Valid targets gain -1 EVA stage for 5 activations.</p>",
         "traits": [
           "social",
@@ -52,10 +53,11 @@
         ],
         "category": "status",
         "predicate": [],
-        "accuracy": 100
+        "accuracy": 100,
+        "free": true
       }
     ],
-    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.EgoYwbdN2WxsVoB0.Actions.alluring-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.EgoYwbdN2WxsVoB0.Actions.alluring-action-active] actions.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.EgoYwbdN2WxsVoB0.Actions.alluring-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.EgoYwbdN2WxsVoB0.Actions.alluring-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -87,7 +89,7 @@
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
             "phase": "initial",
             "predicate": [],
-            "key": "{item|link}-attack",
+            "key": "alluring-entry-attack",
             "chance": 100,
             "isFixedChance": false,
             "affects": "target",
@@ -98,11 +100,25 @@
           },
           {
             "type": "roll-note",
-            "value": "{actor|link} enters combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.EgoYwbdN2WxsVoB0.Actions.alluring]",
+            "value": "{actor|link} enters combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.EgoYwbdN2WxsVoB0.Actions.alluring]{Alluring}",
             "phase": "initial",
             "predicate": [],
             "key": "combat-enter",
             "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hIE6W3Y5E9CyHiTy",
+            "phase": "initial",
+            "predicate": [],
+            "key": "alluring-active-attack",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
             "method": 2,
             "ignored": false
           }
@@ -133,11 +149,11 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1779351610014,
-        "modifiedTime": 1779364563971,
+        "modifiedTime": 1781363938114,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,

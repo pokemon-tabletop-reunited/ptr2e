@@ -10,7 +10,7 @@
           "friendly"
         ],
         "name": "Intimidate (Entry)",
-        "slug": "intimidate",
+        "slug": "intimidate-entry",
         "type": "attack",
         "cost": {
           "activation": "free"
@@ -26,7 +26,8 @@
           "dragon"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       },
       {
         "traits": [
@@ -53,10 +54,11 @@
         ],
         "category": "status",
         "predicate": [],
-        "accuracy": 100
+        "accuracy": 100,
+        "free": true
       }
     ],
-    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.8kQ7BwXp1rUCnwkL.Actions.intimidate] and @UUID[Compendium.ptr2e.core-abilities.Item.8kQ7BwXp1rUCnwkL.Actions.intimidate-active] actions.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.8kQ7BwXp1rUCnwkL.Actions.intimidate-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.8kQ7BwXp1rUCnwkL.Actions.intimidate-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -85,7 +87,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "intimidate-attack",
+            "key": "intimidate-entry-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
             "predicate": [],
             "label": "Intimidate",
@@ -106,6 +108,22 @@
             "predicate": [],
             "key": "combat-enter",
             "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "intimidate-active-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "label": "Intimidate",
+            "priority": null,
+            "phase": "initial",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
             "method": 2,
             "ignored": false
           }
@@ -135,11 +153,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1717951545219,
-        "modifiedTime": 1779367304659,
+        "modifiedTime": 1781363827959,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
       },
