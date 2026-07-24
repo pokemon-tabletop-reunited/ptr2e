@@ -170,12 +170,13 @@
     "slug": "bladed",
     "label": "Bladed",
     "related": [],
-    "description": "This creature possesses effective edged limbs, body parts, or tools as part of its anatomy. Confers [Sharp] to @Trait[adaptable] actions, and grants access to the [Bladed] Tutor List.",
+    "description": "This creature possesses effective edged limbs, body parts, or tools as part of its anatomy.  The user can access the [Bladed] Tutor List and may add the @Trait[sharp] trait to its @Trait[adaptable] @Trait[contact] attacks.",
     "type": "automated",
     "changes": [
       {
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
         "property": "traits",
         "method": "2",
         "value": "sharp"
@@ -225,6 +226,23 @@
         "type": "roll-option",
         "domain": "immunities",
         "value": "affliction:drowning"
+      }
+    ]
+  },
+  {
+    "slug": "booter",
+    "label": "Booter",
+    "related": [],
+    "description": "This creature has a powerful limb that can be thrust or swung in quick, powerful bursts, like humanoids can do with their legs. The user can access the [Booter] Tutor List and may add the @Trait[kick] trait to its @Trait[adaptable] @Trait[contact] attacks.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
+        "property": "traits",
+        "method": "2",
+        "value": "kick"
       }
     ]
   },
@@ -367,7 +385,7 @@
     "slug": "deafening",
     "label": "Deafening",
     "related": [],
-    "description": "This creature is capable of being extremely loud, to the point of pain. The user adds the [Sonic] trait to its @Trait[adaptable] attacks. As a Simple Action, the creature can spend 4 PP to give its Sonic Attacks +20% Power and a 10% chance to inflict Suppressed 5 on hit for the next 4 Activations. The creature gains access to the [Deafening] Tutor List.",
+    "description": "<p>This creature is capable of being extremely loud, to the point of pain in listeners, or even physical effects from the produced soundwaves. The user adds the [Sonic] trait to its @Trait[adaptable] attacks, and gains access to the [Deafening] Tutor List.</p><p>The user may utilize <q>Deafening</q> Attacks, where their @Trait[sonic] Attacks have +40% Power, +20% Accuracy, and +10% Base Effect Chance at a cost of @PP[-3] and granting the user @Affliction[delay 15].</p>",
     "type": "automated",
     "changes": [
       {
@@ -376,8 +394,124 @@
         "property": "traits",
         "method": "2",
         "value": "sonic"
+      },
+      {
+        "type": "roll-option",
+        "key": "",
+        "value": "deafening:active",
+        "predicate": [],
+        "domain": "all",
+        "toggleable": true,
+        "count": false,
+        "state": true,
+        "label": "Defeaning Attacks?",
+        "alwaysActive": false,
+        "ignored": false,
+        "suboptions": [],
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "damaging-attack-power",
+        "value": 40,
+        "predicate": [
+          "deafening:active",
+          "self:action:trait:sonic"
+        ],
+        "label": "Defeaning (Pow)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "percentile-modifier",
+        "key": "attack-accuracy",
+        "value": 20,
+        "predicate": [
+          "deafening:active",
+          "self:action:trait:sonic"
+        ],
+        "label": "Defeaning (Acc)",
+        "priority": null,
+        "ignored": false,
+        "hideIfDisabled": false,
+        "method": 2
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.dVXsQ55hDouadYkE",
+        "phase": "initial",
+        "predicate": [
+          "deafening:active",
+          "self:action:trait:sonic"
+        ],
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 10
+          }
+        ],
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+        "label": "Defeaning (Flinch)",
+        "predicate": [
+          "deafening:active",
+          "self:action:trait:sonic"
+        ],
+        "chance": 100,
+        "isFixedChance": true,
+        "dontMerge": true,
+        "affects": "self",
+        "priority": null,
+        "ignored": false,
+        "alterations": [
+          {
+            "property": "system.amount",
+            "value": -15,
+            "method": 5
+          }
+        ],
+        "method": 2
+      },
+      {
+        "type": "roll-effect",
+        "key": "attack",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.LHUTMAC0nCJWDRFt",
+        "label": "Defeaning (PP)",
+        "predicate": [
+          "deafening:active",
+          "self:action:trait:sonic"
+        ],
+        "chance": 100,
+        "isFixedChance": true,
+        "affects": "target",
+        "alterations": [
+          {
+            "property": "system.changes.0.isFlat",
+            "value": "true",
+            "method": 5
+          },
+          {
+            "property": "system.changes.0.value",
+            "value": -3,
+            "method": 5
+          }
+        ],
+        "dontMerge": false,
+        "ignored": false,
+        "method": 2
       }
-    ]
+]
+    
   },
   {
     "slug": "deep-breath",
@@ -929,12 +1063,13 @@
     "slug": "horned",
     "label": "Horned",
     "related": [],
-    "description": "This creature possesses a prominent horn or spike. Confers [Horn] to @Trait[adaptable] actions. Grants access to the [Horn] Tutor list.",
+    "description": "This creature possesses a prominent horn or spike. The user can access the [Horned] Tutor List and may add the @Trait[horn] trait to its @Trait[adaptable] @Trait[contact] attacks.",
     "type": "automated",
     "changes": [
       {
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
         "property": "traits",
         "method": "2",
         "value": "horn"
@@ -1310,6 +1445,23 @@
     "type": "narrative"
   },
   {
+    "slug": "mouthy",
+    "label": "Mouthy",
+    "related": [],
+    "description": "This creature has an advanced and developed mouth (or something resembling one) that allows them to bite, chew, rip and tear with decent offensive effectiveness. The user can access the [Mouthy] Tutor List and may add the @Trait[jaw] trait to its @Trait[adaptable] @Trait[contact] attacks.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
+        "property": "traits",
+        "method": "2",
+        "value": "jaw"
+      }
+    ]
+  },
+  {
     "slug": "mud-runner",
     "label": "Mud Runner",
     "related": [],
@@ -1446,6 +1598,23 @@
     "description": "This creature can glimpse the future. The creature can spend 4 PP, providing a +20 Occult or Navigate Bonus to reduce the Danger Clock by 1 Span. The Danger Clock is always visible to this creature. \nSUBJECT TO CHANGE"
   },
   {
+    "slug": "prodigious",
+    "label": "Prodigious",
+    "related": [],
+    "description": "This creature possesses exceptionally massive or hard appendages or torso.  The user can access the [Prodigious] Tutor List and may add the @Trait[hammer] trait to its @Trait[adaptable] @Trait[contact] attacks.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
+        "property": "traits",
+        "method": "2",
+        "value": "hammer"
+      }
+    ]
+  },
+  {
     "slug": "propulsion",
     "label": "Propulsion",
     "related": [],
@@ -1531,6 +1700,23 @@
     "description": "This creature is hard to pin down, and makes Grapple checks against them Intense. If this creature is affected by Grapple, they have a +30 bonus to escape the Grapple."
   },
   {
+    "slug": "slugger",
+    "label": "Slugger",
+    "related": [],
+    "description": "This creature is able to clench their hand into a fist, and can throw a punch. Or, at least, has a sturdy enough limb that can function like a fist. The user can access the [Slugger] Tutor List and may add the @Trait[punch] trait to its @Trait[adaptable] @Trait[contact] attacks.",
+    "type": "automated",
+    "changes": [
+      {
+        "type": "alter-attack",
+        "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
+        "property": "traits",
+        "method": "2",
+        "value": "punch"
+      }
+    ]
+  },
+  {
     "slug": "slumbering-statue",
     "label": "Slumbering Statue",
     "related": [],
@@ -1588,31 +1774,16 @@
     "description": "This creature can create or clear stormy conditions. The user has access to the [Stormcaller] Tutor List."
   },
   {
-    "slug": "mouthy",
-    "label": "Mouthy",
-    "related": [],
-    "description": "This creature has an advanced and developed mouth (or something resembling one) that allows them to bite, chew, rip and tear with decent offensive effectiveness. The user has access to the [Jaw] Tutor List.",
-    "type": "automated",
-    "changes": [
-      {
-        "type": "alter-attack",
-        "key": "adaptable-trait-attack",
-        "property": "traits",
-        "method": "2",
-        "value": "jaw"
-      }
-    ]
-  },
-  {
     "slug": "tailed",
     "label": "Tailed",
     "related": [],
-    "description": "This creature has a sizeable tail. The user has access to the [Tailed] Tutor List.",
+    "description": "This creature has a lengthy appendage that it uses for balance or aiding its movements. The user can access the [Tailed] Tutor List and may add the @Trait[tail] trait to its @Trait[adaptable] @Trait[contact] attacks.",
     "type": "automated",
     "changes": [
       {
         "type": "alter-attack",
         "key": "adaptable-trait-attack",
+        "definition": "self:action:trait:contact",
         "property": "traits",
         "method": "2",
         "value": "tailed"
