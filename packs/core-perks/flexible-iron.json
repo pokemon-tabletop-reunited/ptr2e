@@ -66,35 +66,41 @@
         "changes": [
           {
             "type": "alter-attack",
-            "key": "weapon-trait-attack",
+            "key": "attack",
             "value": 10,
-            "predicate": [],
+            "predicate": [
+              "self:action:trait:weapon"
+            ],
             "property": "power",
             "definition": [],
-            "ignored": false,
+            "phase": "initial",
             "method": 2,
-            "phase": "initial"
+            "ignored": false
           },
           {
             "type": "flat-modifier",
-            "key": "weapon-trait-attack-damage-flat",
+            "key": "attack-damage-flat",
             "value": 5,
-            "predicate": [],
-            "ignored": false,
-            "hideIfDisabled": false,
+            "predicate": [
+              "self:action:trait:weapon"
+            ],
+            "phase": "initial",
+            "hideIfDisabled": true,
             "method": 2,
-            "phase": "initial"
+            "ignored": false
           },
           {
             "type": "alter-attack",
-            "key": "basic-trait-attack",
+            "key": "attack",
             "value": "ninja",
-            "predicate": [],
+            "predicate": [
+              "self:action:trait:basic"
+            ],
             "property": "traits",
             "definition": [],
-            "ignored": false,
+            "phase": "initial",
             "method": 2,
-            "phase": "initial"
+            "ignored": false
           }
         ],
         "slug": null,
@@ -122,12 +128,12 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "14.362",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null,
-        "createdTime": null,
-        "modifiedTime": null
+        "systemVersion": "1.7.6.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1784402885312,
+        "modifiedTime": 1784403089774
       },
       "start": null,
       "showIcon": 1,
@@ -135,6 +141,5 @@
       "flags": {}
     }
   ],
-  "_id": "kJ2ykq4Nut3Wmec2",
-  "folder": "cJH2zGbF4xydqhBd"
+  "_id": "kJ2ykq4Nut3Wmec2"
 }
