@@ -10,7 +10,7 @@
           "friendly"
         ],
         "name": "Psych Out (Entry)",
-        "slug": "psych-out",
+        "slug": "psych-out-entry",
         "type": "attack",
         "cost": {
           "activation": "free"
@@ -26,7 +26,8 @@
           "psychic"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       },
       {
         "traits": [
@@ -52,10 +53,11 @@
           "psychic"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       }
     ],
-    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.dkF6bzhBEOHd3fCO.Actions.psych-out] and @UUID[Compendium.ptr2e.core-abilities.Item.dkF6bzhBEOHd3fCO.Actions.psych-out-active] actions.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.dkF6bzhBEOHd3fCO.Actions.psych-out-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.dkF6bzhBEOHd3fCO.Actions.psych-out-active] actions.</p>",
     "traits": [
       "social",
       "friendly"
@@ -84,7 +86,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "psych-out-attack",
+            "key": "psych-out-entry-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
             "predicate": [],
             "label": "Psych Out",
@@ -105,6 +107,22 @@
             "predicate": [],
             "key": "combat-enter",
             "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "psych-out-active-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
+            "predicate": [],
+            "label": "Psych Out",
+            "priority": null,
+            "phase": "initial",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
             "method": 2,
             "ignored": false
           }
@@ -134,11 +152,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1722257222958,
-        "modifiedTime": 1779372846864,
+        "modifiedTime": 1781364759345,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
       },

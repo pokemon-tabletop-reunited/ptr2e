@@ -24,7 +24,8 @@
       "bipedal",
       "plant-grower",
       "fully-evolved",
-      "jump-2"
+      "jump-2",
+      "underdog"
     ],
     "abilities": {
       "starting": [
@@ -504,5 +505,300 @@
     }
   },
   "_id": "SrVNMRejBOWNWj6q",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Sunflora",
+      "type": "form",
+      "_id": "ygaqNDcoX24wlsfO",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-sunflora:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Sunflora Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.XOMOVDDqIkHXv6wI",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "value": "firestarter",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "heater",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "glow 2",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "floratic",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "value": "jump 2",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "jump 5",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "rapid",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "hp": null,
+            "atk": 5,
+            "def": 15,
+            "spa": 30,
+            "spd": 20,
+            "spe": 30,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.overland.value",
+            "value": 8,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.acrobatics.value",
+            "value": 25,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.climb.value",
+            "value": 25,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.intimidate.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 25,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.listen.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.acrobatics.value",
+            "value": 30,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.spot.value",
+            "value": 25,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.survival.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.type.types",
+            "value": "fire",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-sunflora:active"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1781921788924,
+        "modifiedTime": 1781922490083,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

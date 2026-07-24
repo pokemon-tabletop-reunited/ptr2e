@@ -778,5 +778,333 @@
     }
   },
   "_id": "eI4bdZQd9Sok57Uu",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Flygon",
+      "type": "form",
+      "_id": "YYfOArkLhxjsiog4",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-flygon:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Flygon Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.details.size.height",
+            "value": 0.4,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.details.size.weight",
+            "value": 69,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.fOLPQzNdhpX6X3lp",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "remove-trait",
+            "value": "Jump 3",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Jump 4",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Creepy Crawly",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "value": "Blindsight 15",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Blindsight 25",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.flight.value",
+            "value": -2,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.overland.value",
+            "value": -1,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "hp": null,
+            "atk": 25,
+            "def": 15,
+            "spa": 60,
+            "spd": 15,
+            "spe": -15,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": -10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "key": "system.skills.acrobatics.value",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.climb.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.flying.value",
+            "value": -10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.listen.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.dragon.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.running.value",
+            "value": 25,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.stealth.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.survival.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.track.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-flygon:active"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1782004943349,
+        "modifiedTime": 1782005437836,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

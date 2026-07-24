@@ -6,41 +6,40 @@
     "actions": [
       {
         "traits": [
-          "legendary"
+          "legendary",
+          "flinch-40"
         ],
         "name": "Relic Soloist",
         "slug": "relic-soloist",
         "type": "generic",
         "cost": {
-          "activation": "free",
-          "trigger": "<p>The user resolves Relic Song.</p>"
+          "activation": "simple",
+          "trigger": "The user resolves Relic Song."
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Trigger: The user resolves Relic Song.</p><p>Effect: The user transforms into its Pirouette Forme. The user may also change to Pirouette Forme as either a Simple Action (4 PP), or as a Downtime Action.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user changes to Pirouette Forme.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg"
       },
       {
         "traits": [
-          "legendary"
+          "legendary",
+          "interrupt"
         ],
-        "name": "Relic Soloist (Active)",
-        "slug": "relic-soloist-active",
+        "name": "Relic Soloist (Relic Song)",
+        "slug": "relic-soloist-relic-song",
         "type": "generic",
         "cost": {
-          "activation": "simple",
-          "powerPoints": 4
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
+          "unit": "m"
         },
-        "description": "<p>Trigger: The user resolves Relic Song.</p><p>Effect: The user transforms into its Pirouette Forme.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Trigger: The user resolves Relic Song.</p><p>Effect: The user changes to Pirouette Forme.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg"
       },
       {
         "traits": [
@@ -54,75 +53,13 @@
         },
         "range": {
           "target": "self",
-          "unit": "m",
-          "distance": 10
-        },
-        "description": "<p>Effect: The user transforms into its Pirouette Forme.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "relic-song",
-        "name": "Relic Song",
-        "type": "attack",
-        "traits": [
-          "sonic",
-          "friendly",
-          "legendary"
-        ],
-        "range": {
-          "target": "emanation",
-          "distance": 8,
           "unit": "m"
         },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 8
-        },
-        "category": "special",
-        "power": 75,
-        "accuracy": 100,
-        "types": [
-          "normal"
-        ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[drowsy 7].</p>",
-        "free": true,
-        "img": "icons/svg/explosion.svg",
-        "predicate": []
-      },
-      {
-        "traits": [],
-        "name": "Amplifier",
-        "slug": "amplifier",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 10
-        },
-        "description": "<p>Effect: The user's [Sonic] attacks have 30% more Power and have their Range increased by 50%.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [],
-        "name": "Benevolent Gift",
-        "slug": "benevolent-gift",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m",
-          "distance": 10
-        },
-        "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user changes to Pirouette Forme.</p>",
+        "img": "systems/ptr2e/img/perk-icons/Musician.svg"
       }
     ],
-    "description": "<p>Trigger: The user resolves Relic Song</p><p>Effect: Connection - Relic Song. The user transforms into its Pirouette Forme. The user may also change to Pirouette Forme as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Amplifier and Benevolent Gift",
+    "description": "<p>Connection - @UUID[Compendium.ptr2e.core-moves.n4rGUelHpp7rVQoz]. When the user resolves Relic Song, they may change to Pirouette Forme. The user may also change to Pirouette Forme as either a Simple Action at @Trait[flinch-40], or as a Downtime Action.</p><p>Connected Abilities - @UUID[Compendium.ptr2e.core-abilities.Item.NUI3hbwz9PJ65Znw] and @UUID[Compendium.ptr2e.core-abilities.Item.ne1QgdwhvAXeeaX8].</p>",
     "traits": [
       "legendary",
       "connection"
@@ -151,16 +88,16 @@
         "changes": [
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-moves.Item.n4rGUelHpp7rVQoz",
             "predicate": [
-              "ability:relic-soloist:active"
+              "ability:relic-soloist:active",
+              "forme:aria:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.actions.0.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -170,24 +107,26 @@
               "granter": "cascade"
             },
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": true
           },
           {
             "type": "grant-item",
-            "key": "",
-            "value": "Compendium.ptr2e.core-abilities.Item.8GEZyBul46p9V0Fn",
+            "value": "Compendium.ptr2e.core-abilities.Item.NUI3hbwz9PJ65Znw",
             "predicate": [
-              "ability:relic-soloist:active"
+              "ability:relic-soloist:active",
+              "forme:aria:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -197,24 +136,26 @@
             },
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": true
           },
           {
             "type": "grant-item",
-            "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.ne1QgdwhvAXeeaX8",
             "predicate": [
-              "ability:relic-soloist:active"
+              "ability:relic-soloist:active",
+              "forme:aria:active"
             ],
             "alterations": [
               {
+                "method": 5,
                 "property": "system.free",
-                "value": "true",
-                "method": 5
+                "value": "true"
               }
             ],
             "priority": null,
@@ -224,11 +165,13 @@
             },
             "allowDuplicate": false,
             "reevaluateOnUpdate": true,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
             "inMemoryOnly": false,
             "track": false,
-            "replaceSelf": false,
-            "method": 2
+            "replaceSelf": true
           }
         ],
         "slug": null,
@@ -242,7 +185,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -254,14 +199,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1737418623784,
-        "modifiedTime": 1754321054501,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1779897592508,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

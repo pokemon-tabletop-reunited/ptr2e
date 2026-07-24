@@ -10,7 +10,8 @@
         "name": "Leaf Tornado",
         "type": "attack",
         "traits": [
-          "blast-2"
+          "blast-2",
+          "wind"
         ],
         "range": {
           "target": "blast",
@@ -28,7 +29,8 @@
           "grass"
         ],
         "description": "<p>Effect: On hit, all valid targets have a 30% chance of losing -1 ACC Stage for 5 Activations.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "predicate": []
       }
     ],
     "grade": "C",
@@ -40,8 +42,10 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
-    }
+      ],
+      "notes": ""
+    },
+    "traits": []
   },
   "_id": "twCmpfibti0a7kPm",
   "effects": [
@@ -61,19 +65,27 @@
             "affects": "target",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,13 +97,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.5.0",
         "createdTime": 1736636813641,
         "modifiedTime": 1736636839142,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -1,0 +1,63 @@
+{
+  "name": "Commissar (Effect)",
+  "type": "passive",
+  "_id": "qxQxRHRShDEUuVSS",
+  "img": "icons/equipment/head/hat-furred-white.webp",
+  "system": {
+    "changes": [
+      {
+        "type": "percentile-modifier",
+        "value": 50,
+        "phase": "initial",
+        "predicate": [
+          "effect:fear"
+        ],
+        "key": "damaging-attack-power",
+        "label": "Commissar (Power)",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      },
+      {
+        "type": "basic",
+        "key": "system.modifiers.effectHitRate",
+        "value": 25,
+        "phase": "initial",
+        "predicate": [
+          "effect:fear"
+        ],
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "ephemeral-modifier",
+        "value": -10,
+        "phase": "initial",
+        "predicate": [
+          "target:effect:fear"
+        ],
+        "key": "damaging-attack-damage-percentile",
+        "label": "Commissar (DR)",
+        "method": 2,
+        "ignored": false,
+        "hideIfDisabled": false
+      }
+    ],
+    "traits": []
+  },
+  "disabled": false,
+  "start": null,
+  "duration": {
+    "value": null,
+    "units": "seconds",
+    "expiry": null,
+    "expired": false
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": false,
+  "statuses": [],
+  "showIcon": 1,
+  "flags": {}
+}

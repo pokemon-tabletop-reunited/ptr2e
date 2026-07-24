@@ -27,8 +27,7 @@
     "description": "<p>Effect: The user and all allies within range are immune to the @Affliction[poison] and @Affliction[blight] Afflictions.</p>",
     "traits": [
       "defensive",
-      "aura",
-      "partial-automation"
+      "aura"
     ],
     "slug": "pastel-veil",
     "_migration": {
@@ -46,39 +45,63 @@
   "_id": "WLcv6UB9iIqy9cqA",
   "effects": [
     {
-      "name": "Pastel Veil (Self)",
+      "name": "Pastel Veil",
       "type": "passive",
-      "_id": "JTCDgKr2HiACpxHy",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "_id": "wcoxhNVGLSAbSidW",
+      "img": "icons/svg/aura.svg",
       "system": {
         "changes": [
           {
             "type": "roll-option",
-            "key": "",
-            "value": "affliction:poison",
+            "value": "pastel-veil:active",
+            "phase": "initial",
             "predicate": [],
-            "domain": "immunities",
-            "toggleable": false,
+            "label": "Pastel Veil",
+            "domain": "all",
+            "toggleable": true,
             "count": false,
-            "priority": null,
-            "ignored": false,
-            "suboptions": [],
             "state": true,
+            "alwaysActive": false,
+            "key": "",
             "method": 2,
-            "phase": "initial"
+            "ignored": false,
+            "suboptions": []
           },
           {
-            "type": "roll-option",
+            "type": "aura",
             "key": "",
-            "value": "affliction:blight",
-            "predicate": [],
-            "domain": "immunities",
-            "toggleable": false,
-            "count": false,
+            "value": 0,
+            "predicate": [
+              "flower-veil:active"
+            ],
             "priority": null,
             "ignored": false,
-            "suboptions": [],
-            "state": true,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.dWRRJp9E7E1zTHah",
+                "affects": "allies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": []
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
             "method": 2,
             "phase": "initial"
           }
@@ -87,14 +110,15 @@
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
         "removeAfterAttacking": false,
-        "removeAfterAttacked": false
+        "removeAfterAttacked": false,
+        "stacks": 0
       },
       "disabled": false,
+      "start": null,
       "duration": {
-        "units": "turns",
         "value": null,
+        "units": "seconds",
         "expiry": null,
         "expired": false
       },
@@ -103,22 +127,21 @@
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
+      "showIcon": 1,
+      "folder": null,
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": "Actor.1e5Mp4QgdlNuEFFZ.Item.4r7cKBlAskl6BKGH.ActiveEffect.rkpaii85X6efwPcl",
-        "duplicateSource": null,
-        "coreVersion": "14.360",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
-        "createdTime": 1731719151810,
-        "modifiedTime": 1731719151810,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779580597981,
+        "modifiedTime": 1779580748688,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
         "exportSource": null
-      },
-      "start": null,
-      "showIcon": 1,
-      "folder": null
+      }
     }
   ]
 }

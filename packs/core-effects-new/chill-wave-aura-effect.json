@@ -10,40 +10,46 @@
         "key": "ice-attack-power",
         "value": 20,
         "predicate": [],
+        "phase": "initial",
+        "method": 2,
         "ignored": false,
-        "hideIfDisabled": false,
-        "method": 2
+        "hideIfDisabled": false
+      },
+      {
+        "type": "ephemeral-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+        "phase": "initial",
+        "predicate": [],
+        "affects": "self",
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": 20
+          }
+        ],
+        "key": "ice-attack",
+        "method": 2,
+        "ignored": false
       }
     ],
-    "slug": null,
+    "slug": "chill-wave-aura-effect",
     "traits": [],
-    "removeAfterCombat": true,
-    "removeOnRecall": false,
-    "removeAfterAttacking": false,
-    "removeAfterAttacked": false,
-    "stacks": 0
+    "removeAfterCombat": true
   },
   "disabled": false,
   "duration": {
     "units": "turns",
-    "value": null
+    "value": null,
+    "expiry": null,
+    "expired": false
   },
   "description": "",
   "origin": null,
   "tint": "#ffffff",
   "transfer": true,
   "statuses": [],
-  "sort": 0,
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null,
-    "coreVersion": "13.347",
-    "systemId": "ptr2e",
-    "systemVersion": "1.4.3.beta",
-    "lastModifiedBy": "mK35yvCqCgiTUvKf",
-    "modifiedTime": 1755991772164
-  },
   "folder": "sP8yfpABdpdAz4aV",
-  "showIcon": 2
+  "showIcon": 2,
+  "start": null
 }
