@@ -14,50 +14,56 @@
           {
             "type": "basic",
             "key": "system.attributes.hp.base",
-            "value": "max(25,min(5,system.attributes.hp.base * 0.2))",
+            "value": "max(25,min(5,@actor.system.attributes.hp.base * 0.2))",
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.speMultiplier",
             "value": 0.85,
             "predicate": [],
-            "ignored": false,
-            "method": 1
+            "method": 1,
+            "phase": "initial",
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.atkMultiplier",
             "value": 0.05,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.defMultiplier",
             "value": 0.05,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.spaMultiplier",
             "value": 0.05,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
             "key": "system.modifiers.spdMultiplier",
             "value": 0.05,
             "predicate": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-modifier",
@@ -65,9 +71,10 @@
             "value": 6,
             "predicate": [],
             "label": "Megafaunic (Acc)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "ephemeral-modifier",
@@ -75,13 +82,13 @@
             "value": 6,
             "predicate": [],
             "label": "Megafaunic (Acc)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "roll-option",
-            "key": "",
             "value": "megafaunic-sizes:active",
             "predicate": [],
             "domain": "all",
@@ -90,9 +97,11 @@
             "count": false,
             "state": true,
             "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "method": 2
+            "suboptions": []
           },
           {
             "type": "ephemeral-modifier",
@@ -108,9 +117,10 @@
               }
             ],
             "label": "Megafaunic (Dmg)",
+            "method": 1,
+            "phase": "initial",
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 1
+            "hideIfDisabled": false
           },
           {
             "type": "percentile-modifier",
@@ -126,9 +136,10 @@
               }
             ],
             "label": "Megafaunic (Dmg)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "percentile-modifier",
@@ -144,9 +155,10 @@
               }
             ],
             "label": "Megafaunic (Acc)",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "ephemeral-effect",
@@ -164,13 +176,14 @@
             "affects": "origin",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": -10,
-                "method": 5
+                "value": -10
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-effect",
@@ -188,13 +201,14 @@
             "affects": "origin",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.changes.0.value",
-                "value": -10,
-                "method": 5
+                "value": -10
               }
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -208,7 +222,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -220,13 +236,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1772806907306,
-        "modifiedTime": 1772810820929,
-        "lastModifiedBy": "Bk6N5iKyebvEVXhL"
-      }
+        "modifiedTime": 1782867991452,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "system": {
@@ -246,7 +266,12 @@
     "description": "<p>The user’s Base HP increases by +20% (min 5, max 25), their SPD is cut by 15%, their other Stats increase by 5%, and Actions targeting the user have +6 Accuracy.</p><p>Attacks from non-allied creatures that are at least 2 Size Categories smaller than the user deal 15% less damage and have -10% EHR. The user's Attacks targeting these creatures have +15% Accuracy and deal 15% more damage.</p>",
     "traits": [],
     "prerequisites": [
-      "Size: Large or larger"
+      {
+        "gte": [
+          "{actor|system.details.size.heightClass}",
+          4
+        ]
+      }
     ],
     "autoUnlock": [],
     "cost": 3,
