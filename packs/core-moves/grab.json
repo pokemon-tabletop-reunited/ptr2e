@@ -12,6 +12,7 @@
         "traits": [
           "basic",
           "contact",
+          "manipulate",
           "grapple"
         ],
         "range": {
@@ -25,11 +26,11 @@
         },
         "category": "status",
         "power": null,
-        "accuracy": 90,
+        "accuracy": 60,
         "types": [
           "untyped"
         ],
-        "description": "<p>Effect: On hit, the user makes a Lift Check, <em>CR = -20 + 10 * (userWC-targetWC) / 2 + 10 * (userCatMod-targetCatMod)</em>. On success, the user and target gain @Affliction[grapple], and the user is put in control of the grapple.</p><p>Grab may be used on valid targets outside of the Grapple as long as you have Dominance of said Grapple.</p>",
+        "description": "<p>Trigger: The target does not have @Affliction[grapple].</p><p>Effect: On hit, the user and target gain @Affliction[grapple], and the user is made Dominant in the Grapple. This Action's Accuracy is inherently modified by the user's and target's Lift Skills, both creatures' Height and Weight Classes, and a Skill based on the each creature’s current Movement State:</p><p>Overland: Acrobatics<br>Swim: Swim<br>Burrow: Climb<br>Flight: Acrobatics<br>Teleport: The better of Psychic and Parapsychology<br>Threaded: The better of Handiwork and Sleight of Hand</p>",
         "free": true,
         "img": "systems/ptr2e/img/svg/untyped_icon.svg"
       }
@@ -43,6 +44,240 @@
     }
   },
   "_id": "nZIEKK2aQE5Y53Q4",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Grab",
+      "type": "passive",
+      "_id": "mVIFCN3nIE5Y53Q4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "grab-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "leer-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "alterations": [],
+            "method": 2
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*10+(@actor.system.details.size.weightClass+3)*4+log(@actor.system.skills.acrobatics.rvs+@actor.system.skills.acrobatics.value+@actor.system.skills.acrobatics.mod)*12+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*20)",
+            "predicate": [
+              "self:state:overland"
+            ],
+            "label": "Grab (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*5+(@target.system.details.size.weightClass+3)*7+log2(@target.system.skills.acrobatics.rvs+@target.system.skills.acrobatics.value+@target.system.skills.acrobatics.mod)*17+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*14)",
+            "predicate": [
+              "target:state:overland"
+            ],
+            "label": "Grab (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*12+(@actor.system.details.size.weightClass+3)*3+log(@actor.system.skills.swim.rvs+@actor.system.skills.swim.value+@actor.system.skills.swim.mod)*14+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*16)",
+            "predicate": [
+              "self:state:swim"
+            ],
+            "label": "Grab (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*7+(@target.system.details.size.weightClass+3)*5+log2(@target.system.skills.swim.rvs+@target.system.skills.swim.value+@target.system.skills.swim.mod)*22+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*8)",
+            "predicate": [
+              "target:state:swim"
+            ],
+            "label": "Grab (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*8+(@actor.system.details.size.weightClass+3)*6+log(@actor.system.skills.climb.rvs+@actor.system.skills.climb.value+@actor.system.skills.climb.mod)*10+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*14)",
+            "predicate": [
+              "self:state:burrow"
+            ],
+            "label": "Grab (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*8+(@target.system.details.size.weightClass+3)*3+log2(@actor.system.skills.climb.rvs+@actor.system.skills.climb.value+@actor.system.skills.climb.mod)*15+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*10)",
+            "predicate": [
+              "target:state:burrow"
+            ],
+            "label": "Grab (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*7+(@actor.system.details.size.weightClass+3)*2+log(@actor.system.skills.acrobatics.rvs+@actor.system.skills.acrobatics.value+@actor.system.skills.acrobatics.mod)*20+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*15)",
+            "predicate": [
+              "self:state:flight"
+            ],
+            "label": "Grab (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*4+(@target.system.details.size.weightClass+3)*5+log2(@target.system.skills.acrobatics.rvs+@target.system.skills.acrobatics.value+@target.system.skills.acrobatics.mod)*22+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*9)",
+            "predicate": [
+              "target:state:flight"
+            ],
+            "label": "Grab (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*14+(@actor.system.details.size.weightClass+3)*6+log(max(@actor.system.skills.psychic.rvs+@actor.system.skills.psychic.value+@actor.system.skills.psychic.mod,@actor.system.skills.parasychology.rvs+@actor.system.skills.parasychology.value+@actor.system.skills.parasychology.mod))*25+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*11)",
+            "predicate": [
+              "self:state:teleport"
+            ],
+            "label": "Grab (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*7+(@target.system.details.size.weightClass+3)*10+log2(max(@actor.system.skills.psychic.rvs+@actor.system.skills.psychic.value+@actor.system.skills.psychic.mod,@actor.system.skills.parasychology.rvs+@actor.system.skills.parasychology.value+@actor.system.skills.parasychology.mod))*16+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*12)",
+            "predicate": [
+              "target:state:teleport"
+            ],
+            "label": "Grab (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*15+(@actor.system.details.size.weightClass+3)*7+log(max(@actor.system.skills.handiwork.rvs+@actor.system.skills.handiwork.value+@actor.system.skills.handiwork.mod,@actor.system.skills.sleight-of-hand.rvs+@actor.system.skills.sleight-of-hand.value+@actor.system.skills.sleight-of-hand.mod))*19+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*13)",
+            "predicate": [
+              "self:state:threaded"
+            ],
+            "label": "Grab (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "grab-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*10+(@target.system.details.size.weightClass+3)*13+log2(max(@actor.system.skills.handiwork.rvs+@actor.system.skills.handiwork.value+@actor.system.skills.handiwork.mod,@actor.system.skills.sleight-of-hand.rvs+@actor.system.skills.sleight-of-hand.value+@actor.system.skills.sleight-of-hand.mod))*11+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*18)",
+            "predicate": [
+              "target:state:threaded"
+            ],
+            "label": "Grab (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726141434026,
+        "modifiedTime": 1726141459982,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ],
   "folder": "EpCOePz8omfXbp34"
 }
