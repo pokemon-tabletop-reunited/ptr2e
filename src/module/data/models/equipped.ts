@@ -34,7 +34,7 @@ class EquipmentData extends foundry.abstract.DataModel {
 interface EquipmentData extends foundry.abstract.DataModel {
     carryType: PTRCONSTS.CarryType;
     handsHeld: number;
-    slot: "held" | "worn" | "accessory" | "belt" | "backpack";
+    slot: "held" | "worn" | "accessory" | "belt" | "backpack" | "slotless";
 }
 
 export default EquipmentData;
