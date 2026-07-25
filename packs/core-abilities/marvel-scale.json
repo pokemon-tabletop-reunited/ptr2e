@@ -17,13 +17,13 @@
         "range": {
           "target": "self",
           "unit": "m",
-          "distance": 10
+          "distance": 0
         },
-        "description": "<p>Effect: While the user is affected by a Major Status Affliction, the user's DEF is increased by 50%.</p>",
+        "description": "<p>Effect: The user's DEF stat increases by 50% if affected by a @Trait[major-affliction]. If the user is afflicted with @Affliction[frostbite], their DEF increases by 100% instead.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: While the user is affected by a Major Status Affliction, the user's DEF is increased by 50%.</p>",
+    "description": "<p>Effect: The user's DEF stat increases by 50% if affected by a @Trait[major-affliction]. If the user is afflicted with @Affliction[frostbite], their DEF increases by 100% instead.</p>",
     "traits": [
       "defensive"
     ],
@@ -52,11 +52,26 @@
           {
             "type": "basic",
             "key": "system.modifiers.defMultiplier",
-            "value": 0.5,
+            "value": "@actor.system.modifiers.defMultiplier/2",
             "predicate": [
-              "effect:major-affliction"
+              "effect:major-affliction",
+              {
+                "not":  "effect:affliction:frostbite"
+              }
             ],
             "ignored": false,
+            "priority": 91,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": "2*@actor.system.modifiers.defMultiplier",
+            "predicate": [
+              "effect:affliction:frostbite"
+            ],
+            "ignored": false,
+            "priority": 91,
             "method": 2
           }
         ],
