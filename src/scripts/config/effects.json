@@ -559,6 +559,97 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.hindered"
   },
   {
+    "id": "striken",
+    "name": "PTR2E.Effect.Statuses.Labels.striken",
+    "img": "icons/svg/biohazard.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 3
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.effectResistance",
+          "value": "-20 + max(-20,-2/3*@effect.duration.remaining)",
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.atkMultiplier",
+          "value": "max(-40,-4/3*@effect.duration.remaining)",
+          "predicate": [],
+          "ignored": false,
+          "method": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.defMultiplier",
+          "value": "-20 + max(-40,-4/3*@effect.duration.remaining)",
+          "predicate": [],
+          "ignored": false,
+          "method": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.spaMultiplier",
+          "value": "max(-40,-4/3*@effect.duration.remaining)",
+          "predicate": [],
+          "ignored": false,
+          "method": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.spdMultiplier",
+          "value": "-20 + max(-40,4/3*@effect.duration.remaining)",
+          "predicate": [],
+          "ignored": false,
+          "method": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.speMultiplier",
+          "value": "max(-30,-@effect.duration.remaining)",
+          "predicate": [],
+          "ignored": false,
+          "method": 2
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "attack-accuracy",
+          "value": "max(-45,-1.5*@effect.duration.remaining)",
+          "label": "Striken (Acc)"
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-accuracy-percentile",
+          "value": "min(30.@effect.duration.remaining)",
+          "predicate": [],
+          "method": 2,
+          "priority": null,
+          "ignored": false,
+          "hideIfDisabled": false,
+          "label": "Striken (Target)"
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.striken"
+  },
+  {
     "id": "stunted",
     "name": "PTR2E.Effect.Statuses.Labels.stunted",
     "img": "icons/svg/paralysis.svg",
