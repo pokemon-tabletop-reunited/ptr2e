@@ -1,0 +1,146 @@
+{
+  "name": "Leveraged Fury",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.107,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>While afflicted with @Affliction[enraged], the user has +10 Lift, and +20 Lift if they have @Affliction[frenzy]. The user has +10 Power on their Fling (Actor Toss) while @Affliction[enraged] and +20 if they have @Affliction[frenzy].</p>",
+    "traits": [],
+    "prerequisites": [],
+    "cost": 3,
+    "slug": "leveraged fury",
+    "nodes": [
+      {
+        "connected": [
+          "berserker",
+          "elemental-rage"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 56,
+        "y": 47,
+        "tier": null
+      }
+    ],
+    "autoUnlock": [],
+    "global": true,
+    "webs": [],
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "berserker"
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    }
+  },
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": [
+    {
+      "name": "Leveraged Fury",
+      "type": "passive",
+      "_id": "I5HflQR9CZ32VnbT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "predicate": [
+             "effect:affliction:enraged"
+            ],
+            "label": "",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "predicate": [
+             "effect:affliction:frenzy"
+            ],
+            "label": "",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          
+          {
+            "type": "flat-modifier",
+            "key": "actor-toss-attack-power",
+            "value": 10,
+            "predicate": [
+             "effect:affliction:enraged"
+            ],
+            "label": "Leveraged Fury (Enraged)",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "flat-modifier",
+            "key": "actor-toss-attack-power",
+            "value": 20,
+            "predicate": [
+             "effect:affliction:frenzy"
+            ],
+            "label": "Leveraged Fury (Frenzy)",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.6.beta",
+        "createdTime": 1765233620655,
+        "modifiedTime": 1765233664526,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ],
+  "_id": "ZvrpDAbhJKln1pTl",
+  "folder": "zrVtKATNxzLNxTUa"
+}

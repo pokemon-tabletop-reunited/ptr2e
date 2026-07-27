@@ -4,12 +4,12 @@
   "system": {
     "prerequisites": [],
     "cost": 3,
-    "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack.</p>",
+    "description": "<p>While @Affliction[enraged] or @Affliction[frenzy], the user has a 20% chance to be @Affliction[advance 15] when resolving a Physical- or Special-Category Attack. While @Affliction[frenzy], the user has a 10% chance to gain @Affliction[frenzy 1] when resolving a Physical- or Special-Category Attack.</p>",
     "actions": [
       {
         "name": "Frenzied Assault",
         "slug": "frenzied-assault",
-        "description": "<p>While @Affliction[enraged], the user has a 30% chance to gain +1 SPD Stage for 5 Activations when resolving a Physical- or Special-Category Attack.</p>",
+        "description": "<p>While @Affliction[enraged] or @Affliction[frenzy], the user has a 20% chance to be @Affliction[advance 15] when resolving a Physical- or Special-Category Attack. While @Affliction[frenzy], the user has a 10% chance to gain @Affliction[frenzy 1] when resolving a Physical- or Special-Category Attack.</p>",
         "cost": {
           "activation": "free"
         },
@@ -82,18 +82,51 @@
           {
             "type": "roll-effect",
             "key": "damaging-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [
-              "effect:affliction:enraged"
+              {
+                "or":[
+                  "effect:affliction:enraged",
+                  "effect:affliction:frenzy"
+                ]
+              }
             ],
-            "chance": 30,
+            "chance": 20,
             "affects": "self",
             "priority": null,
-            "alterations": [],
+            "alterations": [
+              {
+                "property": "system.amount",
+                "value": 15,
+                "method": 5
+              }
+            ],
             "dontMerge": false,
             "isFixedChance": false,
             "ignored": false,
             "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "damaging-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [
+              "effect:affliction:frenzy"
+            ],
+            "chance": 10,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 1,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "label": "Berserker Frenzy"
           }
         ],
         "slug": null,

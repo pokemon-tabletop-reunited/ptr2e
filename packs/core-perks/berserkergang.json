@@ -18,7 +18,7 @@
       {
         "name": "Berserkergang",
         "slug": "berserkergang",
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user uses Rage, targeting itself, as a Free Action and gains @Affliction[delay 30].</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user gains @Affliction[frenzy 5] and lose -1 DEF and SPDEF Stage for 3 Activations.</p>",
         "traits": [
           "interrupt"
         ],
@@ -36,10 +36,10 @@
       }
     ],
     "slug": "berserkergang",
-    "description": "<p>When the user enters combat, they may spend @PP[-2] as a Free Action @Trait[interrupt] @Trait[flinch-30] and use @UUID[Compendium.ptr2e.core-moves.6OK8vhZYljL4X7cd]{Rage} as a Free Action, targeting itself with the Attack.</p>",
+    "description": "<p>When the user enters combat, they may spend @PP[-2] as a Free Action @Trait[interrupt] to gain @Affliction[frenzy 5] and lose -1 DEF and SPDEF Stage for 3 Activations.</p>",
     "traits": [],
     "prerequisites": [
-      "item:move:rage"
+      "trait:berserker"
     ],
     "autoUnlock": [],
     "cost": 3,
@@ -83,32 +83,68 @@
       "system": {
         "changes": [
           {
-            "type": "roll-effect",
-            "key": "berserkergang-generic",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
-            "predicate": [],
-            "chance": 100,
-            "affects": "self",
-            "alterations": [
-              {
-                "property": "system.amount",
-                "value": 30,
-                "method": 5
-              }
-            ],
-            "label": "Berserkergang",
-            "priority": null,
-            "dontMerge": false,
-            "isFixedChance": true,
-            "ignored": false,
-            "method": 2
-          },
-          {
             "type": "roll-note",
             "key": "combat-enter",
             "value": "{actor|link} enters combat and may spend {item|actions.contents.0.cost.powerPoints} PP to use {item|link}!",
             "predicate": [],
             "visibility": null,
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "berserkergang-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 5,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "berserkergang-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "berserkergang-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "dontMerge": false,
+            "alterations": [
+              {
+                "property": "duration.turns",
+                "value": 3,
+                "method": 5
+              }
+            ],
             "priority": null,
             "ignored": false,
             "method": 2
