@@ -21,12 +21,7 @@
       "gambler"
     ],
     "prerequisites": [
-      {
-        "and": [
-          "item:perk:gambit-style",
-          "trait:ace"
-        ]
-      }
+      "trait:ace"
     ],
     "autoUnlock": [],
     "cost": 3,
@@ -40,14 +35,14 @@
     "nodes": [
       {
         "x": 92,
-        "y": 189,
+        "y": 188,
         "hidden": false,
         "type": "normal",
         "connected": [
-          "up-the-beat",
           "minor-buff-65",
           "cant-break-my-winning-streak",
-          "jockeying"
+          "jockeying",
+          "quick-play"
         ],
         "config": {
           "texture": null,
@@ -57,7 +52,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "img": "icons/sundries/gaming/dice-pair-white-green.webp",
   "effects": [
@@ -85,7 +81,8 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -99,7 +96,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -111,14 +110,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null,
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "_id": "3dakhQVtvPyUlnAh"
