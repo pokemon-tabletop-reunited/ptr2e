@@ -18,7 +18,7 @@
       {
         "name": "Ace Up My Sleeve",
         "slug": "ace-up-my-sleeve",
-        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user may immediately draw 1 card from the Metronome Deck. This action is considered to be the same as using the Metronome move for the purpose of Card Captor.</p>",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user may freely draw 1 card from the Metronome Deck, as per @UUID[Compendium.ptr2e.core-moves.m6eeM9WpSKpSS3rw]{Metronome}.</p>",
         "traits": [
           "interrupt"
         ],
@@ -30,11 +30,12 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
-    "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user may immediately draw 1 card from the Metronome Deck. This action is considered to be the same as using the Metronome move for the purpose of Card Captor.</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user may freely draw 1 card from the Metronome Deck, as per @UUID[Compendium.ptr2e.core-moves.m6eeM9WpSKpSS3rw]{Metronome}.</p>",
     "traits": [
       "gambler"
     ],
@@ -53,16 +54,15 @@
     "traitWebs": [],
     "nodes": [
       {
-        "x": 98,
+        "x": 99,
         "y": 194,
         "hidden": false,
         "type": "normal",
         "connected": [
-          "the-devil-does-bargain",
           "card-captor-1",
           "minor-buff-23",
           "pokerface",
-          "twist"
+          "quick-play"
         ],
         "config": {
           "texture": null,
@@ -72,7 +72,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "slug": "ace-up-my-sleeve"
   },
   "_id": "uk9aI6nJ0S64EaG8",
   "img": "icons/sundries/gaming/playing-cards.webp",
@@ -132,6 +133,5 @@
         "exportSource": null
       }
     }
-  ],
-  "flags": {}
+  ]
 }

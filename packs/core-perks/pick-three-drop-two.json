@@ -18,8 +18,10 @@
       {
         "name": "Pick Three Drop Two",
         "slug": "pick-three-drop-two",
-        "description": "<p>Effect: The user can spend 4 Luck at [Delay 4] @Trait[interrupt] when a member of their Team declares Metronome. The GM draws three moves from the Metronome Deck, and the user selects one Move to be added to the target's Metronome Hand.</p>",
-        "traits": [],
+        "description": "<p>Effect: The user can spend 4 Luck when a member of their Team declares Metronome. The GM draws three additional Cards from the Metronome Deck, and the user selects one Move of these to be added to the target's Metronome Hand.</p>",
+        "traits": [
+          "flinch-20"
+        ],
         "type": "generic",
         "img": "icons/sundries/gaming/playing-cards-black.webp",
         "cost": {
@@ -27,13 +29,13 @@
         },
         "range": {
           "target": "ally",
-          "distance": 10,
+          "distance": 25,
           "unit": "m"
         }
       }
     ],
     "slug": "pick-three-drop-two",
-    "description": "<p>Effect: The user can spend 4 Luck at [Delay 4] @Trait[interrupt] when a member of their Team declares Metronome. The GM draws three moves from the Metronome Deck, and the user selects one Move to be added to the target's Metronome Hand.</p>",
+    "description": "<p>Effect: The user can spend 4 Luck as a @Trait[interrupt] @Trait[flinch-20] Free Action when a member of their Team declares Metronome. The GM draws three moves from the Metronome Deck, and the user selects one Move to be added to the target's Metronome Hand.</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:cant-break-my-winning-streak"
@@ -49,15 +51,22 @@
     "webs": [],
     "nodes": [
       {
-        "x": 91,
-        "y": 185,
-        "connected": [
-          "cant-break-my-winning-streak",
-          "twist",
-          "minor-buff-13"
-        ],
+        "x": 80,
+        "y": 186,
         "hidden": false,
         "type": "normal",
+        "connected": [
+          "cant-break-my-winning-streak",
+          "quick-and-the-dead",
+          "lucky-duck",
+          "destiny-draw"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
