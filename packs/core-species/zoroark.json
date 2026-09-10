@@ -651,5 +651,322 @@
     }
   },
   "_id": "8BZ0uPg1HcYOAjTh",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Zoroark",
+      "type": "form",
+      "_id": "j5s8ZDkvR6OWHcVV",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-zoroark:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Zoroark Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.details.size.height",
+            "value": 0.8,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.details.size.weight",
+            "value": 111.5,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.yQWtZUxpJby0cCTw",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Aura User",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.overland.value",
+            "value": 1,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "burrow",
+            "method": 5,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "key": "system.movement.burrow.method",
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.burrow.value",
+            "value": 7,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.swim.value",
+            "value": 2,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "hp": null,
+            "atk": 35,
+            "def": null,
+            "spa": 25,
+            "spd": 30,
+            "spe": 10,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.acrobatics.value",
+            "value": -10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.aura-sense.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.climb.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.natural-world.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.ghost.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.fairy.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.spirit.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.running.value",
+            "value": 25,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.track.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.swim.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zoroark:active"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1782010350045,
+        "modifiedTime": 1782011342431,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

@@ -20,7 +20,7 @@
       },
       {
         "type": "swim",
-        "value": 5
+        "value": 6
       }
     ],
     "traits": [
@@ -29,7 +29,8 @@
       "pack-mon",
       "zapper",
       "fully-evolved",
-      "jump-5"
+      "jump-5",
+      "glow-2"
     ],
     "abilities": {
       "starting": [
@@ -529,17 +530,12 @@
               "operand": "and"
             }
           ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
           "perk": {
             "x": 26,
             "y": 26
-          }
+          },
+          "details": null,
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.YmNbUVfpXoWoEOoz",
@@ -562,5 +558,344 @@
     }
   },
   "_id": "a7V7UefZkdT2G0LC",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Zebstrika",
+      "type": "form",
+      "_id": "MpkQqOl3uMXTAhLd",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-zebstrika:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Zebstrika Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.details.size.height",
+            "value": 0.3,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.details.size.weight",
+            "value": 11.9,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.type.types",
+            "value": "fairy",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.3ARcE4gEu7yKSkpH",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Sparkler",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "value": "Glow 2",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Glow 3",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "remove-trait",
+            "value": "Jump 5",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Jump 6",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.overland.value",
+            "value": 3,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.movement.swim.value",
+            "value": 4,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "hp": null,
+            "atk": 10,
+            "def": 10,
+            "spa": 45,
+            "spd": 20,
+            "spe": 15,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.acrobatics.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.fairy.value",
+            "value": 50,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.spiritual.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.natural-world.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.navigate.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.running.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.track.value",
+            "value": 35,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.swim.value",
+            "value": 20,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-zebstrika:active"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1782009006332,
+        "modifiedTime": 1782010007593,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

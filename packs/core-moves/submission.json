@@ -10,7 +10,8 @@
         "name": "Submission",
         "type": "attack",
         "traits": [
-          "recoil-1-4",
+          "recoil-1-6",
+          "crash-1-4",
           "contact",
           "grapple"
         ],
@@ -21,45 +22,16 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4
+          "powerPoints": 3
         },
         "category": "physical",
-        "power": 120,
-        "accuracy": 100,
+        "power": 80,
+        "accuracy": 80,
         "types": [
           "fighting"
         ],
+        "description": "Effect: While the user is Dominant in a @Affliction[grapple], this Attack has +1 CRIT Stage and +1 Effectiveness Stage against a @Affliction[grapple] target.",
         "img": "systems/ptr2e/img/svg/fighting_icon.svg"
-      },
-      {
-        "slug": "submission-grappling",
-        "name": "Submission (Grappling)",
-        "type": "attack",
-        "traits": [
-          "recoil-1-4",
-          "contact",
-          "grapple"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "trigger": "<p>The user is in control of a Grapple.</p>"
-        },
-        "category": "physical",
-        "power": 120,
-        "accuracy": 100,
-        "types": [
-          "fighting"
-        ],
-        "description": "<p>Trigger: The user is in control of a Grapple.</p>",
-        "variant": "submission",
-        "free": true,
-        "img": "icons/svg/explosion.svg"
       }
     ],
     "grade": "B",

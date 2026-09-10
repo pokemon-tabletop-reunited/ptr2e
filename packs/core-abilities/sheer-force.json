@@ -17,11 +17,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user's Physical or Special-Category attacks that apply a secondary effect on hit have 30% increased Power, but can no longer apply their secondary effects.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's Physical and Special-Category Attacks have +60% Power and -200% EHR.</p>",
+        "img": "systems/ptr2e/img/icons/summon_icon.webp"
       }
     ],
-    "description": "<p>Effect: The user's Physical or Special-Category attacks that apply a secondary effect on hit have 30% increased Power, but can no longer apply their secondary effects.</p>",
+    "description": "<p>Effect: The user's Physical and Special-Category Attacks have +60% Power and -200% EHR.</p>",
     "traits": [],
     "slug": "sheer-force",
     "_migration": {
@@ -47,11 +47,9 @@
         "changes": [
           {
             "type": "percentile-modifier",
-            "key": "attack-power",
-            "value": 30,
-            "predicate": [
-              "manual"
-            ],
+            "key": "damaging-attack-power",
+            "value": 60,
+            "predicate": [],
             "label": "Sheer Force",
             "priority": null,
             "phase": "initial",
@@ -69,7 +67,7 @@
               {
                 "method": 5,
                 "property": "system.changes.0.value",
-                "value": -100000
+                "value": -200
               }
             ],
             "key": "damaging-attack",
@@ -104,10 +102,10 @@
         "duplicateSource": null,
         "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1721749476500,
-        "modifiedTime": 1778975656409,
-        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "modifiedTime": 1780938697156,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
         "exportSource": null
       },
       "start": null,

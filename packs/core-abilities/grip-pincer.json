@@ -13,19 +13,19 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>The user hits a creature with a [Contact] attack.</p>"
+          "powerPoints": 0,
+          "trigger": "The user hits a creature with a @Trait[contact] attack."
         },
         "range": {
           "target": "creature",
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user hits a creature with a [Contact] attack.</p><p>Effect: The user freely @Affliction[grapple]s the target.</p>",
+        "description": "<p>Trigger: The user hits a creature with a @Trait[contact] attack.</p><p>Effect: The user may inflict @Affliction[grapple] on itself and the target.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user hits a creature with a [Contact] attack.</p><p>Effect: The user freely @Affliction[grapple]s the target.</p>",
+    "description": "<p>Trigger: The user hits a creature with a @Trait[contact] attack.</p><p>Effect: The user may inflict @Affliction[grapple] on itself and the target.</p>",
     "traits": [],
     "slug": "grip-pincer",
     "_migration": {
@@ -40,5 +40,69 @@
     }
   },
   "_id": "qnhK8X9zIEEeHsEp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Grip Pincer",
+      "type": "passive",
+      "_id": "asgK1B2vIEEeHsEp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "grip-pincer-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "grip-pincer-generic",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.grapplecondition",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": false,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ]
 }

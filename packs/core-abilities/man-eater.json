@@ -20,11 +20,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: The user's [Contact] attacks gain the [Drain 1/16] Trait.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user's [Contact] attacks gain the [Drain 1/10] Trait.</p>",
+        "img": "systems/ptr2e/img/item-icons/razor%20fang.webp"
       }
     ],
-    "description": "<p>Effect: The user's [Contact] attacks gain the [Drain 1/16] Trait.</p>",
+    "description": "<p>Effect: The user's [Contact] attacks gain the [Drain 1/10] Trait.</p>",
     "traits": [
       "defensive",
       "healing"
@@ -54,12 +54,13 @@
           {
             "type": "alter-attack",
             "key": "contact-trait-attack",
-            "value": "drain-1-16",
+            "value": "drain-1-10",
             "predicate": [],
-            "ignored": false,
             "property": "traits",
             "definition": [],
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -73,7 +74,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -85,13 +88,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1765280712689,
-        "modifiedTime": 1765280742787,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779639928386,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

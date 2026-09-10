@@ -84,7 +84,8 @@
             "private": false,
             "label": "Conservation",
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "percentile-modifier",
@@ -96,7 +97,8 @@
             "label": "Conservation of Ninjutsu",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -104,7 +106,8 @@
             "value": "2*@actor.clocks.conserNinjaClock",
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -114,7 +117,8 @@
               "effect:affliction:invisible"
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -122,7 +126,8 @@
             "value": "2*@actor.clocks.conserNinjaClock",
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "ephemeral-modifier",
@@ -132,7 +137,8 @@
             "label": "Conservation of Ninjutsu",
             "ignored": false,
             "hideIfDisabled": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -140,7 +146,8 @@
             "value": "0.05*@target.clocks.conserNinjaClock",
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -154,7 +161,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -166,14 +175,19 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.362",
         "systemId": "ptr2e",
         "systemVersion": "1.5.0.beta",
         "lastModifiedBy": "Bk6N5iKyebvEVXhL",
-        "modifiedTime": 1772120336954
-      }
+        "modifiedTime": 1772120336954,
+        "createdTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
-  "_id": "ji85RxkoJYlJXhlN"
+  "_id": "ji85RxkoJYlJXhlN",
+  "folder": "cJH2zGbF4xydqhBd"
 }

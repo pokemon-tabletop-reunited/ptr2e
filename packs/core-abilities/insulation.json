@@ -21,11 +21,11 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all Electric-Type creatures within Range take 20% less damage from all sources.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user and allied @Trait[electric]-Type creatures within Range take 20% less damage from all sources. This applies multiplicatively with other sources of damage reduction, and also applies to flat damage sources like DoT effects.</p>",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user and all Electric-Type creatures within Range take 20% less damage from all sources.</p>",
+    "description": "<p>Effect: The user and allied @Trait[electric]-Type creatures within Range take 20% less damage from all sources. This applies multiplicatively with other sources of damage reduction, and also applies to flat damage sources like DoT effects.</p>",
     "traits": [
       "domain",
       "aura",
@@ -66,7 +66,8 @@
             "alwaysActive": false,
             "ignored": false,
             "suboptions": [],
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "aura",
@@ -79,8 +80,8 @@
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.pCGYXotLQ8IWEzR1",
-                "affects": "all",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.pCGYXotLQ8IWEzR1",
+                "affects": "allies",
                 "events": [
                   "enter"
                 ],
@@ -105,7 +106,8 @@
             },
             "mergeExisting": true,
             "priority": null,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -119,7 +121,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -131,13 +135,17 @@
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.GdUV0ujrIlwb3Eh4.ActiveEffect.7zUxnH1t7Vx7UimX",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1765280398387,
-        "modifiedTime": 1765280465797,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779576395006,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

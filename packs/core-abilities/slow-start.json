@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: The user's default ATK and SPD Stages are -4. After each of the user's Activations, the user's default ATK and SPD Stage increase by 1.</p>",
+        "description": "<p>Effect: The user's default ATK and SPD Stages are -4. After the user resolves an Attack, the user's default ATK and SPD Stage increase by +1 (managed by the Slow Start Clock). While Afflicted with @Affliction[grapple], the user gains +30 Lift and the user's @Trait[grapple] Attacks have a 30% chance to cause the @Affliction[grapple] target to lose @Tick[-1].</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's default ATK and SPD Stages are -4. After each of the user's Activations, the user's default ATK and SPD Stage increase by 1.</p>",
+    "description": "<p>Effect: The user's default ATK and SPD Stages are -4. After the user resolves an Attack, the user's default ATK and SPD Stage increase by +1 (managed by the Slow Start Clock). While Afflicted with @Affliction[grapple], the user gains +30 Lift and the user's @Trait[grapple] Attacks have a 30% chance to cause the @Affliction[grapple] target to lose @Tick[-1].</p>",
     "traits": [
       "legendary"
     ],
@@ -39,5 +39,126 @@
     }
   },
   "_id": "no6jCo7k4T7H8RrN",
-  "effects": []
+  "effects": [
+    {
+      "name": "Slow Start",
+      "type": "passive",
+      "_id": "YESjD17k4T8l8RrN",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "slowStartClkUser",
+            "value": 0,
+            "predicate": [],
+            "max": 20,
+            "color": "eE1e1e1",
+            "private": false,
+            "label": "Slow Start",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": "@actor.clocks.slowStartClkUser-4",
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.stage",
+            "value": "@actor.clocks.slowStartClkUser-4",
+            "predicate": [],
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
+            "predicate": [
+              {
+                "not": "actor:clocks:slow-start:value:20"
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "property": "system.changes.0.key",
+                "value": "slowStartClkUser",
+                "method": 5
+              }
+            ],
+            "dontMerge": true,
+            "label": "Slow Start Clock",
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+            "predicate": [
+              "actor:effect:affliction:grapple",
+              "target:effect:affliction:grapple"
+            ],
+            "chance": 30,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [],
+            "dontMerge": true,
+            "ignored": false,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "effect:affliction:grapple"
+            ],
+            "key": "system.skills.lift.value",
+            "value": 30,
+            "priority": null,
+            "ignored": false,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "ptr2e",
+        "systemVersion": "1.5.0.beta",
+        "createdTime": 1766451306968,
+        "modifiedTime": 1767157029908,
+        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
+      }
+    }
+  ]
 }

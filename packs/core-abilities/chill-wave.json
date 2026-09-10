@@ -21,11 +21,11 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all creatures within Range increase the Power of their Ice-Type attacks by 20%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user and all allies within Range increase the Power & EHR of their @Trait[ice]-Type attacks by 20%.</p>",
+        "img": "systems/ptr2e/img/svg/ice_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user and all creatures within Range increase the Power of their Ice-Type attacks by 20%.</p>",
+    "description": "<p>Effect: The user and all allies within Range increase the Power & EHR of their @Trait[ice]-Type attacks by 20%.</p>",
     "traits": [
       "domain",
       "aura",
@@ -47,57 +47,6 @@
   "_id": "FNZEY4Ahc9oBPwp1",
   "effects": [
     {
-      "name": "Chill Wave",
-      "type": "passive",
-      "_id": "10H9Sze6mVrBfmxd",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
-      "system": {
-        "changes": [
-          {
-            "type": "percentile-modifier",
-            "key": "ice-attack-power",
-            "value": 20,
-            "predicate": [],
-            "label": "Chill Wave",
-            "priority": null,
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
-          }
-        ],
-        "slug": null,
-        "traits": [],
-        "removeAfterCombat": true,
-        "removeOnRecall": false,
-        "stacks": 0,
-        "removeAfterAttacking": false,
-        "removeAfterAttacked": false
-      },
-      "disabled": false,
-      "duration": {
-        "units": "turns",
-        "value": null
-      },
-      "description": "",
-      "origin": null,
-      "tint": "#ffffff",
-      "transfer": true,
-      "statuses": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
-        "createdTime": 1722258576870,
-        "modifiedTime": 1722258597273,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
-        "exportSource": null
-      }
-    },
-    {
       "name": "Chill Wave (Aura)",
       "type": "passive",
       "_id": "Dc7HEdd0o3viV7ao",
@@ -106,7 +55,6 @@
         "changes": [
           {
             "type": "roll-option",
-            "key": "",
             "value": "chill-wave:active",
             "predicate": [],
             "domain": "all",
@@ -115,9 +63,11 @@
             "label": "Chill Wave",
             "state": true,
             "alwaysActive": false,
+            "phase": "initial",
+            "key": "",
+            "method": 2,
             "ignored": false,
-            "suboptions": [],
-            "method": 2
+            "suboptions": []
           },
           {
             "type": "aura",
@@ -130,13 +80,13 @@
             "radius": 5,
             "effects": [
               {
-                "uuid": "Compendium.ptr2e.core-effects.Item.IDrwLcaKjxVdhwFo",
-                "affects": "all",
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.IDrwLcaKjxVdhwFo",
+                "affects": "allies",
                 "events": [
                   "enter"
                 ],
                 "removeOnExit": true,
-                "includesSelf": false,
+                "includesSelf": true,
                 "appliesSelfOnly": false,
                 "predicate": []
               }
@@ -154,7 +104,8 @@
             },
             "mergeExisting": true,
             "priority": null,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -168,7 +119,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -181,13 +134,16 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.1.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1753827050877,
-        "modifiedTime": 1753827258013,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779572451101,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

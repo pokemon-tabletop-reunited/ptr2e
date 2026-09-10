@@ -6,7 +6,24 @@
       "version": 0.107,
       "previous": null
     },
-    "actions": [],
+    "actions": [
+      {
+        "name": "Muse",
+        "slug": "muse",
+        "description": "<p>Effect: The user maintains a Muse Clock with a size of 6 Spans. As a Simple Action, the user designates an ally as their Muse, setting the Muse Clock to 0 Spans.<br><br>When the user's designated Muse ends an Activation, increment one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20% and their EHR is increased 10%, up to a max increase of 100% and 50% respectively. When the Muse Clock is filled, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits and gains @Tick[3], and the Muse Clock is emptied.</p><p>The Muse Clock is emptied if either the user or their Muse leaves combat or is @Affliction[fainted], or if combat ends.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "systems/ptr2e/img/conditions/cheered.svg",
+        "cost": {
+          "activation": "simple"
+        },
+        "range": {
+          "target": "ally",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
     "description": "<p>Effect: The user maintains a Muse Clock with a size of 6 Spans. As a Simple Action, the user designates an ally as their Muse, setting the Muse Clock to 0 Spans.<br><br>When the user's designated Muse ends an Activation, increment one Span on the Muse Clock. For every Span that is filled, the user's Attacks have their Power increased by 20% and their EHR is increased 10%, up to a max increase of 100% and 50% respectively. When the Muse Clock is filled, the user is healed of all Afflictions with the @Trait[major-affliction] or @Trait[minor-affliction] traits and gains @Tick[3], and the Muse Clock is emptied.</p><p>The Muse Clock is emptied if either the user or their Muse leaves combat or is @Affliction[fainted], or if combat ends.</p>",
     "traits": [],
     "prerequisites": [],
@@ -54,7 +71,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/conditions/cheered.svg",
   "effects": [
@@ -74,8 +92,9 @@
             "color": "#c2f55f",
             "private": false,
             "label": "Muse",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "percentile-modifier",
@@ -83,9 +102,10 @@
             "value": "min(100,0+20*@actor.clocks.museClockUser000)",
             "predicate": [],
             "label": "Muse",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "basic",
@@ -93,8 +113,23 @@
             "value": "min(50,0+10*@actor.clocks.museClockUser000)",
             "predicate": [],
             "label": "Muse",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.lwmhs2uaFBOk5of6",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "muse-generic",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -108,7 +143,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -120,14 +157,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1765585453387,
-        "modifiedTime": 1766013643261,
-        "lastModifiedBy": "5ImYyhOS2D6D7ypO"
+        "modifiedTime": 1779651768991,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
       },
-      "showIcon": 0
+      "showIcon": 0,
+      "start": null,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "OXVqgQQ78QUgRinK",

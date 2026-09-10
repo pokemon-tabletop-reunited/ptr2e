@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
-        "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a Major Status Affliction. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>",
+        "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a @Trait[major-affliction]. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a Major Status Affliction. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>",
+    "description": "<p>Effect: The user's SPATK stat increases by 50% if affected by a @Trait[major-affliction]. If the user is afflicted with @Affliction[poison] or @Affliction[blight], their SPATK increases by 100% instead.</p>",
     "traits": [],
     "slug": "prideful",
     "_migration": {
@@ -35,5 +36,76 @@
     }
   },
   "_id": "L4mRysn1IivdAU1B",
-  "effects": []
+  "effects": [
+    {
+      "name": "Prideful",
+      "type": "passive",
+      "_id": "g6nQzsn1IivdAV2c",
+      "img": "systems/ptr2e/img/conditions/poisoned.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": "@actor.system.modifiers.spaMultiplier/2",
+            "predicate": [
+              "effect:major-affliction",
+              {
+                "nor": [
+                  "effect:affliction:poison",
+                  "effect:affliction:blight"
+                ]
+              }
+            ],
+            "ignored": false,
+            "priority": 91,
+            "method": 2
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": "2*@actor.system.modifiers.spaMultiplier",
+            "predicate": [
+              {
+                "or": [
+                  "effect:affliction:poison",
+                  "effect:affliction:blight"
+                ]
+              }
+            ],
+            "ignored": false,
+            "priority": 91,
+            "method": 2
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "ptr2e",
+        "systemVersion": "1.4.4.beta",
+        "lastModifiedBy": null
+      }
+    }
+  ]
 }

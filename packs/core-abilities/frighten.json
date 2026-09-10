@@ -10,7 +10,7 @@
           "friendly"
         ],
         "name": "Frighten (Entry)",
-        "slug": "frighten",
+        "slug": "frighten-entry",
         "type": "attack",
         "cost": {
           "activation": "free"
@@ -26,7 +26,8 @@
           "ghost"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       },
       {
         "traits": [
@@ -53,10 +54,11 @@
         ],
         "category": "status",
         "predicate": [],
-        "accuracy": 100
+        "accuracy": 100,
+        "free": true
       }
     ],
-    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten] and @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten-active] actions.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten-active].</p>",
     "traits": [
       "social",
       "friendly"
@@ -85,7 +87,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "frighten-attack",
+            "key": "frighten-entry-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 100,
@@ -100,11 +102,26 @@
           },
           {
             "type": "roll-note",
-            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten]",
+            "value": "{actor|link} has entered combat and may use @UUID[Compendium.ptr2e.core-abilities.Item.GlVWzzuSC6kJIil4.Actions.frighten]{Frighten}",
             "phase": "initial",
             "predicate": [],
             "key": "combat-enter",
             "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "frighten-active-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
             "method": 2,
             "ignored": false
           }
@@ -134,11 +151,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1737566382529,
-        "modifiedTime": 1779364810000,
+        "modifiedTime": 1781364191223,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
       },

@@ -21,11 +21,11 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all creatures within Range increase the Power of their Nuclear-Type attacks by 20%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The user and all creatures within Range increase the Power & EHR of their @Trait[nuclear]-Type attacks by 20%.</p>",
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg"
       }
     ],
-    "description": "<p>Effect: The user and all creatures within Range increase the Power of their Nuclear-Type attacks by 20%.</p>",
+    "description": "<p>Effect: The user and all creatures within Range increase the Power & EHR of their @Trait[nuclear]-Type attacks by 20%.</p>",
     "traits": [
       "domain",
       "aura",
@@ -48,53 +48,100 @@
   "folder": "0nG9TRDSwrmcTFwO",
   "effects": [
     {
-      "name": "Enrichment Two (Partial)",
+      "name": "Rad Accumulation",
       "type": "passive",
-      "_id": "fg2sJHpNYSKMvivm",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "_id": "9or5WU6Lv5aQGJgx",
+      "img": "icons/svg/aura.svg",
       "system": {
         "changes": [
           {
-            "type": "percentile-modifier",
-            "key": "nuclear-attack-power",
-            "value": 20,
+            "type": "roll-option",
+            "value": "rad-accumulation:active",
+            "phase": "initial",
             "predicate": [],
-            "label": "Enrichment Two",
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "alwaysActive": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "rad-accumulation:active"
+            ],
             "priority": null,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.aig56tRCaVUrtgK2",
+                "affects": "allies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": []
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0,
         "removeAfterAttacking": false,
-        "removeAfterAttacked": false
+        "removeAfterAttacked": false,
+        "stacks": 0
       },
       "disabled": false,
+      "start": null,
       "duration": {
-        "units": "turns",
-        "value": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
+      "showIcon": 1,
+      "folder": null,
       "sort": 0,
       "flags": {},
       "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779573379207,
+        "modifiedTime": 1779573416298,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
-        "createdTime": 1722253518992,
-        "modifiedTime": 1722253555646,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
         "exportSource": null
       }
     }

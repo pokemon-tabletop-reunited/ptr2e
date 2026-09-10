@@ -62,12 +62,12 @@
             "dontMerge": false,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
+                "property": "duration.turns",
                 "value": 3,
                 "method": 5
               },
               {
-                "property": "effects.0.system.changes",
+                "property": "system.changes",
                 "value": {
                   "type": "ephemeral-effect",
                   "key": "attack",
@@ -78,7 +78,8 @@
               }
             ],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -87,16 +88,14 @@
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
-        "stacks": 0,
-        "priority": 50,
-        "formula": "",
-        "type": "damage"
+        "stacks": 0
       },
       "disabled": false,
       "duration": {
         "units": "turns",
         "value": 5,
-        "expiry": "turnEnd"
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -109,13 +108,16 @@
         "compendiumSource": "Item.h7yBB9lyM2d2yUxj.ActiveEffect.FsTZk2V2ICUu1plF",
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.2.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1754475931673,
-        "modifiedTime": 1754476088127,
-        "lastModifiedBy": "QT9RUSVuyZd4bDWO"
-      }
+        "modifiedTime": 1784559454319,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

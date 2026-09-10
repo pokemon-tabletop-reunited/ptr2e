@@ -66,32 +66,41 @@
         "changes": [
           {
             "type": "alter-attack",
-            "key": "weapon-trait-attack",
+            "key": "attack",
             "value": 10,
-            "predicate": [],
+            "predicate": [
+              "self:action:trait:weapon"
+            ],
             "property": "power",
             "definition": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "flat-modifier",
-            "key": "weapon-trait-attack-damage-flat",
+            "key": "attack-damage-flat",
             "value": 5,
-            "predicate": [],
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "predicate": [
+              "self:action:trait:weapon"
+            ],
+            "phase": "initial",
+            "hideIfDisabled": true,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "alter-attack",
-            "key": "basic-trait-attack",
+            "key": "attack",
             "value": "ninja",
-            "predicate": [],
+            "predicate": [
+              "self:action:trait:basic"
+            ],
             "property": "traits",
             "definition": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -105,7 +114,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -117,13 +128,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.6.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1784402885312,
+        "modifiedTime": 1784403089774
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "kJ2ykq4Nut3Wmec2"
 }
