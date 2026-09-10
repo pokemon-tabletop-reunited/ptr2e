@@ -17,11 +17,11 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "<p>Effect: The user and all allied creatures within Range of the user, when receiving a positive @Trait[stage-change] effect, gain an additional +1 to the Stats increased by the effect, and the effect's duration is increased by +2.</p>",
+        "description": "<p>Effect: The user and all allied creatures within Range of the user, when receiving a @Trait[positive-stage-change] effect, gain an additional +1 to the Stats increased by the effect, and the effect's duration is increased by +2.</p>",
         "img": "icons/environment/people/infantry-army.webp"
       }
     ],
-    "description": "<p>Effect: The user and all allied creatures within Range of the user, when receiving a positive @Trait[stage-change] effect, gain an additional +1 to the Stats increased by the effect, and the effect's duration is increased by +2.</p>",
+    "description": "<p>Effect: The user and all allied creatures within Range of the user, when receiving a @Trait[positive-stage-change] effect, gain an additional +1 to the Stats increased by the effect, and the effect's duration is increased by +2.</p>",
     "traits": [],
     "slug": "team-player",
     "_migration": {
@@ -37,5 +37,105 @@
     }
   },
   "_id": "MuBQsNKQsWAMoXlH",
-  "effects": []
+  "effects": [
+    {
+      "name": "Team Player",
+      "type": "passive",
+      "_id": "mzsZbS3vX3pFgrr5",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "value": "team-player:active",
+            "phase": "initial",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "label": "Team Player",
+            "alwaysActive": false,
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [
+              "team-player:active"
+            ],
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects-new.ActiveEffect.EFPCmBI7UDZss4ed",
+                "affects": "allies",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": true,
+                "appliesSelfOnly": false,
+                "predicate": []
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1779582774906,
+        "modifiedTime": 1779582810444,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }

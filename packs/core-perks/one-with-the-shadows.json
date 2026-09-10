@@ -66,21 +66,48 @@
             "type": "ephemeral-effect",
             "key": "ninja-trait-attack",
             "value": "Compendium.ptr2e.core-effects.Item.auJlcV40ua09ITga",
-            "predicate": [],
+            "predicate": [
+              {
+                "or": [
+                  "item:trait:ninja",
+                  "self:action:trait:ninja",
+                  {
+                    "and": [
+                      "actor:item:perk:flexible-iron",
+                      "self:action:trait:basic"
+                    ]
+                  }
+                ]
+              }
+            ],
             "affects": "self",
             "alterations": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "alter-attack",
-            "key": "ninja-trait-attack",
+            "type": "flat-modifier",
+            "key": "attack-accuracy",
             "value": 20,
-            "predicate": [],
-            "property": "accuracy",
-            "definition": [],
+            "predicate": [
+              {
+                "or": [
+                  "item:trait:ninja",
+                  "self:action:trait:ninja",
+                  {
+                    "and": [
+                      "actor:item:perk:flexible-iron",
+                      "self:action:trait:basic"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "method": 2
+            "hideIfDisabled": true
           },
           {
             "type": "ephemeral-modifier",
@@ -92,9 +119,10 @@
               }
             ],
             "label": "One With The Shadows (Acc)",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "hideIfDisabled": true,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-modifier",
@@ -104,9 +132,10 @@
               "self:action:trait:weapon"
             ],
             "label": "One With The Shadows (Wpn Acc)",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "hideIfDisabled": true,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-modifier",
@@ -118,9 +147,10 @@
               }
             ],
             "label": "One With The Shadows (Dmg)",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "hideIfDisabled": true,
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "ephemeral-modifier",
@@ -130,9 +160,10 @@
               "self:action:trait:weapon"
             ],
             "label": "One With The Shadows (Wpn Dmg)",
-            "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "phase": "initial",
+            "hideIfDisabled": true,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -146,7 +177,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -158,13 +191,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
-        "lastModifiedBy": null
-      }
+        "systemVersion": "1.7.6.beta",
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "createdTime": 1784401207533,
+        "modifiedTime": 1784401983075
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "YhYbM161HYod7ArC"
 }

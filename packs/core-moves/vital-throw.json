@@ -22,16 +22,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": 1
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 70,
-        "accuracy": null,
+        "accuracy": 100,
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable, is Pushed, and is Delayed by 40%.</p>",
+        "description": "<p>Effect: On hit, the target gains @Affliction[delay 40].</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -59,7 +58,7 @@
           {
             "type": "roll-effect",
             "key": "vital-throw-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delayconditiitem",
             "predicate": [],
             "chance": 100,
             "dontMerge": true,

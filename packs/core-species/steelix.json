@@ -618,11 +618,19 @@
             "level": null,
             "knownMove": null
           },
-          "evolutions": []
+          "evolutions": [],
+          "perk": {
+            "x": 26,
+            "y": 26
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.EkhJeHPiORiRxysb",
-      "methods": []
+      "methods": [],
+      "perk": {
+        "x": 26,
+        "y": 26
+      }
     },
     "_migration": {
       "version": null,
@@ -637,7 +645,8 @@
       "source": "PTR 2e Core - Johto Dex",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "w309u6WHtT32xjYk",
@@ -663,7 +672,8 @@
             "ignored": false,
             "suboptions": [],
             "state": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "stats-alteration",
@@ -680,7 +690,8 @@
             "spe": null,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -691,7 +702,8 @@
             "value": 1.3,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -702,7 +714,8 @@
             "value": 340,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "add-trait",
@@ -713,7 +726,8 @@
             "value": "Awkward Flier",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "add-trait",
@@ -724,7 +738,8 @@
             "value": "Hover",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "add-trait",
@@ -735,7 +750,8 @@
             "value": "EM Sense 20",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "add-trait",
@@ -746,7 +762,8 @@
             "value": "Magnetic",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "add-trait",
@@ -757,7 +774,8 @@
             "value": "Direction Sense",
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -768,7 +786,8 @@
             "value": 4,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -779,7 +798,8 @@
             "value": 10,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -790,7 +810,8 @@
             "value": 30,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -801,7 +822,8 @@
             "value": 0,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -812,7 +834,8 @@
             "value": 20,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -823,7 +846,8 @@
             "value": 10,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "basic",
@@ -834,7 +858,8 @@
             "value": 15,
             "priority": null,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
@@ -855,7 +880,8 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -864,17 +890,16 @@
         "removeOnRecall": false,
         "stacks": 0,
         "trigger": "manual",
-        "conditions": []
+        "conditions": [],
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "seconds": null,
-        "combat": null,
-        "rounds": null,
-        "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -886,12 +911,277 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1733849401562,
         "modifiedTime": 1733856065105,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
+    },
+    {
+      "name": "Mega Steelix (Alternate)",
+      "type": "form",
+      "_id": "uO22kTbJKPmDJgMs",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-steelix-alternate:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Steelix (Alternate) Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "remove-trait",
+            "value": "ground",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "fire",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "key": "system.type.types",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.olGAnaAhIck8JvQh",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Firestarter",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Heater",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Glow 4",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "key": "IR Vision",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "hp": null,
+            "atk": 40,
+            "def": null,
+            "spa": 20,
+            "spd": 30,
+            "spe": null,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.climb.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.listen.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.navigate.value",
+            "value": 15,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.running.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.spot.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.track.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-steelix-alternate:active"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1781922602891,
+        "modifiedTime": 1781923019441,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
       }
     }
   ]

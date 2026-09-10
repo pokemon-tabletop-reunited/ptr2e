@@ -8,27 +8,28 @@
       {
         "slug": "seizing-the-moment",
         "name": "Seizing the Moment",
-        "type": "generic",
+        "type": "attack",
         "traits": [
-          "grapple",
-          "basic"
+          "contact",
+          "basic",
+          "advance-40"
         ],
         "range": {
-          "target": "self",
-          "distance": 0,
+          "target": "enemy",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
+          "activation": "simple",
           "powerPoints": 0
         },
         "category": "status",
         "power": null,
-        "accuracy": null,
+        "accuracy": 75,
         "types": [
           "untyped"
         ],
-        "description": "<p>Effect: This action can only be taken while the user has the @Affliction[grapple] Affliction.<br>Pick one of the following 3 effects:</p><p><ul><li>If the user is in control of the @Affliction[grapple], they may a Lift check, as per Grab. On success, the user may use Breaking Hold on any number of target in the @Affliction[grapple], once per target. On a failure nothing happens, but the user stays in control of the @Affliction[grapple].</li><li>If the user is in control of the @Affliction[grapple], they may escape the @Affliction[grapple].</li><li>If the user is not in control of the @Affliction[grapple], they may make Lift Check (same rules as above) to break free or take control of the @Affliction[grapple]. On succeess, the user may choose to escape the @Affliction[grapple] or take control of the @Affliction[grapple].</li></ul></p>",
+        "description": "<p>Trigger: The user has @Affliction[grapple] and is not Dominant in the Grapple.</p><p>Effect: On hit, the user and their allies in the Grapple become Dominant in the Grapple. This Action's Accuracy is inherently modified by the user's and target's Lift Skills and both creatures' Height and Weight Classes.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": true,
@@ -45,6 +46,76 @@
     }
   },
   "_id": "I40AiRBdVJWdtmAJ",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Grab",
+      "type": "passive",
+      "_id": "I51ZjLBdVJWdtmAJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "seizing-the-moment-attack-accuracy",
+            "value": "ceil((@actor.system.details.size.heightClass+2)*13+(@actor.system.details.size.weightClass+3)*8+log2(@actor.system.skills.lift.rvs+@actor.system.skills.lift.value+@actor.system.skills.lift.mod)*21)",
+            "predicate": [
+              "self:state:overland"
+            ],
+            "label": "Seizing the Moment (Offense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          },
+          {
+            "type": "flat-modifier",
+            "key": "seizing-the-moment-attack-accuracy",
+            "value": "-ceil((@target.system.details.size.heightClass+2)*6+(@target.system.details.size.weightClass+3)*8+log(@target.system.skills.lift.rvs+@target.system.skills.lift.value+@target.system.skills.lift.mod)*15)",
+            "predicate": [
+              "target:state:overland"
+            ],
+            "label": "Seizing the Moment (Defense)",
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false,
+            "method": 2,
+            "phase": "initial"
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": 5,
+        "expiry": "turnEnd"
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726141434026,
+        "modifiedTime": 1726141459982,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ],
   "folder": "EpCOePz8omfXbp34"
 }

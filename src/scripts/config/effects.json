@@ -37,9 +37,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.atk.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.atkMultiplier",
+          "value": "-@actor.system.modifiers.atkMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -69,9 +73,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spaMultiplier",
+          "value": "-@actor.system.modifiers.spaMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -96,9 +104,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spaMultiplier",
+          "value": "-@actor.system.modifiers.spaMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -129,11 +141,12 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spe.value",
-          "value": 0.5,
+          "key": "system.modifiers.speMultiplier",
+          "value": "-@actor.system.modifiers.speMultiplier/2",
+          "phase": "initial",
           "predicate": [],
-          "method": 1,
-          "priority": null,
+          "method": 2,
+          "priority": 90,
           "ignored": false
         },
         {
@@ -142,7 +155,7 @@
         },
         {
           "type": "roll-effect",
-          "label": "Paralysis Tased Check",
+          "label": "Tased Chance",
           "key": "attack",
           "value": "Compendium.ptr2e.core-effects.Item.tasedconditiitem",
           "chance": 25,
@@ -183,13 +196,17 @@
         {
           "type": "percentile-modifier",
           "key": "attack-power",
-          "value": -33.33
+          "value": -25
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.spdMultiplier",
+          "value": "-@actor.system.modifiers.spdMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -220,7 +237,16 @@
         {
           "type": "percentile-modifier",
           "key": "damaging-attack-power",
-          "value": -50,
+          "value": -33.33,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "attack-accuracy",
+          "value": -25,
           "predicate": [],
           "method": 2,
           "ignored": false,
@@ -228,35 +254,13 @@
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": -1,
+          "key": "system.modifiers.spdMultiplier",
+          "value": "-@actor.system.modifiers.spdMultiplier/2",
+          "phase": "initial",
           "predicate": [],
           "method": 2,
+          "priority": 90,
           "ignored": false
-        },
-        {
-          "type": "grant-effect",
-          "value": "slowed",
-          "key": "",
-          "predicate": [],
-          "alterations": [
-            {
-              "method": 5,
-              "property": "duration.turns",
-              "value": 10
-            }
-          ],
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          },
-          "method": 2,
-          "ignored": false,
-          "reevaluateOnUpdate": false,
-          "inMemoryOnly": false,
-          "allowDuplicate": true,
-          "track": false,
-          "replaceSelf": false
         }
       ],
       "priority": 30,
@@ -291,25 +295,49 @@
     "system": {
       "changes": [
         {
-          "type": "basic",
-          "key": "system.battleStats.evasion.stage",
-          "value": -1,
-          "method": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spe.value",
-          "value": 1.5,
+          "type": "ephemeral-modifier",
+          "key": "attack-accuracy-percentile",
+          "value": 30,
           "predicate": [],
-          "method": 1,
-          "priority": null,
-          "ignored": false
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "action-accuracy-percentile",
+          "value": 30,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
+        },
+        {
+          "type": "ephemeral-modifier",
+          "key": "attack-damage-percentile",
+          "value": -33,
+          "predicate": [],
+          "method": 2,
+          "ignored": false,
+          "hideIfDisabled": false
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": 1,
+          "key": "system.modifiers.effectResistance",
+          "value": 33,
+          "predicate": [],
+          "ignored": false,
           "method": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.speMultiplier",
+          "value": "@actor.system.modifiers.speMultiplier*0.6",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 94,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -338,9 +366,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": -1,
-          "method": 2
+          "key": "system.modifiers.defMultiplier",
+          "value": "-@actor.system.modifiers.defMultiplier/2",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
         }
       ],
       "priority": 30,
@@ -414,7 +446,7 @@
         },
         {
           "type": "roll-effect",
-          "label": "Splinter Bleed Check",
+          "label": "Bleed Chance",
           "key": "attack",
           "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bleedcondition00",
           "chance": 15,
@@ -1948,13 +1980,13 @@
         {
           "type": "basic",
           "key": "system.battleStats.evasion.stage",
-          "value": -1,
+          "value": -2,
           "method": 2
         },
         {
           "type": "basic",
           "key": "system.battleStats.accuracy.stage",
-          "value": -1,
+          "value": -2,
           "method": 2
         },
         {
@@ -1970,28 +2002,110 @@
           }
         },
         {
-          "type": "grant-item",
+          "type": "roll-option",
           "key": "",
-          "value": "Compendium.ptr2e.core-moves.Item.NJy3eYAmlcqfqIua",
+          "value": "grapple:dominant",
           "predicate": [],
-          "replaceSelf": false,
-          "allowDuplicate": false,
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          }
+          "domain": "all",
+          "toggleable": true,
+          "count": false,
+          "state": false,
+          "alwaysActive": false,
+          "label": "Dominant in Grapple?",
+          "ignored": false,
+          "suboptions": [],
+          "method": 2
         },
         {
-          "type": "grant-item",
-          "key": "",
-          "value": "Compendium.ptr2e.core-moves.Item.YI7aL87CCQU797GH",
+          "type": "stage-modifier",
+          "key": "fling-actor-toss-attack-accuracy",
+          "value": 3,
+          "predicate": [
+            "grapple:dominant"
+          ],
+          "label": "Dominant Actor Toss (Acc)",
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "stage-modifier",
+          "key": "fling-actor-toss-attack-crit",
+          "value": 1,
+          "predicate": [
+            "grapple:dominant"
+          ],
+          "label": "Dominant Actor Toss (Crit)",
+          "ignored": false,
+          "hideIfDisabled": false,
+          "method": 2
+        },
+        {
+          "type": "alter-attack",
+          "key": "fling-actor-toss-attack",
+          "value": "priority-30",
           "predicate": [],
-          "replaceSelf": false,
-          "allowDuplicate": false,
-          "onDeleteActions": {
-            "grantee": "detach",
-            "granter": "cascade"
-          }
+          "ignored": false,
+          "property": "traits",
+          "definition": [
+            "grapple:dominant"
+          ],
+          "method": 2
+        },
+        {
+          "type": "grant-effect",
+          "value": "bound",
+          "predicate": [
+            {
+              "not": "grapple:dominant"
+            }
+          ]
+        },
+        {
+          "type": "roll-effect",
+          "key": "attack",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+          "predicate": [
+            {
+              "not": "grapple:dominant"
+            }
+          ],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "self",
+          "alterations": [
+            {
+              "property": "system.amount",
+              "value": -25,
+              "method": 5
+            }
+          ],
+          "dontMerge": true,
+          "ignored": false,
+          "method": 2
+        },
+        {
+          "type": "roll-effect",
+          "key": "generic",
+          "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.delaycondition00",
+          "predicate": [
+            {
+              "not": "grapple:dominant"
+            }
+          ],
+          "chance": 100,
+          "isFixedChance": true,
+          "affects": "self",
+          "alterations": [
+            {
+              "property": "system.amount",
+              "value": -25,
+              "method": 5
+            }
+          ],
+          "dontMerge": true,
+          "ignored": false,
+          "method": 2
         }
       ],
       "removeOnRecall": true,

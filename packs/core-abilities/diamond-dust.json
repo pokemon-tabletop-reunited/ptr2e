@@ -25,8 +25,7 @@
     ],
     "description": "<p>Effect: While Foggy or Snowy Weather is active, the user's Fairy- and Ice-Type attacks have 30% increased Power. The user is immune to the negative effects of Foggy and Snowy Weather. The user is treated as having the Psychic Type for the effects of Foggy Weather.</p>",
     "traits": [
-      "environ",
-      "partial-automation"
+      "environ"
     ],
     "slug": "diamond-dust",
     "_migration": {
@@ -58,9 +57,10 @@
               "effect:summon:foggy-weather"
             ],
             "label": "Fairy Power",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "percentile-modifier",
@@ -70,19 +70,21 @@
               "effect:summon:snowy-weather"
             ],
             "label": "Fairy Power",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "add-trait",
-            "key": "",
             "value": "psychic",
             "predicate": [
               "effect:summon:foggy-weather"
             ],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "key": "",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "percentile-modifier",
@@ -92,9 +94,10 @@
               "effect:summon:foggy-weather"
             ],
             "label": "Ice Power",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
             "type": "percentile-modifier",
@@ -104,9 +107,32 @@
               "effect:summon:snowy-weather"
             ],
             "label": "Ice Power",
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "add-trait",
+            "value": "ice",
+            "phase": "initial",
+            "predicate": [
+              "effect:summon:snowy-weather"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "psychic",
+            "phase": "initial",
+            "predicate": [
+              "effect:summon:foggy-weather"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -120,7 +146,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -132,13 +160,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.6.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1765240367540,
-        "modifiedTime": 1765240482737,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "modifiedTime": 1779558968451,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

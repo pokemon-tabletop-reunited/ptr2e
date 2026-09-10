@@ -2482,7 +2482,6 @@ class ActorPTR2e<
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
     if (game.users.activeGM?.id !== game.user.id) return;
-    if (!this.unconnectedRoots.length) return;
 
     function isEffect(
       collection: "effects" | "items",
@@ -2522,8 +2521,7 @@ class ActorPTR2e<
       }
     }
 
-    const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
-    if (!perks.length) return;
+
 
   }
 

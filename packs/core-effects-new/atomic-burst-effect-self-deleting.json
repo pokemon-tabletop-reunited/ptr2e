@@ -1,0 +1,84 @@
+{
+  "name": "Atomic Burst Effect (Self-Deleting)",
+  "type": "affliction",
+  "_id": "7lE4m5eWaezOeW1q",
+  "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
+  "system": {
+    "changes": [
+      {
+        "type": "grant-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+        "phase": "initial",
+        "predicate": [
+          {
+            "not": "self:state:shielded"
+          }
+        ],
+        "alterations": [
+          {
+            "method": 5,
+            "property": "system.changes.0.value",
+            "value": -2
+          }
+        ],
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "cascade"
+        },
+        "key": "hpTickEffect",
+        "method": 2,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "allowDuplicate": true,
+        "track": false,
+        "replaceSelf": false
+      },
+      {
+        "type": "grant-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.1JXumQz0QqthT9Iv",
+        "phase": "initial",
+        "predicate": [
+          {
+            "not": "self:state:shielded"
+          }
+        ],
+        "alterations": [],
+        "onDeleteActions": {
+          "grantee": "detach",
+          "granter": "detach"
+        },
+        "replaceSelf": true,
+        "key": "1SpecialAttackStage",
+        "method": 2,
+        "ignored": false,
+        "reevaluateOnUpdate": false,
+        "inMemoryOnly": false,
+        "allowDuplicate": true,
+        "track": false
+      }
+    ],
+    "traits": [],
+    "removeAfterCombat": true,
+    "priority": 50,
+    "type": "damage",
+    "predicate": [
+      "[\"[]\"]"
+    ]
+  },
+  "disabled": false,
+  "start": null,
+  "duration": {
+    "value": 1,
+    "units": "seconds",
+    "expiry": null,
+    "expired": false
+  },
+  "description": "",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": false,
+  "statuses": [],
+  "showIcon": 1,
+  "flags": {}
+}

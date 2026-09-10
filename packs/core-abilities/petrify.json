@@ -10,7 +10,7 @@
           "friendly"
         ],
         "name": "Petrify (Entry)",
-        "slug": "petrify",
+        "slug": "petrify-entry",
         "type": "attack",
         "cost": {
           "activation": "free"
@@ -26,7 +26,8 @@
           "rock"
         ],
         "category": "status",
-        "predicate": []
+        "predicate": [],
+        "free": true
       },
       {
         "traits": [
@@ -53,10 +54,11 @@
         ],
         "category": "status",
         "predicate": [],
-        "accuracy": 100
+        "accuracy": 100,
+        "free": true
       }
     ],
-    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.13JbJwxpMrrdRTMm.Actions.petrify] and @UUID[Compendium.ptr2e.core-abilities.Item.13JbJwxpMrrdRTMm.Actions.petrify-active] actions.</p>",
+    "description": "<p>The user gains the @UUID[Compendium.ptr2e.core-abilities.Item.13JbJwxpMrrdRTMm.Actions.petrify-entry] and @UUID[Compendium.ptr2e.core-abilities.Item.13JbJwxpMrrdRTMm.Actions.petrify-active] actions.</p>",
     "traits": [
       "social",
       "friendly",
@@ -86,7 +88,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "petrify-attack",
+            "key": "petrify-entry-attack",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
             "predicate": [],
             "chance": 100,
@@ -106,6 +108,21 @@
             "predicate": [],
             "key": "combat-enter",
             "visibility": null,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "petrify-active-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
             "method": 2,
             "ignored": false
           }
@@ -135,11 +152,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "14.361",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.5.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1737563571394,
-        "modifiedTime": 1779371174238,
+        "modifiedTime": 1781364617135,
         "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
       },

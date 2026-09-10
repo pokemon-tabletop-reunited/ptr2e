@@ -64,8 +64,49 @@
             "predicate": [],
             "property": "power",
             "definition": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "major-affliction-trait"
+              }
+            ],
+            "dontMerge": false,
+            "key": "cast-off-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.cleareffect00000",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "minor-affliction-trait"
+              }
+            ],
+            "dontMerge": false,
+            "key": "cast-off-attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -79,7 +120,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -91,13 +134,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.363",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1767158672971,
-        "modifiedTime": 1767159383819,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW"
-      }
+        "modifiedTime": 1779552174908,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR"
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }

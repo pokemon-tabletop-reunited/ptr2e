@@ -11,33 +11,16 @@
         "slug": "masters-whip",
         "description": "<p>You may advance a targeted ally's activation forward by 30% as a Simple Action, costing 3PP.</p>",
         "traits": [],
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "ally",
-          "unit": "m",
-          "distance": 0
+          "unit": "m"
         },
         "cost": {
           "activation": "simple",
           "powerPoints": 3
         },
-        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
-        "free": true,
-        "predicate": [],
-        "variant": null,
-        "ephemeralVariant": false,
-        "contestType": "",
-        "contestEffect": "",
-        "slot": null,
-        "summon": null,
-        "defaultVariant": null,
-        "flingItemId": "",
-        "offensiveStat": null,
-        "defensiveStat": null
+        "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg"
       }
     ],
     "slug": "masters-whip",
@@ -99,9 +82,7 @@
       ],
       "notes": ""
     },
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "effects": [
     {
@@ -113,35 +94,41 @@
         "changes": [
           {
             "type": "roll-effect",
-            "key": "masters-whip-attack",
+            "key": "masters-whip-generic",
             "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
             "predicate": [],
             "chance": 100,
             "affects": "target",
             "alterations": [
               {
+                "method": 5,
                 "property": "system.amount",
-                "value": 30,
-                "method": 5
+                "value": 30
               }
             ],
             "label": "Master's Whip",
             "dontMerge": false,
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -153,14 +140,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.364",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1742128847826,
-        "modifiedTime": 1745186004290,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf",
+        "modifiedTime": 1784210590443,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

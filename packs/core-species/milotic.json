@@ -654,5 +654,267 @@
     }
   },
   "_id": "6HyvBOqJ3hfbVojE",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Milotic",
+      "type": "form",
+      "_id": "HgLdd3OaCPm1n2mn",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-milotic:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Milotic Forme",
+            "predicate": [],
+            "phase": "initial",
+            "state": true,
+            "alwaysActive": false,
+            "count": false,
+            "method": 2,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.type.types",
+            "value": "fairy",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "grant-item",
+            "value": "Compendium.ptr2e.core-abilities.Item.6I3avjOnSCjM7LLh",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.free",
+                "value": "true"
+              }
+            ],
+            "onDeleteActions": {
+              "grantee": "detach",
+              "granter": "cascade"
+            },
+            "key": "",
+            "method": 2,
+            "ignored": false,
+            "reevaluateOnUpdate": false,
+            "inMemoryOnly": false,
+            "allowDuplicate": true,
+            "track": false,
+            "replaceSelf": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Sparkler",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "value": "Glow 3",
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "stats-alteration",
+            "value": 0,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "hp": null,
+            "atk": 20,
+            "def": 25,
+            "spa": 30,
+            "spd": 25,
+            "spe": null,
+            "key": "",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.acrobatics.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.conversation.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.intimidate.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.leadership.value",
+            "value": 30,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.lift.value",
+            "value": 5,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.listen.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.fairy.value",
+            "value": 40,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.negotiation.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.spot.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.running.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.skills.swim.value",
+            "value": 10,
+            "phase": "initial",
+            "predicate": [
+              "forme:mega-milotic:active"
+            ],
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1782005844728,
+        "modifiedTime": 1782006196113,
+        "lastModifiedBy": "MGsN9sFsYejE0iWa",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    }
+  ]
 }
