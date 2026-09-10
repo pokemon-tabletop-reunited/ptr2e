@@ -6,10 +6,27 @@
   "system": {
     "changes": [
       {
+        "type": "roll-option",
+        "value": "boss-hit-advance:active",
+        "phase": "initial",
+        "predicate": [],
+        "domain": "all",
+        "toggleable": true,
+        "count": false,
+        "state": true,
+        "alwaysActive": false,
+        "key": "",
+        "method": 2,
+        "ignored": false,
+        "suboptions": []
+      },
+      {
         "type": "roll-effect",
         "key": "attack",
-        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
-        "predicate": [],
+        "value": "Compendium.ptr2e.core-effects.Item.delayconditiitem",
+        "predicate": [
+          "boss-hit-advance:active"
+        ],
         "chance": 100,
         "affects": "defensive",
         "dontMerge": true,

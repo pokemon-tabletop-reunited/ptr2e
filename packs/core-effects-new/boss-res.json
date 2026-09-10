@@ -6,44 +6,50 @@
   "system": {
     "changes": [
       {
+        "type": "roll-option",
+        "value": "boss-res-active",
+        "predicate": [],
+        "domain": "all",
+        "toggleable": true,
+        "count": false,
+        "state": true,
+        "alwaysActive": false,
+        "priority": null,
+        "phase": "initial",
+        "key": "",
+        "method": 2,
+        "ignored": false,
+        "suboptions": []
+      },
+      {
         "type": "basic",
         "key": "system.modifiers.effectResistance",
         "value": 30,
-        "predicate": [],
-        "ignored": false,
-        "method": 2
+        "predicate": [
+          "boss-res-active"
+        ],
+        "phase": "initial",
+        "method": 2,
+        "ignored": false
       }
     ],
-    "slug": null,
+    "slug": "boss-res",
     "traits": [],
-    "removeAfterCombat": true,
-    "removeOnRecall": false,
-    "removeAfterAttacking": false,
-    "removeAfterAttacked": false,
-    "stacks": 0,
-    "description": "<p>This effect grants bosses a passive +30% RES.</p>"
+    "removeAfterCombat": true
   },
   "disabled": false,
   "duration": {
     "units": "turns",
-    "value": null
+    "value": null,
+    "expiry": null,
+    "expired": false
   },
-  "description": "",
+  "description": "<p>Adds a togglable 30% RES increase to this Boss.</p><p>The toggle can be found in the Effects tab under 'Toggles'</p>",
   "origin": null,
   "tint": "#ffffff",
   "transfer": true,
   "statuses": [],
-  "sort": 0,
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null,
-    "coreVersion": "13.347",
-    "systemId": "ptr2e",
-    "systemVersion": "1.4.2.beta",
-    "lastModifiedBy": "mK35yvCqCgiTUvKf",
-    "modifiedTime": 1754603715329
-  },
-  "folder": "QUgx4S1LlBbCXWnX"
+  "folder": "QUgx4S1LlBbCXWnX",
+  "start": null,
+  "showIcon": 1
 }
