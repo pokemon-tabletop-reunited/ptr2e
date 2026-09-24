@@ -16,17 +16,16 @@
     "movement": [
       {
         "type": "overland",
-        "value": 7
+        "value": 9
       }
     ],
     "traits": [
       "pokemon",
       "bipedal",
       "telepath",
-      "telekinetic-4",
+      "telekinetic-6",
       "chiller",
-      "fully-evolved",
-      "jump-2"
+      "jump-3"
     ],
     "abilities": {
       "starting": [
@@ -114,6 +113,14 @@
       {
         "slug": "fast-talk",
         "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "husbandry",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -614,6 +621,10 @@
         {
           "name": "shell-shock",
           "gen": null
+        },
+        {
+          "name": "dazzling-gleam",
+          "gen": null
         }
       ],
       "levelUp": [
@@ -778,7 +789,36 @@
             "y": 26
           },
           "details": null,
-          "evolutions": []
+          "evolutions": [
+            {
+              "name": "sopranice",
+              "uuid": "Compendium.ptr2e.core-species.Item.c4AqfNTcYT1x6t5i",
+              "methods": [
+                {
+                  "type": "item",
+                  "item": "frosterizer",
+                  "operand": "or",
+                  "held": false
+                },
+                {
+                  "type": "level",
+                  "level": 44,
+                  "operand": "or"
+                }
+              ],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              },
+              "evolutions": [],
+              "perk": {
+                "x": 26,
+                "y": 26
+              }
+            }
+          ]
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.pIfbrD0AHHqtYz9a",
