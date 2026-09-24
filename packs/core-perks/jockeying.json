@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "jockeying",
-    "description": "<p>Effect: The user can spend 10 Luck @Trait[interrupt] to reroll the Accuracy Check of a missed Physical- or Special-Category Attack of themselves or a member of their Team, but the rerolled Attack gains [Crash 1/3]. This can affect a non-Team Ally by spending another 5 Luck.</p>",
+    "description": "<p>Effect: The user can spend 8 Luck as a Free Action @Trait[interrupt] to reroll the Accuracy Check of a missed Physical- or Special-Category Attack of themselves or a member of their Team, but this Attack gains @Trait[crash-3-4]. This can affect a non-Team Ally by spending another 4 Luck.</p>",
     "traits": [
       "gambler"
     ],
@@ -34,14 +34,17 @@
     "webs": [],
     "nodes": [
       {
-        "x": 90,
-        "y": 194,
+        "x": 89,
+        "y": 190,
         "hidden": false,
         "type": "normal",
         "connected": [
           "lets-go-gambling",
           "cant-break-my-winning-streak",
-          "mulligan"
+          "mulligan",
+          "manifesting-victory",
+          "summoning-greed",
+          "pokerface"
         ],
         "config": {
           "texture": null,
@@ -51,7 +54,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "img": "icons/environment/creatures/horse-tan.webp",
   "effects": [],

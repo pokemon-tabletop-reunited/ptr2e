@@ -35,15 +35,14 @@
     "nodes": [
       {
         "x": 81,
-        "y": 188,
+        "y": 191,
         "hidden": false,
         "type": "normal",
         "connected": [
-          "cant-break-my-winning-streak",
-          "up-the-beat",
-          "quick-and-the-dead",
           "mulligan",
-          "lucky-charm"
+          "lucky-charm",
+          "pick-three-drop-two",
+          "destiny-draw"
         ],
         "config": {
           "texture": null,
@@ -53,7 +52,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "img": "icons/creatures/birds/duck-green.webp",
   "effects": [
@@ -81,7 +81,8 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -95,7 +96,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -107,14 +110,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null,
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "_id": "4kXOJ5lOfe6z0rNK"

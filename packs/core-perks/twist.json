@@ -27,8 +27,10 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
-        }
+          "unit": "m",
+          "distance": 10
+        },
+        "traits": []
       }
     ],
     "description": "<p>Effect: If the user has used @UUID[Compendium.ptr2e.core-gear.Item.PZFyt0DGaa8C6SCy]{Metronome} this Activation, they may discard up to 3 Metronome Cards and draw again for an equal number of cards.</p>",
@@ -50,22 +52,29 @@
     "traitWebs": [],
     "nodes": [
       {
-        "x": 96,
-        "y": 188,
-        "connected": [
-          "the-devil-does-bargain",
-          "ace-up-my-sleeve",
-          "minor-buff-65",
-          "card-captor-1"
-        ],
+        "x": 95,
+        "y": 186,
         "hidden": false,
         "type": "normal",
+        "connected": [
+          "the-devil-does-bargain",
+          "minor-buff-65",
+          "card-captor-1",
+          "cant-break-my-winning-streak",
+          "quick-play"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "twist"
   },
   "_id": "23tGrqFsV5A8DBAi",
   "img": "icons/sundries/gaming/game-playing-cards-deck.webp",
-  "effects": [],
-  "flags": {}
+  "effects": []
 }

@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "mulligan",
-    "description": "<p>Effect: The user can spend 5 Luck to force a reroll of an ally's Effect Roll, this roll gains 50% EHR for this reroll only.</p>",
+    "description": "<p>Effect: The user can spend 6 Luck to force a reroll of an ally's Effect Check or Shake Check, with a failure being successful if it failed by 10 or less.</p>",
     "traits": [
       "gambler"
     ],
@@ -34,13 +34,15 @@
     "webs": [],
     "nodes": [
       {
-        "x": 83,
-        "y": 191,
+        "x": 85,
+        "y": 192,
         "hidden": false,
         "type": "normal",
         "connected": [
           "jockeying",
-          "lucky-duck"
+          "lucky-duck",
+          "manifesting-victory",
+          "summoning-greed"
         ],
         "config": {
           "texture": null,
@@ -50,7 +52,8 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "img": "icons/sundries/gaming/dice-runed-tan.webp",
   "effects": [],
