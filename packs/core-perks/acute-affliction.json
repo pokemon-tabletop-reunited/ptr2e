@@ -9,9 +9,9 @@
       {
         "name": "Acute Affliction",
         "slug": "acute-affliction",
-        "description": "<p>Trigger: The target is afflicted with a @Trait[major-affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
+        "description": "<p>Effect: When the user applies a @Trait[major-affliction] to a creature, that creature gains @Affliction[striken 3].</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
           "target": "creature",
           "unit": "m",
@@ -19,7 +19,6 @@
         },
         "cost": {
           "activation": "free",
-          "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
           "powerPoints": 0
         },
         "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
@@ -28,7 +27,7 @@
       }
     ],
     "slug": "acute-affliction",
-    "description": "<p>Trigger: The target is afflicted with a @Trait[major-affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
+    "description": "<p>Effect: When the user applies a @Trait[major-affliction] to a creature, that creature gains @Affliction[striken 3].</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:potent-afflictions"
@@ -82,5 +81,69 @@
     "variant": null,
     "mode": null
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Acute Affliction",
+      "type": "passive",
+      "_id": "IuAGcFJ6q6zCV012",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "major-affliction-trait-applied",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.strikencondition",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "ignored": false,
+            "method": 2,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "seconds",
+        "value": null,
+        "expiry": "turnEnd",
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "14.358",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726141576571,
+        "modifiedTime": 1774820556542,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
+    }
+  ]
 }
