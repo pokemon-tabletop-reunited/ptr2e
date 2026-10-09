@@ -16,7 +16,7 @@
     },
     "actions": [],
     "slug": "cant-break-my-winning-streak",
-    "description": "<p>Effect: When the user spends Luck, that Luck cost is reduced by 2 (to a minimum Luck cost of 1). Whenever user activates a perk with a Luck-based Activation Cost they gain Resolved 2.</p>",
+    "description": "<p>Effect: When the user spends Luck, that Luck cost is reduced by 4 (to a minimum Luck cost of 1). Whenever user activates a Perk with a Luck-based Activation Cost they gain @Affliction[resolved 2] and @Affliction[hale 2].</p>",
     "traits": [],
     "prerequisites": [
       "item:perk:the-devil-does-bargain"
@@ -32,15 +32,15 @@
     "webs": [],
     "nodes": [
       {
-        "x": 86,
-        "y": 188,
+        "x": 88,
+        "y": 185,
         "hidden": false,
         "type": "normal",
         "connected": [
           "up-the-beat",
           "lets-go-gambling",
-          "lucky-duck",
-          "jockeying"
+          "jockeying",
+          "twist"
         ],
         "config": {
           "texture": null,
@@ -51,12 +51,9 @@
         "tier": null
       }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "icons/commodities/currency/coins-plain-stack-gold-yellow.webp",
   "effects": [],
-  "flags": {},
   "_id": "d0dhiR7eW7AwAoF0"
 }

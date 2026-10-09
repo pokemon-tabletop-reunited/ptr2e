@@ -1,0 +1,82 @@
+{
+  "folder": "E5JYWji5073kTXhD",
+  "name": "Quick Play",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "Dragoon"
+      ],
+      "notes": ""
+    },
+    "actions": [
+      {
+        "name": "Quick Play",
+        "slug": "quick-play",
+        "description": "<p>Effect: The user may use a Move in their Metronome Hand. This may only be done once between the start of one of the user's Activations and the start of the subsequent one.</p>",
+        "traits": [
+          "flinch-30"
+        ],
+        "type": "generic",
+        "img": "icons/magic/symbols/star-inverted-yellow.webp",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "quick-play",
+    "description": "<p>Effect: The user may spend @PP[-1] as a Free Action @Trait[flinch-30] @Trait[interrupt] to use a Move in their Metronome Hand as a Free Action. This may only be done once between the start of one of the user's Activations and the start of the subsequent one. </p>",
+    "traits": [
+      "gambler"
+    ],
+    "prerequisites": [
+      "item:move:metronome"
+    ],
+    "autoUnlock": [],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "gambler"
+    },
+    "global": true,
+    "webs": [],
+    "traitWebs": [],
+    "nodes": [
+      {
+        "x": 96,
+        "y": 191,
+        "hidden": false,
+        "type": "normal",
+        "connected": [
+          "pokerface",
+          "card-captor-1",
+          "twist",
+          "ace-up-my-sleeve",
+          "the-devil-does-bargain"
+        ],
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
+        "tier": null
+      }
+    ]
+  },
+  "_id": "KChJSWcq6bBPK58m",
+  "img": "icons/magic/symbols/star-inverted-yellow.webp",
+  "effects": [],
+  "flags": {}
+}
