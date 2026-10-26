@@ -1,0 +1,129 @@
+{
+  "name": "Shadow Scour",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "shadow-scour",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "shadow-scour",
+        "name": "Shadow Scour",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "crash-3-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 80,
+        "types": [
+          "shadow"
+        ],
+        "description": "<p>Effect: On hit, the target has a 50% chance of losing -2 SPDEF Stages for 5 Activations and a 20% chance of gaining @Affliction[unlucky 5].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": [],
+        "slot": 1
+      }
+    ],
+    "grade": "B"
+  },
+  "_id": "38KIJymi4MYxsus1",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": [
+    {
+      "name": "Shadow Scour",
+      "type": "passive",
+      "_id": "vnQGIYKtCRB6GNPO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shadow-scour-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.PYz1Z32uiXoulkW2",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "priority": null,
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.unluckycondition",
+            "phase": "initial",
+            "predicate": [],
+            "chance": 20,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "shadow-scour-attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1790641064211,
+        "modifiedTime": 1790641064211,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
+    }
+  ],
+  "flags": {}
+}

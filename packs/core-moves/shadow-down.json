@@ -20,14 +20,14 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7
+          "powerPoints": 6
         },
         "category": "status",
         "accuracy": 85,
         "types": [
           "shadow"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -2 DEF Stage for 5 Activations.</p>",
+        "description": "<p>Effect: On hit, all valid targets lose -1 DEF and SPDEF Stage for 5 Activations, and have a 25% chance of losing a further -1 of each Stage.</p>",
         "img": "systems/ptr2e/img/svg/shadow_icon.svg",
         "predicate": []
       }
@@ -57,7 +57,7 @@
         "changes": [
           {
             "type": "roll-effect",
-            "value": "Compendium.ptr2e.core-effects.Item.B79G2s6TauIlmsno",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
             "phase": "initial",
             "predicate": [
               {
@@ -65,6 +65,60 @@
               }
             ],
             "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "key": "shadow-down-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.bdYCJcqjMNqTpJJQ",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "origin:ally"
+              }
+            ],
+            "chance": 25,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "key": "shadow-down-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "origin:ally"
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": true,
+            "key": "shadow-down-attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.qe5aLBJuwb9eYqvv",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "origin:ally"
+              }
+            ],
+            "chance": 25,
             "isFixedChance": false,
             "affects": "target",
             "alterations": [],
@@ -100,11 +154,11 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "coreVersion": "14.359",
+        "coreVersion": "14.365",
         "systemId": "ptr2e",
-        "systemVersion": "1.7.2.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1775576199818,
-        "modifiedTime": 1775576267948,
+        "modifiedTime": 1785340089362,
         "lastModifiedBy": "dgye2I5sN06rQmNS",
         "compendiumSource": null,
         "duplicateSource": null,

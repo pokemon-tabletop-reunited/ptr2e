@@ -1,0 +1,167 @@
+{
+  "name": "Macabre",
+  "type": "affliction",
+  "_id": "KeDnOLnmihQBhXw2",
+  "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+  "system": {
+    "changes": [
+      {
+        "type": "basic",
+        "value": 0.2,
+        "phase": "initial",
+        "predicate": [],
+        "key": "system.modifiers.atkMultiplier",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": 0.2,
+        "phase": "initial",
+        "predicate": [],
+        "key": "system.modifiers.spaMultiplier",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": 20,
+        "phase": "initial",
+        "predicate": [],
+        "key": "system.modifiers.effectHitRate",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": 0.4,
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:marked"
+        ],
+        "key": "system.modifiers.atkMultiplier",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": 0.4,
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:marked"
+        ],
+        "key": "system.modifiers.spaMultiplier",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": 40,
+        "phase": "initial",
+        "predicate": [
+          "effect:affliction:marked"
+        ],
+        "key": "system.modifiers.effectHitRate",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": -0.3,
+        "phase": "initial",
+        "predicate": [],
+        "key": "system.modifiers.defMultiplier",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "basic",
+        "value": -0.3,
+        "phase": "initial",
+        "predicate": [],
+        "key": "system.modifiers.spdMultiplier",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.XeiSuS3APUcN0MLM",
+        "phase": "initial",
+        "predicate": [],
+        "chance": 30,
+        "isFixedChance": false,
+        "affects": "defensive",
+        "alterations": [],
+        "dontMerge": false,
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.CEdcrWbb1KDTNIKl",
+        "phase": "initial",
+        "predicate": [],
+        "chance": 30,
+        "isFixedChance": false,
+        "affects": "defensive",
+        "alterations": [],
+        "dontMerge": false,
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.4DlXFTVooz07YcDm",
+        "phase": "initial",
+        "predicate": [],
+        "chance": 20,
+        "isFixedChance": false,
+        "affects": "defensive",
+        "alterations": [],
+        "dontMerge": false,
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      },
+      {
+        "type": "roll-effect",
+        "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.unluckycondition",
+        "phase": "initial",
+        "predicate": [],
+        "chance": 10,
+        "isFixedChance": false,
+        "affects": "defensive",
+        "alterations": [],
+        "dontMerge": false,
+        "key": "attack",
+        "method": 2,
+        "ignored": false
+      }
+    ],
+    "traits": [
+      "minor-affliction",
+      "control"
+    ],
+    "removeAfterCombat": true,
+    "priority": 50,
+    "type": "damage",
+    "predicate": []
+  },
+  "disabled": false,
+  "start": null,
+  "duration": {
+    "value": 5,
+    "units": "seconds",
+    "expiry": null,
+    "expired": false
+  },
+  "description": "<p>The afflicted creature’s ATK, SPATK, and EHR are increased by 20% (plus an additional 40% if Marked), and their DEF and SPDEF are decreased by -30%. When hit by an Attack, the afflicted creature has a 30% chance to gain +1 SPD and CRIT Stage for 5 Activations, a 20% chance to lose @Tick[-1], and a 10% chance to gain @Affliction[unlucky 5].</p>",
+  "origin": null,
+  "tint": "#ffffff",
+  "transfer": false,
+  "statuses": [],
+  "showIcon": 1,
+  "flags": {}
+}

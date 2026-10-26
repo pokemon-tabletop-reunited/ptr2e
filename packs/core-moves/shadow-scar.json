@@ -1,0 +1,125 @@
+{
+  "name": "Shadow Scar",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "shadow-scar",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "shadow-scar",
+        "name": "Shadow Scar",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 85,
+        "types": [
+          "shadow"
+        ],
+        "description": "<p>Effect: On hit, the target has a 45% chance of gaining @Affliction[burn 5] and @Affliction[bleed 5].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "VvfMhleWlao0hOxr",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": [
+    {
+      "name": "Shadow Scar",
+      "type": "passive",
+      "_id": "OhLdQcBCU8wVUtyP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shadow-scar-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.burncondition000",
+            "predicate": [],
+            "chance": 45,
+            "affects": "target",
+            "priority": null,
+            "alterations": [],
+            "phase": "initial",
+            "isFixedChance": false,
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.hinderedconditio",
+            "phase": "initial",
+            "predicate": [],
+            "key": "shadow-scar-attack",
+            "chance": 45,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1790641062975,
+        "modifiedTime": 1790641062975,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
+    }
+  ],
+  "flags": {}
+}

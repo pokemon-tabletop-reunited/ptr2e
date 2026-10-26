@@ -1,0 +1,48 @@
+{
+  "name": "Shadow Siren",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "shadow-siren",
+    "publication": {
+      "source": "",
+      "authors": [],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "shadow-siren",
+        "name": "Shadow Siren",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "shadow"
+        ],
+        "description": "<p>Effect: If the target has received a @Trait[positive-stage-change] effect since the user's last Activation, the target gains @Affliction[charmed 5], @Affliction[suppressed 5], and @Affliction[puppet 2].</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "B"
+  },
+  "_id": "SE8ziVhTvNHdnzpM",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": [],
+  "flags": {}
+}

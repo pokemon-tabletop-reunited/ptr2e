@@ -1,0 +1,151 @@
+{
+  "name": "Shadow Fall",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "shadow-fall",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "name": "Shadow Fall",
+        "slug": "shadow-fall",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "traits": [],
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "shadow"
+        ],
+        "category": "status",
+        "predicate": [],
+        "description": "<p>Effect: All creatures are @Affliction[grounded 5] and lose -2 EVA Stages for 5 Activations. The user and all allies gain @Affliction[advance 30].</p>",
+        "range": {
+          "target": "field",
+          "distance": 10,
+          "unit": "m"
+        }
+      }
+    ],
+    "grade": "B"
+  },
+  "_id": "KJKoGnwPH7ItrSZ8",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": [
+    {
+      "name": "Shadow Fall",
+      "type": "passive",
+      "_id": "CZAm1a94r47Et8Ap",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shadow-fall-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.groundedconditio",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "shadow-fall-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.5MQzVTuubNTERPjS",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "priority": null,
+            "phase": "initial",
+            "isFixedChance": false,
+            "alterations": [],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.advancecondition",
+            "phase": "initial",
+            "predicate": [
+              {
+                "nor": [
+                  "origin:enemy",
+                  "origin:neutral"
+                ]
+              }
+            ],
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "target",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.amount",
+                "value": 30
+              }
+            ],
+            "dontMerge": true,
+            "key": "shadow-fall-attack",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1790641050662,
+        "modifiedTime": 1790641050662,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null
+    }
+  ],
+  "flags": {}
+}

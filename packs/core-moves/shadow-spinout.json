@@ -1,0 +1,153 @@
+{
+  "name": "Shadow Spinout",
+  "type": "move",
+  "system": {
+    "_migration": {
+      "version": 0.113,
+      "previous": null
+    },
+    "slug": "shadow-spinout",
+    "publication": {
+      "source": "PTR 2e Core",
+      "authors": [
+        "PTR 2e Team"
+      ],
+      "notes": ""
+    },
+    "traits": [],
+    "actions": [
+      {
+        "slug": "shadow-spinout",
+        "name": "Shadow Spinout",
+        "type": "attack",
+        "traits": [
+          "pass-3",
+          "curl",
+          "crushing",
+          "contact",
+          "crash-1-4",
+          "flinch-25"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 35,
+        "accuracy": 90,
+        "types": [
+          "shadow"
+        ],
+        "description": "<p>Effect: When declaring this attack, the user may freely move up to half of a total Movement Score of their choice. For each consecutive time this attack is used and hits at least one target, this Attack's Power doubles, with this progress tracked by the Clock named for this Attack.</p><p>This Clock resets if the user fails to hit at least one target with this Attack, leaves combat, gains @Affliction[fainted], or combat ends.</p>",
+        "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "predicate": []
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "6gd7VGmTn7TFfcU2",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": [
+    {
+      "name": "Shadow Spinout",
+      "type": "passive",
+      "_id": "fOhpM7sOL1epOorL",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "create-clock",
+            "key": "spinoutClockUser",
+            "value": 0,
+            "predicate": [],
+            "max": 4,
+            "color": "#222224",
+            "private": false,
+            "label": "Shadow Spinout",
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "alter-attack",
+            "key": "shadow-spinout-attack-power",
+            "value": "30*pow(2,@actor.clocks.spinoutClockUser)-30",
+            "predicate": [],
+            "label": "Iterative Boost",
+            "property": "power",
+            "definition": [],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "shadow-spinout-attack",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.miMt3zxPrOOJe1wF",
+            "predicate": [
+              {
+                "not": "actor:clocks:spinoutClockUser:value:4"
+              }
+            ],
+            "label": "Shadow Spinout Clock",
+            "chance": 100,
+            "isFixedChance": false,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.key",
+                "value": "spinoutClockUser"
+              }
+            ],
+            "dontMerge": false,
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "units": "turns",
+        "value": null,
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "ptr2e",
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1790641066416,
+        "modifiedTime": 1790641066416,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null,
+      "flags": {}
+    }
+  ],
+  "flags": {}
+}
