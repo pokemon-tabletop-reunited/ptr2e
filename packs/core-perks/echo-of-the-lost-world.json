@@ -7,77 +7,314 @@
     {
       "name": "Echo of the Lost World",
       "type": "passive",
-      "_id": "llRTqfS2bdiZrtkn",
-      "img": "systems/ptr2e/img/item-icons/helix%20fossil.webp",
+      "_id": "7pNL0gIfLar8qBYv",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
-            "type": "ephemeral-modifier",
-            "key": "damaging-attack-damage-percentile",
-            "value": -10,
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.def.base)/0.05)/10000,0)",
             "predicate": [
               {
-                "not": "attack:type:rock"
+                "not": "trait:fully-evolved"
               }
             ],
-            "hideIfDisabled": true,
-            "label": "Non-Rock DMG Resistance",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "ephemeral-effect",
-            "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.CekJx2L2a3x60g1b",
+            "type": "basic",
+            "key": "system.modifiers.defMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.def.base)/0.05)/10000,0)",
             "predicate": [
+              "item:ability:fossilized:active",
               {
-                "not": "attack:type:rock"
+                "not": "trait:fully-evolved"
               }
             ],
-            "affects": "defensive",
-            "alterations": [
-              {
-                "property": "system.changes.0.value",
-                "value": 15,
-                "method": 5
-              }
-            ],
-            "label": "Non-Rock RES",
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "flat-modifier",
-            "key": "damaging-attack-damage-percentile",
-            "value": 15,
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.def.base)/0.065)/10000,0)",
+            "phase": "initial",
             "predicate": [
-              {
-                "not": "attack:type:rock"
-              }
+              "trait:fully-evolved"
             ],
-            "label": "Non-Rock DMG Mod",
-            "hideIfDisabled": true,
-            "ignored": false,
-            "method": 2
+            "key": "system.modifiers.defMultiplier",
+            "method": 2,
+            "ignored": false
           },
           {
-            "type": "ephemeral-effect",
-            "key": "attack",
-            "value": "Compendium.ptr2e.core-effects.Item.dVXsQ55hDouadYkE",
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.def.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "item:ability:fossilized:active",
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.defMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.hpMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.hp.base)/0.05)/10000,0)",
             "predicate": [
               {
-                "not": "attack:type:rock"
+                "not": "trait:fully-evolved"
               }
             ],
-            "affects": "self",
-            "alterations": [],
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.hpMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.hp.base)/0.05)/10000,0)",
+            "predicate": [
+              "item:ability:fossilized:active",
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.hp.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.hpMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.hp.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "item:ability:fossilized:active",
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.hpMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.spa.base)/0.05)/10000,0)",
+            "predicate": [
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spaMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.spa.base)/0.05)/10000,0)",
+            "predicate": [
+              "item:ability:fossilized:active",
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.spa.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.spaMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.spa.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "item:ability:fossilized:active",
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.spaMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.spd.base)/0.05)/10000,0)",
+            "predicate": [
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.spdMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.spd.base)/0.05)/10000,0)",
+            "predicate": [
+              "item:ability:fossilized:active",
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.spd.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.spdMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.spd.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "item:ability:fossilized:active",
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.spdMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.spe.base)/0.05)/10000,0)",
+            "predicate": [
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.speMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.spe.base)/0.05)/10000,0)",
+            "predicate": [
+              "item:ability:fossilized:active",
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.spe.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.speMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.spe.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "item:ability:fossilized:active",
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.speMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.atk.base)/0.05)/10000,0)",
+            "predicate": [
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.modifiers.atkMultiplier",
+            "value": "max(ceil((100-@actor.system.attributes.atk.base)/0.05)/10000,0)",
+            "predicate": [
+              "item:ability:fossilized:active",
+              {
+                "not": "trait:fully-evolved"
+              }
+            ],
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.atk.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.atkMultiplier",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "value": "max(ceil((130-@actor.system.attributes.atk.base)/0.065)/10000,0)",
+            "phase": "initial",
+            "predicate": [
+              "item:ability:fossilized:active",
+              "trait:fully-evolved"
+            ],
+            "key": "system.modifiers.atkMultiplier",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
-        "removeAfterCombat": false,
+        "removeAfterCombat": true,
         "removeOnRecall": false,
         "removeAfterAttacking": false,
         "removeAfterAttacked": false,
@@ -86,25 +323,31 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
-      "description": "<p>Effect: The user takes 10% less damage from non-@Trait[rock] Type Physical- and Special-Category Attacks, and increases their RES by 15% against effects from non-Rock Type Attacks. Additionally, the user's non-@Trait[rock] Type Attacks deal 15% more damage and have their Base Chances (if any) increased by 5%.</p>",
+      "description": "",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
       "_stats": {
-        "compendiumSource": "Item.UH0Z3GpQNhoyv5I4.ActiveEffect.WuyH1tytCFObtFsF",
-        "duplicateSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.1BxjZlaOPUbxtWjZ.ActiveEffect.9WGX0aUkigLcvbjf",
+        "duplicateSource": "Item.QewUuhjwpxF2bzfp.ActiveEffect.zSuVYXSMXDBYkL5h",
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "1.4.8.beta",
-        "createdTime": 1766506653333,
-        "modifiedTime": 1766506653333,
-        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-      }
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1781131295603,
+        "modifiedTime": 1781131295603,
+        "lastModifiedBy": "dgye2I5sN06rQmNS"
+      },
+      "start": null,
+      "showIcon": 0,
+      "folder": null,
+      "flags": {}
     }
   ],
   "system": {
@@ -121,19 +364,19 @@
     },
     "actions": [],
     "slug": "echo-of-the-lost-world",
-    "description": "<p>Effect: The user takes 10% less damage from non-@Trait[rock] Type Physical- and Special-Category Attacks, and increases their RES by 15% against effects from non-Rock Type Attacks. Additionally, the user's non-@Trait[rock] Type Attacks deal 15% more damage and have their Base Chances (if any) increased by 5%.</p>",
+    "description": "<p>The user is a vestige of a long-forgotten time - when nature was more fierce and survival more uncertain. As such, the user is naturally hardier and stronger than initally expected.</p><p>The user may learn any one move from the @Trait[fossil] Tutor List, and may learn two other Moves from any of their Tutor Lists, up to their Grade.</p><p>The user's Stats are increased, based on how close each of their Base Stats are to 100 if not @Trait[fully-evolved] and 130 if they are @Trait[fully-evolved), with this amount doubled if the user has Fossilized slotted.</p>",
     "traits": [],
     "prerequisites": [
       "trait:fossil",
       {
         "gte": [
           "{actor|level}",
-          20
+          30
         ]
       }
     ],
     "autoUnlock": [],
-    "cost": 2,
+    "cost": 4,
     "design": {
       "arena": "physical",
       "approach": "resilience",
@@ -149,7 +392,7 @@
         "type": "normal",
         "connected": [
           "root-2",
-          "cthonic-terror"
+          "chthonic-terror"
         ],
         "config": {
           "texture": null,
@@ -159,6 +402,7 @@
         },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   }
 }

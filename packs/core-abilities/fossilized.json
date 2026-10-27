@@ -14,13 +14,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 0
         },
-        "description": "<p>Effect: The user takes 30% less damage from Rock-Type attacks or effects. The user's Rock-Type attacks have their Power increased by 20%.</p>",
+        "description": "<p>Effect: Effect: The user's Attacks have +10% Power and EHR, while their @Trait[rock] Attacks have a further +20% Power and EHR.<p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user takes 30% less damage from Rock-Type attacks or effects. The user's Rock-Type attacks have their Power increased by 20%.</p>",
+    "description": "<pEffect: The user's Attacks have +10% Power and EHR, while their @Trait[rock] Attacks have a further +20% Power and EHR.</p>",
     "traits": [],
     "slug": "fossilized",
     "_migration": {
@@ -45,37 +46,83 @@
         "changes": [
           {
             "type": "percentile-modifier",
-            "key": "rock-attack-power",
-            "value": 20,
-            "predicate": [],
-            "label": "Fossilized (Offense)",
+            "key": "attack-power",
+            "value": 10,
+            "predicate": [
+              {
+                "not": "self:action:trait:rock"
+              }
+            ],
+            "label": "Fossilized",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           },
           {
-            "type": "ephemeral-modifier",
-            "key": "rock-attack-damage-percentile",
-            "value": -30,
-            "predicate": [],
-            "label": "Fossilized (Defense)",
+            "type": "percentile-modifier",
+            "key": "attack-power",
+            "value": 30,
+            "predicate": [
+              "self:action:trait:rock"
+            ],
+            "label": "Fossilized (Rock)",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [
+              {
+                "not": "self:action:trait:rock"
+              }
+            ],
+            "affects": "self",
+            "alterations": [],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "ephemeral-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.auJlcV40ua09ITga",
+            "phase": "initial",
+            "predicate": [
+              "self:action:trait:rock"
+            ],
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "system.changes.0.value",
+                "value": 30
+              }
+            ],
+            "key": "attack",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -87,13 +134,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.4.1.0",
-        "createdTime": 1729417355393,
-        "modifiedTime": 1734142929842,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1781131976059,
+        "modifiedTime": 1781131976059,
+        "lastModifiedBy": "dgye2I5sN06rQmNS",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
