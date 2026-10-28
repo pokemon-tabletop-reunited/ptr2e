@@ -44,7 +44,8 @@
         ],
         "range": {
           "target": "creature",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "complex"
@@ -74,15 +75,16 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "ammoType": []
   },
   "_id": "1OAL4zFYg8gxROW6",
   "effects": [
     {
       "name": "Leftovers",
-      "type": "passive",
+      "type": "affliction",
       "_id": "HLEmJVRzPmf3wDxH",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/item-icons/leftovers.webp",
       "system": {
         "changes": [],
         "slug": null,
@@ -90,15 +92,21 @@
         "removeAfterCombat": false,
         "removeOnRecall": false,
         "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false,
         "priority": 50,
         "formula": "1/16",
-        "type": "healing"
+        "type": "healing",
+        "predicate": [
+          "item:leftovers:equipped"
+        ]
       },
       "disabled": false,
       "duration": {
-        "units": "turns",
-        "value": 5,
-        "expiry": "turnEnd"
+        "units": "seconds",
+        "value": null,
+        "expiry": "turnEnd",
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -110,13 +118,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.367",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.1.beta",
-        "createdTime": 1746395193938,
-        "modifiedTime": 1746395201992,
-        "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+        "systemVersion": "1.7.6.beta",
+        "createdTime": 1789313186377,
+        "modifiedTime": 1789313301788,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
   "folder": "PGpYU7mfnRpzOZSm"
