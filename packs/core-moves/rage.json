@@ -27,7 +27,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains @Affliction[enraged 2]. While @Affliction[enraged] in this way, if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 Activations.</p>",
+        "description": "<p>Effect: The user gains @Affliction[frenzy 3].</p>",
         "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "predicate": []
       }
@@ -62,38 +62,16 @@
           {
             "type": "roll-effect",
             "key": "rage-attack",
-            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.enragedcondition",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.frenzycondition0",
             "predicate": [],
             "chance": 100,
             "affects": "self",
             "dontMerge": false,
             "alterations": [
               {
-                "property": "effects.0.duration.turns",
-                "value": 2,
+                "property": "duration.turns",
+                "value": 3,
                 "method": 5
-              },
-              {
-                "property": "effects.0.system.changes",
-                "value": {
-                  "type": "roll-effect",
-                  "key": "damaging-attack",
-                  "value": "Compendium.ptr2e.core-effects.Item.ZGwaMlzUwkSuCPyH",
-                  "predicate": [],
-                  "chance": 100,
-                  "affects": "defensive",
-                  "dontMerge": true
-                },
-                "method": 2
-              },
-              {
-                "property": "effects.0.system.changes",
-                "value": {
-                  "type": "roll-option",
-                  "domain": "all",
-                  "value": "enraged-from-rage"
-                },
-                "method": 2
               }
             ],
             "priority": null,
@@ -112,7 +90,7 @@
         "units": "turns",
         "value": null
       },
-      "description": "<p>Effect: The user gains @Affliction[enraged 2]. While @Affliction[enraged] in this way, if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 Activations.</p>",
+      "description": "<p>Effect: The user gains @Affliction[frenzy 3].</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
