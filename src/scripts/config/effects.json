@@ -540,70 +540,13 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.modifiers.effectResistance",
-          "value": "-20 + max(-20,-2/3*@effect.duration.remaining)",
+          "key": "system.modifiers.vulnerabilityMultiplier",
+          "value": "0.2*@actor.system.modifiers.vulnerabilityMultiplier",
+          "phase": "initial",
           "predicate": [],
           "method": 2,
-          "priority": null,
-          "ignored": false,
-          "hideIfDisabled": false
-        },
-        {
-          "type": "basic",
-          "key": "system.modifiers.atkMultiplier",
-          "value": "max(-40,-4/3*@effect.duration.remaining)",
-          "predicate": [],
-          "ignored": false,
-          "method": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.modifiers.defMultiplier",
-          "value": "-20 + max(-40,-4/3*@effect.duration.remaining)",
-          "predicate": [],
-          "ignored": false,
-          "method": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.modifiers.spaMultiplier",
-          "value": "max(-40,-4/3*@effect.duration.remaining)",
-          "predicate": [],
-          "ignored": false,
-          "method": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.modifiers.spdMultiplier",
-          "value": "-20 + max(-40,4/3*@effect.duration.remaining)",
-          "predicate": [],
-          "ignored": false,
-          "method": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.modifiers.speMultiplier",
-          "value": "max(-30,-@effect.duration.remaining)",
-          "predicate": [],
-          "ignored": false,
-          "method": 2
-        },
-        {
-          "type": "percentile-modifier",
-          "key": "attack-accuracy",
-          "value": "max(-45,-1.5*@effect.duration.remaining)",
-          "label": "Striken (Acc)"
-        },
-        {
-          "type": "ephemeral-modifier",
-          "key": "attack-accuracy-percentile",
-          "value": "min(30.@effect.duration.remaining)",
-          "predicate": [],
-          "method": 2,
-          "priority": null,
-          "ignored": false,
-          "hideIfDisabled": false,
-          "label": "Striken (Target)"
+          "priority": 90,
+          "ignored": false
         }
       ],
       "formula": null,
