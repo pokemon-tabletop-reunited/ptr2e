@@ -17,7 +17,8 @@
         },
         "range": {
           "target": "object",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user may Move, using any Movement they still have for the current Round, and use a @Trait[healing] Action on their Active List as a Free Action.</p>",
         "img": "icons/svg/explosion.svg"
@@ -32,13 +33,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: The user is @Affliction[advance 30] when resolving @Trait[healing] Actions.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: Spending @PP[-3] as a Free Action @Trait[interrupt], the user may Move, using any Movement they still have for the current Round, and use a @Trait[healing] Action on their Active List as a Free Action. The user is @Affliction[advance 30] when resolving @Trait[healing] Actions.</p>",
+    "description": "<p>Effect: Spending @PP[-3] as a Free Action @Trait[interrupt], the user may Move, using any Movement they still have for the current Round, and use a @Trait[healing] Action, which is not a Damaging Attack, on their Active List as a Free Action. The user is @Affliction[advance 30] when resolving @Trait[healing] Actions.</p><p>After using the Active component of Triage, this ability becomes @Affliction[nullified 1].</p><p></p>",
     "traits": [],
     "slug": "triage",
     "_migration": {
@@ -72,26 +74,52 @@
             "dontMerge": false,
             "alterations": [
               {
+                "method": 2,
                 "property": "system.amount",
-                "value": 30,
-                "method": 2
+                "value": 30
               }
             ],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "isFixedChance": false,
+            "method": 2,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "value": "Compendium.ptr2e.core-effects-new.ActiveEffect.nullifiedconditi",
+            "phase": "initial",
+            "predicate": [],
+            "key": "triage-emergency-generic",
+            "chance": 100,
+            "isFixedChance": true,
+            "affects": "self",
+            "alterations": [
+              {
+                "method": 5,
+                "property": "duration.turns",
+                "value": 1
+              }
+            ],
+            "dontMerge": false,
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -103,13 +131,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.369",
         "systemId": "ptr2e",
-        "systemVersion": "1.2.0.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1743891416402,
-        "modifiedTime": 1743891476044,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1795532118803,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

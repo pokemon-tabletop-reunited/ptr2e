@@ -22,7 +22,7 @@
       "trait:bug"
     ],
     "autoUnlock": [
-      "item:perk:chitin-plates"
+      "item:ability:chitin-plates"
     ],
     "cost": 2,
     "design": {
@@ -36,19 +36,23 @@
       {
         "x": 82,
         "y": 28,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "arthroprods",
           "root-1",
           "adhesive-digits"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
     ],
-    "originSlug": null,
-    "variant": null,
-    "mode": null
+    "traitWebs": []
   },
   "img": "icons/creatures/invertebrates/beetle-stag-tan-brown.webp",
   "effects": [
@@ -76,19 +80,24 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": false,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -100,16 +109,18 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.342",
+        "coreVersion": "14.362",
         "systemId": "ptr2e",
         "systemVersion": "1.2.1.beta",
         "createdTime": null,
         "modifiedTime": null,
         "lastModifiedBy": null,
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ],
-  "flags": {},
   "_id": "755YpplHAof2NTRe"
 }
