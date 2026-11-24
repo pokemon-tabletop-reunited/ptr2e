@@ -57,16 +57,16 @@
       "system": {
         "changes": [
           {
-            "type": "alter-attack",
-            "key": "hard-press-attack",
-            "value": "((@target.system.health.percent)-100)*0.9+10",
+            "type": "flat-modifier",
+            "key": "hard-press-attack-power",
+            "value": "-(100-(@target.system.health.percent))",
             "predicate": [],
             "label": "Hard Press Scaling",
             "priority": null,
-            "property": "power",
-            "definition": [],
+            "method": 5,
+            "phase": "initial",
             "ignored": false,
-            "method": 5
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -80,7 +80,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -91,14 +93,18 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-moves.Item.0hJmzpADt8XQzegu.ActiveEffect.4bmmAt7wC34dHKY2",
         "duplicateSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.369",
         "systemId": "ptr2e",
-        "systemVersion": "1.5.0.beta",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1743547821895,
-        "modifiedTime": 1767160313478,
-        "lastModifiedBy": "UTlFSVhgfIUeTsoW",
+        "modifiedTime": 1795533539580,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ]
 }
