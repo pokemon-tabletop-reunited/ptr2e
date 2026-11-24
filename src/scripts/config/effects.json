@@ -562,6 +562,40 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.hindered"
   },
   {
+    "id": "stricken",
+    "name": "PTR2E.Effect.Statuses.Labels.stricken",
+    "img": "icons/svg/biohazard.svg",
+    "type": "affliction",
+    "duration": {
+      "units": "turns",
+      "expiry": "turnEnd",
+      "value": 3
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.modifiers.vulnerabilityMultiplier",
+          "value": "0.2*@actor.system.modifiers.vulnerabilityMultiplier",
+          "phase": "initial",
+          "predicate": [],
+          "method": 2,
+          "priority": 90,
+          "ignored": false
+        }
+      ],
+      "formula": null,
+      "type": null,
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "minor-affliction",
+        "control"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.stricken"
+  },
+  {
     "id": "stunted",
     "name": "PTR2E.Effect.Statuses.Labels.stunted",
     "img": "icons/svg/paralysis.svg",
