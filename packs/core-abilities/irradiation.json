@@ -20,11 +20,11 @@
           "unit": "m",
           "distance": 10
         },
-        "description": "<p>Effect: Increases the Damage of the user's Nuclear-Type attacks by 50%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: Increases the Damage of the user's @Trait[nuclear]-Type attacks by 50%, provided that the user does not possess the @Trait[nuclear]-type.</p>",
+        "img": "systems/ptr2e/img/svg/nuclear_icon.svg"
       }
     ],
-    "description": "<p>Effect: Increases the Damage of the user's Nuclear-Type attacks by 50%.</p>",
+    "description": "<p>Effect: Increases the Damage of the user's @Trait[nuclear]-Type attacks by 50%, provided that the user does not possess the @Trait[nuclear]-type.</p>",
     "traits": [
       "stab",
       "nuclear"
@@ -56,12 +56,17 @@
             "type": "percentile-modifier",
             "key": "nuclear-attack-damage",
             "value": 50,
-            "predicate": [],
+            "predicate": [
+              {
+                "not": "trait:nuclear"
+              }
+            ],
             "label": "Irradiation",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -75,7 +80,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -87,14 +94,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.346",
+        "coreVersion": "14.369",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1722259804688,
-        "modifiedTime": 1722259822455,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS",
+        "modifiedTime": 1795535945825,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
         "exportSource": null
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
