@@ -17,13 +17,14 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
-        "description": "<p>Effect: Increases the Damage of the user's Steel-Type attacks by 50%.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: Increases the Damage of the user's @Trait[steel]-Type attacks by 50%, provided that the user does not possess the @Trait[steel]-type.</p>",
+        "img": "systems/ptr2e/img/svg/steel_icon.svg"
       }
     ],
-    "description": "<p>Effect: Increases the Damage of the user's Steel-Type attacks by 50%.</p>",
+    "description": "<p>Effect: Increases the Damage of the user's @Trait[steel]-Type attacks by 50%, provided that the user does not possess the @Trait[steel]-type.</p>",
     "traits": [
       "stab",
       "steel"
@@ -37,7 +38,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "1m4CBw3S4U5ZFkFh",
@@ -53,24 +55,33 @@
             "type": "percentile-modifier",
             "key": "steel-attack-damage",
             "value": 50,
-            "predicate": [],
+            "predicate": [
+              {
+                "not": "trait:steel"
+              }
+            ],
             "label": "Steelworker",
             "priority": null,
+            "phase": "initial",
+            "method": 2,
             "ignored": false,
-            "hideIfDisabled": false,
-            "method": 2
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -82,13 +93,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.369",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1722262686519,
-        "modifiedTime": 1722262704384,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-      }
+        "modifiedTime": 1795536381736,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
