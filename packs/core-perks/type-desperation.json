@@ -17,14 +17,15 @@
         "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
         "range": {
           "target": "ally",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "cost": {
           "activation": "free"
         }
       }
     ],
-    "description": "<p>The user gains one @Trait[strategist] Ability corresponding to one of their Type Specialties, and may Tutor it to owned creatures of that Type.</p>",
+    "description": "<p>The user gains one @Trait[desperation] Ability corresponding to one of their Type Specialties, and may Tutor it to owned creatures of that Type.</p>",
     "traits": [],
     "prerequisites": [
       {
@@ -39,6 +40,10 @@
     "slug": "type-desperation",
     "nodes": [
       {
+        "x": 146,
+        "y": 95,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "type-domain",
           "improved-overland-1",
@@ -49,18 +54,11 @@
           "common-capability"
         ],
         "config": {
-          "alpha": null,
+          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
           "backgroundColor": null,
           "borderColor": null,
-          "borderWidth": null,
-          "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-          "tint": null,
-          "scale": null
+          "tint": null
         },
-        "hidden": false,
-        "type": "normal",
-        "x": 146,
-        "y": 95,
         "tier": null
       }
     ],
@@ -78,7 +76,8 @@
         "PTR 2e Team"
       ],
       "notes": ""
-    }
+    },
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
   "effects": [
@@ -94,7 +93,7 @@
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.fOrAmM8cSQtNoklE",
             "predicate": [
-                "trait:spec-fire"
+              "trait:spec-fire"
             ],
             "priority": null,
             "ignored": false,
@@ -108,14 +107,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.rMkEkomv6IeiTHgd",
             "predicate": [
-                "trait:spec-dark"
+              "trait:spec-dark"
             ],
             "priority": null,
             "ignored": false,
@@ -129,14 +129,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.ts89BEcu1e0tA3w6",
             "predicate": [
-                "trait:spec-fighting"
+              "trait:spec-fighting"
             ],
             "priority": null,
             "ignored": false,
@@ -150,14 +151,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.6qwLdkY871AxKJmM",
             "predicate": [
-                "trait:spec-flying"
+              "trait:spec-flying"
             ],
             "priority": null,
             "ignored": false,
@@ -171,14 +173,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.zWRHuzQE5hpreLwy",
             "predicate": [
-                "trait:spec-ice"
+              "trait:spec-ice"
             ],
             "priority": null,
             "ignored": false,
@@ -192,14 +195,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.Xw364tg2OaSLqoWj",
             "predicate": [
-                "trait:spec-ghost"
+              "trait:spec-ghost"
             ],
             "priority": null,
             "ignored": false,
@@ -213,14 +217,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.3cr8lV0ES23zlwNo",
             "predicate": [
-                "trait:spec-ground"
+              "trait:spec-ground"
             ],
             "priority": null,
             "ignored": false,
@@ -234,14 +239,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.QiqP5Xrw4RONT2Rj",
             "predicate": [
-                "trait:spec-normal"
+              "trait:spec-normal"
             ],
             "priority": null,
             "ignored": false,
@@ -255,14 +261,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.syY6AXnJyG1ed4E8",
             "predicate": [
-                "trait:spec-nuclear"
+              "trait:spec-nuclear"
             ],
             "priority": null,
             "ignored": false,
@@ -276,14 +283,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.BfjkYPHIhVLY8pbd",
             "predicate": [
-                "trait:spec-psychic"
+              "trait:spec-psychic"
             ],
             "priority": null,
             "ignored": false,
@@ -297,14 +305,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.Kp7XFh8O1Yy68ozS",
             "predicate": [
-                "trait:spec-fairy"
+              "trait:spec-fairy"
             ],
             "priority": null,
             "ignored": false,
@@ -318,14 +327,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.EYh4PzU86n4q5gZK",
             "predicate": [
-                "trait:spec-rock"
+              "trait:spec-rock"
             ],
             "priority": null,
             "ignored": false,
@@ -339,14 +349,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.5OvNzjB2nSBLZbBk",
             "predicate": [
-                "trait:spec-grass"
+              "trait:spec-grass"
             ],
             "priority": null,
             "ignored": false,
@@ -360,14 +371,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.656qoQVsc8ss9dfx",
             "predicate": [
-                "trait:spec-dragon"
+              "trait:spec-dragon"
             ],
             "priority": null,
             "ignored": false,
@@ -381,14 +393,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.f1xjUtaJUH9qOIuE",
             "predicate": [
-                "trait:spec-bug"
+              "trait:spec-bug"
             ],
             "priority": null,
             "ignored": false,
@@ -402,14 +415,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.ANRnD2QDxKgRnPFi",
             "predicate": [
-                "trait:spec-water"
+              "trait:spec-water"
             ],
             "priority": null,
             "ignored": false,
@@ -423,14 +437,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.6V4E7dWDnaDedpRP",
             "predicate": [
-                "trait:spec-electric"
+              "trait:spec-electric"
             ],
             "priority": null,
             "ignored": false,
@@ -444,14 +459,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.J0kHDuw62VBEv7hS",
             "predicate": [
-                "trait:spec-steel"
+              "trait:spec-steel"
             ],
             "priority": null,
             "ignored": false,
@@ -465,14 +481,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.i0xkZPn7CXuwdPE3",
             "predicate": [
-                "trait:spec-shadow"
+              "trait:spec-shadow"
             ],
             "priority": null,
             "ignored": false,
@@ -486,14 +503,15 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
             "key": "",
             "value": "Compendium.ptr2e.core-abilities.Item.GvXhEEV30BsWL4B0",
             "predicate": [
-                "trait:spec-poison"
+              "trait:spec-poison"
             ],
             "priority": null,
             "ignored": false,
@@ -507,7 +525,8 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -521,7 +540,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -533,13 +554,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.362",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765206696638,
         "modifiedTime": 1765209516545,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "_id": "N6JdgwC4bTgZBUS6"

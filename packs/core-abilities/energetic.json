@@ -16,7 +16,8 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         },
         "description": "<p>Effect: p>Effect: While the user meets the [Intrepid 3/4] Condition, the user's default SPD and EVA Stages are +1.</p>",
         "img": "icons/svg/explosion.svg"
@@ -35,7 +36,8 @@
       "source": "PTR 2e Core",
       "authors": [
         "PTR 2e Team"
-      ]
+      ],
+      "notes": ""
     }
   },
   "_id": "5cbjxwsrT3t4GQGi",
@@ -49,7 +51,7 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.Stage",
+            "key": "system.attributes.spe.stage",
             "value": {
               "brackets": [
                 {
@@ -62,12 +64,13 @@
             },
             "predicate": [],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           },
           {
             "type": "basic",
-            "key": "system.battleStats.evasion.Stage",
+            "key": "system.battleStats.evasion.stage",
             "value": {
               "brackets": [
                 {
@@ -80,20 +83,25 @@
             },
             "predicate": [],
             "priority": null,
-            "ignored": false,
-            "method": 2
+            "phase": "initial",
+            "method": 2,
+            "ignored": false
           }
         ],
         "slug": null,
         "traits": [],
         "removeAfterCombat": true,
         "removeOnRecall": false,
-        "stacks": 0
+        "stacks": 0,
+        "removeAfterAttacking": false,
+        "removeAfterAttacked": false
       },
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -105,13 +113,17 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "14.369",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.2",
+        "systemVersion": "1.7.6.beta",
         "createdTime": 1728635314920,
-        "modifiedTime": 1728635516210,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
-      }
+        "modifiedTime": 1795531885284,
+        "lastModifiedBy": "VGuCUKsxs9UY3xDR",
+        "exportSource": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }

@@ -27,13 +27,16 @@
         },
         "range": {
           "target": "self",
-          "unit": "m"
+          "unit": "m",
+          "distance": 10
         }
       }
     ],
     "description": "<p>As a free action, the user may deduct @Tick[-4] to gain @UUID[Compendium.ptr2e.core-effects.fvodFSf62YcS6YUL]{Wild Surge}.</p>",
     "traits": [],
-    "prerequisites": [],
+    "prerequisites": [
+      "trait:psychic"
+    ],
     "autoUnlock": [],
     "cost": 3,
     "design": {
@@ -47,17 +50,25 @@
       {
         "x": 131,
         "y": 130,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "master-mindscanner",
           "minor-buff-9",
           "conceal-mind",
           "type-style"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "slug": "wild-surge",
+    "traitWebs": []
   },
   "img": "systems/ptr2e/img/item-icons/exp.%20share.webp",
   "effects": [
@@ -85,7 +96,8 @@
             ],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "roll-effect",
@@ -98,7 +110,8 @@
             "alterations": [],
             "dontMerge": false,
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -112,7 +125,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -124,13 +139,18 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.362",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
-        "lastModifiedBy": null
-      }
+        "lastModifiedBy": null,
+        "createdTime": null,
+        "modifiedTime": null
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
-  "flags": {},
   "_id": "yT7U4xmlGN9SQTDh"
 }
