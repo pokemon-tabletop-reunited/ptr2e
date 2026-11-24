@@ -27,7 +27,8 @@
             "allowDuplicate": true,
             "track": false,
             "replaceSelf": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "slug": null,
@@ -41,7 +42,9 @@
       "disabled": false,
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "description": "",
       "origin": null,
@@ -53,13 +56,17 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": "ptr2e",
         "systemVersion": "1.4.6.beta",
         "createdTime": 1765236408322,
         "modifiedTime": 1765236426046,
         "lastModifiedBy": "mK35yvCqCgiTUvKf"
-      }
+      },
+      "start": null,
+      "showIcon": 1,
+      "folder": null,
+      "flags": {}
     }
   ],
   "system": {
@@ -79,8 +86,7 @@
     "description": "<p>The user learns Metronome, and can Tutor it to any creature, albeit at a -30 if the creature does not have it on a Tutor List.</p>",
     "traits": [],
     "prerequisites": [
-      "trait:ace",
-      "item:perk:gambit-style"
+      "trait:ace"
     ],
     "autoUnlock": [],
     "cost": 1,
@@ -93,8 +99,10 @@
     "webs": [],
     "nodes": [
       {
-        "x": 85,
+        "x": 84,
         "y": 183,
+        "hidden": false,
+        "type": "normal",
         "connected": [
           "minor-buff-13",
           "quick-and-the-dead",
@@ -102,13 +110,18 @@
           "minor-buff-65",
           "gambit-style-1",
           "cant-break-my-winning-streak",
-          "lucky-duck"
+          "pick-three-drop-two"
         ],
-        "hidden": false,
-        "type": "normal",
+        "config": {
+          "texture": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "tint": null
+        },
         "tier": null
       }
-    ]
+    ],
+    "traitWebs": []
   },
   "folder": "E5JYWji5073kTXhD"
 }

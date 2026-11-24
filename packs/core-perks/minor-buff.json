@@ -337,7 +337,9 @@
           "minor-buff-53",
           "minor-buff-65",
           "up-the-beat",
-          "gambit-style-1"
+          "gambit-style-1",
+          "climate-capture",
+          "pasture-to-table"
         ],
         "config": {
           "texture": null,
@@ -812,7 +814,8 @@
           "root-6",
           "chansey-medicine",
           "heroic-transformation",
-          "your-targets-right-here"
+          "your-targets-right-here",
+          "by-necessity"
         ],
         "config": {
           "texture": null,
@@ -1051,7 +1054,10 @@
           "telekinetic-potential",
           "minor-buff-31",
           "not-the-face",
-          "root-3"
+          "root-3",
+          "persnickety",
+          "voracious",
+          "discriminating-taste"
         ],
         "config": {
           "texture": null,
@@ -1209,7 +1215,8 @@
           "minor-buff-23",
           "minor-buff-65",
           "gambit-style-1",
-          "focused-fire-1"
+          "focused-fire-1",
+          "pasture-to-table"
         ],
         "config": {
           "texture": null,
@@ -1425,7 +1432,9 @@
           "minor-buff-53",
           "minor-buff-32",
           "minor-buff-56",
-          "minor-buff-18"
+          "minor-buff-18",
+          "ball-tinkerer",
+          "pasture-to-table"
         ],
         "config": {
           "texture": null,
@@ -1460,7 +1469,7 @@
       },
       {
         "x": 95,
-        "y": 183,
+        "y": 182,
         "hidden": false,
         "type": "normal",
         "connected": [
@@ -1621,7 +1630,8 @@
             "value": 0,
             "predicate": [],
             "ignored": false,
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           },
           {
             "type": "grant-item",
@@ -1645,7 +1655,8 @@
               "grantee": "detach",
               "granter": "cascade"
             },
-            "method": 2
+            "method": 2,
+            "phase": "initial"
           }
         ],
         "removeAfterCombat": false,
@@ -1659,7 +1670,7 @@
       "disabled": false,
       "description": "<p>Offers a Choice Set to pick a @Trait[minor-buff] Perk.</p>",
       "_stats": {
-        "coreVersion": "13.351",
+        "coreVersion": "14.361",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
@@ -1671,14 +1682,19 @@
       },
       "duration": {
         "units": "turns",
-        "value": null
+        "value": null,
+        "expiry": null,
+        "expired": false
       },
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
       "sort": 0,
-      "flags": {}
+      "flags": {},
+      "start": null,
+      "showIcon": 1,
+      "folder": null
     }
   ]
 }
